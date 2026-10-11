@@ -1,6 +1,6 @@
 # 寫作規範 / Style Guide
 
-這份規範讓全書的風格保持一致，也讓之後的翻譯更容易。修改或新增內容之前，請先讀一遍。第 1～8 節是繁體中文原文的規範，第 9 節是英文版的規範。
+這份規範讓全書的風格保持一致，也讓之後的翻譯更容易。修改或新增內容之前，請先讀一遍。第 1～8 節是繁體中文原文的規範，第 9 節是英文版的規範，第 10 節是日文版與韓文版的格式。
 
 Sections 1–8 cover the Traditional Chinese original. Section 9 covers the English version.
 
@@ -202,3 +202,21 @@ The English version in `en/` is a translation of the Traditional Chinese origina
 ```
 
 As in the Chinese version, every field must be a list item, because GitHub does not render a single line break as a new line in `.md` files.
+
+---
+
+## 10. Japanese and Korean versions
+
+The Japanese (`ja/`) and Korean (`ko/`) versions follow the same structure as the English version. Only the labels differ. `scripts/check_book.py` checks these labels.
+
+| Element | 日本語 (`ja/`) | 한국어 (`ko/`) |
+|---|---|---|
+| Title | `# 第 N 章　トピック：サブタイトル` | `# 제N장 주제: 부제` |
+| Where the wafer is | 📍 **ウェーハの現在地**（前の工程／**この章**／次の工程） | 📍 **웨이퍼의 현재 위치**（이전 단계／**이 장**／다음 단계） |
+| Term box | `**📖 用語｜用語（中文）**`: 定義／現場での使い方／関連用語／よくある混同 | `**📖 용어｜용어（中文）**`: 정의／현장에서는／관련 용어／흔한 혼동 |
+| Know-how box | `**🔧 ノウハウ｜要点**`: 状況／やり方／理由／やらないとどうなる／関連する章 | `**🔧 노하우｜요점**`: 상황／방법／이유／안 하면 어떻게 되나／관련 장 |
+| End sections | `## この章のポイント`, `## 参考文献` | `## 이 장의 핵심`, `## 참고 자료` |
+| Navigation | `[← 第 N 章　タイトル](...) ｜ [目次](../../README.md) ｜ [第 N 章　タイトル →](...)` | `[← 제N장 제목](...) ｜ [목차](../../README.md) ｜ [제N장 제목 →](...)` |
+| Style | Prose in です・ます; boxes in plain だ・である | Prose in 합니다체; boxes in plain ~다 |
+
+Use the terms in each language's glossary ([日本語](ja/appendix/glossary.md), [한국어](ko/appendix/glossary.md)).

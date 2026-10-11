@@ -30,7 +30,7 @@ For technical corrections, please include public references such as textbooks, p
 
 ### Which version to edit
 
-The Traditional Chinese text in `zh-TW/` is the original. Content changes should be made there first, and the English version in `en/` should then be synced. If you only read English, you are still welcome to fix the English version or open an issue in English; a maintainer will take care of the Chinese side.
+The Traditional Chinese text in `zh-TW/` is the original. Content changes should be made there first, and the translations in `en/`, `ja/` and `ko/` should then be synced. If you only read English, Japanese or Korean, you are still welcome to fix that version or open an issue in English; a maintainer will take care of the Chinese side.
 
 ### Reporting problems
 
@@ -102,7 +102,7 @@ By contributing, you agree that your contribution is released under the project'
 
 ### 要改哪一個版本
 
-`zh-TW/` 的繁體中文是原文。內容的修改請先改中文原文，再同步英文版 `en/`。只修改英文版、或用英文開 Issue 也非常歡迎，維護者會負責同步中文。
+`zh-TW/` 的繁體中文是原文。內容的修改請先改中文原文，再同步 `en/`、`ja/`、`ko/` 等翻譯。只修改某個翻譯版本、或用英文開 Issue 也非常歡迎，維護者會負責同步中文。
 
 ### 回報問題
 

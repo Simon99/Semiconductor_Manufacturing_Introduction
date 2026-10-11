@@ -50,6 +50,24 @@ CHAPTER_RULES = {
             "[Contents](../../README.md)": "navigation bar",
         },
     },
+    "ja": {
+        "title": "# 第 {n} 章",
+        "required": {
+            "📍 **ウェーハの現在地**": "ウェーハの現在地",
+            "## この章のポイント": "この章のポイント",
+            "## 参考文献": "参考文献",
+            "[目次](../../README.md)": "ナビゲーション",
+        },
+    },
+    "ko": {
+        "title": "# 제{n}장",
+        "required": {
+            "📍 **웨이퍼의 현재 위치**": "웨이퍼의 현재 위치",
+            "## 이 장의 핵심": "이 장의 핵심",
+            "## 참고 자료": "참고 자료",
+            "[목차](../../README.md)": "내비게이션",
+        },
+    },
 }
 
 # 台灣用語檢查：常見的非台灣用語（只發出警告）。
@@ -171,7 +189,7 @@ def check_language(path: Path, lines: list[str], warnings: list[str]) -> None:
     """只檢查繁體中文原文與根目錄的專案文件。"""
     rel = path.relative_to(ROOT)
     first = rel.parts[0]
-    if rel.as_posix() == "STYLE_GUIDE.md":
+    if rel.as_posix() in {"STYLE_GUIDE.md", "README.md"}:
         return
     if len(rel.parts) > 1 and first != SOURCE_LANG and re.match(r"^[a-z]{2,3}(-[A-Za-z0-9]+)?$", first):
         return

@@ -1,0 +1,67 @@
+name: 內容建議 / Content suggestion
+description: 建議改寫、新增內容或補充圖片 / Suggest a rewrite, new content or a figure
+title: "[建議] "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: 章節 / Chapter
+      options:
+        - "第 0 章 半導體製造全景 / Ch. 0 The Big Picture"
+        - "第 1 章 晶圓廠如何運作 / Ch. 1 How a Fab Works"
+        - "第 2 章 從物理到電晶體 / Ch. 2 From Physics to Transistors"
+        - "第 3 章 從沙子到晶圓 / Ch. 3 From Sand to Wafer"
+        - "第 4 章 微影 / Ch. 4 Lithography"
+        - "第 5 章 薄膜 / Ch. 5 Thin Films"
+        - "第 6 章 蝕刻 / Ch. 6 Etching"
+        - "第 7 章 離子佈植與熱處理 / Ch. 7 Ion Implantation and Thermal Processing"
+        - "第 8 章 CMP / Ch. 8 CMP"
+        - "第 9 章 清洗與污染控制 / Ch. 9 Cleaning and Contamination Control"
+        - "第 10 章 金屬化 / Ch. 10 Metallization"
+        - "第 11 章 走一遍完整的 CMOS 流程 / Ch. 11 A Complete CMOS Process Flow"
+        - "第 12 章 先進電晶體結構 / Ch. 12 Advanced Transistor Structures"
+        - "第 13 章 記憶體製程 / Ch. 13 Memory Processes"
+        - "第 14 章 「幾奈米」是什麼意思 / Ch. 14 What Does 3 nm Really Mean?"
+        - "第 15 章 量測與檢測 / Ch. 15 Metrology and Inspection"
+        - "第 16 章 良率與故障分析 / Ch. 16 Yield and Failure Analysis"
+        - "第 17 章 製程控制 / Ch. 17 Process Control"
+        - "第 18 章 異常處理與工程變更 / Ch. 18 Handling Abnormalities and Engineering Changes"
+        - "第 19 章 晶圓測試 / Ch. 19 Wafer Test"
+        - "第 20 章 封裝 / Ch. 20 Packaging"
+        - "第 21 章 先進封裝 / Ch. 21 Advanced Packaging"
+        - "第 22 章 最終測試與可靠度 / Ch. 22 Final Test and Reliability"
+        - "第 23 章 工廠如何被系統管理 / Ch. 23 How Systems Run the Fab"
+        - "第 24 章 製程如何影響韌體 / Ch. 24 How the Process Shapes Firmware"
+        - "附錄 A 術語總表 / Appendix A Glossary"
+        - "附錄 B 現場行話 / Appendix B Fab Jargon"
+        - "附錄 C 延伸閱讀 / Appendix C Further Reading"
+        - "README 或其他專案文件 / README or other project documents"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 建議類型 / Type
+      options:
+        - 說明不清楚，建議改寫 / Unclear explanation
+        - 新增名詞框或 Know-how 框 / New glossary or know-how box
+        - 新增段落或主題 / New section or topic
+        - 繪製或改善圖片 / New or better figure
+        - 其他 / Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 說明 / Details
+      description: 想改善什麼？為什麼？如果有草稿，也可以直接貼上。 / What would you improve and why? Feel free to paste a draft.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confidentiality
+    attributes:
+      label: 確認 / Confirmation
+      options:
+        - label: 我提供的內容不包含任何公司的機密資訊 / My suggestion contains no confidential information of any company
+          required: true

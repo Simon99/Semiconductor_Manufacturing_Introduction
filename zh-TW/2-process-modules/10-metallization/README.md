@@ -18,7 +18,9 @@
 - **中層**：較寬，像市區道路，連接不同的電路區塊。
 - **上層**：最粗最寬，像高速公路，負責長距離傳送訊號和供應電源。
 
-<!-- 圖：多層金屬導線剖面（下層細密、上層粗寬，層與層之間以導通孔連接） -->
+![多層金屬導線](../../../images/zh-TW/10-metal-layers.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch10/metal-layers.html)自己動手調整看看。*
 
 ---
 
@@ -62,7 +64,9 @@
 
 如果導通孔和溝槽一起填銅，就稱為**雙大馬士革**（Dual Damascene），可以少做一次填充和研磨。每一層金屬都重複這個流程，一層一層往上蓋。
 
-<!-- 圖：雙大馬士革流程剖面（挖洞 → 阻障層 → 電鍍 → CMP → 覆蓋層） -->
+![六個階段：鋪絕緣層、蝕刻導通孔與溝槽、阻障層與晶種層、電鍍銅、銅 CMP、覆蓋層。示意圖，未依比例。](../../../images/zh-TW/10-dual-damascene.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch10/dual-damascene.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜大馬士革製程（Damascene）**

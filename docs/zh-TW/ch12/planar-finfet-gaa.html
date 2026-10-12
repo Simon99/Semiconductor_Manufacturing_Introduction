@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>平面、FinFET 與 GAA：數數閘極包住幾個面</title>
+<style>
+:root{--bg:#f4f6fa;--fg:#17202e;--mut:#51607a;--card:#fff;--line:#d3dae6;--acc:#1f7a3a;--btn:#e7ecf4;--btnon:#1f6feb;--btnfg:#fff;--plate:#e9eef6}
+:root[data-theme=dark]{--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 28px}
+a{color:var(--btnon)}h1{font-size:24px;margin:6px 0 2px}p.sub{margin:0 0 12px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+#stage{width:100%;height:auto;display:block;background:var(--plate);border-radius:8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+button{font:inherit;font-size:15px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--btn);color:var(--fg);cursor:pointer}
+button.on{background:var(--btnon);color:var(--btnfg);border-color:var(--btnon)}
+label{display:block;font-size:14px;color:var(--mut);margin-top:6px}input[type=range]{width:100%}
+.big{font-size:44px;font-weight:800;color:var(--acc);line-height:1.1}.big small{font-size:18px;font-weight:600;color:var(--mut)}
+ul.f{list-style:none;padding:0;margin:6px 0;display:flex;flex-wrap:wrap;gap:6px}
+ul.f li{padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut);font-size:14px}
+ul.f li.lit{background:var(--acc);color:#0b1a0e;border-color:var(--acc);font-weight:700}
+.txt{min-height:4.6em;margin:6px 0}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+tr.cur{background:rgba(59,130,246,.15)}.note{font-size:13px;color:var(--mut)}
+</style></head><body><div class="wrap">
+<div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/12-advanced-transistors/README.md">&larr; 回到章節</a></div>
+<h1>數數閘極包住幾個面</h1>
+<p class="sub">旋轉電晶體，再按「數下一個面」，依序點亮閘極接觸的每個通道面。</p>
+<div class="grid">
+<div class="card"><svg id="stage" viewBox="0 0 640 440" role="img" aria-label="電晶體立體模型"></svg>
+<div class="row" id="devs"></div>
+<div class="row"><button id="bPlay">暫停旋轉</button><button id="bCount" class="on">數下一個面</button><button id="bGate">隱藏閘極</button></div>
+<label>旋轉（偏航角）<span id="yv"></span><input id="yaw" type="range" min="-180" max="180" value="35"></label>
+</div>
+<div class="card">
+<div class="note">閘極包覆的通道面</div>
+<div class="big"><span id="cnt">3</span> <small>／共 <span id="tot">3</span> 面</small></div>
+<ul class="f" id="flist"></ul>
+<div class="txt" id="stageTxt"></div>
+<div class="row"><button id="bPrev">&larr; 上一個</button><button id="bNext">下一個 &rarr;</button></div>
+<table><tr><th>結構</th><th>包覆面數</th></tr><tbody id="tb"></tbody></table>
+<p class="note">示意圖，未依比例；尺寸僅為示意。為求清楚，省略了閘極絕緣層。</p>
+</div></div></div>
+<script>
+const GEO={"planar": [{"b": [1, 7, -1, 7, -1.6, -1], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, -1, 0], "kind": "ch", "wrap": ["top"], "main": ["top"]}, {"b": [5, 6, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, 0, 0.9], "kind": "gate", "wrap": [], "main": false}], "finfet": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 2.6, 3.4, 0, 3], "kind": "ch", "wrap": ["top", "ymax", "ymin"], "main": ["top", "ymax", "ymin"]}, {"b": [5, 6, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 4.2, 3, 3.6], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 2.6, 0, 3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 3.4, 4.2, 0, 3], "kind": "gate", "wrap": [], "main": false}], "gaa": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [5, 6, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.1, 1.7000000000000002], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["bot"]}, {"b": [3, 5, 1.5, 4.5, 2.2, 2.8000000000000003], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": []}, {"b": [3, 5, 1.5, 4.5, 3.3000000000000003, 3.9000000000000004], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["top", "ymax", "ymin"]}, {"b": [3, 5, 1.5, 4.5, 0.3, 1.1], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.7, 2.2], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 2.8, 3.3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 3.9, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.0, 1.5, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 4.5, 5.0, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}]};
+const DEVS=[['planar','平面電晶體','平面電晶體：閘極坐落在通道上方，只能從一面（上方）控制通道。閘極關閉時，電流仍可能從較深處偷偷溜過去。'],
+['finfet','FinFET','FinFET：通道是一片垂直豎立的薄鰭，閘極覆蓋在頂面與兩側面，共三面控制，因此漏電大幅減少。'],
+['gaa','GAA 奈米片','GAA：通道是數片堆疊的薄片，閘極填入並包住每一片的頂面、底面、左面與右面，共四面。']];
+const FN={top:'頂面',ymax:'前側面',ymin:'後側面',bot:'底面'};
+const ORD=['top','ymax','ymin','bot'];
+const q=new URLSearchParams(location.search);
+if(q.get('theme'))document.documentElement.dataset.theme=q.get('theme');
+const S={dev:0,count:null,gate:true,play:true,yaw:35,t:0,off:0};
+const $=id=>document.getElementById(id), st=$('stage');
+function pal(){const d=getComputedStyle(document.documentElement).getPropertyValue('--plate').trim()==='#121c2a';
+ return {sub:d?[70,84,104]:[150,162,182],sd:d?[88,150,196]:[96,150,205],ch:[96,200,230],gate:[255,170,80],lit:'#7dff4f',litS:'#124a1a'}}
+function geomOf(){return GEO[DEVS[S.dev][0]]}
+function nwrap(){const m=geomOf().find(b=>b.kind==='ch');return m.wrap.length}
+function proj(p,yaw,th,sc,cx,cy){const c=Math.cos(yaw*Math.PI/180),s=Math.sin(yaw*Math.PI/180),ct=Math.cos(th*Math.PI/180),stt=Math.sin(th*Math.PI/180);
+ const rx=p[0]-4,ry=p[1]-3,xr=rx*c-ry*s,yr=rx*s+ry*c;return [cx+xr*sc,cy-(p[2]*ct+yr*stt)*sc,-yr*ct+p[2]*stt]}
+function shade(n,yaw){const c=Math.cos(yaw*Math.PI/180),s=Math.sin(yaw*Math.PI/180);const nx=n[0]*c-n[1]*s,ny=n[0]*s+n[1]*c;return .45+.55*Math.max(0,-.35*nx-.45*ny+.82*n[2])}
+function faces(b){const[x0,x1,y0,y1,z0,z1]=b;return {top:[[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],[0,0,1]],bot:[[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]],[0,0,-1]],
+xmin:[[[x0,y0,z0],[x0,y1,z0],[x0,y1,z1],[x0,y0,z1]],[-1,0,0]],xmax:[[[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],[1,0,0]],
+ymin:[[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],[0,-1,0]],ymax:[[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],[0,1,0]]}}
+const cl=(c,f)=>'rgb('+c.map(v=>Math.min(255,Math.round(v*f))).join(',')+')';
+function render(){
+ const P=pal(),yaw=S.yaw,sc=48,cx=320,cy=250,N=nwrap(),cnt=S.count===null?N:S.count;
+ let h='',badges='';const G=geomOf();
+ const key=b=>proj([(b.b[0]+b.b[1])/2,(b.b[2]+b.b[3])/2,(b.b[4]+b.b[5])/2],yaw,28,1,0,0)[2];
+ const ord=G.filter(b=>b.kind==='sub').concat(G.filter(b=>b.kind!=='sub').sort((a,b)=>key(a)-key(b)));
+ for(const bx of ord){
+  if(bx.kind==='gate'&&!S.gate)continue;
+  const fs=faces(bx.b),arr=Object.entries(fs).map(([n,v])=>[n,v,proj([0,1,2].map(i=>v[0].reduce((a,c)=>a+c[i],0)/4),yaw,28,1,0,0)[2]]).sort((a,b)=>a[2]-b[2]);
+  for(const [n,v] of arr){
+   const pts=v[0].map(c=>proj(c,yaw,28,sc,cx,cy)),ps=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '),f=shade(v[1],yaw);
+   if(bx.kind==='gate')h+=`<polygon points="${ps}" fill="${cl(P.gate,f)}" fill-opacity=".34" stroke="#ffd29a" stroke-opacity=".6"/>`;
+   else h+=`<polygon points="${ps}" fill="${cl(P[bx.kind],f)}" stroke="#0d1520" stroke-opacity=".45" stroke-width=".8"/>`;
+   if(bx.kind==='ch'&&bx.wrap.includes(n)){const idx=bx.wrap.indexOf(n);
+    if(idx<cnt)h+=`<polygon points="${ps}" fill="${P.lit}" fill-opacity=".92" stroke="#eaffd8" stroke-width="1.6"/>`;
+    if(bx.main.includes(n)&&idx<cnt){const mx=pts.reduce((a,p)=>a+p[0],0)/4,my=pts.reduce((a,p)=>a+p[1],0)/4;
+     badges+=`<g><circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="11" fill="#14202e" stroke="${P.lit}" stroke-width="2"/><text x="${mx.toFixed(1)}" y="${(my+4.5).toFixed(1)}" text-anchor="middle" font-size="13" font-weight="700" fill="${P.lit}" font-family=""Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,sans-serif">${idx+1}</text></g>`}}
+  }}
+ st.innerHTML=h+badges;
+ $('yv').textContent=Math.round(((yaw+540)%360)-180)+'°';$('yaw').value=Math.round(((yaw+540)%360)-180);
+ $('cnt').textContent=cnt;$('tot').textContent=N;
+ const m=G.find(b=>b.kind==='ch');
+ $('flist').innerHTML=ORD.filter(n=>m.wrap.includes(n)).map(n=>`<li class="${m.wrap.indexOf(n)<cnt?'lit':''}">${m.wrap.indexOf(n)+1}. ${FN[n]}</li>`).join('')+'<li>源極／汲極端：未被包覆</li>';
+ $('stageTxt').textContent=DEVS[S.dev][2]+(S.dev===2?'（以單片計算，每一片的包覆方式相同。）':'')+(S.gate?'':'［已隱藏閘極，只顯示通道。］');
+ $('tb').innerHTML=DEVS.map((d,i)=>`<tr class="${i===S.dev?'cur':''}"><td>${d[1]}</td><td>${['一面','三面','四面'][i]}</td></tr>`).join('');
+ [...$('devs').children].forEach((b,i)=>b.classList.toggle('on',i===S.dev));
+ $('bGate').textContent=S.gate?'隱藏閘極':'顯示閘極';$('bPlay').textContent=S.play?'暫停旋轉':'播放旋轉';
+}
+function setDev(i){S.dev=((i%3)+3)%3;S.count=null;render()}
+DEVS.forEach((d,i)=>{const b=document.createElement('button');b.textContent=d[1];b.onclick=()=>setDev(i);$('devs').appendChild(b)});
+$('bCount').onclick=()=>{const N=nwrap();S.count=(S.count===null||S.count>=N)?1:S.count+1;render()};
+$('bGate').onclick=()=>{S.gate=!S.gate;render()};
+$('bPlay').onclick=()=>{S.play=!S.play;if(S.play)S.off=S.yaw-spin(S.t);render()};
+$('bPrev').onclick=()=>setDev(S.dev-1);$('bNext').onclick=()=>setDev(S.dev+1);
+$('yaw').oninput=e=>{S.play=false;S.yaw=+e.target.value;render()};
+const spin=t=>30*Math.sin(t/2600);
+window.__setTime=ms=>{S.t=ms;if(S.play)S.yaw=S.off+spin(ms);render()};
+let t0=null;function loop(ts){if(t0===null)t0=ts;if(S.play)window.__setTime(ts-t0);requestAnimationFrame(loop)}
+S.off=35;
+if(q.has('dev'))S.dev=+q.get('dev');
+if(q.has('count'))S.count=+q.get('count');
+if(q.get('gate')==='0')S.gate=false;
+const still=q.has('still')||q.has('t')||q.has('yaw')||window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(q.has('yaw'))S.yaw=+q.get('yaw');
+if(q.has('t'))window.__setTime(+q.get('t'));
+if(still)S.play=false;
+render();
+if(!still)requestAnimationFrame(loop);
+</script></body></html>

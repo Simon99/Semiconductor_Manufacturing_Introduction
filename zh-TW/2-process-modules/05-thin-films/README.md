@@ -80,7 +80,9 @@ PVD 主要用來沉積金屬，例如鋁、鈦、氮化鈦，以及銅製程中�
 | ALD | 一次一層原子 | 極薄膜、閘極絕緣層 | 最均勻，但速度慢 |
 | 磊晶 | 延續晶格生長 | 磊晶矽、矽鍺 | 可以長出單晶 |
 
-<!-- 圖：四種沉積方式的示意對照（熱氧化、CVD、PVD、ALD） -->
+![並排的溝槽剖面圖：熱氧化讓氧化層從矽本身長出來，CVD 用反應氣體堆出相當均勻的薄膜，PVD 濺鍍的原子大多直直往下，所以溝槽底部較薄，ALD 每個循環長一層原子層，覆蓋最均勻。](../../../images/zh-TW/05-deposition.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch05/deposition.html)自己動手調整看看。*
 
 ---
 

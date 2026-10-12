@@ -18,7 +18,9 @@
 
 真正生產晶圓的無塵室，只是整棟建築的一部分，其他空間都在「服務」它。
 
-<!-- 圖：晶圓廠剖面示意（上層空調與過濾、中層無塵室、下層管線與附屬設備） -->
+![分成三層：上層是空調與過濾，中層是無塵室，下層是管線與附屬設備。空氣從天花板濾網往下流過無塵室，再穿過有孔地板被抽走，把微粒一併帶走。](../../../images/zh-TW/01-fab-cross-section.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch01/fab-cross-section.html)自己動手調整看看。*
 
 ---
 
@@ -50,7 +52,9 @@
 - **倉儲（Stocker）**：暫時存放還在等待的 FOUP。
 - **Load Port**：機台前方放 FOUP 的平台，機台從這裡取出晶圓。
 
-<!-- 圖：天車在天花板軌道上，把 FOUP 放到機台 Load Port 的示意圖 -->
+![天車沿天花板軌道從倉儲駛向機台，用吊掛機構把 FOUP 放到 Load Port 上，再回去載下一個 FOUP。時間為示意。](../../../images/zh-TW/01-oht-foup.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch01/oht-foup.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜FOUP（Front Opening Unified Pod，前開式晶圓傳送盒）**

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用天車派送 FOUP</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#14213a;--mute:#53627c;--line:#cdd7e6;--accent:#1b6fd1;--btn:#e7eef9;
+--scene:#101c2e;--ceil:#233248;--rail:#8795ab;--tool:#35506e;--toolln:#6f8fb3;--ledge:#8fa6c2;--stk:#2d4663;--slot:#223a55;--floor:#2b3d57;--stxt:#e6eefb;--hl:#ffd27a}
+:root[data-theme=dark]{--bg:#0b1220;--card:#131d31;--ink:#e6eefb;--mute:#9db0cf;--line:#2a3a57;--accent:#6db3ff;--btn:#1d2b45;
+--scene:#0a1424;--ceil:#1a2a42;--floor:#223350}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1220;--card:#131d31;--ink:#e6eefb;--mute:#9db0cf;--line:#2a3a57;--accent:#6db3ff;--btn:#1d2b45;--scene:#0a1424;--ceil:#1a2a42;--floor:#223350}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:12px 16px 32px}
+a{color:var(--accent)}
+h1{font-size:1.4rem;margin:.4rem 0 .2rem}
+.sub{color:var(--mute);margin:0 0 .8rem;font-size:.95rem}
+.scene{width:100%;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--scene)}
+.scene svg{display:block;width:100%;height:auto}
+.stxt{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,sans-serif;fill:var(--stxt)}
+.row{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:820px){.row{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h2{font-size:1rem;margin:0 0 8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--btn);color:var(--ink);padding:6px 12px;border-radius:7px}
+button:hover:not(:disabled){border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.tools{grid-template-columns:1fr}}
+.tc{border:2px solid var(--line);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px}
+.tc.sel{border-color:var(--accent)}
+.tc b{display:flex;justify-content:space-between;align-items:center}
+.chip{font-size:.8rem;padding:1px 8px;border-radius:99px;color:#fff}
+.idle{background:#1f9d57}.running{background:#1b6fd1}.down{background:#c8372d}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+.btns button{padding:4px 8px;font-size:.85rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.steps li{padding:5px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mute);font-size:.92rem}
+.steps li.on{border-color:var(--accent);color:var(--ink);background:var(--btn);font-weight:600}
+.steps li.done{color:var(--ink)}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.ctl label{display:flex;gap:8px;align-items:center;flex:1 1 220px}
+input[type=range]{flex:1;min-width:90px}
+.read{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-variant-numeric:tabular-nums;margin:8px 0 0}
+.read dt{color:var(--mute)}.read dd{margin:0;font-weight:600}
+.msg{min-height:2.8em;margin:8px 0 0;font-size:.92rem;color:var(--ink)}
+.note{color:var(--mute);font-size:.82rem;margin:.5rem 0 0}
+</style>
+</head>
+<body>
+<main>
+<a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/01-how-a-fab-works/README.md">&larr; 回到章節</a>
+<h1>用天車派送 FOUP</h1>
+<p class="sub">選一台機台，從倉儲送出一個 FOUP。天車沿天花板軌道載運，再把它放到機台的 Load Port 上。</p>
+<div class="scene"><svg id="sv" viewBox="0 0 1100 540" role="img" aria-label="天花板軌道上的天車，往來於倉儲與四台機台之間"></svg></div>
+<div class="row">
+ <div class="card">
+  <h2>機台（點選卡片上的按鈕）</h2>
+  <div class="tools" id="tools"></div>
+  <div class="ctl">
+   <label>天車速度 <input id="spd" type="range" min="1" max="5" step="0.5" value="3"> <output id="spdo">3.0 m/s</output></label>
+   <button id="pause">暫停</button>
+  </div>
+  <p class="msg" id="msg" aria-live="polite">請先選一台機台，再按「派送 FOUP」。</p>
+ </div>
+ <div class="card">
+  <h2>運送階段</h2>
+  <ol class="steps" id="steps">
+   <li>1. 吊掛機構在倉儲抓取 FOUP</li>
+   <li>2. 天車沿軌道駛向機台</li>
+   <li>3. 吊掛機構把 FOUP 放到 Load Port</li>
+   <li>4. FOUP 已就位：由機台接手</li>
+  </ol>
+  <dl class="read">
+   <dt>軌道距離</dt><dd id="r1">-</dd>
+   <dt>行駛時間</dt><dd id="r2">-</dd>
+   <dt>整趟時間</dt><dd id="r3">-</dd>
+  </dl>
+  <p class="note">示意數字：場景 1 單位 = 0.1 m，抓取與放下分別耗時 6 秒與 8 秒，動畫約為實際速度的 6 倍。機台停機或 Load Port 已被占用時會拒收 FOUP（簡化規則）。依本章說明，一個 FOUP 最多裝 25 片晶圓，重約 8 公斤。</p>
+ </div>
+</div>
+</main>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+var TOOLS=[{n:'機台 A',x0:310,cx:265},{n:'機台 B',x0:530,cx:485},{n:'機台 C',x0:750,cx:705},{n:'機台 D',x0:970,cx:925}];
+var STK=105, D_LAND=172, D_STK=22, UNIT=0.1;
+var q=new URLSearchParams(location.search);
+if(q.get('theme')==='dark'||q.get('theme')==='light')document.documentElement.setAttribute('data-theme',q.get('theme'));
+var sv=document.getElementById('sv');
+var h='<defs><g id="foup"><rect x="-12" y="121" width="24" height="7" rx="2" fill="#d8f1ff"/><rect x="-26" y="127" width="52" height="61" rx="5" fill="#58b8f0" stroke="#d8f1ff" stroke-width="2"/><path d="M-18 168H18M-18 175H18M-18 182H18" stroke="#1e5f8a" stroke-width="2" fill="none"/><rect x="19" y="132" width="5" height="30" rx="2" fill="#d8f1ff"/><text class="stxt" x="-3" y="152" text-anchor="middle" font-size="13" font-weight="700" style="fill:#08263d">FOUP</text></g><clipPath id="below"><rect x="-50" y="110" width="100" height="700"/></clipPath></defs>';
+h+='<rect width="1100" height="540" fill="var(--scene)"/><rect width="1100" height="44" fill="var(--ceil)"/><text class="stxt" x="20" y="28" font-size="14">晶圓廠天花板：天車軌道</text>';
+for(var x=40;x<1100;x+=120)h+='<rect x="'+x+'" y="44" width="8" height="12" fill="#4a5a74"/>';
+h+='<rect y="56" width="1100" height="12" fill="var(--rail)"/><rect y="56" width="1100" height="3" fill="#b9c4d6"/><rect y="470" width="1100" height="10" fill="var(--floor)"/>';
+h+='<rect x="30" y="210" width="150" height="260" rx="4" fill="var(--stk)" stroke="var(--toolln)" stroke-width="2"/>';
+[228,298,368].forEach(function(y){[44,108].forEach(function(x){h+='<rect x="'+x+'" y="'+y+'" width="56" height="58" rx="4" fill="var(--slot)"/><rect x="'+(x+8)+'" y="'+(y+8)+'" width="40" height="42" rx="4" fill="#58b8f0" opacity=".55"/>';});});
+h+='<text class="stxt" x="105" y="458" text-anchor="middle" font-size="14" font-weight="700">倉儲</text><g id="stkf"><use href="#foup" transform="translate('+STK+',22)"/></g>';
+TOOLS.forEach(function(t,i){
+ h+='<rect x="'+(t.x0-90)+'" y="360" width="90" height="12" rx="2" fill="var(--ledge)"/><rect x="'+t.x0+'" y="300" width="100" height="170" rx="4" fill="var(--tool)" stroke="var(--toolln)" stroke-width="2"/><rect x="'+t.x0+'" y="304" width="6" height="56" fill="var(--ledge)"/>';
+ h+='<text class="stxt" x="'+(t.x0+53)+'" y="420" text-anchor="middle" font-size="14" font-weight="700">'+t.n+'</text><text class="stxt" x="'+t.cx+'" y="392" text-anchor="middle" font-size="12" style="fill:var(--hl)">Load Port</text>';
+ h+='<circle id="led'+i+'" cx="'+(t.x0+80)+'" cy="322" r="7" fill="#3ddc84"/><g id="pf'+i+'" opacity="0"><use href="#foup" transform="translate('+t.cx+','+D_LAND+')"/></g>';
+});
+h+='<g id="veh"><g clip-path="url(#below)"><g id="hoist"><rect x="-24" y="-300" width="4" height="412" fill="#cfd8e6"/><rect x="20" y="-300" width="4" height="412" fill="#cfd8e6"/><rect x="-34" y="110" width="68" height="14" rx="3" fill="#6b7c96"/><rect x="-34" y="124" width="6" height="10" fill="#6b7c96"/><rect x="28" y="124" width="6" height="10" fill="#6b7c96"/><g id="carry" opacity="0"><use href="#foup"/></g></g></g><circle cx="-26" cy="62" r="6" fill="#d9e2f0"/><circle cx="26" cy="62" r="6" fill="#d9e2f0"/><rect x="-42" y="68" width="84" height="42" rx="7" fill="#e8a23a"/><rect x="-42" y="100" width="84" height="10" rx="3" fill="#1b2a40"/><text class="stxt" x="0" y="92" text-anchor="middle" font-size="18" font-weight="800" style="fill:#1b2a40">OHT</text></g>';
+h+='<text class="stxt" x="30" y="505" font-size="13" font-weight="700" id="cap1">階段：閒置</text><text class="stxt" x="30" y="524" font-size="13" style="opacity:.8" id="cap2">示意配置，未依比例</text>';
+sv.innerHTML=h;
+var $=function(i){return document.getElementById(i)};
+var veh=$('veh'),hoist=$('hoist'),carry=$('carry'),stkf=$('stkf');
+// ---- model ----
+var S, events=[], clock=0, paused=false, speed=3;
+function reset(){S={x:TOOLS[1].cx,d:150,carry:false,stk:false,tools:TOOLS.map(function(){return{st:'idle',pf:false}}),job:null,sel:1,msg:'請先選一台機台，再按「派送 FOUP」。',stage:-1,info:null};
+ /* start pose: mid-delivery to Tool B so a still is informative */ }
+function dist(a,b){return Math.abs(a-b)}
+function makeJob(target){
+ var t=TOOLS[target],steps=[],sp=S.speed;
+ var back=dist(S.x,STK);
+ if(back>1)steps.push({k:'back',dur:Math.max(700,back*UNIT/sp*1000/6),a:S.x,b:STK,stage:-1});
+ steps.push({k:'low1',dur:900,stage:0},{k:'grab',dur:250,stage:0},{k:'lift1',dur:900,stage:0});
+ var tr=dist(STK,t.cx);
+ steps.push({k:'go',dur:Math.max(900,tr*UNIT/sp*1000/6),a:STK,b:t.cx,stage:1});
+ steps.push({k:'low2',dur:1300,stage:2},{k:'rel',dur:300,stage:2},{k:'up2',dur:900,stage:2});
+ var m=tr*UNIT; S.info={dist:m,travel:m/sp,total:6+8+m/sp};
+ return {target:target,steps:steps,i:0,e:0};
+}
+function stepJob(dt){
+ var j=S.job; if(!j)return;
+ while(dt>0&&j.i<j.steps.length){
+  var s=j.steps[j.i],p0=j.e;
+  var use=Math.min(dt,s.dur-j.e); j.e+=use; dt-=use;
+  var p=s.dur?j.e/s.dur:1; S.stage=s.stage;
+  switch(s.k){
+   case 'back':case 'go':S.x=s.a+(s.b-s.a)*p;S.d=0;break;
+   case 'low1':S.x=STK;S.d=D_STK*p;break;
+   case 'grab':S.d=D_STK;if(p>=1){S.carry=true;S.stk=false}break;
+   case 'lift1':S.d=D_STK*(1-p);break;
+   case 'low2':S.x=TOOLS[j.target].cx;S.d=D_LAND*p;break;
+   case 'rel':S.d=D_LAND;if(p>=1){S.carry=false;S.tools[j.target].pf=true}break;
+   case 'up2':S.d=D_LAND*(1-p);break;
+  }
+  if(j.e>=s.dur){j.i++;j.e=0}
+ }
+ if(j.i>=j.steps.length){S.tools[j.target].st='running';S.stk=true;S.stage=3;S.msg=TOOLS[j.target].n+'的 Load Port 已收到 FOUP，正在加工這批晶圓。';S.job=null}
+}
+function apply(ev){
+ if(ev.t==='dispatch'){
+  var T=S.tools[ev.i];
+  if(S.job){S.msg='天車正忙著運送另一個 FOUP。';return}
+  if(T.st==='down'){S.msg=TOOLS[ev.i].n+'停機中（維修或故障），派送被拒絕，請改選其他機台。';return}
+  if(T.st==='running'){S.msg=TOOLS[ev.i].n+'的 Load Port 被加工中的批次占用，請等它完成，或改選其他機台。';return}
+  S.job=makeJob(ev.i);S.stage=0;S.msg='正在派送 FOUP 到'+TOOLS[ev.i].n+'。';
+ }else if(ev.t==='down'){var T2=S.tools[ev.i];if(T2.st!=='running'&&!(S.job&&S.job.target===ev.i)){T2.st=T2.st==='down'?'idle':'down';S.msg=TOOLS[ev.i].n+(T2.st==='down'?'已設為停機。':'已恢復運作，目前閒置。')}}
+ else if(ev.t==='finish'){var T3=S.tools[ev.i];if(T3.st==='running'){T3.st='idle';T3.pf=false;S.msg=TOOLS[ev.i].n+'已完成這批晶圓，FOUP 已被取走。'}}
+ else if(ev.t==='speed'){S.speed=ev.v}
+ else if(ev.t==='sel'){S.sel=ev.i}
+}
+var STEP=20;
+function reinit(){reset();S.speed=speed0;S.carry=true;S.d=150;S.x=TOOLS[1].cx;S.job=null;S.initRun=true}
+var speed0=3;
+// initial demo: dispatch to Tool B from t=0
+function boot(){reset();S.speed=3;S.stk=true;events=[];clock=0;S.cursor=0;var tg=parseInt(q.get('dispatch')||'2',10)-1;if(tg>=0&&tg<4)events.push({at:0,t:'dispatch',i:tg});
+ var dn=q.get('down');if(dn)events.unshift({at:0,t:'down',i:parseInt(dn,10)-1});}
+function advanceTo(target){
+ if(target<clock){var ev=events.slice();boot();events=ev}
+ while(clock<target){
+  var dt=Math.min(STEP,target-clock);
+  S.cursor=S.cursor||0;
+  while(S.cursor<events.length&&events[S.cursor].at<=clock){apply(events[S.cursor]);S.cursor++}
+  stepJob(dt);clock+=dt;
+ }
+ render();
+}
+function render(){
+ veh.setAttribute('transform','translate('+S.x+',0)');
+ hoist.setAttribute('transform','translate(0,'+S.d+')');
+ carry.setAttribute('opacity',S.carry?1:0);
+ stkf.setAttribute('opacity',S.stk?1:0);
+ TOOLS.forEach(function(t,i){var T=S.tools[i];$('pf'+i).setAttribute('opacity',T.pf?1:0);
+  $('led'+i).setAttribute('fill',T.st==='idle'?'#3ddc84':T.st==='running'?'#58a6ff':'#ff5a4d');
+  var c=$('tc'+i);if(c){c.className='tc'+(S.sel===i?' sel':'');$('ch'+i).className='chip '+T.st;$('ch'+i).textContent=T.st==='down'?'停機':T.st==='running'?'運轉中':'閒置';
+   $('dp'+i).disabled=!!S.job;$('dn'+i).disabled=T.st==='running'||(S.job&&S.job.target===i);$('dn'+i).textContent=T.st==='down'?'恢復運作':'設為停機';$('fn'+i).style.display=T.st==='running'?'':'none'}});
+ var lis=$('steps').children;for(var k=0;k<lis.length;k++)lis[k].className=(S.stage===k?'on':(S.stage>k?'done':''));
+ $('msg').textContent=S.msg;
+ if(S.info){$('r1').textContent=S.info.dist.toFixed(1)+' m';$('r2').textContent=S.info.travel.toFixed(1)+' 秒（速度 '+S.speed.toFixed(1)+' m/s）';$('r3').textContent='約 '+Math.round(S.info.total)+' 秒（示意）'}
+ $('cap1').textContent=S.stage<0?'階段：天車返回倉儲':S.stage===3?'階段：已就位，FOUP 在 Load Port':'階段：'+['在倉儲抓取','沿軌道行駛','放到 Load Port'][S.stage];
+}
+// ---- UI ----
+var tc='';TOOLS.forEach(function(t,i){tc+='<div class="tc" id="tc'+i+'"><b>'+t.n+' <span class="chip idle" id="ch'+i+'">閒置</span></b><div class="btns"><button class="pri" id="dp'+i+'">派送 FOUP</button><button id="dn'+i+'">設為停機</button><button id="fn'+i+'" style="display:none">完成批次</button></div></div>'});
+$('tools').innerHTML=tc;
+function log(ev){ev.at=clock;events.push(ev);apply(ev);S.cursor=events.length;render()}
+TOOLS.forEach(function(t,i){$('dp'+i).onclick=function(){log({t:'sel',i:i});log({t:'dispatch',i:i})};$('dn'+i).onclick=function(){log({t:'down',i:i})};$('fn'+i).onclick=function(){log({t:'finish',i:i})}});
+$('spd').oninput=function(){var v=parseFloat(this.value);$('spdo').textContent=v.toFixed(1)+' m/s';log({t:'speed',v:v})};
+$('pause').onclick=function(){paused=!paused;this.textContent=paused?'播放':'暫停'};
+// ---- clock ----
+boot();
+var still=q.get('still')==='1',tq=q.get('t');
+window.__setTime=function(ms){paused=true;$('pause').textContent='播放';advanceTo(ms)};
+if(tq!==null){window.__setTime(parseFloat(tq))}
+else if(still){window.__setTime(3000)}
+else{render();var last=performance.now();
+ (function loop(n){var dt=n-last;last=n;if(!paused&&dt<200)advanceTo(clock+dt);requestAnimationFrame(loop)})(last)}
+})();
+</script>
+</body>
+</html>

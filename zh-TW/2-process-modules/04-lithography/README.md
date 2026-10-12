@@ -20,7 +20,9 @@
 
 不同的是，微影印出來的圖形要精準到奈米等級，而且每一層都要和前一層對得剛剛好。所以微影是整個製程中最昂貴、最關鍵的步驟。
 
-<!-- 圖：攝影與微影的對照圖（光源、底片／光罩、鏡頭、相紙／光阻） -->
+![並排比較：暗房沖印（燈泡、底片、鏡頭、相紙）與微影（紫外光源、光罩、鏡頭、晶圓上的光阻）。光穿過底片或光罩，塗層在受光處產生變化，再由顯影液顯出畫面或圖形。](../../../images/zh-TW/04-camera-vs-litho.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch04/camera-vs-litho.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜微影（Lithography）**
@@ -56,7 +58,9 @@
 6. **顯影**：用顯影液溶掉不要的光阻，圖形就出現了。
 7. **檢查（ADI）**：量測圖形的尺寸、對準程度，以及有沒有缺陷。
 
-<!-- 圖：微影流程示意（塗佈、曝光、顯影三個階段的晶圓剖面） -->
+![正型與負型光阻在微影三個階段的晶圓剖面示意。](../../../images/zh-TW/04-litho-flow.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch04/litho-flow.html)自己動手調整看看。*
 
 > [!TIP]
 > **🔧 Know-how｜微影是「可以重來」的最後機會**

@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d">
+<title id="t">微影流程：塗佈、曝光、顯影</title>
+<desc id="d">正型與負型光阻在微影三個階段的晶圓剖面示意。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1f2933}
+.bg{fill:#fbf9f4}
+.pbg{fill:#fff;stroke:#d6d0c2;stroke-width:1.5}
+.glow{fill:none;stroke:#e8590c;stroke-width:3.5;opacity:0}
+.sub{fill:#7b8794}.film{fill:#4f86c6}
+.res{fill:#f2b134}.resN{fill:#a4571a}
+.expP{fill:#fff1bf;stroke:#c99a1e;stroke-width:1.5;stroke-dasharray:4 3}
+.expN{fill:#a4571a;stroke:#6b3410;stroke-width:1.5}
+.quartz{fill:#bfe0f5;stroke:#6aa6cf;stroke-width:1}.chrome{fill:#2b2f36}
+.beam{stroke:#6d3be8;stroke-width:2.5;stroke-dasharray:6 5}
+.nozzle{fill:#52606d}.drop{fill:#a4571a}.ddrop{fill:#1b9aaa}
+.spin{fill:none;stroke:#52606d;stroke-width:2.5}
+.ovl{fill:#f2b134;opacity:0}
+.t1{font-size:24px;font-weight:700}.t2{font-size:14px;fill:#52606d}
+.h{font-size:18px;font-weight:700}.hs{font-size:13px;fill:#52606d}
+.ban{font-size:14px;font-weight:700}
+.lab{font-size:12px;fill:#323f4b}.lab.w{fill:#fff}.lab.d{fill:#3d2a00}
+.note{font-size:13px;fill:#3e4c59}.leg{font-size:12px;fill:#323f4b}
+.arr{fill:#9aa5b1}
+@keyframes gc{0%{opacity:1}30%{opacity:1}33%{opacity:0}100%{opacity:0}}
+@keyframes ge{0%{opacity:0}33%{opacity:0}36%{opacity:1}63%{opacity:1}66%{opacity:0}100%{opacity:0}}
+@keyframes gd{0%{opacity:0}66%{opacity:0}69%{opacity:1}97%{opacity:1}100%{opacity:0}}
+@keyframes drop{0%{transform:translateY(0);opacity:1}20%{transform:translateY(24px);opacity:1}26%{transform:translateY(24px);opacity:0}27%{transform:translateY(0);opacity:0}99%{transform:translateY(0);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes ddrop{0%{transform:translateY(0);opacity:1}66%{transform:translateY(0);opacity:1}72%{transform:translateY(0);opacity:1}88%{transform:translateY(14px);opacity:1}94%{transform:translateY(14px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes beam{0%{opacity:.5}33%{opacity:.5}37%{opacity:1}63%{opacity:1}67%{opacity:.5}100%{opacity:.5}}
+@keyframes flow{to{stroke-dashoffset:-22}}
+@keyframes ex{0%{opacity:1}32%{opacity:1}33%{opacity:0}55%{opacity:1}100%{opacity:1}}
+@keyframes ovl{0%{opacity:0}65%{opacity:0}66%{opacity:1}96%{opacity:0}100%{opacity:0}}
+@keyframes spin{0%{opacity:1}100%{opacity:1}}
+.g-coat{animation:gc 12s infinite}.g-expose{animation:ge 12s infinite}.g-develop{animation:gd 12s infinite}
+.drop{animation:drop 12s infinite}.ddrop{animation:ddrop 12s infinite}
+.beam{animation:beam 12s infinite,flow 1s linear infinite}
+.ex{animation:ex 12s infinite}.ovl{animation:ovl 12s infinite}
+@media (prefers-reduced-motion:reduce){.glow,.drop,.ddrop,.beam,.ex,.ovl{animation:none!important}.glow{opacity:0}}
+</style>
+<defs>
+<marker id="ah" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7z" fill="#52606d"/></marker>
+<marker id="ahv" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="#6d3be8"/></marker>
+</defs>
+<rect class="bg" width="960" height="600"/>
+<text class="t1" x="25" y="34">微影流程：塗佈、曝光、顯影</text>
+<text class="t2" x="25" y="56">各階段的晶圓剖面。光阻的類型決定圖形的哪一部分會留下來。</text>
+<text class="h" x="25" y="88">1  塗佈</text><text class="hs" x="25" y="108">旋轉塗上一層薄而均勻的光阻</text>
+<text class="h" x="335" y="88">2  曝光</text><text class="hs" x="335" y="108">光線穿過光罩的透光縫隙</text>
+<text class="h" x="645" y="88">3  顯影</text><text class="hs" x="645" y="108">顯影液洗掉部分光阻</text>
+<text class="ban" x="25" y="128">正型光阻：曝光區變成可溶，所以被洗掉</text>
+<g transform="translate(25,136)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-coat" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<text class="lab w" x="145" y="158" text-anchor="middle">矽晶圓</text>
+<text class="lab w" x="145" y="136" text-anchor="middle">待圖形化的薄膜</text>
+<rect class="res" x="15" y="94" width="260" height="30"/>
+<text class="lab d" x="145" y="114" text-anchor="middle">光阻</text>
+<path class="nozzle" d="M133 26 h24 v22 l-9 12 l-3 0 l-9 -12 z"/>
+<text class="lab" x="20" y="38">滴塗</text>
+<circle class="drop" cx="145" cy="68" r="5"/>
+<path class="spin" d="M232 40 a20 20 0 1 1 -2 -18" marker-end="url(#ah)"/>
+<text class="lab" x="252" y="62" text-anchor="middle">旋轉</text>
+</g>
+<g transform="translate(335,136)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-expose" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<line class="beam" x1="90" y1="8" x2="90" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="110" y1="8" x2="110" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="130" y1="8" x2="130" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="150" y1="8" x2="150" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="170" y1="8" x2="170" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="190" y1="8" x2="190" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="210" y1="8" x2="210" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="230" y1="8" x2="230" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="115" y1="56" x2="115" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="135" y1="56" x2="135" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="155" y1="56" x2="155" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="175" y1="56" x2="175" y2="91" marker-end="url(#ahv)"/>
+<rect class="quartz" x="15" y="42" width="260" height="10"/>
+<rect class="chrome" x="15" y="50" width="90" height="5"/>
+<rect class="chrome" x="185" y="50" width="90" height="5"/>
+<text class="lab" x="20" y="22">紫外光</text>
+<text class="lab" x="270" y="36" text-anchor="end">光罩</text>
+<rect class="res" x="15" y="94" width="260" height="30"/>
+<rect class="expP ex" x="105" y="94" width="80" height="30"/>
+<text class="lab d ex" x="145" y="114" text-anchor="middle">可溶</text>
+</g>
+<g transform="translate(645,136)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-develop" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<text class="lab" x="20" y="24">顯影液</text>
+<circle class="ddrop" cx="115" cy="56" r="4"/>
+<circle class="ddrop" cx="145" cy="56" r="4"/>
+<circle class="ddrop" cx="175" cy="56" r="4"/>
+<rect class="res" x="15" y="94" width="90" height="30"/><rect class="res" x="185" y="94" width="90" height="30"/>
+<rect class="ovl" x="105" y="94" width="80" height="30"/>
+<text class="lab" x="145" y="86" text-anchor="middle">裸露薄膜</text>
+</g>
+<path class="arr" d="M317 211 l16 10 l-16 10 z"/>
+<path class="arr" d="M627 211 l16 10 l-16 10 z"/>
+<text class="ban" x="25" y="330">負型光阻：曝光區硬化，所以留下來（同一片光罩，結果相反）</text>
+<g transform="translate(25,338)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-coat" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<rect class="res" x="15" y="94" width="260" height="30"/>
+<path class="nozzle" d="M133 26 h24 v22 l-9 12 l-3 0 l-9 -12 z"/>
+<text class="lab" x="20" y="38">滴塗</text>
+<circle class="drop" cx="145" cy="68" r="5"/>
+<path class="spin" d="M232 40 a20 20 0 1 1 -2 -18" marker-end="url(#ah)"/>
+<text class="lab" x="252" y="62" text-anchor="middle">旋轉</text>
+</g>
+<g transform="translate(335,338)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-expose" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<line class="beam" x1="90" y1="8" x2="90" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="110" y1="8" x2="110" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="130" y1="8" x2="130" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="150" y1="8" x2="150" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="170" y1="8" x2="170" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="190" y1="8" x2="190" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="210" y1="8" x2="210" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="230" y1="8" x2="230" y2="38" marker-end="url(#ahv)"/>
+<line class="beam" x1="115" y1="56" x2="115" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="135" y1="56" x2="135" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="155" y1="56" x2="155" y2="91" marker-end="url(#ahv)"/>
+<line class="beam" x1="175" y1="56" x2="175" y2="91" marker-end="url(#ahv)"/>
+<rect class="quartz" x="15" y="42" width="260" height="10"/>
+<rect class="chrome" x="15" y="50" width="90" height="5"/>
+<rect class="chrome" x="185" y="50" width="90" height="5"/>
+<text class="lab" x="20" y="22">紫外光</text>
+<text class="lab" x="270" y="36" text-anchor="end">光罩</text>
+<rect class="res" x="15" y="94" width="260" height="30"/>
+<rect class="expN ex" x="105" y="94" width="80" height="30"/>
+<text class="lab w ex" x="145" y="114" text-anchor="middle">硬化</text>
+</g>
+<g transform="translate(645,338)">
+<rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="glow g-develop" x="0" y="0" width="290" height="170" rx="8"/>
+<rect class="sub" x="15" y="140" width="260" height="26"/>
+<rect class="film" x="15" y="124" width="260" height="16"/>
+<text class="lab" x="20" y="24">顯影液</text>
+<circle class="ddrop" cx="115" cy="56" r="4"/>
+<circle class="ddrop" cx="145" cy="56" r="4"/>
+<circle class="ddrop" cx="175" cy="56" r="4"/>
+<rect class="resN" x="105" y="94" width="80" height="30"/>
+<rect class="ovl" x="15" y="94" width="90" height="30"/><rect class="ovl" x="185" y="94" width="90" height="30"/>
+<text class="lab" x="60" y="86" text-anchor="middle">裸露薄膜</text>
+<text class="lab" x="230" y="86" text-anchor="middle">裸露薄膜</text>
+</g>
+<path class="arr" d="M317 413 l16 10 l-16 10 z"/>
+<path class="arr" d="M627 413 l16 10 l-16 10 z"/>
+<g>
+<rect class="sub" x="25" y="528" width="16" height="14"/><text class="leg" x="47" y="540">矽晶圓</text>
+<rect class="film" x="147" y="528" width="16" height="14"/><text class="leg" x="169" y="540">薄膜層</text>
+<rect class="res" x="253" y="528" width="16" height="14"/><text class="leg" x="275" y="540">光阻</text>
+<rect class="expP" x="369" y="528" width="16" height="14"/><text class="leg" x="391" y="540">曝光後：可溶</text>
+<rect class="expN" x="581" y="528" width="16" height="14"/><text class="leg" x="603" y="540">曝光後：硬化</text>
+<rect class="chrome" x="801" y="528" width="16" height="14"/><text class="leg" x="823" y="540">光罩鉻層</text>
+</g>
+<text class="note" x="25" y="568">下一站是蝕刻：只有光阻已被洗掉之處，底下的薄膜才會被蝕刻。圖中光罩按 1:1 繪製；曝光機實際以 1/4 大小投影。</text>
+<text class="note" x="25" y="588">此示意圖省略烘烤（軟烤、曝後烤）與檢查步驟。</text>
+</svg>

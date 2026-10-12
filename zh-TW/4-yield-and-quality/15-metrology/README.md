@@ -51,7 +51,9 @@
 
 最後會得到一張缺陷分佈圖，標出每個缺陷在晶圓上的位置和種類。
 
-<!-- 圖：缺陷檢測流程（全片掃描 → 比對相鄰晶粒 → 標出差異 → 電子顯微鏡複檢） -->
+![全片掃描、比對相鄰晶粒、標出差異、電子顯微鏡複檢。](../../../images/zh-TW/15-defect-inspection.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch15/defect-inspection.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜缺陷（Defect）**

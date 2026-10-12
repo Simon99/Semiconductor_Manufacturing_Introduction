@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">浴缸曲線與預燒</title>
+<desc id="d">失效率浴缸曲線分三個階段逐步畫出；旁邊的晶片經輸送帶通過預燒爐，其中一顆體質弱的晶片冒煙而被剔除，使曲線的早期失效部分變得平坦。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;fill:#0f172a}
+.puff{opacity:0} .sub{fill:#475569} .b{font-weight:700}
+@keyframes gUse{0%{stroke-dashoffset:0}4%{stroke-dashoffset:0}6%{stroke-dashoffset:1}25.0%{stroke-dashoffset:1}42.857%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}@keyframes gWear{0%{stroke-dashoffset:0}4%{stroke-dashoffset:0}6%{stroke-dashoffset:1}42.857%{stroke-dashoffset:1}60.714%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}@keyframes gShip{0%{stroke-dashoffset:0}4%{stroke-dashoffset:0}6%{stroke-dashoffset:1}67.857%{stroke-dashoffset:1}82.143%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}@keyframes gEarly{0%{stroke-dashoffset:0;opacity:.4}4%{stroke-dashoffset:0;opacity:.4}6%{stroke-dashoffset:1;opacity:1}7.143%{stroke-dashoffset:1;opacity:1}25.0%{stroke-dashoffset:0;opacity:1}67.857%{stroke-dashoffset:0;opacity:1}82.143%{stroke-dashoffset:0;opacity:.4}100%{stroke-dashoffset:0;opacity:.4}}@keyframes fEarly{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}17.857%{opacity:0}23.571%{opacity:1}100%{opacity:1}}@keyframes fUse{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}35.714%{opacity:0}41.429%{opacity:1}100%{opacity:1}}@keyframes fWear{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}53.571%{opacity:0}59.286%{opacity:1}100%{opacity:1}}@keyframes fShip{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}71.429%{opacity:0}77.143%{opacity:1}100%{opacity:1}}@keyframes fBurn{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}67.857%{opacity:0}73.571%{opacity:1}100%{opacity:1}}@keyframes fNo{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}82.143%{opacity:0}87.857%{opacity:1}100%{opacity:1}}@keyframes fHatch{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}67.857%{opacity:0}82.143%{opacity:1}100%{opacity:1}}@keyframes fMark{0%{opacity:1}4%{opacity:1}5.5%{opacity:0}64.286%{opacity:0}70.0%{opacity:1}100%{opacity:1}}@keyframes m_w{0%{transform:translate(520.0px,300.0px);opacity:0}3%{transform:translate(532.6px,300.0px);opacity:1}73.5%{transform:translate(828.7px,300.0px);opacity:1;animation-timing-function:ease-in}77.5%{transform:translate(828.7px,386.0px);opacity:1}83%{transform:translate(828.7px,386.0px);opacity:1}86%{transform:translate(828.7px,386.0px);opacity:0}100%{transform:translate(520.0px,300.0px);opacity:0}}@keyframes m_g1{0%{transform:translate(520.0px,300.0px);opacity:0}3%{transform:translate(532.6px,300.0px);opacity:1}97%{transform:translate(927.4px,300.0px);opacity:1}100%{transform:translate(940.0px,300.0px);opacity:0}}@keyframes m_g2{0%{transform:translate(520.0px,300.0px);opacity:0}3%{transform:translate(532.6px,300.0px);opacity:1}97%{transform:translate(927.4px,300.0px);opacity:1}100%{transform:translate(940.0px,300.0px);opacity:0}}@keyframes m_g3{0%{transform:translate(520.0px,300.0px);opacity:0}3%{transform:translate(532.6px,300.0px);opacity:1}97%{transform:translate(927.4px,300.0px);opacity:1}100%{transform:translate(940.0px,300.0px);opacity:0}}@keyframes wBody{0%{fill:#334155}51%{fill:#334155}52.5%{fill:#292524}100%{fill:#292524}}@keyframes wX{0%{opacity:0}51%{opacity:0}52.5%{opacity:1}100%{opacity:1}}@keyframes smoke{0%{opacity:0;transform:translateY(0px) scale(.6)}72%{opacity:0;transform:translateY(0px) scale(.6)}74%{opacity:.85;transform:translateY(-8px) scale(.8)}84%{opacity:0;transform:translateY(-95px) scale(1.6)}100%{opacity:0;transform:translateY(-95px) scale(1.6)}}@keyframes heat{0%{opacity:.25}50%{opacity:.8}100%{opacity:.25}}@keyframes belt{to{stroke-dashoffset:-20}}
+#cEarly{animation:gEarly 14s linear infinite}#cUse{animation:gUse 14s linear infinite}#cWear{animation:gWear 14s linear infinite}#cShip{animation:gShip 14s linear infinite}.lEarly{animation:fEarly 14s linear infinite}.lUse{animation:fUse 14s linear infinite}.lWear{animation:fWear 14s linear infinite}.lShip{animation:fShip 14s linear infinite}.lBurn{animation:fBurn 14s linear infinite}.lNo{animation:fNo 14s linear infinite}.hatch{animation:fHatch 14s linear infinite}.mark{animation:fMark 14s linear infinite}#wbody{animation:wBody 14s linear infinite;animation-delay:-11.06s}#wx{animation:wX 14s linear infinite;animation-delay:-11.06s}.puff{animation:smoke 14s linear infinite backwards}.heat{animation:heat 3s ease-in-out infinite}.beltdash{animation:belt 1.2s linear infinite}#chip_w{animation:m_w 14s linear infinite;animation-delay:-11.060s}#chip_g1{animation:m_g1 14s linear infinite;animation-delay:-0.560s}#chip_g2{animation:m_g2 14s linear infinite;animation-delay:-4.060s}#chip_g3{animation:m_g3 14s linear infinite;animation-delay:-7.560s}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</style>
+<defs>
+<pattern id="hp" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#dc2626" fill-opacity=".10"/><line x1="0" y1="0" x2="0" y2="7" stroke="#dc2626" stroke-width="2.2" stroke-opacity=".55"/></pattern>
+<linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#f97316"/></linearGradient>
+</defs>
+<rect width="960" height="540" fill="#f8fafc"/>
+<!-- TITLE -->
+<text x="480" y="38" text-anchor="middle" font-size="24" class="b" id="txtTitle">浴缸曲線與預燒</text>
+<text x="480" y="64" text-anchor="middle" font-size="14" class="sub" id="txtSub">晶片生命週期中的失效率，以及工廠預燒能篩除的部分</text>
+
+<!-- ===== LEFT: PLOT ===== -->
+<g id="plot">
+<path d="M50,100 V380 H500" fill="none" stroke="#475569" stroke-width="2"/>
+<path d="M500,380 l-9,-5 v10 z" fill="#475569"/><path d="M50,100 l-5,9 h10 z" fill="#475569"/>
+<text x="500" y="372" text-anchor="end" font-size="13" class="sub" id="txtTime">使用時間</text>
+<text transform="translate(26,240) rotate(-90)" text-anchor="middle" font-size="13" class="sub" id="txtRate">失效率</text>
+<!-- shaved region -->
+<g class="hatch"><path d="M50,330 V120 C75,290 110,326 170,330 Z" fill="url(#hp)"/></g>
+<!-- ship marker -->
+<g class="mark"><path d="M170,104 V380" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="176" y="112" font-size="13" class="b" fill="#0d9488" style="fill:#0d9488" id="txtShip">出貨</text></g>
+<!-- curve -->
+<path id="cEarly" d="M50,120 C75,290 110,326 170,330" pathLength="1" fill="none" stroke="#dc2626" stroke-width="5" stroke-dasharray="1 1.001" stroke-dashoffset="0" opacity=".4"/>
+<path id="cUse" d="M170,330 H330" pathLength="1" fill="none" stroke="#16a34a" stroke-width="5" stroke-dasharray="1 1.001"/>
+<path id="cWear" d="M330,330 C400,332 445,290 480,120" pathLength="1" fill="none" stroke="#ea580c" stroke-width="5" stroke-dasharray="1 1.001"/>
+<path id="cShip" d="M50,330 H170" pathLength="1" fill="none" stroke="#0d9488" stroke-width="7" stroke-dasharray="1 1.001"/>
+<!-- phase labels under axis -->
+<g class="lEarly"><text x="110" y="402" text-anchor="middle" font-size="14" class="b" style="fill:#dc2626" id="txtEarly">早期失效</text>
+<text x="110" y="419" text-anchor="middle" font-size="12" class="sub" id="txtEarly2">體質弱的晶片</text></g>
+<g class="lUse"><text x="250" y="402" text-anchor="middle" font-size="14" class="b" style="fill:#16a34a" id="txtUse">穩定期</text>
+<text x="250" y="419" text-anchor="middle" font-size="12" class="sub" id="txtUse2">隨機、偏低</text></g>
+<g class="lWear"><text x="405" y="402" text-anchor="middle" font-size="14" class="b" style="fill:#ea580c" id="txtWear">老化期</text>
+<text x="405" y="419" text-anchor="middle" font-size="12" class="sub" id="txtWear2">老化</text></g>
+<!-- burn-in annotations -->
+<g class="lShip"><text x="62" y="305" font-size="13" class="b" style="fill:#0d9488" id="txtFlat">預燒後趨平</text></g>
+<g class="lBurn"><text x="176" y="140" font-size="12" class="sub" id="txtCut1">於工廠篩除弱晶片</text><text x="176" y="156" font-size="12" class="sub" id="txtCut2">（出廠前）</text></g>
+<g class="lNo"><text x="322" y="150" font-size="13" class="b" style="fill:#ea580c" id="txtNo1">預燒無法</text><text x="322" y="167" font-size="13" class="b" style="fill:#ea580c" id="txtNo2">修復老化</text></g>
+</g>
+
+<!-- ===== RIGHT: MACHINE ===== -->
+<g id="machine">
+<text x="520" y="100" font-size="15" class="b" id="txtM1">工廠預燒</text>
+<text x="520" y="119" font-size="12" class="sub" id="txtM2">高溫 + 略高電壓</text>
+<text x="520" y="136" font-size="12" class="sub" id="txtM3">（失效比例為示意放大）</text>
+<text x="522" y="252" font-size="12" class="sub" id="txtIn">晶片進入</text>
+<text x="936" y="252" text-anchor="end" font-size="12" class="b" style="fill:#16a34a" id="txtOut">通過：出貨</text>
+<!-- belt -->
+<g><rect x="515" y="300" width="300" height="12" rx="6" fill="#64748b"/><rect x="850" y="300" width="95" height="12" rx="6" fill="#64748b"/>
+<path class="beltdash" d="M522,306 H808" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="10 10"/><path class="beltdash" d="M856,306 H938" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="10 10"/>
+<circle cx="522" cy="326" r="9" fill="#475569"/><circle cx="938" cy="326" r="9" fill="#475569"/>
+<rect x="815" y="298" width="35" height="5" fill="#94a3b8"/></g>
+<!-- oven back -->
+<rect x="640" y="252" width="140" height="52" fill="url(#glow)"/>
+<!-- reject bin -->
+<path d="M800,350 H890 L880,408 H810 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+<!-- chips -->
+<g id="chip_g1" style="transform:translate(536.8px,300.0px)"><rect x="-34" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="-28" y="-34" width="56" height="34" rx="4" fill="#334155" stroke="#0f172a" stroke-width="1.5"/><circle cx="-18" cy="-24" r="3" fill="#e2e8f0"/></g><g id="chip_g2" style="transform:translate(641.8px,300.0px)"><rect x="-34" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="-28" y="-34" width="56" height="34" rx="4" fill="#334155" stroke="#0f172a" stroke-width="1.5"/><circle cx="-18" cy="-24" r="3" fill="#e2e8f0"/></g><g id="chip_g3" style="transform:translate(746.8px,300.0px)"><rect x="-34" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="-28" y="-34" width="56" height="34" rx="4" fill="#334155" stroke="#0f172a" stroke-width="1.5"/><circle cx="-18" cy="-24" r="3" fill="#e2e8f0"/></g><g id="chip_w" style="transform:translate(828.7px,386.0px)"><rect x="-34" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-30" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-21" width="8" height="4" fill="#94a3b8"/><rect x="-34" y="-12" width="8" height="4" fill="#94a3b8"/><rect x="26" y="-12" width="8" height="4" fill="#94a3b8"/><rect id="wbody" x="-28" y="-34" width="56" height="34" rx="4" fill="#334155" stroke="#0f172a" stroke-width="1.5"/><circle cx="-18" cy="-24" r="3" fill="#e2e8f0"/><g id="wx"><path d="M-12,-26 L12,-8 M12,-26 L-12,-8" stroke="#dc2626" stroke-width="4" stroke-linecap="round" fill="none"/></g></g>
+<!-- oven frame with window -->
+<path fill-rule="evenodd" fill="#9a3412" stroke="#431407" stroke-width="2" d="M620,212 H800 V328 H620 Z M640,252 H780 V304 H640 Z"/>
+<text x="710" y="238" text-anchor="middle" font-size="13" class="b" style="fill:#fff" id="txtOven">預燒爐</text>
+<rect x="620" y="322" width="14" height="22" fill="#431407"/><rect x="786" y="322" width="14" height="22" fill="#431407"/>
+<!-- heat waves -->
+<g fill="none" stroke="#f97316" stroke-width="3" stroke-linecap="round">
+<path class="heat" d="M650,198 q6,-8 12,0 t12,0" /><path class="heat" d="M690,198 q6,-8 12,0 t12,0" style="animation-delay:-1s"/><path class="heat" d="M730,198 q6,-8 12,0 t12,0" style="animation-delay:-2s"/></g>
+<!-- smoke -->
+<g fill="#64748b"><circle class="puff" cx="738" cy="250" r="11"/><circle class="puff" cx="730" cy="250" r="9" style="animation-delay:.3s"/><circle class="puff" cx="747" cy="250" r="8" style="animation-delay:.6s"/></g>
+<text x="845" y="426" text-anchor="middle" font-size="13" class="b" style="fill:#dc2626" id="txtRej">剔除</text>
+<text x="832" y="338" text-anchor="middle" font-size="12" class="sub" id="txtTest">測試與分級</text>
+</g>
+
+<!-- ===== CAPTION ===== -->
+<rect x="30" y="452" width="900" height="64" rx="10" fill="#e2e8f0"/>
+<text x="480" y="480" text-anchor="middle" font-size="17" class="b" id="txtCap1">預燒在工廠篩出早期失效，而不是等到客戶手上才發現。</text>
+<text x="480" y="503" text-anchor="middle" font-size="15" class="sub" id="txtCap2">它無法延長壽命，也無法修復設計或製程造成的老化。</text>
+</svg>

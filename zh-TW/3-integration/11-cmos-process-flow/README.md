@@ -44,7 +44,9 @@
 6. **源極與汲極**：做一次深而重的佈植。Spacer 讓這次佈植和閘極保持一點距離，接著退火活化。
 7. **金屬矽化物**：鋪上一層金屬並加熱，讓它和源極、汲極、閘極表面的矽反應，形成電阻很低的化合物，方便後續接線。
 
-<!-- 圖：FEOL 剖面演進（隔離 → 井 → 閘極 → Spacer → 源汲極 → 金屬矽化物） -->
+![七個步驟做出一顆 NMOS 與一顆 PMOS 電晶體：隔離、井、閘極、淺摻雜、側壁間隔物、源極與汲極、金屬矽化物。](../../../images/zh-TW/11-feol-flow.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch11/feol-flow.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜STI（Shallow Trench Isolation，淺溝槽隔離）**

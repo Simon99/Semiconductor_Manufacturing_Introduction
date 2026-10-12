@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">雙大馬士革流程剖面圖</title>
+<desc id="d">六個階段：鋪絕緣層、蝕刻導通孔與溝槽、阻障層與晶種層、電鍍銅、銅 CMP、覆蓋層。示意圖，未依比例。</desc>
+<style>
+.bg{fill:#f4f6f9}.panel{fill:#f4f6f9;stroke:#cdd5e0;stroke-width:1.5}
+.diel{fill:#c9d3e0}.diel2{fill:#aebbcc}.cuL{fill:#d9822b}.cu{fill:#e8903a}.cap{fill:#2a9d8f}.pad{fill:#6b7280}.void{fill:#f4f6f9}
+.seedst{stroke:#ffd9a8;fill:none}.barst{stroke:#34425c;fill:none}
+.lbl{font-size:12px;fill:#1f2937}.lblCu{font-size:12px;fill:#2b1a05}.padt{font-size:12px;fill:#fff;font-weight:600}
+.lead{stroke:#1f2937;stroke-width:1;fill:none}.arrow{fill:#fff}
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.title{font-size:24px;font-weight:700;fill:#1f2937}.sub{font-size:13px;fill:#566174}
+.row{fill:#fff;stroke:#cdd5e0;stroke-width:1.2}.rt{font-size:14px;fill:#1f2937}.rn{fill:#cdd5e0}.rnt{font-size:12px;font-weight:700;fill:#1f2937;text-anchor:middle}
+.hi{fill:#f59e0b;fill-opacity:.28;stroke:#c2620a;stroke-width:2.5}
+.capt{font-size:14px;fill:#1f2937}.cap0{font-size:13px;font-weight:700;fill:#c2620a}
+.lg{font-size:12px;fill:#566174}
+.g{opacity:0}.g5{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+.g{animation:none 15s linear infinite}
+.g0{animation-name:g0}.g1{animation-name:g1}.g2{animation-name:g2}.g3{animation-name:g3}.g4{animation-name:g4}.g5{animation-name:g5}
+.grow{transform-origin:0 400px;animation:grow 15s linear infinite}
+.polish{transform-origin:0 400px;animation:polish 15s linear infinite}
+.padg{animation:padm 15s linear infinite}
+.fieldb{animation:fieldf 15s linear infinite}
+@keyframes g0{0%{opacity:0}0.000%{opacity:0}0.400%{opacity:1}16.267%{opacity:1}16.667%{opacity:0}100%{opacity:0}}
+@keyframes g1{0%{opacity:0}16.667%{opacity:0}17.067%{opacity:1}32.933%{opacity:1}33.333%{opacity:0}100%{opacity:0}}
+@keyframes g2{0%{opacity:0}33.333%{opacity:0}33.733%{opacity:1}49.600%{opacity:1}50.000%{opacity:0}100%{opacity:0}}
+@keyframes g3{0%{opacity:0}50.000%{opacity:0}50.400%{opacity:1}66.267%{opacity:1}66.667%{opacity:0}100%{opacity:0}}
+@keyframes g4{0%{opacity:0}66.667%{opacity:0}67.067%{opacity:1}82.933%{opacity:1}83.333%{opacity:0}100%{opacity:0}}
+@keyframes g5{0%{opacity:0}83.333%{opacity:0}83.733%{opacity:1}99.600%{opacity:1}100.000%{opacity:0}100%{opacity:0}}
+@keyframes grow{0%,50.000%{transform:scaleY(.02)}63.000%{transform:scaleY(1)}100%{transform:scaleY(1)}}
+@keyframes polish{0%,66.667%{transform:scaleY(1)}79.667%{transform:scaleY(.875)}100%{transform:scaleY(.875)}}
+@keyframes padm{0%,66.667%{transform:translateY(0)}79.667%{transform:translateY(30px)}100%{transform:translateY(30px)}}
+@keyframes fieldf{0%,66.667%{opacity:1}79.667%{opacity:0}100%{opacity:0}}
+}
+</style>
+<defs><clipPath id="pc"><rect x="30" y="90" width="570" height="380" rx="10"/></clipPath></defs>
+<rect class="bg" width="960" height="540"/>
+<text class="title" x="30" y="42">雙大馬士革：一次填銅，同時形成導通孔與導線</text>
+<text class="sub" x="30" y="66">一層新金屬層的剖面（示意，未依比例）</text>
+<rect class="panel" x="30" y="90" width="570" height="380" rx="10"/>
+<rect class="row" x="630" y="98" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="115" r="11"/><text class="rnt" x="652" y="119">1</text>
+<text class="rt" x="672" y="120">鋪絕緣層</text>
+<rect class="row" x="630" y="138" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="155" r="11"/><text class="rnt" x="652" y="159">2</text>
+<text class="rt" x="672" y="160">蝕刻導通孔與溝槽</text>
+<rect class="row" x="630" y="178" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="195" r="11"/><text class="rnt" x="652" y="199">3</text>
+<text class="rt" x="672" y="200">阻障層與晶種層</text>
+<rect class="row" x="630" y="218" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="235" r="11"/><text class="rnt" x="652" y="239">4</text>
+<text class="rt" x="672" y="240">電鍍銅（再退火）</text>
+<rect class="row" x="630" y="258" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="275" r="11"/><text class="rnt" x="652" y="279">5</text>
+<text class="rt" x="672" y="280">銅 CMP</text>
+<rect class="row" x="630" y="298" width="300" height="34" rx="8"/>
+<circle class="rn" cx="652" cy="315" r="11"/><text class="rnt" x="652" y="319">6</text>
+<text class="rt" x="672" y="320">覆蓋層</text>
+<rect x="30" y="490" width="14" height="14" rx="3" fill="#c9d3e0"/><text class="lg" x="50" y="502">絕緣層（低介電常數）</text>
+<rect x="188.8" y="490" width="14" height="14" rx="3" fill="#e8903a"/><text class="lg" x="208.8" y="502">銅</text>
+<rect x="268.4" y="490" width="14" height="14" rx="3" fill="#ffd9a8"/><text class="lg" x="288.4" y="502">銅晶種層</text>
+<rect x="354.59999999999997" y="490" width="14" height="14" rx="3" fill="#34425c"/><text class="lg" x="374.59999999999997" y="502">阻障層</text>
+<rect x="440.79999999999995" y="490" width="14" height="14" rx="3" fill="#2a9d8f"/><text class="lg" x="460.79999999999995" y="502">覆蓋層</text>
+<g class="g g0">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><rect class="diel" x="30" y="190" width="570" height="202"/><rect class="cap" x="30" y="392" width="570" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text></g>
+<rect class="hi" x="630" y="98" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 1：鋪絕緣層</text>
+<text class="capt" x="630" y="378">以 CVD 在已完成的下層銅導線</text>
+<text class="capt" x="630" y="398">上方鋪一層絕緣層（先進製程</text>
+<text class="capt" x="630" y="418">使用低介電常數材料）。</text>
+</g>
+<g class="g g1">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text></g>
+<rect class="hi" x="630" y="138" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 2：蝕刻導通孔與溝槽</text>
+<text class="capt" x="630" y="378">微影與蝕刻先向下挖出窄的</text>
+<text class="capt" x="630" y="398">導通孔，連到下層導線；上方</text>
+<text class="capt" x="630" y="418">再挖出較寬的溝槽，作為新導線。</text>
+<text class="capt" x="630" y="438">導通孔底部的覆蓋層也一併打開。</text>
+</g>
+<g class="g g2">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text><clipPath id="s2o"><path d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,100 L30,100 Z"/></clipPath><clipPath id="s2f"><rect x="0" y="190" width="700" height="300"/></clipPath><clipPath id="s2t"><rect x="0" y="0" width="700" height="190"/></clipPath><g clip-path="url(#s2o)"><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/></g><text class="lbl" x="40" y="132">銅晶種層</text><path class="lead" d="M75,137 L75,182"/><text class="lbl" x="120" y="150">阻障層（阻擋銅擴散）</text><path class="lead" d="M140,155 L140,187"/></g>
+<rect class="hi" x="630" y="178" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 3：阻障層與晶種層</text>
+<text class="capt" x="630" y="378">先鋪一層極薄的阻障層，防止銅</text>
+<text class="capt" x="630" y="398">擴散出去；再鋪一層薄薄的銅晶種層，</text>
+<text class="capt" x="630" y="418">作為電鍍的起點。</text>
+</g>
+<g class="g g3">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text><clipPath id="s3o"><path d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,100 L30,100 Z"/></clipPath><clipPath id="s3f"><rect x="0" y="190" width="700" height="300"/></clipPath><clipPath id="s3t"><rect x="0" y="0" width="700" height="190"/></clipPath><g clip-path="url(#s3o)"><rect class="cu grow" x="30" y="160" width="570" height="240" transform="translate(0 400) scale(1 1.0000) translate(0 -400)"/><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/><path class="arrow" d="M293,368 L307,368 L300,350 Z" opacity="0.000"/></g><text class="lbl" x="45" y="150">多餘的銅（之後由 CMP 磨除）</text><text class="lbl" x="340" y="335">&#9666; 由下往上填充</text></g>
+<rect class="hi" x="630" y="218" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 4：電鍍銅（再退火）</text>
+<text class="capt" x="630" y="378">電鍍一次填滿導通孔與溝槽，</text>
+<text class="capt" x="630" y="398">底部長得比開口處快（由下往上</text>
+<text class="capt" x="630" y="418">填充）。之後退火，讓銅的</text>
+<text class="capt" x="630" y="438">結構穩定下來。</text>
+</g>
+<g class="g g4">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text><clipPath id="s4o"><path d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,100 L30,100 Z"/></clipPath><clipPath id="s4f"><rect x="0" y="190" width="700" height="300"/></clipPath><clipPath id="s4t"><rect x="0" y="0" width="700" height="190"/></clipPath><g clip-path="url(#s4o)"><rect class="cu polish" x="30" y="160" width="570" height="240" transform="translate(0 400) scale(1 0.8750) translate(0 -400)"/><g clip-path="url(#s4f)"><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/></g><g clip-path="url(#s4t)" class="fieldb" opacity="0.000"><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/></g></g><g class="padg" transform="translate(0 30.00)"><rect class="pad" x="30" y="134" width="570" height="26"/><text class="padt" x="42" y="152">研磨墊＋研磨液</text></g></g>
+<rect class="hi" x="630" y="258" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 5：銅 CMP</text>
+<text class="capt" x="630" y="378">CMP 把溝槽以外多餘的銅（以及</text>
+<text class="capt" x="630" y="398">阻障層）磨掉，留下平坦的表面</text>
+<text class="capt" x="630" y="418">與彼此分開的導線。</text>
+</g>
+<g class="g g5">
+<g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text><clipPath id="s5o"><path d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,100 L30,100 Z"/></clipPath><clipPath id="s5f"><rect x="0" y="190" width="700" height="300"/></clipPath><clipPath id="s5t"><rect x="0" y="0" width="700" height="190"/></clipPath><g clip-path="url(#s5o)"><rect class="cu polish" x="30" y="160" width="570" height="240" transform="translate(0 400) scale(1 0.8750) translate(0 -400)"/><g clip-path="url(#s5f)"><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/></g><g clip-path="url(#s5t)" class="fieldb" opacity="0"><path class="seedst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="18"/><path class="barst" d="M30,190 L200,190 L200,270 L270,270 L270,400 L330,400 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190" stroke-width="12"/></g></g><rect class="cap" x="30" y="182" width="570" height="8"/><text class="lbl" x="45" y="172">新的覆蓋層 &#9662;</text></g>
+<rect class="hi" x="630" y="298" width="300" height="34" rx="8"/>
+<text class="cap0" x="630" y="352">步驟 6：覆蓋層</text>
+<text class="capt" x="630" y="378">薄薄的覆蓋層封住銅，防止氧化</text>
+<text class="capt" x="630" y="398">與擴散。下一層金屬會重複</text>
+<text class="capt" x="630" y="418">這個流程。</text>
+</g>
+<text class="lg" x="630" y="502">每一層金屬都重複此流程。</text>
+</svg>

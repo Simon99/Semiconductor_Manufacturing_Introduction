@@ -45,7 +45,9 @@
 
 一根 300 mm 晶棒可以長達兩公尺左右、重達數百公斤。長晶時還會在熔融的矽中加入少量硼或磷，讓晶圓一開始就是 P 型或 N 型，並且有指定的電阻值。
 
-<!-- 圖：CZ 長晶示意（坩堝、熔融矽、晶種、旋轉上拉的晶棒） -->
+![旋轉的晶種從石英坩堝內的矽熔液中被緩慢向上拉出，拉出一根圓柱狀的單晶晶棒。](../../../images/zh-TW/03-cz-growth.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch03/cz-growth.html)自己動手調整看看。*
 
 ---
 

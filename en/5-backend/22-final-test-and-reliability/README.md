@@ -35,7 +35,7 @@ Some products also go through **system-level test** (SLT), in which the chip is 
 
 ![Animation: a handler picks a packaged chip from a tray, places it in a test socket, the tester runs, and the chip is sorted into a fail, slow or fast bin](../../../images/22-final-test-binning.svg)
 
-*Animated figure. [Open the interactive version](../../../docs/ch22/final-test-binning.html) to change the test temperature and watch the bins change.*
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch22/final-test-binning.html) to change the test temperature and watch the bins change.*
 
 ---
 
@@ -51,7 +51,7 @@ How a chip's failure rate changes over time is often described by a curve shaped
 
 ![Animation: the bathtub curve grows in three phases while chips pass through a burn-in oven, weak chips fail and are rejected, and the early-failure peak is flattened](../../../images/22-bathtub-curve.svg)
 
-*Animated figure. [Open the interactive version](../../../docs/ch22/bathtub-curve.html) to change the burn-in time and see how much of the early-failure region it removes.*
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch22/bathtub-curve.html) to change the burn-in time and see how much of the early-failure region it removes.*
 
 > [!NOTE]
 > **📖 Term | Bathtub curve (浴缸曲線)**
@@ -93,7 +93,7 @@ A chip ages because the materials and structures built during manufacturing are 
 
 ![Animation: electrons push metal atoms along a wire, a void opens at one end and a hillock grows at the other until the wire breaks, beside short panels for the other aging mechanisms](../../../images/22-accelerated-aging.svg)
 
-*Animated figure. [Open the interactive version](../../../docs/ch22/accelerated-aging.html) to change the temperatures and see how many years a 1000-hour test stands for.*
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch22/accelerated-aging.html) to change the temperatures and see how many years a 1000-hour test stands for.*
 
 These mechanisms are closely tied to earlier chapters. For the quality of the wiring, see [Chapter 10](../../2-process-modules/10-metallization/README.md); for the gate insulator, see [Chapter 12](../../3-integration/12-advanced-transistors/README.md).
 

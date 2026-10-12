@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>打線接合互動圖</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--mut:#55606e;--card:#fff;--bd:#d6d9de;--acc:#b8860b;--accbg:#f6c95a;
+--mold:#e3cfa6;--moldst:#8a6a35;--die:#5b6b7d;--diest:#2f3a47;--lead:#c8783c;--leadst:#7a4518;--wire:#d09a10;--pad:#e0b020;--padst:#8a6a10;--adh:#7a5aa8;--ld:#55606e;--cap:#9aa3b0;--capst:#4a5361;--bad:#c0392b;--ok:#2a7d4f}
+:root[data-theme=dark]{--bg:#14171c;--fg:#e8eaee;--mut:#9aa4b2;--card:#1d2229;--bd:#363d48;--acc:#f0c040;--accbg:#7a5a10;
+--mold:#6d5a38;--moldst:#c9a45e;--die:#56667a;--diest:#c5d0dc;--lead:#d98a50;--leadst:#f0b080;--wire:#f0c040;--pad:#f0c040;--padst:#fff2b0;--adh:#a98ad8;--ld:#9aa4b2;--cap:#b8c0cc;--capst:#e8eaee;--bad:#ff7b6b;--ok:#6fd49b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14171c;--fg:#e8eaee;--mut:#9aa4b2;--card:#1d2229;--bd:#363d48;--acc:#f0c040;--accbg:#7a5a10;
+--mold:#6d5a38;--moldst:#c9a45e;--die:#56667a;--diest:#c5d0dc;--lead:#d98a50;--leadst:#f0b080;--wire:#f0c040;--pad:#f0c040;--padst:#fff2b0;--adh:#a98ad8;--ld:#9aa4b2;--cap:#b8c0cc;--capst:#e8eaee;--bad:#ff7b6b;--ok:#6fd49b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:12px 16px 32px}
+a{color:var(--acc)} h1{font-size:1.5rem;margin:.3rem 0 .2rem}
+.sub{color:var(--mut);margin:0 0 10px;font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px}
+svg{display:block;width:100%;height:auto}
+.lab{font:600 14px "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,sans-serif;fill:var(--fg)} .ld{stroke:var(--ld);stroke-width:1.2}
+.panel{margin:10px 0;min-height:3.2em;font-size:1rem}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 12px;font:inherit;font-size:.9rem;cursor:pointer}
+.chip.on{background:var(--accbg);border-color:var(--acc);color:#111}
+:root[data-theme=dark] .chip.on{color:#fff}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:10px}
+label{display:block;font-weight:600;font-size:.92rem}
+input[type=range]{width:100%}
+.ro{font-variant-numeric:tabular-nums;color:var(--mut);font-size:.92rem}
+.ro b{color:var(--fg)}
+button.pp{border:1px solid var(--acc);background:var(--accbg);color:#111;border-radius:8px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer}
+.legend{display:none;margin:8px 0 0;padding-left:18px;font-size:.92rem}
+@media (max-width:640px){.lab,.ld,.lead-dot{display:none}.legend{display:block}}
+.bad{color:var(--bad);font-weight:700}.ok{color:var(--ok);font-weight:700}
+</style></head><body><main>
+<a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/20-packaging/README.md">&larr; 回到章節</a>
+<h1>打線接合：把晶粒連接到封裝</h1>
+<p class="sub">示意圖，未依比例。可按播放、跳到各步驟，或調整下方的線弧高度與封膠流速。</p>
+<div class="card"><svg id="scene" viewBox="0 90 960 350" role="img" aria-label="打線封裝剖面動畫"></svg></div>
+<div class="chips" id="chips"></div>
+<div class="panel" id="panel" aria-live="polite"></div>
+<ul class="legend"><li>金屬線：金或銅，比頭髮還細</li><li>焊墊：晶粒上的小金屬方塊</li><li>封膠材料：環氧樹脂外殼</li><li>黏晶膠：把晶粒黏在承載座上</li><li>晶粒承載座與接腳：合稱導線架</li></ul>
+<div class="row card">
+ <div><button class="pp" id="pp">暫停</button> <span class="ro" id="tro"></span>
+  <input type="range" id="scrub" min="0" max="14000" step="10" value="0" aria-label="時間軸"></div>
+ <div><label for="h">線弧高度：<span class="ro" id="hv"></span></label>
+  <input type="range" id="h" min="30" max="140" value="71">
+  <div class="ro">金屬線長度（相對預設）：<b id="wl"></b></div></div>
+ <div><label for="flow">封膠流速（示意）：<span class="ro" id="fv"></span></label>
+  <input type="range" id="flow" min="0" max="100" value="40">
+  <div class="ro">沖線量：<b id="sw"></b>（占與相鄰導線間距的比例）<span id="verdict" style="white-space:nowrap"></span></div></div>
+</div>
+<div class="card" style="margin-top:10px"><div class="ro" style="margin-bottom:4px">三條相鄰金屬線的俯視圖（示意）。封膠流動會把中間那條線推向一側；線弧越高，線越長，沖線越大。</div>
+<svg id="top" viewBox="0 0 960 150" role="img" aria-label="沖線俯視圖"></svg></div>
+<p class="sub" style="margin-top:12px">沖線模型（示意，非實測）：沖線% = 流速 &times; (金屬線長度 / 預設長度)&sup2; &times; 0.6。達 100% 時，金屬線碰到相鄰導線，造成短路。</p>
+</main>
+<script>
+const D=14,PY=236,LY=288,H0=71;
+const $=id=>document.getElementById(id);
+const q=new URLSearchParams(location.search);
+if(q.get('theme'))document.documentElement.dataset.theme=q.get('theme');
+const NS='http://www.w3.org/2000/svg';
+let h=H0,flow=40,t=0,playing=true;
+function wpath(m){const cy=PY-h;let p=[[386,PY],[386,cy],[255,cy],[255,LY]];if(m)p=p.map(a=>[960-a[0],a[1]]);return `M${p[0]} C${p[1]} ${p[2]} ${p[3]}`}
+const lead=(m)=>[[100,288,200,12],[88,288,12,84],[56,360,44,12]].map(([x,y,w,hh])=>`<rect x="${m?960-x-w:x}" y="${y}" width="${w}" height="${hh}"/>`).join('');
+const ld=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" class="ld"/><circle class="lead-dot" cx="${c}" cy="${d}" r="2.5" fill="var(--ld)"/>`;
+const tx=(x,y,s,a)=>`<text x="${x}" y="${y}" text-anchor="${a||'start'}" class="lab">${s}</text>`;
+const capG=id=>`<g id="${id}" opacity="0"><polygon points="-4,0 4,0 4,-14 12,-60 12,-90 -12,-90 -12,-60 -4,-14" fill="var(--cap)" stroke="var(--capst)" stroke-width="1.5"/><line x1="0" y1="-1" x2="0" y2="-90" stroke="var(--wire)" stroke-width="1.5"/></g>`;
+$('scene').innerHTML=`
+<rect id="moldB" x="140" y="165" width="680" height="180" rx="16" fill="var(--mold)" stroke="var(--moldst)" stroke-width="2"/>
+<g fill="var(--lead)" stroke="var(--leadst)" stroke-width="1">${lead(0)}${lead(1)}<rect x="340" y="288" width="280" height="12"/></g>
+<rect x="370" y="282" width="220" height="6" fill="var(--adh)"/>
+<rect x="370" y="240" width="220" height="42" fill="var(--die)" stroke="var(--diest)" stroke-width="1.5"/>
+<rect x="370" y="240" width="220" height="5" fill="#8fa3b8" opacity=".7"/>
+<text x="480" y="268" text-anchor="middle" class="lab" style="fill:#fff">晶粒（矽）</text>
+<rect x="376" y="233" width="20" height="7" fill="var(--pad)" stroke="var(--padst)"/><rect x="564" y="233" width="20" height="7" fill="var(--pad)" stroke="var(--padst)"/>
+<path id="wL" pathLength="1" fill="none" stroke="var(--wire)" stroke-width="3" stroke-dasharray="1 1"/>
+<path id="wR" pathLength="1" fill="none" stroke="var(--wire)" stroke-width="3" stroke-dasharray="1 1"/>
+<circle id="bL" cx="386" cy="231" r="6" fill="var(--pad)" stroke="var(--padst)"/><circle id="bR" cx="574" cy="231" r="6" fill="var(--pad)" stroke="var(--padst)"/>
+<ellipse id="sL" cx="255" cy="287" rx="8" ry="3" fill="var(--pad)" stroke="var(--padst)"/><ellipse id="sR" cx="705" cy="287" rx="8" ry="3" fill="var(--pad)" stroke="var(--padst)"/>
+<rect id="moldF" x="140" y="165" width="680" height="180" rx="16" fill="var(--mold)" fill-opacity=".14" style="pointer-events:none"/>
+${capG('cL')}${capG('cR')}
+${ld(850,128,800,172)}${tx(940,122,'封膠材料（環氧樹脂）','end')}
+<g id="wlab">${tx(300,122,'金屬線（金或銅）','end')}<line id="wld" x1="200" y1="128" class="ld"/></g>
+${ld(480,134,570,232)}${tx(480,128,'焊墊','middle')}
+${ld(380,404,430,285)}${tx(250,420,'黏晶膠')}
+${ld(600,404,605,298)}${tx(560,420,'晶粒承載座（導線架）')}
+${ld(70,404,72,368)}${tx(30,420,'接腳')}`;
+const CAP=[
+ [0,1.4,'完成的封裝：封膠材料保護晶粒與金屬線，接腳則把晶片接到電路板。打線是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。'],
+ [1.4,5.1,'第 1 條線：劈刀把線端的金屬球壓在晶粒焊墊上，再拉出弧形線圈拉向接腳。在接腳上壓出扁平的針腳接點，這條線就完成了。這條線比頭髮還細。'],
+ [5.1,8.5,'第 2 條線：在下一個焊墊重複同樣的動作。每個焊墊各有一條線，依序完成。若焊墊受到污染，線就黏不上，造成斷路。'],
+ [8.5,10.5,'封膠：環氧樹脂流過晶粒與金屬線四周，硬化成保護外殼。流速過快會把細線推向一側（沖線），造成相鄰導線短路。'],
+ [10.5,14.1,'完成的封裝：封膠材料保護晶粒與金屬線，接腳則把晶片接到電路板。打線是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。']];
+const STEPS=[['起點',1.5],['球形接合',2.5],['拉線弧',3.4],['針腳接合',4.35],['第 2 條線',6.7],['封膠',9.6],['完成',12]];
+$('chips').innerHTML=STEPS.map((s,i)=>`<button class="chip" data-i="${i}">${s[0]}</button>`).join('');
+$('chips').onclick=e=>{const i=e.target.dataset.i;if(i==null)return;setPlaying(false);t=STEPS[i][1]*1000;render()};
+function I(p,s){if(s<=p[0][0])return p[0][1];for(let i=1;i<p.length;i++)if(s<=p[i][0]){const a=p[i-1],b=p[i],f=(s-a[0])/(b[0]-a[0]);return a[1]+(b[1]-a[1])*f}return p[p.length-1][1]}
+function sideState(s,off){return{
+ w:I([[0,0],[1.4,0],[1.45,1],[2.6+off,1],[4.0+off,0],[14,0]],s),
+ b:I([[0,1],[1.4,1],[1.45,0],[2.4+off,0],[2.45+off,1],[14,1]],s),
+ s:I([[0,1],[1.4,1],[1.45,0],[4.2+off,0],[4.25+off,1],[14,1]],s),
+ c:I([[0,0],[1.8+off,0],[1.9+off,1],[4.7+off,1],[4.9+off,0],[14,0]],s)}}
+function place(side,m,off,s){
+ const st=sideState(s,off),w=$('w'+side),x0=m?574:386;
+ w.style.strokeDashoffset=st.w;$('b'+side).setAttribute('opacity',st.b);$('s'+side).setAttribute('opacity',st.s);
+ const c=$('c'+side);c.setAttribute('opacity',st.c);
+ const ts=1.8+off,len=w.getTotalLength();let x,y;
+ if(s<ts+0.6){const f=Math.max(0,(s-ts)/0.6);x=x0;y=190+(PY-190)*f}
+ else if(s<ts+0.8){x=x0;y=PY}
+ else if(s<ts+2.2){const f=(s-ts-0.8)/1.4;const pt=w.getPointAtLength(f*len);x=pt.x;y=pt.y}
+ else if(s<ts+2.45){const pt=w.getPointAtLength(len);x=pt.x;y=pt.y}
+ else{const f=Math.min(1,(s-ts-2.45)/0.55);const pt=w.getPointAtLength(len);x=pt.x;y=pt.y-(LY-245)*f}
+ c.setAttribute('transform',`translate(${x},${y})`);
+}
+function topView(){
+ const L=$('wL').getTotalLength?$('wL').getTotalLength():300;const L0=221.8;
+ const sw=Math.min(250,flow*Math.pow(L/L0,2)*0.6);
+ const gap=40,amp=gap*sw/100,short=sw>=100;
+ let s='<rect x="60" y="10" width="30" height="130" fill="var(--lead)" opacity=".0"/>';
+ s+=`<text x="40" y="18" class="lab">晶粒焊墊</text><text x="760" y="18" class="lab">接腳</text>`;
+ const ys=[45,85,125];
+ ys.forEach((y,i)=>{s+=`<rect x="40" y="${y-6}" width="22" height="12" fill="var(--pad)" stroke="var(--padst)"/><rect x="778" y="${y-6}" width="60" height="12" fill="var(--lead)" stroke="var(--leadst)"/>`});
+ const mid=ys[1]+amp;
+ s+=`<path d="M62,45 L778,45" stroke="var(--wire)" stroke-width="3" fill="none"/><path d="M62,125 L778,125" stroke="var(--wire)" stroke-width="3" fill="none"/>`;
+ s+=`<path d="M62,85 Q420,${85+2*amp} 778,85" stroke="${short?'var(--bad)':'var(--wire)'}" stroke-width="3" fill="none"/>`;
+ s+=`<text x="100" y="146" class="lab" style="font-size:13px">封膠流向 &#8594;（此視角為橫向）</text>`;
+ $('top').innerHTML=s;
+ $('sw').textContent=Math.round(sw)+'%';
+ $('verdict').innerHTML=short?'<span class="bad">&mdash; 短路！</span>':(sw>70?'<span class="bad">&mdash; 有風險</span>':'<span class="ok">&mdash; 安全</span>');
+ $('wl').textContent=Math.round(L/L0*100)+'%';
+}
+function render(){
+ const s=t/1000;
+ place('L',0,0,s);place('R',1,3.4,s);
+ const mo=I([[0,1],[1.4,1],[1.6,0],[8.8,0],[10.4,1],[14,1]],s);
+ $('moldB').setAttribute('opacity',mo);$('moldF').style.opacity=mo;
+ $('moldB').style.opacity=mo;
+ const cp=CAP.find(c=>s>=c[0]&&s<c[1])||CAP[0];$('panel').textContent=cp[2];
+ let cur=-1;STEPS.forEach((st,i)=>{if(s>=st[1]-0.05)cur=i});
+ document.querySelectorAll('.chip').forEach((c,i)=>c.classList.toggle('on',i===cur&&!playing));
+ $('scrub').value=t;$('tro').textContent=(s).toFixed(1)+' / 14 秒';
+}
+function setH(){
+ $('wL').setAttribute('d',wpath(0));$('wR').setAttribute('d',wpath(1));
+ $('hv').textContent=h+'（單位）';
+ const cy=PY-h,P=[[386,PY],[386,cy],[255,cy],[255,LY]];const t8=0.8;
+ const b=(a,b2,c,d,u)=>[0,1].map(k=>(1-u)**3*a[k]+3*(1-u)**2*u*b2[k]+3*(1-u)*u*u*c[k]+u**3*d[k]);
+ const pt=b(...P,0.8);$('wld').setAttribute('x2',pt[0]);$('wld').setAttribute('y2',pt[1]);
+ $('fv').textContent=flow+' / 100';
+ topView();render();
+}
+function setPlaying(p){playing=p;$('pp').textContent=p?'暫停':'播放';if(p)last=performance.now()}
+$('pp').onclick=()=>setPlaying(!playing);
+$('scrub').oninput=e=>{setPlaying(false);t=+e.target.value;render()};
+$('h').oninput=e=>{h=+e.target.value;setH()};
+$('flow').oninput=e=>{flow=+e.target.value;setH()};
+window.__setTime=ms=>{setPlaying(false);t=((ms%14000)+14000)%14000;render()};
+let last=performance.now();
+function tick(n){if(playing){t=(t+(n-last))%14000;render()}last=n;requestAnimationFrame(tick)}
+if(q.get('h')){h=+q.get('h');$('h').value=h}
+if(q.get('flow')){flow=+q.get('flow');$('flow').value=flow}
+setH();
+if(q.get('t')!=null){window.__setTime(+q.get('t'))}
+if(q.get('still')==='1'){setPlaying(false)}
+if(matchMedia('(prefers-reduced-motion:reduce)').matches&&q.get('t')==null){setPlaying(false);t=0;render()}
+requestAnimationFrame(tick);
+</script></body></html>

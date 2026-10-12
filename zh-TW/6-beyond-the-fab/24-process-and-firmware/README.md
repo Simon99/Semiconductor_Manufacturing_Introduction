@@ -38,6 +38,10 @@ DRAM 的記憶單元越做越密，相鄰的單元之間也越容易互相干擾
 
 這不只是可靠度問題，也是安全問題，因為攻擊者可能利用它修改不該修改的資料。現在的 DRAM 和記憶體控制器，都加入了偵測與額外刷新相鄰列的機制來防範。
 
+![動畫：DRAM 單元的電荷會漏失，並由刷新補回；反覆存取攻擊列會使相鄰受害列中較弱的單元遺失位元；提前刷新相鄰列即可避免。數值皆為示意。](../../../images/zh-TW/24-dram-refresh-rowhammer.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch24/dram-refresh-rowhammer.html)自己動手調整看看。*
+
 ---
 
 ## ECC：錯誤一定會發生

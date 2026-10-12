@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>管制圖：平移平均值，看哪條規則觸發</title>
+<style>
+:root{--bg:#f4f6fa;--fg:#17212f;--mut:#51607a;--card:#fff;--bd:#cfd7e4;--pn:#0f1b2d;--acc:#0b6bcb}
+:root[data-theme=dark]{--bg:#0b121d;--fg:#e4ecf7;--mut:#9fb3cc;--card:#14202f;--bd:#2b4160;--pn:#0f1b2d;--acc:#7dd3fc}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b121d;--fg:#e4ecf7;--mut:#9fb3cc;--card:#14202f;--bd:#2b4160;--pn:#0f1b2d;--acc:#7dd3fc}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:10px 16px 20px}
+a{color:var(--acc)}
+h1{font-size:20px;margin:6px 0 2px}
+.sub{color:var(--mut);margin:0 0 10px;font-size:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--pn);border-radius:12px;border:2px solid #2b4160;padding:4px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px}
+.card h2{font-size:14px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+.stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:6px 10px;cursor:pointer;min-height:36px}
+button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
+:root[data-theme=dark] button[aria-pressed=true]{color:#0b121d}
+label{display:block;margin:8px 0 2px;font-weight:600}
+input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:700}
+.rule{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border:1px solid var(--bd);border-radius:8px;margin-top:6px}
+.rule i{flex:none;width:12px;height:12px;border-radius:50%;margin-top:5px;background:#7c8aa3}
+.rule.on{border-color:#e5484d;background:rgba(229,72,77,.1)}
+.rule.on i{background:#e5484d}
+.rule b{display:block}
+.rule span{color:var(--mut);font-size:13px}
+#story{min-height:64px;margin:6px 0 0}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:center}
+.note{color:var(--mut);font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/17-process-control/README.md">&larr; 回到章節</a><span class="note" style="margin:0">所有數據皆為示意</span></div>
+<h1>管制圖：平移平均值，看哪條規則觸發</h1>
+<p class="sub">每個點代表一批（lot）的量測值，依時間順序排列。界限是依製程平常的表現計算出來的；前 20 批是正常的基準線。</p>
+<div class="grid">
+<div>
+<div class="panel"><svg id="chart" viewBox="0 0 960 460" role="img" aria-label="互動式管制圖"></svg></div>
+<div class="card" style="margin-top:10px">
+<h2 id="stageName">步驟 1</h2>
+<div class="stages" id="stages"></div>
+<p id="story"></p>
+</div>
+</div>
+<div>
+<div class="card">
+<h2>動手試試</h2>
+<label for="shift">自第 21 批起的平均值偏移： <span class="val" id="shiftV"></span></label>
+<input id="shift" type="range" min="0" max="3" step="0.1" value="0">
+<label for="spike">第 15 批的單批突波： <span class="val" id="spikeV"></span></label>
+<input id="spike" type="range" min="0" max="5" step="0.1" value="0">
+<div style="display:flex;gap:6px;margin-top:10px"><button id="play" aria-pressed="true">暫停</button><button id="reset">重設</button></div>
+<div class="note">單位為 σ，即製程正常的變異幅度。規格界限設在 ±4.5σ 僅為示意。</div>
+</div>
+<div class="card" style="margin-top:10px">
+<h2>檢查的規則</h2>
+<div class="rule" id="r1"><i></i><div><b>1. 有一點超出管制界限</b><span id="r1t"></span></div></div>
+<div class="rule" id="r2"><i></i><div><b>2. 連續 9 點落在中心線同一側</b><span id="r2t"></span></div></div>
+<div class="rule" id="r3"><i></i><div><b>3. 連續 6 點上升或下降</b><span id="r3t"></span></div></div>
+<div class="rule" id="r4"><i></i><div><b>超出規格（OOS）</b><span id="r4t"></span></div></div>
+<div class="note">規則門檻（±3σ、9 點、6 點）是教科書常見的慣例（Western Electric／Nelson 規則）；各晶圓廠會自行訂定。</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var NOISE=[0.4,-0.8,1.1,-0.3,0.7,-1.2,0.2,0.9,-0.6,-0.1,1.3,-1.0,0.5,-0.4,0.8,-0.7,1.4,-0.2,0.3,-1.1,0.6,-0.5,1.0,-0.9,0.1,0.7,-1.3,0.4,-0.3,1.2,-0.6,0.8,-1.4,0.2,0.9,-0.8,0.5,-0.1,-1.0,0.6];
+var N=NOISE.length,SPEC=4.5,UCL=3,CYCLE=14000,SWEEP=9000;
+var q=new URLSearchParams(location.search);
+var th=q.get('theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+var still=q.get('still')==='1';
+var $=function(i){return document.getElementById(i)};
+var svg=$('chart'),NS='http://www.w3.org/2000/svg';
+var W=960,H=484,X0=40,X1=790,Y0=16,Y1=428,R=5.5,FS=13,SM=12,narrow=false;
+function layout(){narrow=svg.parentNode.clientWidth<620;if(narrow){W=520;H=500;X0=14;X1=440;FS=15;SM=14;Y1=444}else{W=960;H=484;X0=40;X1=790;FS=13;SM=12;Y1=428}svg.setAttribute('viewBox','0 0 '+W+' '+H)}
+function Y(v){return Y0+(R-v)/(2*R)*(Y1-Y0)}
+function Xp(i){return X0+14+i*(X1-X0-28)/(N-1)}
+var stages=[
+ {n:'1. 中心線與管制界限',shift:0,spike:0,spec:false,t:'中心線是製程的平均值。管制界限位於兩側 3σ 處：穩定的製程幾乎總是落在兩條界限之間。這裡沒有任何問題，點只是在隨機起伏。'},
+ {n:'2. 規格界限',shift:0,spike:0,spec:true,t:'規格界限來自產品，而不是來自製程，而且範圍較寬。管制界限就像車道線，規格界限則是路的邊緣。'},
+ {n:'3. 一點超出管制界限',shift:0,spike:3.2,spec:true,t:'第 15 批跳過了 UCL：它是 OOC（失控），但仍在規格界限內，所以產品沒問題。規則 1 觸發：要趁下一批變成 OOS 之前，立刻檢查機台。'},
+ {n:'4. 同側連續多點',shift:1.6,spike:0,spec:true,t:'從第 21 批起平均值向上偏移。沒有任何單點離開管制界限，但連續 9 點都在中心線上方，靠巧合發生的機率極低。規則 2 觸發。可以拖動偏移滑桿，找出剛好能觸發它的最小偏移量。'}
+];
+var stage=0,specOn=false,t=0,playing=!still&&!matchMedia('(prefers-reduced-motion: reduce)').matches,last=null;
+function data(){var s=+$('shift').value,sp=+$('spike').value,a=[];
+ for(var i=0;i<N;i++){var v=NOISE[i];if(i>=20)v+=s;if(i===14)v+=sp;a.push(v)}return a}
+function evalRules(a){
+ var r={r1:[],r2:[],r3:[],r4:[]};
+ a.forEach(function(v,i){if(Math.abs(v)>UCL)r.r1.push(i);if(Math.abs(v)>SPEC)r.r4.push(i)});
+ var run=1,dir=0;
+ for(var i=0;i<N;i++){var sd=a[i]>0?1:-1;
+  if(i>0&&sd===dir)run++;else run=1;dir=sd;
+  if(run>=9){r.r2.push({i:i,from:i-run+1})}}
+ var up=1,dn=1;
+ for(i=1;i<N;i++){up=a[i]>a[i-1]?up+1:1;dn=a[i]<a[i-1]?dn+1:1;
+  if(up>=6)r.r3.push({i:i,from:i-up+1});if(dn>=6)r.r3.push({i:i,from:i-dn+1})}
+ return r}
+function el(n,at,p){var e=document.createElementNS(NS,n);for(var k in at)e.setAttribute(k,at[k]);if(p)p.appendChild(e);return e}
+function txt(p,x,y,s,fill,anchor,w,sz){var e=el('text',{x:x,y:y,fill:fill,'text-anchor':anchor||'start','font-size':sz||FS,'font-weight':w||400},p);e.textContent=s;return e}
+function render(){
+ layout();var a=data(),r=evalRules(a);
+ var tt=still?CYCLE:(t%CYCLE),shown=tt>=SWEEP?N:Math.floor(tt/SWEEP*N);
+ var total=shown;
+ while(svg.firstChild)svg.removeChild(svg.firstChild);
+ el('rect',{width:W,height:H,fill:'#0f1b2d'},svg);
+ if(specOn){
+  el('rect',{x:X0,y:Y(R),width:X1-X0,height:Y(SPEC)-Y(R),fill:'#f87171',opacity:.14},svg);
+  el('rect',{x:X0,y:Y(-SPEC),width:X1-X0,height:Y(-R)-Y(-SPEC),fill:'#f87171',opacity:.14},svg);
+ }
+ el('rect',{x:X0,y:Y(SPEC),width:X1-X0,height:Y(UCL)-Y(SPEC),fill:'#fbbf24',opacity:.08},svg);
+ el('rect',{x:X0,y:Y(-UCL),width:X1-X0,height:Y(-SPEC)-Y(-UCL),fill:'#fbbf24',opacity:.08},svg);
+ for(var g=-5;g<=5;g++)el('line',{x1:X0,x2:X1,y1:Y(g),y2:Y(g),stroke:'#22344d'},svg);
+ el('rect',{x:X0,y:Y0,width:X1-X0,height:Y1-Y0,fill:'none',stroke:'#3a5478'},svg);
+ function L(v,c,d,w,lab,sub){var o={x1:X0,x2:X1,y1:Y(v),y2:Y(v),stroke:c,'stroke-width':w};if(d)o['stroke-dasharray']=d;el('line',o,svg);
+  txt(svg,X1+8,Y(v)+4,lab,c,'start',700);if(sub&&!narrow)txt(svg,X1+8,Y(v)+19,sub,'#9fb3cc','start',400,SM)}
+ if(specOn){L(SPEC,'#f87171',null,2.5,'USL','規格');L(-SPEC,'#f87171',null,2.5,'LSL','規格')}
+ L(UCL,'#fbbf24','8 5',2,'UCL','+3σ');L(0,'#7dd3fc',null,2,'中心線','平均值');L(-UCL,'#fbbf24','8 5',2,'LCL','−3σ');
+ // clamp for drawing
+ function cy(v){return Math.max(Y0+6,Math.min(Y1-6,Y(v)))}
+ var pts=[];for(var i=0;i<total;i++)pts.push(Xp(i).toFixed(1)+','+cy(a[i]).toFixed(1));
+ if(pts.length>1)el('polyline',{points:pts.join(' '),fill:'none',stroke:'#94a3b8','stroke-width':2,'stroke-linejoin':'round'},svg);
+ // baseline brace
+ txt(svg,Xp(0),Y1+18,narrow?'基準線':'基準線（第 1–20 批）','#9fb3cc','start',400,SM);
+ txt(svg,Xp(20),Y1+18,narrow?'第 21 批起偏移 →':'第 21 批起可能偏移 →','#9fb3cc','start',400,SM);
+ el('line',{x1:(Xp(19)+Xp(20))/2,x2:(Xp(19)+Xp(20))/2,y1:Y0,y2:Y1,stroke:'#3a5478','stroke-dasharray':'3 4'},svg);
+ var inRun={};r.r2.forEach(function(o){for(var k=o.from;k<=o.i;k++)inRun[k]=1});
+ var inTr={};r.r3.forEach(function(o){for(var k=o.from;k<=o.i;k++)inTr[k]=1});
+ for(i=0;i<total;i++){var x=Xp(i),yy=cy(a[i]),c=Math.abs(a[i])>UCL;
+  if(c){el('circle',{cx:x,cy:yy,r:11,fill:'none',stroke:'#ff5d5d','stroke-width':2.5},svg);el('circle',{cx:x,cy:yy,r:7,fill:'#ff5d5d',stroke:'#fff','stroke-width':1.5},svg);
+   txt(svg,x,yy+(a[i]>0?-16:26),'第 '+(i+1)+' 批','#ffb4b4','middle',700,SM)}
+  else if(inRun[i])el('path',{d:'M'+x+' '+(yy-7)+' l7 7 l-7 7 l-7 -7z',fill:'#a78bfa',stroke:'#0f1b2d','stroke-width':1.5},svg);
+  else if(inTr[i])el('rect',{x:x-5,y:yy-5,width:10,height:10,fill:'#34d399',stroke:'#0f1b2d','stroke-width':1.5},svg);
+  else el('circle',{cx:x,cy:yy,r:4.5,fill:'#e2e8f0',stroke:'#0f1b2d','stroke-width':1.5},svg);
+ }
+ if(total<N)el('line',{x1:Xp(total),x2:Xp(total),y1:Y0,y2:Y1,stroke:'#7dd3fc','stroke-width':1.5,opacity:.6},svg);
+ // legend
+ var ly=H-8,lx=narrow?14:44,gp=narrow?0:0;
+ el('circle',{cx:lx+5,cy:ly-4,r:5,fill:'#ff5d5d'},svg);txt(svg,lx+16,ly,narrow?'超出界限':'超出管制界限','#9fb3cc','start',400,SM);
+ var l2=narrow?150:230;el('path',{d:'M'+(lx+l2)+' '+(ly-11)+' l7 7 l-7 7 l-7 -7z',fill:'#a78bfa'},svg);txt(svg,lx+l2+12,ly,'連續 9 點','#9fb3cc','start',400,SM);
+ var l3=narrow?240:330;el('rect',{x:lx+l3,y:ly-9,width:10,height:10,fill:'#34d399'},svg);txt(svg,lx+l3+16,ly,'連續 6 點趨勢','#9fb3cc','start',400,SM);
+ // texts
+ var full=(total===N);
+ function set(id,on,msg,idle){$(id).className='rule'+(on&&full?' on':'');$(id+'t').textContent=on&&full?msg:idle}
+ var firstRun=r.r2.length?r.r2[0].i+1:0;
+ set('r1',r.r1.length>0,'觸發：第 '+r.r1.map(function(k){return k+1}).join('、')+' 批超出界限（OOC）。','未觸發。');
+ set('r2',r.r2.length>0,'在第 '+firstRun+' 批觸發：平均值可能已經偏移。','未觸發。');
+ set('r3',r.r3.length>0,'在第 '+(r.r3.length?r.r3[0].i+1:'')+' 批觸發：製程正在漂移。','未觸發。');
+ set('r4',r.r4.length>0,'第 '+r.r4.map(function(k){return k+1}).join('、')+' 批超出規格：產品不合格。','沒有超出規格。');
+ $('shiftV').textContent='+'+(+$('shift').value).toFixed(1)+'σ';
+ $('spikeV').textContent='+'+(+$('spike').value).toFixed(1)+'σ';
+ $('play').textContent=playing?'暫停':'播放';$('play').setAttribute('aria-pressed',playing);
+}
+function setStage(k,keep){stage=k;var s=stages[k];specOn=s.spec;
+ if(!keep){$('shift').value=s.shift;$('spike').value=s.spike}
+ $('stageName').textContent=s.n;$('story').textContent=s.t;
+ Array.prototype.forEach.call($('stages').children,function(b,i){b.setAttribute('aria-pressed',i===k)});render()}
+stages.forEach(function(s,i){var b=document.createElement('button');b.textContent=String(i+1);b.title=s.n;b.setAttribute('aria-label','步驟 '+(i+1)+'：'+s.n);
+ b.onclick=function(){t=0;setStage(i)};$('stages').appendChild(b)});
+['shift','spike'].forEach(function(id){$(id).addEventListener('input',function(){if(!still){t=SWEEP}render()})});
+$('shift').addEventListener('input',function(){if(+$('shift').value>0&&!specOn){specOn=true}});
+$('play').onclick=function(){playing=!playing;last=null;render()};
+$('reset').onclick=function(){t=0;setStage(0)};
+window.__setTime=function(ms){playing=false;still=false;t=ms;render()};
+function loop(ts){if(playing){if(last!=null)t+=ts-last;last=ts;render()}else last=null;requestAnimationFrame(loop)}
+window.addEventListener('resize',render);var qt=q.get('t');
+setStage(q.get('stage')?(+q.get('stage')-1):0);
+if(qt!=null)window.__setTime(+qt);
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

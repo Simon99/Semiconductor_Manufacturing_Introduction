@@ -77,6 +77,10 @@ sequenceDiagram
 
 機台來自世界各地不同的廠商，為了讓系統能用同樣的方式和每一台機台溝通，產業制定了共同的通訊標準，最常見的是 **SECS/GEM**。它就像機台與系統之間的共同語言。
 
+![晶圓盒降到蝕刻機上，機台透過機台自動化系統把編號回報給 MES；MES 執行七項防呆檢查，通過後下載 Recipe 並記錄進站；機台加工後記錄出站，履歷新增一筆資料，晶圓盒再移往下一站。數值為示意。](../../../images/zh-TW/23-lot-at-tool.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch23/lot-at-tool.html)自己動手調整看看。*
+
 ---
 
 ## 防呆：讓錯誤無法發生

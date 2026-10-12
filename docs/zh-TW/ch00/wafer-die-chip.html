@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>晶圓、晶粒與晶片</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#1d2733;--sub:#44546a;--line:#c9d3e0;--wafer:#c9d3e0;--wst:#6b7c93;--die:#8fa6c4;--dst:#4d6585;--hl:#f08a24;--hlst:#b85d00;--blk:#5d7fa8;--pad:#e6b422;--body:#2b2f36;--acc:#0b63c5;--bad:#c0392b}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10161e;--card:#18212c;--ink:#e6edf5;--sub:#9fb0c5;--line:#32445a;--wafer:#3a4b60;--wst:#7e93ad;--die:#5f7fa8;--dst:#9bb6d8;--hl:#ffa040;--hlst:#ffc080;--blk:#4a6c98;--acc:#6db0ff}}
+:root[data-theme=dark]{--bg:#10161e;--card:#18212c;--ink:#e6edf5;--sub:#9fb0c5;--line:#32445a;--wafer:#3a4b60;--wst:#7e93ad;--die:#5f7fa8;--dst:#9bb6d8;--hl:#ffa040;--hlst:#ffc080;--blk:#4a6c98;--acc:#6db0ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 16px 28px}
+a{color:var(--acc)}
+h1{font-size:24px;margin:6px 0 2px}h2{font-size:18px;margin:0 0 8px}
+.lead{color:var(--sub);margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:0 0 16px}
+svg{display:block;width:100%;height:auto}
+#map{max-width:430px;margin:0 auto}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button{font:inherit;padding:6px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;cursor:pointer}
+button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.say{margin:10px 0 0;min-height:3em}
+.row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:center}
+@media(max-width:760px){.row{grid-template-columns:1fr}}
+input[type=range]{width:100%}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0}
+.kv b{font-variant-numeric:tabular-nums}
+.formula{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font-family:ui-monospace,Menlo,Consolas,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",monospace;font-size:14px;overflow-wrap:anywhere}
+.note{color:var(--sub);font-size:13px}
+.t{fill:var(--ink);font-size:13px}.tb{font-size:17px;font-weight:700;fill:var(--ink)}.ts{font-size:13px;fill:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/00-overview/README.md">&larr; 回到章節</a></p>
+<h1>晶圓、晶粒與晶片</h1>
+<p class="lead">一片晶圓上有許多相同的電路，每一個叫做一顆晶粒。沿著切割道把晶圓切開，再把每顆晶粒封裝起來，就成了你手上拿得到的晶片。</p>
+
+<div class="card">
+<h2>跟著一顆晶粒走一趟</h2>
+<svg id="scene" viewBox="0 80 960 320" role="img" aria-label="晶圓放大到其中一顆晶粒，再切割並封裝成晶片"></svg>
+<div class="ctl">
+<button data-s="0">1 晶圓</button><button data-s="1">2 晶粒</button><button data-s="2">3 切割</button><button data-s="3">4 封裝</button>
+<button id="pp">暫停</button>
+</div>
+<p class="say" id="say"></p>
+</div>
+
+<div class="card">
+<h2>一片晶圓放得下幾顆晶粒？</h2>
+<div class="row">
+<svg id="map" viewBox="0 0 320 320" role="img" aria-label="排滿晶粒的晶圓圖"></svg>
+<div>
+<label for="sz"><b>晶粒邊長</b>（方形晶粒）：<b id="szv"></b></label>
+<input id="sz" type="range" min="2" max="40" step="0.5" value="10">
+<div class="kv">
+<span>晶粒面積 S</span><b id="area"></b>
+<span>公式估算值</span><b id="est"></b>
+<span>圖中顆數（僅計完整晶粒）</span><b id="cnt"></b>
+<span>完整晶粒佔晶圓面積</span><b id="use"></b>
+</div>
+<div class="formula">DPW &asymp; &pi;(d/2)&sup2; / S &minus; &pi;d / &radic;(2S)<br>d = 300 mm（晶圓直徑），S = 晶粒面積（單位 mm&sup2;）</div>
+<p class="note">第一項：晶圓面積除以晶粒面積。第二項：圓形邊緣損失的晶粒。公式未考慮切割道與邊緣排除區；圖中顆數取 4 種網格對位中最多的一種。所有數字皆為示意的幾何計算，並非實際產品的資料。</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var q=new URLSearchParams(location.search);
+var th=q.get('theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+var NS='http://www.w3.org/2000/svg',D=300;
+var LOOP=16000,STG=4000;
+var scene=document.getElementById('scene'),say=document.getElementById('say');
+var texts=[
+"1. 晶圓是一片薄薄的圓形矽片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒。",
+"2. 放大其中一顆晶粒，電路就在裡面。窄窄的切割道（虛線）把它和鄰近的晶粒隔開，銲墊則負責和外界連接。",
+"3. 鋸片沿著切割道切下去，讓每顆晶粒脫離晶圓。",
+"4. 晶粒被固定在外殼裡，從銲墊拉線接到接腳，再封起來。封裝好的晶粒就是晶片。"];
+function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+// scene build
+var cx=150,cy=215,R=118,pitch=19,gW=[],hl=null;
+var dstr='';
+for(var i=-8;i<=8;i++)for(var j=-8;j<=8;j++){var x0=cx+i*pitch-pitch/2+1,y0=cy+j*pitch-pitch/2+1;
+ var ok=[[x0,y0],[x0+pitch-2,y0],[x0,y0+pitch-2],[x0+pitch-2,y0+pitch-2]].every(function(c){return Math.hypot(c[0]-cx,c[1]-cy)<=R-5});
+ if(!ok)continue;if(i==3&&j==-2){hl=[x0,y0];continue}dstr+='M'+x0.toFixed(1)+' '+y0.toFixed(1)+'h'+(pitch-2)+'v'+(pitch-2)+'h-'+(pitch-2)+'z'}
+var g1=el('g',{},scene),g2=el('g',{},scene),g3=el('g',{},scene);
+el('circle',{cx:cx,cy:cy,r:R,fill:'var(--wafer)',stroke:'var(--wst)','stroke-width':2},g1);
+el('path',{d:dstr,fill:'var(--die)'},g1);
+var hlr=el('rect',{x:hl[0],y:hl[1],width:pitch-2,height:pitch-2,fill:'var(--hl)',stroke:'var(--hlst)'},g1);
+var t1=el('text',{x:cx,y:cy+R+30,'text-anchor':'middle',class:'tb'},g1);t1.textContent='晶圓';
+var t1b=el('text',{x:cx,y:cy+R+50,'text-anchor':'middle',class:'ts'},g1);t1b.textContent='例：直徑 300 mm';
+// die
+var dx=370,dy=120,ds=150;
+el('rect',{x:dx-24,y:dy-24,width:ds+48,height:ds+48,fill:'var(--die)',opacity:.45,stroke:'var(--dst)'},g2);
+el('rect',{x:dx,y:dy,width:ds,height:ds,fill:'var(--die)',stroke:'var(--dst)','stroke-width':2},g2);
+[[12,12,52,44],[70,12,68,26],[70,44,34,36],[110,44,28,36],[12,62,44,36],[62,86,76,52],[12,104,44,34]].forEach(function(b){el('rect',{x:dx+b[0],y:dy+b[1],width:b[2],height:b[3],rx:3,fill:'var(--blk)',stroke:'var(--dst)'},g2)});
+for(var k=0;k<7;k++){var p=12+k*19;[[p,3,9,7],[p,ds-10,9,7],[3,p,7,9],[ds-10,p,7,9]].forEach(function(r){el('rect',{x:dx+r[0],y:dy+r[1],width:r[2],height:r[3],fill:'var(--pad)'},g2)})}
+el('rect',{x:dx-12,y:dy-12,width:ds+24,height:ds+24,fill:'none',stroke:'var(--hlst)','stroke-width':2,'stroke-dasharray':'7 5'},g2);
+var t2=el('text',{x:dx+ds/2,y:dy+ds+54,'text-anchor':'middle',class:'tb'},g2);t2.textContent='晶粒';
+var t2b=el('text',{x:dx+ds/2,y:dy+ds+74,'text-anchor':'middle',class:'ts'},g2);t2b.textContent='虛線＝切割道，黃色＝銲墊';
+var zl1=el('line',{x1:hl[0]+pitch-2,y1:hl[1],x2:dx-24,y2:dy-24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
+var zl2=el('line',{x1:hl[0]+pitch-2,y1:hl[1]+pitch-2,x2:dx-24,y2:dy+ds+24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
+// saw
+var saw=el('g',{},g2);el('circle',{cx:0,cy:0,r:16,fill:'var(--wafer)',stroke:'var(--wst)','stroke-width':2},saw);
+el('path',{d:'M-16 0H16M0 -16V16',stroke:'var(--wst)','stroke-width':2},saw);
+// package
+var px=690,py=120,ps=150;
+var leads='';for(var k=0;k<8;k++){var q2=12+k*16;leads+='M'+(px+q2)+' '+(py-14)+'v14M'+(px+q2)+' '+(py+ps)+'v14M'+(px-14)+' '+(py+q2)+'h14M'+(px+ps)+' '+(py+q2)+'h14'}
+el('path',{d:leads,stroke:'var(--wst)','stroke-width':6,fill:'none'},g3);
+el('rect',{x:px,y:py,width:ps,height:ps,rx:8,fill:'var(--body)',stroke:'var(--dst)','stroke-width':1.5},g3);
+var inner=el('g',{},g3);
+el('rect',{x:px+ps/2-34,y:py+ps/2-34,width:68,height:68,fill:'var(--die)',stroke:'var(--dst)'},inner);
+el('rect',{x:px+ps/2-24,y:py+ps/2-24,width:48,height:48,fill:'var(--blk)'},inner);
+var bw='';for(var k=0;k<5;k++){bw+='M'+(px+ps/2-28+k*14)+' '+(py+ps/2-34)+'L'+(px+12+k*16)+' '+(py+8)+'M'+(px+ps/2-28+k*14)+' '+(py+ps/2+34)+'L'+(px+12+k*16)+' '+(py+ps-8)}
+el('path',{d:bw,stroke:'var(--pad)','stroke-width':1.5,fill:'none'},inner);
+var cover=el('g',{},g3);el('rect',{x:px,y:py,width:ps,height:ps,rx:8,fill:'var(--body)',stroke:'var(--dst)','stroke-width':1.5},cover);
+el('circle',{cx:px+15,cy:py+15,r:5,fill:'#8b95a3'},cover);
+var ct=el('text',{x:px+ps/2,y:py+ps/2+5,'text-anchor':'middle',style:'fill:#c4ccd6;font-size:15px;font-weight:700'},cover);ct.textContent='晶片';
+var t3=el('text',{x:px+ps/2,y:py+ps+54,'text-anchor':'middle',class:'tb'},g3);t3.textContent='封裝後的晶片';
+var t3b=el('text',{x:px+ps/2,y:py+ps+74,'text-anchor':'middle',class:'ts'},g3);t3b.textContent='晶粒＋金線＋外殼＋接腳';
+// arrows
+var ar1=el('path',{d:'M270 195H340',stroke:'var(--sub)','stroke-width':3,fill:'none'},scene);
+var ar1t=el('text',{x:300,y:180,'text-anchor':'middle',class:'t'},scene);ar1t.textContent='放大';
+var ar2=el('path',{d:'M570 195H650',stroke:'var(--sub)','stroke-width':3,fill:'none'},scene);
+var ar2t=el('text',{x:612,y:172,'text-anchor':'middle',class:'t'},scene);ar2t.textContent='切割＋封裝';
+var ttl=el('text',{x:20,y:28,class:'tb'},scene);
+// time
+window.addEventListener('resize',function(){render()});var T=0,playing=true,last=null,still=q.get('still')==='1';
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function render(){
+ var s=Math.floor(T/STG)%4,l=(T%STG)/STG;
+ var act=[g1,g2,g2,g3];
+ [g1,g2,g3].forEach(function(g){g.style.opacity=0.55});
+ if(s==0)g1.style.opacity=1;
+ if(s==1){g1.style.opacity=.7;g2.style.opacity=1}
+ if(s==2){g2.style.opacity=1;g1.style.opacity=.55}
+ if(s==3){g3.style.opacity=1;g2.style.opacity=.7}
+ hlr.style.opacity=(s==0)?(0.5+0.5*Math.cos(l*Math.PI*6)):1;
+ zl1.style.opacity=zl2.style.opacity=(s==1)?1:0.5;
+ var sx=dx-40+clamp((l-.1)/.8,0,1)*(ds+80);
+ saw.setAttribute('transform','translate('+sx+','+(dy-12)+') rotate('+(l*1440)+')');
+ saw.style.opacity=(s==2)?1:0;
+ // cover: removed at start of packaging stage
+ cover.style.opacity=(s==3&&l<.25)?0:1;
+ ar1.style.opacity=ar1t.style.opacity=(s==1)?1:.55;
+ ar2.style.opacity=ar2t.style.opacity=(s>=2)?1:.55;
+ var vb=['10 90 280 320','290 90 380 320','290 90 380 320','660 90 300 320'];
+ scene.setAttribute('viewBox',window.innerWidth<640?vb[s]:'0 80 960 320');
+ say.textContent=texts[s];
+ document.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',+b.dataset.s===s)});
+ document.getElementById('pp').textContent=playing?'暫停':'播放';
+}
+window.__setTime=function(ms){T=((ms%LOOP)+LOOP)%LOOP;render()};
+function tick(ts){if(last!==null&&playing)T=(T+ts-last)%LOOP;last=ts;render();requestAnimationFrame(tick)}
+if(q.get('t')!==null)T=+q.get('t')%LOOP;
+if(still||q.get('t')!==null)playing=false;
+render();if(!still)requestAnimationFrame(tick);
+document.getElementById('pp').onclick=function(){playing=!playing;render()};
+document.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){T=+b.dataset.s*STG+200;render()}});
+// map
+var map=document.getElementById('map'),sz=document.getElementById('sz');
+var MR=150,MC=160,sc=MR/(D/2);
+function layout(a){
+ var best=null,half=a/2,R2=D/2;
+ var offs=[[0,0],[half,0],[0,half],[half,half]];
+ offs.forEach(function(o){var pts=[],n=Math.ceil(R2/a)+1;
+  for(var i=-n;i<=n;i++)for(var j=-n;j<=n;j++){var x0=i*a-o[0]-half+ (0)+half*0,y0=j*a-o[1]-half;
+   // cell [x0,x0+a]x[y0,y0+a]
+   var x=i*a+o[0]-half,y=j*a+o[1]-half;
+   if([[x,y],[x+a,y],[x,y+a],[x+a,y+a]].every(function(c){return c[0]*c[0]+c[1]*c[1]<=R2*R2}))pts.push([x,y])}
+  if(!best||pts.length>best.length)best=pts});
+ return best}
+function upd(){
+ var a=+sz.value,S=a*a,est=Math.PI*D*D/4/S-Math.PI*D/Math.sqrt(2*S);
+ var pts=layout(a);
+ map.innerHTML='';
+ el('circle',{cx:MC,cy:MC,r:MR,fill:'var(--wafer)',stroke:'var(--wst)','stroke-width':2},map);
+ var d='',w=a*sc,g=w>6?0.6:(w>3?0.35:0.15);
+ pts.forEach(function(p){d+='M'+(MC+p[0]*sc+g/2).toFixed(2)+' '+(MC+p[1]*sc+g/2).toFixed(2)+'h'+(w-g).toFixed(2)+'v'+(w-g).toFixed(2)+'h'+(g-w).toFixed(2)+'z'});
+ el('path',{d:d,fill:'var(--die)'},map);
+ document.getElementById('szv').textContent=a.toFixed(1)+' mm';
+ document.getElementById('area').textContent=S.toFixed(1)+' mm²';
+ document.getElementById('est').textContent=Math.max(0,Math.round(est)).toLocaleString('en-US');
+ document.getElementById('cnt').textContent=pts.length.toLocaleString('en-US');
+ document.getElementById('use').textContent=(pts.length*S/(Math.PI*D*D/4)*100).toFixed(0)+'%';
+}
+sz.addEventListener('input',upd);
+if(q.get('die'))sz.value=q.get('die');
+upd();
+})();
+</script>
+</body>
+</html>

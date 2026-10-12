@@ -47,7 +47,9 @@
 
 這些規則的重點是：即使每一點都還在規格內，只要「形狀」不對，就值得注意。
 
-<!-- 圖：管制圖示意（中心線、管制界限、規格界限，以及超出界限和連續偏移的例子） -->
+![依時間順序畫出的量測值，搭配中心線、管制界限與較寬的規格界限。有一點超出管制上限；之後連續九點都位於中心線上方。](../../../images/zh-TW/17-control-chart.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch17/control-chart.html)自己動手調整看看。*
 
 ---
 

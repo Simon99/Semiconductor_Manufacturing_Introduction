@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRAM 刷新與 Row Hammer</title>
+<style>
+:root{--bg:#f6f8fb;--panel:#fff;--ink:#17212f;--mute:#586679;--line:#cdd6e2;--band:#e6ecf5;--track:#f1f4f9;--accent:#2563eb;--ok:#2fa36b;--warn:#d68b00;--bad:#d64545;--ham:#e07a00;--chart1:#2563eb;--chart2:#9333ea}
+:root[data-theme="dark"]{--bg:#0f1722;--panel:#162231;--ink:#e8eef7;--mute:#9fb2c8;--line:#34475f;--band:#1f2f44;--track:#0c1420;--accent:#6aa5ff;--ok:#3ec585;--warn:#f0b43c;--bad:#ff6b6b;--ham:#ffb454;--chart1:#6aa5ff;--chart2:#c58bff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1722;--panel:#162231;--ink:#e8eef7;--mute:#9fb2c8;--line:#34475f;--band:#1f2f44;--track:#0c1420;--accent:#6aa5ff;--ok:#3ec585;--warn:#f0b43c;--bad:#ff6b6b;--ham:#ffb454;--chart1:#6aa5ff;--chart2:#c58bff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--accent)}
+h1{font-size:22px;margin:6px 0 4px}
+.sub{color:var(--mute);margin:0 0 10px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.card h2{font-size:15px;margin:0 0 6px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer}
+button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ctl{margin:8px 0}
+.ctl label{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+.ctl input[type=range]{width:100%}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0}
+.read{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:8px 0;font-size:14px}
+.read b{text-align:right;font-variant-numeric:tabular-nums}
+.stage-text{background:var(--band);border-radius:8px;padding:8px 10px;margin:8px 0;min-height:4.4em}
+.status{font-weight:700;margin:6px 0}
+.bad{color:var(--bad)}.ok{color:var(--ok)}
+.note{color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/6-beyond-the-fab/24-process-and-firmware/README.md">&larr; 回到章節</a></div>
+<h1>為什麼 DRAM 需要刷新，以及 Row Hammer 做了什麼</h1>
+<p class="sub">DRAM 的一個位元是存放在微小電容中的電荷，而電容會漏電。拖曳滑桿，看看哪些單元會遺失位元。所有數字皆為<b>示意</b>。</p>
+<div class="stages" id="stages"></div>
+<div class="grid">
+ <div>
+  <div class="card"><h2>DRAM 陣列（眾多列中的 5 列；單元皆儲存 1）</h2><svg id="arr" viewBox="0 0 640 340" role="img" aria-label="顯示各單元電荷量的 DRAM 單元陣列"></svg></div>
+  <div class="card" style="margin-top:12px"><h2>受害列中兩個單元在三個刷新週期內的電荷</h2><svg id="chart" viewBox="0 0 640 230" role="img" aria-label="電荷隨時間變化圖"></svg></div>
+ </div>
+ <div class="card">
+  <div class="stage-text" id="stext"></div>
+  <div class="ctl"><label for="T"><span>刷新間隔（整個週期）</span><span id="Tv"></span></label><input id="T" type="range" min="8" max="128" step="4" value="64"></div>
+  <div class="ctl"><label for="N"><span>錘擊次數（攻擊列每個週期的啟動次數）</span><span id="Nv"></span></label><input id="N" type="range" min="0" max="200000" step="5000" value="0"></div>
+  <label class="chk"><input id="hot" type="checkbox"><span>高溫（漏電快 2 倍，示意）</span></label>
+  <label class="chk"><input id="def" type="checkbox"><span>防禦：提前刷新相鄰列（每個週期 4 次）</span></label>
+  <div class="status" id="status"></div>
+  <div class="read">
+   <span>僅因漏電而遺失的單元</span><b id="rLeak"></b>
+   <span>因錘擊而額外翻轉的單元</span><b id="rHam"></b>
+   <span>刷新指令的間隔</span><b id="rRefi"></b>
+   <span>花在刷新上的時間（8192 個指令 × 350 ns）</span><b id="rOvh"></b>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button id="pp">暫停</button><button id="rs">重新開始</button></div>
+  <p class="note">模型（示意）：單元電荷依 e<sup>-t/&tau;</sup> 衰減，&tau; 介於 100 到 250 ms（高溫時減半）；被錘擊的受害列會額外流失 0.5 &times;（次數 / 150,000）&times;（時間 / 週期）；電荷低於 50% 時位元即遺失。實際的臨界值、資料保存時間與防護機制會因晶片與世代而異。典型的刷新週期為 64 ms（高溫時 32 ms），每個週期 8192 個刷新指令，是 DDR3/DDR4 常見的數值；每個指令 350 ns 為範例值。</p>
+ </div>
+</div>
+</div>
+<script>
+(function(){
+var NTH=150000, LOOP=12000, SENSE=0.5, TREFC=350e-6; // ms per command
+var norm=[[160,220,100,190,240,170,210,150],[230,180,200,120,250,175,140,215]];
+var vic=[220,200,140,210,170,230,120,205];
+var rowsDef=[{k:'n',t:norm[0],l:'列 0',s:''},{k:'v',t:vic,l:'列 1',s:'受害列'},{k:'a',t:null,l:'列 2',s:'攻擊列'},{k:'v',t:vic.slice().reverse(),l:'列 3',s:'受害列'},{k:'n',t:norm[1],l:'列 4',s:''}];
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='light'||th==='dark') document.documentElement.setAttribute('data-theme',th);
+var $=function(id){return document.getElementById(id)};
+var st={T:+(q.get('T')||64),N:+(q.get('N')||0),hot:q.get('hot')==='1',def:q.get('def')==='1',t:0,paused:false,stage:0};
+if(q.get('t')!==null){st.t=+q.get('t');st.paused=true}
+if(q.get('still')==='1')st.paused=true;
+var stages=[
+ {n:'1 漏電',T:128,N:0,hot:0,def:0,x:'每個單元都會漏電。刷新間隔太長（這裡是 128 ms）時，最會漏電的單元會在刷新來到之前掉到 50% 以下，位元因此遺失。'},
+ {n:'2 刷新',T:64,N:0,hot:0,def:0,x:'每個週期把每一列刷新一次（64 ms 是典型值），就能在電荷掉得太低之前把它補回來，沒有任何資料遺失。'},
+ {n:'3 高溫',T:64,N:0,hot:1,def:0,x:'高溫的單元漏電更快，64 ms 的週期已經不夠。把間隔減半（試試 32 ms），資料就能保住，代價是花更多時間在刷新上。'},
+ {n:'4 Row Hammer',T:64,N:70000,hot:0,def:0,x:'反覆開啟攻擊列，會干擾旁邊的列。受害列的單元流失電荷更快，即使刷新準時，最弱的單元仍會翻轉。'},
+ {n:'5 防禦',T:64,N:70000,hot:0,def:1,x:'偵測到這種模式後提前刷新相鄰列，就能在損害累積之前將它重置，位元翻轉隨之消失。'}];
+stages.forEach(function(s,i){var b=document.createElement('button');b.textContent=s.n;b.onclick=function(){setStage(i)};b.id='st'+i;$('stages').appendChild(b)});
+function setStage(i){var s=stages[i];st.stage=i;st.T=s.T;st.N=s.N;st.hot=!!s.hot;st.def=!!s.def;st.t=0;sync();render()}
+function sync(){$('T').value=st.T;$('N').value=st.N;$('hot').checked=st.hot;$('def').checked=st.def}
+$('T').oninput=function(){st.T=+this.value;st.stage=-1;render()};
+$('N').oninput=function(){st.N=+this.value;st.stage=-1;render()};
+$('hot').onchange=function(){st.hot=this.checked;st.stage=-1;render()};
+$('def').onchange=function(){st.def=this.checked;st.stage=-1;render()};
+$('pp').onclick=function(){st.paused=!st.paused;if(!st.paused)last=null;render()};
+$('rs').onclick=function(){st.t=0;render()};
+function colr(l){ if(l<SENSE)return css('--bad'); if(l>=0.75)return css('--ok'); var f=(0.75-l)/0.25; return mix(css('--ok'),css('--warn'),f)}
+var cs=null; function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function hex(c){c=c.replace('#','');if(c.length===3)c=c.replace(/./g,'$&$&');return [0,2,4].map(function(i){return parseInt(c.substr(i,2),16)})}
+function mix(a,b,f){var A=hex(a),B=hex(b);return 'rgb('+A.map(function(x,i){return Math.round(x+(B[i]-x)*f)}).join(',')+')'}
+// model
+function tauEff(tau){return st.hot?tau/2:tau}
+function period(victim,hammer){return (st.def&&victim&&hammer&&st.N>0)?st.T/4:st.T}
+function raw(tau,victim,hammer,tt){ // tt ms since last refresh of this cell
+  var l=Math.exp(-tt/tauEff(tau)); if(victim&&hammer) l-=0.5*(st.N/NTH)*(tt/st.T); return l}
+function cross(tau,victim,hammer){ // first time (ms) in the first period when charge<SENSE, or null
+  var P=period(victim,hammer); if(raw(tau,victim,hammer,P)>=SENSE)return null;
+  var lo=0,hi=P; for(var i=0;i<40;i++){var m=(lo+hi)/2; if(raw(tau,victim,hammer,m)<SENSE)hi=m;else lo=m} return hi}
+function cellState(tau,victim,hammer,ts){ // ts sim ms in loop
+  var tc=cross(tau,victim,hammer);
+  if(tc!==null&&ts>=tc)return {l:0.1,lost:true};
+  var P=period(victim,hammer); return {l:Math.max(raw(tau,victim,hammer,ts%P),0),lost:false}}
+function simTime(){return (st.t%LOOP)/LOOP*3*st.T}
+function render(){
+  var ts=simTime(), hamming=st.N>0;
+  var b=document.querySelectorAll('#stages button'); for(var i=0;i<b.length;i++)b[i].className=(i===st.stage?'on':'');
+  $('stext').textContent=st.stage>=0?stages[st.stage].x:'自訂設定。可以點上方的階段按鈕走一遍引導流程，或自行繼續拖曳滑桿。';
+  $('Tv').textContent=st.T+' ms'; $('Nv').textContent=st.N.toLocaleString('en-US');
+  $('pp').textContent=st.paused?'播放':'暫停';
+  // array
+  var s='',lostLeak=0,lostHam=0;
+  var bandc=css('--band'),trk=css('--track'),line=css('--line'),ink=css('--ink'),mute=css('--mute'),ham=css('--ham');
+  var pulse=hamming&&((Math.floor(st.t/150)%2)===0);
+  rowsDef.forEach(function(r,i){
+    var y=18+i*62;
+    s+='<rect x="100" y="'+y+'" width="468" height="54" rx="9" fill="'+bandc+'"/>';
+    if(r.k==='a'&&hamming)s+='<rect x="96" y="'+(y-3)+'" width="476" height="60" rx="11" fill="none" stroke="'+ham+'" stroke-width="3" opacity="'+(pulse?1:0.35)+'"/>';
+    s+='<text x="8" y="'+(y+23)+'" font-size="14" font-weight="600" fill="'+ink+'">'+r.l+'</text>';
+    if(r.s)s+='<text x="8" y="'+(y+42)+'" font-size="12" fill="'+(r.k==='a'?ham:css('--bad'))+'">'+r.s+'</text>';
+    var anyRef=false;
+    for(var c=0;c<8;c++){
+      var x=110+c*57, ct=y+5, h=44, w=38, l=1, lost=false;
+      if(r.k!=='a'){
+        var v=r.k==='v', a=cellState(r.t[c],v,hamming&&v,ts); l=a.l; lost=a.lost;
+              }
+      s+='<rect x="'+x+'" y="'+ct+'" width="'+w+'" height="'+h+'" rx="5" fill="'+trk+'" stroke="'+line+'" stroke-width="1.5"/>';
+      var fh=(h-6)*l; s+='<rect x="'+(x+3)+'" y="'+(ct+3+(h-6)-fh)+'" width="'+(w-6)+'" height="'+fh+'" rx="3" fill="'+(r.k==='a'?css('--ok'):colr(l))+'"/>';
+      if(lost)s+='<text x="'+(x+w/2)+'" y="'+(ct+h/2+5)+'" font-size="14" font-weight="700" text-anchor="middle" fill="'+css('--bad')+'">X</text>';
+    }
+    s+='<text x="574" y="'+(y+22)+'" font-size="12" fill="'+mute+'">'+(r.k==='a'?(hamming?'ACT ACT ...':'閒置'):(r.k==='v'&&st.def&&hamming?'提前 REF':'REF'))+'</text>';
+  });
+  s+='<text x="8" y="334" font-size="12" fill="'+mute+'">模擬時間 '+ts.toFixed(0)+' ms／共 '+(3*st.T)+' ms（3 個刷新週期；循環結束後以全新資料重新開始）</text>';
+  $('arr').innerHTML=s;
+  // counts
+  rowsDef.forEach(function(r){ if(r.k==='a')return; for(var c=0;c<8;c++){
+    var v=r.k==='v', base=cross(r.t[c],false,false)!==null, wh=cross(r.t[c],v,hamming&&v)!==null;
+    if(base)lostLeak++; else if(wh)lostHam++; }});
+  $('rLeak').textContent=lostLeak+' / 32'; $('rHam').textContent=lostHam+' / 16';
+  var tre=st.T/8192; $('rRefi').textContent=(tre*1000).toFixed(2)+' µs';
+  var ovh=8192*TREFC/st.T*100; $('rOvh').textContent=ovh.toFixed(1)+' %';
+  var stt=$('status'), tot=lostLeak+lostHam;
+  if(tot===0){stt.className='status ok';stt.textContent='所有資料完好。'}
+  else if(lostLeak>0){stt.className='status bad';stt.textContent='資料遺失：刷新太慢，撐不住最會漏電的單元'+(lostHam?'（錘擊又造成更多遺失）。':'。')}
+  else{stt.className='status bad';stt.textContent='即使刷新準時，Row Hammer 仍翻轉了 '+lostHam+' 個位元。'}
+  chart(ts);
+}
+function chart(ts){
+  var W=640,H=230,L=44,R=12,Tp=14,B=36, pw=W-L-R, ph=H-Tp-B, tot=3*st.T;
+  var X=function(t){return L+t/tot*pw}, Y=function(v){return Tp+(1-v)*ph};
+  var ink=css('--ink'),mute=css('--mute'),line=css('--line'),bad=css('--bad');
+  var s='<rect x="'+L+'" y="'+Tp+'" width="'+pw+'" height="'+ph+'" fill="'+css('--track')+'" stroke="'+line+'"/>';
+  s+='<line x1="'+L+'" x2="'+(L+pw)+'" y1="'+Y(SENSE)+'" y2="'+Y(SENSE)+'" stroke="'+bad+'" stroke-dasharray="6 4" stroke-width="1.5"/>';
+  s+='<text x="'+(L+pw-4)+'" y="'+(Y(SENSE)-5)+'" font-size="12" text-anchor="end" fill="'+bad+'">電荷低於約 50% 即位元遺失（示意）</text>';
+  [['220',css('--chart1'),'強單元（τ 220 ms）',220],['120',css('--chart2'),'弱單元（τ 120 ms）',120]].forEach(function(cfg,k){
+    var tau=cfg[3],v=true,ham=st.N>0, P=period(v,ham), tc=cross(tau,v,ham), d='';
+    for(var t=0;t<=tot+0.001;t+=tot/360){
+      if(tc!==null&&t>=tc){break}
+      var tt=t%P; var l=Math.max(raw(tau,v,ham,tt),0);
+      var prev=(t-tot/360)%P; if(t>0&&tt<prev) d+=' L'+X(t)+' '+Y(Math.max(raw(tau,v,ham,P),0));
+      d+=(d===''?'M':' L')+X(t)+' '+Y(l);
+    }
+    s+='<path d="'+d+'" fill="none" stroke="'+cfg[1]+'" stroke-width="2.2"/>';
+    if(tc!==null){s+='<circle cx="'+X(tc)+'" cy="'+Y(raw(tau,v,ham,tc))+'" r="6" fill="'+bad+'"/><text x="'+(X(tc)+9)+'" y="'+(Y(0.5)+18+k*14)+'" font-size="12" fill="'+bad+'">位元遺失</text>'}
+    s+='<line x1="'+(L+8+k*250)+'" x2="'+(L+32+k*250)+'" y1="'+(H-10)+'" y2="'+(H-10)+'" stroke="'+cfg[1]+'" stroke-width="3"/><text x="'+(L+38+k*250)+'" y="'+(H-6)+'" font-size="12" fill="'+ink+'">'+cfg[2]+'</text>';
+  });
+  for(var w=1;w<3;w++)s+='<line x1="'+X(w*st.T)+'" x2="'+X(w*st.T)+'" y1="'+Tp+'" y2="'+(Tp+ph)+'" stroke="'+line+'" stroke-dasharray="2 4"/>';
+  s+='<line x1="'+X(ts)+'" x2="'+X(ts)+'" y1="'+Tp+'" y2="'+(Tp+ph)+'" stroke="'+ink+'" stroke-width="1.5"/>';
+  [0,1,2,3].forEach(function(w){s+='<text x="'+X(w*st.T)+'" y="'+(Tp+ph+15)+'" font-size="12" text-anchor="'+(w===3?'end':'middle')+'" fill="'+mute+'">'+(w*st.T)+' ms</text>'});
+  s+='<text x="12" y="'+(Tp+ph/2)+'" font-size="12" fill="'+mute+'" transform="rotate(-90 12 '+(Tp+ph/2)+')" text-anchor="middle">單元電荷</text>';
+  s+='<text x="'+(L-6)+'" y="'+(Y(1)+4)+'" font-size="12" text-anchor="end" fill="'+mute+'">100%</text><text x="'+(L-6)+'" y="'+(Y(0)+4)+'" font-size="12" text-anchor="end" fill="'+mute+'">0</text>';
+  $('chart').innerHTML=s;
+}
+var last=null;
+function tick(now){ if(!st.paused){ if(last!==null)st.t+=now-last; last=now; render(); } else last=null; requestAnimationFrame(tick)}
+window.__setTime=function(ms){st.t=ms;st.paused=true;render()};
+window.__setState=function(o){for(var k in o)st[k]=o[k];st.stage=-1;sync();render()};
+sync(); if(q.get('stage')!==null){setStage(+q.get('stage'));if(q.get('t')!==null)st.t=+q.get('t')} else if(!q.get('T')&&!q.get('N')) {setStage(1);} 
+if(q.get('t')!==null)st.t=+q.get('t');
+render(); requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

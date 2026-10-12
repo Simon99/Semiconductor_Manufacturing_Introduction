@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>多層金屬導線</title>
+<style>
+:root{color-scheme:light dark;--plate:#f6f8fb;--ild:#dbe6f3;--pass:#c4d2e4;--si:#aab4c3;--sti:#c4cbd6;--n:#7fb0dc;--gate:#6b7482;--chan:#b4bdca;--cu:#c0702a;--cuv:#b3652a;--w:#7d8590;--gold:#f2b01e;--bar:#5b3a1f;--t0:#14202e;--t1:#8a5a00;--t2:#2a3747;--t3:#44556a;--glow:#f2b01e;--brk:#5b6b82;--page:#eef2f7;--card:#fff;--ink:#14202e;--mut:#4a5a70;--line:#c9d3e0;--acc:#b36b00;--btn:#e4ebf4}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--plate:#0f1722;--ild:#1d2c42;--pass:#2c3d57;--si:#3d4655;--sti:#2a3342;--n:#2f6fa8;--gate:#9aa3ae;--chan:#4b5566;--cu:#b8692a;--cuv:#a85d24;--w:#9aa3ae;--gold:#ffc83d;--bar:#0b1018;--t0:#f1f4f8;--t1:#ffd36b;--t2:#cfd8e4;--t3:#aebacb;--glow:#ffc83d;--brk:#8696ad;--page:#0a0f17;--card:#141c28;--ink:#e6ebf2;--mut:#9fb0c6;--line:#2a3648;--acc:#ffc83d;--btn:#1f2a3a}}
+:root[data-theme=dark]{--plate:#0f1722;--ild:#1d2c42;--pass:#2c3d57;--si:#3d4655;--sti:#2a3342;--n:#2f6fa8;--gate:#9aa3ae;--chan:#4b5566;--cu:#b8692a;--cuv:#a85d24;--w:#9aa3ae;--gold:#ffc83d;--bar:#0b1018;--t0:#f1f4f8;--t1:#ffd36b;--t2:#cfd8e4;--t3:#aebacb;--glow:#ffc83d;--brk:#8696ad;--page:#0a0f17;--card:#141c28;--ink:#e6ebf2;--mut:#9fb0c6;--line:#2a3648;--acc:#ffc83d;--btn:#1f2a3a;color-scheme:dark}
+:root[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 28px}
+a.back{color:var(--acc);font-size:14px;text-decoration:none;font-weight:600}a.back:hover{text-decoration:underline}
+h1{font-size:22px;margin:6px 0 10px}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto}
+
+.plate{fill:var(--plate)}.ild{fill:var(--ild)}.pass{fill:var(--pass)}.si{fill:var(--si)}.sti{fill:var(--sti)}.nplus{fill:var(--n)}.gate{fill:var(--gate)}.chan{fill:var(--chan)}
+.cu{fill:var(--cu);stroke:var(--bar);stroke-width:1}.cuv{fill:var(--cuv)}.wtn,.pc{fill:var(--w)}
+.pw,.pv{fill:var(--gold);stroke:var(--bar);stroke-width:1.2}.pc{stroke:var(--gold);stroke-width:2}.route{fill:none;stroke:none}
+.glow{fill:var(--glow)}
+.brk{fill:none;stroke:var(--brk);stroke-width:1.5}
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.t0{font-size:20px;font-weight:700;fill:var(--t0)}.t1{font-size:14px;font-weight:700;fill:var(--t1)}.t2{font-size:13px;fill:var(--t2)}.t3{font-size:12px;fill:var(--t3)}
+
+.row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:12px 0}
+button{font:inherit;font-size:14px;color:var(--ink);background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--acc)}button.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc) inset}button:disabled{opacity:.4;cursor:default}
+label{font-size:14px;color:var(--mut)}input[type=range]{accent-color:var(--acc);vertical-align:middle}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h2{font-size:15px;margin:0 0 6px;color:var(--acc)}
+.card p{margin:0;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:14px}td{padding:3px 0;border-bottom:1px solid var(--line)}td:last-child{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.note{font-size:12.5px;color:var(--mut);margin-top:8px}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+</style></head><body><div class="wrap">
+<a class="back" href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/10-metallization/README.md">&larr; 回到章節</a>
+<h1>多層金屬導線：訊號一路向上，再向下走回來</h1>
+<div class="stage"><svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-label="可互動的多層晶片導線剖面圖，標出一條訊號路徑。">
+<defs><filter id="gl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect class="plate" width="960" height="520"/>
+<text class="t0" x="60" y="28">多層金屬導線（剖面）</text>
+<text class="t2" x="60" y="48">金色＝一條訊號路徑：電晶體 A → 接觸窗 → M1 … 向上到粗導線層 … 再向下 → 接觸窗 → 電晶體 B。</text>
+<text class="t2 lay" x="50" y="407.0" text-anchor="end">接觸窗</text>
+<text class="t2 lay" x="50" y="382.0" text-anchor="end">M1</text>
+<text class="t2 lay" x="50" y="366.0" text-anchor="end">V1</text>
+<text class="t2 lay" x="50" y="350.0" text-anchor="end">M2</text>
+<text class="t2 lay" x="50" y="334.0" text-anchor="end">V2</text>
+<text class="t2 lay" x="50" y="314.0" text-anchor="end">M3</text>
+<text class="t2 lay" x="50" y="292.0" text-anchor="end">V3</text>
+<text class="t2 lay" x="50" y="270.0" text-anchor="end">M4</text>
+<text class="t2 lay" x="50" y="248.0" text-anchor="end">V4</text>
+<text class="t2 lay" x="50" y="219.0" text-anchor="end">M5</text>
+<text class="t2 lay" x="50" y="184.0" text-anchor="end">V5</text>
+<text class="t2 lay" x="50" y="149.0" text-anchor="end">M6</text>
+<path class="brk" d="M712 126 V234 M708 126 H712 M708 234 H712"/>
+<text class="t1" x="722" y="166.0">上層 · M5–M6 · 粗而寬</text>
+<text class="t2" x="722" y="183.0">像高速公路，負責長距離傳送</text>
+<text class="t2" x="722" y="199.0">訊號和供應電源</text>
+<path class="brk" d="M712 236 V322 M708 236 H712 M708 322 H712"/>
+<text class="t1" x="722" y="265.0">中層 · M3–M4 · 較寬</text>
+<text class="t2" x="722" y="282.0">像市區道路，連接不同的</text>
+<text class="t2" x="722" y="298.0">電路區塊</text>
+<path class="brk" d="M712 324 V386 M708 324 H712 M708 386 H712"/>
+<text class="t1" x="722" y="341.0">下層 · M1–M2 · 細而密</text>
+<text class="t2" x="722" y="358.0">像巷弄，負責連接鄰近的</text>
+<text class="t2" x="722" y="374.0">電晶體</text>
+<rect class="pass" x="56.0" y="100.0" width="648.0" height="26.0" />
+<text class="t2" x="64" y="117">鈍化層（最終保護層）</text>
+<rect class="ild" x="56.0" y="126.0" width="648.0" height="294.0" />
+<rect class="si" x="56.0" y="420.0" width="648.0" height="50.0" />
+<rect class="sti" x="56.0" y="420.0" width="30.0" height="18.0" />
+<rect class="sti" x="206.0" y="420.0" width="360.0" height="18.0" />
+<rect class="sti" x="686.0" y="420.0" width="18.0" height="18.0" />
+<rect class="nplus" x="90.0" y="420.0" width="112.0" height="12.0" rx="2"/>
+<rect class="gate" x="134.0" y="410.0" width="24.0" height="10.0" />
+<rect class="chan" x="134.0" y="420.0" width="24.0" height="12.0" />
+<rect class="nplus" x="570.0" y="420.0" width="112.0" height="12.0" rx="2"/>
+<rect class="gate" x="614.0" y="410.0" width="24.0" height="10.0" />
+<rect class="chan" x="614.0" y="420.0" width="24.0" height="12.0" />
+<text class="t3" x="146" y="454" text-anchor="middle">電晶體 A（輸出）</text>
+<text class="t3" x="626" y="454" text-anchor="middle">電晶體 B（閘極＝輸入）</text>
+<rect class="cu" x="62.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="78.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="94.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="110.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="126.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="142.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="158.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="174.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="190.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="206.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="222.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="238.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="254.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="270.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="286.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="302.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="318.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="334.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="350.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="366.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="382.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="398.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="414.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="430.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="446.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="462.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="478.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="494.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="510.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="526.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="542.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="558.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="574.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="590.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="606.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="622.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="638.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="654.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="670.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="686.0" y="370.0" width="8.0" height="16.0" />
+<rect class="cu" x="62.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="78.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="94.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="110.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="126.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="142.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="158.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="174.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="190.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="206.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="222.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="238.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="254.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="270.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="286.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="302.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="318.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="334.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="350.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="366.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="382.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="398.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="414.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="430.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="446.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="462.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="478.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="494.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="510.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="526.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="542.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="558.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="574.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="590.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="606.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="622.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="638.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="654.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="670.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="686.0" y="338.0" width="8.0" height="16.0" />
+<rect class="cu" x="58.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="90.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="122.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="154.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="186.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="218.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="250.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="282.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="314.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="346.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="378.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="410.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="442.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="474.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="506.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="538.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="570.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="602.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="634.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="666.0" y="298.0" width="16.0" height="24.0" />
+<rect class="cu" x="58.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="90.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="122.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="154.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="186.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="218.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="250.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="282.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="314.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="346.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="378.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="410.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="442.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="474.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="506.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="538.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="570.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="602.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="634.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="666.0" y="254.0" width="16.0" height="24.0" />
+<rect class="cu" x="72.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="168.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="264.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="360.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="456.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="552.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="648.0" y="196.0" width="52.0" height="38.0" />
+<rect class="cu" x="72.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="168.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="264.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="360.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="456.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="552.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cu" x="648.0" y="126.0" width="52.0" height="38.0" />
+<rect class="cuv" x="94.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="142.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="190.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="238.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="286.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="334.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="382.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="430.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="478.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="526.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="574.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="670.0" y="354.0" width="8.0" height="16.0" />
+<rect class="cuv" x="126.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="222.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="318.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="414.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="510.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="606.0" y="322.0" width="8.0" height="16.0" />
+<rect class="cuv" x="60.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="156.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="252.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="348.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="444.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="540.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="636.0" y="278.0" width="12.0" height="20.0" />
+<rect class="cuv" x="91.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="187.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="283.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="379.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="475.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="571.0" y="234.0" width="14.0" height="20.0" />
+<rect class="cuv" x="667.0" y="234.0" width="14.0" height="20.0" />
+<rect class="wtn" x="174.0" y="386.0" width="8.0" height="34.0" />
+<rect class="wtn" x="590.0" y="386.0" width="8.0" height="34.0" />
+<rect class="wtn" x="654.0" y="386.0" width="8.0" height="34.0" />
+<rect class="glow" x="56.0" y="386.0" width="648.0" height="34.0" id="glow-C" opacity="0"/>
+<rect class="glow" x="56.0" y="370.0" width="648.0" height="16.0" id="glow-M1" opacity="0"/>
+<rect class="glow" x="56.0" y="354.0" width="648.0" height="16.0" id="glow-V1" opacity="0"/>
+<rect class="glow" x="56.0" y="338.0" width="648.0" height="16.0" id="glow-M2" opacity="0"/>
+<rect class="glow" x="56.0" y="322.0" width="648.0" height="16.0" id="glow-V2" opacity="0"/>
+<rect class="glow" x="56.0" y="298.0" width="648.0" height="24.0" id="glow-M3" opacity="0"/>
+<rect class="glow" x="56.0" y="278.0" width="648.0" height="20.0" id="glow-V3" opacity="0"/>
+<rect class="glow" x="56.0" y="254.0" width="648.0" height="24.0" id="glow-M4" opacity="0"/>
+<rect class="glow" x="56.0" y="234.0" width="648.0" height="20.0" id="glow-V4" opacity="0"/>
+<rect class="glow" x="56.0" y="196.0" width="648.0" height="38.0" id="glow-M5" opacity="0"/>
+<rect class="glow" x="56.0" y="164.0" width="648.0" height="32.0" id="glow-V5" opacity="0"/>
+<rect class="glow" x="56.0" y="126.0" width="648.0" height="38.0" id="glow-M6" opacity="0"/>
+<g class="pgrp" style="display:none" id="pg-2">
+<rect class="ild" x="105.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="617.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="105.0" y="322.0" width="530.0" height="48.0" />
+<rect class="pw" x="107.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="619.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="107.0" y="338.0" width="526.0" height="16.0" rx="2"/>
+<rect class="pv" x="110.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pc" x="110.0" y="386.0" width="8.0" height="34.0" />
+<rect class="pc" x="622.0" y="386.0" width="8.0" height="24.0" />
+<path class="route" id="route-2" d="M114.0 420.0 L114.0 378.0 L114.0 346.0 L626.0 346.0 L626.0 378.0 L626.0 410.0"/>
+</g>
+<g class="pgrp" style="display:none" id="pg-3">
+<rect class="ild" x="105.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="617.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="105.0" y="322.0" width="46.0" height="48.0" />
+<rect class="ild" x="573.0" y="322.0" width="62.0" height="48.0" />
+<rect class="ild" x="121.0" y="278.0" width="480.0" height="60.0" />
+<rect class="pw" x="107.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="619.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="107.0" y="338.0" width="42.0" height="16.0" rx="2"/>
+<rect class="pw" x="583.0" y="338.0" width="50.0" height="16.0" rx="2"/>
+<rect class="pw" x="133.0" y="298.0" width="466.0" height="24.0" rx="2"/>
+<rect class="pv" x="110.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="138.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="586.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pc" x="110.0" y="386.0" width="8.0" height="34.0" />
+<rect class="pc" x="622.0" y="386.0" width="8.0" height="24.0" />
+<path class="route" id="route-3" d="M114.0 420.0 L114.0 378.0 L114.0 346.0 L142.0 346.0 L142.0 310.0 L590.0 310.0 L590.0 346.0 L626.0 346.0 L626.0 378.0 L626.0 410.0"/>
+</g>
+<g class="pgrp" style="display:none" id="pg-4">
+<rect class="ild" x="105.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="617.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="105.0" y="322.0" width="46.0" height="48.0" />
+<rect class="ild" x="573.0" y="322.0" width="62.0" height="48.0" />
+<rect class="ild" x="121.0" y="278.0" width="82.0" height="60.0" />
+<rect class="ild" x="555.0" y="278.0" width="46.0" height="60.0" />
+<rect class="ild" x="178.0" y="234.0" width="409.0" height="64.0" />
+<rect class="pw" x="107.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="619.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="107.0" y="338.0" width="42.0" height="16.0" rx="2"/>
+<rect class="pw" x="583.0" y="338.0" width="50.0" height="16.0" rx="2"/>
+<rect class="pw" x="133.0" y="298.0" width="66.0" height="24.0" rx="2"/>
+<rect class="pw" x="557.0" y="298.0" width="42.0" height="24.0" rx="2"/>
+<rect class="pw" x="180.0" y="254.0" width="396.0" height="24.0" rx="2"/>
+<rect class="pv" x="110.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="138.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="586.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="184.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pv" x="560.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pc" x="110.0" y="386.0" width="8.0" height="34.0" />
+<rect class="pc" x="622.0" y="386.0" width="8.0" height="24.0" />
+<path class="route" id="route-4" d="M114.0 420.0 L114.0 378.0 L114.0 346.0 L142.0 346.0 L142.0 310.0 L190.0 310.0 L190.0 266.0 L566.0 266.0 L566.0 310.0 L590.0 310.0 L590.0 346.0 L626.0 346.0 L626.0 378.0 L626.0 410.0"/>
+</g>
+<g class="pgrp" style="display:none" id="pg-5">
+<rect class="ild" x="105.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="617.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="105.0" y="322.0" width="46.0" height="48.0" />
+<rect class="ild" x="573.0" y="322.0" width="62.0" height="48.0" />
+<rect class="ild" x="121.0" y="278.0" width="82.0" height="60.0" />
+<rect class="ild" x="555.0" y="278.0" width="46.0" height="60.0" />
+<rect class="ild" x="178.0" y="234.0" width="89.0" height="64.0" />
+<rect class="ild" x="528.0" y="234.0" width="59.0" height="64.0" />
+<rect class="ild" x="230.0" y="164.0" width="375.0" height="90.0" />
+<rect class="pw" x="107.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="619.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="107.0" y="338.0" width="42.0" height="16.0" rx="2"/>
+<rect class="pw" x="583.0" y="338.0" width="50.0" height="16.0" rx="2"/>
+<rect class="pw" x="133.0" y="298.0" width="66.0" height="24.0" rx="2"/>
+<rect class="pw" x="557.0" y="298.0" width="42.0" height="24.0" rx="2"/>
+<rect class="pw" x="180.0" y="254.0" width="80.0" height="24.0" rx="2"/>
+<rect class="pw" x="530.0" y="254.0" width="46.0" height="24.0" rx="2"/>
+<rect class="pw" x="232.0" y="196.0" width="326.0" height="38.0" rx="2"/>
+<rect class="pv" x="110.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="138.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="586.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="184.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pv" x="560.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pv" x="243.0" y="234.0" width="14.0" height="20.0" />
+<rect class="pv" x="533.0" y="234.0" width="14.0" height="20.0" />
+<rect class="pc" x="110.0" y="386.0" width="8.0" height="34.0" />
+<rect class="pc" x="622.0" y="386.0" width="8.0" height="24.0" />
+<path class="route" id="route-5" d="M114.0 420.0 L114.0 378.0 L114.0 346.0 L142.0 346.0 L142.0 310.0 L190.0 310.0 L190.0 266.0 L250.0 266.0 L250.0 215.0 L540.0 215.0 L540.0 266.0 L566.0 266.0 L566.0 310.0 L590.0 310.0 L590.0 346.0 L626.0 346.0 L626.0 378.0 L626.0 410.0"/>
+</g>
+<g class="pgrp" style="display:block" id="pg-6">
+<rect class="ild" x="105.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="617.0" y="354.0" width="18.0" height="32.0" />
+<rect class="ild" x="105.0" y="322.0" width="46.0" height="48.0" />
+<rect class="ild" x="573.0" y="322.0" width="62.0" height="48.0" />
+<rect class="ild" x="121.0" y="278.0" width="82.0" height="60.0" />
+<rect class="ild" x="555.0" y="278.0" width="46.0" height="60.0" />
+<rect class="ild" x="178.0" y="234.0" width="89.0" height="64.0" />
+<rect class="ild" x="528.0" y="234.0" width="59.0" height="64.0" />
+<rect class="ild" x="230.0" y="164.0" width="110.0" height="90.0" />
+<rect class="ild" x="455.0" y="164.0" width="150.0" height="90.0" />
+<rect class="ild" x="263.0" y="126.0" width="255.0" height="70.0" />
+<rect class="pw" x="107.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="619.0" y="370.0" width="14.0" height="16.0" rx="2"/>
+<rect class="pw" x="107.0" y="338.0" width="42.0" height="16.0" rx="2"/>
+<rect class="pw" x="583.0" y="338.0" width="50.0" height="16.0" rx="2"/>
+<rect class="pw" x="133.0" y="298.0" width="66.0" height="24.0" rx="2"/>
+<rect class="pw" x="557.0" y="298.0" width="42.0" height="24.0" rx="2"/>
+<rect class="pw" x="180.0" y="254.0" width="80.0" height="24.0" rx="2"/>
+<rect class="pw" x="530.0" y="254.0" width="46.0" height="24.0" rx="2"/>
+<rect class="pw" x="232.0" y="196.0" width="106.0" height="38.0" rx="2"/>
+<rect class="pw" x="480.0" y="196.0" width="78.0" height="38.0" rx="2"/>
+<rect class="pw" x="302.0" y="126.0" width="214.0" height="38.0" rx="2"/>
+<rect class="pv" x="110.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="622.0" y="354.0" width="8.0" height="16.0" />
+<rect class="pv" x="138.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="586.0" y="322.0" width="8.0" height="16.0" />
+<rect class="pv" x="184.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pv" x="560.0" y="278.0" width="12.0" height="20.0" />
+<rect class="pv" x="243.0" y="234.0" width="14.0" height="20.0" />
+<rect class="pv" x="533.0" y="234.0" width="14.0" height="20.0" />
+<rect class="pv" x="305.0" y="164.0" width="30.0" height="32.0" />
+<rect class="pv" x="483.0" y="164.0" width="30.0" height="32.0" />
+<rect class="pc" x="110.0" y="386.0" width="8.0" height="34.0" />
+<rect class="pc" x="622.0" y="386.0" width="8.0" height="24.0" />
+<path class="route" id="route-6" d="M114.0 420.0 L114.0 378.0 L114.0 346.0 L142.0 346.0 L142.0 310.0 L190.0 310.0 L190.0 266.0 L250.0 266.0 L250.0 215.0 L320.0 215.0 L320.0 145.0 L498.0 145.0 L498.0 215.0 L540.0 215.0 L540.0 266.0 L566.0 266.0 L566.0 310.0 L590.0 310.0 L590.0 346.0 L626.0 346.0 L626.0 378.0 L626.0 410.0"/>
+</g>
+<rect class="pw" x="60.0" y="492.0" width="14.0" height="14.0" rx="2"/><text class="t2" x="80" y="504">訊號路徑</text>
+<rect class="cu" x="190.0" y="492.0" width="14.0" height="14.0" rx="2"/><text class="t2" x="210" y="504">銅導線（內襯阻障層）</text>
+<rect class="wtn" x="418.0" y="492.0" width="14.0" height="14.0" rx="2"/><text class="t2" x="438" y="504">鎢接觸窗</text>
+<rect class="ild" x="590.0" y="492.0" width="14.0" height="14.0" rx="2"/><text class="t2" x="610" y="504">介電層（低介電常數）</text>
+<text class="t3" x="940" y="504" text-anchor="end">示意，未依比例</text>
+<text class="t1" id="nowtxt" x="60" y="86">訊號目前位於：</text>
+<path id="trail" d="" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9" filter="url(#gl)"/>
+<circle id="dot" r="7" fill="#fff" stroke="#ffc83d" stroke-width="3" filter="url(#gl)" cx="114" cy="420"/>
+</svg></div>
+<div class="row">
+<button id="play" type="button">暫停</button><button id="rst" type="button">重新開始</button>
+<label>訊號位置：<input id="pos" type="range" min="0" max="1000" value="0" style="width:200px"></label>
+<label>使用的最高金屬層：<b id="Tout">M6</b> <input id="T" type="range" min="2" max="6" step="1" value="6" style="width:140px"></label>
+</div>
+<div class="grid">
+<div class="card"><h2 id="sttitle">步驟</h2>
+<div class="steps" id="steps"></div><p id="sttext"></p></div>
+<div class="card"><h2>這條路徑的代價（示意模型）</h2>
+<table>
+<tr><td>訊號目前位於</td><td id="r-now">-</td></tr>
+<tr><td>路徑上的導通孔數</td><td id="r-via">-</td></tr>
+<tr><td>導線電阻 R &prop; &Sigma; L / (W&middot;T)</td><td id="r-R">-</td></tr>
+<tr><td>相較於全程走在 M2</td><td id="r-rel">-</td></tr>
+</table>
+<p class="note">把「使用的最高金屬層」往下拉，長距離的一段就得改走較細的導線：電阻會大幅上升，但需要的導通孔變少。導線的寬度、厚度與長度皆為示意，且未計入導通孔的電阻。導通孔不通是真實存在的失效模式（見章節中的「常見問題」）。</p></div>
+</div></div>
+<script>
+const DATA={"bands": {"C": [386, 420, "接觸窗（鎢）\u00b7 電晶體 \u2194 M1"], "M1": [370, 386, "M1 \u00b7 下層（細而密）"], "V1": [354, 370, "Via V1 \u00b7 M1 \u2194 M2"], "M2": [338, 354, "M2 \u00b7 下層（細而密）"], "V2": [322, 338, "Via V2 \u00b7 M2 \u2194 M3"], "M3": [298, 322, "M3 \u00b7 中層"], "V3": [278, 298, "Via V3 \u00b7 M3 \u2194 M4"], "M4": [254, 278, "M4 \u00b7 中層"], "V4": [234, 254, "Via V4 \u00b7 M4 \u2194 M5"], "M5": [196, 234, "M5 \u00b7 上層（粗而寬）"], "V5": [164, 196, "Via V5 \u00b7 M5 \u2194 M6"], "M6": [126, 164, "M6 \u00b7 上層（粗而寬）"]}, "order": ["C", "M1", "V1", "M2", "V2", "M3", "V3", "M4", "V4", "M5", "V5", "M6"], "wt": {"1": [8, 16], "2": [8, 16], "3": [16, 24], "4": [16, 24], "5": [52, 38], "6": [52, 38]}, "var": {"2": {"L": 650.0, "segs": [[2, 512]], "vias": 2, "entry": {"1": 42.0, "2": 74.0}, "top": 330.0}, "3": {"L": 722.0, "segs": [[2, 28], [2, 36], [3, 448]], "vias": 4, "entry": {"1": 42.0, "2": 74.0, "3": 138.0}, "top": 362.0}, "4": {"L": 810.0, "segs": [[2, 28], [2, 36], [3, 48], [3, 24], [4, 376]], "vias": 6, "entry": {"1": 42.0, "2": 74.0, "3": 138.0, "4": 230.0}, "top": 418.0}, "5": {"L": 912.0, "segs": [[2, 28], [2, 36], [3, 48], [3, 24], [4, 60], [4, 26], [5, 290]], "vias": 8, "entry": {"1": 42.0, "2": 74.0, "3": 138.0, "4": 230.0, "5": 341.0}, "top": 486.0}, "6": {"L": 1052.0, "segs": [[2, 28], [2, 36], [3, 48], [3, 24], [4, 60], [4, 26], [5, 70], [5, 42], [6, 178]], "vias": 10, "entry": {"1": 42.0, "2": 74.0, "3": 138.0, "4": 230.0, "5": 341.0, "6": 481.0}, "top": 570.0}}};
+(function(){
+const $=id=>document.getElementById(id), CYCLE=12000, TRAVEL=9600;
+const q=new URLSearchParams(location.search);
+const th=q.get('theme'); if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+let T=6,p=0,playing=true,tms=0;
+const dot=$('dot'),trail=$('trail'),pos=$('pos');
+function route(){return $('route-'+T)}
+function tier(k){return k<=2?'下層':k<=4?'中層':'上層'}
+function bandAt(y){for(const n of DATA.order){const b=DATA.bands[n];if(y>=b[0]&&y<=b[1])return n}return null}
+function calc(){
+  const v=DATA.var[T];let R=0,Rm2=0;
+  for(const [k,len] of v.segs){const w=DATA.wt[k];R+=len/(w[0]*w[1])}
+  const L2=DATA.var[2].segs[0][1];Rm2=L2/(DATA.wt[2][0]*DATA.wt[2][1]);
+  $('r-via').textContent=v.vias+' 個（另加 2 個接觸窗）';
+  $('r-R').textContent=(R*1000).toFixed(1)+' 單位';
+  $('r-rel').textContent=(R/Rm2).toFixed(2)+'×';
+}
+function render(){
+  for(const t of [2,3,4,5,6])$('pg-'+t).style.display=(t===T)?'block':'none';
+  const r=route(),L=DATA.var[T].L,pt=r.getPointAtLength(p*L);
+  dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
+  trail.setAttribute('d',r.getAttribute('d'));trail.setAttribute('stroke-dasharray',(p*L)+' '+(L*3));
+  trail.style.display=p>0.002?'block':'none';
+  const b=bandAt(pt.y);
+  for(const n of DATA.order)$('glow-'+n).setAttribute('opacity',n===b?0.3:0);
+  const name=b?DATA.bands[b][2]:'';
+  $('nowtxt').textContent='訊號目前位於：'+name;$('r-now').textContent=b?(b==='C'?'接觸窗':b):'-';
+  pos.value=Math.round(p*1000);
+  $('Tout').textContent='M'+T;
+}
+function steps(){
+  const v=DATA.var[T],e=v.entry;
+  const S=[
+   ['1. 接觸窗',0.0,'訊號從電晶體 A 出發，經過鎢接觸窗：在絕緣層上挖出小孔並填入金屬，一路通到第一層金屬（M1）。'],
+   ['2. 下層',(e[2]+ (T>2?20:0))/v.L,'M1–M2 又窄又密，像巷弄。細導線的截面積小，所以只用在鄰近電晶體之間的短距離連接。'],
+   ['3. 中層',T>=3?(e[3]+10)/v.L:null,'M3–M4 比較寬，像市區道路，連接不同的電路區塊。導通孔（層與層之間填滿金屬的孔）把訊號從一層送到下一層。'],
+   ['4. 最長的一段',v.top/v.L,'長距離的一段走在 M'+T+'（'+tier(T)+'）。'+(T>=5?'粗而寬的導線截面積大，單位長度的電阻很低，所以長距離訊號和電源都走最上面幾層。':'試著把最高金屬層往上調：更寬、更厚的導線能降低長距離走線的電阻。')],
+   ['5. 向下走回來',1.0,'訊號沿著導通孔一路往下，再經過另一個接觸窗，進入電晶體 B 的閘極。']
+  ];
+  const box=$('steps');box.innerHTML='';
+  S.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=s[0];b.disabled=s[1]===null;
+    b.onclick=()=>{playing=false;$('play').textContent='播放';p=Math.min(1,Math.max(0,s[1]));$('sttitle').textContent=s[0];$('sttext').textContent=s[2];render()};box.appendChild(b)});
+  window.__steps=S;
+}
+function setT(t){T=t;steps();calc();render()}
+$('T').oninput=e=>{setT(+e.target.value)};
+pos.oninput=e=>{playing=false;$('play').textContent='播放';p=e.target.value/1000;render()};
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'暫停':'播放'};
+$('rst').onclick=()=>{p=0;tms=0;playing=true;$('play').textContent='暫停';render()};
+let last=null;
+function tick(ts){
+  if(last!==null&&playing){tms=(tms+ts-last)%CYCLE;p=Math.min(1,tms/TRAVEL);render()}
+  last=ts;requestAnimationFrame(tick);
+}
+window.__setTime=function(ms){playing=false;$('play').textContent='播放';tms=((ms%CYCLE)+CYCLE)%CYCLE;p=Math.min(1,tms/TRAVEL);render()};
+window.__setT=setT;
+const tq=q.get('T');if(tq)T=Math.max(2,Math.min(6,+tq));$('T').value=T;
+steps();calc();$('sttitle').textContent='跟著訊號走';$('sttext').textContent='按下「播放」、拖曳位置滑桿，或選一個步驟。金色的導線和導通孔，就是兩個電晶體之間的一條訊號路徑。';
+render();
+if(q.get('still')==='1'){playing=false;$('play').textContent='播放';p=0.5;render()}
+if(q.get('t')!==null)window.__setTime(+q.get('t'));
+if(q.get('step')){const i=+q.get('step')-1;document.querySelectorAll('#steps button')[i].click()}
+requestAnimationFrame(tick);
+})();
+</script></body></html>

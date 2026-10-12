@@ -54,7 +54,9 @@
 | 封裝 | 把晶圓切開，把好的晶片包裝起來 | [第 20、21 章](../../5-backend/20-packaging/README.md) |
 | 最終測試 | 封裝後再測一次，並確保晶片能用很多年 | [第 22 章](../../5-backend/22-final-test-and-reliability/README.md) |
 
-<!-- 圖：晶片的一生全景圖（設計、光罩、晶圓廠、測試、封裝、出貨，依序排列） -->
+![八個站點：設計、光罩製作、投片、前段製程、晶圓測試、封裝、最終測試，到出貨。](../../../images/zh-TW/00-chip-life.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch00/chip-life.html)自己動手調整看看。*
 
 ---
 
@@ -81,7 +83,9 @@
 
 一片 300 mm 晶圓可以做出幾十顆到上萬顆晶粒，數量取決於晶粒的大小。
 
-<!-- 圖：晶圓、晶粒、晶片的關係（整片晶圓 → 放大一顆晶粒 → 封裝後的晶片） -->
+![一片晶圓上有許多相同的晶粒。放大其中一顆晶粒，沿著切割道把晶圓切開，再把晶粒封裝成晶片。](../../../images/zh-TW/00-wafer-die-chip.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch00/wafer-die-chip.html)自己動手調整看看。*
 
 ---
 

@@ -31,6 +31,10 @@
 > - **相關名詞**：CP、分類機、分級、SLT
 > - **常見混淆**：CP 是在晶圓上測晶粒，FT 是測封裝好的晶片。兩者的測試項目和目的不完全相同。
 
+![分類機機械臂從托盤取出已封裝的晶片，放入測試座，由測試機量測後，再依結果把晶片分入不合格、低速等級或高速等級的收納槽。](../../../images/zh-TW/22-final-test-binning.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch22/final-test-binning.html)自己動手調整看看。*
+
 ---
 
 ## 預燒：提早篩掉體質不好的晶片
@@ -43,7 +47,9 @@
 
 **預燒**（Burn-in）就是在出貨前，讓晶片在高溫和較高電壓下運作一段時間，讓體質不好的晶片提早在工廠裡壞掉、被篩掉，而不是在客戶手上壞掉。
 
-<!-- 圖：浴缸曲線（早期失效期、穩定期、老化期） -->
+![失效率浴缸曲線分三個階段逐步畫出；旁邊的晶片經輸送帶通過預燒爐，其中一顆體質弱的晶片冒煙而被剔除，使曲線的早期失效部分變得平坦。](../../../images/zh-TW/22-bathtub-curve.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch22/bathtub-curve.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜浴缸曲線（Bathtub Curve）**
@@ -82,6 +88,10 @@
 | 介電層崩潰（TDDB） | 絕緣層長期承受電場，最後被擊穿 |
 | 熱載子效應（HCI） | 高能量的電子撞進閘極絕緣層，電晶體特性慢慢改變 |
 | 偏壓溫度不穩定（BTI） | 高溫加上電壓，讓 Vt 隨時間漂移 |
+
+![示意動畫：電流中的電子推動金屬原子，上游形成空洞、下游堆積成小丘，最後導線開路；右側輪流說明 TDDB、HCI 與 BTI 三種老化機制，下方列出加速測試、HTOL 與 FIT。](../../../images/zh-TW/22-accelerated-aging.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch22/accelerated-aging.html)自己動手調整看看。*
 
 這些機制和前面的章節息息相關，例如導線的品質見[第 10 章](../../2-process-modules/10-metallization/README.md)，閘極絕緣層見[第 12 章](../../3-integration/12-advanced-transistors/README.md)。
 

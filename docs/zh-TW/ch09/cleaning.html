@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>批次式清洗槽與單片式清洗對照</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--ink:#14233a;--dim:#4f6482;--line:#c9d6e8;--accent:#1d6fd6;--scene:#1b2f4d;--scene-ink:#e8f0fa;--good:#1f9d6b;--bad:#e04848;--track:#dfe7f2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1626;--panel:#14233a;--ink:#e8f0fa;--dim:#a9bcd6;--line:#2c4468;--accent:#5aa8ff;--scene:#1b2f4d;--track:#0f1b2d;--good:#3ecf8e;--bad:#ff6a6a}}
+:root[data-theme="dark"]{--bg:#0d1626;--panel:#14233a;--ink:#e8f0fa;--dim:#a9bcd6;--line:#2c4468;--accent:#5aa8ff;--scene:#1b2f4d;--track:#0f1b2d;--good:#3ecf8e;--bad:#ff6a6a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:12px 16px 32px}
+a{color:var(--accent)}
+h1{font-size:22px;margin:8px 0 4px}
+p.lead{margin:0 0 12px;color:var(--dim)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+#scene{width:100%;height:auto;display:block;border-radius:10px;background:var(--scene)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+button{font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sl{display:grid;grid-template-columns:minmax(150px,230px) 1fr 70px;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl input{width:100%}
+.sl output{font-variant-numeric:tabular-nums;text-align:right}
+@media(max-width:560px){.sl{grid-template-columns:1fr 60px}.sl label{grid-column:1/3}}
+#stagetxt{min-height:3.2em;font-size:15px}
+.bars{display:grid;grid-template-columns:130px 1fr 80px;gap:6px 8px;align-items:center;font-size:14px}
+.bars .t{height:14px;border-radius:7px;background:var(--track);overflow:hidden}
+.bars .t i{display:block;height:100%;border-radius:7px}
+.bars .on{font-weight:700}
+.note{color:var(--dim);font-size:13px}
+@media(max-width:560px){.bars{grid-template-columns:100px 1fr 64px}}
+</style>
+</head>
+<body>
+<main>
+<p><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/09-cleaning/README.md">&larr; 回到章節</a></p>
+<h1>批次式濕式清洗槽與單片式旋轉清洗</h1>
+<p class="lead">切換模式後再調整滑桿，你會在產能與交叉污染之間取捨。所有數字皆為示意。</p>
+<div class="card">
+<svg id="scene" viewBox="0 0 960 400" role="img" aria-label="清洗機台動畫：批次式濕式清洗槽或單片式旋轉清洗機"></svg>
+<div class="row" role="group" aria-label="模式">
+<button id="mBatch" aria-pressed="true">批次式濕式清洗槽</button>
+<button id="mSingle" aria-pressed="false">單片式旋轉清洗</button>
+<span style="flex:1"></span>
+<button id="bPause" aria-pressed="false">暫停</button>
+<button id="bDirty" aria-pressed="false">加入一片髒晶圓</button>
+</div>
+<div class="row" role="group" aria-label="階段"><span class="note">階段：</span>
+<button data-s="0">1 SC1</button><button data-s="1">2 沖洗</button><button data-s="2">3 SC2</button><button data-s="3">4 沖洗／乾燥</button></div>
+<div id="stagetxt" aria-live="polite"></div>
+</div>
+<div class="card">
+<div class="sl"><label for="sB">每批晶圓數（批次式清洗槽）</label><input id="sB" type="range" min="1" max="50" value="25"><output id="oB"></output></div>
+<div class="sl"><label for="sC">腔室數（單片式機台）</label><input id="sC" type="range" min="1" max="8" value="4"><output id="oC"></output></div>
+<div class="sl"><label for="sN">換藥液後已處理的晶圓數（批次式藥槽）</label><input id="sN" type="range" min="0" max="200" value="60"><output id="oN"></output></div>
+<div class="bars" id="bars"></div>
+<p id="verdict" style="margin:10px 0 4px"></p>
+<p class="note">示意模型，並非實測數據：批次式每批循環 15 分鐘（產能 = 每批片數 x 4 片／小時）；單片式每腔室每片 4 分鐘（每腔室 15 片／小時）。批次式的污染指數會隨共用藥槽老化而上升：8 + 87 x (1 - e^(-N/80))；單片式因為每片晶圓都用新鮮化學品，維持在低檔（5）。批次中的一片髒晶圓會與整批晶圓共用同一個藥槽；在單片式腔室中，它的微粒會被甩向排水口。</p>
+</div>
+</main>
+<script>
+(function(){
+var NS="http://www.w3.org/2000/svg",CYC=12000;
+var svg=document.getElementById('scene');
+var q=new URLSearchParams(location.search);
+if(q.get('theme')==='light'||q.get('theme')==='dark')document.documentElement.setAttribute('data-theme',q.get('theme'));
+var st={mode:q.get('mode')==='single'?'single':'batch',paused:false,t:0,dirty:q.get('dirty')==='1',B:25,C:4,N:60};
+if(q.get('t')!==null)st.t=+q.get('t')||0;
+if(q.get('still')==='1')st.paused=true;
+function el(p,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function txt(p,x,y,s,a){a=a||{};a.x=x;a.y=y;a['font-size']=a['font-size']||17;a.fill='#e8f0fa';a['font-family']='Noto Sans TC,PingFang TC,Microsoft JhengHei,Noto Sans CJK TC,system-ui,sans-serif';var e=el(p,'text',a);e.textContent=s;return e}
+var COL=['#4aa3ff','#7fe3ff','#7be08a','#9aa6b8'];
+var NAMES=['SC1','超純水沖洗','SC2','超純水沖洗'];
+var STXT=[
+'<b>1. SC1</b>：氨水＋雙氧水＋水，去除微粒和有機物。',
+'<b>2. 沖洗</b>：超純水（幾乎不含離子、微粒和細菌）把 SC1 的化學品沖掉。',
+'<b>3. SC2</b>：鹽酸＋雙氧水＋水，去除金屬污染。',
+'<b>4. 沖洗並乾燥</b>：最後用超純水沖洗一次，再乾燥。乾燥不完全會留下水痕。'];
+var gB=el(svg,'g',{}),gS=el(svg,'g',{});
+// ---- batch scene
+var TX=[135,365,595,825],TW=190,TY=215,TH=150;
+el(gB,'line',{x1:40,y1:60,x2:920,y2:60,stroke:'#6f86a8','stroke-width':5});
+var bathP=[];
+for(var i=0;i<4;i++){
+ var x=TX[i]-TW/2;
+ el(gB,'rect',{x:x,y:TY+30,width:TW,height:TH-30,fill:COL[i],opacity:.55});
+ el(gB,'path',{d:'M'+x+' '+TY+'V'+(TY+TH)+'H'+(x+TW)+'V'+TY,fill:'none',stroke:'#c9d6e8','stroke-width':5,'stroke-linejoin':'round'});
+ txt(gB,TX[i],TY+TH+26,NAMES[i],{'text-anchor':'middle'});
+ for(var k=0;k<14;k++){bathP.push({c:el(gB,'circle',{r:3.5,fill:'#ff5a5a',opacity:0}),tank:i,k:k})}
+}
+var carrier=el(gB,'g',{}),carrierBase=null;
+var slices=[],overl=[],rod,frame,carLbl,dirtDots=[];
+function buildCarrier(){
+ while(carrier.firstChild)carrier.removeChild(carrier.firstChild);
+ slices=[];overl=[];dirtDots=[];
+ var n=Math.min(st.B,12),w=n*12+14,mid=Math.floor(n/2);
+ rod=el(carrier,'line',{x1:0,y1:60,x2:0,y2:98,stroke:'#c9d6e8','stroke-width':5});
+ frame=el(carrier,'rect',{x:-w/2,y:98,width:w,height:84,rx:7,fill:'none',stroke:'#c9d6e8','stroke-width':4});
+ for(var i=0;i<n;i++){
+  var x=-w/2+9+i*12;
+  var s=el(carrier,'rect',{x:x,y:106,width:6,height:68,rx:2,fill:'#dfe8f4'});
+  var o=el(carrier,'rect',{x:x,y:106,width:6,height:68,rx:2,fill:'#ff5a5a',opacity:0});
+  slices.push(s);overl.push(o);
+ }
+ slices.mid=mid;
+ for(var k=0;k<5;k++)dirtDots.push(el(carrier,'circle',{cx:-w/2+9+mid*12+3,cy:140,r:3.5,fill:'#ff5a5a',opacity:0}));
+ carLbl=txt(carrier,10,86,st.B+' 片晶圓',{'text-anchor':'start','font-size':16});
+ carLbl.setAttribute('transform','translate(0,0)');
+ // label sits above frame; hide behind rail? keep
+}
+txt(gB,40,40,'共用藥槽：同一批晶圓、同一種化學品',{'font-size':17});
+// ---- single scene
+var CX=480,CY=210;
+el(gS,'circle',{cx:CX,cy:CY,r:148,fill:'#0f1b2d',stroke:'#c9d6e8','stroke-width':6});
+el(gS,'circle',{cx:CX,cy:CY,r:125,fill:'none',stroke:'#6f86a8','stroke-width':2,'stroke-dasharray':'4 7'});
+el(gS,'circle',{cx:CX,cy:CY,r:105,fill:'#cfd9e8'});
+var film=el(gS,'circle',{cx:CX,cy:CY,r:105,fill:COL[0],opacity:.6});
+var spinG=el(gS,'g',{});
+[0,120,240].forEach(function(a){var r=a*Math.PI/180;el(spinG,'line',{x1:CX+36*Math.cos(r),y1:CY+36*Math.sin(r),x2:CX+96*Math.cos(r),y2:CY+96*Math.sin(r),stroke:'#14233a','stroke-width':2,opacity:.5})});
+el(spinG,'circle',{cx:CX+99,cy:CY,r:6,fill:'#14233a'});
+var sDirt=[[50,-38],[-62,24],[14,68],[-38,-68],[68,30]].map(function(d){return el(spinG,'circle',{cx:CX+d[0],cy:CY+d[1],r:5,fill:'#ff5a5a',opacity:0})});
+el(gS,'circle',{cx:CX,cy:CY,r:17,fill:'#6f86a8'});
+var rips=[0,1,2].map(function(){return el(gS,'circle',{cx:CX,cy:CY,r:10,fill:'none','stroke-width':3,opacity:0})});
+var flings=[20,90,160,230,300].map(function(a){return {a:a*Math.PI/180,c:el(gS,'circle',{r:4,fill:'#ff5a5a',opacity:0})}});
+el(gS,'path',{d:'M640 100 L'+(CX+18)+' '+(CY-20),stroke:'#e8f0fa','stroke-width':11,'stroke-linecap':'round'});
+el(gS,'circle',{cx:CX+12,cy:CY-26,r:9,fill:'#e8f0fa'});
+txt(gS,650,96,'噴嘴');
+[0,1,2].forEach(function(i){el(gS,'circle',{cx:150,cy:140+i*62,r:24,fill:'#dfe8f4'})});
+txt(gS,150,338,'待洗晶圓',{'text-anchor':'middle','font-size':16});
+txt(gS,150,104,'每片晶圓都用新鮮化學品',{'text-anchor':'middle','font-size':15});
+txt(gS,830,330,'微粒被甩向排水口，',{'text-anchor':'middle','font-size':16});
+txt(gS,830,350,'不會傳給下一片晶圓',{'text-anchor':'middle','font-size':16});
+txt(gS,700,36,'並行運作的腔室',{'font-size':15});
+var minis=[];
+for(var i=0;i<8;i++){var g=el(gS,'g',{});el(g,'circle',{cx:714+i*30,cy:66,r:12,fill:'#cfd9e8'});var m=el(g,'line',{x1:714+i*30,y1:66,x2:714+i*30+10,y2:66,stroke:'#14233a','stroke-width':2.5});minis.push({g:g,m:m,cx:714+i*30})}
+// ---- readouts
+var barsEl=document.getElementById('bars');
+function mkBar(label,col){var a=document.createElement('div');a.textContent=label;var t=document.createElement('div');t.className='t';var i=document.createElement('i');i.style.background=col;t.appendChild(i);var v=document.createElement('div');v.style.textAlign='right';barsEl.appendChild(a);barsEl.appendChild(t);barsEl.appendChild(v);return {a:a,i:i,v:v}}
+var bars={tb:mkBar('批次：片／小時','var(--good)'),ts:mkBar('單片：片／小時','var(--good)'),cb:mkBar('批次：污染','var(--bad)'),cs:mkBar('單片：污染','var(--bad)'),eb:mkBar('批次：受波及','var(--bad)'),es:mkBar('單片：受波及','var(--bad)')};
+function model(){
+ var wb=4*st.B,ws=15*st.C,cb=8+87*(1-Math.exp(-st.N/80)),cs=5;
+ return {wb:wb,ws:ws,cb:cb,cs:cs};
+}
+function setBar(b,frac,label){b.i.style.width=Math.max(0,Math.min(1,frac))*100+'%';b.v.textContent=label}
+function readout(){
+ var m=model();
+ setBar(bars.tb,m.wb/200,m.wb.toFixed(0));setBar(bars.ts,m.ws/200,m.ws.toFixed(0));
+ setBar(bars.cb,m.cb/100,m.cb.toFixed(0)+'/100');setBar(bars.cs,m.cs/100,m.cs.toFixed(0)+'/100');
+ setBar(bars.eb,st.B/50,st.B+' 片');setBar(bars.es,1/50,'1 片');
+ var bm=st.mode==='batch';
+ [bars.tb,bars.cb,bars.eb].forEach(function(b){b.a.className=bm?'on':''});
+ [bars.ts,bars.cs,bars.es].forEach(function(b){b.a.className=bm?'':'on'});
+ var v=m.wb>m.ws?'在此設定下，批次式每小時處理的晶圓較多（'+m.wb+' 對 '+m.ws+'）':(m.wb<m.ws?'在此設定下，單片式每小時處理的晶圓較多（'+m.ws+' 對 '+m.wb+'）':'在此設定下，兩者產能相同');
+ v+='，但一片髒晶圓在共用藥槽中會波及 '+st.B+' 片晶圓，單片式機台則只波及 1 片；老化藥槽的污染分數為 '+m.cb.toFixed(0)+' 對 '+m.cs+'（示意）。';
+ document.getElementById('verdict').textContent=v;
+ document.getElementById('oB').textContent=st.B;document.getElementById('oC').textContent=st.C;document.getElementById('oN').textContent=st.N;
+}
+// ---- animation
+var KF=[];(function(){for(var s=0;s<4;s++){var a=22*s,dx=s*230;KF.push([a,dx,0],[a+3,dx,110],[a+15,dx,110],[a+18,dx,0])}KF.push([88,690,0],[100,0,0])})();
+function carPos(u){for(var i=0;i<KF.length-1;i++){var a=KF[i],b=KF[i+1];if(u>=a[0]&&u<=b[0]){var f=b[0]==a[0]?0:(u-a[0])/(b[0]-a[0]);return [a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f]}}return [0,0]}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+function stageOf(u){return u<25?0:u<50?1:u<75?2:3}
+var lastStage=-1;
+function render(){
+ var tt=((st.t%CYC)+CYC)%CYC,u=tt/CYC*100,s=stageOf(u),m=model(),bm=st.mode==='batch';
+ gB.style.display=bm?'':'none';gS.style.display=bm?'none':'';
+ if(s!==lastStage||true){document.getElementById('stagetxt').innerHTML=STXT[s]+(bm?'':(s===3?'（最後旋乾）':''));lastStage=s}
+ document.querySelectorAll('[data-s]').forEach(function(b){b.setAttribute('aria-pressed',(+b.dataset.s===s)?'true':'false')});
+ if(bm){
+  var p=carPos(u);carrier.setAttribute('transform','translate('+(TX[0]+p[0])+','+p[1]+')');
+  var base=m.cb/100*.5,dEff=st.dirty?clamp(u/30,0,1)*.85:0,ov=Math.max(base,dEff);
+  for(var i=0;i<slices.length;i++){var isMid=(i===slices.mid);
+   slices[i].setAttribute('fill',(isMid&&st.dirty)?'#ff5a5a':'#dfe8f4');overl[i].setAttribute('opacity',isMid?0:ov)}
+  dirtDots.forEach(function(d,k){var ph=tt/1000*2.6+k*1.3;d.setAttribute('opacity',st.dirty?.85:0);d.setAttribute('cx',(-(Math.min(st.B,12)*12+14)/2+9+slices.mid*12+3)+Math.sin(ph)*(18+k*5));d.setAttribute('cy',140+Math.cos(ph*1.3)*26)});
+  bathP.forEach(function(b){var ph=tt/1000*1.1+b.k*2.1+b.tank;var cx=TX[b.tank]+Math.sin(ph)*(TW/2-14)*(0.4+0.6*((b.k%5)/5)),cy=TY+60+((b.k*37)%80)+Math.cos(ph*1.4)*8;
+   var lvl=Math.max(m.cb/100*.9,(st.dirty&&b.tank<=Math.floor(u/25))?.9*clamp(u/30,0,1):0);
+   b.c.setAttribute('cx',cx);b.c.setAttribute('cy',cy);b.c.setAttribute('opacity',(b.k/14<lvl)?.85:0)});
+ }else{
+  spinG.setAttribute('transform','rotate('+(tt/1600*360)+' '+CX+' '+CY+')');
+  film.setAttribute('fill',COL[s]);film.setAttribute('opacity',s===3&&u>=90?.35:.6);
+  var dirtOp=st.dirty?clamp(1-(u-15)/45,0,1):0;
+  sDirt.forEach(function(d){d.setAttribute('opacity',dirtOp)});
+  var spray=!(u>=90);
+  rips.forEach(function(r,k){var ph=((tt/1200)+k/3)%1;r.setAttribute('r',10+95*ph);r.setAttribute('opacity',spray?.9*(1-ph):0);r.setAttribute('stroke',COL[s])});
+  flings.forEach(function(f,k){var ph=((tt/1500)+k*.2)%1,rr=108+38*ph;f.c.setAttribute('cx',CX+rr*Math.cos(f.a));f.c.setAttribute('cy',CY+rr*Math.sin(f.a));f.c.setAttribute('opacity',(st.dirty&&u<55)?.9*(1-ph):0)});
+  minis.forEach(function(mi,i){mi.g.style.display=i<st.C?'':'none';var a=(tt/700+i*.37)*Math.PI*2;mi.m.setAttribute('x2',mi.cx+10*Math.cos(a));mi.m.setAttribute('y2',66+10*Math.sin(a))});
+ }
+}
+var last=null;
+function tick(ts){if(last!==null&&!st.paused){st.t+=ts-last}last=ts;render();requestAnimationFrame(tick)}
+window.__setTime=function(ms){st.t=+ms;st.paused=true;sync();render()};
+function sync(){document.getElementById('bPause').setAttribute('aria-pressed',st.paused?'true':'false');document.getElementById('bPause').textContent=st.paused?'播放':'暫停';
+ document.getElementById('mBatch').setAttribute('aria-pressed',st.mode==='batch');document.getElementById('mSingle').setAttribute('aria-pressed',st.mode==='single');
+ document.getElementById('bDirty').setAttribute('aria-pressed',st.dirty);document.getElementById('bDirty').textContent=st.dirty?'移除髒晶圓':'加入一片髒晶圓';readout()}
+document.getElementById('mBatch').onclick=function(){st.mode='batch';sync();render()};
+document.getElementById('mSingle').onclick=function(){st.mode='single';sync();render()};
+document.getElementById('bPause').onclick=function(){st.paused=!st.paused;sync()};
+document.getElementById('bDirty').onclick=function(){st.dirty=!st.dirty;sync();render()};
+document.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){st.t=(+b.dataset.s)*3000+700;st.paused=true;sync();render()}});
+[['sB','B'],['sC','C'],['sN','N']].forEach(function(p){var e=document.getElementById(p[0]);e.oninput=function(){st[p[1]]=+e.value;if(p[1]==='B')buildCarrier();sync();render()}});
+if(q.get('B')){st.B=+q.get('B');document.getElementById('sB').value=st.B}
+if(q.get('C')){st.C=+q.get('C');document.getElementById('sC').value=st.C}
+if(q.get('N')){st.N=+q.get('N');document.getElementById('sN').value=st.N}
+buildCarrier();sync();render();requestAnimationFrame(tick);
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches&&q.get('t')===null){st.paused=true;st.t=4500;sync();render()}
+})();
+</script>
+</body>
+</html>

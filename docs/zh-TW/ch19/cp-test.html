@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CP 晶圓針測互動探索</title>
+<style>
+:root{--bg:#f5f8fc;--panel:#fff;--line:#c9d3e0;--ink:#1b2735;--ink2:#52627a;--metal:#b7c2d1;--metal2:#cfd7e3;--metalEdge:#7f8ea3;--pcb:#2f9560;--pcbEdge:#1f6b43;--epoxy:#26303f;--needle:#c98b12;--pad:#e0b24a;--si:#8da3c4;--siDark:#6b7f9f;--chuck:#aab6c7;--tester:#2d3a4f;--testerEdge:#1a2434;--cable:#8794a8;--accent:#1f6fd1;--waf:#8da3c4;--wafEdge:#5b6f8f;--dieU:#d5deec;--pass:#2a9d5c;--f2:#d94a4a;--f3:#e8a21c;--pg:#eef2f8;--card:#fff;--btn:#e4ebf5;--btnInk:#1b2735}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131c2a;--panel:#1b2636;--line:#33445d;--ink:#e8eef7;--ink2:#a9b8cd;--metal:#56657b;--metal2:#46546a;--metalEdge:#2d394b;--pcb:#2a8a58;--pcbEdge:#14502f;--epoxy:#0d131c;--needle:#e6a82a;--pad:#e0b24a;--si:#6e86ad;--siDark:#4f6489;--chuck:#6a7a92;--tester:#2a3649;--testerEdge:#0e1521;--cable:#6f7e94;--accent:#5aa2ff;--waf:#6e86ad;--wafEdge:#9db3d6;--dieU:#2c3a52;--pass:#34b36b;--f2:#e05555;--f3:#eaa62a;--pg:#0c121b;--card:#18212f;--btn:#27344a;--btnInk:#e8eef7}}
+:root[data-theme="dark"]{--bg:#131c2a;--panel:#1b2636;--line:#33445d;--ink:#e8eef7;--ink2:#a9b8cd;--metal:#56657b;--metal2:#46546a;--metalEdge:#2d394b;--pcb:#2a8a58;--pcbEdge:#14502f;--epoxy:#0d131c;--needle:#e6a82a;--pad:#e0b24a;--si:#6e86ad;--siDark:#4f6489;--chuck:#6a7a92;--tester:#2a3649;--testerEdge:#0e1521;--cable:#6f7e94;--accent:#5aa2ff;--waf:#6e86ad;--wafEdge:#9db3d6;--dieU:#2c3a52;--pass:#34b36b;--f2:#e05555;--f3:#eaa62a;--pg:#0c121b;--card:#18212f;--btn:#27344a;--btnInk:#e8eef7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 40px}
+.back{display:inline-block;margin:4px 0 8px;color:var(--accent);text-decoration:none;font-size:14px}
+.back:hover{text-decoration:underline}
+h1{font-size:22px;margin:0 0 4px}
+.lead{margin:0 0 12px;color:var(--ink2);font-size:15px}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px}
+.stage svg{display:block;width:100%;height:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card h2{font-size:15px;margin:0 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+button{font:inherit;font-size:14px;background:var(--btn);color:var(--btnInk);border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer;min-height:36px}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:14px;margin-top:8px}
+label b{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.hint{font-size:13px;color:var(--ink2);margin:2px 0 0}
+.read{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.read div{background:var(--pg);border-radius:8px;padding:6px 8px}
+.read span{display:block;font-size:12px;color:var(--ink2)}
+.read strong{font-size:20px;font-variant-numeric:tabular-nums}
+ol.steps{margin:0;padding:0;list-style:none}
+ol.steps li{padding:6px 8px;border-radius:8px;border:1px solid transparent;font-size:14px;color:var(--ink2)}
+ol.steps li.on{background:var(--pg);border-color:var(--accent);color:var(--ink)}
+ol.steps li b{display:inline-block;width:22px;height:22px;line-height:22px;border-radius:50%;text-align:center;background:var(--accent);color:#fff;font-size:12px;margin-right:8px}
+.note{font-size:13px;color:var(--ink2);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/19-wafer-test/README.md">&larr; 回到章節</a>
+<h1>CP 晶圓針測：逐顆晶粒探測</h1>
+<p class="lead">觀察針測機把晶圓逐步移到探針卡下方，再調整模型：有多少晶粒是壞的，以及探針接觸得好不好。</p>
+<div class="stage" id="stage">
+<svg id="sv" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" role="img" aria-label="互動式 CP 晶圓針測場景：測試機、探針卡、針測機、吸盤與晶圓圖">
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.mono{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",ui-monospace,Menlo,Consolas,"DejaVu Sans Mono",monospace}
+.bg{fill:var(--bg)} .panel{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.ink{fill:var(--ink)} .ink2{fill:var(--ink2)}
+.metal{fill:var(--metal);stroke:var(--metalEdge);stroke-width:1.5}
+.metal2{fill:var(--metal2);stroke:var(--metalEdge);stroke-width:1.5}
+.pcb{fill:var(--pcb);stroke:var(--pcbEdge);stroke-width:1.5}
+.epoxy{fill:var(--epoxy)}
+.needle{stroke:var(--needle);stroke-width:2;stroke-linecap:round;fill:none}
+.tip{fill:var(--needle)}
+.pad{fill:var(--pad)}
+.si{fill:var(--si)} .siDark{fill:var(--siDark)}
+.chuck{fill:var(--chuck);stroke:var(--metalEdge);stroke-width:1.5}
+.tester{fill:var(--tester);stroke:var(--testerEdge);stroke-width:1.5}
+.screen{fill:#0a1220;stroke:#33445e;stroke-width:1.5}
+.cable{fill:none;stroke:var(--cable);stroke-width:3.5;stroke-linecap:round}
+.flow{fill:none;stroke:var(--accent);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:3 14;animation:flow .9s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-17}}
+.leader{stroke:var(--ink2);stroke-width:1.2;fill:none}
+.waf{fill:var(--waf);stroke:var(--wafEdge);stroke-width:2}
+.dieU{fill:var(--dieU);stroke:var(--wafEdge);stroke-width:1}
+.b1{fill:var(--pass)} .b2{fill:var(--f2)} .b3{fill:var(--f3)}
+.g2{stroke:#fff;stroke-width:2.6;stroke-linecap:round;fill:none}
+.g3{stroke:#2b1d00;stroke-width:3;stroke-linecap:round;fill:none}
+.g1{stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.cur{fill:none;stroke:var(--accent);stroke-width:3}
+.glow{fill:var(--accent);opacity:0}
+ .res{opacity:0} </style>
+<rect class="bg" width="960" height="540" rx="14"/>
+<text class="ink" x="24" y="30" font-size="20" font-weight="700">CP 晶圓針測：逐顆晶粒探測</text>
+<text class="ink2" x="24" y="46" font-size="12">CP（Chip Probing，晶圓針測）會測試晶圓上的每一顆晶粒</text>
+<rect class="tester" x="24" y="56" width="266" height="78" rx="8"/>
+<rect class="screen" x="36" y="66" width="140" height="54" rx="4"/>
+<text id="tcount" class="mono" x="44" y="84" font-size="12" fill="#9fb3d1">晶粒 0 / 37</text>
+<text id="tstat" class="mono" x="44" y="108" font-size="18" font-weight="700" fill="#9fb3d1">就緒</text>
+<text x="188" y="86" font-size="15" font-weight="700" fill="#eef3fa">測試機</text>
+<text x="188" y="103" font-size="12" fill="#c7d3e6">送出測試訊號，</text>
+<text x="188" y="118" font-size="12" fill="#c7d3e6">判斷反應是否正確</text>
+<path class="cable" d="M290 95 C 340 95, 315 120, 315 150"/>
+<path class="flow" d="M290 95 C 340 95, 315 120, 315 150"/>
+<rect class="metal2" x="24" y="150" width="16" height="280"/>
+<rect class="metal2" x="590" y="150" width="16" height="280"/>
+<g id="chuck" class="mv" transform="translate(-40 0)">
+<rect class="metal" x="293" y="300" width="44" height="112"/>
+<rect class="chuck" x="165.0" y="278" width="300" height="22" rx="3"/>
+<rect class="siDark" x="175.0" y="270" width="280" height="8"/>
+<rect class="si" x="177" y="270" width="36" height="8"/>
+<rect class="pad" x="177" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="187" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="197" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="207" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="217" y="270" width="36" height="8"/>
+<rect class="pad" x="217" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="227" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="237" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="247" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="257" y="270" width="36" height="8"/>
+<rect class="pad" x="257" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="267" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="277" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="287" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="297" y="270" width="36" height="8"/>
+<rect class="pad" x="297" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="307" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="317" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="327" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="337" y="270" width="36" height="8"/>
+<rect class="pad" x="337" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="347" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="357" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="367" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="377" y="270" width="36" height="8"/>
+<rect class="pad" x="377" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="387" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="397" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="407" y="267.5" width="6" height="2.5"/>
+<rect class="si" x="417" y="270" width="36" height="8"/>
+<rect class="pad" x="417" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="427" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="437" y="267.5" width="6" height="2.5"/>
+<rect class="pad" x="447" y="267.5" width="6" height="2.5"/>
+</g>
+<rect class="metal2" x="24" y="150" width="582" height="14"/>
+<rect class="metal2" x="24" y="400" width="582" height="30"/>
+<text class="ink" x="40" y="420" font-size="13" font-weight="700" fill="var(--ink)">針測機<tspan font-weight="400">：載台使晶圓在 X / Y 方向移動，並在 Z 方向升降</tspan></text>
+<rect class="pcb" x="225" y="164" width="180" height="12" rx="2"/>
+<rect class="epoxy" x="283" y="176" width="64" height="14" rx="2"/>
+<path class="needle" d="M288 190 L300 259.5"/>
+<circle class="tip" cx="300" cy="259.5" r="2.2"/>
+<path class="needle" d="M302 190 L310 259.5"/>
+<circle class="tip" cx="310" cy="259.5" r="2.2"/>
+<path class="needle" d="M328 190 L320 259.5"/>
+<circle class="tip" cx="320" cy="259.5" r="2.2"/>
+<path class="needle" d="M342 190 L330 259.5"/>
+<circle class="tip" cx="330" cy="259.5" r="2.2"/>
+<g id="glow" class="glow"><circle cx="300" cy="259.5" r="6"/><circle cx="310" cy="259.5" r="6"/><circle cx="320" cy="259.5" r="6"/><circle cx="330" cy="259.5" r="6"/></g>
+<text class="ink" x="52" y="198" font-size="13" font-weight="700">探針卡</text>
+<text class="ink2" x="52" y="214" font-size="12">極細探針對應</text>
+<text class="ink2" x="52" y="229" font-size="12">晶粒的焊墊位置</text>
+<path class="leader" d="M150 196 L218 172"/>
+<text class="ink" x="430" y="222" font-size="13" font-weight="700">晶圓</text>
+<text class="ink2" x="430" y="237" font-size="12">一排晶粒的</text>
+<text class="ink2" x="430" y="251" font-size="12">剖面圖</text>
+<path class="leader" d="M428 240 L340 266"/>
+<text class="ink" x="52" y="326" font-size="13" font-weight="700">吸盤</text>
+<text class="ink2" x="52" y="341" font-size="12">固定晶圓</text>
+<path class="leader" d="M118 322 L280 292"/>
+<circle cx="34" cy="453" r="8" fill="var(--accent)"/>
+<text x="34" y="457" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">1</text>
+<text class="ink" x="50" y="457" font-size="13">針測機步進移動晶圓，讓下一顆晶粒位於探針下方。</text>
+<circle cx="34" cy="473" r="8" fill="var(--accent)"/>
+<text x="34" y="477" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">2</text>
+<text class="ink" x="50" y="477" font-size="13">吸盤抬升晶圓，探針接觸晶粒的焊墊。</text>
+<circle cx="34" cy="493" r="8" fill="var(--accent)"/>
+<text x="34" y="497" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">3</text>
+<text class="ink" x="50" y="497" font-size="13">測試機經由探針送出訊號，並檢查反應。</text>
+<circle cx="34" cy="513" r="8" fill="var(--accent)"/>
+<text x="34" y="517" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">4</text>
+<text class="ink" x="50" y="517" font-size="13">晶粒被分入某個 Bin（合格或某種失效類型），並加入晶圓圖。</text>
+<text class="ink" x="790" y="76" font-size="16" font-weight="700" text-anchor="middle">晶圓圖（俯視）</text>
+<circle class="waf" cx="790" cy="262" r="128"/>
+<path d="M781 393 A9 9 0 0 1 799 393 Z" class="bg"/>
+<path d="M781 392 A9 9 0 0 0 799 392" fill="none" stroke="var(--wafEdge)" stroke-width="0"/>
+<text class="ink2" x="790" y="410" font-size="12" text-anchor="middle">缺口（方向標記）</text>
+<rect class="dieU" x="744" y="152" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="152" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="152" width="28" height="28" rx="3"/>
+<rect class="dieU" x="840" y="184" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="184" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="184" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="184" width="28" height="28" rx="3"/>
+<rect class="dieU" x="712" y="184" width="28" height="28" rx="3"/>
+<rect class="dieU" x="680" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="712" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="840" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="872" y="216" width="28" height="28" rx="3"/>
+<rect class="dieU" x="872" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="840" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="712" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="680" y="248" width="28" height="28" rx="3"/>
+<rect class="dieU" x="680" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="712" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="840" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="872" y="280" width="28" height="28" rx="3"/>
+<rect class="dieU" x="840" y="312" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="312" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="312" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="312" width="28" height="28" rx="3"/>
+<rect class="dieU" x="712" y="312" width="28" height="28" rx="3"/>
+<rect class="dieU" x="744" y="344" width="28" height="28" rx="3"/>
+<rect class="dieU" x="776" y="344" width="28" height="28" rx="3"/>
+<rect class="dieU" x="808" y="344" width="28" height="28" rx="3"/>
+<g id="r0" class="res" transform="translate(758 166)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r1" class="res" transform="translate(790 166)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r2" class="res" transform="translate(822 166)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r3" class="res" transform="translate(854 198)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r4" class="res" transform="translate(822 198)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r5" class="res" transform="translate(790 198)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r6" class="res" transform="translate(758 198)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r7" class="res" transform="translate(726 198)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r8" class="res" transform="translate(694 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r9" class="res" transform="translate(726 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r10" class="res" transform="translate(758 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r11" class="res" transform="translate(790 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r12" class="res" transform="translate(822 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r13" class="res" transform="translate(854 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r14" class="res" transform="translate(886 230)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r15" class="res" transform="translate(886 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r16" class="res" transform="translate(854 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r17" class="res" transform="translate(822 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r18" class="res" transform="translate(790 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r19" class="res" transform="translate(758 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r20" class="res" transform="translate(726 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r21" class="res" transform="translate(694 262)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r22" class="res" transform="translate(694 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r23" class="res" transform="translate(726 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r24" class="res" transform="translate(758 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r25" class="res" transform="translate(790 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r26" class="res" transform="translate(822 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r27" class="res" transform="translate(854 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r28" class="res" transform="translate(886 294)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r29" class="res" transform="translate(854 326)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r30" class="res" transform="translate(822 326)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r31" class="res" transform="translate(790 326)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r32" class="res" transform="translate(758 326)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r33" class="res" transform="translate(726 326)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r34" class="res" transform="translate(758 358)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r35" class="res" transform="translate(790 358)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="r36" class="res" transform="translate(822 358)"><rect class="b1" x="-14" y="-14" width="28" height="28" rx="3"/><path class="g1" d="M-6 0 L-2 5 L7 -5"/></g>
+<g id="cur" transform="translate(822 358)"><rect class="cur" x="-18" y="-18" width="36" height="36" rx="5"/></g>
+<rect class="b1" x="672" y="432" width="16" height="16" rx="3"/><path class="g1" transform="translate(680 440) scale(.7)" d="M-6 0 L-2 5 L7 -5"/>
+<text class="ink" x="696" y="445" font-size="13">Bin 1：合格</text>
+<rect class="b2" x="672" y="454" width="16" height="16" rx="3"/><path class="g2" transform="translate(680 462) scale(.7)" d="M-5.5 -5.5 L5.5 5.5 M5.5 -5.5 L-5.5 5.5"/>
+<text class="ink" x="696" y="467" font-size="13">Bin 2：失效（一種失效類型）</text>
+<rect class="b3" x="672" y="476" width="16" height="16" rx="3"/><path class="g3" transform="translate(680 484) scale(.7)" d="M-6 0 L6 0"/>
+<text class="ink" x="696" y="489" font-size="13">Bin 3：失效（另一種類型）</text>
+<text class="ink2" x="640" y="510" font-size="12">Bin 的意義由測試程式定義。</text>
+<text class="ink2" x="640" y="525" font-size="12">合格／失效分布僅為示意。</text>
+</svg>
+</div>
+<div class="grid">
+<section class="card">
+<h2>控制</h2>
+<div class="row">
+<button id="bPlay" type="button">暫停</button>
+<button id="bStep" type="button">步進一顆晶粒</button>
+<button id="bReset" type="button">重新開始</button>
+</div>
+<label>探測速度：<b id="vSpeed">3.0</b> 顆晶粒／秒（示意）
+<input id="sSpeed" type="range" min="0.5" max="6" step="0.5" value="3"></label>
+<label>不良晶粒：<b id="vDef">16</b> %（示意，邊緣晶粒較容易失效）
+<input id="sDef" type="range" min="0" max="50" step="1" value="16"></label>
+<label>探針接觸品質：<b id="vCon">100</b> %
+<input id="sCon" type="range" min="60" max="100" step="1" value="100"></label>
+<p class="hint">接觸不良（探針磨損或沾污）時，部分好的晶粒會被誤判為壞的，落入 Bin 3。</p>
+</section>
+<section class="card">
+<h2>晶圓圖讀數</h2>
+<div class="read">
+<div><span>已測</span><strong id="rTested">0 / 37</strong></div>
+<div><span>合格（Bin 1）</span><strong id="rPass">0</strong></div>
+<div><span>失效（Bin 2 + 3）</span><strong id="rFail">0</strong></div>
+<div><span>目前良率</span><strong id="rYield">&ndash;</strong></div>
+<div><span>Bin 2（缺陷）</span><strong id="rB2">0</strong></div>
+<div><span>接觸誤判（Bin 3）</span><strong id="rB3">0</strong></div>
+</div>
+<h2 style="margin-top:14px">目前進行到哪</h2>
+<ol class="steps" id="steps">
+<li data-s="1"><b>1</b>針測機步進移動晶圓，讓下一顆晶粒位於探針下方。</li>
+<li data-s="2"><b>2</b>吸盤抬升晶圓，探針接觸焊墊。</li>
+<li data-s="3"><b>3</b>測試機送出訊號並檢查反應。</li>
+<li data-s="4"><b>4</b>晶粒被分入某個 Bin，並加入晶圓圖。</li>
+</ol>
+<p class="note">核心概念：每顆晶粒依序測試，其 Bin 會被加入晶圓圖。此處的缺陷分布、速度與接觸模型僅為示意；在本頁中，Bin 3 代表好的晶粒因接觸不良而被誤判為失效。</p>
+</section>
+</div>
+</div>
+<script>
+(function(){
+var DIES=[[2, 0], [3, 0], [4, 0], [5, 1], [4, 1], [3, 1], [2, 1], [1, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [6, 3], [5, 3], [4, 3], [3, 3], [2, 3], [1, 3], [0, 3], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [5, 5], [4, 5], [3, 5], [2, 5], [1, 5], [2, 6], [3, 6], [4, 6]], N=DIES.length, PITCH=40, STATE={t:0,playing:true,stepMs:1000/3};
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='light'||th==='dark') document.documentElement.setAttribute('data-theme',th);
+var $=function(i){return document.getElementById(i)};
+var chuck=$('chuck'),cur=$('cur'),glow=$('glow'),tcount=$('tcount'),tstat=$('tstat');
+var MP=32,MCX=790,MCY=262;
+// fixed random numbers per die so sliders behave smoothly
+function rng(seed){var s=seed;return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+var R=rng(20261012),U=[],V=[],K=[];
+for(var i=0;i<N;i++){U.push(R());V.push(R());K.push(R());}
+var res=[]; // 1 pass, 2 defect, 3 contact false fail
+function compute(){
+  var def=+$('sDef').value/100, con=+$('sCon').value/100;
+  for(var i=0;i<N;i++){
+    var c=DIES[i][0],r=DIES[i][1],d=Math.hypot(c-3,r-3)/3.2;
+    var p=Math.min(1,def*(0.4+1.8*d*d));
+    if(U[i]<p) res[i]=2;
+    else if(V[i]>con) res[i]=3;
+    else res[i]=1;
+  }
+}
+var glyph={1:'M-6 0 L-2 5 L7 -5',2:'M-5.5 -5.5 L5.5 5.5 M5.5 -5.5 L-5.5 5.5',3:'M-6 0 L6 0'};
+var dieEls=[];
+for(var i=0;i<N;i++){dieEls.push($('r'+i));}
+function paintDie(i,show){
+  var g=dieEls[i];
+  if(!show){g.style.opacity=0;return}
+  g.firstChild.setAttribute('class','b'+res[i]);
+  g.lastChild.setAttribute('class','g'+res[i]);
+  g.lastChild.setAttribute('d',glyph[res[i]]);
+  g.style.opacity=1;
+}
+function ease(x){return x<0?0:x>1?1:x*x*(3-2*x)}
+function txOf(i){return (3-DIES[i][0])*PITCH}
+var lastTested=-1,lastKey='';
+function render(){
+  var sm=STATE.stepMs, lead=sm*2, hold=3000, total=lead+N*sm+hold;
+  var t=STATE.t; var loc=((t%total)+total)%total;
+  var k,fr,phase;
+  if(loc<lead){k=-1;fr=0}
+  else{var u=(loc-lead)/sm;k=Math.floor(u);fr=u-k;}
+  var x,z=0,tested,sIdx,status,count;
+  if(k<0){ x=txOf(0); tested=0; sIdx=0; status='就緒'; count=0; curI=0;}
+  else if(k>=N){ x=txOf(N-1); tested=N; sIdx=0; status='全部完成'; count=N; curI=N-1;}
+  else{
+    var prev=k?txOf(k-1):txOf(0), c=txOf(k); curI=k; count=k+1;
+    if(fr<0.30){x=prev+(c-prev)*ease(fr/0.30);sIdx=1;status='移動中';tested=k}
+    else {x=c; if(fr<0.50){z=-8*ease((fr-0.30)/0.2);sIdx=2;status='接觸';tested=k}
+      else if(fr<0.80){z=-8;sIdx=3;status='測試中';tested=k}
+      else {z=-8*(1-ease((fr-0.80)/0.2));sIdx=4;status=res[k]==1?'合格':'失效';tested=k+1}}
+  }
+  chuck.setAttribute('transform','translate('+x.toFixed(2)+' '+z.toFixed(2)+')');
+  var mp=[MCX+(DIES[curI][0]-3)*MP, MCY+(DIES[curI][1]-3)*MP];
+  cur.setAttribute('transform','translate('+mp[0]+' '+mp[1]+')');
+  glow.style.opacity=(k>=0&&k<N&&fr>=0.5&&fr<0.8)?1:0;
+  tcount.textContent='晶粒 '+count+' / '+N;
+  tstat.textContent=status;
+  tstat.setAttribute('fill',status==='合格'||status==='全部完成'?'#4be28a':status==='失效'?(res[k]==2?'#ff7a7a':'#ffc25c'):'#9fb3d1');
+  var key=tested+'|'+res.join('');
+  if(key!==lastKey){
+    lastKey=key;
+    var p=0,f=0,b2=0,b3=0;
+    for(var i=0;i<N;i++){var s=i<tested;paintDie(i,s);if(s){if(res[i]==1)p++;else{f++;if(res[i]==2)b2++;else b3++}}}
+    $('rTested').textContent=tested+' / '+N;$('rPass').textContent=p;$('rFail').textContent=f;
+    $('rB2').textContent=b2;$('rB3').textContent=b3;
+    $('rYield').textContent=tested?Math.round(100*p/tested)+' %':'–';
+  }
+  var lis=document.querySelectorAll('#steps li');
+  for(var j=0;j<lis.length;j++)lis[j].classList.toggle('on',+lis[j].getAttribute('data-s')===sIdx);
+}
+var curI=0,raf=0,lastTs=0;
+function loop(ts){
+  if(STATE.playing){ if(lastTs)STATE.t+=ts-lastTs; render(); }
+  lastTs=ts; raf=requestAnimationFrame(loop);
+}
+function setPlaying(p){STATE.playing=p;$('bPlay').textContent=p?'暫停':'播放';lastTs=0}
+$('bPlay').onclick=function(){setPlaying(!STATE.playing)};
+$('bStep').onclick=function(){
+  setPlaying(false);
+  var sm=STATE.stepMs, lead=sm*2, total=lead+N*sm+3000, loc=((STATE.t%total)+total)%total;
+  var k=loc<lead?-1:Math.floor((loc-lead)/sm);
+  k=k+1; if(k>=N)k=N; // snap to the end of die k-1 (result shown)
+  STATE.t=lead+(k-1)*sm+sm*0.9; if(k<=0)STATE.t=lead+sm*0.55; render();
+};
+$('bReset').onclick=function(){STATE.t=0;lastKey='';render();setPlaying(true)};
+function sl(id,vid,fmt,cb){var e=$(id);e.oninput=function(){$(vid).textContent=fmt(+e.value);cb&&cb();lastKey='';compute();render()}}
+sl('sSpeed','vSpeed',function(v){return v.toFixed(1)},function(){
+  var old=STATE.stepMs,nw=1000/(+$('sSpeed').value);
+  var lead=old*2,loc=STATE.t, prog=(loc-lead)/old; // keep position in die units
+  STATE.stepMs=nw; STATE.t=lead*(nw/old)+prog*nw;
+});
+sl('sDef','vDef',function(v){return v});
+sl('sCon','vCon',function(v){return v});
+window.__setTime=function(ms){setPlaying(false);STATE.t=+ms;lastKey='';render();};
+compute();
+var still=q.get('still')==='1', tq=q.get('t');
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var sp=q.get('def'); if(sp!==null){$('sDef').value=sp;$('vDef').textContent=sp;compute()}
+var cq=q.get('con'); if(cq!==null){$('sCon').value=cq;$('vCon').textContent=cq;compute()}
+if(tq!==null){window.__setTime(+tq)}
+else if(still||reduce){ setPlaying(false); STATE.t=STATE.stepMs*2+N*STATE.stepMs+500; render(); }
+else render();
+raf=requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

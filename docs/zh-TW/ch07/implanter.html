@@ -1,0 +1,155 @@
+<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>離子佈植機互動圖解</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2433;--mute:#566074;--panel:#dfe5ef;--metal:#8b98b3;--si:#cdd2de;--acc:#e8590c;--rej:#7d8598;--blue:#2f6fdb;--resist:#c9a227;--line:#d5dae5}
+:root[data-theme=dark]{--bg:#151a24;--card:#1d2431;--ink:#e8ecf4;--mute:#9aa5ba;--panel:#2a3447;--metal:#62708d;--si:#3a4152;--acc:#ff8a3d;--rej:#7a8397;--blue:#6ea1ff;--resist:#b8962a;--line:#33405a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151a24;--card:#1d2431;--ink:#e8ecf4;--mute:#9aa5ba;--panel:#2a3447;--metal:#62708d;--si:#3a4152;--acc:#ff8a3d;--rej:#7a8397;--blue:#6ea1ff;--resist:#b8962a;--line:#33405a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:12px 16px 32px}
+a{color:var(--blue)}h1{font-size:1.5rem;margin:.3em 0 .2em}p{margin:.3em 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+svg{display:block;width:100%;height:auto}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.on{background:var(--ink);color:var(--bg)}
+#cap{min-height:3.2em;color:var(--ink)}
+.ctl{display:grid;grid-template-columns:1fr;gap:12px}
+label{display:block;font-weight:600}input[type=range]{width:100%;accent-color:var(--acc)}
+.ro{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.ro div{background:var(--bg);border-radius:8px;padding:8px}.ro b{display:block;font-size:1.25rem}.ro span{color:var(--mute);font-size:.85rem}
+.two{display:flex;flex-wrap:wrap;gap:12px}.two>div{flex:1 1 300px;min-width:0}
+.note{color:var(--mute);font-size:.9rem}
+.dim{opacity:.28}.sf g{transition:opacity .2s}
+@media (max-width:600px){.lbl{display:none}}
+
+.t{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;fill:var(--ink)}
+.b{font-weight:700}.m{fill:var(--mute)}
+.beam{fill:none;stroke:var(--acc);stroke-width:4;stroke-linecap:round;stroke-dasharray:3 13}
+.beamf{fill:none;stroke:var(--acc);stroke-width:4;stroke-linecap:round;stroke-dasharray:5 11}
+.glow{fill:none;stroke:var(--acc);stroke-width:9;opacity:.16;stroke-linecap:round}
+.rej{fill:none;stroke:var(--rej);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:3 13}
+.box{fill:var(--panel);stroke:var(--metal);stroke-width:2}
+.ring{fill:var(--metal)}
+.plate{fill:var(--metal)}
+.si{fill:var(--si);stroke:var(--metal);stroke-width:2}
+.res{fill:var(--resist)}
+.plasma{fill:var(--acc);opacity:.85}
+.badge{fill:var(--ink)}.bt{fill:var(--bg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:700}
+.fanbg{fill:var(--acc);opacity:.08}
+.dop{fill:var(--acc)}
+.bfield{fill:none;stroke:var(--metal);stroke-width:1.6;opacity:.7}
+
+</style></head><body><main>
+<a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/07-ion-implantation/README.md">&larr; 回到章節</a>
+<h1>離子佈植機互動圖解</h1>
+<p>雜質原子先被變成離子，依質量篩選、加速，再掃過整片晶圓。調整加速能量，看佈植深度如何改變。</p>
+<div class="card"><svg id="scene" class="sf" viewBox="0 20 960 390" role="img" aria-label="離子佈植機示意圖"><g transform="translate(0 22)"><g id="g1"><rect class="box" x="40" y="215" width="110" height="80" rx="10"/>
+<circle id="plasma" class="plasma" cx="95" cy="255" r="22"/>
+<path d="M95 215V190" stroke="var(--metal)" stroke-width="6" fill="none"/>
+<text class="t m lbl" x="95" y="180" text-anchor="middle" font-size="14">摻雜氣體</text>
+<circle class="badge" cx="95" cy="322" r="14"/><text class="bt" x="95" y="328" text-anchor="middle" font-size="16">1</text>
+<text class="t b lbl" x="95" y="358" text-anchor="middle" font-size="17">離子源</text>
+<text class="t m lbl" x="95" y="377" text-anchor="middle" font-size="14">氣體變成離子</text></g><g id="g2"><rect class="box" x="228" y="150" width="124" height="134" rx="14"/><g transform="translate(255 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(255 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g>
+<text class="t m lbl" x="334" y="206" font-size="16" font-style="italic">B</text>
+<rect class="plate" x="358" y="105" width="10" height="55"/><rect class="plate" x="358" y="190" width="10" height="100"/>
+<path class="rej" id="r1" d="M235 255C290 255 310 135 357 135"/><path class="rej" id="r2" d="M235 255C300 255 330 252 357 246"/>
+<path d="M349 128l8 8M357 128l-8 8M349 240l8 8M357 240l-8 8" stroke="var(--rej)" stroke-width="2.5"/>
+<text class="t m lbl" x="376" y="262" font-size="13">其他質量的離子</text><text class="t m lbl" x="376" y="278" font-size="13">撞上極板被擋下</text>
+<circle class="badge" cx="290" cy="322" r="14"/><text class="bt" x="290" y="328" text-anchor="middle" font-size="16">2</text>
+<text class="t b lbl" x="290" y="358" text-anchor="middle" font-size="17">質量分析器</text>
+<text class="t m lbl" x="290" y="377" text-anchor="middle" font-size="14">磁鐵篩選質量</text></g><g id="g3"><rect class="box" x="395" y="142" width="135" height="66" rx="6"/><rect class="ring" x="408" y="130" width="8" height="90" rx="2"/><rect class="ring" x="428" y="130" width="8" height="90" rx="2"/><rect class="ring" x="448" y="130" width="8" height="90" rx="2"/><rect class="ring" x="468" y="130" width="8" height="90" rx="2"/><rect class="ring" x="488" y="130" width="8" height="90" rx="2"/><rect class="ring" x="508" y="130" width="8" height="90" rx="2"/>
+<text class="t m lbl" x="462" y="120" text-anchor="middle" font-size="14">高電壓</text>
+<circle class="badge" cx="462" cy="322" r="14"/><text class="bt" x="462" y="328" text-anchor="middle" font-size="16">3</text>
+<text class="t b lbl" x="462" y="358" text-anchor="middle" font-size="17">加速</text>
+<text class="t m lbl" x="462" y="377" text-anchor="middle" font-size="14">電場增加能量</text></g><g id="g4"><polygon class="fanbg" points="640,175 774,69 774,281"/>
+<rect id="pt" class="plate" x="575" y="138" width="50" height="9" rx="2"/><rect id="pb" class="plate" x="575" y="203" width="50" height="9" rx="2"/>
+<circle class="badge" cx="610" cy="322" r="14"/><text class="bt" x="610" y="328" text-anchor="middle" font-size="16">4</text>
+<text class="t b lbl" x="610" y="358" text-anchor="middle" font-size="17">掃描</text>
+<text class="t m lbl" x="610" y="377" text-anchor="middle" font-size="14">來回掃過晶圓</text></g><g id="g5"><rect class="si" x="790" y="55" width="32" height="240" rx="3"/>
+<rect class="res" x="774" y="55" width="16" height="60"/><rect class="res" x="774" y="200" width="16" height="28"/><rect class="res" x="774" y="262" width="16" height="33"/>
+<g id="wd"><circle class="dop" cx="797" cy="122" r="3"/><circle class="dop" cx="806" cy="122" r="3"/><circle class="dop" cx="797" cy="131" r="3"/><circle class="dop" cx="806" cy="131" r="3"/><circle class="dop" cx="797" cy="140" r="3"/><circle class="dop" cx="806" cy="140" r="3"/><circle class="dop" cx="797" cy="149" r="3"/><circle class="dop" cx="806" cy="149" r="3"/><circle class="dop" cx="797" cy="158" r="3"/><circle class="dop" cx="806" cy="158" r="3"/><circle class="dop" cx="797" cy="167" r="3"/><circle class="dop" cx="806" cy="167" r="3"/><circle class="dop" cx="797" cy="176" r="3"/><circle class="dop" cx="806" cy="176" r="3"/><circle class="dop" cx="797" cy="185" r="3"/><circle class="dop" cx="806" cy="185" r="3"/><circle class="dop" cx="797" cy="194" r="3"/><circle class="dop" cx="806" cy="194" r="3"/><circle class="dop" cx="797" cy="236" r="3"/><circle class="dop" cx="806" cy="236" r="3"/><circle class="dop" cx="797" cy="244" r="3"/><circle class="dop" cx="806" cy="244" r="3"/><circle class="dop" cx="797" cy="252" r="3"/><circle class="dop" cx="806" cy="252" r="3"/><circle class="dop" cx="797" cy="259" r="3"/><circle class="dop" cx="806" cy="259" r="3"/></g>
+<text class="t m lbl" x="768" y="46" text-anchor="middle" font-size="14">光阻</text>
+<circle class="badge" cx="806" cy="322" r="14"/><text class="bt" x="806" y="328" text-anchor="middle" font-size="16">5</text>
+<text class="t b lbl" x="806" y="358" text-anchor="middle" font-size="17">晶圓</text>
+<text class="t m lbl" x="806" y="377" text-anchor="middle" font-size="14">光阻擋住離子</text></g><path class="glow" d="M150 255H235C290 255 290 175 358 175H640"/>
+<path id="bA" class="beam a-slow" d="M150 255H235C290 255 290 175 358 175H395"/>
+<path id="bB" class="beamf a-fast" d="M395 175H640"/>
+<g id="scan" class="scan"><path class="glow" d="M640 175H774"/><path id="bF" class="beamf a-fast" d="M640 175H774"/></g></g></svg>
+<div class="steps" id="steps"></div><p id="cap"></p>
+<button id="pause">暫停</button></div>
+<div class="card"><div class="ctl">
+<div><label for="E">加速能量：<span id="Ev"></span> keV</label><input id="E" type="range" min="10" max="200" step="1" value="100"></div>
+<div><label for="D">劑量：<span id="Dv"></span> 個原子/cm&sup2;</label><input id="D" type="range" min="12" max="16" step="0.1" value="15"></div></div>
+<div class="ro" style="margin-top:10px"><div><b id="rp"></b><span>投影射程 Rp（示意）</span></div><div><b id="dr"></b><span>射程離散 &Delta;Rp（示意）</span></div><div><b id="np"></b><span>峰值濃度（cm&minus;&sup3;）</span></div></div></div>
+<div class="card two"><div><svg id="xs" viewBox="0 0 360 352" role="img" aria-label="佈植後矽的剖面圖"></svg></div><div><svg id="ch" viewBox="0 0 520 352" role="img" aria-label="摻雜濃度隨深度分布圖"></svg></div></div>
+<p class="note">示意模型，並非製程模擬器：Rp &asymp; 3 &middot; E<sup>0.95</sup> nm（E 單位為 keV），&Delta;Rp = 0.35 &middot; Rp，高斯分布 N(x) = Q / (&radic;(2&pi;) &Delta;Rp) &middot; exp(&minus;(x&minus;Rp)&sup2; / 2&Delta;Rp&sup2;)，Q 為劑量。實際深度取決於離子種類、基板與傾角（通道效應）。本圖未模擬退火。劑量決定原子數量，能量決定深度。</p>
+</main>
+<script>
+(function(){
+var q=new URLSearchParams(location.search),th=q.get('theme');if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);
+var $=function(i){return document.getElementById(i)},NS='http://www.w3.org/2000/svg';
+var E=100,LD=15,T=0,paused=false,last=null;
+var steps=[['全部','按下任一步驟即可強調顯示，或觀看整條離子束線。橘色點代表所選摻雜物的離子。'],
+['1 離子源','離子源：含有硼、磷或砷的氣體被變成帶電的離子。'],
+['2 質量分析','質量分析：離子通過磁場，不同質量的離子轉彎程度不同，所以只有需要的那一種能通過狹縫。'],
+['3 加速','加速：電場把離子加速到所需的能量，能量決定離子打進多深。'],
+['4 掃描','掃描：離子束均勻地掃過整片晶圓。'],
+['5 晶圓','晶圓：光阻會擋住離子，所以只有光阻開口的區域會被佈植。']];
+var sel=0,sc=$('scene');
+steps.forEach(function(s,i){var b=document.createElement('button');b.textContent=s[0];b.onclick=function(){sel=i;ui()};b.id='s'+i;$('steps').appendChild(b)});
+function ui(){steps.forEach(function(s,i){$('s'+i).className=i===sel?'on':''});$('cap').textContent=steps[sel][1];
+for(var k=1;k<=5;k++)$('g'+k).setAttribute('class',sel&&sel!==k?'dim':'')}
+function Rp(e){return 3*Math.pow(e,0.95)}
+function fmt(n){var e=Math.floor(Math.log10(n)),m=n/Math.pow(10,e);return m.toFixed(1)+'×10'+sup(e)}
+function sup(e){var m={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};return String(e).split('').map(function(c){return m[c]}).join('')}
+function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+var Y0=40,SC=0.34;
+function build(){var xs=$('xs'),ch=$('ch');xs.innerHTML='';ch.innerHTML='';
+el('rect',{x:40,y:Y0,width:290,height:272,class:'si'},xs);
+el('rect',{x:40,y:Y0-14,width:130,height:14,class:'res'},xs);
+var t=el('text',{x:105,y:Y0-20,'text-anchor':'middle','font-size':13,class:'t m'},xs);t.textContent='光阻';
+xs.band=el('ellipse',{cx:250,cy:100,rx:62,ry:10,fill:'var(--acc)'},xs);
+xs.ions=[0,1,2].map(function(i){return el('circle',{cx:200+i*45,cy:20,r:3.5,class:'dop'},xs)});
+for(var d=0;d<=800;d+=200){var yy=Y0+d*SC;var l=el('text',{x:34,y:yy+4,'text-anchor':'end','font-size':13,class:'t m'},xs);l.textContent=d;el('line',{x1:36,x2:40,y1:yy,y2:yy,stroke:'var(--mute)'},xs)}
+var u=el('text',{x:7,y:176,'font-size':12,class:'t m',transform:'rotate(-90 7 176)','text-anchor':'middle'},xs);u.textContent='深度（nm）';
+var x0=70,x1=500;
+for(var p=16;p<=22;p+=2){var xx=x0+(p-16)/6*(x1-x0);el('line',{x1:xx,x2:xx,y1:Y0,y2:Y0+272,stroke:'var(--line)'},ch);var l2=el('text',{x:xx,y:Y0+292,'text-anchor':'middle','font-size':14,class:'t m'},ch);l2.textContent='10'+sup(p)}
+var l3=el('text',{x:285,y:348,'text-anchor':'middle','font-size':14,class:'t m'},ch);l3.textContent='濃度（cm⁻³，對數刻度）';
+for(var d2=0;d2<=800;d2+=200){var y2=Y0+d2*SC;el('line',{x1:x0,x2:x1,y1:y2,y2:y2,stroke:'var(--line)'},ch);var l4=el('text',{x:x0-6,y:y2+4,'text-anchor':'end','font-size':13,class:'t m'},ch);l4.textContent=d2}
+el('rect',{x:x0,y:Y0,width:x1-x0,height:272,fill:'none',stroke:'var(--metal)'},ch);
+ch.curve=el('path',{fill:'none',stroke:'var(--acc)','stroke-width':3},ch);
+ch.rp=el('line',{x1:x0,x2:x1,stroke:'var(--mute)','stroke-dasharray':'5 4'},ch);
+ch.rpt=el('text',{x:x1-4,'text-anchor':'end','font-size':14,class:'t b'},ch);
+}
+function model(){var rp=Rp(E),dr=0.35*rp,Q=Math.pow(10,LD),np=Q/(Math.sqrt(2*Math.PI)*dr*1e-7);return{rp:rp,dr:dr,np:np}}
+function calc(){var m=model(),xs=$('xs'),ch=$('ch');
+$('Ev').textContent=E;$('Dv').textContent=fmt(Math.pow(10,LD));
+$('rp').textContent=m.rp.toFixed(0)+' nm';$('dr').textContent=m.dr.toFixed(0)+' nm';$('np').textContent=fmt(m.np);
+var b=xs.band;b.setAttribute('cy',Y0+m.rp*SC);b.setAttribute('ry',Math.max(3,m.dr*SC*1.2));b.setAttribute('opacity',(0.3+0.6*(LD-12)/4).toFixed(2));
+var x0=70,x1=500,pts=[];
+for(var d=0;d<=800;d+=4){var lg=Math.log10(m.np)-Math.pow(d-m.rp,2)/(2*m.dr*m.dr*Math.LN10);var c=Math.max(16,Math.min(22,lg));pts.push((x0+(c-16)/6*(x1-x0)).toFixed(1)+','+(Y0+d*SC).toFixed(1))}
+ch.curve.setAttribute('d','M'+pts.join('L'));
+var yr=Y0+m.rp*SC;ch.rp.setAttribute('y1',yr);ch.rp.setAttribute('y2',yr);ch.rpt.setAttribute('y',yr-5);ch.rpt.textContent='Rp = '+m.rp.toFixed(0)+' nm';}
+function render(t){
+var sp1=0.03,sp2=0.03+0.2*Math.sqrt(E/200);
+$('bA').style.strokeDashoffset=-t*sp1;$('r1').style.strokeDashoffset=-t*sp1;$('r2').style.strokeDashoffset=-t*sp1;
+$('bB').style.strokeDashoffset=-t*sp2;$('bF').style.strokeDashoffset=-t*sp2;
+var s=Math.sin(2*Math.PI*t/6000);
+$('scan').setAttribute('transform','translate(0 0) translate(640 175) skewY('+(38*s).toFixed(2)+') translate(-640 -175)');
+$('pt').style.opacity=(0.65+0.35*s).toFixed(2);$('pb').style.opacity=(0.65-0.35*s).toFixed(2);
+$('plasma').setAttribute('r',(22+3*Math.sin(t/160)).toFixed(1));
+$('wd').style.opacity=(0.75+0.25*Math.sin(t/300)).toFixed(2);
+$('xs').ions.forEach(function(c,i){var ph=((t*0.04+i*17)%60)/60;c.setAttribute('cy',(8+ph*(Y0+m_rp()*SC-10)).toFixed(1));c.setAttribute('opacity',ph<.9?1:0)});
+}
+function m_rp(){return Rp(E)}
+function loop(ts){if(last===null)last=ts;var dt=ts-last;last=ts;if(!paused){T+=dt;render(T)}requestAnimationFrame(loop)}
+$('E').oninput=function(){E=+this.value;calc();render(T)};
+$('D').oninput=function(){LD=+this.value;calc();render(T)};
+$('pause').onclick=function(){paused=!paused;this.textContent=paused?'播放':'暫停';last=null};
+window.__setTime=function(ms){T=ms;paused=true;$('pause').textContent='播放';render(T)};
+window.__setParams=function(e,d){$('E').value=e;if(d!=null)$('D').value=d;$('E').oninput();$('D').oninput()};
+build();ui();calc();
+var tq=q.get('t');if(tq!==null){T=+tq;paused=true}else if(q.get('still')==='1'){T=1500;paused=true}
+if(paused)$('pause').textContent='播放';
+render(T);requestAnimationFrame(loop);
+})();
+</script></body></html>

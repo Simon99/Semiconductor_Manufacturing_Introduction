@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CMP 機台：互動圖</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--tx:#1c2433;--mu:#4a5568;--bd:#cbd2de;--ac:#2b6cb0;--hi:#d64545;--stage:#e8eef8}
+:root[data-theme=dark]{--bg:#12161d;--card:#1b212b;--tx:#e6ebf3;--mu:#a3adbf;--bd:#313a49;--ac:#6cb0f5;--hi:#ff7b7b;--stage:#262f3d}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161d;--card:#1b212b;--tx:#e6ebf3;--mu:#a3adbf;--bd:#313a49;--ac:#6cb0f5;--hi:#ff7b7b;--stage:#262f3d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:10px 16px 16px}
+a{color:var(--ac)}
+h1{font-size:20px;margin:4px 0 8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:12px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+svg.scene{width:100%;height:auto;display:block;background:#f5f7fb;border-radius:8px}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+button{font:inherit;background:var(--stage);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:5px 10px;cursor:pointer}
+button[aria-pressed=true]{background:var(--ac);color:#fff;border-color:var(--ac)}
+.cap{min-height:44px;font-size:14px;color:var(--tx);margin:4px 0 0}
+label{display:block;font-weight:600;margin-top:8px}
+input[type=range]{width:100%}
+.row{display:flex;justify-content:space-between;gap:8px}
+.val{font-variant-numeric:tabular-nums;color:var(--ac);font-weight:700}
+.formula{font-size:22px;font-weight:700;text-align:center;margin:6px 0 2px}
+.calc{font-size:13px;color:var(--mu);text-align:center;font-variant-numeric:tabular-nums}
+.big{font-size:30px;font-weight:800;color:var(--hi);text-align:center;font-variant-numeric:tabular-nums}
+.note{font-size:12px;color:var(--mu)}
+svg.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--mu);font-size:11px}
+.dim{opacity:.22}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+</style></head><body><div class="wrap">
+<div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/08-cmp/README.md">&larr; 回到章節</a><span class="note">互動圖：CMP 機台（數值為示意）</span></div>
+<h1>CMP 機台：壓力與速度如何決定研磨速率</h1>
+<div class="grid">
+<div class="card">
+<svg id="scene" class="scene" viewBox="0 0 720 400" role="img" aria-label="CMP 機台側視圖：平台、研磨墊、研磨頭、研磨液噴嘴、修整器" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">
+<defs><clipPath id="padclip"><rect x="20" y="280" width="580" height="18"/></clipPath><clipPath id="platclip"><rect x="20" y="298" width="580" height="47"/></clipPath><clipPath id="spclip"><rect x="295" y="130" width="30" height="85"/></clipPath><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#d64545"/></marker><marker id="ahk" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2d3748"/></marker></defs>
+<g data-part="3"><rect x="60" y="345" width="500" height="45" rx="4" fill="#2d3748"/><rect x="290" y="345" width="40" height="45" fill="#1a202c"/>
+<rect x="20" y="298" width="580" height="47" rx="3" fill="#4a5568"/>
+<g clip-path="url(#platclip)"><g id="platscroll" class="platscroll"><rect x="-20" y="298" width="14" height="47" fill="#5f6b80"/><rect x="20" y="298" width="14" height="47" fill="#5f6b80"/><rect x="60" y="298" width="14" height="47" fill="#5f6b80"/><rect x="100" y="298" width="14" height="47" fill="#5f6b80"/><rect x="140" y="298" width="14" height="47" fill="#5f6b80"/><rect x="180" y="298" width="14" height="47" fill="#5f6b80"/><rect x="220" y="298" width="14" height="47" fill="#5f6b80"/><rect x="260" y="298" width="14" height="47" fill="#5f6b80"/><rect x="300" y="298" width="14" height="47" fill="#5f6b80"/><rect x="340" y="298" width="14" height="47" fill="#5f6b80"/><rect x="380" y="298" width="14" height="47" fill="#5f6b80"/><rect x="420" y="298" width="14" height="47" fill="#5f6b80"/><rect x="460" y="298" width="14" height="47" fill="#5f6b80"/><rect x="500" y="298" width="14" height="47" fill="#5f6b80"/><rect x="540" y="298" width="14" height="47" fill="#5f6b80"/><rect x="580" y="298" width="14" height="47" fill="#5f6b80"/><rect x="620" y="298" width="14" height="47" fill="#5f6b80"/></g></g>
+<text x="310" y="327" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">平台（旋轉中）</text>
+<rect x="20" y="280" width="580" height="18" fill="#cfd5e0" stroke="#9aa3b5"/>
+<g clip-path="url(#padclip)"><g id="padscroll" class="padscroll"><circle cx="0" cy="286" r="2" fill="#8993a8"/><circle cx="30" cy="292" r="2" fill="#8993a8"/><circle cx="60" cy="286" r="2" fill="#8993a8"/><circle cx="90" cy="292" r="2" fill="#8993a8"/><circle cx="120" cy="286" r="2" fill="#8993a8"/><circle cx="150" cy="292" r="2" fill="#8993a8"/><circle cx="180" cy="286" r="2" fill="#8993a8"/><circle cx="210" cy="292" r="2" fill="#8993a8"/><circle cx="240" cy="286" r="2" fill="#8993a8"/><circle cx="270" cy="292" r="2" fill="#8993a8"/><circle cx="300" cy="286" r="2" fill="#8993a8"/><circle cx="330" cy="292" r="2" fill="#8993a8"/><circle cx="360" cy="286" r="2" fill="#8993a8"/><circle cx="390" cy="292" r="2" fill="#8993a8"/><circle cx="420" cy="286" r="2" fill="#8993a8"/><circle cx="450" cy="292" r="2" fill="#8993a8"/><circle cx="480" cy="286" r="2" fill="#8993a8"/><circle cx="510" cy="292" r="2" fill="#8993a8"/><circle cx="540" cy="286" r="2" fill="#8993a8"/><circle cx="570" cy="292" r="2" fill="#8993a8"/><circle cx="600" cy="286" r="2" fill="#8993a8"/><circle cx="630" cy="292" r="2" fill="#8993a8"/></g></g></g>
+<g data-part="1"><rect x="20" y="276" width="580" height="4" fill="#3b9be8" opacity="0.55"/></g>
+<g data-part="2">
+<rect x="175" y="215" width="270" height="58" rx="8" fill="#5b6b82" stroke="#2d3748" stroke-width="2"/>
+<line x1="265" y1="225" x2="265" y2="265" stroke="#8fa0b8" stroke-width="2"/>
+<line x1="355" y1="225" x2="355" y2="265" stroke="#8fa0b8" stroke-width="2"/>
+<rect x="180" y="255" width="15" height="28" rx="2" fill="#3c4a5e"/><rect x="425" y="255" width="15" height="28" rx="2" fill="#3c4a5e"/>
+<rect x="295" y="120" width="30" height="97" fill="#a0aec0" stroke="#2d3748" stroke-width="2"/>
+<g clip-path="url(#spclip)"><g id="headscroll" class="headscroll"><rect x="281" y="120" width="7" height="97" fill="#718096"/><rect x="295" y="120" width="7" height="97" fill="#718096"/><rect x="309" y="120" width="7" height="97" fill="#718096"/><rect x="323" y="120" width="7" height="97" fill="#718096"/><rect x="337" y="120" width="7" height="97" fill="#718096"/></g></g>
+<g id="pa" class="pa"><rect id="pshaft" x="306" y="40" width="8" height="55" fill="#d64545"/><path id="phead" d="M296 95 L330 95 L313 118 Z" fill="#d64545"/></g>
+<text x="344" y="62" font-size="14" font-weight="700" fill="#b83232">下壓力（壓力 P）</text>
+</g>
+<g data-part="3"><rect x="195" y="273" width="230" height="8" fill="#8aa0bd" stroke="#2d3748"/>
+<g id="bumps" class="bumps"><rect x="215" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="265" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="310" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="345" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="390" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/></g></g>
+<g data-part="1"><path d="M20 120 H55 V200" fill="none" stroke="#718096" stroke-width="10" stroke-linejoin="round"/><path d="M48 200 L62 200 L58 214 L52 214 Z" fill="#4a5568"/>
+<circle id="drop0" class="drop d0" cx="55" cy="224" r="4" fill="#3b9be8"/>
+<circle id="drop1" class="drop d1" cx="55" cy="224" r="4" fill="#3b9be8"/>
+<circle id="drop2" class="drop d2" cx="55" cy="224" r="4" fill="#3b9be8"/>
+</g>
+<g data-part="4"><g id="cond" class="cond"><rect x="500" y="130" width="140" height="18" rx="3" fill="#718096"/><rect x="504" y="146" width="20" height="116" fill="#718096"/><rect x="470" y="262" width="90" height="16" rx="3" fill="#d69e2e" stroke="#744210" stroke-width="1.5"/>
+<path d="M476 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M486 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M496 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M506 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M516 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M526 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M536 278 l4 5 l4 -5 z" fill="#1a202c"/>
+<path d="M546 278 l4 5 l4 -5 z" fill="#1a202c"/>
+</g></g>
+<text x="76" y="150" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨液噴嘴</text><text x="76" y="166" font-size="12" fill="#4a5568" text-anchor="start">研磨顆粒＋化學品</text>
+<line x1="74" y1="147" x2="62" y2="125" stroke="#2d3748" stroke-width="1.2"/>
+<text x="345" y="165" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨頭</text><text x="345" y="181" font-size="12" fill="#4a5568" text-anchor="start">將晶圓正面朝下壓住</text>
+<line x1="340" y1="171" x2="340" y2="215" stroke="#2d3748" stroke-width="1.2"/>
+<text x="76" y="252" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">晶圓</text><text x="76" y="268" font-size="12" fill="#4a5568" text-anchor="start">（正面朝下）</text>
+<line x1="156" y1="264" x2="222" y2="277" stroke="#2d3748" stroke-width="1.2"/><circle cx="222" cy="277" r="2.5" fill="#2d3748"/>
+<text x="545" y="200" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">修整器</text><text x="545" y="216" font-size="12" fill="#4a5568" text-anchor="start">鑽石顆粒圓盤</text>
+<line x1="543" y1="197" x2="528" y2="197" stroke="#2d3748" stroke-width="1.2"/>
+<text x="610" y="293" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨墊</text>
+<text x="610" y="328" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">平台</text>
+<line x1="608" y1="289" x2="598" y2="289" stroke="#2d3748"/><line x1="608" y1="324" x2="598" y2="324" stroke="#2d3748"/>
+<text x="310" y="372" font-size="12" fill="#e2e8f0" text-anchor="middle">平台旋轉，研磨頭旋轉</text>
+<!-- wafer surface inset -->
+<g id="inset" transform="translate(30,10)">
+<rect x="0" y="0" width="190" height="104" rx="6" fill="#fff" stroke="#9aa3b5"/>
+<text x="8" y="16" font-size="12" font-weight="700" fill="#1c2433">晶圓表面（放大）</text>
+<path id="prof" d="" fill="#8aa0bd" stroke="#2d3748" stroke-width="1.5"/>
+<text id="insetT" x="8" y="98" font-size="12" fill="#1c2433"></text>
+</g>
+</svg>
+<div class="stages" id="stages"></div>
+<div class="cap" id="cap"></div>
+</div>
+<div>
+<div class="card">
+<div class="row"><b>Preston 關係式</b><button id="pause" aria-pressed="false">暫停</button></div>
+<div class="formula">RR = K<sub>p</sub> &middot; P &middot; V</div>
+<div class="calc" id="calc"></div>
+<label for="P"><span class="row"><span>壓力 P（下壓力）</span><span class="val" id="Pv"></span></span></label>
+<input id="P" type="range" min="1" max="8" step="0.1" value="3">
+<label for="N"><span class="row"><span>平台轉速</span><span class="val" id="Nv"></span></span></label>
+<input id="N" type="range" min="20" max="120" step="1" value="60">
+<div class="note">V = 2&pi; &middot; r &middot; N / 60，其中 r = 0.15 m；K<sub>p</sub> = 1.0&times;10<sup>&minus;13</sup> Pa<sup>&minus;1</sup>（皆為示意）</div>
+<div class="big" id="RR"></div>
+<div class="calc" id="tm"></div>
+</div>
+<div class="card" style="margin-top:12px">
+<b>研磨速率與壓力的關係</b> <span class="note">（以目前的平台轉速計算）</span>
+<svg id="chart" class="chart" viewBox="0 0 400 180"></svg>
+</div>
+</div>
+</div>
+<p class="note">V 是距離平台中心 0.15 m 處晶圓與研磨墊之間的相對速度，且研磨頭與平台轉速相同。K<sub>p</sub> 取決於研磨墊、研磨液與薄膜。簡化模型：Preston 關係式指出研磨速率與壓力、相對速度成正比；它沒有納入研磨液化學、研磨墊磨耗與圖形密度，而這些在實務上同樣重要。本頁所有數值皆為示意。</p>
+</div>
+<script>
+(function(){
+var Kp=1.0e-13, R=0.15, FILM=500; // Pa^-1, m, nm
+var stagesTxt=[["全部","在研磨液的作用下，把晶圓壓在旋轉的研磨墊上，表面就被磨平。請拖曳滑桿。"],
+["1 研磨液","研磨液（研磨顆粒＋化學品）滴在旋轉的研磨墊上。"],
+["2 下壓","研磨頭把晶圓正面朝下壓在研磨墊上。壓力 P 越大，研磨越快。"],
+["3 研磨","化學作用讓表面變軟，研磨顆粒將它磨掉。凸起處受到的壓力較大，最先被磨除。"],
+["4 修整","鑽石顆粒修整器持續刮磨研磨墊，讓它保持粗糙。"]];
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='dark'||th==='light') document.documentElement.setAttribute('data-theme',th);
+var $=function(i){return document.getElementById(i)};
+var P=3,N=60,stage=0,paused=false,t=0,last=null;
+var st=$('stages');
+stagesTxt.forEach(function(s,i){var b=document.createElement('button');b.textContent=s[0];b.setAttribute('aria-pressed',i==0);b.onclick=function(){stage=i;upd();};st.appendChild(b);});
+function ps(){return P*6894.76} // psi -> Pa
+function V(){return 2*Math.PI*R*N/60}
+function RR(){return Kp*ps()*V()*1e9*60} // nm/min
+function rrAt(p,n){return Kp*p*6894.76*(2*Math.PI*R*n/60)*1e9*60}
+function chart(){
+ var c=$('chart'),h='',x0=44,x1=385,y0=140,y1=10,ymax=700;
+ function X(p){return x0+(p-1)/7*(x1-x0)} function Y(r){return y0-(r/ymax)*(y0-y1)}
+ for(var r=0;r<=700;r+=100){h+='<line x1="'+x0+'" x2="'+x1+'" y1="'+Y(r)+'" y2="'+Y(r)+'" stroke="currentColor" opacity=".12"/><text x="'+(x0-6)+'" y="'+(Y(r)+4)+'" text-anchor="end">'+r+'</text>';}
+ for(var p=1;p<=8;p++){h+='<text x="'+X(p)+'" y="'+(y0+14)+'" text-anchor="middle">'+p+'</text>';}
+ h+='<text x="'+((x0+x1)/2)+'" y="176" text-anchor="middle">壓力 P（psi）</text><text x="10" y="75" transform="rotate(-90 10 75)" text-anchor="middle">RR（nm/min）</text>';
+ h+='<polyline fill="none" stroke="var(--ac)" stroke-width="2.5" points="'+X(1)+','+Y(rrAt(1,N))+' '+X(8)+','+Y(rrAt(8,N))+'"/>';
+ h+='<circle cx="'+X(P)+'" cy="'+Y(RR())+'" r="6" fill="var(--hi)"/>';
+ c.innerHTML=h; c.style.color='var(--tx)';
+}
+function prof(removed,amp){ // film surface profile in inset (190x86)
+ var base=78-Math.max(0,(FILM-removed))/FILM*26; var d='M8 82 L8 '+base.toFixed(1);
+ for(var x=8;x<=182;x+=2){var u=(x-8)/174; var bump=Math.max(0,Math.sin(u*Math.PI*3))*amp*12; d+=' L'+x+' '+(base-bump).toFixed(1);}
+ d+=' L182 82 Z'; $('prof').setAttribute('d',d);
+}
+function set(){
+ var rr=RR(), v=V();
+ $('Pv').textContent=P.toFixed(1)+' psi（'+(P*6.895).toFixed(0)+' kPa）'; $('Nv').textContent=N+' rpm';
+ $('calc').innerHTML='P = '+ps().toFixed(0)+' Pa &nbsp; V = '+v.toFixed(2)+' m/s<br>RR = '+Kp.toExponential(1).replace('e-','&times;10<sup>&minus;')+'</sup> &times; '+ps().toFixed(0)+' &times; '+v.toFixed(2)+' = '+(Kp*ps()*v*1e9).toFixed(2)+' nm/s';
+ $('RR').textContent=rr.toFixed(0)+' nm/min';
+ $('tm').textContent='磨除 500 nm 薄膜所需時間：'+(FILM/rr).toFixed(1)+' 分鐘（示意）';
+ chart();
+ // pressure arrow
+ var w=6+P*1.6, L=26+P*5; $('pshaft').setAttribute('x',313-w/2); $('pshaft').setAttribute('width',w);
+ $('pshaft').setAttribute('y',95-L); $('pshaft').setAttribute('height',L);
+ $('phead').setAttribute('d','M'+(313-w/2-8)+' 95 L'+(313+w/2+8)+' 95 L313 118 Z');
+}
+function frame(){
+ var s=t/1000;
+ $('padscroll').style.transform='translateX('+(-(s*N*0.5)%30)+'px)';
+ $('platscroll').style.transform='translateX('+(-(s*N*0.6)%40)+'px)';
+ $('headscroll').style.transform='translateX('+(-(s*N*0.35)%14)+'px)';
+ for(var i=0;i<3;i++){var ph=((s*1.2+i/3)%1); var e=$('drop'+i); e.style.transform='translateY('+(-8+ph*62)+'px)'; e.style.opacity=ph<.1?ph*10:(ph>.9?(1-ph)*10:1);}
+ $('cond').style.transform='translateX('+(-18+32*(0.5-0.5*Math.cos(s*0.8)))+'px)';
+ var cyc=15, k=(s%cyc), sim=k*4; // process seconds
+ var removed=RR()/60*sim; // nm
+ var amp=Math.exp(-removed/120);
+ $('bumps').style.transform='scaleY('+Math.max(.08,amp)+')'; $('bumps').style.transformOrigin='320px 281px'; $('bumps').style.transformBox='view-box';
+ prof(removed,amp);
+ $('insetT').textContent='已磨除 '+removed.toFixed(0)+' nm（示意）';
+}
+function applyStage(){
+ var els=document.querySelectorAll('#scene [data-part]');
+ els.forEach(function(e){var p=+e.getAttribute('data-part'); e.classList.toggle('dim', stage!==0 && p!==stage && !(stage===3&&p===3));});
+ // stage 3 highlights wafer/pad/platen group (data-part 3), stage 2 head
+ var b=st.children; for(var i=0;i<b.length;i++) b[i].setAttribute('aria-pressed',i===stage);
+ $('cap').textContent=stagesTxt[stage][1];
+}
+function upd(){applyStage();set();frame();}
+window.__setTime=function(ms){t=ms;paused=true;$('pause').setAttribute('aria-pressed',true);$('pause').textContent='播放';frame();};
+$('P').oninput=function(){P=+this.value;set();frame();};
+$('N').oninput=function(){N=+this.value;set();frame();};
+$('pause').onclick=function(){paused=!paused;this.setAttribute('aria-pressed',paused);this.textContent=paused?'播放':'暫停';};
+if(q.get('p'))P=+q.get('p'); if(q.get('n'))N=+q.get('n'); if(q.get('stage'))stage=+q.get('stage');
+$('P').value=P;$('N').value=N;
+if(q.get('t')!==null&&q.get('t')!==''){t=+q.get('t');}
+var still=q.get('still')==='1'; var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(still||q.get('t')!==null||reduce){paused=true;$('pause').setAttribute('aria-pressed',true);$('pause').textContent='播放';}
+upd();
+function loop(ts){ if(last===null)last=ts; var dt=ts-last; last=ts; if(!paused){t+=dt;frame();} requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+})();
+</script></body></html>

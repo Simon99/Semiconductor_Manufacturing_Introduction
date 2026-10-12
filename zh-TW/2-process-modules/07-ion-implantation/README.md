@@ -27,7 +27,9 @@
 
 晶圓上有光阻覆蓋的地方，離子會被光阻擋住，所以只有光阻開口的區域會被佈植。這就是為什麼佈植前要先做一次微影。
 
-<!-- 圖：離子佈植機示意（離子源、質量分析磁鐵、加速段、掃描、晶圓） -->
+![離子佈植機互動圖解](../../../images/zh-TW/07-implanter.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch07/implanter.html)自己動手調整看看。*
 
 ---
 

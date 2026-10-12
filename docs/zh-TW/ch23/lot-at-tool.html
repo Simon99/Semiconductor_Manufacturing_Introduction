@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一批晶圓到站機台：互動圖解</title>
+<style>
+:root{--bg:#f4f6f9;--panel:#ffffff;--panel2:#eef2f7;--pstroke:#9aa6b8;--text:#1f2a37;--muted:#505b6b;--blue:#2563eb;--blueSoft:#dbe7ff;--green:#15803d;--orange:#c2610c;--red:#dc2626;--grey:#c3cbd6;--toolBody:#dfe5ec;--toolStroke:#5f6f85;--screen:#0f1b2d;--screenText:#4ade80;--screenRed:#fb7185;--chamber:#b8c3d1;--plasma:#a855f7;--wire:#6b7a8f;--white:#ffffff;--foup:#e8eefc;--page:#eef1f6;--ink:#1f2a37;--btn:#ffffff;--btnink:#1f2a37;--link:#1d4ed8}
+:root[data-theme="dark"]{--bg:#12171f;--panel:#1b2330;--panel2:#243040;--pstroke:#4a586e;--text:#e6ebf2;--muted:#a9b4c4;--blue:#60a5fa;--blueSoft:#1e3a66;--green:#4ade80;--orange:#fb923c;--red:#f87171;--grey:#3d495c;--toolBody:#2a3443;--toolStroke:#8896ab;--screen:#05090f;--screenText:#4ade80;--screenRed:#fb7185;--chamber:#3b475a;--plasma:#c084fc;--wire:#8896ab;--white:#ffffff;--foup:#2b3a58;--page:#0d1117;--ink:#e6ebf2;--btn:#1f2937;--btnink:#e6ebf2;--link:#8ab4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12171f;--panel:#1b2330;--panel2:#243040;--pstroke:#4a586e;--text:#e6ebf2;--muted:#a9b4c4;--blue:#60a5fa;--blueSoft:#1e3a66;--green:#4ade80;--orange:#fb923c;--red:#f87171;--grey:#3d495c;--toolBody:#2a3443;--toolStroke:#8896ab;--screen:#05090f;--screenText:#4ade80;--screenRed:#fb7185;--chamber:#3b475a;--plasma:#c084fc;--wire:#8896ab;--white:#ffffff;--foup:#2b3a58;--page:#0d1117;--ink:#e6ebf2;--btn:#1f2937;--btnink:#e6ebf2;--link:#8ab4ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 32px}
+a{color:var(--link)}
+h1{font-size:22px;margin:6px 0 4px}
+.lead{margin:0 0 10px;color:var(--muted)}
+.scene{background:var(--bg);border:1px solid var(--pstroke);border-radius:12px;overflow:hidden}
+.scene svg{display:block;width:100%;height:auto}
+.panel{margin-top:12px;background:var(--panel);border:1px solid var(--pstroke);border-radius:12px;padding:12px 14px}
+.panel h2{font-size:14px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:14px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--pstroke);background:var(--btn);color:var(--btnink);cursor:pointer}
+button:hover{border-color:var(--blue)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+button.fix{border-color:var(--green);color:var(--green);font-weight:700}
+button.play{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700;min-width:84px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+label.sl{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+input[type=range]{accent-color:var(--blue)}
+#scrub{flex:1;min-width:160px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:700}
+.bad{color:var(--red)}.good{color:var(--green)}
+#why{margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--panel2);border-left:5px solid var(--grey);font-size:15px;min-height:3.2em}
+#why.blocked{border-left-color:var(--red)}
+#why.ok{border-left-color:var(--green)}
+.mob{display:none;margin-top:12px}
+.mob .cap{font-weight:700;font-size:16px;margin:0 0 8px}
+.mob ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.mob li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--panel2);font-size:15px;font-weight:600}
+.mob li i{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--grey);color:#fff;text-align:center;font-style:normal;line-height:22px;font-size:14px}
+.mob li.ok i{background:var(--green)}.mob li.no i{background:var(--red)}.mob li.no{color:var(--red)}
+@media (max-width:760px){.mob{display:block}}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/6-beyond-the-fab/23-fab-systems/README.md">&larr; 回到章節</a>
+<h1>一批晶圓到站機台：破壞一項檢查，看防呆如何擋下</h1>
+<p class="lead">按下播放，看一批正常的晶圓順利通過。接著用紅色按鈕破壞一項檢查（例如 Recipe 版本錯誤、機台未通過驗證……），再跑一次。</p>
+<div class="scene">
+<svg id="scene" viewBox="0 0 960 540" role="img" aria-label="動畫圖解：一批晶圓抵達蝕刻機，經過 MES 防呆檢查、進站、加工、出站，並寫入履歷">
+<rect id="bgrect" style="fill:var(--bg)" x="0" y="0" width="960" height="540" rx="0"/><text id="t_title" style="fill:var(--text);font-size:16px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="20" y="22" text-anchor="start">一批晶圓到站：先做防呆檢查，再進站</text><rect id="chip0" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="20" y="34" width="148" height="26" rx="13"/><rect id="chipH0" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="20" y="34" width="148" height="26" rx="13"/><text id="chipT0" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="94" y="52" text-anchor="middle">1  晶圓盒到站</text><rect id="chip1" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="174" y="34" width="148" height="26" rx="13"/><rect id="chipH1" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="174" y="34" width="148" height="26" rx="13"/><text id="chipT1" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="248" y="52" text-anchor="middle">2  防呆檢查</text><rect id="chip2" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="328" y="34" width="148" height="26" rx="13"/><rect id="chipH2" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="328" y="34" width="148" height="26" rx="13"/><text id="chipT2" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="402" y="52" text-anchor="middle">3  Recipe 與進站</text><rect id="chip3" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="482" y="34" width="148" height="26" rx="13"/><rect id="chipH3" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="482" y="34" width="148" height="26" rx="13"/><text id="chipT3" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="556" y="52" text-anchor="middle">4  加工中</text><rect id="chip4" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="636" y="34" width="148" height="26" rx="13"/><rect id="chipH4" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="636" y="34" width="148" height="26" rx="13"/><text id="chipT4" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="710" y="52" text-anchor="middle">5  出站與履歷</text><rect id="chip5" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:1.2" x="790" y="34" width="148" height="26" rx="13"/><rect id="chipH5" style="fill:var(--blueSoft);stroke:var(--blue);stroke-width:2;opacity:0" x="790" y="34" width="148" height="26" rx="13"/><text id="chipT5" style="fill:var(--text);font-size:12px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="864" y="52" text-anchor="middle">6  下一站</text><text style="fill:var(--muted);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="24" y="80" text-anchor="start">天車軌道（物料搬運）</text><line style="stroke:var(--wire);stroke-width:4" x1="20" y1="88" x2="340" y2="88"/><rect id="toolbody" style="fill:var(--toolBody);stroke:var(--toolStroke);stroke-width:2.5" x="20" y="154" width="280" height="190" rx="10"/><rect style="fill:var(--toolStroke)" x="66" y="146" width="148" height="8" rx="3"/><text style="fill:var(--muted);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="140" y="170" text-anchor="middle">Load Port</text><rect style="fill:var(--screen);stroke:var(--toolStroke);stroke-width:1.5" x="34" y="206" width="140" height="74" rx="6"/><text style="fill:var(--screenText);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',ui-monospace,Menlo,Consolas,monospace,sans-serif" x="44" y="228" text-anchor="start">E07  蝕刻機</text><text id="statusT" style="fill:var(--screenText);font-size:14px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',ui-monospace,Menlo,Consolas,monospace,sans-serif" x="44" y="256" text-anchor="start">讀取編號</text><text id="statusSub" style="fill:var(--screenText);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',ui-monospace,Menlo,Consolas,monospace,sans-serif" x="44" y="272" text-anchor="start"></text><rect id="chamber" style="fill:var(--chamber);stroke:var(--toolStroke);stroke-width:2" x="190" y="190" width="95" height="110" rx="10"/><ellipse id="plasma" style="fill:var(--plasma);opacity:0" cx="237" cy="238" rx="36" ry="32"/><ellipse style="fill:var(--text);opacity:0.55" cx="237" cy="268" rx="30" ry="6"/><text style="fill:var(--muted);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="237" y="316" text-anchor="middle">腔體</text><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="34" y="332" text-anchor="start">蝕刻機</text><g id="lockG" style="opacity:0" ><path style="fill:none;stroke:var(--red);stroke-width:5" d="M222 226 v-10 a15 15 0 0 1 30 0 v10"/><rect style="fill:var(--red)" x="212" y="226" width="50" height="36" rx="6"/><circle style="fill:var(--white)" cx="237" cy="242" r="5"/><rect style="fill:var(--white)" x="235" y="244" width="4" height="10" rx="1"/></g><g id="carrier" ><rect style="fill:var(--toolStroke)" x="118" y="82" width="44" height="12" rx="3"/><line style="stroke:var(--toolStroke);stroke-width:3" x1="128" y1="94" x2="128" y2="108"/><line style="stroke:var(--toolStroke);stroke-width:3" x1="152" y1="94" x2="152" y2="108"/><rect style="fill:var(--foup);stroke:var(--blue);stroke-width:2.2" x="84" y="108" width="112" height="38" rx="7"/><rect style="fill:var(--panel);stroke:var(--blue);stroke-width:1" x="94" y="114" width="92" height="10" rx="3"/><text style="fill:var(--text);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="140" y="138" text-anchor="middle">LOT-A123</text></g><rect id="eapbox" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:2" x="345" y="160" width="120" height="90" rx="8"/><rect id="eapH" style="fill:none;stroke:var(--blue);stroke-width:3.5;opacity:0" x="345" y="160" width="120" height="90" rx="8"/><text style="fill:var(--text);font-size:14px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="192" text-anchor="middle">機台自動化</text><text style="fill:var(--text);font-size:14px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="210" text-anchor="middle">系統</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="230" text-anchor="middle">（EAP）</text><text style="fill:var(--muted);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="268" text-anchor="middle">SECS/GEM 連接機台</text><rect style="fill:var(--panel);stroke:var(--pstroke);stroke-width:2" x="345" y="290" width="120" height="50" rx="8"/><text style="fill:var(--text);font-size:14px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="312" text-anchor="middle">FDC</text><text style="fill:var(--muted);font-size:12px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="405" y="330" text-anchor="middle">感測器數據</text><rect id="mesbox" style="fill:var(--panel);stroke:var(--pstroke);stroke-width:2" x="525" y="90" width="180" height="230" rx="10"/><rect id="mesH" style="fill:none;stroke:var(--blue);stroke-width:3.5;opacity:0" x="525" y="90" width="180" height="230" rx="10"/><text style="fill:var(--text);font-size:15px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="615" y="112" text-anchor="middle">MES</text><rect style="fill:var(--panel2);stroke:var(--pstroke);stroke-width:1" x="537" y="124" width="156" height="28" rx="6"/><text style="fill:var(--text);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="547" y="143" text-anchor="start">Route：下一站</text><rect style="fill:var(--panel2);stroke:var(--pstroke);stroke-width:1" x="537" y="160" width="156" height="28" rx="6"/><text style="fill:var(--text);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="547" y="179" text-anchor="start">機台驗證資格</text><rect style="fill:var(--panel2);stroke:var(--pstroke);stroke-width:1" x="537" y="196" width="156" height="28" rx="6"/><text style="fill:var(--text);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="547" y="215" text-anchor="start">Hold 與 Q-Time</text><rect style="fill:var(--panel2);stroke:var(--pstroke);stroke-width:1" x="537" y="232" width="156" height="28" rx="6"/><text style="fill:var(--text);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="547" y="251" text-anchor="start">Recipe 版本</text><rect style="fill:var(--panel2);stroke:var(--pstroke);stroke-width:1" x="537" y="268" width="156" height="28" rx="6"/><text style="fill:var(--text);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="547" y="287" text-anchor="start">晶圓履歷</text><line style="stroke:var(--wire);stroke-width:2" x1="300" y1="190" x2="345" y2="190"/><line style="stroke:var(--wire);stroke-width:2" x1="465" y1="190" x2="525" y2="190"/><line style="stroke:var(--wire);stroke-width:2" x1="300" y1="215" x2="345" y2="215"/><line style="stroke:var(--wire);stroke-width:2" x1="465" y1="215" x2="525" y2="215"/><line style="stroke:var(--wire);stroke-width:2" x1="300" y1="315" x2="345" y2="315"/><line style="stroke:var(--wire);stroke-width:2" x1="705" y1="205" x2="725" y2="205"/><polygon style="fill:var(--wire)" points="725,205 717,200 717,210"/><g id="histArrow" ><line style="stroke:var(--wire);stroke-width:2" x1="615" y1="320" x2="615" y2="390"/><polygon style="fill:var(--wire)" points="615,398 610,390 620,390"/></g><circle id="pk_id1" style="fill:var(--orange);stroke:var(--white);stroke-width:1.5;opacity:0" cx="300" cy="190" r="7"/><circle id="pk_id2" style="fill:var(--orange);stroke:var(--white);stroke-width:1.5;opacity:0" cx="465" cy="190" r="7"/><circle id="pk_ok1" style="fill:var(--green);stroke:var(--white);stroke-width:1.5;opacity:0" cx="525" cy="215" r="7"/><rect id="pk_rec" style="fill:var(--blue);stroke:var(--white);stroke-width:1.5;opacity:0" x="338" y="208" width="14" height="14" rx="3"/><circle id="pk_out1" style="fill:var(--orange);stroke:var(--white);stroke-width:1.5;opacity:0" cx="300" cy="190" r="7"/><circle id="pk_out2" style="fill:var(--orange);stroke:var(--white);stroke-width:1.5;opacity:0" cx="465" cy="190" r="7"/><rect id="pk_hist" style="fill:var(--blue);stroke:var(--white);stroke-width:1.5;opacity:0" x="608" y="315" width="14" height="14" rx="3"/><circle id="pk_fdc" style="fill:var(--blue);stroke:var(--white);stroke-width:1.5;opacity:0" cx="300" cy="315" r="6"/><circle id="pk_no1" style="fill:var(--red);stroke:var(--white);stroke-width:1.5;opacity:0" cx="525" cy="215" r="7"/><circle id="pk_no2" style="fill:var(--red);stroke:var(--white);stroke-width:1.5;opacity:0" cx="345" cy="215" r="7"/><rect style="fill:var(--panel);stroke:var(--pstroke);stroke-width:2" x="725" y="76" width="215" height="296" rx="10"/><text style="fill:var(--text);font-size:15px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="740" y="98" text-anchor="start">防呆檢查</text><rect id="row0" style="fill:var(--panel2)" x="733" y="110" width="199" height="30" rx="6"/><g id="lg0" ><circle style="fill:var(--green)" cx="752" cy="125" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 125 l4 4.2 l8 -8.4"/></g><g id="lr0" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="125" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 120.5 l9 9 M756.5 120.5 l-9 9"/></g><g id="pend0" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="125" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="125" x2="757" y2="125"/></g><rect id="hi0" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="110" width="199" height="30" rx="6"/><text id="lab0" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="130" text-anchor="start">目前站別正確</text><rect id="row1" style="fill:var(--panel2)" x="733" y="146" width="199" height="30" rx="6"/><g id="lg1" ><circle style="fill:var(--green)" cx="752" cy="161" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 161 l4 4.2 l8 -8.4"/></g><g id="lr1" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="161" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 156.5 l9 9 M756.5 156.5 l-9 9"/></g><g id="pend1" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="161" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="161" x2="757" y2="161"/></g><rect id="hi1" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="146" width="199" height="30" rx="6"/><text id="lab1" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="166" text-anchor="start">機台已通過驗證</text><rect id="row2" style="fill:var(--panel2)" x="733" y="182" width="199" height="30" rx="6"/><g id="lg2" ><circle style="fill:var(--green)" cx="752" cy="197" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 197 l4 4.2 l8 -8.4"/></g><g id="lr2" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="197" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 192.5 l9 9 M756.5 192.5 l-9 9"/></g><g id="pend2" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="197" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="197" x2="757" y2="197"/></g><rect id="hi2" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="182" width="199" height="30" rx="6"/><text id="lab2" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="202" text-anchor="start">機台狀態正常</text><rect id="row3" style="fill:var(--panel2)" x="733" y="218" width="199" height="30" rx="6"/><g id="lg3" ><circle style="fill:var(--green)" cx="752" cy="233" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 233 l4 4.2 l8 -8.4"/></g><g id="lr3" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="233" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 228.5 l9 9 M756.5 228.5 l-9 9"/></g><g id="pend3" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="233" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="233" x2="757" y2="233"/></g><rect id="hi3" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="218" width="199" height="30" rx="6"/><text id="lab3" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="238" text-anchor="start">晶圓未被 Hold</text><rect id="row4" style="fill:var(--panel2)" x="733" y="254" width="199" height="30" rx="6"/><g id="lg4" ><circle style="fill:var(--green)" cx="752" cy="269" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 269 l4 4.2 l8 -8.4"/></g><g id="lr4" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="269" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 264.5 l9 9 M756.5 264.5 l-9 9"/></g><g id="pend4" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="269" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="269" x2="757" y2="269"/></g><rect id="hi4" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="254" width="199" height="30" rx="6"/><text id="lab4" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="274" text-anchor="start">Q-Time 未超過</text><rect id="row5" style="fill:var(--panel2)" x="733" y="290" width="199" height="30" rx="6"/><g id="lg5" ><circle style="fill:var(--green)" cx="752" cy="305" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 305 l4 4.2 l8 -8.4"/></g><g id="lr5" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="305" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 300.5 l9 9 M756.5 300.5 l-9 9"/></g><g id="pend5" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="305" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="305" x2="757" y2="305"/></g><rect id="hi5" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="290" width="199" height="30" rx="6"/><text id="lab5" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="310" text-anchor="start">污染等級相符</text><rect id="row6" style="fill:var(--panel2)" x="733" y="326" width="199" height="30" rx="6"/><g id="lg6" ><circle style="fill:var(--green)" cx="752" cy="341" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M746.5 341 l4 4.2 l8 -8.4"/></g><g id="lr6" style="opacity:0" ><circle style="fill:var(--red)" cx="752" cy="341" r="10"/><path style="fill:none;stroke:var(--white);stroke-width:2.6" d="M747.5 336.5 l9 9 M756.5 336.5 l-9 9"/></g><g id="pend6" style="opacity:0" ><circle style="fill:var(--grey)" cx="752" cy="341" r="10"/><line style="stroke:var(--muted);stroke-width:2.4" x1="747" y1="341" x2="757" y2="341"/></g><rect id="hi6" style="fill:none;stroke:var(--blue);stroke-width:2.5;opacity:0" x="733" y="326" width="199" height="30" rx="6"/><text id="lab6" style="fill:var(--text);font-size:13px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="770" y="346" text-anchor="start">Recipe 版本正確</text><rect style="fill:var(--panel);stroke:var(--pstroke);stroke-width:2" x="20" y="400" width="920" height="128" rx="10"/><text style="fill:var(--text);font-size:14px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="36" y="422" text-anchor="start">晶圓履歷（示意數值）</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="36" y="446" text-anchor="start">批號</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="150" y="446" text-anchor="start">站別</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="330" y="446" text-anchor="start">機台 / 腔體</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="500" y="446" text-anchor="start">Recipe</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="690" y="446" text-anchor="start">進站</text><text style="fill:var(--muted);font-size:12px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="820" y="446" text-anchor="start">出站</text><line style="stroke:var(--pstroke);stroke-width:1" x1="34" y1="453" x2="926" y2="453"/><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="36" y="474" text-anchor="start">LOT-A123</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="150" y="474" text-anchor="start">13  微影</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="330" y="474" text-anchor="start">L03 / -</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="500" y="474" text-anchor="start">PHOTO-RCP v7</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="690" y="474" text-anchor="start">08:10</text><text style="fill:var(--muted);font-size:13px;font-weight:400;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="820" y="474" text-anchor="start">08:31</text><g id="histA" ><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="36" y="500" text-anchor="start">LOT-A123</text><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="150" y="500" text-anchor="start">14  蝕刻</text><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="330" y="500" text-anchor="start">E07 / CH-B</text><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="500" y="500" text-anchor="start">ETCH-RCP v3</text><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="690" y="500" text-anchor="start">10:42</text></g><g id="histB" ><text style="fill:var(--text);font-size:13px;font-weight:700;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="820" y="500" text-anchor="start">11:05</text></g><rect id="histHL" style="fill:none;stroke:var(--blue);stroke-width:2;opacity:0" x="30" y="482" width="900" height="24" rx="5"/><text id="caption" style="fill:var(--text);font-size:15px;font-weight:600;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" x="20" y="388" text-anchor="start">晶圓盒降到 Load Port，機台讀取晶圓盒編號。</text>
+</svg>
+</div>
+
+<div class="panel mob" aria-live="off"><p class="cap" id="mcap"></p><ul id="mlist"></ul></div>
+<div class="grid">
+<div class="panel">
+<h2>1 &middot; 破壞一項檢查</h2>
+<div class="row" id="breaks" role="group" aria-label="破壞一項檢查"></div>
+<div class="row" style="margin-top:10px"><button class="fix" id="fix" type="button">全部修復</button></div>
+<div id="why" aria-live="polite"></div>
+</div>
+<div class="panel">
+<h2>2 &middot; 執行</h2>
+<div class="row">
+<button class="play" id="play" type="button">暫停</button>
+<button id="restart" type="button">重新開始</button>
+<button id="prev" type="button" aria-label="上一階段">&larr; 階段</button>
+<button id="next" type="button" aria-label="下一階段">階段 &rarr;</button>
+</div>
+<div class="row" style="margin-top:10px">
+<label class="sl" style="flex:1">時間 <input id="scrub" type="range" min="0" max="13000" step="10" value="0" aria-label="時間"></label>
+</div>
+<div class="row" style="margin-top:6px">
+<label class="sl">速度 <input id="speed" type="range" min="0.25" max="2" step="0.25" value="1" aria-label="速度"> <span id="speedv">1x</span></label>
+</div>
+<h2 style="margin-top:14px">目前狀態</h2>
+<dl class="kv">
+<dt>已通過檢查</dt><dd id="r_checks">-</dd>
+<dt>防呆判定</dt><dd id="r_verdict">-</dd>
+<dt>Recipe 已下載</dt><dd id="r_recipe">-</dd>
+<dt>已記錄進站</dt><dd id="r_trackin">-</dd>
+<dt>此站的履歷筆數</dt><dd id="r_hist">-</dd>
+</dl>
+</div>
+</div>
+<p class="note">本圖所有數值皆為示意（批號、機台、Recipe 名稱與時間皆為虛構）。檢查項目依本章所列，實際的晶圓廠會設定更多規則。</p>
+</div>
+<script>
+(function(){
+"use strict";
+var Q=new URLSearchParams(location.search);
+var th=Q.get("theme"); if(th==="light"||th==="dark") document.documentElement.setAttribute("data-theme",th);
+var CK0=2600,CKDT=550,CKRES=420;
+var NAMES=["目前站別正確","機台已通過驗證","機台狀態正常","晶圓未被 Hold","Q-Time 未超過","污染等級相符","Recipe 版本正確"];
+var BR=[
+ {k:"step",i:0,b:"站別錯誤",why:"Route 顯示這批晶圓的下一站不是這個蝕刻站，所以 MES 不讓它在這台進站。"},
+ {k:"qual",i:1,b:"機台未通過驗證",why:"機台 E07 尚未通過這個產品的驗證，所以這批晶圓不能在它上面加工。"},
+ {k:"state",i:2,b:"機台狀態異常",why:"機台 E07 的狀態不正常（例如停機保養中），所以任何一批晶圓都不能在它上面開始加工。"},
+ {k:"hold",i:3,b:"晶圓被 Hold",why:"這批晶圓在 MES 上顯示 Hold，解除之前不能繼續。"},
+ {k:"qtime",i:4,b:"Q-Time 超過",why:"Q-Time（兩站之間最長允許的等待時間）已超過，所以這批晶圓不能繼續。"},
+ {k:"contam",i:5,b:"污染等級不符",why:"這個晶圓盒接觸過銅，受銅污染的晶圓盒不能放上前段機台。"},
+ {k:"recipe",i:6,b:"Recipe 版本錯誤",why:"Recipe 版本與 MES 指定的不一致，所以不能開始加工。"}
+];
+var broken={}; (Q.get("break")||"").split(",").forEach(function(k){if(k)broken[k]=true;});
+var $=function(id){return document.getElementById(id);};
+function nb(){return BR.filter(function(b){return broken[b.k];}).length;}
+function isBlocked(){return nb()>0;}
+function total(){return isBlocked()?9000:13000;}
+var t=0,playing=false,speed=1,last=0;
+
+/* buttons */
+var ml=$("mlist");NAMES.forEach(function(n){var li=document.createElement("li");li.innerHTML="<i>?</i><span>"+n+"</span>";ml.appendChild(li);});
+var bw=$("breaks");
+BR.forEach(function(b){var el=document.createElement("button");el.type="button";el.textContent=b.b;el.setAttribute("aria-pressed",broken[b.k]?"true":"false");el.dataset.k=b.k;
+ el.onclick=function(){broken[b.k]=!broken[b.k];sync();restart();};bw.appendChild(el);});
+function sync(){[].forEach.call(bw.children,function(el){el.setAttribute("aria-pressed",broken[el.dataset.k]?"true":"false");});
+ $("scrub").max=total();}
+$("fix").onclick=function(){broken={};sync();restart();};
+
+function W(x,a,b,F){F=F||120;if(x<a||x>b+F)return 0;if(x<=b)return Math.min(1,(x-a)/F);return Math.max(0,1-(x-b)/F);}
+function Wh(x,a,b,F){F=F||120;if(x<a)return 0;if(x<=b)return Math.min(1,(x-a)/F);return Math.max(0,1-(x-b)/F);}
+function op(id,v){var e=$(id);if(e)e.style.opacity=v;}
+function tr(id,x,y,o){var e=$(id);if(!e)return;e.style.transform="translate("+x+"px,"+y+"px)";if(o!==undefined)e.style.opacity=o;}
+function pk(id,s,e,dx,dy){var v=(t>=s&&t<=e);tr(id,v?dx*(t-s)/(e-s):0,v?dy*(t-s)/(e-s):0,v?1:0);}
+function setFill(id,tok){var e=$(id);if(e)e.style.fill="var(--"+tok+")";}
+function setStroke(id,tok){var e=$(id);if(e)e.style.stroke="var(--"+tok+")";}
+
+var CAPS=["晶圓盒降到 Load Port，機台讀取晶圓盒編號。",
+"機台回報編號，並詢問 MES：這批晶圓可以在這台進站嗎？",
+"MES 逐項執行防呆檢查，任何一項不通過，就擋下這批晶圓。",
+"全部通過：記錄進站，並下載正確版本的 Recipe。",
+"加工進行中，感測器數據即時送往 FDC。",
+"記錄出站；機台、腔體、Recipe 與時間寫入履歷。",
+"MES 指定下一站，搬運系統把晶圓盒送走。"];
+var CAPB="防呆攔阻：MES 說不行。不下載 Recipe、不進站、不加工。";
+
+function phase(){
+ var bl=isBlocked();
+ if(t<1500)return 0; if(t<2600)return 1; if(t<6500)return 2;
+ if(bl)return 7;
+ if(t<7800)return 3; if(t<10400)return 4; if(t<11800)return 5; return 6;
+}
+function render(){
+ var bl=isBlocked(),ph=phase(),i;
+ /* carrier */
+ var cx=0,co=1;
+ if(t<1000){var p=t/1000;cx=-230*(1-p);co=p;}
+ else if(!bl&&t>=11800){var q=Math.min(1,(t-11800)/1100);cx=230*q;co=1-q;}
+ tr("carrier",cx,0,co);
+ /* status */
+ var st="讀取編號",sc="screenText";
+ if(t>=1500)st="等待 MES";
+ if(bl&&t>=6500){st="已攔阻";sc="screenRed";}
+ else if(!bl){ if(t>=6500)st="載入 Recipe"; if(t>=7800)st="加工中"; if(t>=10400)st="完成"; }
+ $("statusT").textContent=st; setFill("statusT",sc);
+ var sub="";if(bl&&t>=6500)sub="防呆";$("statusSub").textContent=sub;setFill("statusSub","screenRed");
+ /* chips */
+ for(i=0;i<6;i++){var on=false;
+  if(bl){on=(i===0&&t<1500)||(i===1&&t>=1500);}
+  else on=(i===ph);
+  op("chipH"+i,on?1:0);
+  var dim=bl&&t>=6500&&i>=2; op("chipT"+i,dim?0.4:1);}
+ /* packets */
+ pk("pk_id1",1500,2000,45,0);pk("pk_id2",2100,2600,60,0);
+ if(!bl){pk("pk_ok1",6500,7000,-60,0);pk("pk_rec",7000,7700,-45,0);pk("pk_out1",10400,10900,45,0);pk("pk_out2",10900,11400,60,0);pk("pk_hist",11000,11700,0,66);
+  pk("pk_no1",0,1,0,0);pk("pk_no2",0,1,0,0);}
+ else{pk("pk_ok1",0,1,0,0);pk("pk_rec",0,1,0,0);pk("pk_out1",0,1,0,0);pk("pk_out2",0,1,0,0);pk("pk_hist",0,1,0,0);
+  pk("pk_no1",6500,7000,-60,0);pk("pk_no2",7000,7500,-45,0);}
+ if(!bl&&t>=7800&&t<10400){tr("pk_fdc",45*(((t-7800)%650)/650),0,1);}else tr("pk_fdc",0,0,0);
+ /* plasma */
+ var pl=0;if(!bl){if(t>=7800&&t<10400)pl=0.5+0.25*Math.sin(t/110);else pl=Math.max(0,0.4*(1-(t-10400)/150))*(t>=10400?1:0);}
+ op("plasma",pl);
+ /* lock */
+ var lk=bl&&t>=7000?Math.min(1,(t-7000)/300):0;op("lockG",lk);
+ setStroke("toolbody",bl&&t>=6500?"red":"toolStroke");
+ /* lamps */
+ var passed=0,done=0;
+ for(i=0;i<7;i++){var s=CK0+i*CKDT,r=s+CKRES,bad=!!broken[BR[i].k];
+  var res=t>=r; if(res){done++;if(!bad)passed++;}
+  op("pend"+i,res?0:1);op("lg"+i,res&&!bad?1:0);op("lr"+i,res&&bad?1:0);
+  op("hi"+i,(t>=s&&t<s+500)?1:0);
+  setFill("lab"+i,res&&bad?"red":"text");}
+ /* highlights */
+ var mh=(t>=2600&&t<6500)||(!bl&&t>=10400&&t<12000);
+ var mhRed=bl&&t>=6500;
+ op("mesH",(mh||mhRed)?1:0);setStroke("mesH",mhRed?"red":"blue");
+ var eh=(t>=1500&&t<2600)||(t>=6500&&t<(bl?7500:8000))||(!bl&&t>=10400&&t<11400);
+ op("eapH",eh?1:0);
+ /* history */
+ op("histArrow",(bl&&t>=6500)?0:1);
+ op("histA",(!bl&&t>=7000)?1:0);op("histB",(!bl&&t>=11700)?1:0);
+ op("histHL",(!bl&&((t>=7000&&t<7800)||(t>=11700&&t<12600)))?1:0);
+ /* caption */
+ $("caption").textContent=(bl&&t>=6500)?CAPB:CAPS[ph===7?2:ph];
+ setFill("caption",(bl&&t>=6500)?"red":"text");
+ $("mcap").textContent=$("caption").textContent;
+ for(i=0;i<7;i++){var res2=t>=CK0+i*CKDT+CKRES,bad2=!!broken[BR[i].k],li=ml.children[i];
+  li.className=res2?(bad2?"no":"ok"):"";li.firstChild.textContent=res2?(bad2?"x":"v"):"?";}
+ /* readouts */
+ var ro=$("r_checks"),rv=$("r_verdict");
+ ro.textContent=(done<7?("目前通過 "+passed+" 項（已評估 "+done+" / 7 項）"):(passed+" / 7 項"));
+ ro.className=(done===7&&passed<7)?"bad":"";
+ if(t<6500){rv.textContent=t<2600?"等待中":"檢查中……";rv.className="";}
+ else if(bl){rv.textContent="已攔阻";rv.className="bad";}
+ else{rv.textContent="放行";rv.className="good";}
+ $("r_recipe").textContent=bl?(t>=6500?"否":"-"):(t>=7000?(t>=7700?"是":"下載中……"):"-");
+ $("r_trackin").textContent=bl?(t>=6500?"否（這批晶圓留在原處）":"-"):(t>=7000?"是":"-");
+ $("r_hist").textContent=bl?(t>=6500?"不變":"-"):(t>=11700?"2 筆（進站與出站）":(t>=7000?"1 筆（僅進站）":"-"));
+ /* why */
+ var w=$("why");
+ if(bl&&t>=6500){var m=BR.filter(function(b){return broken[b.k];}).map(function(b){return "未通過的檢查：<b>"+NAMES[b.i]+"</b>。"+b.why;}).join("<br>");
+  w.innerHTML=m+"<br>防呆每一次都會執行，不管誰在趕時間。";w.className="blocked";}
+ else if(!bl&&t>=6500){w.textContent="七項檢查全部通過，這批晶圓可以進站。現在試著破壞一項，再跑一次。";w.className="ok";}
+ else if(bl){w.textContent="已破壞："+BR.filter(function(b){return broken[b.k];}).map(function(b){return b.b;}).join("、")+"。請看檢查清單。";w.className="";}
+ else{w.textContent="目前沒有破壞任何項目。選一個紅色按鈕來破壞一項檢查。";w.className="";}
+ var sc2=$("scrub");if(document.activeElement!==sc2)sc2.value=t;
+ $("play").textContent=playing?"暫停":(t>=total()?"重播":"播放");
+}
+function frame(now){
+ if(!playing){return;}
+ var dt=now-last;last=now;t+=dt*speed;
+ if(t>=total()){t=total();playing=false;}
+ render();
+ if(playing)requestAnimationFrame(frame);
+}
+function play(){if(t>=total())t=0;playing=true;last=performance.now();requestAnimationFrame(function(n){last=n;frame(n);});render();}
+function pause(){playing=false;render();}
+function restart(){t=0;sync();play();}
+$("play").onclick=function(){if(playing)pause();else play();};
+$("restart").onclick=restart;
+$("scrub").oninput=function(){playing=false;t=Math.min(total(),+this.value);render();};
+$("speed").oninput=function(){speed=+this.value;$("speedv").textContent=speed+"x";};
+function bounds(){return isBlocked()?[0,1500,2600,6500,7500,9000]:[0,1500,2600,6500,7800,10400,11800,13000];}
+$("next").onclick=function(){playing=false;var b=bounds();for(var k=0;k<b.length;k++){if(b[k]>t+1){t=b[k];break;}}render();};
+$("prev").onclick=function(){playing=false;var b=bounds();var n=0;for(var k=0;k<b.length;k++){if(b[k]<t-1)n=b[k];}t=n;render();};
+window.__setTime=function(ms){playing=false;sync();t=Math.max(0,Math.min(total(),+ms));render();};
+sync();
+var still=Q.get("still")==="1";
+if(Q.has("t")){t=+Q.get("t");playing=false;render();}
+else if(still){t=total();render();}
+else{render();play();}
+if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches&&!Q.has("t")&&!Q.has("still")){playing=false;t=isBlocked()?total():total();render();}
+})();
+</script>
+</body>
+</html>

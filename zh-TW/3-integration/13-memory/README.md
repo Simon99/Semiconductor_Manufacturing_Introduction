@@ -34,7 +34,9 @@ DRAM 製程最大的挑戰在電容。單元的面積越來越小，但電容仍
 
 為了節省面積，DRAM 的電晶體閘極也被埋進矽裡，稱為**埋入式字元線**。
 
-<!-- 圖：DRAM 記憶單元剖面（埋入式字元線、位元線、高聳的圓柱電容） -->
+![DRAM 1T1C 記憶單元的動態剖面：埋入式字元線、位元線與高聳的圓柱電容，依序展示寫入 1、保持期間的漏電、刷新、讀取與寫入 0。](../../../images/zh-TW/13-dram-cell.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch13/dram-cell.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜DRAM（Dynamic Random Access Memory，動態隨機存取記憶體）**
@@ -62,7 +64,9 @@ NAND Flash 把電荷存放在一層特殊的儲存層中，斷電後電荷仍然
 
 很多 3D NAND 還會把周邊電路做在記憶陣列的**正下方**，進一步節省面積。
 
-<!-- 圖：3D NAND 剖面（交替堆疊層、垂直通道孔、邊緣的階梯結構） -->
+![氧化層與字元線金屬層交替堆疊，垂直的通道孔內有儲存層與通道，邊緣為帶接觸窗的階梯結構，下方為周邊電路。](../../../images/zh-TW/13-3d-nand.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch13/3d-nand.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜3D NAND**

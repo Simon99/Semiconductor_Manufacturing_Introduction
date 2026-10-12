@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>缺陷檢測：靈敏度與誤報</title>
+<style>
+:root{--bg:#f1f4f9;--card:#fff;--ink:#1c2a3e;--mut:#4a5b73;--line:#b6c2d3;--acc:#e07a1f;--die:#e9eef5;--dieL:#9aa8bb;--waf:#c9d3e0;--red:#d6342c;--grn:#2f9e6e;--amb:#d08a00;--sem:#16202f}
+:root[data-theme=dark]{--bg:#0f1622;--card:#182233;--ink:#e8eef7;--mut:#a9b8cc;--line:#34445c;--acc:#ff9a3d;--die:#24324a;--dieL:#3d4f6c;--waf:#2c3b55;--red:#ff6b61;--grn:#4cc896;--amb:#f2b73a;--sem:#0a0f18}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1622;--card:#182233;--ink:#e8eef7;--mut:#a9b8cc;--line:#34445c;--acc:#ff9a3d;--die:#24324a;--dieL:#3d4f6c;--waf:#2c3b55;--red:#ff6b61;--grn:#4cc896;--amb:#f2b73a;--sem:#0a0f18}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--acc)}.wrap{max-width:1240px;margin:0 auto;padding:10px 16px 20px}
+h1{font-size:21px;margin:6px 0 2px}.sub{color:var(--mut);margin:0 0 10px}
+.main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+@media(max-width:820px){.main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+svg{width:100%;height:auto;display:block}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+button{font:inherit;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}
+button.on{border-color:var(--acc);background:var(--acc);color:#fff;font-weight:700}
+.desc{min-height:3.2em;margin:4px 0 8px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.read{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.read div{border:1px solid var(--line);border-radius:8px;padding:6px 8px}.read b{font-size:20px;display:block}.read span{color:var(--mut);font-size:13px}
+.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-top:6px}
+.lg i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.note{font-size:13px;color:var(--mut);margin-top:8px}
+</style></head><body><div class="wrap">
+<div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/15-metrology/README.md">&larr; 回到章節</a></div>
+<h1>缺陷檢測：掃描的靈敏度該設多高？</h1>
+<p class="sub">掃描、比對相鄰晶粒、標出差異、用電子顯微鏡複檢。拖動滑桿：靈敏度越高，抓到的真缺陷越多，但誤報也會增加。所有數字皆為示意。</p>
+<div class="main">
+<div class="card" style="max-width:560px;margin:0 auto;width:100%"><svg id="w" viewBox="0 0 480 480" role="img" aria-label="晶圓、晶粒、掃描光束與被標記的位置"></svg>
+<div class="lg"><span><i style="background:var(--red)"></i>抓到的真缺陷</span><span><i style="background:none;border:2px dashed var(--mut)"></i>漏掉的真缺陷</span><span><i style="background:var(--amb)"></i>誤報</span></div></div>
+<div>
+<div class="card">
+<label for="sl"><b>靈敏度</b>（晶粒間差異訊號的門檻值）</label>
+<input id="sl" type="range" min="0" max="100" value="50">
+<div class="row" style="justify-content:space-between;font-size:13px;color:var(--mut)"><span>低：標記少</span><span id="th"></span><span>高：標記多</span></div>
+<div class="read"><div><b id="r1"></b><span>抓到的真缺陷</span></div><div><b id="r2"></b><span>漏掉的真缺陷</span></div><div><b id="r3"></b><span>誤報</span></div><div><b id="r4"></b><span>SEM 複檢佇列</span></div></div>
+<div class="note" id="msg"></div>
+<div class="card" style="margin-top:12px">
+<div class="stages" id="st"></div>
+<div class="desc" id="desc"></div>
+<div class="row"><button id="pp">暫停</button><span id="ph" style="color:var(--mut);font-size:13px"></span></div>
+<svg id="v" viewBox="0 0 420 190" style="margin-top:6px" role="img" aria-label="晶粒比對與 SEM 複檢面板"></svg>
+</div>
+</div></div></div>
+<p class="note">示意模型：24 個訊號強度各異的真缺陷，加上 150 個雜訊干擾點。訊號超過門檻的點就會被標記。實際的檢測機台處理的數量大得多，過濾方式也更聰明；這裡只是示範取捨關係。</p>
+</div>
+<script>
+(function(){
+var q=new URLSearchParams(location.search),th=q.get('theme');if(th)document.documentElement.setAttribute('data-theme',th);
+function rng(s){return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+var R=rng(7),CX=240,CY=240,RAD=225,PW=30,PH=26,dies=[];
+for(var y=CY-RAD;y<CY+RAD;y+=PH)for(var x=CX-RAD;x<CX+RAD;x+=PW){var mx=x+PW/2-CX,my=y+PH/2-CY;if(Math.hypot(Math.abs(mx)+PW/2,Math.abs(my)+PH/2)<RAD+6)dies.push([x,y])}
+var TN={particle:'微粒',scratch:'刮傷',bridging:'橋接'};var types=['particle','scratch','bridging'],real=[],noise=[];
+function pos(){for(;;){var a=R()*6.283,r=Math.sqrt(R())*(RAD-18);return [CX+r*Math.cos(a),CY+r*Math.sin(a)]}}
+for(var i=0;i<24;i++){var p=pos();real.push({x:p[0],y:p[1],s:1.4+R()*3.4,t:types[i%3]})}
+for(var j=0;j<150;j++){var p=pos();noise.push({x:p[0],y:p[1],s:0.9+(-Math.log(1-R()))*0.75})}
+var all=real.map(function(d,i){return{x:d.x,y:d.y,s:d.s,t:d.t,real:1}}).concat(noise.map(function(d){return{x:d.x,y:d.y,s:d.s,t:'nuisance',real:0}}));
+var T=2.8,flag=[],stage=0,t=0,playing=true,STG=4000;
+var names=['1 掃描','2 比對','3 標記','4 複檢'];
+var descs=['機台以光或電子束掃過整片晶圓，為每顆晶粒取像。','將每顆晶粒與相鄰晶粒比對。每顆晶粒應該長得一樣，所以有差異的地方就可能是缺陷。','強度超過門檻的差異會被標在缺陷分佈圖上。門檻值就是靈敏度設定。','被標記的位置會用電子顯微鏡拍攝近照並分類（微粒、刮傷、橋接）。誤報也會被複檢。'];
+var stEl=document.getElementById('st');names.forEach(function(n,i){var b=document.createElement('button');b.textContent=n;b.onclick=function(){t=i*STG+300;playing=false;sync();draw()};stEl.appendChild(b)});
+var ppb=document.getElementById('pp');ppb.onclick=function(){playing=!playing;sync()};
+function sync(){ppb.textContent=playing?'暫停':'播放';[].forEach.call(stEl.children,function(b,i){b.className=i===stage?'on':''});document.getElementById('desc').textContent=descs[stage];document.getElementById('ph').textContent='階段 '+(stage+1)+'／4'}
+var sl=document.getElementById('sl');
+function model(){var s=+sl.value;T=4.6-s*0.036;flag=all.filter(function(d){return d.s>T});
+var c=flag.filter(function(d){return d.real}).length,fa=flag.length-c;
+document.getElementById('th').textContent='門檻值 '+T.toFixed(1)+'（示意單位）';
+document.getElementById('r1').textContent=c+' / 24';document.getElementById('r2').textContent=24-c;document.getElementById('r3').textContent=fa;document.getElementById('r4').textContent=flag.length;
+document.getElementById('msg').textContent=fa>c?'超過一半的標記是誤報。複檢時間被浪費，不過漏網的缺陷很少。':(c<12?'許多真缺陷被漏掉。複檢很快，但問題會在沒被發現的情況下溜過去。':'中間的設定：大部分真缺陷都抓得到，誤報也在可控範圍內。')}
+function C(v){return getComputedStyle(document.documentElement).getPropertyValue(v)||'#888'}
+function sem(g,x,y,w,h,type){var s='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="5" fill="'+C('--sem')+'"/>',m=x+w/2,n=y+h/2;
+if(type==='particle')s+='<path d="M'+m+' '+(n-18)+' q18 0 15 16 q4 18 -14 20 q-22 2 -22 -14 q-2 -20 21 -22z" fill="#9fb2c9"/>';
+else if(type==='scratch')s+='<rect x="'+(x+6)+'" y="'+(y+10)+'" width="'+(w-12)+'" height="8" fill="#4f6b8c"/><rect x="'+(x+6)+'" y="'+(y+h-18)+'" width="'+(w-12)+'" height="8" fill="#4f6b8c"/><path d="M'+(x+10)+' '+(y+h-8)+' L'+(x+w-10)+' '+(y+8)+'" stroke="#d5e0ee" stroke-width="3"/>';
+else if(type==='bridging')s+='<rect x="'+(x+6)+'" y="'+(y+8)+'" width="'+(w-12)+'" height="14" fill="#4f6b8c"/><rect x="'+(x+6)+'" y="'+(y+h-22)+'" width="'+(w-12)+'" height="14" fill="#4f6b8c"/><rect x="'+(m-10)+'" y="'+(y+20)+'" width="20" height="'+(h-40)+'" fill="#d5e0ee"/>';
+else s+='<rect x="'+(x+6)+'" y="'+(y+8)+'" width="'+(w-12)+'" height="14" fill="#4f6b8c"/><rect x="'+(x+6)+'" y="'+(y+h-22)+'" width="'+(w-12)+'" height="14" fill="#4f6b8c"/><text x="'+m+'" y="'+(n+4)+'" fill="#d5e0ee" font-size="12" text-anchor="middle">圖形正常</text>';
+return s}
+function die(x,y,bad,lab){var s='<rect x="'+x+'" y="'+y+'" width="60" height="60" rx="3" fill="'+C('--die')+'" stroke="'+C('--mut')+'" stroke-width="1.5"/>';for(var k=0;k<4;k++)s+='<rect x="'+(x+7)+'" y="'+(y+8+k*13)+'" width="46" height="6" fill="'+C('--dieL')+'"/>';if(bad)s+='<circle cx="'+(x+38)+'" cy="'+(y+30)+'" r="6" fill="'+C('--red')+'"/>';return s+'<text x="'+(x+30)+'" y="'+(y+76)+'" font-size="12" text-anchor="middle" fill="'+C('--mut')+'">'+lab+'</text>'}
+function draw(){var p=(t%STG)/STG;stage=Math.floor(t/STG)%4;sync();
+var s='<circle cx="'+CX+'" cy="'+CY+'" r="'+RAD+'" fill="'+C('--waf')+'" stroke="'+C('--mut')+'" stroke-width="2"/><clipPath id="cw"><circle cx="'+CX+'" cy="'+CY+'" r="'+RAD+'"/></clipPath><g clip-path="url(#cw)">';
+var by=CY-RAD+p*2*RAD;
+dies.forEach(function(d,i){var f=C('--die');if(stage===0&&d[1]+PH/2<by)f=C('--dieL');s+='<rect x="'+(d[0]+1)+'" y="'+(d[1]+1)+'" width="'+(PW-2)+'" height="'+(PH-2)+'" fill="'+f+'" stroke="'+C('--dieL')+'" stroke-width=".6"/>'});
+var cmpIdx=Math.floor(p*dies.length);
+if(stage===0)s+='<rect x="0" y="'+(by-7)+'" width="480" height="14" fill="'+C('--grn')+'" fill-opacity=".55"/><rect x="0" y="'+(by-1.5)+'" width="480" height="3" fill="'+C('--grn')+'"/>';
+if(stage===1){var a=dies[cmpIdx],b=dies[Math.min(cmpIdx+1,dies.length-1)];s+='<rect x="'+a[0]+'" y="'+a[1]+'" width="'+PW+'" height="'+PH+'" fill="none" stroke="'+C('--acc')+'" stroke-width="3"/><rect x="'+b[0]+'" y="'+b[1]+'" width="'+PW+'" height="'+PH+'" fill="none" stroke="'+C('--acc')+'" stroke-width="3"/>'}
+s+='</g>';
+var queue=flag;
+if(stage>=2){var shown=stage===2?Math.ceil(flag.length*Math.min(1,p*1.6+0.05)):flag.length;
+all.forEach(function(d){if(d.s>T){}});
+for(var i=0;i<shown;i++){var d=flag[i];if(d.real)s+='<circle cx="'+d.x+'" cy="'+d.y+'" r="8" fill="none" stroke="'+C('--red')+'" stroke-width="3"/><circle cx="'+d.x+'" cy="'+d.y+'" r="2.5" fill="'+C('--red')+'"/>';else s+='<circle cx="'+d.x+'" cy="'+d.y+'" r="5" fill="'+C('--amb')+'"/>'}
+real.forEach(function(d){if(d.s<=T)s+='<circle cx="'+d.x+'" cy="'+d.y+'" r="8" fill="none" stroke="'+C('--mut')+'" stroke-width="2" stroke-dasharray="3 3"/>'})}
+var cur=null;if(stage===3&&flag.length){var k=Math.min(flag.length-1,Math.floor(p*flag.length));cur=flag[k];s+='<circle cx="'+cur.x+'" cy="'+cur.y+'" r="14" fill="none" stroke="'+C('--acc')+'" stroke-width="3"/>'}
+document.getElementById('w').innerHTML=s;
+var v='';
+if(stage<=1){var bad=stage===1;v+=die(30,20,false,'晶粒 n-1')+die(110,20,bad,'晶粒 n')+die(190,20,false,'晶粒 n+1');
+v+='<text x="30" y="125" font-size="13" fill="'+C('--mut')+'">'+(stage===1?'差異影像':'相鄰晶粒看起來相同')+'</text><rect x="30" y="134" width="150" height="48" rx="5" fill="'+C('--sem')+'"/>';
+if(stage===1)v+='<circle cx="'+(104)+'" cy="158" r="'+(7+3*Math.sin(t/200))+'" fill="#ffd24a"/><circle cx="104" cy="158" r="3" fill="#fff"/>';
+v+='<text x="205" y="150" font-size="13" fill="'+C('--mut')+'">'+(stage===1?'只有缺陷處亮起':'掃描中⋯⋯')+'</text>'}
+else if(stage===2){v+='<text x="14" y="40" font-size="14" fill="'+C('--ink')+'">已標記：'+flag.length+' 處</text><text x="14" y="64" font-size="13" fill="'+C('--mut')+'">'+flag.filter(function(d){return d.real}).length+' 個真缺陷，'+flag.filter(function(d){return!d.real}).length+' 個誤報</text><text x="14" y="88" font-size="13" fill="'+C('--mut')+'">缺陷分佈圖記錄每個標記的位置。</text>'}
+else{if(cur){v+=sem(0,14,12,150,110,cur.t)+'<text x="180" y="42" font-size="14" fill="'+C('--ink')+'">第 '+(flag.indexOf(cur)+1)+'／'+flag.length+' 處</text><text x="180" y="66" font-size="14" font-weight="700" fill="'+(cur.real?C('--red'):C('--amb'))+'">'+(cur.real?'真缺陷：'+TN[cur.t]:'誤報')+'</text><text x="180" y="90" font-size="13" fill="'+C('--mut')+'">'+(cur.real?'由近照分類':'沒有問題；複檢時間白費')+'</text>'}else v+='<text x="14" y="50" font-size="14" fill="'+C('--mut')+'">此門檻下沒有任何標記。</text>'}
+document.getElementById('v').innerHTML=v}
+sl.oninput=function(){model();draw()};
+window.__setTime=function(ms){t=((ms%(4*STG))+4*STG)%(4*STG);playing=false;sync();draw()};
+var last=0;function tick(ts){if(playing){t=(t+(ts-last))%(4*STG);draw()}last=ts;requestAnimationFrame(tick)}
+model();var qt=q.get('t');if(qt!==null)t=+qt;if(q.get('still')==='1'||qt!==null)playing=false;
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches&&qt===null){t=2*STG+STG*0.9;playing=false}
+sync();draw();requestAnimationFrame(function(ts){last=ts;requestAnimationFrame(tick)});
+})();
+</script></body></html>

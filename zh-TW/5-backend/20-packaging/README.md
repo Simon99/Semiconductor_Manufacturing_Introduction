@@ -32,7 +32,9 @@
 7. **植球或電鍍接腳**：在底部植上錫球，或在接腳表面電鍍。
 8. **切單**：把一整條基板上的封裝切成一顆顆獨立的晶片。
 
-<!-- 圖：打線封裝剖面（晶粒、金屬線、導線架或基板、封膠） -->
+![動畫：劈刀將金線或銅線從晶粒焊墊接到導線架接腳，接著以封膠材料包覆封裝。](../../../images/zh-TW/20-wire-bond.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch20/wire-bond.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜打線接合（Wire Bonding）**
@@ -50,7 +52,9 @@
 
 和打線相比，覆晶的連接路徑更短，可以在晶粒整個表面布滿接點，電性和散熱也更好，所以處理器和繪圖晶片大多採用覆晶。
 
-<!-- 圖：覆晶封裝剖面（翻轉的晶粒、凸塊、底部填充、基板、錫球） -->
+![帶有凸塊的晶粒翻轉成正面朝下，放到基板上，縫隙填入底部填充膠，最後在底面植上錫球。](../../../images/zh-TW/20-flip-chip.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch20/flip-chip.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜覆晶（Flip Chip）**

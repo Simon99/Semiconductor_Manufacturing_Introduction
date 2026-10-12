@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">管制圖：一個失控點與一段偏移的連續點</title>
+<desc id="d">依時間順序畫出的量測值，搭配中心線、管制界限與較寬的規格界限。有一點超出管制上限；之後連續九點都位於中心線上方。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
+.lbl{font-size:13px;fill:#dbe7f5}.sm{font-size:12px;fill:#9fb3cc}.h{font-size:20px;font-weight:700;fill:#f1f6fc}
+.ring{transform-box:fill-box;transform-origin:center;animation:ring 3s ease-out infinite}
+.brk{animation:brk 6s ease-in-out infinite}
+.scan{animation:scan 12s linear infinite}
+.c1{animation:c1 12s infinite}.c2{animation:c2 12s infinite}
+@keyframes ring{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.2);opacity:0}}
+@keyframes brk{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes scan{0%{transform:translateX(0)}100%{transform:translateX(690px)}}
+@keyframes c1{0%,100%{opacity:1}30%,45%{opacity:.6}}
+@keyframes c2{0%,100%{opacity:1}60%,75%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.ring,.brk,.scan,.c1,.c2{animation:none}.ring{opacity:0}.scan{display:none}}
+</style>
+<rect width="960" height="540" rx="14" fill="#0f1b2d"/>
+<rect x="6" y="6" width="948" height="528" rx="10" fill="none" stroke="#2b4160" stroke-width="2"/>
+<circle cx="22" cy="22" r="6" fill="#2b4160"/><path d="M18 22 H26" stroke="#0f1b2d" stroke-width="2"/>
+<circle cx="938" cy="22" r="6" fill="#2b4160"/><path d="M934 22 H942" stroke="#0f1b2d" stroke-width="2"/>
+<circle cx="22" cy="518" r="6" fill="#2b4160"/><path d="M18 518 H26" stroke="#0f1b2d" stroke-width="2"/>
+<circle cx="938" cy="518" r="6" fill="#2b4160"/><path d="M934 518 H942" stroke="#0f1b2d" stroke-width="2"/>
+<text class="h" x="40" y="46">管制圖：每批一個量測值，依時間順序排列</text>
+<text class="sm" x="40" y="68">示意數據。縱軸單位為 σ（正常製程的標準差）。</text>
+<rect x="70" y="84" width="720" height="32.72727272727272" fill="#f87171" opacity=".14"/>
+<rect x="70" y="411.27272727272725" width="720" height="32.72727272727275" fill="#f87171" opacity=".14"/>
+<rect x="70" y="116.72727272727272" width="720" height="49.09090909090909" fill="#fbbf24" opacity=".08"/>
+<rect x="70" y="362.1818181818182" width="720" height="49.090909090909065" fill="#fbbf24" opacity=".08"/>
+<line x1="70" x2="790" y1="427.6363636363636" y2="427.6363636363636" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="394.90909090909093" y2="394.90909090909093" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="362.1818181818182" y2="362.1818181818182" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="329.45454545454544" y2="329.45454545454544" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="296.72727272727275" y2="296.72727272727275" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="264.0" y2="264.0" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="231.27272727272728" y2="231.27272727272728" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="198.54545454545456" y2="198.54545454545456" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="165.8181818181818" y2="165.8181818181818" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="133.0909090909091" y2="133.0909090909091" stroke="#22344d" stroke-width="1"/>
+<line x1="70" x2="790" y1="100.36363636363636" y2="100.36363636363636" stroke="#22344d" stroke-width="1"/>
+<rect x="70" y="84" width="720" height="360" fill="none" stroke="#3a5478"/>
+<line x1="70" x2="790" y1="116.72727272727272" y2="116.72727272727272" stroke="#f87171" stroke-width="2.5"/>
+<text class="lbl" x="800" y="117.72727272727272" fill="#f87171" style="fill:#f87171;font-weight:700">USL</text>
+<text class="sm" x="800" y="132.72727272727272">規格界限（產品）</text>
+<line x1="70" x2="790" y1="165.8181818181818" y2="165.8181818181818" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
+<text class="lbl" x="800" y="166.8181818181818" fill="#fbbf24" style="fill:#fbbf24;font-weight:700">UCL</text>
+<text class="sm" x="800" y="181.8181818181818">平均值 + 3σ</text>
+<line x1="70" x2="790" y1="264.0" y2="264.0" stroke="#7dd3fc" stroke-width="2"/>
+<text class="lbl" x="800" y="265.0" fill="#7dd3fc" style="fill:#7dd3fc;font-weight:700">中心線</text>
+<text class="sm" x="800" y="280.0">製程平均值</text>
+<line x1="70" x2="790" y1="362.1818181818182" y2="362.1818181818182" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
+<text class="lbl" x="800" y="363.1818181818182" fill="#fbbf24" style="fill:#fbbf24;font-weight:700">LCL</text>
+<text class="sm" x="800" y="378.1818181818182">平均值 − 3σ</text>
+<line x1="70" x2="790" y1="411.27272727272725" y2="411.27272727272725" stroke="#f87171" stroke-width="2.5"/>
+<text class="lbl" x="800" y="412.27272727272725" fill="#f87171" style="fill:#f87171;font-weight:700">LSL</text>
+<text class="sm" x="800" y="427.27272727272725">規格界限（產品）</text>
+<polyline points="85.0,250.9 110.6,290.2 136.1,228.0 161.7,273.8 187.2,241.1 212.8,303.3 238.3,257.5 263.9,234.5 289.4,283.6 315.0,267.3 340.6,221.5 366.1,296.7 391.7,247.6 417.2,277.1 442.8,149.5 468.3,286.9 493.9,244.4 519.4,270.5 545.0,237.8 570.6,224.7 596.1,241.1 621.7,211.6 647.2,231.3 672.8,247.6 698.3,218.2 723.9,234.5 749.4,205.1 775.0,228.0" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round"/>
+<g class="scan"><rect x="79" y="84" width="12" height="360" fill="#7dd3fc" opacity=".13"/><line x1="85" x2="85" y1="84" y2="444" stroke="#7dd3fc" stroke-width="1.5" opacity=".6"/></g>
+<circle cx="85.0" cy="250.9" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="110.6" cy="290.2" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="136.1" cy="228.0" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="161.7" cy="273.8" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="187.2" cy="241.1" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="212.8" cy="303.3" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="238.3" cy="257.5" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="263.9" cy="234.5" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="289.4" cy="283.6" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="315.0" cy="267.3" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="340.6" cy="221.5" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="366.1" cy="296.7" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="391.7" cy="247.6" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="417.2" cy="277.1" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="468.3" cy="286.9" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="493.9" cy="244.4" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="519.4" cy="270.5" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle cx="545.0" cy="237.8" r="5" fill="#e2e8f0" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M570.6 217.7 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M596.1 234.1 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M621.7 204.6 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M647.2 224.3 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M672.8 240.6 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M698.3 211.2 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M723.9 227.5 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M749.4 198.1 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<path d="M775.0 221.0 l7 7 l-7 7 l-7 -7z" fill="#a78bfa" stroke="#0f1b2d" stroke-width="1.5"/>
+<circle class="ring" cx="442.8" cy="149.5" r="12" fill="none" stroke="#ff5d5d" stroke-width="3"/>
+<circle cx="442.8" cy="149.5" r="8" fill="#ff5d5d" stroke="#fff" stroke-width="2"/>
+<g class="c1"><line x1="452.8" y1="145.5" x2="496.8" y2="127.5" stroke="#ff9d9d" stroke-width="1.5"/>
+<text class="lbl" x="500.8" y="125.5" style="fill:#ffb4b4;font-weight:700">① 單點超出 UCL</text>
+<text class="sm" x="500.8" y="141.5">OOC：雖仍在規格內，仍須立即處理</text></g>
+<g class="brk c2"><path d="M560.6 274.4 V280.4 H785.0 V274.4" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<text class="lbl" x="672.8" y="299.4" text-anchor="middle" style="fill:#c9bcff;font-weight:700">② 連續 9 點位於中心線上方</text>
+<text class="sm" x="672.8" y="315.4" text-anchor="middle">平均值已偏移，但每一點都仍在界限內</text></g>
+<text class="sm" x="70" y="464">較早</text><text class="sm" x="790" y="464" text-anchor="end">較晚（時間順序）</text>
+<circle cx="46" cy="492" r="5" fill="#e2e8f0"/><text class="sm" x="58" y="496">正常點</text>
+<circle cx="168" cy="492" r="6" fill="#ff5d5d"/><text class="sm" x="180" y="496">失控（OOC）</text>
+<path d="M322 485 l7 7 l-7 7 l-7 -7z" fill="#a78bfa"/><text class="sm" x="336" y="496">偏移連續點</text>
+<line x1="480" x2="506" y1="492" y2="492" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/><text class="sm" x="512" y="496">管制界限（來自製程）</text>
+<line x1="716" x2="742" y1="492" y2="492" stroke="#f87171" stroke-width="2.5"/><text class="sm" x="748" y="496">規格界限（來自產品）</text>
+<text class="sm" x="40" y="522">管制界限位於規格界限之內，因此能提早示警。圖中的規則（單點超出 ±3σ；同側連續 9 點）為常見慣例。</text>
+</svg>

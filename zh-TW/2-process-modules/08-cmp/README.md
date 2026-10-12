@@ -32,7 +32,9 @@ CMP 機台的主要零件：
 
 研磨時，研磨液中的化學品先讓晶圓表面變軟或起反應，研磨顆粒再把這層變軟的材料磨掉。凸起的地方受到的壓力比較大，磨得比較快，所以表面會越磨越平。
 
-<!-- 圖：CMP 機台示意（旋轉平台、研磨墊、研磨頭、研磨液噴嘴、修整器） -->
+![化學機械研磨（CMP）機台的側視圖。研磨頭把晶圓正面朝下壓在旋轉的研磨墊上，研磨液持續滴落，修整器刮磨研磨墊。研磨速率遵循 Preston 關係式 RR = Kp × P × V。](../../../images/zh-TW/08-cmp-tool.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch08/cmp-tool.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜CMP（Chemical Mechanical Planarization，化學機械研磨）**
@@ -67,7 +69,9 @@ CMP 也需要終點偵測。當研磨從一種材料磨到另一種材料時，�
 
 CMP 並不是在任何地方都磨得一樣多。軟的材料比硬的材料容易磨，圖形密的區域和疏的區域也磨得不一樣，因此會出現兩種典型的問題：
 
-<!-- 圖：Dishing 與 Erosion 的剖面對照 -->
+![剖面動畫：隨著過度研磨時間增加，較寬的銅導線中間逐漸凹陷（碟化），密集排列的銅導線整個區域則沉到周圍表面以下（侵蝕）。](../../../images/zh-TW/08-dishing-erosion.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch08/dishing-erosion.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜碟化與侵蝕（Dishing / Erosion）**

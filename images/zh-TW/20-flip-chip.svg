@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" role="img" aria-labelledby="t d">
+<title id="t">覆晶封裝剖面：組裝順序</title>
+<desc id="d">帶有凸塊的晶粒翻轉成正面朝下，放到基板上，縫隙填入底部填充膠，最後在底面植上錫球。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1d2a38}
+.ti{font-size:24px;font-weight:700}.sub{font-size:14px;fill:#55657a}
+.lb{font-size:16px;font-weight:600}.ls{font-size:13px;font-weight:400;fill:#4a5a6e}
+.cap{font-size:20px;font-weight:600;text-anchor:middle}
+.ld{stroke:#1d2a38;stroke-width:1.5;fill:none}
+.scene{animation:sc 14s infinite linear;opacity:1}
+.die{animation:die 14s infinite;transform-origin:480px 220px}
+.uf{animation:uf 14s infinite linear;transform-origin:222px 276px}
+.bl{animation:bl 14s infinite}
+.lab{animation:lab 14s infinite linear}
+.ht{animation:ht 14s infinite linear}
+.pg{animation:pg 14s infinite linear;transform-origin:80px 518px}
+.c1,.c2,.c3,.c4{opacity:0}.c5{opacity:1}
+.c1{animation:c1 14s infinite linear}.c2{animation:c2 14s infinite linear}
+.c3{animation:c3 14s infinite linear}.c4{animation:c4 14s infinite linear}.c5{animation:c5 14s infinite linear}
+@keyframes sc{0%{opacity:0}2%{opacity:1}96%{opacity:1}100%{opacity:0}}
+@keyframes die{0%,12%{transform:translateY(-70px) scaleY(-1);animation-timing-function:ease-in-out}
+30%{transform:translateY(-70px) scaleY(1);animation-timing-function:ease-in}
+46%,100%{transform:translateY(0) scaleY(1)}}
+@keyframes uf{0%,46%{transform:scaleX(0)}68%,100%{transform:scaleX(1)}}
+@keyframes bl{0%,68%{opacity:0;transform:translateY(-16px)}76%,100%{opacity:1;transform:translateY(0)}}
+@keyframes lab{0%,50%{opacity:0}58%,100%{opacity:1}}
+@keyframes ht{0%,80%{opacity:0}88%,100%{opacity:1}}
+@keyframes pg{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes c1{0%,12%{opacity:1}14%,100%{opacity:0}}
+@keyframes c2{0%,12%{opacity:0}14%,30%{opacity:1}32%,100%{opacity:0}}
+@keyframes c3{0%,30%{opacity:0}32%,46%{opacity:1}48%,100%{opacity:0}}
+@keyframes c4{0%,46%{opacity:0}48%,67%{opacity:1}69%,100%{opacity:0}}
+@keyframes c5{0%,67%{opacity:0}69%,97%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.scene,.die,.uf,.bl,.lab,.ht,.pg,.c1,.c2,.c3,.c4,.c5{animation:none!important}}
+</style>
+<rect width="960" height="540" fill="#f6f8fb"/>
+<text class="ti" x="40" y="38">覆晶封裝剖面</text>
+<text class="sub" x="40" y="60">示意，未依比例</text>
+<g class="scene">
+
+<g class="ht">
+<path d="M390 182 V148 M382 158 L390 146 L398 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M480 182 V148 M472 158 L480 146 L488 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M570 182 V148 M562 158 L570 146 L578 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="ls" x="480" y="136" text-anchor="middle" style="fill:#b23b37">熱量從晶粒背面散出</text></g>
+<g id="substrate"><rect x="200" y="292" width="560" height="52" rx="3" fill="#7fb98f" stroke="#3f7a52" stroke-width="1.5"/>
+<polyline points="298.0,296 298.0,310 235.0,326 235.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="282.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="215.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="350.0,296 350.0,310 305.0,326 305.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="334.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="285.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="402.0,296 402.0,310 375.0,326 375.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="386.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="355.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="454.0,296 454.0,310 445.0,326 445.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="438.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="425.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="506.0,296 506.0,310 515.0,326 515.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="490.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="495.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="558.0,296 558.0,310 585.0,326 585.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="542.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="565.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="610.0,296 610.0,310 655.0,326 655.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="594.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="635.0" y="340" width="40" height="5" fill="#e0b440"/>
+<polyline points="662.0,296 662.0,310 725.0,326 725.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="646.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="705.0" y="340" width="40" height="5" fill="#e0b440"/>
+</g>
+<g class="uf"><polygon points="250,260 710,260 738,292 222,292" fill="#f0b43c" fill-opacity="0.7" stroke="#c98b12" stroke-width="1.2"/></g>
+<g class="die"><rect x="250" y="190" width="460" height="60" rx="3" fill="#8ea6bf" stroke="#4b6580" stroke-width="1.5"/>
+<rect x="250" y="250" width="460" height="10" fill="#e8892f" stroke="#a95d14" stroke-width="1"/>
+<ellipse cx="298.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="350.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="402.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="454.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="506.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="558.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="610.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+<ellipse cx="662.0" cy="276" rx="13" ry="16" fill="#c4cbd3" stroke="#59636e" stroke-width="1.5"/>
+</g>
+<g class="bl"><rect x="150" y="384" width="660" height="28" rx="3" fill="#2f6b4a" stroke="#1d4a31" stroke-width="1.5"/>
+<rect x="215.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="235.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="229.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="285.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="305.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="299.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="355.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="375.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="369.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="425.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="445.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="439.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="495.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="515.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="509.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="565.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="585.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="579.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="635.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="655.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="649.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+<rect x="705.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="725.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="719.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
+</g>
+<g class="lab">
+<text x="480" y="226" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:600">矽晶粒（背面朝上）</text>
+<path class="ld" d="M712 225 H744"/><text class="lb" x="752" y="222">晶粒（已翻轉）</text><text class="ls" x="752" y="241">主動面朝下</text>
+<path class="ld" d="M676 270 H758"/><text class="lb" x="766" y="276">凸塊</text><text class="ls" x="766" y="295" >連接晶粒與基板</text>
+<path class="ld" d="M196 282 H240"/><text class="lb" x="190" y="287" text-anchor="end">底部填充</text>
+<path class="ld" d="M194 316 H212"/><text class="lb" x="188" y="316" text-anchor="end">基板</text><text class="ls" x="188" y="334" text-anchor="end">扇出到較寬的間距</text>
+<path class="ld" d="M744 362 H748"/><text class="lb" x="756" y="360">錫球</text><text class="ls" x="756" y="379">連接封裝與電路板</text>
+<text class="lb" x="140" y="403" text-anchor="end">電路板</text>
+</g>
+<text class="cap c1" x="480" y="478">1  在晶粒焊墊上做出凸塊（正面朝上）</text>
+<text class="cap c2" x="480" y="478">2  晶粒翻轉成正面朝下</text>
+<text class="cap c3" x="480" y="478">3  凸塊焊接到基板焊墊</text>
+<text class="cap c4" x="480" y="478">4  底部填充膠流入縫隙並固化，分散應力</text>
+<text class="cap c5" x="480" y="478">5  底面的錫球把封裝連接到電路板</text>
+<rect x="80" y="516" width="800" height="4" rx="2" fill="#d3dae3"/><rect class="pg" x="80" y="516" width="800" height="4" rx="2" fill="#3b7dd8"/>
+</g></svg>

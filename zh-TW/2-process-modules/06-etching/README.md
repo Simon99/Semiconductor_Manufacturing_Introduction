@@ -22,7 +22,9 @@
 
 **乾蝕刻**則是用**電漿**來蝕刻。帶電的離子被電場加速，幾乎垂直地撞向晶圓，所以主要往下挖，可以做出筆直的側壁。現代晶片的細微圖形，幾乎都靠乾蝕刻完成。
 
-<!-- 圖：等向蝕刻與非等向蝕刻的剖面對照（側壁形狀、光阻下方的側蝕） -->
+![同一個光阻開口下的兩種剖面。等向蝕刻會往側面吃，在光阻下方造成側蝕；非等向蝕刻則筆直往下，側壁垂直。](../../../images/zh-TW/06-etch-profiles.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch06/etch-profiles.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜等向與非等向（Isotropic / Anisotropic）**

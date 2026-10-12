@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 552" width="960" height="552" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<title>閘極間距與金屬間距</title>
+<desc>從上方看的閘極與金屬導線，標示 CPP 與 MMP；間距縮小到 0.7 倍後，同樣面積內可容納更多線條，相對密度提高到約 2 倍。</desc>
+<style>
+.sc{transform-origin:0 0;animation:shrink 12s linear infinite}
+.lx{animation:lx 12s linear infinite}
+.ly{animation:ly 12s linear infinite}
+.bar{transform-box:fill-box;transform-origin:0 50%;animation:bar 12s linear infinite}
+.oa{animation:oa 12s linear infinite}
+.ob{animation:ob 12s linear infinite}
+@keyframes shrink{0%,17%{transform:scale(1)}42%,75%{transform:scale(.7)}92%,100%{transform:scale(1)}}
+@keyframes lx{0%,17%{transform:translateX(0)}42%,75%{transform:translateX(-34.8px)}92%,100%{transform:translateX(0)}}
+@keyframes ly{0%,17%{transform:translateY(0)}42%,75%{transform:translateY(-24px)}92%,100%{transform:translateY(0)}}
+@keyframes bar{0%,17%{transform:scaleX(1)}42%,75%{transform:scaleX(2.04)}92%,100%{transform:scaleX(1)}}
+@keyframes oa{0%,41.9%{opacity:1}42%,91.9%{opacity:0}92%,100%{opacity:1}}
+@keyframes ob{0%,41.9%{opacity:0}42%,91.9%{opacity:1}92%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+.t{fill:#1d2433}.m{fill:#4a5468}.hd{font-weight:700}
+</style>
+<defs>
+<clipPath id="clA"><rect x="30" y="130" width="290" height="320" rx="6"/></clipPath>
+<clipPath id="clB"><rect x="370" y="130" width="290" height="320" rx="6"/></clipPath>
+<marker id="ar" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="0"/></marker>
+</defs>
+<rect width="960" height="552" fill="#f6f7fb"/>
+<text class="t hd" x="30" y="40" font-size="24">間距：圖案重複得多緊密</text>
+<text class="m" x="30" y="66" font-size="15">上視圖。把每個間距縮到 0.7 倍，同樣面積內可容納約兩倍的重複單元。數值僅為示意。</text>
+
+<rect x="30" y="130" width="290" height="320" rx="6" fill="#e6e9f1" stroke="#9aa3b5"/>
+<rect x="370" y="130" width="290" height="320" rx="6" fill="#e6e9f1" stroke="#9aa3b5"/>
+<g clip-path="url(#clA)"><g transform="translate(30,130)"><g class="sc">
+<rect x="0" y="50" width="480" height="24" fill="#8fb8d8"/>
+<rect x="0" y="140" width="480" height="24" fill="#8fb8d8"/>
+<rect x="0" y="230" width="480" height="24" fill="#8fb8d8"/>
+<rect x="0" y="320" width="480" height="24" fill="#8fb8d8"/>
+<rect x="0" y="410" width="480" height="24" fill="#8fb8d8"/>
+<rect x="0" y="500" width="480" height="24" fill="#8fb8d8"/>
+<rect x="20" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="84" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="148" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="212" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="276" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="340" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="404" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="468" y="0" width="22" height="480" fill="#c9743a"/>
+<rect x="56" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="55" width="14" height="14" fill="#2f8a5b"/>
+<rect x="56" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="145" width="14" height="14" fill="#2f8a5b"/>
+<rect x="56" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="235" width="14" height="14" fill="#2f8a5b"/>
+<rect x="56" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="325" width="14" height="14" fill="#2f8a5b"/>
+<rect x="56" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="415" width="14" height="14" fill="#2f8a5b"/>
+<rect x="56" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="120" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="184" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="248" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="312" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="376" y="505" width="14" height="14" fill="#2f8a5b"/>
+<rect x="440" y="505" width="14" height="14" fill="#2f8a5b"/>
+</g></g></g>
+<g clip-path="url(#clB)"><g transform="translate(370,130)"><g class="sc">
+<rect x="0" y="20" width="200" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="224" y="20" width="260" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="60" width="120" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="144" y="60" width="336" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="100" width="480" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="140" width="200" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="224" y="140" width="260" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="180" width="120" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="144" y="180" width="336" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="220" width="480" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="260" width="200" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="224" y="260" width="260" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="300" width="120" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="144" y="300" width="336" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="340" width="480" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="380" width="200" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="224" y="380" width="260" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="420" width="120" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="144" y="420" width="336" height="20" rx="2" fill="#3c6fb0"/>
+<rect x="0" y="460" width="480" height="20" rx="2" fill="#3c6fb0"/>
+</g></g></g>
+<g transform="translate(30,130)"><g class="sc"><g stroke="#111" stroke-width="2" fill="none" vector-effect="non-scaling-stroke">
+<line x1="84" y1="-16" x2="84" y2="-2" vector-effect="non-scaling-stroke"/>
+<line x1="148" y1="-16" x2="148" y2="-2" vector-effect="non-scaling-stroke"/>
+<line x1="84" y1="-9" x2="148" y2="-9" vector-effect="non-scaling-stroke"/></g></g></g>
+<g class="lx"><text class="t hd" x="146" y="106" text-anchor="middle" font-size="16">CPP</text></g>
+<g transform="translate(370,130)"><g class="sc"><g stroke="#111" stroke-width="2" fill="none">
+<line x1="-16" y1="60" x2="-2" y2="60" vector-effect="non-scaling-stroke"/>
+<line x1="-16" y1="100" x2="-2" y2="100" vector-effect="non-scaling-stroke"/>
+<line x1="-9" y1="60" x2="-9" y2="100" vector-effect="non-scaling-stroke"/></g></g></g>
+<g class="ly"><text class="t hd" x="352" y="215" text-anchor="end" font-size="12">MMP</text></g>
+<text class="t hd" x="30" y="476" font-size="16">閘極層</text>
+<text class="m" x="30" y="496" font-size="13">閘極（橘）疊在鰭（藍）上，接點（綠）</text>
+<text class="m" x="30" y="514" font-size="13">CPP＝閘極到閘極的間距</text>
+<text class="t hd" x="370" y="476" font-size="16">最密金屬層</text>
+<text class="m" x="370" y="496" font-size="13">導線（藍）；MMP＝導線到導線的間距</text>
+<text class="m" x="370" y="514" font-size="13">間距＝線寬＋間隔</text>
+<rect x="700" y="130" width="230" height="320" rx="6" fill="#ffffff" stroke="#9aa3b5"/>
+<text class="m" x="716" y="164" font-size="14">閘極間距（CPP）</text>
+<text class="t hd oa" x="716" y="194" font-size="26">48 nm</text>
+<text class="t hd ob" x="716" y="194" font-size="26">34 nm</text>
+<text class="m" x="716" y="234" font-size="14">金屬間距（MMP）</text>
+<text class="t hd oa" x="716" y="264" font-size="26">30 nm</text>
+<text class="t hd ob" x="716" y="264" font-size="26">21 nm</text>
+<text class="m" x="716" y="304" font-size="14">相對密度</text>
+<text class="t hd oa" x="716" y="334" font-size="26">1.0x</text>
+<text class="t hd ob" x="716" y="334" font-size="26">~2.0x</text>
+<rect x="716" y="348" width="100" height="16" rx="3" fill="#2f8a5b" class="bar"/>
+<text class="m" x="716" y="392" font-size="13">密度 ~ 1 / (CPP x MMP)</text>
+<text class="m" x="716" y="412" font-size="13">0.7 x 0.7 = 0.49 倍面積，</text>
+<text class="m" x="716" y="430" font-size="13">電晶體數量約為 2 倍</text>
+<text class="m" x="30" y="538" font-size="13">數值僅為示意。「3 nm」等製程節點名稱是世代代號，不是這些尺寸。</text>
+</svg>

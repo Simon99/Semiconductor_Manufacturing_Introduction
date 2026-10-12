@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">柴可拉斯基長晶法</title>
+<desc id="d">旋轉的晶種從石英坩堝內的矽熔液中被緩慢向上拉出，拉出一根圓柱狀的單晶晶棒。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;fill:#1d2a3a}
+.ttl{font-size:24px;font-weight:700}
+.sub{font-size:13px;fill:#4a5a70}
+.lbl{font-size:13px}
+.lblb{font-size:13px;font-weight:600}
+.lead{stroke:#4a5a70;stroke-width:1.2;fill:none}
+.card{fill:#ffffff;stroke:#c3ccd8;stroke-width:1.5}
+.ct{font-size:15px;font-weight:700}
+.cb{font-size:13px;fill:#33445a}
+.num{fill:#2f6fb0}
+.numt{fill:#fff;font-size:14px;font-weight:700;text-anchor:middle}
+.hl{fill:none;stroke:#e8742c;stroke-width:3.5;opacity:0}
+.hl1{animation:hl 12s linear infinite;opacity:1}
+.hl2{animation:hl 12s linear infinite 3s}
+.hl3{animation:hl 12s linear infinite 6s}
+.hl4{animation:hl 12s linear infinite 9s}
+@keyframes hl{0%{opacity:1}24.9%{opacity:1}25%{opacity:0}100%{opacity:0}}
+.hl1{animation-name:hl1}
+@keyframes hl1{0%{opacity:1}24.9%{opacity:1}25%{opacity:0}99.9%{opacity:0}100%{opacity:1}}
+.pull{animation:pull 12s ease-in-out infinite}
+@keyframes pull{0%,8%{transform:translateY(0)}78%,100%{transform:translateY(-36px)}}
+.stripe{animation:sx 2.4s cubic-bezier(.37,0,.63,1) infinite}
+.stripe rect{animation:so 2.4s linear infinite}
+.s2{animation-delay:-.6s}.s2 rect{animation-delay:-.6s}
+.s3{animation-delay:-1.2s}.s3 rect{animation-delay:-1.2s}
+.s4{animation-delay:-1.8s}.s4 rect{animation-delay:-1.8s}
+@keyframes sx{from{transform:translateX(-40px)}to{transform:translateX(40px)}}
+@keyframes so{0%{opacity:0}15%{opacity:.55}85%{opacity:.55}100%{opacity:0}}
+.dash1{stroke-dasharray:7 5;animation:dd 1.2s linear infinite}
+.dash2{stroke-dasharray:7 5;animation:dd 1.6s linear infinite}
+@keyframes dd{to{stroke-dashoffset:-24}}
+.glow{animation:gl 2.4s ease-in-out infinite alternate}
+@keyframes gl{from{opacity:.45}to{opacity:1}}
+.wave{animation:wv 3s linear infinite}
+@keyframes wv{to{transform:translateX(24px)}}
+@media (prefers-reduced-motion:reduce){
+ .pull{animation:none;transform:translateY(-36px)}
+ .stripe,.stripe rect,.dash1,.dash2,.glow,.wave{animation:none}
+ .stripe rect{opacity:.35}
+ .hl1{animation:none;opacity:0}
+ .hl2,.hl3{animation:none}
+ .hl4{animation:none;opacity:1}
+}
+</style>
+<defs>
+ <linearGradient id="si" gradientUnits="userSpaceOnUse" x1="255" y1="0" x2="345" y2="0">
+  <stop offset="0" stop-color="#7d8794"/><stop offset=".3" stop-color="#d5dce5"/><stop offset=".55" stop-color="#eef2f6"/><stop offset="1" stop-color="#7d8794"/>
+ </linearGradient>
+ <linearGradient id="melt" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#e2602a"/>
+ </linearGradient>
+ <clipPath id="above"><rect x="120" y="82" width="360" height="298"/></clipPath>
+ <clipPath id="bodyclip"><rect x="255" y="256" width="90" height="270"/></clipPath>
+ <clipPath id="cru"><path d="M200 350 L200 440 Q200 472 232 472 L368 472 Q400 472 400 440 L400 350 Z"/></clipPath>
+ <clipPath id="meltclip"><rect x="200" y="380" width="200" height="100"/></clipPath>
+ <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#2f6fb0"/></marker>
+</defs>
+
+<!-- opaque base -->
+<rect width="960" height="540" fill="#f4f6fa"/>
+<text class="ttl" x="24" y="38">柴可拉斯基（CZ）長晶法</text>
+<text class="sub" x="936" y="38" text-anchor="end">把晶種從矽熔液中向上拉出，晶體就會跟著晶種生長</text>
+
+<!-- chamber -->
+<rect x="110" y="80" width="380" height="420" rx="14" fill="#e3e9f1" stroke="#55657a" stroke-width="3"/>
+
+<!-- heater -->
+<rect x="176" y="340" width="12" height="136" fill="#5b4a44"/>
+<rect x="412" y="340" width="12" height="136" fill="#5b4a44"/>
+<g class="glow"><rect x="176" y="340" width="12" height="136" fill="none" stroke="#ff7a3d" stroke-width="3"/><rect x="412" y="340" width="12" height="136" fill="none" stroke="#ff7a3d" stroke-width="3"/></g>
+
+<!-- crucible + melt -->
+<g clip-path="url(#cru)"><g clip-path="url(#meltclip)">
+ <rect x="200" y="380" width="200" height="100" fill="url(#melt)"/>
+ <g class="wave"><path d="M176 392 q6 -4 12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="#ffe0a0" stroke-width="2" opacity=".7"/>
+ <path d="M164 420 q6 -4 12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="#ffd08a" stroke-width="2" opacity=".5"/></g>
+</g></g>
+<path d="M200 350 L200 440 Q200 472 232 472 L368 472 Q400 472 400 440 L400 350" fill="rgba(190,220,238,.28)" stroke="#8fb8cf" stroke-width="6" stroke-linejoin="round"/>
+
+<!-- pulled assembly -->
+<g clip-path="url(#above)"><g class="pull">
+ <rect x="297" y="-60" width="6" height="178" fill="#6c7a8c"/>
+ <rect x="284" y="118" width="32" height="20" rx="3" fill="#55657a"/>
+ <rect x="292" y="138" width="16" height="30" fill="#b9c2ce" stroke="#6c7a8c" stroke-width="1.2"/>
+ <rect x="296" y="168" width="8" height="50" fill="#b9c2ce" stroke="#6c7a8c" stroke-width="1"/>
+ <path d="M296 218 L304 218 C304 236 345 238 345 256 L255 256 C255 238 296 236 296 218 Z" fill="url(#si)" stroke="#6c7a8c" stroke-width="1.2"/>
+ <rect x="255" y="256" width="90" height="270" fill="url(#si)" stroke="#6c7a8c" stroke-width="1.2"/>
+ <g clip-path="url(#bodyclip)">
+  <g class="stripe s1"><rect x="298" y="256" width="5" height="270" fill="#2f6fb0"/></g>
+  <g class="stripe s2"><rect x="298" y="256" width="5" height="270" fill="#2f6fb0"/></g>
+  <g class="stripe s3"><rect x="298" y="256" width="5" height="270" fill="#2f6fb0"/></g>
+  <g class="stripe s4"><rect x="298" y="256" width="5" height="270" fill="#2f6fb0"/></g>
+ </g>
+ <path class="dash1" d="M278 108 Q300 124 322 108" fill="none" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text class="lblb" x="122" y="158">晶種</text><path class="lead" d="M216 154 L290 154"/>
+ <text class="lblb" x="122" y="198">頸部（細）</text><path class="lead" d="M210 194 L294 194"/>
+ <text class="lblb" x="122" y="238">肩部</text><path class="lead" d="M196 234 L270 234"/>
+</g></g>
+
+<!-- meniscus flare -->
+<path d="M236 380 Q252 380 255 366 L255 380 Z" fill="#ffb347"/>
+<path d="M364 380 Q348 380 345 366 L345 380 Z" fill="#ffb347"/>
+
+<!-- pull mechanism on top -->
+<rect x="268" y="52" width="64" height="28" rx="4" fill="#55657a"/>
+<text x="300" y="71" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:600">拉桿</text>
+
+<!-- crucible rotation arrow -->
+<path class="dash2" d="M420 488 Q300 506 180 488" fill="none" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#ar)"/>
+<text class="lbl" x="300" y="524" text-anchor="middle">坩堝通常朝反方向旋轉</text>
+
+<!-- static labels -->
+<text class="lbl" x="122" y="98">晶種與晶棒一起旋轉</text>
+<text class="lblb" x="362" y="318">晶棒本體</text>
+<text class="lbl" x="362" y="336">（單晶）</text>
+<text class="lblb" x="8" y="440" >石英</text><text class="lblb" x="8" y="456">坩堝</text><path class="lead" d="M62 446 L197 446"/>
+<text class="lblb" x="8" y="396">石墨</text><text class="lblb" x="8" y="412">加熱器</text><path class="lead" d="M66 402 L174 402"/>
+<text class="lblb" x="500" y="436">矽熔液</text><path class="lead" d="M496 432 L300 432"/>
+<text class="lbl" x="500" y="452">高於 1,400 °C</text>
+<text class="lblb" x="500" y="388">固液</text><text class="lblb" x="500" y="404">界面</text><path class="lead" d="M496 384 L362 374"/>
+<text class="lbl" x="500" y="200">氬氣</text><text class="lbl" x="500" y="216">充滿腔體</text>
+
+<!-- right panel -->
+<g>
+ <rect class="card" x="650" y="86" width="290" height="90" rx="10"/><circle class="num" cx="674" cy="110" r="13"/><text class="numt" x="674" y="115">1</text>
+ <text class="ct" x="696" y="115">熔化</text>
+ <text class="cb" x="666" y="138">多晶矽放進石英坩堝，</text><text class="cb" x="666" y="156">加熱到 1,400 °C 以上熔化。</text>
+ <rect class="hl hl1" x="650" y="86" width="290" height="90" rx="10"/>
+
+ <rect class="card" x="650" y="186" width="290" height="90" rx="10"/><circle class="num" cx="674" cy="210" r="13"/><text class="numt" x="674" y="215">2</text>
+ <text class="ct" x="696" y="215">接觸</text>
+ <text class="cb" x="666" y="238">一小塊單晶矽做成的晶種，</text><text class="cb" x="666" y="256">輕輕接觸熔化的矽。</text>
+ <rect class="hl hl2" x="650" y="186" width="290" height="90" rx="10"/>
+
+ <rect class="card" x="650" y="286" width="290" height="108" rx="10"/><circle class="num" cx="674" cy="310" r="13"/><text class="numt" x="674" y="315">3</text>
+ <text class="ct" x="696" y="315">旋轉並上拉</text>
+ <text class="cb" x="666" y="338">晶種一邊旋轉，一邊非常緩慢地</text><text class="cb" x="666" y="356">上升。矽在晶種下方凝固時，</text><text class="cb" x="666" y="374">會沿著晶種的原子排列生長。</text>
+ <rect class="hl hl3" x="650" y="286" width="290" height="108" rx="10"/>
+
+ <rect class="card" x="650" y="404" width="290" height="108" rx="10"/><circle class="num" cx="674" cy="428" r="13"/><text class="numt" x="674" y="433">4</text>
+ <text class="ct" x="696" y="433">晶棒</text>
+ <text class="cb" x="666" y="456">一根圓柱狀的單晶晶棒。</text><text class="cb" x="666" y="474">300 mm：約 2 公尺長，</text><text class="cb" x="666" y="492">重達數百公斤。</text>
+ <rect class="hl hl4" x="650" y="404" width="290" height="108" rx="10"/>
+</g>
+</svg>

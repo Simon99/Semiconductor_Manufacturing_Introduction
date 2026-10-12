@@ -31,7 +31,9 @@
 
 鰭的間距非常小，通常要用第 4 章提到的多重曝光技巧才做得出來。而且一個電晶體的驅動能力，取決於它用了幾根鰭，所以設計時只能選擇「一根、兩根、三根」，無法任意調整。
 
-<!-- 圖：平面電晶體、FinFET、GAA 的立體對照（閘極包覆通道的面數） -->
+![立體對照。平面電晶體的閘極接觸通道 1 面，FinFET 為 3 面，GAA 奈米片為 4 面。](../../../images/zh-TW/12-planar-finfet-gaa.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch12/planar-finfet-gaa.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜FinFET（鰭式場效電晶體）**

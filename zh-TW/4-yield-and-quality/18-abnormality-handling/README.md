@@ -16,6 +16,10 @@
 
 **發現異常 → 擋住影響 → 找出範圍 → 判定處置 → 找出根本原因 → 防止再發**
 
+![多批晶圓經過一台發出警報的機台，依 OCAP 被 Hold，再用自上一次確認正常以來的批次－機台履歷找出範圍，最後判定為放行、有條件放行、重工或報廢。](../../../images/zh-TW/18-abnormality-response.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch18/abnormality-response.html)自己動手調整看看。*
+
 ---
 
 ## OCAP：事先寫好的應變步驟

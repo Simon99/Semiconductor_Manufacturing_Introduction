@@ -62,7 +62,9 @@
 
 開與關，對應到數位世界的 1 和 0。數十億個這樣的開關組合起來，就能做運算和儲存資料。
 
-<!-- 圖：MOSFET 剖面圖，標出源極、汲極、閘極、閘極氧化層、通道（以編號標示） -->
+![MOSFET 開關互動圖](../../../images/zh-TW/02-mosfet.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch02/mosfet.html)自己動手調整看看。*
 
 > [!NOTE]
 > **📖 名詞｜MOSFET（金屬氧化物半導體場效電晶體）**

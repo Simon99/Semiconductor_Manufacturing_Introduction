@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>異常處理：互動圖解</title>
+<style>
+:root{--bg:#f3f5f9;--card:#fff;--tx:#1d2433;--mut:#4a5671;--bd:#c4cbdb;--acc:#2b3a5c;--norm:#9dbbf0;--normS:#34548f;--amb:#ffc247;--ambS:#a86b00;--red:#c02020;--grn:#1a7a42;--row:#e9edf5;--rel:#6fd09a;--cond:#5fd0d0;--rew:#b79bf0;--scr:#f08080;--btn:#2b3a5c;--btnt:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161f;--card:#1b2130;--tx:#e8ecf5;--mut:#a3aec6;--bd:#394258;--acc:#9db4e8;--norm:#4a6fb0;--normS:#9dbbf0;--amb:#d99a1e;--ambS:#ffd27a;--red:#ff7070;--grn:#5fd08c;--row:#232b3d;--btn:#9db4e8;--btnt:#12161f}}
+:root[data-theme=dark]{--bg:#12161f;--card:#1b2130;--tx:#e8ecf5;--mut:#a3aec6;--bd:#394258;--acc:#9db4e8;--norm:#4a6fb0;--normS:#9dbbf0;--amb:#d99a1e;--ambS:#ffd27a;--red:#ff7070;--grn:#5fd08c;--row:#232b3d;--btn:#9db4e8;--btnt:#12161f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:10px 16px 24px}
+a{color:var(--acc)}
+h1{font-size:20px;margin:6px 0 2px}
+.sub{color:var(--mut);margin:0 0 10px;font-size:14px}
+.grid{display:grid;grid-template-columns:270px 1fr;gap:12px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+.ctl label{display:block;font-size:13px;margin-top:8px;color:var(--mut)}
+.ctl label b{color:var(--tx)}
+.ctl input[type=range]{width:100%}
+.ctl select{width:100%;font:inherit;padding:3px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:6px}
+.tools{display:flex;gap:4px;flex-wrap:wrap}
+button{font:inherit;font-size:14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:7px;padding:5px 10px;cursor:pointer}
+button.on{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+.tools button{min-width:42px}
+.stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;align-items:center}
+svg{width:100%;height:auto;display:block}
+.stg{margin:8px 0 0;font-size:14px;min-height:62px}
+.stg b{font-size:15px}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:10px}
+.read div{background:var(--row);border-radius:8px;padding:6px 10px}
+.read span{display:block;font-size:12px;color:var(--mut)}
+.read strong{font-size:22px}
+.note{font-size:12.5px;color:var(--mut);margin-top:8px}
+svg text{fill:var(--tx);font-family:inherit}
+svg .m{fill:var(--mut)}
+</style></head><body><div class="wrap">
+<p style="margin:4px 0"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/18-abnormality-handling/README.md">&larr; 回到章節</a></p>
+<h1>注入一個異常，看看哪些批次會被 Hold</h1>
+<p class="sub">選一台機台，設定問題真正開始與被發現的時間。工廠不知道真正的起點，所以會 Hold 自上一次確認正常以來的所有批次。所有批次、機台與時間皆為示意。</p>
+<div class="grid">
+<div class="card ctl">
+<b>在哪台機台注入異常</b>
+<div class="tools" id="tools"></div>
+<label>問題真正開始於 <b id="vS"></b><input type="range" id="start" min="1" max="20" step="0.5" value="10"></label>
+<label>經過 <b id="vD"></b> 後被發現（或在下一次控片量測時，以先到者為準）<input type="range" id="delay" min="0.5" max="8" step="0.5" value="5"></label>
+<label>控片量測間隔：<b id="vI"></b><input type="range" id="intv" min="2" max="12" step="1" value="6"></label>
+<label><input type="checkbox" id="contain" checked> 發現時立即擋住（停機台、Hold 批次）</label>
+<label>量測後確認正常的 Hold 批次處置為
+<select id="clean"><option value="0">放行</option><option value="1">有條件放行</option></select></label>
+<label><input type="checkbox" id="rework"> 受影響的步驟可以重做（例如微影）：重工，否則報廢</label>
+<label><input type="checkbox" id="truth" checked> 顯示隱藏的真相（紅色虛線框＝真正受影響）</label>
+</div>
+<div>
+<div class="card">
+<div class="stages" id="stages"><button id="play">暫停</button></div>
+<svg id="sc" viewBox="0 0 960 490" role="img" aria-label="批次－機台時間軸，含 Hold 範圍與處置區"></svg>
+<div class="stg" id="stg"></div>
+</div>
+<div class="read" id="read"></div>
+<p class="note">被 Hold ＝ 在最後一次通過的控片量測到問題被發現之間，於該機台上跑過的批次（章節說明：範圍從上一次確認正常的時間點開始算）。多 Hold ＝ 為預防而被 Hold、結果其實正常的批次。處置選項依本章的表格：放行、重工、報廢、有條件放行；影響較大或不確定的實際案例會交給物料審查會議（MRB）。</p>
+</div></div></div>
+<script>
+(function(){
+var Q=new URLSearchParams(location.search);
+var th=Q.get('theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;
+var CYC=16000,NS='http://www.w3.org/2000/svg';
+// lots: 30 lots, 1 per 0.8h, tool permutation per block of 5 (illustrative)
+var PERM=[[0,2,4,1,3],[3,0,2,4,1],[1,4,0,3,2],[2,3,1,0,4],[4,1,3,2,0],[0,3,2,1,4]];
+var lots=[];for(var k=0;k<30;k++){lots.push({id:k+1,t:0.4+0.8*k,tool:PERM[Math.floor(k/5)][k%5]});}
+var S={tool:2,start:10,delay:5,intv:6,contain:true,clean:0,rework:false,truth:true,t:6500,paused:false};
+if(Q.get('tool'))S.tool=+Q.get('tool')-1;if(Q.get('start'))S.start=+Q.get('start');if(Q.get('delay'))S.delay=+Q.get('delay');
+if(Q.get('interval'))S.intv=+Q.get('interval');if(Q.get('contain')==='0')S.contain=false;
+if(Q.get('t')!==null&&Q.get('t')!==''){S.t=+Q.get('t');S.paused=true;}
+if(Q.get('still')==='1')S.paused=true;
+var $=function(i){return document.getElementById(i)};
+$('start').value=S.start;$('delay').value=S.delay;$('intv').value=S.intv;$('contain').checked=S.contain;
+var STG=[['發現異常',0,'機台警報或失控點揭露了異常。批次持續送進來，但還沒有人知道出了問題。'],
+['擋住（OCAP + Hold）',4000,'照 OCAP 處理：停機台、Hold 可疑的批次。先擋住再修復，損失才不會繼續擴大。'],
+['找出範圍',8000,'往回找到上一次確認正常的時間點（最後一次通過的控片量測）。從那之後在這台機台上跑過的批次都可疑；其他機台上的批次則不受影響。'],
+['判定處置',11000,'依量測結果決定每個被 Hold 批次的處置：放行、有條件放行、重工或報廢。']];
+function fmt(h){h=Math.max(0,h);var m=Math.round(h*60),hh=Math.floor(m/60)%24,mm=m%60;return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm}
+function model(){
+ var start=S.start,iv=S.intv,nm=(Math.floor(start/iv)+1)*iv,det=Math.min(24,start+S.delay,nm);
+ var lg=Math.floor((start-1e-6)/iv)*iv;
+ var end=S.contain?det:24;
+ var held=[],aff=0;
+ lots.forEach(function(l){l.held=false;l.aff=false;l.vis=l.t<=end;l.dis=-1;
+  if(l.tool===S.tool&&l.t>=lg&&l.t<=end){l.held=true;}
+  if(l.tool===S.tool&&l.t>=start&&l.t<=end)l.aff=true;
+  if(l.held){held.push(l);l.dis=l.aff?(S.rework?2:3):(+S.clean===1?1:0);} });
+ aff=held.filter(function(l){return l.aff}).length;
+ return{start:start,det:det,lg:lg,end:end,held:held,aff:aff};
+}
+var M=model();
+// layout
+var X0=120,PW=810,Y0=70,DY=46;function X(h){return X0+h/24*PW}function Y(i){return Y0+i*DY}
+var BX=[30,255,480,705],BY=346,BW=215,BH=130;
+var BN=[['放行','var(--rel)'],['有條件放行','var(--cond)'],['重工','var(--rew)'],['報廢','var(--scr)']];
+var svg=$('sc');
+function el(n,a,p,tx){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(tx!=null)e.textContent=tx;(p||svg).appendChild(e);return e}
+function ease(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+function lerp(a,b,x){return a+(b-a)*x}
+var dyn=null;
+function build(){
+ svg.innerHTML='';
+ for(var i=0;i<5;i++){
+  el('rect',{x:20,y:Y(i)-20,width:920,height:40,rx:6,fill:'var(--row)',opacity:i===S.tool?1:.55,'stroke':i===S.tool?'var(--red)':'none','stroke-width':i===S.tool?2:0});
+  el('text',{x:30,y:Y(i)+5,'font-size':15,'font-weight':700},null,'機台 T'+(i+1));
+ }
+ for(var h=0;h<=24;h+=4){el('line',{x1:X(h),x2:X(h),y1:Y(0)-24,y2:Y(4)+24,stroke:'var(--bd)','stroke-dasharray':'3 4'});
+  el('text',{x:X(h),y:Y(4)+42,'text-anchor':'middle','font-size':12,class:'m'},null,fmt(h));}
+ dyn=el('g',{});
+}
+build();
+function draw(t){
+ t=((t%CYC)+CYC)%CYC;
+ M=model();
+ var g=dyn;g.innerHTML='';
+ var stage=t<4000?0:t<8000?1:t<11000?2:3;
+ var run=ease(t/4000);
+ var play=M.det*run;
+ if(t>=4000){play=M.det}
+ if(!S.contain){ if(t>=4000){var e2=ease((t-4000)/4000);play=lerp(M.det,24,e2);} }
+ if(t>=8000)play=S.contain?M.det:24;
+ var T=S.tool,y=Y(T);
+ // monitor ticks on injected tool
+ for(var m=0;m<24;m+=S.intv){ if(m<=play+1e-6){ var mx=X(m);
+   el('path',{d:'M'+(mx-5)+' '+(Y(T)+26)+' l4 5 l8 -10',stroke:m<M.start?'var(--grn)':'var(--red)','stroke-width':2.5,fill:'none'},g);
+   if(m>=M.start)el('text',{x:mx+8,y:Y(T)+34,'font-size':12,fill:'var(--red)',class:'m'},g,'');
+ }}
+ // scope bracket (stage>=2)
+ var sc=ease((t-8000)/1200);
+ if(t>=8000&&sc>0){
+  var bx=X(M.lg),ex=X(M.end);
+  el('rect',{x:bx,y:y-21,width:(ex-bx)*sc,height:42,fill:'var(--amb)',opacity:.25,rx:4},g);
+  el('line',{x1:bx,x2:bx,y1:Y(0)-22,y2:Y(4)+22,stroke:'var(--grn)','stroke-width':3},g);
+  el('text',{x:bx-4,y:Y(0)-26,'text-anchor':'end','font-size':13,'font-weight':700,fill:'var(--grn)'},g,'上次確認正常 '+fmt(M.lg));
+ }
+ // true start (hidden truth)
+ if(S.truth&&play>=M.start){el('line',{x1:X(M.start),x2:X(M.start),y1:y-24,y2:y+24,stroke:'var(--red)','stroke-width':2,'stroke-dasharray':'4 3'},g);
+   el('text',{x:X(M.start)+3,y:y-24,'font-size':12,fill:'var(--red)'},g,'真正開始 '+fmt(M.start));}
+ // detect line
+ if(t>=4000-1){var pul=(t<6000)?(0.5+0.5*Math.sin(t/90)):1;
+   el('line',{x1:X(M.det),x2:X(M.det),y1:Y(0)-22,y2:Y(4)+22,stroke:'var(--red)','stroke-width':3,opacity:.9},g);
+   el('text',{x:X(M.det)+5,y:Y(0)-26,'font-size':13,'font-weight':700,fill:'var(--red)'},g,'發現 '+fmt(M.det));
+   var lx=X(M.det);el('circle',{cx:lx,cy:y,r:9+6*pul*(t<6000?1:0),fill:'var(--red)',opacity:t<6000?.35:0},g);}
+ // playhead
+ if(t<8000||!S.contain){var px=X(play);el('line',{x1:px,x2:px,y1:Y(0)-18,y2:Y(4)+18,stroke:'var(--tx)','stroke-width':1.5,opacity:.7},g);}
+ // lots
+ var holdA=ease((t-4800)/1200);
+ lots.forEach(function(l){
+  var vis=l.t<=Math.min(M.end,play+1e-6);if(!vis)return;
+  var x=X(l.t),yy=Y(l.tool);
+  var fill='var(--norm)',st='var(--normS)',op=1;
+  var isHeld=l.held&&(stage>=1);
+  var amb=l.held?holdA:0;
+  if(stage===2&&!l.held&&l.tool!==T)op=.45;
+  if(stage===2&&l.tool===T&&!l.held&&l.t<M.lg)op=1;
+  if(l.held&&t>=8000+0&&false){}
+  var cx=x,cy=yy,w=26,h=26;
+  var fly=0;
+  if(l.held&&t>=11000){
+    var idx=M.held.indexOf(l),b=l.dis;
+    var cnt=M.held.filter(function(q){return q.dis===b}).indexOf(l);
+    var tx=BX[b]+14+(cnt%7)*29+13,ty=BY+52+Math.floor(cnt/7)*29+13;
+    fly=ease((t-11000-idx*70)/1300);
+    cx=lerp(x,tx,fly);cy=lerp(yy,ty,fly);
+  }
+  var gg=el('g',{transform:'translate('+cx+' '+cy+')',opacity:op},g);
+  el('rect',{x:-13,y:-13,width:26,height:26,rx:5,fill:'var(--norm)',stroke:'var(--normS)','stroke-width':1.5},gg);
+  if(amb>0)el('rect',{x:-13,y:-13,width:26,height:26,rx:5,fill:'var(--amb)',stroke:'var(--ambS)','stroke-width':1.5,opacity:amb},gg);
+  if(fly>0.6){var col=BN[l.dis][1];el('rect',{x:-13,y:-13,width:26,height:26,rx:5,fill:col,stroke:'var(--normS)','stroke-width':1.5,opacity:(fly-.6)/.4},gg);}
+  el('text',{x:0,y:5,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'#10151f',style:'fill:#10151f'},gg,String(l.id));
+  if(S.truth&&l.aff&&stage>=0&&t>=4000&&fly<0.05)el('rect',{x:-16,y:-16,width:32,height:32,rx:7,fill:'none',stroke:'var(--red)','stroke-width':2,'stroke-dasharray':'4 3'},gg);
+  if(stage===2&&l.tool===T&&!l.held&&l.t<M.lg&&sc>.5)el('path',{d:'M-14 -16 l4 5 l9 -11',transform:'translate(14 -3)',stroke:'var(--grn)','stroke-width':2.5,fill:'none'},gg);
+ });
+ // bins
+ var binA=t>=8000?1:.5;
+ for(var b=0;b<4;b++){
+  var cnt=M.held.filter(function(q){return q.dis===b}).length;
+  var shown=0;if(t>=11000)M.held.forEach(function(q,idx){if(q.dis===b&&ease((t-11000-idx*70)/1300)>=0.98)shown++});
+  var gb=el('g',{opacity:binA},g);
+  el('rect',{x:BX[b],y:BY,width:BW,height:BH,rx:8,fill:BN[b][1],'fill-opacity':.25,stroke:BN[b][1],'stroke-width':2},gb);
+  el('text',{x:BX[b]+10,y:BY+20,'font-size':14,'font-weight':700},gb,BN[b][0]);
+  el('text',{x:BX[b]+BW-10,y:BY+20,'text-anchor':'end','font-size':14},gb,t>=11000?String(shown):'');
+  }
+ var sub=['確認無影響','需要更多數據','重做該步驟','無法挽回'];
+ for(var b2=0;b2<4;b2++)el('text',{x:BX[b2]+10,y:BY+40,'font-size':12,class:'m',opacity:binA},g,sub[b2]);
+ // stage text
+ var s=STG[stage];
+ var extra='';
+ if(stage===1&&!S.contain)extra='（未擋住：機台繼續運轉，範圍持續擴大。）';
+ $('stg').innerHTML='<b>'+(stage+1)+'. '+s[0]+'</b>：'+s[2]+extra;
+ var bs=document.querySelectorAll('#stages button[data-s]');for(var q=0;q<bs.length;q++)bs[q].className=(+bs[q].dataset.s===stage)?'on':'';
+ // readouts
+ var over=M.held.length-M.aff;
+ var naive=Math.max(0,M.aff-1);
+ $('read').innerHTML=
+  '<div><span>被 Hold 的批次數</span><strong>'+M.held.length+'</strong></div>'+
+  '<div><span>真正受影響（隱藏）</span><strong>'+M.aff+'</strong></div>'+
+  '<div><span>多 Hold（正常，預防性）</span><strong>'+over+'</strong></div>'+
+  '<div><span>Hold 時間窗</span><strong>'+(M.end-M.lg).toFixed(1)+' h</strong></div>'+
+  '<div><span>若只 Hold 最新一批會漏掉</span><strong>'+naive+'</strong></div>';
+}
+// controls
+var tb=$('tools');for(var i=0;i<5;i++){(function(i){var b=document.createElement('button');b.textContent='T'+(i+1);b.onclick=function(){S.tool=i;sync();};tb.appendChild(b);})(i)}
+function sync(){
+ S.start=+$('start').value;S.delay=+$('delay').value;S.intv=+$('intv').value;S.contain=$('contain').checked;S.clean=$('clean').value;S.rework=$('rework').checked;S.truth=$('truth').checked;
+ $('vS').textContent=fmt(S.start);$('vD').textContent=S.delay.toFixed(1)+' h';$('vI').textContent=S.intv+' h';
+ var bs=tb.children;for(var i=0;i<5;i++)bs[i].className=i===S.tool?'on':'';
+ build();draw(S.t);
+}
+['start','delay','intv','contain','clean','rework','truth'].forEach(function(id){$(id).addEventListener('input',sync)});
+var st=$('stages');STG.forEach(function(s,i){var b=document.createElement('button');b.dataset.s=i;b.textContent=(i+1)+' '+s[0].split('（')[0];b.onclick=function(){S.t=s[1]+(i===0?3900:200);S.paused=true;$('play').textContent='播放';draw(S.t)};st.appendChild(b)});
+$('play').onclick=function(){S.paused=!S.paused;this.textContent=S.paused?'播放':'暫停';last=null};
+if(S.paused)$('play').textContent='播放';
+var last=null;
+function tick(ts){if(!S.paused){if(last!=null)S.t=(S.t+(ts-last))%CYC;last=ts;draw(S.t)}else last=null;requestAnimationFrame(tick)}
+window.__setTime=function(ms){S.t=ms;S.paused=true;$('play').textContent='播放';draw(ms)};
+sync();requestAnimationFrame(tick);
+})();
+</script></body></html>

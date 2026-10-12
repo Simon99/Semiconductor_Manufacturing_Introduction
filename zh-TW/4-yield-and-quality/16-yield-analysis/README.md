@@ -40,7 +40,9 @@
 
 可以把缺陷想像成隨機落在晶圓上的雨滴。晶粒越大，被雨滴打中的機率就越高。所以在同樣的缺陷密度下，大晶粒的良率會比小晶粒低很多。這也是近年把大晶片拆成多顆小晶片的原因之一，見[第 21 章](../../5-backend/21-advanced-packaging/README.md)。
 
-<!-- 圖：同樣的缺陷分佈下，大晶粒與小晶粒的良率差異 -->
+![兩片晶圓上的缺陷位置完全相同。大晶粒大多被缺陷打中而失效；小晶粒大多能存活。](../../../images/zh-TW/16-die-size-yield.svg)
+
+*動態圖解。[開啟互動版](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/zh-TW/ch16/die-size-yield.html)自己動手調整看看。*
 
 良率損失大致分成兩類：
 

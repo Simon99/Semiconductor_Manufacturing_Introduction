@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>閘極間距與金屬間距</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--panel:#e6e9f1;--line:#9aa3b5;--tx:#1d2433;--mu:#4a5468;--gate:#c9743a;--fin:#8fb8d8;--ct:#2f8a5b;--mt:#3c6fb0;--acc:#2f6fd0;--on:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10141c;--card:#1a2030;--panel:#262d40;--line:#4a5470;--tx:#e8ecf5;--mu:#aab3c8;--gate:#e08a4c;--fin:#5d86a8;--ct:#4cc08a;--mt:#6a9fe0;--acc:#6aa0ff;--on:#10141c}}
+:root[data-theme=dark]{--bg:#10141c;--card:#1a2030;--panel:#262d40;--line:#4a5470;--tx:#e8ecf5;--mu:#aab3c8;--gate:#e08a4c;--fin:#5d86a8;--ct:#4cc08a;--mt:#6a9fe0;--acc:#6aa0ff;--on:#10141c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.45}
+main{max-width:1100px;margin:0 auto;padding:10px 16px 20px}
+a{color:var(--acc)}
+h1{font-size:22px;margin:6px 0 2px}
+.sub{color:var(--mu);font-size:14px;margin:0 0 8px}
+.stage{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+button{font:inherit;font-size:14px;padding:6px 12px;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:6px;cursor:pointer}
+button[aria-pressed=true]{background:var(--acc);color:var(--on);border-color:var(--acc)}
+#scene{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:8px}
+#scene text{fill:var(--tx);font-family:inherit}
+#scene .mu{fill:var(--mu)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+label{display:flex;justify-content:space-between;font-size:14px;margin-top:6px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.ro{display:flex;gap:16px;flex-wrap:wrap}
+.ro div{min-width:110px}.ro b{display:block;font-size:24px}.ro span{font-size:13px;color:var(--mu)}
+#expl{font-size:15px;margin:0;min-height:68px}
+.note{font-size:13px;color:var(--mu);margin:8px 0 0}
+@media (max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:19px}}
+</style>
+</head>
+<body>
+<main>
+<p style="margin:4px 0;font-size:14px"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/14-process-nodes/README.md">&larr; 回到章節</a></p>
+<h1>閘極間距與金屬間距</h1>
+<p class="sub">縮小間距，看看同樣面積內能容納多少重複單元。所有數值僅為示意。</p>
+<div class="stage" role="group" aria-label="階段">
+<button data-st="1" aria-pressed="false">1. 閘極間距</button>
+<button data-st="2" aria-pressed="false">2. 金屬間距</button>
+<button data-st="3" aria-pressed="false">3. 密度</button>
+<button data-st="0" aria-pressed="true">全部</button>
+<button id="play" aria-pressed="false">暫停</button>
+</div>
+<svg id="scene" viewBox="0 0 960 440" role="img" aria-label="閘極、金屬導線及兩層疊合的上視圖"></svg>
+<div class="grid">
+<div class="box">
+<label><span>同時縮小兩種間距</span><span id="vs">1.00x</span></label>
+<input id="s" type="range" min="50" max="100" value="100" aria-label="同時縮小兩種間距">
+<label><span>閘極間距（CPP）</span><span id="vc"></span></label>
+<input id="c" type="range" min="24" max="48" value="48" aria-label="閘極間距">
+<label><span>金屬間距（MMP）</span><span id="vm"></span></label>
+<input id="m" type="range" min="15" max="30" value="30" aria-label="金屬間距">
+</div>
+<div class="box">
+<div class="ro"><div><b id="rc"></b><span>CPP</span></div><div><b id="rm"></b><span>MMP</span></div><div><b id="rd"></b><span>相對密度</span></div></div>
+<p class="note" id="rn"></p>
+</div>
+</div>
+<div class="box" style="margin-top:12px"><p id="expl"></p></div>
+<p class="note">參考起點：CPP 48 nm、MMP 30 nm（僅為示意，落在本章所述 3 nm 世代晶片的範圍，閘極間距約四十到五十奈米）。相對密度 ~ (48 x 30) / (CPP x MMP) 是理想化的估算：實際密度還取決於單元佈局（DTCO）、SRAM 單元面積等因素。「3 nm」等製程節點名稱是世代代號，不是這些尺寸。</p>
+</main>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg',K=1.333,C0=48,M0=30,PY=70,W=290,H=300,PX=[20,335,650];
+var svg=document.getElementById('scene');
+var q=new URLSearchParams(location.search);
+var th=q.get('theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+var st=0,playing=!(q.get('still')==='1'||q.has('t')),t0=null,tms=0;
+var EX={0:'兩層都在重複同一種圖案。從一個重複單元到下一個的距離就是間距，它決定了一定面積內能放進多少重複單元。',
+1:'閘極間距（CPP，Contacted Poly Pitch）：相鄰兩個閘極之間的距離。兩者之間有接點，所以稱為「有接點的」閘極間距。',
+2:'金屬間距（MMP，Minimum Metal Pitch）：最密集那層金屬導線的間距。間距＝一條線寬＋一個間隔，它的一半稱為半間距。CD 通常只指線寬。',
+3:'把兩種間距都縮到 0.7 倍，每個重複單元的面積約變成 0.7 x 0.7 = 0.49，因此大約能多放一倍的電晶體。這就是節點命名沿用 0.7 倍慣例的原因。'};
+function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function tx(p,x,y,s,t,o){var e=el('text',{x:x,y:y,'font-size':s,'text-anchor':o&&o.a||'start','font-weight':o&&o.b?700:400,'class':o&&o.m?'mu':''},p);e.textContent=t;return e}
+function val(id){return +document.getElementById(id).value}
+function render(){
+ var c=val('c'),m=val('m'),cp=c*K,mp=m*K;
+ svg.innerHTML='';
+ var d=el('defs',{},svg);
+ for(var i=0;i<3;i++){var cl=el('clipPath',{id:'cl'+i},d);el('rect',{x:PX[i],y:PY,width:W,height:H,rx:6},cl)}
+ var ti=['閘極層','最密金屬層','兩層疊合，同樣面積'];
+ var gs=[],ms=[];
+ for(i=0;i<3;i++){
+  var g=el('g',{'data-p':i+1},svg);gs.push(g);
+  el('rect',{x:PX[i],y:PY,width:W,height:H,rx:6,fill:'var(--panel)',stroke:'var(--line)'},g);
+  var cg=el('g',{'clip-path':'url(#cl'+i+')'},g);
+  var ox=PX[i],gw=cp*0.46,mw=mp*0.5,n,j;
+  if(i!==1){ // fins + gates + contacts
+   var fp=mp*3; // fin row pitch tied to cell height idea: 3 metal pitches
+   var fy=[];for(j=0;PY+10+j*fp<PY+H;j++)fy.push(PY+10+j*fp);
+   if(i===0)fy.forEach(function(y){el('rect',{x:ox,y:y,width:W,height:Math.max(8,fp*0.3),fill:'var(--fin)'},cg)});
+   for(n=0;ox+14+n*cp<ox+W;n++){var x=ox+14+n*cp;
+    el('rect',{x:x,y:PY,width:gw,height:H,fill:'var(--gate)',opacity:i===2?0.8:1},cg);
+    if(i===0)fy.forEach(function(y){el('rect',{x:x+gw+(cp-gw)/2-5,y:y+Math.max(8,fp*0.3)/2-5,width:10,height:10,fill:'var(--ct)'},cg)});}
+  }
+  if(i!==0){
+   for(j=0;PY+10+j*mp<PY+H;j++){var y=PY+10+j*mp;
+    if(i===1){var cut=(j%3===0)?0.62:(j%3===1?0.4:2);
+     if(cut>1)el('rect',{x:ox,y:y,width:W,height:mw,rx:2,fill:'var(--mt)'},cg);
+     else{var a=W*cut-10;el('rect',{x:ox,y:y,width:a,height:mw,rx:2,fill:'var(--mt)'},cg);el('rect',{x:ox+a+16,y:y,width:W-a-16,height:mw,rx:2,fill:'var(--mt)'},cg);}
+    }else el('rect',{x:ox,y:y,width:W,height:mw,rx:2,fill:'var(--mt)',opacity:0.6},cg);
+   }}
+  tx(g,ox,PY+H+24,16,ti[i],{b:1});
+ }
+ // brackets
+ var b=el('g',{stroke:'var(--tx)','stroke-width':2,fill:'none'},gs[0]);
+ var x1=PX[0]+14,x2=x1+cp;
+ el('line',{x1:x1,y1:PY-14,x2:x1,y2:PY-2},b);el('line',{x1:x2,y1:PY-14,x2:x2,y2:PY-2},b);el('line',{x1:x1,y1:PY-8,x2:x2,y2:PY-8},b);
+ tx(gs[0],(x1+x2)/2,PY-20,14,'CPP '+c+' nm',{a:'middle',b:1});
+ var y1=PY+10,y2=y1+mp,bx=PX[1]-12;
+ var b2=el('g',{stroke:'var(--tx)','stroke-width':2,fill:'none'},gs[1]);
+ el('line',{x1:bx-6,y1:y1,x2:bx+6,y2:y1},b2);el('line',{x1:bx-6,y1:y2,x2:bx+6,y2:y2},b2);el('line',{x1:bx,y1:y1,x2:bx,y2:y2},b2);
+ tx(gs[1],PX[1],PY-10,14,'MMP '+m+' nm（線寬＋間隔）',{b:1});
+ // counts
+ var ng=0;for(n=0;14+n*cp+gw<=W;n++)ng++;
+ var nw=0;for(j=0;10+j*mp+mp*0.5<=H;j++)nw++;
+ tx(gs[0],PX[0],PY+H+44,13,'視窗橫向 '+ng+' 個閘極',{m:1});
+ tx(gs[1],PX[1],PY+H+44,13,'視窗縱向 '+nw+' 條導線',{m:1});
+ tx(gs[2],PX[2],PY+H+44,13,ng+' x '+nw+' = '+(ng*nw)+' 個交會點',{m:1});
+ gs.forEach(function(g,k){g.style.opacity=(st===0||st===3||st===k+1)?1:0.3});
+ var rel=(C0*M0)/(c*m);
+ document.getElementById('vc').textContent=c+' nm';document.getElementById('vm').textContent=m+' nm';
+ document.getElementById('rc').textContent=c+' nm';document.getElementById('rm').textContent=m+' nm';
+ document.getElementById('rd').textContent=rel.toFixed(2)+'x';
+ document.getElementById('rn').textContent='半間距：閘極 '+(c/2).toFixed(1)+' nm，金屬 '+(m/2).toFixed(1)+' nm。每種設定下，視窗顯示的都是同樣面積。';
+ document.getElementById('expl').textContent=EX[st];
+ window.__state={cpp:c,mpp:m,density:rel,stage:st};
+}
+function setS(s,fromSlider){ // s in 0.5..1
+ var c=Math.round(C0*s),m=Math.round(M0*s);
+ document.getElementById('c').value=c;document.getElementById('m').value=m;
+ document.getElementById('s').value=Math.round(s*100);
+ document.getElementById('vs').textContent=s.toFixed(2)+'x';
+}
+function tri(ms){var p=(ms%12000)/12000; // match the SVG loop
+ if(p<0.17)return 1; if(p<0.42)return 1-0.3*(p-0.17)/0.25; if(p<0.75)return 0.7; if(p<0.92)return 0.7+0.3*(p-0.75)/0.17; return 1}
+window.__setTime=function(ms){tms=ms;setS(tri(ms));render()};
+function stop(){playing=false;pb.textContent='播放';pb.setAttribute('aria-pressed','true')}
+var pb=document.getElementById('play');
+pb.onclick=function(){if(playing)stop();else{playing=true;t0=null;pb.textContent='暫停';pb.setAttribute('aria-pressed','false');requestAnimationFrame(loop)}};
+function loop(ts){if(!playing)return;if(t0===null)t0=ts-tms;window.__setTime(ts-t0);requestAnimationFrame(loop)}
+document.getElementById('s').oninput=function(){stop();var s=val('s')/100;setS(s);render()};
+document.getElementById('c').oninput=function(){stop();document.getElementById('vs').textContent='自訂';render()};
+document.getElementById('m').oninput=function(){stop();document.getElementById('vs').textContent='自訂';render()};
+document.querySelectorAll('[data-st]').forEach(function(b){b.onclick=function(){st=+b.dataset.st;document.querySelectorAll('[data-st]').forEach(function(o){o.setAttribute('aria-pressed',o===b)});render()}});
+var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(rm&&!q.has('t'))playing=false;
+if(q.has('t'))window.__setTime(+q.get('t')||0);else{setS(1);render()}
+if(!playing){pb.textContent='播放';pb.setAttribute('aria-pressed','true')}else requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

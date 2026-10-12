@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 525" width="960" height="525" role="img" aria-labelledby="t d">
+<title id="t">2.5D 封裝剖面圖</title>
+<desc id="d">處理器與 HBM 堆疊並排放在矽中介層上，中介層再置於封裝基板上。資料點沿著中介層上大量的短導線流動；下方則是同樣兩顆晶片放在電路板上，僅以少數幾條長走線相連。</desc>
+<style>
+text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#1f2a37}
+.lb{font-size:13px}.sm{font-size:12px}.hd{font-size:16px;font-weight:700}.w{fill:#fff}
+.dot{fill:#ff7a00;stroke:#7a2e00;stroke-width:.8;transform:translateX(var(--s))}
+.r1{animation:fr 1.5s linear infinite}.l1{animation:fl 1.5s linear infinite}
+.rb{animation:fb 2.9s linear infinite}.lb2{animation:fbl 2.9s linear infinite}
+@keyframes fr{0%{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:translateX(250px);opacity:0}}
+@keyframes fl{0%{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:translateX(-250px);opacity:0}}
+@keyframes fb{0%{transform:translateX(0);opacity:0}5%{opacity:1}95%{opacity:1}100%{transform:translateX(460px);opacity:0}}
+@keyframes fbl{0%{transform:translateX(0);opacity:0}5%{opacity:1}95%{opacity:1}100%{transform:translateX(-460px);opacity:0}}
+.pulse{animation:pl 6s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:.0}50%{opacity:.9}}
+@media (prefers-reduced-motion:reduce){.r1,.l1,.rb,.lb2,.pulse{animation:none!important}.dot{opacity:1}.pulse{opacity:.6}}
+</style>
+<rect width="960" height="525" fill="#f5f7fa"/>
+<text class="hd" x="20" y="28">2.5D 封裝剖面（未依比例）</text>
+<g transform="translate(0,-90)">
+
+<rect x="40" y="330" width="780" height="34" rx="3" fill="#3f8f62" stroke="#25623f"/>
+<circle cx="80" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="77" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="120" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="117" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="160" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="157" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="200" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="197" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="240" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="237" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="280" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="277" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="320" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="317" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="360" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="357" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="400" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="397" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="440" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="437" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="480" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="477" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="520" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="517" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="560" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="557" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="600" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="597" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="640" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="637" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="680" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="677" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="720" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="717" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="760" cy="380" r="8" fill="#d5d8de" stroke="#7b8494"/>
+<rect x="757" y="364" width="6" height="8" fill="#d5d8de" stroke="none"/>
+<circle cx="90" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="120" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="150" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="180" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="210" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="240" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="270" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="300" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="330" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="360" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="390" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="420" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="450" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="480" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="510" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="540" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="570" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="600" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="630" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="660" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="690" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="720" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="750" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<circle cx="780" cy="322" r="5" fill="#d9a441" stroke="#8a6414"/>
+<rect x="60" y="268" width="740" height="48" rx="2" fill="#b8c4d6" stroke="#6b7a90"/>
+<rect x="88" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="118" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="148" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="178" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="208" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="238" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="268" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="298" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="328" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="358" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="388" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="418" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="448" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="478" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="508" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="538" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="568" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="598" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="628" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="658" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="688" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="718" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="748" y="286" width="4" height="30" fill="#c9783a"/>
+<rect x="778" y="286" width="4" height="30" fill="#c9783a"/>
+<line x1="332" y1="271" x2="582" y2="271" stroke="#5a687d" stroke-width="1.4"/>
+<line x1="332" y1="274.5" x2="582" y2="274.5" stroke="#5a687d" stroke-width="1.4"/>
+<line x1="332" y1="278" x2="582" y2="278" stroke="#5a687d" stroke-width="1.4"/>
+<line x1="332" y1="281.5" x2="582" y2="281.5" stroke="#5a687d" stroke-width="1.4"/>
+<line x1="332" y1="285" x2="582" y2="285" stroke="#5a687d" stroke-width="1.4"/>
+<rect x="90" y="190" width="310" height="72" rx="3" fill="#4f74c9" stroke="#2b4a94"/>
+<text class="hd w" x="245" y="222" text-anchor="middle" style="fill:#fff">處理器晶粒</text>
+<text class="sm w" x="245" y="244" text-anchor="middle" style="fill:#fff">運算核心</text>
+<rect x="500" y="166" width="260" height="17" rx="2" fill="#e8b04a" stroke="#8a6414"/>
+<rect x="520" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="546" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="572" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="598" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="624" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="650" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="676" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="702" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="728" y="183" width="3" height="3" fill="#8a6414"/>
+<rect x="500" y="186" width="260" height="17" rx="2" fill="#e8b04a" stroke="#8a6414"/>
+<rect x="520" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="546" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="572" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="598" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="624" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="650" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="676" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="702" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="728" y="203" width="3" height="3" fill="#8a6414"/>
+<rect x="500" y="206" width="260" height="17" rx="2" fill="#e8b04a" stroke="#8a6414"/>
+<rect x="520" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="546" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="572" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="598" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="624" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="650" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="676" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="702" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="728" y="223" width="3" height="3" fill="#8a6414"/>
+<rect x="500" y="226" width="260" height="17" rx="2" fill="#e8b04a" stroke="#8a6414"/>
+<rect x="520" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="546" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="572" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="598" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="624" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="650" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="676" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="702" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="728" y="243" width="3" height="3" fill="#8a6414"/>
+<rect x="500" y="246" width="260" height="16" rx="2" fill="#c98a2b" stroke="#8a6414"/>
+<text class="sm" x="630" y="199" text-anchor="middle">DRAM 晶粒（堆疊）</text>
+<text class="sm w" x="630" y="258" text-anchor="middle" style="fill:#fff">基底晶粒</text>
+<circle cx="350" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="359" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="368" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="377" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="386" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="395" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="505" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="514" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="523" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="532" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="541" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="550" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="110" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="128" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="146" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="164" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="182" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="200" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="218" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="236" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="254" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="272" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="290" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="308" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="326" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="570" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="588" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="606" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="624" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="642" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="660" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="678" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="696" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="714" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<circle cx="732" cy="266" r="2.6" fill="#d9a441" stroke="#8a6414" stroke-width=".6"/>
+<line x1="350" y1="266" x2="350" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="359" y1="266" x2="359" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="368" y1="266" x2="368" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="377" y1="266" x2="377" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="386" y1="266" x2="386" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="505" y1="266" x2="505" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="514" y1="266" x2="514" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="523" y1="266" x2="523" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="532" y1="266" x2="532" y2="271" stroke="#5a687d" stroke-width="1"/>
+<line x1="541" y1="266" x2="541" y2="271" stroke="#5a687d" stroke-width="1"/>
+<circle class="dot r1" cx="332" cy="271" r="2.6" style="--s:10px;animation-delay:0.00s"/>
+<circle class="dot l1" cx="582" cy="271" r="2.6" style="--s:-20px;animation-delay:0.80s"/>
+<circle class="dot r1" cx="332" cy="274.5" r="2.6" style="--s:57px;animation-delay:1.19s"/>
+<circle class="dot l1" cx="582" cy="274.5" r="2.6" style="--s:-91px;animation-delay:0.37s"/>
+<circle class="dot r1" cx="332" cy="278" r="2.6" style="--s:104px;animation-delay:0.88s"/>
+<circle class="dot l1" cx="582" cy="278" r="2.6" style="--s:-162px;animation-delay:1.44s"/>
+<circle class="dot r1" cx="332" cy="281.5" r="2.6" style="--s:151px;animation-delay:0.57s"/>
+<circle class="dot l1" cx="582" cy="281.5" r="2.6" style="--s:-33px;animation-delay:1.01s"/>
+<circle class="dot r1" cx="332" cy="285" r="2.6" style="--s:198px;animation-delay:0.26s"/>
+<circle class="dot l1" cx="582" cy="285" r="2.6" style="--s:-104px;animation-delay:0.58s"/>
+<text class="lb" x="450" y="204" text-anchor="middle">微凸塊</text>
+<line x1="420" y1="210" x2="392" y2="262" stroke="#6b7a90"/><line x1="480" y1="210" x2="508" y2="262" stroke="#6b7a90"/>
+<text class="lb" x="450" y="244" text-anchor="middle">大量短而細</text><text class="lb" x="450" y="260" text-anchor="middle">的導線</text>
+<line x1="450" y1="264" x2="450" y2="270" stroke="#6b7a90"/>
+<line x1="826" y1="280" x2="800" y2="284" stroke="#6b7a90"/><text class="lb" x="830" y="284">矽中介層</text>
+<line x1="826" y1="302" x2="788" y2="304" stroke="#6b7a90"/><text class="lb" x="830" y="306">TSV</text>
+<line x1="826" y1="322" x2="795" y2="322" stroke="#6b7a90"/><text class="lb" x="830" y="326">覆晶凸塊</text>
+<line x1="826" y1="348" x2="820" y2="348" stroke="#6b7a90"/><text class="lb" x="830" y="352">封裝基板</text>
+<line x1="826" y1="384" x2="808" y2="382" stroke="#6b7a90"/><text class="lb" x="830" y="388">錫球</text>
+<text class="lb" x="630" y="150" text-anchor="middle">HBM 堆疊</text>
+<text class="sm" x="450" y="404" text-anchor="middle" style="font-weight:600">距離短 + 導線極多 = 高頻寬、每位元低能耗</text>
+<line x1="20" y1="418" x2="940" y2="418" stroke="#c4cbd6"/>
+<text class="hd" x="20" y="446">對照：電路板上的獨立封裝</text>
+<rect x="40" y="520" width="780" height="70" rx="3" fill="#3f8f62" stroke="#25623f"/>
+<rect x="120" y="466" width="160" height="54" rx="3" fill="#4f74c9" stroke="#2b4a94"/><text class="lb w" x="200" y="498" text-anchor="middle" style="fill:#fff">處理器</text>
+<rect x="580" y="466" width="160" height="54" rx="3" fill="#e8b04a" stroke="#8a6414"/><text class="lb" x="660" y="498" text-anchor="middle">記憶體</text>
+<line x1="200" y1="542" x2="660" y2="542" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="200" y1="520" x2="200" y2="542" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="660" y1="520" x2="660" y2="542" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="200" y1="558" x2="660" y2="558" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="216" y1="520" x2="216" y2="558" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="644" y1="520" x2="644" y2="558" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="200" y1="574" x2="660" y2="574" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="232" y1="520" x2="232" y2="574" stroke="#d8dde5" stroke-width="3.5"/>
+<line x1="628" y1="520" x2="628" y2="574" stroke="#d8dde5" stroke-width="3.5"/>
+<circle class="dot rb" cx="200" cy="542" r="3.2" style="--s:80px;animation-delay:0.00s"/>
+<circle class="dot lb2" cx="660" cy="542" r="3.2" style="--s:-200px;animation-delay:-1.30s"/>
+<circle class="dot rb" cx="216" cy="558" r="3.2" style="--s:190px;animation-delay:-0.90s"/>
+<circle class="dot lb2" cx="644" cy="558" r="3.2" style="--s:-260px;animation-delay:-2.20s"/>
+<circle class="dot rb" cx="232" cy="574" r="3.2" style="--s:300px;animation-delay:-1.80s"/>
+<circle class="dot lb2" cx="628" cy="574" r="3.2" style="--s:-320px;animation-delay:-3.10s"/>
+<text class="lb" x="430" y="470" text-anchor="middle">長走線（數公分），</text><text class="lb" x="430" y="488" text-anchor="middle">只容得下少數導線</text>
+<text class="sm" x="832" y="526">示意，未依比例。</text>
+<text class="sm" x="832" y="541">兩張圖中的資料點</text>
+<text class="sm" x="832" y="556">移動速度相同；</text>
+<text class="sm" x="832" y="571">電路板上的路徑</text>
+<text class="sm" x="832" y="586">只是比較長。</text>
+</g></svg>

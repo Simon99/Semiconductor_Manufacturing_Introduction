@@ -96,7 +96,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text x="120" y="222" font-size="13" fill="#e2e8f0" text-anchor="middle" font-weight="400" >強電場會慢慢損傷絕緣層，</text><text x="120" y="240" font-size="13" fill="#e2e8f0" text-anchor="middle" font-weight="400" >直到形成漏電路徑，</text><text x="120" y="258" font-size="13" fill="#e2e8f0" text-anchor="middle" font-weight="400" >最後被擊穿。</text>
 </g><g class="sl2">
 <text x="120" y="56" font-size="16" fill="#fbbf24" text-anchor="middle" font-weight="700" >HCI</text>
-<text x="120" y="74" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400" >熱載子注入</text>
+<text x="120" y="74" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="400" >熱載子效應</text>
 <rect x="60" y="94" width="120" height="22" rx="3" fill="#94a3b8"/><text x="120" y="110" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="600" >閘極</text>
 <rect x="60" y="116" width="120" height="12" fill="#fde68a" opacity=".9"/>
 <rect x="14" y="128" width="212" height="62" rx="3" fill="#475569"/>

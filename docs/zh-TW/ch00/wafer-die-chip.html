@@ -75,9 +75,9 @@ var LOOP=16000,STG=4000;
 var scene=document.getElementById('scene'),say=document.getElementById('say');
 var texts=[
 "1. 晶圓是一片薄薄的圓形矽片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒。",
-"2. 放大其中一顆晶粒，電路就在裡面。窄窄的切割道（虛線）把它和鄰近的晶粒隔開，銲墊則負責和外界連接。",
+"2. 放大其中一顆晶粒，電路就在裡面。窄窄的切割道（虛線）把它和鄰近的晶粒隔開，焊墊則負責和外界連接。",
 "3. 鋸片沿著切割道切下去，讓每顆晶粒脫離晶圓。",
-"4. 晶粒被固定在外殼裡，從銲墊拉線接到接腳，再封起來。封裝好的晶粒就是晶片。"];
+"4. 晶粒被固定在外殼裡，從焊墊拉線接到接腳，再封起來。封裝好的晶粒就是晶片。"];
 function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 // scene build
 var cx=150,cy=215,R=118,pitch=19,gW=[],hl=null;
@@ -99,7 +99,7 @@ el('rect',{x:dx,y:dy,width:ds,height:ds,fill:'var(--die)',stroke:'var(--dst)','s
 for(var k=0;k<7;k++){var p=12+k*19;[[p,3,9,7],[p,ds-10,9,7],[3,p,7,9],[ds-10,p,7,9]].forEach(function(r){el('rect',{x:dx+r[0],y:dy+r[1],width:r[2],height:r[3],fill:'var(--pad)'},g2)})}
 el('rect',{x:dx-12,y:dy-12,width:ds+24,height:ds+24,fill:'none',stroke:'var(--hlst)','stroke-width':2,'stroke-dasharray':'7 5'},g2);
 var t2=el('text',{x:dx+ds/2,y:dy+ds+54,'text-anchor':'middle',class:'tb'},g2);t2.textContent='晶粒';
-var t2b=el('text',{x:dx+ds/2,y:dy+ds+74,'text-anchor':'middle',class:'ts'},g2);t2b.textContent='虛線＝切割道，黃色＝銲墊';
+var t2b=el('text',{x:dx+ds/2,y:dy+ds+74,'text-anchor':'middle',class:'ts'},g2);t2b.textContent='虛線＝切割道，黃色＝焊墊';
 var zl1=el('line',{x1:hl[0]+pitch-2,y1:hl[1],x2:dx-24,y2:dy-24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
 var zl2=el('line',{x1:hl[0]+pitch-2,y1:hl[1]+pitch-2,x2:dx-24,y2:dy+ds+24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
 // saw

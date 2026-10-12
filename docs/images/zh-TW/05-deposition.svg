@@ -139,7 +139,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle cx="408" cy="112.5" r="1.8" class="hole"/>
 <circle cx="426" cy="112.5" r="1.8" class="hole"/>
 <circle cx="443" cy="112.5" r="1.8" class="hole"/>
-<text x="362" y="136" text-anchor="middle" class="lab">前驅氣體</text>
+<text x="362" y="136" text-anchor="middle" class="lab">前驅物</text>
 <g class="p" style="--dx:-11px;--dy:298px;animation-duration:3.6s;animation-delay:-4.2s"><g transform="translate(354,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
 <g class="p" style="--dx:-3px;--dy:298px;animation-duration:5.3s;animation-delay:-2.7s"><g transform="translate(368,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
 <g class="p" style="--dx:1px;--dy:298px;animation-duration:5.3s;animation-delay:-4.5s"><g transform="translate(361,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>

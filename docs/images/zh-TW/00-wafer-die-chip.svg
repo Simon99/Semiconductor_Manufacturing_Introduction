@@ -64,7 +64,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="cap" x="480.0" y="478" text-anchor="middle">2. 晶粒</text>
 <text class="sub" x="480.0" y="498" text-anchor="middle">從晶圓上切下來的一小塊</text>
 <text class="lab" x="480.0" y="199" text-anchor="middle">虛線：切割道（下刀的路徑）</text>
-<text class="lab" x="480.0" y="451" text-anchor="middle">黃色：銲墊（對外的連接點）</text>
+<text class="lab" x="480.0" y="451" text-anchor="middle">黃色：焊墊（對外的連接點）</text>
 <!-- arrow 2 -->
 <path class="ar" d="M599 320.0 H676"/>
 <path class="arh" d="M676 312.0 L690 320.0 L676 328.0Z"/>

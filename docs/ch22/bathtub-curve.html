@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bathtub curve and burn-in</title>
+<style>
+:root{--bg:#f8fafc;--panel:#fff;--ink:#0f172a;--sub:#475569;--line:#cbd5e1;--red:#dc2626;--grn:#16a34a;--org:#ea580c;--teal:#0d9488;--grey:#64748b;--chip:#334155;--oven:#9a3412;--accent:#2563eb;}
+:root[data-theme="dark"]{--bg:#0b1220;--panel:#131c2e;--ink:#e5eaf3;--sub:#9fb0c8;--line:#2b3a55;--red:#f87171;--grn:#4ade80;--org:#fb923c;--teal:#2dd4bf;--grey:#94a3b8;--chip:#475569;--oven:#c2410c;--accent:#60a5fa;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--panel:#131c2e;--ink:#e5eaf3;--sub:#9fb0c8;--line:#2b3a55;--red:#f87171;--grn:#4ade80;--org:#fb923c;--teal:#2dd4bf;--grey:#94a3b8;--chip:#475569;--oven:#c2410c;--accent:#60a5fa;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:8px 16px 12px}
+.top{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+h1{font-size:22px;margin:2px 0 0}
+.lede{color:var(--sub);margin:0 0 6px;font-size:14px}
+.grid>div{min-width:0}.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+svg text{fill:var(--ink);font-family:inherit}
+.s{fill:var(--sub)!important}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:8px}
+.ctl label{font-weight:600}
+input[type=range]{width:min(320px,100%);accent-color:var(--teal)}
+button{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font:inherit;cursor:pointer}
+button[aria-pressed=true],button.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.read{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.read div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.read b{display:block;font-size:20px;line-height:1.2}
+.read span{font-size:12px;color:var(--sub)}
+#stageTxt{min-height:60px;font-size:13.5px}
+#mach{max-height:200px}#dots{max-height:112px}
+.stages button{padding:3px 8px;font-size:13.5px}
+.note{font-size:12px;color:var(--sub);margin:6px 0 0}
+code{font-size:12px}
+.callout{margin-top:6px;padding:6px 8px;border-left:4px solid var(--org);background:var(--bg);font-size:13px;display:none}
+@media (max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}.read b{font-size:17px}h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="../../en/5-backend/22-final-test-and-reliability/README.md">&larr; Back to chapter</a><h1>Bathtub curve and burn-in</h1></div>
+<p class="lede">Failure rate over a chip's life, and what factory burn-in can and cannot remove. All model numbers are <b>illustrative</b>.</p>
+<div class="grid">
+ <div>
+  <div class="card" style="overflow-x:auto"><svg id="plot" style="min-width:600px" viewBox="0 0 760 362" width="100%" role="img" aria-label="Failure rate versus time in use, log-log, with and without burn-in"></svg></div>
+  <div class="ctl">
+   <label for="bi">Burn-in time: <span id="biv">48</span> h</label>
+   <input id="bi" type="range" min="0" max="168" step="1" value="48" aria-label="Burn-in time in hours">
+   <label><input id="nw" type="checkbox"> Show: burn-in cannot change wear-out</label>
+   <button id="pp" aria-pressed="false">Pause</button><span class="note" id="clock"></span>
+  </div>
+  <div class="read" aria-live="polite">
+   <div><b id="rScr">-</b><span>screened out at the factory</span></div>
+   <div><b id="r0">-</b><span>shipped: failure rate at hour 0 (FIT)</span></div>
+   <div><b id="r1k">-</b><span>shipped: failure rate at hour 1000 (FIT)</span></div>
+  </div>
+  <div class="callout" id="callout"></div>
+ </div>
+ <div>
+  <div class="card"><svg id="mach" viewBox="0 0 420 232" width="100%" role="img" aria-label="Chips ride a conveyor through a burn-in oven; weak chips fail and are rejected"></svg></div>
+  <div class="card" style="margin-top:8px"><svg id="dots" viewBox="0 0 420 134" width="100%" role="img" aria-label="1000 chips, failed ones in red"></svg></div>
+  <div class="stages" id="stages"></div>
+  <div class="card" id="stageTxt"></div>
+   </div>
+</div>
+<p class="note"><b>Model (illustrative):</b> hazard <code>h(t) = h<sub>early</sub> + h<sub>random</sub> + h<sub>wear</sub></code>; each Weibull hazard is <code>(&beta;/&eta;)(t/&eta;)<sup>&beta;&minus;1</sup></code>. Early: &beta;=0.5, &eta;=2,000 h, weight 0.02 (a weak sub-population). Random: &beta;=1, constant 1,000 FIT. Wear-out: &beta;=4, &eta;=60,000 h. Burn-in of <i>b</i> hours at stress equals <i>AF</i>&times;<i>b</i> equivalent field hours (AF=10, assumed). Screened fraction = 1&minus;exp(&minus;H(AF&middot;b)). Shipped units' hazard at field hour &tau; is h(AF&middot;b+&tau;): same curve, start point moved right. FIT = failures per 10<sup>9</sup> device-hours. Hour 0 is evaluated at 1 h to avoid the &beta;&lt;1 singularity. Drawn as a standard reliability sketch, not data from any product.</p>
+</div>
+<script>
+(function(){
+const P={c1:0.02,b1:0.5,e1:2000,hc:1e-6,b3:4,e3:6e4,AF:10};
+const hE=t=>P.c1*(P.b1/P.e1)*Math.pow(Math.max(t,1)/P.e1,P.b1-1);
+const hW=t=>(P.b3/P.e3)*Math.pow(t/P.e3,P.b3-1);
+const hT=t=>hE(t)+P.hc+hW(t);
+const H=t=>P.c1*Math.pow(t/P.e1,P.b1)+P.hc*t+Math.pow(t/P.e3,P.b3);
+const FIT=h=>h*1e9;
+const q=new URLSearchParams(location.search);
+if(q.get('theme')==='dark'||q.get('theme')==='light')document.documentElement.dataset.theme=q.get('theme');
+const NS='http://www.w3.org/2000/svg';
+function el(p,n,a,txt){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+const fmt=n=>n>=100?Math.round(n).toLocaleString('en-US'):n.toPrecision(3);
+const css=v=>'var(--'+v+')';
+// ---------- state ----------
+const CYC=14000;let t=0,paused=false,last=null,b=48;
+const STG=[
+ ['1. Early failures','Weak chips with latent defects fail soon after first use. The rate starts high and falls as they drop out (Weibull shape β<1).',2500],
+ ['2. Stable period','Random failures at a low, roughly constant rate (β=1). This is the chip\'s useful life.',5000],
+ ['3. Wear-out','Aging mechanisms accumulate and the rate climbs (β>1). Design and process decide when this starts.',7500],
+ ['4. Burn-in','Run chips hot and at slightly higher voltage so weak ones fail in the factory, then test and discard them. Customers get a population that starts past the early-failure region. Burn-in cannot lengthen life or fix wear-out.',12000]];
+function stageOf(tt){return tt<3500?0:tt<6000?1:tt<8500?2:3}
+// ---------- plot ----------
+const PL=56,PR=744,PT=14,PB=318,XMIN=1,XMAX=1e5,YMIN=100,YMAX=1e6;
+const X=x=>PL+(Math.log10(x)-Math.log10(XMIN))/(Math.log10(XMAX)-Math.log10(XMIN))*(PR-PL);
+const Y=f=>PB-(Math.log10(f)-Math.log10(YMIN))/(Math.log10(YMAX)-Math.log10(YMIN))*(PB-PT);
+const plot=document.getElementById('plot');
+const N=240,TAU=[];for(let i=0;i<=N;i++)TAU.push(Math.pow(10,5*i/N));
+function pathOf(fn){return TAU.map((x,i)=>(i?'L':'M')+X(x).toFixed(1)+','+Y(Math.max(YMIN,FIT(fn(x)))).toFixed(1)).join('')}
+const g={};
+function buildPlot(){
+ plot.innerHTML='';
+ const defs=el(plot,'defs',{});
+ const cp=el(defs,'clipPath',{id:'rev'});g.rev=el(cp,'rect',{x:0,y:0,width:0,height:362});
+ const pat=el(defs,'pattern',{id:'hp',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+ el(pat,'rect',{width:6,height:6,fill:css('red'),'fill-opacity':.12});el(pat,'line',{x1:0,y1:0,x2:0,y2:6,stroke:css('red'),'stroke-width':2,'stroke-opacity':.6});
+ // grid
+ for(let e=0;e<=5;e++){const x=X(Math.pow(10,e));el(plot,'line',{x1:x,x2:x,y1:PT,y2:PB,stroke:css('line'),'stroke-width':1});
+  el(plot,'text',{x:x,y:PB+16,'text-anchor':'middle','font-size':12,class:'s'},e===0?'1':e===1?'10':e===2?'100':e===3?'1k':e===4?'10k':'100k')}
+ for(let e=2;e<=6;e++){const y=Y(Math.pow(10,e));el(plot,'line',{x1:PL,x2:PR,y1:y,y2:y,stroke:css('line'),'stroke-width':1});
+  el(plot,'text',{x:PL-6,y:y+4,'text-anchor':'end','font-size':12,class:'s'},e===2?'100':e===3?'1k':e===4?'10k':e===5?'100k':'1M')}
+ el(plot,'text',{x:(PL+PR)/2,y:PB+36,'text-anchor':'middle','font-size':13,class:'s'},'hours in use after shipping (log scale)');
+ el(plot,'text',{transform:'translate(13,'+((PT+PB)/2)+') rotate(-90)','text-anchor':'middle','font-size':13,class:'s'},'failure rate, FIT (log scale)');
+ g.wearBand=el(plot,'g',{});
+ g.hatch=el(plot,'path',{fill:'url(#hp)',stroke:'none'});
+ const clip=el(plot,'g',{'clip-path':'url(#rev)'});g.clip=clip;
+ g.cE=el(clip,'path',{d:pathOf(t=>hE(t)),fill:'none',stroke:css('red'),'stroke-width':1.5,'stroke-opacity':.55,'stroke-dasharray':'2 3'});
+ g.cC=el(clip,'path',{d:pathOf(()=>P.hc),fill:'none',stroke:css('grn'),'stroke-width':1.5,'stroke-opacity':.7,'stroke-dasharray':'2 3'});
+ g.cW=el(clip,'path',{d:pathOf(t=>hW(t)),fill:'none',stroke:css('org'),'stroke-width':1.5,'stroke-opacity':.7,'stroke-dasharray':'2 3'});
+ g.cO=el(clip,'path',{d:pathOf(hT),fill:'none',stroke:css('grey'),'stroke-width':3,'stroke-dasharray':'7 5'});
+ g.cS=el(plot,'path',{fill:'none',stroke:css('teal'),'stroke-width':4.5,'stroke-linejoin':'round'});
+ g.wm=el(plot,'g',{});
+ // legend
+ const lg=el(plot,'g',{transform:'translate(300,18)'});
+ [['grey','All units, no burn-in','7 5',3],['teal','Shipped after burn-in','',4.5]].forEach((r,i)=>{el(lg,'line',{x1:0,x2:26,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':r[3],'stroke-dasharray':r[2]});el(lg,'text',{x:32,y:i*18+4,'font-size':12.5},r[1])});
+ [['red','early part (β<1)'],['grn','random part (β=1)'],['org','wear-out part (β>1)']].forEach((r,i)=>{el(lg,'line',{x1:230,x2:254,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':2,'stroke-dasharray':'2 3'});el(lg,'text',{x:260,y:i*18+4,'font-size':12,class:'s'},r[1])});
+ // phase labels
+ [['Early failures',2.5,'red'],['Stable period',160,'grn'],['Wear-out',2e4,'org']].forEach(r=>{g['l'+r[0]]=el(plot,'text',{x:X(r[1]),y:PB-8-0,'font-size':13,'font-weight':700,fill:css(r[2]),style:'fill:'+css(r[2])},r[0])});
+}
+function wearStart(){let lo=1,hi=1e5;for(let i=0;i<60;i++){const m=Math.sqrt(lo*hi);(hW(m)>hE(m)+P.hc)?hi=m:lo=m}return hi}
+function draw(){
+ const teq=P.AF*b;
+ const shipFn=x=>hT(teq+x);
+ g.cS.setAttribute('d',pathOf(shipFn));
+ // hatch region: where orig > shipped
+ let d='',up=[],dn=[];
+ for(let i=0;i<=N;i++){const x=TAU[i],o=FIT(hT(x)),s=FIT(shipFn(x));if(o>s*1.0005){up.push([X(x),Y(Math.max(YMIN,o))]);dn.push([X(x),Y(Math.max(YMIN,s))])}}
+ if(up.length>1)d='M'+up.map(p=>p.join(',')).join('L')+'L'+dn.reverse().map(p=>p.join(',')).join('L')+'Z';
+ g.hatch.setAttribute('d',d);
+ // wear band
+ g.wearBand.innerHTML='';g.wm.innerHTML='';
+ const on=document.getElementById('nw').checked;
+ const co=document.getElementById('callout');
+ if(on){
+  const ws=wearStart();
+  el(g.wearBand,'rect',{x:X(ws),y:PT,width:PR-X(ws),height:PB-PT,fill:css('org'),'fill-opacity':.12});
+  el(g.wearBand,'text',{x:X(ws)-6,y:PB-60,'text-anchor':'end','font-size':12.5,'font-weight':700,style:'fill:'+css('org')},'wear-out zone:');el(g.wearBand,'text',{x:X(ws)-6,y:PB-44,'text-anchor':'end','font-size':12.5,'font-weight':700,style:'fill:'+css('org')},'unchanged by burn-in');
+  const xm=5e4,o=FIT(hT(xm)),s=FIT(shipFn(xm));
+  el(g.wm,'line',{x1:X(xm),x2:X(xm),y1:PT+22,y2:PB,stroke:css('org'),'stroke-width':1.5,'stroke-dasharray':'4 3'});
+  el(g.wm,'circle',{cx:X(xm),cy:Y(o),r:6,fill:css('grey')});el(g.wm,'circle',{cx:X(xm),cy:Y(s),r:3.5,fill:css('teal')});
+  co.style.display='block';
+  const dl=(s/o-1)*100;
+  co.innerHTML='At 50,000 h in use: <b>'+fmt(o)+' FIT</b> without burn-in vs <b>'+fmt(s)+' FIT</b> with it ('+(dl>=0?'+':'')+dl.toFixed(1)+'%). The wear-out curve is the same curve. Burn-in only moves the clock by '+fmt(teq)+' equivalent hours (of life used up), so shipped chips sit a little further along it, never lower.';
+ }else co.style.display='none';
+ // readouts
+ const scr=1-Math.exp(-H(teq));
+ document.getElementById('biv').textContent=b;
+ document.getElementById('rScr').textContent=(scr*100).toFixed(2)+' %';
+ const f0=FIT(hT(Math.max(teq+0,1))),f1=FIT(shipFn(1000));
+ const o0=FIT(hT(1)),o1=FIT(hT(1000));
+ document.getElementById('r0').textContent=fmt(f0)+(b?'  (was '+fmt(o0)+')':'');
+ document.getElementById('r1k').textContent=fmt(f1)+(b?'  (was '+fmt(o1)+')':'');
+ drawDots(scr);
+}
+// ---------- dots ----------
+const dots=document.getElementById('dots');let dotEls=[],order=[];
+(function(){let s=12345;const a=[...Array(1000).keys()];for(let i=999;i>0;i--){s=(s*1103515245+12345)%2147483648;const j=s%(i+1);[a[i],a[j]]=[a[j],a[i]]}order=a;
+ for(let i=0;i<1000;i++){dotEls.push(el(dots,'circle',{cx:8+(i%50)*8.2,cy:22+Math.floor(i/50)*4.6,r:2.3,fill:css('chip')}))}
+ el(dots,'text',{x:6,y:12,'font-size':12.5,'font-weight':700,id:'dotT'},'');el(dots,'text',{x:6,y:129,'font-size':12,class:'s'},'One dot = one chip. Red = failed in burn-in, removed.')})();
+function drawDots(scr){const n=Math.round(scr*1000);const red=new Set(order.slice(0,n));dotEls.forEach((c,i)=>c.setAttribute('fill',red.has(i)?css('red'):css('chip')));
+ document.getElementById('dotT').textContent='1,000 chips in burn-in: '+n+' removed';}
+// ---------- machine ----------
+const mach=document.getElementById('mach');
+const CH=[['w',.79],['a',.04],['b',.29],['c',.54]];let chipEl={},wx,wb,puff=[],hat;
+(function(){
+ el(mach,'defs',{}).innerHTML='<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#f97316"/></linearGradient>';
+ el(mach,'text',{x:8,y:20,'font-size':14,'font-weight':700},'Burn-in oven (hot + slightly higher voltage)');
+ el(mach,'text',{x:8,y:37,'font-size':12,class:'s'},'Failure share drawn exaggerated');
+ el(mach,'rect',{x:6,y:140,width:190,height:9,rx:4.5,fill:css('grey')});el(mach,'rect',{x:262,y:140,width:152,height:9,rx:4.5,fill:css('grey')});
+ el(mach,'rect',{x:196,y:139,width:66,height:4,fill:css('grey'),'fill-opacity':.6});
+ el(mach,'rect',{x:104,y:92,width:100,height:45,fill:'url(#gl)'});
+ el(mach,'path',{d:'M222,160 H292 L284,208 H230 Z',fill:css('red'),'fill-opacity':.15,stroke:css('red'),'stroke-width':1.6});
+ el(mach,'text',{x:257,y:207,'text-anchor':'middle','font-size':12,'font-weight':700,style:'fill:'+css('red'),dy:'-0'},'');
+ CH.forEach(c=>{const gg=el(mach,'g',{});chipEl[c[0]]=gg;
+  for(let i=0;i<3;i++){el(gg,'rect',{x:-23,y:-26+i*7,width:6,height:3,fill:'#94a3b8'});el(gg,'rect',{x:17,y:-26+i*7,width:6,height:3,fill:'#94a3b8'})}
+  const body=el(gg,'rect',{x:-19,y:-27,width:38,height:27,rx:3,fill:'#334155',stroke:'#0f172a','stroke-width':1.2});el(gg,'circle',{cx:-12,cy:-20,r:2.4,fill:'#e2e8f0'});
+  if(c[0]==='w'){wb=body;wx=el(gg,'path',{d:'M-9,-21 L9,-6 M9,-21 L-9,-6',stroke:'#dc2626','stroke-width':3.2,'stroke-linecap':'round',fill:'none',opacity:0})}});
+ el(mach,'path',{'fill-rule':'evenodd',fill:'#9a3412',stroke:'#431407','stroke-width':1.6,d:'M92,62 H216 V150 H92 Z M104,92 H204 V137 H104 Z'});
+ el(mach,'text',{x:154,y:82,'text-anchor':'middle','font-size':12.5,'font-weight':700,style:'fill:#fff'},'BURN-IN OVEN');
+ el(mach,'text',{x:8,y:166,'font-size':12,class:'s'},'chips in');el(mach,'text',{x:414,y:166,'text-anchor':'end','font-size':12,'font-weight':700,style:'fill:'+css('grn')},'pass: ship');
+ el(mach,'text',{x:257,y:154,'text-anchor':'middle','font-size':12,class:'s',dy:'0'},'');
+ el(mach,'text',{x:257,y:226,'text-anchor':'middle','font-size':12,'font-weight':700,style:'fill:'+css('red')},'rejected (test & sort)');
+ for(let i=0;i<3;i++)puff.push(el(mach,'circle',{cx:150+i*8,cy:88,r:6+i,fill:'#64748b',opacity:0}));
+})();
+const mx=ph=>8+ph*404;
+function drawMach(tt){
+ CH.forEach(c=>{const k=c[0];let ph=((tt/CYC)+c[1])%1,x=mx(ph),y=0,op=1;
+  if(ph<.03)op=ph/.03;
+  if(k==='w'){const fx=mx(.735);if(ph>.735){x=fx;y=Math.min(1,(ph-.735)/.04)*56;}
+   if(ph>.83)op=Math.max(0,1-(ph-.83)/.03);
+   const failed=ph>.52;wb.setAttribute('fill',failed?'#292524':'#334155');wx.setAttribute('opacity',failed?1:0)}
+  else if(ph>.97)op=(1-ph)/.03;
+  chipEl[k].setAttribute('transform','translate('+x.toFixed(1)+','+(140+y)+')');chipEl[k].setAttribute('opacity',op)});
+ const wph=((tt/CYC)+.79)%1;
+ puff.forEach((p,i)=>{const u=(wph-.52-i*.02)/.14;if(u>0&&u<1){p.setAttribute('opacity',.85*(1-u));p.setAttribute('cy',88-u*38);p.setAttribute('r',(6+i)*(.7+u))}else p.setAttribute('opacity',0)});
+}
+// ---------- stages / time ----------
+const stBox=document.getElementById('stages');
+STG.forEach((s,i)=>{const bt=document.createElement('button');bt.textContent=s[0];bt.onclick=()=>{paused=true;sync();setT(s[2])};bt.dataset.i=i;stBox.appendChild(bt)});
+function reveal(tt){return Math.min(1,Math.max(0,(tt-300)/8000))}
+function render(){
+ // reveal curves left to right
+ const r=reveal(t),W=PL+(PR-PL)*r;g.rev.setAttribute('width',(W).toFixed(1));
+ const sa=Math.min(1,Math.max(0,(t-8500)/2500));
+ g.cS.setAttribute('opacity',sa);g.hatch.setAttribute('opacity',sa);g.wm.setAttribute('opacity',r>.72?1:0);g.wearBand.setAttribute('opacity',r>.72?1:0);
+ g.cO.setAttribute('stroke-opacity',sa>0?.75-.2*sa:1);
+ const st=stageOf(t);
+ [...stBox.children].forEach((bt,i)=>{bt.classList.toggle('on',i===st)});
+ const S=STG[st];document.getElementById('stageTxt').innerHTML='<b>'+S[0]+'</b><br>'+S[1];
+ drawMach(t);
+ document.getElementById('clock').textContent='t = '+(t/1000).toFixed(1)+' s / '+(CYC/1000)+' s';
+ // hide labels not yet reached
+ g['lEarly failures'].setAttribute('opacity',r>.02?1:0);g['lStable period'].setAttribute('opacity',r>.35?1:0);g['lWear-out'].setAttribute('opacity',r>.72?1:0);
+}
+function setT(ms){t=((ms%CYC)+CYC)%CYC;render()}
+function sync(){const p=document.getElementById('pp');p.textContent=paused?'Play':'Pause';p.setAttribute('aria-pressed',paused)}
+document.getElementById('pp').onclick=()=>{paused=!paused;sync()};
+const bi=document.getElementById('bi');
+bi.addEventListener('input',()=>{b=+bi.value;if(t<8500||true){t=12000;paused=true;sync()}draw();render()});
+document.getElementById('nw').addEventListener('change',()=>{draw()});
+buildPlot();draw();
+window.__setTime=function(ms){paused=true;sync();setT(ms)};
+window.__setBurnin=function(h){bi.value=h;b=+h;draw();render()};
+if(q.get('b')){b=+q.get('b');bi.value=b}
+if(q.get('nw')==='1')document.getElementById('nw').checked=true;
+draw();
+if(q.get('still')==='1'){paused=true;sync();setT(12000)}
+else if(q.get('t')!==null){paused=true;sync();setT(+q.get('t'))}
+else render();
+function loop(ts){if(last!==null&&!paused)setT(t+(ts-last));last=ts;requestAnimationFrame(loop)}
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches&&q.get('t')===null){paused=true;sync();setT(12000)}
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

@@ -33,6 +33,10 @@ Some products also go through **system-level test** (SLT), in which the chip is 
 > - **Related terms**: CP, handler, binning, SLT
 > - **Common confusion**: CP tests dies on the wafer, while FT tests packaged chips. Their test items and purposes are not exactly the same.
 
+![Animation: a handler picks a packaged chip from a tray, places it in a test socket, the tester runs, and the chip is sorted into a fail, slow or fast bin](../../../images/22-final-test-binning.svg)
+
+*Animated figure. [Open the interactive version](../../../docs/ch22/final-test-binning.html) to change the test temperature and watch the bins change.*
+
 ---
 
 ## Burn-in: weeding out weak chips early
@@ -45,7 +49,9 @@ How a chip's failure rate changes over time is often described by a curve shaped
 
 **Burn-in** runs chips at high temperature and somewhat higher voltage for a while before shipment, so that weak chips fail early in the factory and are screened out, instead of failing in the customer's hands.
 
-<!-- Figure: the bathtub curve (early failure period, stable period, wear-out period) -->
+![Animation: the bathtub curve grows in three phases while chips pass through a burn-in oven, weak chips fail and are rejected, and the early-failure peak is flattened](../../../images/22-bathtub-curve.svg)
+
+*Animated figure. [Open the interactive version](../../../docs/ch22/bathtub-curve.html) to change the burn-in time and see how much of the early-failure region it removes.*
 
 > [!NOTE]
 > **📖 Term | Bathtub curve (浴缸曲線)**
@@ -84,6 +90,10 @@ A chip ages because the materials and structures built during manufacturing are 
 | Time-dependent dielectric breakdown (TDDB) | An insulating layer under a long-term electric field eventually breaks down |
 | Hot carrier injection (HCI) | High-energy electrons get into the gate insulator, and the transistor's characteristics slowly change |
 | Bias temperature instability (BTI) | High temperature plus voltage makes Vt drift over time |
+
+![Animation: electrons push metal atoms along a wire, a void opens at one end and a hillock grows at the other until the wire breaks, beside short panels for the other aging mechanisms](../../../images/22-accelerated-aging.svg)
+
+*Animated figure. [Open the interactive version](../../../docs/ch22/accelerated-aging.html) to change the temperatures and see how many years a 1000-hour test stands for.*
 
 These mechanisms are closely tied to earlier chapters. For the quality of the wiring, see [Chapter 10](../../2-process-modules/10-metallization/README.md); for the gate insulator, see [Chapter 12](../../3-integration/12-advanced-transistors/README.md).
 

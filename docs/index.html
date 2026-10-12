@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Semiconductor Manufacturing: Animated Figures</title>
+<style>
+:root{--bg:#f6f8fa;--fg:#1f2933;--mut:#52606d;--card:#fff;--bd:#d9e0e6;--ac:#0b7285}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1720;--fg:#e6edf3;--mut:#9fb0bf;--card:#16212c;--bd:#2a3846;--ac:#4fc3d9}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,"Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",sans-serif}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.5rem;margin:0 0 4px}
+p.sub{color:var(--mut);margin:0 0 24px}
+figure{margin:0 0 28px;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px}
+figure img{width:100%;height:auto;display:block;border-radius:6px}
+figcaption{margin-top:10px;color:var(--mut)}
+figcaption b{color:var(--fg)}
+a{color:var(--ac)}
+</style>
+</head>
+<body>
+<main>
+<h1>Chapter 22: Final Test and Reliability</h1>
+<p class="sub">Animated figures. Each loops automatically.</p>
+<figure>
+<img src="images/22-bathtub-curve.svg" alt="Animation: the bathtub curve grows in three phases while chips pass through a burn-in oven and weak chips are rejected">
+<figcaption><b>Bathtub curve and burn-in.</b> <a href="ch22/bathtub-curve.html">Interactive version</a></figcaption>
+</figure>
+<figure>
+<img src="images/22-final-test-binning.svg" alt="Animation: a handler places packaged chips into a test socket and sorts them into fail, slow and fast bins">
+<figcaption><b>Final test and binning.</b> <a href="ch22/final-test-binning.html">Interactive version</a></figcaption>
+</figure>
+<figure>
+<img src="images/22-accelerated-aging.svg" alt="Animation: electromigration pushes metal atoms along a wire until a void opens and the wire breaks">
+<figcaption><b>Accelerated aging (electromigration).</b> <a href="ch22/accelerated-aging.html">Interactive version</a></figcaption>
+</figure>
+</main>
+</body>
+</html>

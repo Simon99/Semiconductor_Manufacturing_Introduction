@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>FEOL Cross-Section Walkthrough</title>
+<style>
+:root{--bg:#f3f5f9;--panel:#fff;--ink:#1b2330;--ink2:#4a566b;--line:#cdd5e2;--acc:#2c5db0;--accink:#fff;--warn:#b84f00;--svgbg:#f6f8fb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--panel:#171e2e;--ink:#e8edf6;--ink2:#a6b2c7;--line:#2e3a52;--acc:#6aa0ff;--accink:#0b1220;--warn:#ffa24d;--svgbg:#121a2b}}
+:root[data-theme="dark"]{--bg:#0f1420;--panel:#171e2e;--ink:#e8edf6;--ink2:#a6b2c7;--line:#2e3a52;--acc:#6aa0ff;--accink:#0b1220;--warn:#ffa24d;--svgbg:#121a2b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--acc)}
+.wrap{max-width:1240px;margin:0 auto;padding:10px 16px 20px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px}
+h1{font-size:20px;margin:6px 0 2px}
+.sub{margin:0 0 10px;color:var(--ink2);font-size:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+svg#fig{display:block;width:100%;height:auto;border-radius:8px}
+.bg{fill:var(--svgbg)}.tx{fill:var(--ink)}.tx2{fill:var(--ink2)}.lb{font-size:13px;paint-order:stroke;stroke:var(--svgbg);stroke-width:3px;stroke-linejoin:round}.lb2{font-size:12px;fill:var(--warn);font-weight:600}
+.lb.in{fill:#1b2330;stroke:#eef2f8}
+.ld{stroke:var(--ink2);stroke-width:1.3;fill:none}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.st{transition:opacity .35s}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;min-height:36px}
+button:hover{border-color:var(--acc)}
+button[aria-pressed="true"],button.on{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}
+.steps button{text-align:left}
+label{display:block;font-size:13.5px;margin:10px 0 2px;color:var(--ink2)}
+input[type=range]{width:100%}
+.read{font-variant-numeric:tabular-nums;font-size:13.5px;border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.read div{display:flex;justify-content:space-between;gap:8px}
+.read .m{color:var(--ink2)}
+#cap h2{font-size:16px;margin:0 0 2px}#cap p{margin:0;color:var(--ink2);font-size:14px}
+.note{font-size:13px;color:var(--ink2);margin-top:10px}
+.tiny{font-size:12.5px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a href="../../en/3-integration/11-cmos-process-flow/README.md">&larr; Back to chapter</a><button id="th" type="button" aria-label="Toggle light/dark">Theme</button></div>
+<h1>FEOL step by step: from bare silicon to two transistors</h1>
+<p class="sub">Simplified planar CMOS cross-section (schematic, not to scale). Step through the seven stages, then change the gate length and spacer width.</p>
+<div class="grid">
+<div>
+<div class="card"><svg id="fig" viewBox="0 140 960 310" role="img" aria-label="FEOL cross-section of an NMOS and a PMOS transistor"><rect class="bg" x="0" y="140" width="960" height="310" rx="10"/>
+<text class="tx" x="250" y="168" text-anchor="middle" font-size="16" font-weight="700">NMOS</text><text class="tx" x="690" y="168" text-anchor="middle" font-size="16" font-weight="700">PMOS</text>
+<g id="scene" transform="translate(0,-10)"></g></svg></div>
+<div class="card" id="cap" style="margin-top:10px" aria-live="polite"><h2 id="ct"></h2><p id="cd"></p></div>
+</div>
+<div class="card">
+<div class="ctl" role="group" aria-label="View"><button id="vb" type="button" aria-pressed="false">View both</button><button id="vn" type="button" aria-pressed="false">Zoom NMOS</button><button id="vp" type="button" aria-pressed="false">Zoom PMOS</button></div>
+<div class="steps" id="steps"></div>
+<div class="ctl"><button id="prev" type="button">&larr; Prev</button><button id="next" type="button">Next &rarr;</button><button id="play" type="button">Pause</button><button id="rst" type="button">Reset</button></div>
+<label for="stg">Process step: <b id="stgv"></b></label><input id="stg" type="range" min="0" max="7" step="1" value="7">
+<label for="lg">Gate length Lg: <b id="lgv"></b></label><input id="lg" type="range" min="50" max="100" step="2" value="70">
+<label for="sp">Spacer width: <b id="spv"></b></label><input id="sp" type="range" min="10" max="30" step="1" value="18">
+<div class="read">
+<div><span class="m">Gate length (Lg)</span><b id="r1"></b></div>
+<div><span class="m">Spacer width (each side)</span><b id="r2"></b></div>
+<div><span class="m">Source/drain gap = Lg + 2 &times; spacer</span><b id="r3"></b></div>
+<div><span class="m">Light-doped (LDD) strip under spacer</span><b id="r4"></b></div>
+</div>
+<p class="note">Units are illustrative (drawing units, not nanometres). The heavy source/drain implant is blocked by the gate and the spacers, so it lands one spacer width away from the gate edge; the light implant (step 4) lands right at the gate edge. A wider spacer therefore moves the source/drain further from the gate.</p>
+<p class="note">Advanced processes use a high-k dielectric and metal gate (HKMG): a polysilicon dummy gate holds the place through the high-temperature anneals and is replaced afterwards (Chapter 12).</p>
+<p class="tiny">URL options: <code>?t=ms</code>, <code>?view=b|n|p</code>, <code>?still=1</code>, <code>?theme=dark|light</code>.</p>
+</div>
+</div>
+</div>
+<script>
+// Shared geometry for FEOL scene. Returns ordered elements (z-order) tagged by stage k (0=base).
+function feolScene(Lg, sp) {
+  var Y = 300, cxN = 250, cxP = 690, out = [];
+  function add(k, s) { out.push({ k: k, s: s }); }
+  function sdPath(x0, x1, d) { var r = 8; return 'M' + x0 + ' ' + Y + 'H' + x1 + 'V' + (Y + d - r) + 'Q' + x1 + ' ' + (Y + d) + ' ' + (x1 - r) + ' ' + (Y + d) + 'H' + (x0 + r) + 'Q' + x0 + ' ' + (Y + d) + ' ' + x0 + ' ' + (Y + d - r) + 'Z'; }
+  function sti(x0, x1, tl, tr) { var t = 7; return '<path class="sti" d="M' + x0 + ' ' + Y + 'H' + x1 + 'L' + (x1 - (tr ? t : 0)) + ' ' + (Y + 40) + 'H' + (x0 + (tl ? t : 0)) + 'Z"/>'; }
+  function lbl(x, y, t, a) { return '<text class="tx lb' + (y >= 315 ? ' in' : '') + '" x="' + x + '" y="' + y + '" text-anchor="' + (a || 'middle') + '">' + t + '</text>'; }
+  function ld(x1, y1, x2, y2) { return '<path class="ld" d="M' + x1 + ' ' + y1 + 'L' + x2 + ' ' + y2 + '"/>'; }
+  // base silicon
+  add(0, '<rect class="si" x="30" y="' + Y + '" width="900" height="150"/>' + lbl(480, 438, 'Silicon substrate (wafer)'));
+  // stage 2 wells
+  add(2, '<rect class="pw" x="30" y="' + Y + '" width="450" height="100"/><rect class="nw" x="480" y="' + Y + '" width="450" height="100"/>' +
+    lbl(250, 392, 'P-well (for NMOS)') + lbl(690, 392, 'N-well (for PMOS)'));
+  // stage 1 STI (above wells in z)
+  add(1, sti(30, 110, 0, 1) + sti(440, 520, 1, 1) + sti(850, 930, 1, 0) + ld(480, 340, 480, 356) + lbl(480, 370, 'STI oxide'));
+  var cx = [cxN, cxP], isN = [true, false];
+  var g3 = '', g4 = '', g5 = '', g6 = '', g7 = '';
+  for (var i = 0; i < 2; i++) {
+    var c = cx[i], gl = c - Lg / 2, gr = c + Lg / 2, a0 = i ? 520 : 110, a1 = i ? 850 : 440, n = isN[i], p = n ? 'n' : 'p';
+    g3 += '<rect class="gox" x="' + gl + '" y="297" width="' + Lg + '" height="3"/><rect class="poly" x="' + gl + '" y="247" width="' + Lg + '" height="50"/>';
+    g4 += '<path class="' + p + 'l" d="' + sdPath(a0, gl + 8, 13) + '"/><path class="' + p + 'l" d="' + sdPath(gr - 8, a1, 13) + '"/>';
+    g5 += '<path class="spc" d="M' + gl + ' 250C' + (gl - sp * .2) + ' 285 ' + (gl - sp * .5) + ' 297 ' + (gl - sp) + ' 300L' + gl + ' 300Z"/>' +
+      '<path class="spc" d="M' + gr + ' 250C' + (gr + sp * .2) + ' 285 ' + (gr + sp * .5) + ' 297 ' + (gr + sp) + ' 300L' + gr + ' 300Z"/>';
+    g6 += '<path class="' + p + 'h" d="' + sdPath(a0, gl - sp, 32) + '"/><path class="' + p + 'h" d="' + sdPath(gr + sp, a1, 32) + '"/>';
+    g7 += '<rect class="sil" x="' + (a0 + 1) + '" y="300" width="' + (gl - sp - a0 - 1) + '" height="6" rx="2"/><rect class="sil" x="' + (gr + sp) + '" y="300" width="' + (a1 - gr - sp - 1) + '" height="6" rx="2"/><rect class="sil" x="' + gl + '" y="247" width="' + Lg + '" height="7" rx="2"/>';
+  }
+  var gP = cxP - Lg / 2, gN = cxN + Lg / 2;
+  // stage 4 (LDD) drawn before spacers/S-D
+  add(4, g4 + lbl(cxN - Lg / 2 - sp / 2, 356, 'n&#8722; LDD (light dose)') + ld(cxN - Lg / 2 - sp / 2, 342, cxN - Lg / 2 - sp / 2, 308));
+  add(6, g6 + ld(370, 322, 370, 348) + lbl(370, 362, 'n+ source/drain') + ld(810, 322, 810, 348) + lbl(810, 362, 'p+ source/drain'));
+  add(3, g3 + '<path class="ld" d="M' + (cxN - Lg / 2) + ' 236H' + (cxN + Lg / 2) + 'M' + (cxN - Lg / 2) + ' 231V241M' + (cxN + Lg / 2) + ' 231V241"/>' + lbl(cxN, 224, 'gate length (Lg)') +
+    lbl(cxP, 230, 'Gate (polysilicon)') + ld(cxP, 300, cxP, 311) + lbl(cxP, 324, 'gate oxide'));
+  add(5, g5 + ld(gN + sp * .6, 268, gN + sp + 22, 240) + lbl(gN + sp + 26, 244, 'Spacer', 'start'));
+  add(7, g7 + ld(150, 307, 150, 276) + lbl(150, 270, 'Silicide'));
+  return out;
+}
+function impArrows(k, Lg, sp) {
+  var cxN = 250, cxP = 690, regs = [];
+  if (k == 2) regs = [[125, 425], [535, 835]];
+  if (k == 4) regs = [[120, cxN - Lg / 2 - 3], [cxN + Lg / 2 + 3, 430], [530, cxP - Lg / 2 - 3], [cxP + Lg / 2 + 3, 840]];
+  if (k == 6) regs = [[120, cxN - Lg / 2 - sp - 3], [cxN + Lg / 2 + sp + 3, 430], [530, cxP - Lg / 2 - sp - 3], [cxP + Lg / 2 + sp + 3, 840]];
+  var d = '';
+  regs.forEach(function (r) { for (var x = r[0] + 6; x <= r[1] - 4; x += 18) d += 'M' + x + ' 258v32m-4.5-7l4.5 8l4.5-8'; });
+  return '<path class="imp-a" d="' + d + '"/><text class="tx lb2" x="' + (k == 2 ? 130 : 118) + '" y="250">ion implant</text>';
+}
+var STAGES = [
+  ['1  Isolation (STI)', 'Etch shallow trenches around each transistor, fill with silicon oxide, polish flat with CMP.'],
+  ['2  Wells', 'Lithography + implant form the P-well (NMOS) and N-well (PMOS) separately, then anneal.'],
+  ['3  Gate', 'Grow an extremely thin gate insulator, deposit gate material, pattern it. Gate length is critical.'],
+  ['4  Light doping', 'Implant a shallow, light dose on both sides of the gate.'],
+  ['5  Sidewall spacers', 'Deposit a film, then etch straight down: only a small piece stays on each gate sidewall.'],
+  ['6  Source and drain', 'Deep, heavy implant. The spacers keep it a small distance from the gate. Anneal to activate.'],
+  ['7  Silicide', 'Deposit metal and heat: it reacts with silicon on source, drain and gate into a low-resistance compound.']
+];
+var SCENE_CSS = '.si{fill:#c4cad4}.pw{fill:#f0b7a3;opacity:.92}.nw{fill:#98bdea;opacity:.95}.sti{fill:#e9f6f9;stroke:#5f9aa8;stroke-width:1.2}' +
+  '.gox{fill:#18b4d0}.poly{fill:#5d626d}.spc{fill:#8f6fc4;stroke:#5b3f8c;stroke-width:1}.nl{fill:#7ba4e6}.pl{fill:#f29a85}.nh{fill:#2f6fd0}.ph{fill:#e0523a}.sil{fill:#e8b923;stroke:#a9820a;stroke-width:.8}' +
+  '.ld{stroke:#555;stroke-width:1.3;fill:none}.imp-a{stroke:#d9640b;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}';
+
+(function(){
+var NS='http://www.w3.org/2000/svg';
+var Q=new URLSearchParams(location.search);
+var root=document.documentElement;
+if(Q.get('theme')==='dark'||Q.get('theme')==='light')root.setAttribute('data-theme',Q.get('theme'));
+var st={stage:7,Lg:70,sp:18,playing:true};
+var still=Q.get('still')==='1';
+var styleEl=document.createElement('style');styleEl.textContent=SCENE_CSS;document.head.appendChild(styleEl);
+var sceneG=document.getElementById('scene');
+var $=function(i){return document.getElementById(i)};
+function build(){
+ var sc=feolScene(st.Lg,st.sp),h='';
+ sc.forEach(function(e){h+=e.k==0?'<g>'+e.s+'</g>':'<g class="st" data-k="'+e.k+'">'+e.s+'</g>';});
+ [2,4,6].forEach(function(k){h+='<g class="st" data-imp="'+k+'">'+impArrows(k,st.Lg,st.sp)+'</g>';});
+ sceneG.innerHTML=h;
+}
+function paint(){
+ var gs=sceneG.querySelectorAll('[data-k]');
+ for(var i=0;i<gs.length;i++){gs[i].style.opacity=(+gs[i].getAttribute('data-k')<=st.stage)?1:0;}
+ var im=sceneG.querySelectorAll('[data-imp]');
+ for(i=0;i<im.length;i++){im[i].style.opacity=(+im[i].getAttribute('data-imp')===st.stage)?1:0;}
+ var s=st.stage;
+ $('ct').textContent=s?STAGES[s-1][0]:'0  Bare silicon wafer';
+ $('cd').textContent=s?STAGES[s-1][1]+([2,4,6].indexOf(s)>=0?' (orange arrows = ion implant)':''):'Start of the FEOL flow: a clean silicon wafer. Press Next to build the transistors.';
+ $('stg').value=s;$('stgv').textContent=s+' / 7';
+ var b=document.querySelectorAll('#steps button');
+ for(i=0;i<b.length;i++){b[i].setAttribute('aria-pressed',(i+1)===s?'true':'false');}
+ $('lgv').textContent=st.Lg;$('spv').textContent=st.sp;
+ $('r1').textContent=st.Lg+(s>=3?'':' (from step 3)');
+ $('r2').textContent=st.sp+(s>=5?'':' (from step 5)');
+ $('r3').textContent=(st.Lg+2*st.sp)+(s>=6?'':' (from step 6)');
+ $('r4').textContent=s>=4?'reaches the gate edge':'(from step 4)';
+ $('play').textContent=st.playing?'Pause':'Play';
+}
+function go(n){st.stage=Math.max(0,Math.min(7,n));paint();}
+var names=['Isolation','Wells','Gate','Light doping','Spacers','Source/drain','Silicide'];
+names.forEach(function(n,i){var bt=document.createElement('button');bt.type='button';bt.textContent=(i+1)+' '+n;bt.onclick=function(){st.playing=false;go(i+1)};$('steps').appendChild(bt);});
+$('prev').onclick=function(){st.playing=false;go(st.stage-1)};
+$('next').onclick=function(){st.playing=false;go(st.stage+1)};
+$('rst').onclick=function(){st.playing=false;go(0)};
+$('play').onclick=function(){st.playing=!st.playing;if(st.playing&&st.stage>=7)st.stage=0;paint();};
+$('stg').oninput=function(){st.playing=false;go(+this.value)};
+$('lg').oninput=function(){st.Lg=+this.value;st.playing=false;if(st.stage<3)st.stage=3;build();paint();};
+$('sp').oninput=function(){st.sp=+this.value;st.playing=false;if(st.stage<5)st.stage=5;build();paint();};
+$('th').onclick=function(){var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;root.setAttribute('data-theme',dark?'light':'dark');};
+var VB={b:'0 140 960 310',n:'10 140 510 310',p:'430 140 510 310'};
+function view(k){$('fig').setAttribute('viewBox',VB[k]);var m={b:'vb',n:'vn',p:'vp'};for(var q in m)$(m[q]).setAttribute('aria-pressed',q===k?'true':'false');}
+$('vb').onclick=function(){view('b')};$('vn').onclick=function(){view('n')};$('vp').onclick=function(){view('p')};
+view(Q.get('view')||(innerWidth<600?'n':'b'));
+var STEP=1600,CYCLE=14400;
+window.__setTime=function(ms){st.playing=false;var t=((ms%CYCLE)+CYCLE)%CYCLE;go(Math.min(7,Math.floor(t/STEP)));return st.stage;};
+build();
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(Q.get('t')!==null){window.__setTime(+Q.get('t'));}
+else if(still||rm){st.playing=false;st.stage=7;}
+else{st.stage=0;}
+if(still)styleEl.textContent+='.st{transition:none!important}';
+paint();
+setInterval(function(){if(!st.playing)return;if(st.stage<7){go(st.stage+1);}else{st.hold=(st.hold||0)+1;if(st.hold>=2){st.hold=0;go(0);}}},STEP);
+})();
+</script>
+</body>
+</html>

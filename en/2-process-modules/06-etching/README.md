@@ -24,7 +24,9 @@ Imagine sticking a cut-out stencil onto a sheet of glass and sandblasting it. Wh
 
 **Dry etching** uses a **plasma**. Charged ions are accelerated by an electric field and strike the wafer almost vertically, so the etch goes mainly downward and can produce straight sidewalls. The fine patterns of modern chips are made almost entirely by dry etching.
 
-<!-- Figure: cross-sections comparing isotropic and anisotropic etching (sidewall shape, undercut beneath the resist) -->
+![Animation: isotropic etching undercuts the resist while anisotropic etching cuts straight down](../../../images/06-etch-profiles.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch06/etch-profiles.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Isotropic and anisotropic (等向與非等向)**

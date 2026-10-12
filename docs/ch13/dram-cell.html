@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DRAM Cell Explorer</title>
+<style>
+:root{--bg:#f8fafc;--text:#0f172a;--muted:#475569;--si:#cbd5e1;--np:#60a5fa;--sti:#94a3b8;--ild:#e2e8f0;--plate:#ddd6fe;--electrode:#7c3aed;--diel:#0f172a;--gox:#475569;--gcap:#94a3b8;--goff:#94a3b8;--gon:#ea580c;--bl:#059669;--plug:#64748b;--charge:#0891b2;--leak:#dc2626;--bore:#f5f3ff;--box:#e2e8f0;--line:#94a3b8;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}}
+:root[data-theme="dark"]{--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}
+:root[data-theme="light"]{--bg:#f8fafc;--text:#0f172a;--muted:#475569;--si:#cbd5e1;--np:#60a5fa;--sti:#94a3b8;--ild:#e2e8f0;--plate:#ddd6fe;--electrode:#7c3aed;--diel:#0f172a;--gox:#475569;--gcap:#94a3b8;--goff:#94a3b8;--gon:#ea580c;--bl:#059669;--plug:#64748b;--charge:#0891b2;--leak:#dc2626;--bore:#f5f3ff;--box:#e2e8f0;--line:#94a3b8;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,Segoe UI,Arial,sans-serif}
+a{color:var(--charge)}
+.wrap{max-width:1240px;margin:0 auto;padding:10px 16px 28px}
+.back{font-size:14px;margin:4px 0 6px}
+h1{font-size:22px;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--box);border:1px solid var(--line);border-radius:10px;padding:12px}
+#stage{width:100%;height:auto;display:block;background:var(--bg);border-radius:8px}
+#stage text{font-family:system-ui,Segoe UI,Arial,sans-serif}
+
+.si{fill:var(--si)}.np{fill:var(--np)}.sti{fill:var(--sti)}.ild{fill:var(--ild)}.plate{fill:var(--plate)}
+.gox{fill:var(--gox)}.gcap{fill:var(--gcap)}.goff{fill:var(--goff)}.gon{fill:var(--gon)}
+.blm{fill:var(--bl)}.plug{fill:var(--plug)}.bore{fill:var(--bore)}.chg{fill:var(--charge)}
+.electrode{fill:none;stroke:var(--electrode);stroke-width:8;stroke-linejoin:miter}
+.diel{fill:none;stroke:var(--diel);stroke-width:2;opacity:.85}
+.chan{fill:none;stroke:var(--charge);stroke-width:4;stroke-dasharray:1 7;stroke-linecap:round}
+.lbl{fill:var(--text);font:13px system-ui,Segoe UI,Arial,sans-serif}
+.lblm{fill:var(--muted);font:13px system-ui,Segoe UI,Arial,sans-serif}
+.lead{stroke:var(--muted);stroke-width:1.2;fill:none}
+.fd{fill:var(--charge);stroke:var(--bg);stroke-width:1.5}
+.ld{fill:var(--leak)}
+
+.gate{transition:none}
+#stage.hl .gate,#stage.hl .blm,#stage.hl .electrode{animation:pulse 0.9s ease-in-out 3}
+@keyframes pulse{50%{opacity:.25}}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+button{font:inherit;font-size:15px;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text);cursor:pointer;min-height:40px}
+button:hover{border-color:var(--charge)}
+button.primary{background:var(--charge);color:#06222b;border-color:var(--charge);font-weight:600}
+button:focus-visible,input:focus-visible{outline:2px solid var(--charge);outline-offset:2px}
+label{display:block;font-size:14px;margin:8px 0 2px}
+input[type=range]{width:100%}
+.stage-title{font-weight:700;font-size:20px;color:var(--charge);min-height:28px}
+.stage-desc{min-height:66px;font-size:15px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:15px;margin:6px 0}
+.kv b{font-weight:600}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-weight:600;font-size:14px;border:1px solid var(--line)}
+.ok{color:var(--bl)}.warn{color:var(--gon)}.bad{color:var(--leak)}
+#gauge{width:100%;height:auto;display:block}
+#gauge text{font:12px system-ui,Segoe UI,Arial,sans-serif;fill:var(--muted)}
+.steps{margin:8px 0 0;padding:0;list-style:none}
+.steps li{padding:7px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:15px}
+.steps li.on{border-color:var(--charge);background:color-mix(in srgb,var(--charge) 14%,transparent)}
+.steps li small{display:block;color:var(--muted);font-size:13px}
+.note{color:var(--muted);font-size:13px;margin-top:8px}
+.demo{font-size:13px;color:var(--gon);min-height:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="back"><a href="../../en/3-integration/13-memory/README.md">&larr; Back to chapter</a></p>
+<h1>DRAM Cell Explorer: write, leak, refresh</h1>
+<p class="sub">One transistor (the switch) and one tall cylinder capacitor (the bucket). Charge = 1, no charge = 0.</p>
+<div class="grid">
+ <div class="card">
+  <svg id="stage" viewBox="0 0 640 600" role="img" aria-label="DRAM cell cross-section with buried word line, bit line and tall cylinder capacitor">
+   <rect width="640" height="600" fill="var(--bg)"/>
+   <g id="sc"><rect class="ild" x="60" y="230" width="540" height="180"/>
+<rect class="plate" x="70" y="40" width="520" height="190" rx="3"/>
+<rect class="plug" x="135" y="226" width="30" height="188"/>
+<rect class="plug" x="495" y="226" width="30" height="188"/>
+<rect class="plug" x="315" y="358" width="30" height="56"/>
+<rect class="blm bl" x="285" y="335" width="90" height="25" rx="3"/>
+<rect class="si" x="60" y="410" width="540" height="150"/>
+<rect class="sti" x="60" y="410" width="40" height="32"/><rect class="sti" x="560" y="410" width="40" height="32"/>
+<rect class="np" x="100" y="410" width="105" height="25"/><rect class="np" x="245" y="410" width="170" height="25"/><rect class="np" x="455" y="410" width="105" height="25"/>
+<rect class="gox" x="205" y="410" width="40" height="73"/>
+<rect class="gcap" x="213" y="410" width="24" height="30"/>
+<rect class="goff" x="213" y="440" width="24" height="36"/>
+<rect class="gox" x="415" y="410" width="40" height="73"/>
+<rect class="gcap" x="423" y="410" width="24" height="30"/>
+<rect class="goff" x="423" y="440" width="24" height="36"/>
+<rect class="gon gate" id="gate1" x="213" y="440" width="24" height="36"/>
+
+<path class="chan" id="chan" d="M249 435 V487 H201 V435"/>
+<rect class="bore" x="128" y="48" width="44" height="174"/>
+<rect class="chg" id="fillL" x="128" y="48" width="44" height="174"/>
+<path class="diel" d="M118 48 V232 H182 V48"/>
+<path class="electrode" d="M124 48 V226 H176 V48"/>
+<rect class="bore" x="488" y="48" width="44" height="174"/>
+<path class="diel" d="M478 48 V232 H542 V48"/>
+<path class="electrode" d="M484 48 V226 H536 V48"/>
+<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">Top plate (shared by all cells)</text>
+<text class="lblm" x="330" y="168" text-anchor="middle">Real cylinders are dozens of</text>
+<text class="lblm" x="330" y="186" text-anchor="middle">times taller than wide</text>
+<text class="lblm" x="330" y="204" text-anchor="middle">(drawn shorter here)</text>
+<text class="lbl" x="178" y="289">Storage-node contact</text><path class="lead" d="M175 285 H167"/>
+<text class="lbl" x="330" y="326" text-anchor="middle">Bit line (runs into the page)</text>
+<text class="lbl" x="354" y="390">Bit-line contact</text><path class="lead" d="M351 387 H347"/>
+<text class="lbl" x="225" y="514" text-anchor="middle">Buried word line</text><path class="lead" d="M225 500 V486"/>
+<text class="lbl" x="435" y="514" text-anchor="middle">Buried word line</text><path class="lead" d="M435 500 V486"/>
+<text class="lblm" x="330" y="548" text-anchor="middle">p-type silicon</text>
+<text class="lblm" x="80" y="430" text-anchor="middle" font-size="12">STI</text>
+<text class="lblm" x="580" y="430" text-anchor="middle" font-size="12">STI</text>
+<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">Capacitor = bucket</text>
+<text class="lblm" x="510" y="30" text-anchor="middle">Neighbor cell: 0</text>
+<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">Transistor = switch</text>
+<text class="lblm" x="500" y="586" text-anchor="middle">Not to scale</text></g>
+   <g id="dots"></g>
+   <g id="leakg" opacity="0"></g>
+  </svg>
+  <div class="demo" id="demo"></div>
+  <div class="row">
+   <button id="bPlay" aria-pressed="false">Pause</button>
+   <button id="bDemo">Restart demo loop</button>
+  </div>
+ </div>
+ <div>
+  <div class="card">
+   <div class="stage-title" id="sTitle">WRITE 1</div>
+   <div class="stage-desc" id="sDesc"></div>
+   <div class="kv">
+    <b>Word line</b><span id="kWL">OFF</span>
+    <b>Bit line</b><span id="kBL">idle</span>
+    <b>Charge</b><span id="kQ">0 %</span>
+    <b>Sensed value</b><span id="kS">0</span>
+    <b>Status</b><span id="kStat"><span class="badge ok">OK</span></span>
+    <b>Sim clock</b><span id="kT">0 ms</span>
+    <b>Refreshes done</b><span id="kR">0</span>
+   </div>
+   <svg id="gauge" viewBox="0 0 440 150" role="img" aria-label="Stored charge versus time">
+    <rect x="0" y="0" width="400" height="150" fill="none"/>
+    <path d="M40 24 V120 H370" stroke="var(--muted)" fill="none" stroke-width="1.2"/>
+    <line id="gThr" x1="40" x2="370" y1="72" y2="72" stroke="var(--leak)" stroke-dasharray="5 4" stroke-width="1.2"/>
+    <text x="376" y="68" style="fill:var(--leak)">sense</text><text x="376" y="82" style="fill:var(--leak)">level</text>
+    <text x="34" y="28" text-anchor="end">1</text><text x="34" y="124" text-anchor="end">0</text>
+    <polyline id="gLine" points="" fill="none" stroke="var(--charge)" stroke-width="2.4" stroke-linejoin="round"/>
+    <circle id="gDot" r="5.5" cx="40" cy="120" fill="var(--gon)" stroke="var(--bg)" stroke-width="2"/>
+    <text id="gL" x="40" y="138">time</text><text id="gR" x="370" y="138" text-anchor="end"></text>
+    <text x="205" y="11" text-anchor="middle" style="fill:var(--text)">Stored charge vs. time (illustrative)</text>
+   </svg>
+  </div>
+  <div class="card" style="margin-top:12px">
+   <b>Try it yourself</b> <span class="note">(any button takes over from the demo)</span>
+   <div class="row">
+    <button id="bW1" class="primary">Write 1</button>
+    <button id="bW0">Write 0</button>
+    <button id="bRd">Read</button>
+    <button id="bRf">Refresh now</button>
+   </div>
+   <label for="sTau">Leak speed: charge time constant <b id="vTau">100 ms</b> (illustrative)</label>
+   <input id="sTau" type="range" min="30" max="300" step="5" value="100">
+   <label><input id="cAuto" type="checkbox"> Auto-refresh every <b id="vInt">64 ms</b></label>
+   <input id="sInt" type="range" min="8" max="200" step="2" value="64">
+   <div class="note">Try: write 1, wait with auto-refresh off and watch the charge fall below the sense level (the 1 is lost). Then turn auto-refresh on with an interval shorter than the leak time.</div>
+  </div>
+  <div class="card" style="margin-top:12px">
+   <b>Step by step</b>
+   <ol class="steps" id="steps"></ol>
+   <div class="row"><button id="bPrev">&laquo; Back</button><button id="bNext" class="primary">Next &raquo;</button></div>
+  </div>
+ </div>
+</div>
+<p class="note">Schematic, not to scale; the charge level is drawn simplified as a bucket. Leakage is modeled as a simple exponential decay and operations are slowed down for viewing, so all numbers are illustrative. For reference, DDR3/DDR4 DRAM must refresh every row within about 64 ms at normal temperature.</p>
+</div>
+<script>
+(function(){
+"use strict";
+const PATH=[[330, 350], [330, 422], [249, 422], [249, 487], [201, 487], [201, 422], [150, 422], [150, 232], [150, 200]];
+const $=id=>document.getElementById(id);
+const THR=0.5, T=14;
+// ---- theme
+const qs=new URLSearchParams(location.search);
+const th=qs.get('theme'); if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+// ---- geometry helpers
+const cum=[0];for(let i=1;i<PATH.length;i++)cum.push(cum[i-1]+Math.hypot(PATH[i][0]-PATH[i-1][0],PATH[i][1]-PATH[i-1][1]));
+const LEN=cum[cum.length-1];
+function pointAt(s){const d=Math.max(0,Math.min(1,s))*LEN;let i=1;while(i<cum.length-1&&cum[i]<d)i++;const f=(d-cum[i-1])/(cum[i]-cum[i-1]||1);return[PATH[i-1][0]+(PATH[i][0]-PATH[i-1][0])*f,PATH[i-1][1]+(PATH[i][1]-PATH[i-1][1])*f];}
+const NS='http://www.w3.org/2000/svg';
+const dots=[];for(let k=0;k<5;k++){const c=document.createElementNS(NS,'circle');c.setAttribute('r','5');c.setAttribute('class','fd');c.setAttribute('opacity','0');$('dots').appendChild(c);dots.push(c);}
+const ldots=[];{const g=$('leakg');for(let k=0;k<3;k++){const c=document.createElementNS(NS,'circle');c.setAttribute('r','4');c.setAttribute('class','ld');g.appendChild(c);ldots.push(c);}
+ const t=document.createElementNS(NS,'text');t.setAttribute('x','64');t.setAttribute('y','476');t.setAttribute('class','lbl');t.setAttribute('style','fill:var(--leak)');t.setAttribute('font-weight','600');t.textContent='leakage';g.appendChild(t);}
+const chan=document.querySelector('#sc .chan');
+const fill=$('fillL'), gate=$('gate1');
+// ---- demo script (same timeline as the animated SVG)
+const PH=[
+ ["WRITE 1",0,1.2,1,"driven high (1)",["Word line on: the switch closes.","Bit line high fills the bucket."]],
+ ["HOLD, LEAKING",1.2,6.5,0,"idle",["Word line off: the switch opens.","Charge is trapped, but leaks away."]],
+ ["REFRESH",6.5,8.0,1,"sense amp pushes it high",["Read the weakened charge,","then write a full 1 back."]],
+ ["HOLD",8.0,9.0,0,"idle",["Charge is back to full.","Switch is open again."]],
+ ["READ",9.0,11.5,1,"nudged by cell, then restored",["Switch closes; charge nudges the","bit line, sense amp sees a 1,","then the cell is rewritten."]],
+ ["WRITE 0",11.5,12.5,1,"driven low (0)",["Bit line low drains the bucket.","The cell now stores 0."]],
+ ["HOLD (stored 0)",12.5,14,0,"idle",["No charge = 0. Switch is open."]]];
+const WLON=[[0,1.2],[6.5,8.0],[9.0,10.8],[11.5,12.4]];
+const QP=[[0,0],[1.0,1],[1.2,1],[6.5,.58],[7.6,1],[9.0,1],[9.6,.8],[10.6,1],[11.5,1],[12.3,0],[14,0]];
+const FWD=[[0,1.4],[6.5,8.1],[9.9,10.7]], REV=[[9.0,9.8],[11.5,12.3]];
+function interp(p,t){for(let i=1;i<p.length;i++)if(t<=p[i][0]){const f=(t-p[i-1][0])/(p[i][0]-p[i-1][0]||1);return p[i-1][1]+(p[i][1]-p[i-1][1])*f;}return p[p.length-1][1];}
+const inW=(w,t)=>w.some(r=>t>=r[0]&&t<r[1]);
+function demoState(ms){const t=((ms/1000)%T+T)%T;const ph=PH.find(p=>t>=p[1]&&t<p[2])||PH[0];
+ return{Q:interp(QP,t),wl:inW(WLON,t),title:ph[0],bl:ph[4],desc:ph[5],flow:inW(FWD,t)?1:inW(REV,t)?-1:0,leak:t>=1.4&&t<6.5,t:t};}
+// ---- live model
+const S={mode:'demo',running:true,demoMs:1000,Q:0,wbit:null,clock:0,op:null,lastRef:0,refs:0,ff:false,tau:100,auto:false,interval:64,trace:[],hl:false,flowPh:0,
+  title:'HOLD (stored 0)',desc:['No charge = 0. Switch is open.'],bl:'idle',read:null};
+const RATE=20; // sim ms per real second
+const ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+function startWrite(b){S.op={type:'write',t:0,dur:1.0,Q0:S.Q,tgt:b};S.wbit=b;S.title=b?'WRITE 1':'WRITE 0';S.bl=b?'driven high (1)':'driven low (0)';
+ S.desc=b?['Word line on: the switch closes.','Bit line high fills the bucket.']:['Word line on: the switch closes.','Bit line low drains the bucket.'];}
+function startRW(kind){if(S.op)return;S.op={type:kind,t:0,dur:2.0,Q0:S.Q,sensed:S.Q>=THR?1:0};S.title=kind==='read'?'READ':'REFRESH';S.bl='precharged, then nudged by cell';
+ S.desc=kind==='read'?['Switch closes; charge nudges the','bit line, sense amp decides 1 or 0,','then the cell is rewritten.']:['Read the weakened charge,','then write it back at full strength.'];}
+function take(){if(S.mode==='demo'){S.mode='live';S.Q=0;S.wbit=null;S.op=null;S.clock=0;S.lastRef=0;S.refs=0;S.trace=[];S.read=null;S.title='HOLD (stored 0)';S.desc=['No charge = 0. Switch is open.'];S.bl='idle';$('demo').textContent='';}}
+function wl(){return S.mode==='demo'?demoState(S.demoMs).wl:!!S.op;}
+function flowOf(){
+ if(S.mode==='demo')return demoState(S.demoMs).flow;
+ const o=S.op;if(!o)return 0;
+ if(o.type==='write')return o.tgt>=o.Q0?(o.tgt>o.Q0?1:0):-1;
+ const x=o.t/o.dur;if(x<.35)return o.Q0>.05?-1:0;if(x<.5)return 0;const tg=o.sensed?1:0;return tg>=S.Q?(tg>S.Q+.01?1:0):-1;}
+function step(dt){
+ if(S.mode==='demo'){S.demoMs+=dt*1000;return;}
+ let dc=dt*RATE*(S.ff?6:1);
+ const o=S.op;
+ if(o){
+  o.t+=dt;const x=Math.min(1,o.t/o.dur);
+  if(o.type==='write'){S.Q=o.Q0+(o.tgt-o.Q0)*ease(x);}
+  else{ if(x<.35)S.Q=o.Q0+(o.Q0*.8-o.Q0)*ease(x/.35);
+        else if(x<.5)S.Q=o.Q0*.8;
+        else{const tg=o.sensed?1:0;S.Q=o.Q0*.8+(tg-o.Q0*.8)*ease((x-.5)/.5);} }
+  S.clock+=dc*0.5; // time passes, but no leak modeled during the slowed-down operation
+  if(o.t>=o.dur){
+   if(o.type!=='write'){S.Q=o.sensed?1:0;if(o.type==='read'){S.read=o.sensed;}else{S.refs++;S.lastRef=S.clock;} if(S.wbit===null)S.wbit=o.sensed; }
+   S.op=null;S.title=S.Q>.95?'HOLD':S.Q<.05?'HOLD (stored 0)':'HOLD, LEAKING';S.bl='idle';
+   if(o.type==='write'&&o.tgt===1)S.lastRef=S.clock;
+   idleText();
+  }
+ }else{
+  S.clock+=dc;S.Q*=Math.exp(-dc/S.tau); if(S.Q<.001)S.Q=0;
+  if(S.ff&&S.Q<=.62)S.ff=false;
+  idleText();
+  if(S.auto&&S.clock-S.lastRef>=S.interval){startRW('refresh');}
+ }
+ S.clock=S.clock;
+ S.flowPh=(S.flowPh+dt*1.1)%1;
+ S.trace.push([S.clock,S.Q]);const W=240;while(S.trace.length>2&&S.trace[0][0]<S.clock-W)S.trace.shift();
+}
+function idleText(){if(S.op)return;S.bl='idle';
+ if(S.Q>.97){S.title='HOLD';S.desc=['Word line off: the switch is open.','Full bucket = 1, but it will leak.'];}
+ else if(S.Q<.03){S.title='HOLD (stored 0)';S.desc=['No charge = 0. Switch is open.'];}
+ else{S.title='HOLD, LEAKING';S.desc=['Word line off: the switch is open.','Charge is slowly leaking away.'];}}
+// ---- render
+function badge(c,t){return '<span class="badge '+c+'">'+t+'</span>';}
+function render(){
+ let st,Q,wlOn,flow,leak,title,desc,bl;
+ if(S.mode==='demo'){st=demoState(S.demoMs);Q=st.Q;wlOn=st.wl;flow=st.flow;leak=st.leak;title=st.title;desc=st.desc;bl=st.bl;}
+ else{Q=S.Q;wlOn=!!S.op;flow=flowOf();leak=!S.op&&Q>.05;title=S.title;desc=S.desc;bl=S.bl;}
+ const H=174,y0=222;
+ fill.setAttribute('y',(y0-H*Q).toFixed(2));fill.setAttribute('height',(H*Q).toFixed(2));
+ gate.setAttribute('opacity',wlOn?1:0);
+ if(chan)chan.setAttribute('opacity',wlOn?1:0);
+ const ph=S.mode==='demo'?((S.demoMs/1000)*1.1)%1:S.flowPh;
+ dots.forEach((d,k)=>{if(!flow){d.setAttribute('opacity',0);return;}let s=(ph+k/5)%1;if(flow<0)s=1-s;const p=pointAt(s);d.setAttribute('cx',p[0]);d.setAttribute('cy',p[1]);d.setAttribute('opacity',1);});
+ const lt=(S.mode==='demo'?S.demoMs/1000:S.clock/RATE*3);
+ $('leakg').setAttribute('opacity',leak?Math.min(1,0.25+Q):0);
+ ldots.forEach((d,k)=>{const f=((lt*0.7)+k/3)%1;d.setAttribute('cx',130+k*25);d.setAttribute('cy',442+55*f);d.setAttribute('opacity',f<.15?f/.15:1-f);});
+ $('sTitle').textContent=title;$('sDesc').innerHTML=desc.join('<br>');
+ $('kWL').innerHTML=wlOn?'<b style="color:var(--gon)">ON</b> (switch closed)':'OFF (switch open)';
+ $('kBL').textContent=bl;
+ $('kQ').textContent=Math.round(Q*100)+' %';
+ const sensed=Q>=THR?1:0;$('kS').textContent=sensed+(Q>=THR?'':'  (below sense level)');
+ if(S.mode==='live'){
+  let b;if(S.wbit===1&&Q<THR)b=badge('bad','DATA LOST: the 1 now reads as 0');else if(S.wbit===1&&Q<THR+.15)b=badge('warn','Weak: refresh soon');else if(S.wbit===0&&Q>=THR)b=badge('bad','DATA ERROR');else b=badge('ok','OK');
+  $('kStat').innerHTML=b;$('kT').textContent=S.clock.toFixed(0)+' ms (sim)';$('kR').textContent=S.refs;
+ }else{$('kStat').innerHTML=badge('ok','demo loop');$('kT').textContent=(st.t).toFixed(1)+' s (demo)';$('kR').textContent='-';}
+ // gauge
+ const gx0=40,gx1=370,gy1=24,gy0=120;const gy=q=>gy0-(gy0-gy1)*q;
+ if(S.mode==='demo'){
+  $('gLine').setAttribute('points',QP.map(p=>(gx0+(gx1-gx0)*p[0]/T).toFixed(1)+','+gy(p[1]).toFixed(1)).join(' '));
+  $('gDot').setAttribute('cx',gx0+(gx1-gx0)*st.t/T);$('gDot').setAttribute('cy',gy(Q));
+  $('gL').textContent='demo loop: write 1, leak, refresh, read, write 0';$('gR').textContent='';
+ }else{
+  const W=240,now=S.clock;
+  $('gLine').setAttribute('points',S.trace.map(p=>(gx0+(gx1-gx0)*(1-(now-p[0])/W)).toFixed(1)+','+gy(p[1]).toFixed(1)).join(' '));
+  $('gDot').setAttribute('cx',gx1);$('gDot').setAttribute('cy',gy(Q));
+  $('gL').textContent='-'+W+' ms';$('gR').textContent='now';
+ }
+}
+// ---- loop
+let last=performance.now();
+function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;if(S.running)step(dt);render();requestAnimationFrame(frame);}
+// ---- controls
+$('bW1').onclick=()=>{take();if(S.op)S.op=null;startWrite(1);};
+$('bW0').onclick=()=>{take();if(S.op)S.op=null;startWrite(0);};
+$('bRd').onclick=()=>{take();startRW('read');};
+$('bRf').onclick=()=>{take();startRW('refresh');};
+$('bPlay').onclick=()=>{S.running=!S.running;$('bPlay').textContent=S.running?'Pause':'Play';$('bPlay').setAttribute('aria-pressed',!S.running);};
+$('bDemo').onclick=()=>{S.mode='demo';S.demoMs=1000;S.ff=false;S.running=true;$('bPlay').textContent='Pause';stepSel(-1);$('demo').textContent='Demo loop running. Press any button to take control.';};
+$('sTau').oninput=e=>{take();S.tau=+e.target.value;$('vTau').textContent=S.tau+' ms';};
+$('sInt').oninput=e=>{S.interval=+e.target.value;$('vInt').textContent=S.interval+' ms';};
+$('cAuto').onchange=e=>{take();S.auto=e.target.checked;S.lastRef=S.clock;};
+// ---- steps
+const STEPS=[
+ ["1. Meet the cell","One switch plus one bucket. The word line is buried in the silicon and opens or closes the switch; the bit line carries data in and out.",()=>{take();S.op=null;S.Q=0;S.wbit=null;S.ff=false;S.trace=[];idleText();const s=$('stage');s.classList.remove('hl');void s.getBoundingClientRect();s.classList.add('hl');}],
+ ["2. Write a 1","The word line goes high, the switch closes, and the bit line fills the bucket with charge. Charge means 1.",()=>{take();S.op=null;startWrite(1);}],
+ ["3. Hold: the bucket leaks","The word line goes low and the switch opens. The charge slowly leaks into the silicon. Time is sped up here. If the charge falls below the sense level, the 1 is lost.",()=>{take();S.op=null;S.ff=true;}],
+ ["4. Refresh","Read the weakened charge, decide it is still a 1, and write it back at full strength. DRAM does this for every row, over and over.",()=>{take();S.ff=false;S.op=null;startRW('refresh');}],
+ ["5. Read","Reading connects the bucket to the bit line; the sense amplifier detects the tiny change. The read disturbs the charge, so the value is written back.",()=>{take();S.ff=false;S.op=null;startRW('read');}]];
+let cur=-1;const ol=$('steps');
+STEPS.forEach((s,i)=>{const li=document.createElement('li');li.innerHTML='<b>'+s[0]+'</b><small>'+s[1]+'</small>';li.tabIndex=0;li.onclick=()=>go(i);li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(i);}};ol.appendChild(li);});
+function stepSel(i){cur=i;[...ol.children].forEach((li,j)=>li.classList.toggle('on',j===i));}
+function go(i){i=Math.max(0,Math.min(STEPS.length-1,i));stepSel(i);STEPS[i][2]();}
+$('bNext').onclick=()=>go(cur+1);$('bPrev').onclick=()=>go(cur-1);
+// ---- external time control (screenshots)
+window.__setTime=function(ms){S.mode='demo';S.running=false;S.demoMs=ms;$('bPlay').textContent='Play';render();};
+window.__dram=S;
+$('demo').textContent='Demo loop running. Press any button to take control.';
+const t0=qs.get('t');
+if(t0!==null){S.demoMs=+t0;}
+if(qs.get('still')==='1'){S.running=false;$('bPlay').textContent='Play';$('demo').textContent='';}
+render();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -55,7 +55,9 @@ There are two main types of cleaning tools:
 - **Batch wet benches**: A whole batch of wafers is dipped in turn into a row of chemical tanks and rinse tanks, like a car wash line.
 - **Single-wafer cleaners**: Process one wafer at a time, spraying chemicals while the wafer spins. They offer more precise control and avoid cross-contamination between wafers, and advanced processes use them more and more.
 
-<!-- Figure: a batch wet bench compared with single-wafer spin cleaning -->
+![Animation: a batch wet bench dipping a wafer carrier through tanks next to a single-wafer spin cleaner](../../../images/09-cleaning.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch09/cleaning.html) to try it yourself.*
 
 The water used for cleaning is **ultrapure water**, with almost no ions, particles or bacteria, far purer than drinking water. A fab uses huge amounts of it every day.
 

@@ -18,6 +18,10 @@ The basic order for handling an abnormality is:
 
 **Detect → Contain → Find the scope → Disposition → Find the root cause → Prevent recurrence**
 
+![Animation: lots held at a gate after an abnormality, then sorted into release, conditional release, rework or scrap](../../../images/18-abnormality-response.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch18/abnormality-response.html) to try it yourself.*
+
 ---
 
 ## OCAP: response steps written in advance

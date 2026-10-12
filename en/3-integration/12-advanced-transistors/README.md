@@ -33,7 +33,9 @@ A **FinFET** turns the channel into a thin vertical "fin," and the gate wraps ar
 
 The fins are packed so closely that they usually need the multiple patterning tricks from Chapter 4. And a transistor's drive strength depends on how many fins it uses, so designers can only choose "one fin, two fins, three fins" and cannot tune it freely.
 
-<!-- Figure: planar transistor, FinFET and GAA in 3D (how many sides of the channel the gate wraps) -->
+![Animation: planar, FinFET and gate-all-around transistors with the faces the gate wraps counted as 1, 3 and 4](../../../images/12-planar-finfet-gaa.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch12/planar-finfet-gaa.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | FinFET (鰭式場效電晶體)**

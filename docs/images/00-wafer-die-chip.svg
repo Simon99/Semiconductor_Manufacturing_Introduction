@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">Wafer, die and chip</title>
+<desc id="d">A wafer carries many identical dies. One die is enlarged, the wafer is cut along scribe lines, and the die is packaged into the chip.</desc>
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1d2733}
+.title{font-size:22px;font-weight:700}
+.cap{font-size:17px;font-weight:700}
+.sub{font-size:13px;fill:#44546a}
+.lab{font-size:13px;fill:#2a3a50}
+.arrow{font-size:13px;fill:#44546a;font-weight:600}
+.waf{fill:#c9d3e0;stroke:#6b7c93;stroke-width:2}
+.dies rect{fill:#8fa6c4}
+.hl{fill:#f08a24;stroke:#b85d00;stroke-width:1.5}
+.dieb{fill:#8fa6c4;stroke:#4d6585;stroke-width:2}
+.scribe{fill:none;stroke:#b85d00;stroke-width:2;stroke-dasharray:7 5}
+.nb{fill:#b9c8dc;stroke:#4d6585}
+.blk{fill:#5d7fa8;stroke:#34506f;stroke-width:1}
+.wire{fill:none;stroke:#dfe8f4;stroke-width:1.5}
+.pad{fill:#e6b422;stroke:#8a6a00;stroke-width:.8}
+.lead{fill:#9aa4b2;stroke:#5b6572;stroke-width:1}
+.body{fill:#2b2f36;stroke:#12151a;stroke-width:2}
+.bw{stroke:#e6b422;stroke-width:1.5}
+.link{stroke:#b85d00;stroke-width:1.5;stroke-dasharray:4 4;fill:none}
+.ar{fill:none;stroke:#44546a;stroke-width:3}
+.arh{fill:#44546a}
+.ring{fill:none;stroke:#f08a24;stroke-width:4;opacity:0}
+.saw{fill:#d8dde4;stroke:#566;stroke-width:2}
+.cover{animation:cov 12s infinite}
+.sawg{animation:sw 12s infinite}
+.r1{animation:r1 12s infinite}.r2{animation:r2 12s infinite}.r3{animation:r3 12s infinite}
+.pulse{animation:pu 12s infinite}
+@keyframes r1{0%,2%{opacity:0}5%,25%{opacity:1}30%,100%{opacity:0}}
+@keyframes r2{0%,30%{opacity:0}35%,55%{opacity:1}60%,100%{opacity:0}}
+@keyframes r3{0%,60%{opacity:0}65%,92%{opacity:1}97%,100%{opacity:0}}
+@keyframes pu{0%,100%{opacity:1}15%{opacity:.35}30%{opacity:1}45%{opacity:.35}60%{opacity:1}}
+@keyframes sw{0%,33%{opacity:0;transform:translateX(-30px)}36%{opacity:1;transform:translateX(-30px)}54%{opacity:1;transform:translateX(200px)}58%,100%{opacity:0;transform:translateX(200px)}}
+@keyframes cov{0%,60%{opacity:1}64%,76%{opacity:0}82%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.cover,.sawg,.r1,.r2,.r3,.pulse{animation:none}.sawg,.ring{opacity:0}}
+</style>
+<rect width="960" height="540" fill="#eef2f7"/>
+<text class="title" x="30" y="40">From wafer to chip</text>
+<text class="sub" x="30" y="62">One wafer carries many identical dies; each die is cut out and packaged.</text>
+<!-- wafer -->
+<circle class="ring r1" cx="170" cy="300" r="138"/>
+<circle class="waf" cx="170" cy="300" r="128"/>
+<path d="M156 427 Q170 419 184 427" fill="#eef2f7" stroke="#6b7c93" stroke-width="1.5"/>
+<g class="dies"><rect x="55.5" y="269.5" width="19" height="19"/><rect x="55.5" y="290.5" width="19" height="19"/><rect x="55.5" y="311.5" width="19" height="19"/><rect x="76.5" y="227.5" width="19" height="19"/><rect x="76.5" y="248.5" width="19" height="19"/><rect x="76.5" y="269.5" width="19" height="19"/><rect x="76.5" y="290.5" width="19" height="19"/><rect x="76.5" y="311.5" width="19" height="19"/><rect x="76.5" y="332.5" width="19" height="19"/><rect x="76.5" y="353.5" width="19" height="19"/><rect x="97.5" y="206.5" width="19" height="19"/><rect x="97.5" y="227.5" width="19" height="19"/><rect x="97.5" y="248.5" width="19" height="19"/><rect x="97.5" y="269.5" width="19" height="19"/><rect x="97.5" y="290.5" width="19" height="19"/><rect x="97.5" y="311.5" width="19" height="19"/><rect x="97.5" y="332.5" width="19" height="19"/><rect x="97.5" y="353.5" width="19" height="19"/><rect x="97.5" y="374.5" width="19" height="19"/><rect x="118.5" y="206.5" width="19" height="19"/><rect x="118.5" y="227.5" width="19" height="19"/><rect x="118.5" y="248.5" width="19" height="19"/><rect x="118.5" y="269.5" width="19" height="19"/><rect x="118.5" y="290.5" width="19" height="19"/><rect x="118.5" y="311.5" width="19" height="19"/><rect x="118.5" y="332.5" width="19" height="19"/><rect x="118.5" y="353.5" width="19" height="19"/><rect x="118.5" y="374.5" width="19" height="19"/><rect x="139.5" y="185.5" width="19" height="19"/><rect x="139.5" y="206.5" width="19" height="19"/><rect x="139.5" y="227.5" width="19" height="19"/><rect x="139.5" y="248.5" width="19" height="19"/><rect x="139.5" y="269.5" width="19" height="19"/><rect x="139.5" y="290.5" width="19" height="19"/><rect x="139.5" y="311.5" width="19" height="19"/><rect x="139.5" y="332.5" width="19" height="19"/><rect x="139.5" y="353.5" width="19" height="19"/><rect x="139.5" y="374.5" width="19" height="19"/><rect x="139.5" y="395.5" width="19" height="19"/><rect x="160.5" y="185.5" width="19" height="19"/><rect x="160.5" y="206.5" width="19" height="19"/><rect x="160.5" y="227.5" width="19" height="19"/><rect x="160.5" y="248.5" width="19" height="19"/><rect x="160.5" y="269.5" width="19" height="19"/><rect x="160.5" y="290.5" width="19" height="19"/><rect x="160.5" y="311.5" width="19" height="19"/><rect x="160.5" y="332.5" width="19" height="19"/><rect x="160.5" y="353.5" width="19" height="19"/><rect x="160.5" y="374.5" width="19" height="19"/><rect x="160.5" y="395.5" width="19" height="19"/><rect x="181.5" y="185.5" width="19" height="19"/><rect x="181.5" y="206.5" width="19" height="19"/><rect x="181.5" y="227.5" width="19" height="19"/><rect x="181.5" y="248.5" width="19" height="19"/><rect x="181.5" y="269.5" width="19" height="19"/><rect x="181.5" y="290.5" width="19" height="19"/><rect x="181.5" y="311.5" width="19" height="19"/><rect x="181.5" y="332.5" width="19" height="19"/><rect x="181.5" y="353.5" width="19" height="19"/><rect x="181.5" y="374.5" width="19" height="19"/><rect x="181.5" y="395.5" width="19" height="19"/><rect x="202.5" y="206.5" width="19" height="19"/><rect x="202.5" y="227.5" width="19" height="19"/><rect x="202.5" y="248.5" width="19" height="19"/><rect x="202.5" y="269.5" width="19" height="19"/><rect x="202.5" y="290.5" width="19" height="19"/><rect x="202.5" y="311.5" width="19" height="19"/><rect x="202.5" y="332.5" width="19" height="19"/><rect x="202.5" y="353.5" width="19" height="19"/><rect x="202.5" y="374.5" width="19" height="19"/><rect x="223.5" y="206.5" width="19" height="19"/><rect x="223.5" y="227.5" width="19" height="19"/><rect x="223.5" y="269.5" width="19" height="19"/><rect x="223.5" y="290.5" width="19" height="19"/><rect x="223.5" y="311.5" width="19" height="19"/><rect x="223.5" y="332.5" width="19" height="19"/><rect x="223.5" y="353.5" width="19" height="19"/><rect x="223.5" y="374.5" width="19" height="19"/><rect x="244.5" y="227.5" width="19" height="19"/><rect x="244.5" y="248.5" width="19" height="19"/><rect x="244.5" y="269.5" width="19" height="19"/><rect x="244.5" y="290.5" width="19" height="19"/><rect x="244.5" y="311.5" width="19" height="19"/><rect x="244.5" y="332.5" width="19" height="19"/><rect x="244.5" y="353.5" width="19" height="19"/><rect x="265.5" y="269.5" width="19" height="19"/><rect x="265.5" y="290.5" width="19" height="19"/><rect x="265.5" y="311.5" width="19" height="19"/></g>
+<rect class="hl pulse" x="223.5" y="248.5" width="19" height="19"/>
+<text class="cap" x="170" y="478" text-anchor="middle">1. Wafer</text>
+<text class="sub" x="170" y="498" text-anchor="middle">e.g. 300 mm across</text>
+<text class="lab" x="170" y="158" text-anchor="middle">Each square = one die (illustrative grid)</text>
+<!-- zoom lines -->
+<path class="link" d="M242.5 248.5 L395 235"/>
+<path class="link" d="M242.5 267.5 L395 405"/>
+<!-- arrow 1 label -->
+<text class="arrow" x="329" y="217" text-anchor="middle">zoom in</text>
+<!-- die -->
+<rect class="ring r2" x="363" y="203" width="234" height="234" rx="10"/>
+<rect class="nb" x="369" y="209" width="222" height="222"/>
+<rect class="dieb" x="395" y="235" width="170" height="170"/>
+<rect class="blk" x="409" y="249" width="60" height="50" rx="3"/><rect class="blk" x="475" y="249" width="76" height="30" rx="3"/><rect class="blk" x="475" y="285" width="40" height="40" rx="3"/><rect class="blk" x="521" y="285" width="30" height="40" rx="3"/><rect class="blk" x="409" y="305" width="50" height="40" rx="3"/><rect class="blk" x="465" y="331" width="86" height="60" rx="3"/><rect class="blk" x="409" y="351" width="50" height="40" rx="3"/><path class="wire" d="M439.0 274.0 H475 V385"/><path class="wire" d="M513.0 264.0 H483 V385"/><path class="wire" d="M495.0 305.0 H491 V385"/><path class="wire" d="M536.0 305.0 H499 V385"/><rect class="pad" x="409" y="238" width="9" height="7"/><rect class="pad" x="409" y="395" width="9" height="7"/><rect class="pad" x="398" y="249" width="7" height="9"/><rect class="pad" x="555" y="249" width="7" height="9"/><rect class="pad" x="429" y="238" width="9" height="7"/><rect class="pad" x="429" y="395" width="9" height="7"/><rect class="pad" x="398" y="269" width="7" height="9"/><rect class="pad" x="555" y="269" width="7" height="9"/><rect class="pad" x="449" y="238" width="9" height="7"/><rect class="pad" x="449" y="395" width="9" height="7"/><rect class="pad" x="398" y="289" width="7" height="9"/><rect class="pad" x="555" y="289" width="7" height="9"/><rect class="pad" x="469" y="238" width="9" height="7"/><rect class="pad" x="469" y="395" width="9" height="7"/><rect class="pad" x="398" y="309" width="7" height="9"/><rect class="pad" x="555" y="309" width="7" height="9"/><rect class="pad" x="489" y="238" width="9" height="7"/><rect class="pad" x="489" y="395" width="9" height="7"/><rect class="pad" x="398" y="329" width="7" height="9"/><rect class="pad" x="555" y="329" width="7" height="9"/><rect class="pad" x="509" y="238" width="9" height="7"/><rect class="pad" x="509" y="395" width="9" height="7"/><rect class="pad" x="398" y="349" width="7" height="9"/><rect class="pad" x="555" y="349" width="7" height="9"/><rect class="pad" x="529" y="238" width="9" height="7"/><rect class="pad" x="529" y="395" width="9" height="7"/><rect class="pad" x="398" y="369" width="7" height="9"/><rect class="pad" x="555" y="369" width="7" height="9"/><rect class="pad" x="549" y="238" width="9" height="7"/><rect class="pad" x="549" y="395" width="9" height="7"/><rect class="pad" x="398" y="389" width="7" height="9"/><rect class="pad" x="555" y="389" width="7" height="9"/>
+<rect class="scribe" x="382" y="222" width="196" height="196"/>
+<g class="sawg"><g transform="translate(355,222)"><circle class="saw" cx="0" cy="0" r="16"/><line x1="-16" y1="0" x2="16" y2="0" stroke="#566" stroke-width="2"/><line x1="0" y1="-16" x2="0" y2="16" stroke="#566" stroke-width="2"/></g></g>
+<text class="cap" x="480.0" y="478" text-anchor="middle">2. Die</text>
+<text class="sub" x="480.0" y="498" text-anchor="middle">one piece of the wafer, cut out</text>
+<text class="lab" x="480.0" y="199" text-anchor="middle">Dashed: scribe line (the cut path)</text>
+<text class="lab" x="480.0" y="451" text-anchor="middle">Yellow: bond pads (connections to outside)</text>
+<!-- arrow 2 -->
+<path class="ar" d="M599 320.0 H676"/>
+<path class="arh" d="M676 312.0 L690 320.0 L676 328.0Z"/>
+<text class="arrow" x="636" y="296.0" text-anchor="middle">cut</text>
+<text class="arrow" x="636" y="312.0" text-anchor="middle">+ package</text>
+<!-- package -->
+<circle class="ring r3" cx="805.0" cy="315.0" r="121.0" />
+<rect class="lead" x="732" y="214" width="7" height="16"/><rect class="lead" x="732" y="400" width="7" height="16"/><rect class="lead" x="704" y="242" width="16" height="7"/><rect class="lead" x="890" y="242" width="16" height="7"/><rect class="lead" x="749" y="214" width="7" height="16"/><rect class="lead" x="749" y="400" width="7" height="16"/><rect class="lead" x="704" y="259" width="16" height="7"/><rect class="lead" x="890" y="259" width="16" height="7"/><rect class="lead" x="766" y="214" width="7" height="16"/><rect class="lead" x="766" y="400" width="7" height="16"/><rect class="lead" x="704" y="276" width="16" height="7"/><rect class="lead" x="890" y="276" width="16" height="7"/><rect class="lead" x="783" y="214" width="7" height="16"/><rect class="lead" x="783" y="400" width="7" height="16"/><rect class="lead" x="704" y="293" width="16" height="7"/><rect class="lead" x="890" y="293" width="16" height="7"/><rect class="lead" x="800" y="214" width="7" height="16"/><rect class="lead" x="800" y="400" width="7" height="16"/><rect class="lead" x="704" y="310" width="16" height="7"/><rect class="lead" x="890" y="310" width="16" height="7"/><rect class="lead" x="817" y="214" width="7" height="16"/><rect class="lead" x="817" y="400" width="7" height="16"/><rect class="lead" x="704" y="327" width="16" height="7"/><rect class="lead" x="890" y="327" width="16" height="7"/><rect class="lead" x="834" y="214" width="7" height="16"/><rect class="lead" x="834" y="400" width="7" height="16"/><rect class="lead" x="704" y="344" width="16" height="7"/><rect class="lead" x="890" y="344" width="16" height="7"/><rect class="lead" x="851" y="214" width="7" height="16"/><rect class="lead" x="851" y="400" width="7" height="16"/><rect class="lead" x="704" y="361" width="16" height="7"/><rect class="lead" x="890" y="361" width="16" height="7"/><rect class="lead" x="868" y="214" width="7" height="16"/><rect class="lead" x="868" y="400" width="7" height="16"/><rect class="lead" x="704" y="378" width="16" height="7"/><rect class="lead" x="890" y="378" width="16" height="7"/>
+<rect class="body" x="720" y="230" width="170" height="170" rx="8" fill="#2b2f36"/>
+<rect class="dieb" x="769.0" y="279.0" width="72" height="72"/>
+<rect class="blk" x="779.0" y="289.0" width="24" height="24"/><rect class="blk" x="807.0" y="289.0" width="24" height="52"/><rect class="blk" x="779.0" y="317.0" width="24" height="24"/>
+<line class="bw" x1="775.0" y1="285.0" x2="734" y2="238"/><line class="bw" x1="790.0" y1="285.0" x2="751" y2="238"/><line class="bw" x1="805.0" y1="285.0" x2="768" y2="238"/><line class="bw" x1="820.0" y1="285.0" x2="785" y2="238"/><line class="bw" x1="835.0" y1="285.0" x2="802" y2="238"/><line class="bw" x1="775.0" y1="345.0" x2="734" y2="392"/><line class="bw" x1="790.0" y1="345.0" x2="751" y2="392"/><line class="bw" x1="805.0" y1="345.0" x2="768" y2="392"/><line class="bw" x1="820.0" y1="345.0" x2="785" y2="392"/><line class="bw" x1="835.0" y1="345.0" x2="802" y2="392"/>
+<g class="cover"><rect class="body" x="720" y="230" width="170" height="170" rx="8"/><circle cx="736" cy="246" r="5" fill="#8b95a3"/><text x="805.0" y="320.0" text-anchor="middle" style="fill:#c4ccd6;font-size:15px;font-weight:700">CHIP</text></g>
+<text class="cap" x="805.0" y="478" text-anchor="middle">3. Packaged chip</text>
+<text class="sub" x="805.0" y="498" text-anchor="middle">die + wires + plastic case + pins</text>
+<text class="lab" x="805.0" y="200" text-anchor="middle">Pins carry signals to the circuit board</text>
+</svg>

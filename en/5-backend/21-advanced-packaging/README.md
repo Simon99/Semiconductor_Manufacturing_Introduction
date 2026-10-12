@@ -29,7 +29,9 @@ So the industry started splitting one large chip into several smaller chips, mak
 
 The classic example places a processor and several stacks of HBM memory side by side on the same interposer. The interposer can even be made larger than a single exposure field by stitching several exposures together.
 
-<!-- Figure: cross-section of a 2.5D package (processor and HBM side by side on an interposer, with the substrate below) -->
+![Animation: a processor and an HBM stack on a silicon interposer, compared with a long board trace](../../../images/21-2p5d.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch21/2p5d.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Interposer (中介層)**

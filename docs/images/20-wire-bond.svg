@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img" aria-labelledby="t d">
+<title id="t">Wire-bond package cross-section</title>
+<desc id="d">Animated: a capillary bonds gold or copper wires from die pads to lead frame leads, then mold compound encapsulates the package.</desc>
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1d2430}
+.ttl{font-size:24px;font-weight:700} .sub{font-size:14px;fill:#55606e}
+.lab{font-size:14px;font-weight:600} .ld{stroke:#55606e;stroke-width:1.2}
+.cap{font-size:15px} .chip{font-size:14px;font-weight:600}
+.ball,.stitch{fill:#e0b020;stroke:#8a6a10;stroke-width:1}
+.wire{fill:none;stroke:#d09a10;stroke-width:3;stroke-dasharray:1 1;stroke-dashoffset:0}
+.mold{opacity:1}
+.cap1,.cap2,.cap3,.chip2,.chip3{opacity:0}
+@keyframes wL{0.000%{stroke-dashoffset:0}10.000%{stroke-dashoffset:0}10.357%{stroke-dashoffset:1}18.571%{stroke-dashoffset:1}28.571%{stroke-dashoffset:0}100.000%{stroke-dashoffset:0}}
+@keyframes bL{0.000%{opacity:1}10.000%{opacity:1}10.357%{opacity:0}17.143%{opacity:0}17.500%{opacity:1}100.000%{opacity:1}}
+@keyframes sL{0.000%{opacity:1}10.000%{opacity:1}10.357%{opacity:0}30.000%{opacity:0}30.357%{opacity:1}100.000%{opacity:1}}
+@keyframes cL{0.000%{opacity:0}12.857%{opacity:0}13.571%{opacity:1}33.571%{opacity:1}35.000%{opacity:0}100.000%{opacity:0}}
+@keyframes wR{0.000%{stroke-dashoffset:0}10.000%{stroke-dashoffset:0}10.357%{stroke-dashoffset:1}42.857%{stroke-dashoffset:1}52.857%{stroke-dashoffset:0}100.000%{stroke-dashoffset:0}}
+@keyframes bR{0.000%{opacity:1}10.000%{opacity:1}10.357%{opacity:0}41.429%{opacity:0}41.786%{opacity:1}100.000%{opacity:1}}
+@keyframes sR{0.000%{opacity:1}10.000%{opacity:1}10.357%{opacity:0}54.286%{opacity:0}54.643%{opacity:1}100.000%{opacity:1}}
+@keyframes cR{0.000%{opacity:0}37.143%{opacity:0}37.857%{opacity:1}57.857%{opacity:1}59.286%{opacity:0}100.000%{opacity:0}}
+@keyframes mold{0.000%{opacity:1}10.000%{opacity:1}11.429%{opacity:0}62.857%{opacity:0}74.286%{opacity:1}100.000%{opacity:1}}
+@keyframes cap0{0.000%{opacity:1}9.286%{opacity:1}10.000%{opacity:0}74.286%{opacity:0}75.714%{opacity:1}100.000%{opacity:1}}
+@keyframes cap1{0.000%{opacity:0}10.714%{opacity:0}11.429%{opacity:1}35.714%{opacity:1}36.429%{opacity:0}100.000%{opacity:0}}
+@keyframes cap2{0.000%{opacity:0}36.429%{opacity:0}37.143%{opacity:1}60.000%{opacity:1}60.714%{opacity:0}100.000%{opacity:0}}
+@keyframes cap3{0.000%{opacity:0}62.143%{opacity:0}62.857%{opacity:1}74.286%{opacity:1}75.000%{opacity:0}100.000%{opacity:0}}
+@keyframes chip2{0.000%{opacity:0}10.714%{opacity:0}11.429%{opacity:1}60.000%{opacity:1}60.714%{opacity:0}100.000%{opacity:0}}
+@keyframes chip3{0.000%{opacity:0}62.143%{opacity:0}62.857%{opacity:1}74.286%{opacity:1}75.000%{opacity:0}100.000%{opacity:0}}
+
+@media (prefers-reduced-motion:no-preference){
+.wL{animation:wL 14s linear infinite}
+.bL{animation:bL 14s linear infinite}
+.sL{animation:sL 14s linear infinite}
+.cL{animation:cL 14s linear infinite}
+.wR{animation:wR 14s linear infinite}
+.bR{animation:bR 14s linear infinite}
+.sR{animation:sR 14s linear infinite}
+.cR{animation:cR 14s linear infinite}
+.mold{animation:mold 14s linear infinite}
+.cap0{animation:cap0 14s linear infinite}
+.cap1{animation:cap1 14s linear infinite}
+.cap2{animation:cap2 14s linear infinite}
+.cap3{animation:cap3 14s linear infinite}
+.chip2{animation:chip2 14s linear infinite}
+.chip3{animation:chip3 14s linear infinite}
+}
+</style>
+<defs><clipPath id="none"><rect width="960" height="560"/></clipPath></defs>
+<rect width="960" height="560" fill="#fbfaf7"/>
+<text x="40" y="38" text-anchor="start" class="ttl" >Wire-bond package, cross-section</text>
+<text x="40" y="60" text-anchor="start" class="sub" >Lead-frame version, schematic and not to scale. Substrate (BGA) packages use the same wires.</text>
+<g class="mold"><rect x="140" y="165" width="680" height="180" rx="16" fill="#e3cfa6" stroke="#8a6a35" stroke-width="2"/></g>
+<g fill="#c8783c" stroke="#7a4518" stroke-width="1"><rect x="100" y="288" width="200" height="12"/><rect x="88" y="288" width="12" height="84"/><rect x="56" y="360" width="44" height="12"/><rect x="660" y="288" width="200" height="12"/><rect x="860" y="288" width="12" height="84"/><rect x="860" y="360" width="44" height="12"/><rect x="340" y="288" width="280" height="12"/></g>
+<rect x="370" y="282" width="220" height="6" fill="#7a5aa8"/>
+<rect x="370" y="240" width="220" height="42" fill="#5b6b7d" stroke="#2f3a47" stroke-width="1.5"/>
+<rect x="370" y="240" width="220" height="5" fill="#8fa3b8"/>
+<text x="480" y="268" text-anchor="middle" class="lab" style="fill:#fff">Die (silicon)</text>
+<rect x="376" y="233" width="20" height="7" fill="#e0b020" stroke="#8a6a10"/>
+<rect x="564" y="233" width="20" height="7" fill="#e0b020" stroke="#8a6a10"/>
+<path class="wire wL" pathLength="1" d="M386,236 C386,165 255,165 255,288"/>
+<path class="wire wR" pathLength="1" d="M574,236 C574,165 705,165 705,288"/>
+<circle class="ball bL" cx="386" cy="231" r="6"/><circle class="ball bR" cx="574" cy="231" r="6"/>
+<ellipse class="stitch sL" cx="255" cy="287" rx="8" ry="3"/><ellipse class="stitch sR" cx="705" cy="287" rx="8" ry="3"/>
+<g class="mold" style="pointer-events:none"><rect x="140" y="165" width="680" height="180" rx="16" fill="#e3cfa6" fill-opacity="0.14"/></g>
+<g class="cL" opacity="0"><g>
+<animateMotion dur="14s" repeatCount="indefinite" calcMode="linear" keyTimes="0.00000;0.12857;0.17143;0.18571;0.28571;0.30357;0.34286;1.00000" keyPoints="0.00000;0.00000;0.14801;0.14801;0.86164;0.86164;1.00000;1.00000" path="M386,190 L386,236 C386,165 255,165 255,288 L255,245"/>
+<polygon points="-4,0 4,0 4,-14 12,-60 12,-90 -12,-90 -12,-60 -4,-14" fill="#9aa3b0" stroke="#4a5361" stroke-width="1.5"/>
+<line x1="0" y1="-1" x2="0" y2="-90" stroke="#d09a10" stroke-width="1.5"/></g></g>
+<g class="cR" opacity="0"><g>
+<animateMotion dur="14s" repeatCount="indefinite" calcMode="linear" keyTimes="0.00000;0.37143;0.41429;0.42857;0.52857;0.54643;0.58571;1.00000" keyPoints="0.00000;0.00000;0.14801;0.14801;0.86164;0.86164;1.00000;1.00000" path="M574,190 L574,236 C574,165 705,165 705,288 L705,245"/>
+<polygon points="-4,0 4,0 4,-14 12,-60 12,-90 -12,-90 -12,-60 -4,-14" fill="#9aa3b0" stroke="#4a5361" stroke-width="1.5"/>
+<line x1="0" y1="-1" x2="0" y2="-90" stroke="#d09a10" stroke-width="1.5"/></g></g>
+<line x1="850" y1="128" x2="800" y2="172" class="ld"/><circle cx="800" cy="172" r="2.5" fill="#55606e"/><text x="940" y="122" text-anchor="end" class="lab" >Mold compound (epoxy)</text>
+<line x1="200" y1="128" x2="269" y2="229" class="ld"/><circle cx="269" cy="229" r="2.5" fill="#55606e"/><text x="300" y="122" text-anchor="end" class="lab" >Bond wire (gold or copper)</text>
+<line x1="480" y1="134" x2="570" y2="232" class="ld"/><circle cx="570" cy="232" r="2.5" fill="#55606e"/><text x="480" y="128" text-anchor="middle" class="lab" >Bond pad</text>
+<line x1="380" y1="404" x2="430" y2="285" class="ld"/><circle cx="430" cy="285" r="2.5" fill="#55606e"/><text x="250" y="420" text-anchor="start" class="lab" >Die attach adhesive</text>
+<line x1="600" y1="404" x2="605" y2="298" class="ld"/><circle cx="605" cy="298" r="2.5" fill="#55606e"/><text x="560" y="420" text-anchor="start" class="lab" >Die paddle (lead frame)</text>
+<line x1="70" y1="404" x2="72" y2="368" class="ld"/><circle cx="72" cy="368" r="2.5" fill="#55606e"/><text x="30" y="420" text-anchor="start" class="lab" >Lead</text>
+<g class="cap0"><text x="480" y="466" text-anchor="middle" class="cap" >Finished package: the mold compound protects the die and wires; the leads connect the chip to the circuit board.</text><text x="480" y="488" text-anchor="middle" class="cap" >Wire bonding is the most common die-to-package connection because it is cheap and mature.</text></g>
+<g class="cap1"><text x="480" y="466" text-anchor="middle" class="cap" >Wire 1: the capillary presses a ball of wire onto a die pad, then draws the wire in a loop over to the lead.</text><text x="480" y="488" text-anchor="middle" class="cap" >A flat stitch bond on the lead finishes the wire. The wire is thinner than a human hair.</text></g>
+<g class="cap2"><text x="480" y="466" text-anchor="middle" class="cap" >Wire 2: the same motion on the next pad. Every pad gets its own wire, one after another.</text><text x="480" y="488" text-anchor="middle" class="cap" >If a pad is contaminated the wire will not stick, leaving an open circuit.</text></g>
+<g class="cap3"><text x="480" y="466" text-anchor="middle" class="cap" >Molding: epoxy resin flows around the die and wires and hardens into a protective body.</text><text x="480" y="488" text-anchor="middle" class="cap" >A fast flow can push the thin wires sideways (wire sweep) and short neighbors.</text></g>
+<g transform="translate(250,508)">
+<rect x="0" y="0" width="140" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><text x="70" y="20" text-anchor="middle" class="chip" >1 Die attach</text>
+<rect x="160" y="0" width="160" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip2" x="160" y="0" width="160" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="240" y="20" text-anchor="middle" class="chip" >2 Wire bonding</text>
+<rect x="340" y="0" width="130" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip3" x="340" y="0" width="130" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="405" y="20" text-anchor="middle" class="chip" >3 Molding</text>
+</g>
+</svg>

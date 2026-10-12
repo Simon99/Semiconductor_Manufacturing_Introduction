@@ -22,7 +22,9 @@ Lithography is a lot like photography:
 
 The difference is that the patterns printed by lithography must be accurate to the nanometer, and every layer must line up exactly with the one before it. That is why lithography is the most expensive and most critical step in the whole process.
 
-<!-- Figure: photography compared with lithography (light source, negative/mask, lens, photo paper/photoresist) -->
+![Animation: a darkroom print and lithography side by side, each with light source, pattern carrier, lens and light-sensitive layer](../../../images/04-camera-vs-litho.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch04/camera-vs-litho.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Lithography (微影)**
@@ -58,7 +60,9 @@ Lithography is not just "exposure." It is a whole sequence of steps. The track, 
 6. **Develop**: A developer dissolves the unwanted resist, and the pattern appears.
 7. **Inspect (ADI)**: Measure the pattern size and alignment, and check for defects.
 
-<!-- Figure: the lithography flow (wafer cross-sections at the coat, expose and develop stages) -->
+![Animation: lithography coat, expose and develop on wafer cross-sections for positive and negative resist](../../../images/04-litho-flow.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch04/litho-flow.html) to try it yourself.*
 
 > [!TIP]
 > **🔧 Know-how | Lithography is the last chance to start over**

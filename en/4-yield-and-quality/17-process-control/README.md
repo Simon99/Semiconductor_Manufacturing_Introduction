@@ -49,7 +49,9 @@ Engineers use a set of rules to spot abnormal patterns, for example:
 
 The point of these rules is that even when every point is still within spec, a "shape" that looks wrong deserves attention.
 
-<!-- Figure: a control chart (center line, control limits, specification limits, with examples of a point outside the limits and a run of shifted points) -->
+![Animation: a control chart with center line, control limits, spec limits, an out-of-control point and a shifted run](../../../images/17-control-chart.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch17/control-chart.html) to try it yourself.*
 
 ---
 

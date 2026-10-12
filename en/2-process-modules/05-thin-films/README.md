@@ -82,7 +82,9 @@ It is like laying tiles: one layer at a time, stopping naturally when the layer 
 | ALD | One atomic layer at a time | Ultra-thin films, gate insulators | The most uniform, but slow |
 | Epitaxy | Growth that continues the crystal lattice | Epitaxial silicon, silicon germanium | Can grow single crystals |
 
-<!-- Figure: the four deposition methods side by side (thermal oxidation, CVD, PVD, ALD) -->
+![Animation: thermal oxidation, CVD, PVD and ALD building a film in a trench](../../../images/05-deposition.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch05/deposition.html) to try it yourself.*
 
 ---
 

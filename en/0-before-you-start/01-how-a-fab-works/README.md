@@ -20,7 +20,9 @@ From the outside, a wafer fab looks like a huge box-shaped building. Inside, it 
 
 The cleanroom where wafers are actually made is only part of the building. Everything else is there to serve it.
 
-<!-- Figure: cross-section of a fab (air handling and filtration on top, cleanroom in the middle, piping and support equipment below) -->
+![Animation: cross-section of a fab with air handling on top, the cleanroom in the middle and piping below, with particles carried down by the airflow](../../../images/01-fab-cross-section.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch01/fab-cross-section.html) to try it yourself.*
 
 ---
 
@@ -52,7 +54,9 @@ In a 300 mm fab, wafers travel inside sealed boxes called **FOUPs**, each holdin
 - **Stocker**: Temporarily stores FOUPs that are waiting.
 - **Load port**: The platform at the front of a tool where a FOUP is placed so the tool can take the wafers out.
 
-<!-- Figure: an OHT vehicle on a ceiling rail lowering a FOUP onto a tool's load port -->
+![Animation: an overhead hoist vehicle on a ceiling rail lowers a FOUP onto a tool's load port](../../../images/01-oht-foup.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch01/oht-foup.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | FOUP (Front Opening Unified Pod, 前開式晶圓傳送盒)**

@@ -47,7 +47,9 @@ The most common way to grow a crystal is the **Czochralski method** (CZ method):
 
 A 300 mm ingot can be about two meters long and weigh several hundred kilograms. During growth, small amounts of boron or phosphorus are added to the melt so that the wafers start out P-type or N-type with a specified resistivity.
 
-<!-- Figure: CZ crystal growth (crucible, molten silicon, seed crystal, ingot being rotated and pulled up) -->
+![Animation: Czochralski crystal growth, a rotating seed pulled slowly out of molten silicon to form a single-crystal ingot](../../../images/03-cz-growth.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch03/cz-growth.html) to try it yourself.*
 
 ---
 

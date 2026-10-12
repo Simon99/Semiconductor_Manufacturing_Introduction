@@ -64,7 +64,9 @@ When a high enough voltage is applied to the gate, the channel opens like a gate
 
 On and off correspond to the 1s and 0s of the digital world. Billions of these switches working together can compute and store data.
 
-<!-- Figure: MOSFET cross-section showing the source, drain, gate, gate oxide and channel (labeled with numbers) -->
+![Animation: a MOSFET cross-section where rising gate voltage forms the channel and electrons flow from source to drain](../../../images/02-mosfet.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch02/mosfet.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor, 金屬氧化物半導體場效電晶體)**

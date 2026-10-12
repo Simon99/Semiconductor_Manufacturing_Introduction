@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-section of a fab</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#1f2d3d;--mute:#51627a;--line:#c5d0de;--accent:#2a6db0;--accent-ink:#fff;--warn:#d9480f;--ok:#1f8f5f}
+:root[data-theme="dark"]{--bg:#0f1621;--card:#18222f;--ink:#e6edf5;--mute:#9db0c6;--line:#2c3b4e;--accent:#5aa7e8;--accent-ink:#0b1420;--warn:#ff7a3d;--ok:#4cc38a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:10px 16px 0;max-width:1280px;margin:0 auto}
+header a{color:var(--accent);text-decoration:none;font-size:14px}
+header a:hover{text-decoration:underline}
+h1{font-size:20px;margin:4px 0 8px}
+main{max-width:1280px;margin:0 auto;padding:0 16px 16px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+#stage canvas{display:block;width:100%;height:auto;border-radius:6px}
+.panel h2{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin:0 0 6px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+button{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 6px;cursor:pointer;min-height:36px}
+.steps button{font-size:13px}
+button:hover{border-color:var(--accent)}
+button[aria-pressed="true"],button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#stext{margin:0 0 6px;min-height:6.6em;font-size:13.5px;line-height:1.4}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0 0}
+.row label{font-size:14px}
+.row output{font-variant-numeric:tabular-nums;min-width:4.5em;text-align:right;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--accent)}
+#sw{display:flex;align-items:center;gap:10px;width:100%;justify-content:space-between;font-weight:600}
+#sw .knob{width:44px;height:24px;border-radius:12px;background:var(--mute);position:relative;transition:background .15s}
+#sw .knob::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s}
+#sw[aria-checked="true"] .knob{background:var(--ok)}
+#sw[aria-checked="true"] .knob::after{left:23px}
+#sw{background:var(--card);color:var(--ink)}
+.btns{display:flex;gap:6px}.btns button{flex:1}
+.read{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-top:6px}
+.big{font-size:32px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.k{font-size:12px;color:var(--mute)}
+.v{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+#spark{width:100%;height:56px;display:block;margin-top:4px}
+.note{font-size:12px;color:var(--mute);margin:6px 0 0;line-height:1.35}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+@media (max-width:480px){.big{font-size:34px}header{padding-top:8px}}
+</style>
+</head>
+<body>
+<header>
+<a href="../../en/0-before-you-start/01-how-a-fab-works/README.md">&larr; Back to chapter</a>
+<h1>Cross-section of a fab: why the air only moves one way</h1>
+</header>
+<main>
+<section class="card" id="stage" aria-label="Fab cross-section simulation">
+<canvas id="cv" width="960" height="600" role="img" aria-label="Animated cross-section of a fab: air handling and filters on top, cleanroom in the middle, piping and support equipment below. Orange dots are particles moving downward."></canvas>
+</section>
+<aside class="card panel">
+<h2>Walk through</h2>
+<div class="steps" role="group" aria-label="Stage">
+<button data-s="1" aria-pressed="false">1 Air in</button>
+<button data-s="2" aria-pressed="false">2 Filter</button>
+<button data-s="3" aria-pressed="false">3 Room</button>
+<button data-s="4" aria-pressed="false">4 Floor</button>
+</div>
+<p id="stext"></p>
+<h2 style="margin-top:6px">Try it</h2>
+<button id="sw" role="switch" aria-checked="true"><span>Ceiling filters: <span id="swv">ON</span></span><span class="knob"></span></button>
+<div class="row"><label for="eff">Filter efficiency</label><output id="effo"></output></div>
+<input id="eff" type="range" min="0" max="99.99" step="0.01" value="99.97">
+<div class="row"><label for="ppl">People in the room</label><output id="pplo"></output></div>
+<input id="ppl" type="range" min="0" max="5" step="1" value="2">
+<div class="btns" style="margin-top:8px"><button id="pause">Pause</button><button id="reset">Reset</button></div>
+<div class="read" aria-live="off">
+<div style="grid-column:1/3"><div class="k">Particles in the cleanroom now</div><div class="big" id="now">0</div></div>
+<div><div class="k">Average, last 10 s</div><div class="v" id="avg">0</div></div>
+<div><div class="k">Highest, last 10 s</div><div class="v" id="peak">0</div></div>
+</div>
+<canvas id="spark" width="320" height="56" aria-label="Particle count over the last 40 seconds"></canvas>
+<p class="note">Illustrative: dots stand in for particles; counts are not a measured cleanliness class.</p>
+</aside>
+</main>
+<script>
+(function(){
+"use strict";
+var Q=new URLSearchParams(location.search);
+var W=960,H=600;
+var Y={top:47,filt:152,room:178,floor:400,bot:408,end:597};
+// ---------- theme ----------
+var P;
+var THEMES={
+light:{bg:"#eef2f7",wall:"#51627a",zTop:"#d7e4f3",zRoom:"#f8fbfe",zBot:"#e8e0d2",plen:"#c3d5ea",ink:"#1f2d3d",mute:"#3c5169",tool:"#8da4bf",toolWin:"#cbd8e6",unit:"#9fb6d0",filt:"#f4f7fb",filtOff:"#e3c9c0",airline:"rgba(77,155,224,.55)",air:"#2a6db0",dim:"rgba(238,242,247,.72)",pill:"#2f4157",pillInk:"#fff",part:"#d9480f",suit:"#fff",stock:"#a9b9a0"},
+dark:{bg:"#0f1621",wall:"#7f93ad",zTop:"#1b2a3d",zRoom:"#14202e",zBot:"#2a2620",plen:"#223650",ink:"#e6edf5",mute:"#a9bbd0",tool:"#4b6280",toolWin:"#2d4058",unit:"#3a5273",filt:"#26364b",filtOff:"#4a2f2a",airline:"rgba(90,167,232,.55)",air:"#6db4f0",dim:"rgba(15,22,33,.72)",pill:"#cfdcec",pillInk:"#10202f",part:"#ff7a3d",suit:"#e9eff6",stock:"#52624c"}};
+function pickTheme(){var t=Q.get("theme");if(t!=="light"&&t!=="dark"){t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}
+document.documentElement.dataset.theme=t;P=THEMES[t];}
+pickTheme();
+if(window.matchMedia){try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){if(!Q.get("theme")){pickTheme();draw();}});}catch(e){}}
+// ---------- state ----------
+var S={filters:Q.get("filters")!=="off",eff:Q.has("eff")?+Q.get("eff"):99.97,people:Q.has("people")?+Q.get("people"):2,stage:Q.has("stage")?+Q.get("stage"):0,paused:Q.get("paused")==="1"};
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(reduce&&!Q.has("paused"))S.paused=true;
+var PEOPLE_X=[480,720,530,440,570];
+var LAMBDA=18;        // dirty air particles per second entering the plenum (illustrative)
+var VROOM=55,VPLEN=45; // px/s
+var EMIT=0.8;         // particles per second shed by one person (illustrative)
+var sim;
+function mkRng(seed){var a=seed>>>0;return function(){a+=0x6D2B79F5;var t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+function reset(){sim={t:0,rng:mkRng(12345),parts:[],flash:[],acc:0,accP:[0,0,0,0,0],hist:[],histT:0,samples:[]};}
+function step(dt){
+ var r=sim.rng;sim.t+=dt;
+ sim.acc+=LAMBDA*dt;
+ while(sim.acc>=1){sim.acc-=1;sim.parts.push({x:80+r()*800,y:90+r()*50,vx:0,vy:VPLEN,f:0});}
+ for(var i=0;i<S.people&&i<5;i++){sim.accP[i]+=EMIT*dt;while(sim.accP[i]>=1){sim.accP[i]-=1;sim.parts.push({x:PEOPLE_X[i]+(r()-.5)*14,y:332+r()*8,vx:0,vy:VROOM,f:1});}}
+ var kept=[],eff=S.filters?S.eff/100:0;
+ for(var k=0;k<sim.parts.length;k++){var p=sim.parts[k];var oy=p.y;
+  if(p.y>=Y.room){p.vx+=(r()-.5)*90*dt;p.vx*=0.985;p.vy=VROOM+(r()-.5)*8;}
+  p.x+=p.vx*dt;p.y+=p.vy*dt;
+  if(p.x<72)p.x=72;if(p.x>888)p.x=888;
+  if(!p.f&&oy<164&&p.y>=164){p.f=1;if(r()<eff){sim.flash.push({x:p.x,age:0});continue;}}
+  if(p.y>Y.floor+36)continue;
+  kept.push(p);}
+ sim.parts=kept;
+ for(var m=sim.flash.length-1;m>=0;m--){sim.flash[m].age+=dt;if(sim.flash[m].age>.35)sim.flash.splice(m,1);}
+ sim.histT+=dt;if(sim.histT>=.25){sim.histT-=.25;sim.samples.push(count());if(sim.samples.length>160)sim.samples.shift();}
+}
+function count(){var n=0;for(var i=0;i<sim.parts.length;i++){var y=sim.parts[i].y;if(y>Y.room&&y<Y.floor)n++;}return n;}
+// ---------- drawing ----------
+var cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+var sp=document.getElementById("spark"),sctx=sp.getContext("2d");
+function fit(){var dpr=Math.min(window.devicePixelRatio||1,3);var w=cv.clientWidth||W;cv.width=Math.round(w*dpr);cv.height=Math.round(w*dpr*H/W);
+ var sw=sp.clientWidth||320;sp.width=Math.round(sw*dpr);sp.height=Math.round(56*dpr);draw();}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function txt(c,s,x,y,o){o=o||{};c.font=(o.b?"700 ":"")+(o.sz||13)+"px system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";c.textAlign=o.a||"left";c.fillStyle=o.c||P.ink;
+ if(o.halo){c.lineWidth=4;c.strokeStyle=o.halo;c.lineJoin="round";c.strokeText(s,x,y);}c.fillText(s,x,y);}
+function smooth(u){u=Math.max(0,Math.min(1,u));return u*u*(3-2*u);}
+function fan(c,cx,cy,r,ang){c.save();c.translate(cx,cy);c.fillStyle=P.filt;c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,r,0,7);c.fill();c.stroke();
+ c.rotate(ang);c.fillStyle=P.air;for(var k=0;k<4;k++){c.save();c.rotate(k*Math.PI/2);c.beginPath();c.ellipse(0,-r*.5,r*.22,r*.45,0,0,7);c.fill();c.restore();}
+ c.fillStyle=P.ink;c.beginPath();c.arc(0,0,r*.15,0,7);c.fill();c.restore();}
+function person(c,x){c.save();c.translate(x,400);c.fillStyle=P.suit;c.strokeStyle=P.wall;c.lineWidth=1.5;
+ rr(c,-10,-46,20,30,7);c.fill();c.stroke();rr(c,-9,-18,8,18,3);c.fill();c.stroke();rr(c,1,-18,8,18,3);c.fill();c.stroke();
+ c.beginPath();c.arc(0,-56,10,0,7);c.fill();c.stroke();c.fillStyle="#8fb6dc";rr(c,-6,-59,12,6,3);c.fill();c.restore();}
+function draw(){
+ var s=cv.width/W;ctx.setTransform(s,0,0,s,0,0);var c=ctx,t=sim.t;
+ c.fillStyle=P.bg;c.fillRect(0,0,W,H);
+ c.fillStyle=P.zTop;c.fillRect(31,47,898,131);c.fillStyle=P.zRoom;c.fillRect(31,178,898,230);c.fillStyle=P.zBot;c.fillRect(31,408,898,189);
+ c.strokeStyle=P.wall;c.lineWidth=2;rr(c,30,46,900,552,8);c.stroke();c.lineWidth=1;c.beginPath();c.moveTo(31,178);c.lineTo(929,178);c.moveTo(31,408);c.lineTo(929,408);c.stroke();
+ // plenum + units
+ c.fillStyle=P.plen;c.fillRect(66,82,828,70);c.strokeStyle=P.wall;c.lineWidth=1.5;c.strokeRect(66,82,828,70);
+ txt(c,"plenum: dirty air waiting to be cleaned",448,132,{a:"center",sz:12,c:P.mute});
+ [90,772].forEach(function(x){c.fillStyle=P.unit;rr(c,x,86,104,62,4);c.fill();c.stroke();fan(c,x+30,117,20,t*2*Math.PI/1.6);txt(c,"Air",x+56,112,{sz:12});txt(c,"handler",x+56,127,{sz:12});});
+ // filters
+ var n=12,w=828/n;for(var i=0;i<n;i++){var x=66+i*w;c.fillStyle=S.filters?P.filt:P.filtOff;c.fillRect(x+1.5,152,w-3,24);c.strokeStyle=P.wall;c.lineWidth=1.5;c.strokeRect(x+1.5,152,w-3,24);
+  c.strokeStyle=S.filters?"#8aa0ba":"rgba(120,120,120,.35)";for(var k=1;k<6;k++){c.beginPath();c.moveTo(x+1.5+k*(w-3)/6,154);c.lineTo(x+1.5+k*(w-3)/6,174);c.stroke();}}
+ txt(c,S.filters?"Ceiling filters":"Ceiling filters: OFF (bypassed)",448,170,{a:"center",b:1,halo:S.filters?P.filt:P.filtOff,c:P.ink});
+ // flash on filter
+ sim.flash.forEach(function(f){c.fillStyle="rgba(255,200,80,"+(1-f.age/.35)*.9+")";c.beginPath();c.arc(f.x,160,6*(1+f.age*4),0,7);c.fill();});
+ // airflow dashes
+ c.strokeStyle=P.airline;c.lineWidth=2;c.setLineDash([8,12]);c.lineDashOffset=-t*30;
+ for(i=0;i<17;i++){c.beginPath();c.moveTo(82+i*50,181);c.lineTo(82+i*50,398);c.stroke();}
+ c.setLineDash([]);
+ // rail
+ c.strokeStyle=P.wall;c.lineWidth=3;for(x=80;x<894;x+=90){c.beginPath();c.moveTo(x,180);c.lineTo(x,216);c.stroke();}
+ c.lineWidth=4;c.beginPath();c.moveTo(66,216);c.lineTo(894,216);c.stroke();
+ txt(c,"OHT rail (overhead hoist transport)",330,204,{sz:12,c:P.mute,halo:P.zRoom});
+ var u=(t%14)/14,ox=u<.28?smooth(u/.28)*345:u<.72?345:345+smooth((u-.72)/.28)*465;
+ var low=u<.28?0:u<.38?smooth((u-.28)/.1)*88:u<.58?88:u<.70?88*(1-smooth((u-.58)/.12)):0;
+ var oa=u<.04?u/.04:u>.94?(1-u)/.06:1;
+ c.save();c.globalAlpha=oa;c.translate(70+ox,0);c.fillStyle="#e0a82e";c.strokeStyle="#7a5a10";c.lineWidth=1.5;rr(c,-24,216,48,16,4);c.fill();c.stroke();
+ c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.moveTo(0,232);c.lineTo(0,232+26+low);c.stroke();
+ c.fillStyle=P.filt;c.strokeStyle=P.pill;c.lineWidth=1.8;rr(c,-11,232+low,22,26,3);c.fill();c.stroke();c.fillStyle="#8fb6dc";c.fillRect(-7,238+low,14,5);c.restore();
+ // callout
+ c.fillStyle=P.filt;c.strokeStyle=P.wall;c.lineWidth=1.2;rr(c,76,262,336,42,6);c.fill();c.stroke();
+ txt(c,"Office air: hundreds of thousands to millions of",86,279,{sz:12});txt(c,"particles (0.5 µm+) per ft³; critical area: below 10.",86,296,{sz:12});
+ // tools
+ [[80,150],[250,150],[580,120]].forEach(function(a){var x=a[0],w=a[1];c.fillStyle=P.tool;c.strokeStyle=P.pill===P.pill?P.wall:P.wall;c.lineWidth=2;rr(c,x,312,w,88,4);c.fill();c.stroke();
+  c.fillStyle=P.toolWin;rr(c,x+12,322,w-24,30,3);c.fill();c.stroke();c.fillStyle=P.ink;c.fillRect(x+12,362,26,18);
+  c.fillStyle="#4cc38a";c.beginPath();c.arc(x+54,371,4,0,7);c.fill();c.fillStyle="#e0a82e";c.beginPath();c.arc(x+68,371,4,0,7);c.fill();txt(c,"Process tool",x+w/2,342,{a:"center",c:P.ink});});
+ c.fillStyle=P.wall;c.fillRect(400,346,32,6);c.fillRect(400,352,6,24);txt(c,"Load port",418,392,{a:"center",sz:12,c:P.mute});
+ c.fillStyle=P.stock;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,760,284,120,116,4);c.fill();c.stroke();
+ for(var r=0;r<4;r++){var yy=288+r*27;c.beginPath();c.moveTo(764,yy+25);c.lineTo(876,yy+25);c.stroke();for(var q=0;q<3;q++)if((r+q)%3!=2){c.fillStyle=P.filt;rr(c,772+q*36,yy+3,20,20,2);c.fill();c.lineWidth=1.3;c.stroke();c.lineWidth=2;}}
+ txt(c,"Stocker (waiting FOUPs)",820,276,{a:"center",b:1});
+ // people
+ var xs=PEOPLE_X.slice(0,S.people);xs.forEach(function(x){person(c,x);});
+ txt(c,"People: the biggest",520,284,{a:"center",b:1});txt(c,"source of contamination",520,300,{a:"center",b:1});
+ // floor
+ c.fillStyle=P.pill;c.fillRect(66,400,828,8);c.strokeStyle=P.zRoom;c.lineWidth=4;c.setLineDash([10,8]);c.beginPath();c.moveTo(66,404);c.lineTo(894,404);c.stroke();c.setLineDash([]);
+ // return air
+ c.strokeStyle=P.airline;c.lineWidth=3;c.setLineDash([8,12]);c.lineDashOffset=t*30;
+ c.beginPath();c.moveTo(448,448);c.lineTo(48,448);c.lineTo(48,120);c.lineTo(66,120);c.moveTo(448,448);c.lineTo(912,448);c.lineTo(912,120);c.lineTo(894,120);c.stroke();c.setLineDash([]);
+ c.save();c.fillStyle=P.air;c.font="700 12px system-ui,sans-serif";c.textAlign="center";c.translate(40,330);c.rotate(-Math.PI/2);c.fillText("return air",0,0);c.restore();
+ c.save();c.fillStyle=P.air;c.font="700 12px system-ui,sans-serif";c.textAlign="center";c.translate(922,330);c.rotate(-Math.PI/2);c.fillText("return air",0,0);c.restore();
+ // pipes
+ var pipes=[[464,"#e0a82e"],[482,"#4cc38a"],[500,"#4d9be0"],[518,"#a3a7ae"]];
+ [[120,0],[135,1],[300,2],[315,0],[610,1],[625,3],[790,0],[805,2]].forEach(function(a){c.strokeStyle=pipes[a[1]][1];c.lineWidth=5;c.beginPath();c.moveTo(a[0],408);c.lineTo(a[0],pipes[a[1]][0]);c.stroke();});
+ pipes.forEach(function(p){c.strokeStyle=p[1];c.lineWidth=14;c.beginPath();c.moveTo(66,p[0]);c.lineTo(894,p[0]);c.stroke();
+  c.strokeStyle="rgba(255,255,255,.7)";c.lineWidth=2.5;c.setLineDash([6,34]);c.lineDashOffset=-t*30;c.beginPath();c.moveTo(66,p[0]);c.lineTo(894,p[0]);c.stroke();c.setLineDash([]);});
+ [[250,464,"chemicals"],[360,482,"specialty gases"],[470,500,"ultrapure water"],[580,518,"exhaust"],[780,464,"chemicals"],[780,500,"ultrapure water"]].forEach(function(a){txt(c,a[2],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});});
+ function tank(x,y,w,h,col,lab){c.fillStyle=col;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,x,y,w,h,10);c.fill();c.stroke();c.fillStyle="rgba(255,255,255,.35)";rr(c,x+6,y+h*.4,w-12,h*.6-6,6);c.fill();txt(c,lab,x+w/2,y+h+16,{a:"center",sz:12,c:P.ink});}
+ tank(95,534,60,40,"#e8c35a","Chemical supply");tank(220,534,60,40,"#8fc7a0","Specialty gases");tank(345,534,60,40,"#7ab6ea","Ultrapure water");
+ [490,550].forEach(function(x){c.save();c.translate(x,553);c.fillStyle="#c8ced6";c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,19,0,7);c.fill();c.stroke();c.rotate(t*2*Math.PI/1.6);c.fillStyle="#51627a";c.fillRect(-3,-14,6,28);c.fillRect(-14,-3,28,6);c.restore();});
+ txt(c,"Vacuum pumps",520,590,{a:"center",sz:12});
+ tank(640,534,92,40,"#b9bcc2","Exhaust treatment");tank(790,534,92,40,"#a7b8a0","Wastewater treatment");
+ // particles
+ c.fillStyle=P.part;sim.parts.forEach(function(p){var a=p.y>Y.floor?1-(p.y-Y.floor)/36:1;c.globalAlpha=Math.max(0,a);c.beginPath();c.arc(p.x,p.y,2.8,0,7);c.fill();});c.globalAlpha=1;
+ // pills
+ [[52,"1  TOP LEVEL: air handling and filtration",368],[184,"2  MIDDLE LEVEL: cleanroom",262],[414,"3  BOTTOM LEVEL: piping and support equipment",412]].forEach(function(a){c.fillStyle=P.pill;rr(c,72,a[0],a[2],22,11);c.fill();txt(c,a[1],84,a[0]+16,{b:1,sz:14,c:P.pillInk});});
+ txt(c,"perforated floor: air and particles are pulled out",650,432,{a:"center",sz:12,b:1,c:P.air,halo:P.zBot});
+ txt(c,"Illustrative, not to scale",930,30,{a:"right",sz:12,c:P.mute});
+ // stage highlight
+ if(S.stage){var reg={1:[47,152],2:[150,178],3:[178,408],4:[408,597]}[S.stage];
+  c.fillStyle=P.dim;c.fillRect(0,0,W,reg[0]);c.fillRect(0,reg[1],W,H-reg[1]);
+  c.strokeStyle=P.air;c.lineWidth=3;c.setLineDash([10,6]);c.strokeRect(34,reg[0]+1,892,reg[1]-reg[0]-2);c.setLineDash([]);}
+ drawSpark();
+}
+function drawSpark(){
+ var s=sp.width/320,c=sctx;c.setTransform(s,0,0,sp.height/56,0,0);c.clearRect(0,0,320,56);
+ var cs=getComputedStyle(document.documentElement);var line=cs.getPropertyValue("--line"),mute=cs.getPropertyValue("--mute"),warn=cs.getPropertyValue("--warn");
+ c.strokeStyle=line;c.lineWidth=1;c.strokeRect(.5,.5,319,55);
+ var d=sim.samples,mx=Math.max(10,Math.max.apply(null,d.concat([0])))*1.1;
+ c.fillStyle=mute;c.font="11px system-ui,sans-serif";c.fillText("0",3,52);c.fillText(Math.round(mx),3,11);
+ c.strokeStyle=warn;c.lineWidth=2;c.beginPath();
+ d.forEach(function(v,i){var x=20+(i/159)*296,y=52-(v/mx)*46;if(i)c.lineTo(x,y);else c.moveTo(x,y);});c.stroke();
+}
+// ---------- UI ----------
+var $=function(i){return document.getElementById(i);};
+var STEXT={0:"Pick a stage to follow the air from the roof to the basement, or just play with the switch below.",
+1:"1 Air in. Air handlers and fans pull in air and push it into the plenum above the cleanroom. This air is still dirty: the orange dots are particles.",
+2:"2 Filters. The ceiling filters catch particles from the air going down. Switch them off and the dirty air walks right through.",
+3:"3 Cleanroom. Clean air flows downward past the tools. People still shed skin flakes and hair, but the downflow keeps carrying those particles away from the wafers.",
+4:"4 Floor and below. The air is pulled out through the perforated floor and returns to the top. Below, piping and equipment deliver ultrapure water, gases and chemicals, pull vacuum, and treat exhaust and wastewater."};
+function sync(){
+ $("sw").setAttribute("aria-checked",S.filters);$("swv").textContent=S.filters?"ON":"OFF";
+ $("eff").value=S.eff;$("effo").textContent=S.eff.toFixed(2)+"%";$("eff").disabled=!S.filters;
+ $("ppl").value=S.people;$("pplo").textContent=S.people;
+ $("pause").textContent=S.paused?"Play":"Pause";
+ document.querySelectorAll(".steps button").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.s===S.stage));});
+ $("stext").textContent=STEXT[S.stage];
+ readout();}
+function readout(){
+ var n=count(),d=sim.samples.slice(-40);$("now").textContent=n;
+ var avg=d.length?d.reduce(function(a,b){return a+b;},0)/d.length:n;$("avg").textContent=avg.toFixed(1);$("peak").textContent=d.length?Math.max.apply(null,d):n;}
+$("sw").onclick=function(){S.filters=!S.filters;sync();draw();};
+$("eff").oninput=function(){S.eff=+this.value;sync();};
+$("ppl").oninput=function(){S.people=+this.value;sync();draw();};
+$("pause").onclick=function(){S.paused=!S.paused;sync();};
+$("reset").onclick=function(){reset();sync();draw();};
+document.querySelectorAll(".steps button").forEach(function(b){b.onclick=function(){var s=+b.dataset.s;S.stage=S.stage===s?0:s;sync();draw();};});
+// ---------- loop ----------
+var last=0,accT=0;
+function frame(ts){
+ if(!last)last=ts;var dt=Math.min(.1,(ts-last)/1000);last=ts;
+ if(!S.paused){accT+=dt;var n=0;while(accT>=1/60&&n<12){step(1/60);accT-=1/60;n++;}draw();readout();}
+ requestAnimationFrame(frame);}
+window.__setTime=function(ms){var keep=S.paused;reset();var n=Math.round(ms/1000*60);for(var i=0;i<n;i++)step(1/60);S.paused=true;sync();draw();return count();};
+reset();sync();
+if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);else window.addEventListener("resize",fit);
+fit();
+if(Q.has("t")||Q.get("still")==="1"){window.__setTime(Q.has("t")?+Q.get("t"):8000);}
+else{ // warm start so the room is already in steady state
+ for(var i=0;i<60*8;i++)step(1/60);sync();draw();}
+if(Q.get("still")!=="1")requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

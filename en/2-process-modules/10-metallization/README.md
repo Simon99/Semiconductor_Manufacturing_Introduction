@@ -20,7 +20,9 @@ The wiring is a lot like a city's road network:
 - **Middle layers**: Wider, like city streets, connecting different circuit blocks.
 - **Upper layers**: The thickest and widest, like highways, carrying signals over long distances and delivering power.
 
-<!-- Figure: cross-section of multilevel metal wiring (narrow, dense lower layers and thick, wide upper layers, connected by vias) -->
+![Animation: a signal climbing through six metal layers and vias between two transistors](../../../images/10-metal-layers.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch10/metal-layers.html) to try it yourself.*
 
 ---
 
@@ -64,7 +66,9 @@ The name comes from an ancient inlay craft of Damascus: carve grooves into the s
 
 When the vias and trenches are filled with copper together, the process is called **dual damascene**, which saves one round of filling and polishing. Every metal layer repeats this flow, building up layer by layer.
 
-<!-- Figure: dual damascene cross-sections (etch → barrier → plating → CMP → cap layer) -->
+![Animation: the six steps of the dual damascene flow in cross-section, from dielectric to cap layer](../../../images/10-dual-damascene.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch10/dual-damascene.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Damascene process (大馬士革製程)**

@@ -45,7 +45,9 @@ To compare two processes, these numbers are more meaningful:
 - **Transistor density**: How many transistors fit per square millimeter, often given in millions of transistors per square millimeter.
 - **SRAM cell area**: The size of one SRAM memory cell, often used as a reference for density.
 
-<!-- Figure: gate pitch and metal pitch (top view of gates and wires with the pitches marked) -->
+![Animation: gate pitch and metal pitch shrinking by 0.7 times in a top view, doubling the density](../../../images/14-pitch.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch14/pitch.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Pitch (間距)**

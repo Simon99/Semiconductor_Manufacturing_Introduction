@@ -42,7 +42,9 @@ The overall yield is the product of these stages. For example, 98% × 90% × 99%
 
 Think of defects as raindrops falling randomly on the wafer. The bigger the die, the more likely it is to be hit. So with the same defect density, large dies have much lower yield than small ones. This is one reason the industry has recently been splitting large chips into several smaller ones. See [Chapter 21](../../5-backend/21-advanced-packaging/README.md).
 
-<!-- Figure: with the same defect distribution, the yield difference between large and small dies -->
+![Animation: the same defects landing on a wafer of large dies and a wafer of small dies, giving different yields](../../../images/16-die-size-yield.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch16/die-size-yield.html) to try it yourself.*
 
 Yield loss falls into two broad types:
 

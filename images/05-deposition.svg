@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d">
+<title id="t">Four ways to deposit a thin film</title>
+<desc id="d">Side-by-side trench cross-sections: thermal oxidation grows oxide from the silicon, CVD builds a fairly even film from reacting gases, PVD sputters atoms mostly straight down so the trench bottom is thin, and ALD builds one atomic layer per cycle for the most uniform coverage.</desc>
+<defs>
+<pattern id="si" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#56647a"/><circle cx="3" cy="3" r="1.3" fill="#7c8ba3"/><circle cx="9" cy="9" r="1.3" fill="#7c8ba3"/></pattern>
+<linearGradient id="plasma" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b07cff" stop-opacity=".30"/><stop offset="1" stop-color="#b07cff" stop-opacity="0"/></linearGradient>
+</defs>
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.bg{fill:#0b1626}
+.card{fill:#14263d;stroke:#24405f;stroke-width:1}
+.hdr{fill:#e8eef7;font-size:18px;font-weight:700}
+.hdr2{fill:#9fb3cc;font-size:12px}
+.ttl{fill:#e8eef7;font-size:15px;font-weight:700}
+.sub{fill:#9fb3cc;font-size:12px}
+.sub2{fill:#9fb3cc;font-size:12px}
+.ch{fill:#0d1c30;stroke:#35557a;stroke-width:1.2}
+.furn{fill:#2a1a1c;stroke:#ff8a4c;stroke-width:1.6}
+.coil{fill:none;stroke:#ff8a4c;stroke-width:1.6;stroke-linejoin:round;opacity:.85}
+.metal{fill:#8d99aa}.hole{fill:#0d1c30}
+.target{fill:#aeb8c6;stroke:#e5ebf3}
+.tgt{fill:#10203a;font-size:12px;font-weight:700}
+.plus{fill:#4a3d00;font-size:9px;font-weight:700}
+.lab{fill:#c9d6e8;font-size:12px}.lab2{fill:#9fb3cc;font-size:12px}
+.silab{fill:#e4ebf5;font-size:12px;font-weight:600}
+.rd{font-size:14px;font-weight:700}
+.ln{fill:#dbe5f2;font-size:12.5px}
+.film{stroke:#0b1626;stroke-opacity:.45;stroke-width:.6}
+.si{stroke:#8795ab;stroke-width:1}
+.ghost{fill:none;stroke:#fff;stroke-width:1.2;stroke-dasharray:4 3;opacity:.85}
+.p{animation:fly linear infinite}
+@keyframes fly{0%{transform:translate(0,0);opacity:0}10%{opacity:1}82%{opacity:1}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+.film,.gas{animation-duration:12s;animation-iteration-count:infinite;animation-timing-function:linear}
+@media (prefers-reduced-motion:reduce){.p,.film,.gas{animation:none!important}.p{opacity:.9}}
+@keyframes s0_1{0%,10%{opacity:1}11%{opacity:0}19.13%{opacity:0}20.33%{opacity:1}100%{opacity:1}}
+@keyframes s0_2{0%,10%{opacity:1}11%{opacity:0}25.47%{opacity:0}26.67%{opacity:1}100%{opacity:1}}
+@keyframes s0_3{0%,10%{opacity:1}11%{opacity:0}31.80%{opacity:0}33.00%{opacity:1}100%{opacity:1}}
+@keyframes s0_4{0%,10%{opacity:1}11%{opacity:0}38.13%{opacity:0}39.33%{opacity:1}100%{opacity:1}}
+@keyframes s0_5{0%,10%{opacity:1}11%{opacity:0}44.47%{opacity:0}45.67%{opacity:1}100%{opacity:1}}
+@keyframes s0_6{0%,10%{opacity:1}11%{opacity:0}50.80%{opacity:0}52.00%{opacity:1}100%{opacity:1}}
+@keyframes s0_7{0%,10%{opacity:1}11%{opacity:0}57.13%{opacity:0}58.33%{opacity:1}100%{opacity:1}}
+@keyframes s0_8{0%,10%{opacity:1}11%{opacity:0}63.47%{opacity:0}64.67%{opacity:1}100%{opacity:1}}
+@keyframes s0_9{0%,10%{opacity:1}11%{opacity:0}69.80%{opacity:0}71.00%{opacity:1}100%{opacity:1}}
+@keyframes s0_10{0%,10%{opacity:1}11%{opacity:0}76.13%{opacity:0}77.33%{opacity:1}100%{opacity:1}}
+@keyframes s0_11{0%,10%{opacity:1}11%{opacity:0}82.47%{opacity:0}83.67%{opacity:1}100%{opacity:1}}
+@keyframes s0_12{0%,10%{opacity:1}11%{opacity:0}88.80%{opacity:0}90.00%{opacity:1}100%{opacity:1}}
+@keyframes s1_1{0%,10%{opacity:1}11%{opacity:0}19.13%{opacity:0}20.33%{opacity:1}100%{opacity:1}}
+@keyframes s1_2{0%,10%{opacity:1}11%{opacity:0}25.47%{opacity:0}26.67%{opacity:1}100%{opacity:1}}
+@keyframes s1_3{0%,10%{opacity:1}11%{opacity:0}31.80%{opacity:0}33.00%{opacity:1}100%{opacity:1}}
+@keyframes s1_4{0%,10%{opacity:1}11%{opacity:0}38.13%{opacity:0}39.33%{opacity:1}100%{opacity:1}}
+@keyframes s1_5{0%,10%{opacity:1}11%{opacity:0}44.47%{opacity:0}45.67%{opacity:1}100%{opacity:1}}
+@keyframes s1_6{0%,10%{opacity:1}11%{opacity:0}50.80%{opacity:0}52.00%{opacity:1}100%{opacity:1}}
+@keyframes s1_7{0%,10%{opacity:1}11%{opacity:0}57.13%{opacity:0}58.33%{opacity:1}100%{opacity:1}}
+@keyframes s1_8{0%,10%{opacity:1}11%{opacity:0}63.47%{opacity:0}64.67%{opacity:1}100%{opacity:1}}
+@keyframes s1_9{0%,10%{opacity:1}11%{opacity:0}69.80%{opacity:0}71.00%{opacity:1}100%{opacity:1}}
+@keyframes s1_10{0%,10%{opacity:1}11%{opacity:0}76.13%{opacity:0}77.33%{opacity:1}100%{opacity:1}}
+@keyframes s1_11{0%,10%{opacity:1}11%{opacity:0}82.47%{opacity:0}83.67%{opacity:1}100%{opacity:1}}
+@keyframes s1_12{0%,10%{opacity:1}11%{opacity:0}88.80%{opacity:0}90.00%{opacity:1}100%{opacity:1}}
+@keyframes s2_1{0%,10%{opacity:1}11%{opacity:0}19.13%{opacity:0}20.33%{opacity:1}100%{opacity:1}}
+@keyframes s2_2{0%,10%{opacity:1}11%{opacity:0}25.47%{opacity:0}26.67%{opacity:1}100%{opacity:1}}
+@keyframes s2_3{0%,10%{opacity:1}11%{opacity:0}31.80%{opacity:0}33.00%{opacity:1}100%{opacity:1}}
+@keyframes s2_4{0%,10%{opacity:1}11%{opacity:0}38.13%{opacity:0}39.33%{opacity:1}100%{opacity:1}}
+@keyframes s2_5{0%,10%{opacity:1}11%{opacity:0}44.47%{opacity:0}45.67%{opacity:1}100%{opacity:1}}
+@keyframes s2_6{0%,10%{opacity:1}11%{opacity:0}50.80%{opacity:0}52.00%{opacity:1}100%{opacity:1}}
+@keyframes s2_7{0%,10%{opacity:1}11%{opacity:0}57.13%{opacity:0}58.33%{opacity:1}100%{opacity:1}}
+@keyframes s2_8{0%,10%{opacity:1}11%{opacity:0}63.47%{opacity:0}64.67%{opacity:1}100%{opacity:1}}
+@keyframes s2_9{0%,10%{opacity:1}11%{opacity:0}69.80%{opacity:0}71.00%{opacity:1}100%{opacity:1}}
+@keyframes s2_10{0%,10%{opacity:1}11%{opacity:0}76.13%{opacity:0}77.33%{opacity:1}100%{opacity:1}}
+@keyframes s2_11{0%,10%{opacity:1}11%{opacity:0}82.47%{opacity:0}83.67%{opacity:1}100%{opacity:1}}
+@keyframes s2_12{0%,10%{opacity:1}11%{opacity:0}88.80%{opacity:0}90.00%{opacity:1}100%{opacity:1}}
+@keyframes alda{0%{opacity:1}6.00%{opacity:1}6.40%{opacity:0}13.60%{opacity:0}14.00%{opacity:1}17.80%{opacity:1}18.20%{opacity:0}26.27%{opacity:0}26.67%{opacity:1}30.47%{opacity:1}30.87%{opacity:0}38.93%{opacity:0}39.33%{opacity:1}43.13%{opacity:1}43.53%{opacity:0}51.60%{opacity:0}52.00%{opacity:1}55.80%{opacity:1}56.20%{opacity:0}64.27%{opacity:0}64.67%{opacity:1}68.47%{opacity:1}68.87%{opacity:0}76.93%{opacity:0}77.33%{opacity:1}81.13%{opacity:1}81.53%{opacity:0}100%{opacity:0}}
+@keyframes aldb{0%{opacity:0}19.93%{opacity:0}20.33%{opacity:1}24.13%{opacity:1}24.53%{opacity:0}32.60%{opacity:0}33.00%{opacity:1}36.80%{opacity:1}37.20%{opacity:0}45.27%{opacity:0}45.67%{opacity:1}49.47%{opacity:1}49.87%{opacity:0}57.93%{opacity:0}58.33%{opacity:1}62.13%{opacity:1}62.53%{opacity:0}70.60%{opacity:0}71.00%{opacity:1}74.80%{opacity:1}75.20%{opacity:0}83.27%{opacity:0}83.67%{opacity:1}87.47%{opacity:1}87.87%{opacity:0}100%{opacity:0}}
+@keyframes aldp{0%{opacity:0}17.40%{opacity:0}17.80%{opacity:1}20.33%{opacity:1}20.73%{opacity:0}23.73%{opacity:0}24.13%{opacity:1}26.67%{opacity:1}27.07%{opacity:0}30.07%{opacity:0}30.47%{opacity:1}33.00%{opacity:1}33.40%{opacity:0}36.40%{opacity:0}36.80%{opacity:1}39.33%{opacity:1}39.73%{opacity:0}42.73%{opacity:0}43.13%{opacity:1}45.67%{opacity:1}46.07%{opacity:0}49.07%{opacity:0}49.47%{opacity:1}52.00%{opacity:1}52.40%{opacity:0}55.40%{opacity:0}55.80%{opacity:1}58.33%{opacity:1}58.73%{opacity:0}61.73%{opacity:0}62.13%{opacity:1}64.67%{opacity:1}65.07%{opacity:0}68.07%{opacity:0}68.47%{opacity:1}71.00%{opacity:1}71.40%{opacity:0}74.40%{opacity:0}74.80%{opacity:1}77.33%{opacity:1}77.73%{opacity:0}80.73%{opacity:0}81.13%{opacity:1}83.67%{opacity:1}84.07%{opacity:0}87.07%{opacity:0}87.47%{opacity:1}90.00%{opacity:1}90.40%{opacity:0}100%{opacity:0}}
+@keyframes s3_1{0%,10%{opacity:1}11%{opacity:0}22.93%{opacity:0}24.13%{opacity:1}100%{opacity:1}}
+@keyframes s3_2{0%,10%{opacity:1}11%{opacity:0}35.60%{opacity:0}36.80%{opacity:1}100%{opacity:1}}
+@keyframes s3_3{0%,10%{opacity:1}11%{opacity:0}48.27%{opacity:0}49.47%{opacity:1}100%{opacity:1}}
+@keyframes s3_4{0%,10%{opacity:1}11%{opacity:0}60.93%{opacity:0}62.13%{opacity:1}100%{opacity:1}}
+@keyframes s3_5{0%,10%{opacity:1}11%{opacity:0}73.60%{opacity:0}74.80%{opacity:1}100%{opacity:1}}
+@keyframes s3_6{0%,10%{opacity:1}11%{opacity:0}86.27%{opacity:0}87.47%{opacity:1}100%{opacity:1}}
+</style>
+<rect class="bg" width="960" height="600"/>
+<text x="15" y="28" class="hdr">Four ways to add a film to a wafer</text>
+<text x="945" y="28" text-anchor="end" class="hdr2">cross-section of a trench · film builds up, then the loop restarts</text>
+<rect x="15" y="44" width="222" height="544" rx="12" class="card"/>
+<text x="27" y="68" class="ttl">1  Thermal oxidation</text>
+<text x="27" y="88" class="sub">O2 or steam + Si → SiO2</text>
+<rect x="23" y="104" width="206" height="382" rx="6" class="furn"/>
+<polyline points="24,112 32,124 24,136 32,148 24,160 32,172 24,184 32,196 24,208 32,220 24,232 32,244 24,256 32,268 24,280 32,292 24,304 32,316 24,328 32,340" class="coil"/>
+<polyline points="220,112 228,124 220,136 228,148 220,160 228,172 220,184 228,196 220,208 228,220 220,232 228,244 220,256 228,268 220,280 228,292 220,304 228,316 220,328 228,340" class="coil"/>
+<text x="126" y="128" text-anchor="middle" class="lab">O2 / steam</text>
+<g class="p" style="--dx:0px;--dy:126px;animation-duration:3.1s;animation-delay:-2.4s"><g transform="translate(69,189)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:137px;animation-duration:3.1s;animation-delay:-2.0s"><g transform="translate(54,178)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:143px;animation-duration:4.2s;animation-delay:-0.6s"><g transform="translate(60,172)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:109px;animation-duration:3.9s;animation-delay:-1.8s"><g transform="translate(166,211)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:5px;--dy:186px;animation-duration:3.8s;animation-delay:-2.6s"><g transform="translate(143,204)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:269px;animation-duration:3.3s;animation-delay:-0.4s"><g transform="translate(127,148)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:231px;animation-duration:3.8s;animation-delay:-3.5s"><g transform="translate(126,186)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:148px;animation-duration:3.4s;animation-delay:-0.8s"><g transform="translate(195,167)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:254px;animation-duration:3.5s;animation-delay:-2.0s"><g transform="translate(126,163)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:239px;animation-duration:3.5s;animation-delay:-4.2s"><g transform="translate(121,178)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:169px;animation-duration:3.8s;animation-delay:-3.6s"><g transform="translate(201,146)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:5px;--dy:224px;animation-duration:3.7s;animation-delay:-3.8s"><g transform="translate(145,166)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:-5px;--dy:200px;animation-duration:3.5s;animation-delay:-2.6s"><g transform="translate(106,190)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<g class="p" style="--dx:0px;--dy:223px;animation-duration:3.5s;animation-delay:-4.2s"><g transform="translate(132,194)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
+<text x="221" y="295" text-anchor="end" class="lab2">oxide also grows into the Si</text>
+<path d="M23,345 L98.0,345 L98.0,445 L154.0,445 L154.0,345 L229,345 L229,482 L23,482 Z" fill="url(#si)" class="si"/>
+<text x="126" y="474" text-anchor="middle" class="silab">Si wafer</text>
+<polygon points="23.0,343.9 99.0,343.9 99.0,353.9 98.9,444.0 153.1,444.0 153.0,353.9 153.0,343.9 229.0,343.9 229.0,345.9 154.8,345.9 154.8,353.9 154.7,445.7 97.3,445.7 97.2,353.9 97.2,345.9 23.0,345.9" fill="#5ec8ff" class="film" style="animation-name:s0_1"/>
+<polygon points="23.0,342.8 100.0,342.8 100.0,354.8 99.9,443.1 152.1,443.1 152.0,354.8 152.0,342.8 229.0,342.8 229.0,346.8 155.5,346.8 155.5,354.8 155.5,446.5 96.5,446.5 96.5,354.8 96.5,346.8 23.0,346.8" fill="#46b5ec" class="film" style="animation-name:s0_2"/>
+<polygon points="23.0,341.6 101.0,341.6 101.0,355.6 100.8,442.1 151.2,442.1 151.0,355.6 151.0,341.6 229.0,341.6 229.0,347.6 156.3,347.6 156.3,355.6 156.2,447.2 95.8,447.2 95.7,355.6 95.7,347.6 23.0,347.6" fill="#5ec8ff" class="film" style="animation-name:s0_3"/>
+<polygon points="23.0,340.5 101.9,340.5 101.9,356.5 101.7,441.2 150.3,441.2 150.1,356.5 150.1,340.5 229.0,340.5 229.0,348.5 157.1,348.5 157.1,356.5 156.9,448.0 95.1,448.0 94.9,356.5 94.9,348.5 23.0,348.5" fill="#46b5ec" class="film" style="animation-name:s0_4"/>
+<polygon points="23.0,339.4 102.9,339.4 102.9,357.4 102.6,440.2 149.4,440.2 149.1,357.4 149.1,339.4 229.0,339.4 229.0,349.4 157.9,349.4 157.9,357.4 157.6,448.7 94.4,448.7 94.1,357.4 94.1,349.4 23.0,349.4" fill="#5ec8ff" class="film" style="animation-name:s0_5"/>
+<polygon points="23.0,338.3 103.9,338.3 103.9,358.3 103.6,439.3 148.4,439.3 148.1,358.3 148.1,338.3 229.0,338.3 229.0,350.3 158.6,350.3 158.6,358.3 158.4,449.5 93.6,449.5 93.4,358.3 93.4,350.3 23.0,350.3" fill="#46b5ec" class="film" style="animation-name:s0_6"/>
+<polygon points="23.0,337.2 104.9,337.2 104.9,359.2 104.5,438.3 147.5,438.3 147.1,359.2 147.1,337.2 229.0,337.2 229.0,351.2 159.4,351.2 159.4,359.2 159.1,450.2 92.9,450.2 92.6,359.2 92.6,351.2 23.0,351.2" fill="#5ec8ff" class="film" style="animation-name:s0_7"/>
+<polygon points="23.0,336.0 105.9,336.0 105.9,360.0 105.4,437.4 146.6,437.4 146.1,360.0 146.1,336.0 229.0,336.0 229.0,352.0 160.2,352.0 160.2,360.0 159.8,451.0 92.2,451.0 91.8,360.0 91.8,352.0 23.0,352.0" fill="#46b5ec" class="film" style="animation-name:s0_8"/>
+<polygon points="23.0,334.9 106.9,334.9 106.9,360.9 106.4,436.4 145.6,436.4 145.1,360.9 145.1,334.9 229.0,334.9 229.0,352.9 161.0,352.9 161.0,360.9 160.6,451.7 91.4,451.7 91.0,360.9 91.0,352.9 23.0,352.9" fill="#5ec8ff" class="film" style="animation-name:s0_9"/>
+<polygon points="23.0,333.8 107.8,333.8 107.8,361.8 107.3,435.5 144.7,435.5 144.2,361.8 144.2,333.8 229.0,333.8 229.0,353.8 161.7,353.8 161.7,361.8 161.3,452.5 90.7,452.5 90.3,361.8 90.3,353.8 23.0,353.8" fill="#46b5ec" class="film" style="animation-name:s0_10"/>
+<polygon points="23.0,332.7 108.8,332.7 108.8,362.7 108.2,434.5 143.8,434.5 143.2,362.7 143.2,332.7 229.0,332.7 229.0,354.7 162.5,354.7 162.5,362.7 162.0,453.2 90.0,453.2 89.5,362.7 89.5,354.7 23.0,354.7" fill="#5ec8ff" class="film" style="animation-name:s0_11"/>
+<polygon points="23.0,331.6 109.8,331.6 109.8,363.6 109.1,433.6 142.9,433.6 142.2,363.6 142.2,331.6 229.0,331.6 229.0,355.6 163.3,355.6 163.3,363.6 162.8,454.0 89.2,454.0 88.7,363.6 88.7,355.6 23.0,355.6" fill="#46b5ec" class="film" style="animation-name:s0_12"/>
+<polyline points="23,345 98.0,345 98.0,445 154.0,445 154.0,345 229,345" class="ghost"/>
+<text x="221" y="311" text-anchor="end" class="lab2">dashed = original Si surface</text>
+<text x="27" y="512" class="rd" fill="#5ec8ff">bottom / top ≈ 85%</text>
+<text x="27" y="529" class="sub2">step coverage (illustrative)</text>
+<text x="27" y="551" class="ln">Grows from the silicon itself</text>
+<text x="27" y="568" class="ln">Best interface, batch furnace</text>
+<text x="27" y="585" class="ln">Needs high temperature</text>
+<rect x="251" y="44" width="222" height="544" rx="12" class="card"/>
+<text x="263" y="68" class="ttl">2  CVD</text>
+<text x="263" y="88" class="sub">Gases react on the surface</text>
+<rect x="259" y="104" width="206" height="382" rx="6" class="ch"/>
+<rect x="273" y="108" width="178" height="9" rx="2" class="metal"/>
+<circle cx="285" cy="112.5" r="1.8" class="hole"/>
+<circle cx="303" cy="112.5" r="1.8" class="hole"/>
+<circle cx="320" cy="112.5" r="1.8" class="hole"/>
+<circle cx="338" cy="112.5" r="1.8" class="hole"/>
+<circle cx="355" cy="112.5" r="1.8" class="hole"/>
+<circle cx="373" cy="112.5" r="1.8" class="hole"/>
+<circle cx="391" cy="112.5" r="1.8" class="hole"/>
+<circle cx="408" cy="112.5" r="1.8" class="hole"/>
+<circle cx="426" cy="112.5" r="1.8" class="hole"/>
+<circle cx="443" cy="112.5" r="1.8" class="hole"/>
+<text x="362" y="136" text-anchor="middle" class="lab">precursor gases</text>
+<g class="p" style="--dx:-11px;--dy:298px;animation-duration:3.6s;animation-delay:-4.2s"><g transform="translate(354,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:-3px;--dy:298px;animation-duration:5.3s;animation-delay:-2.7s"><g transform="translate(368,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:1px;--dy:298px;animation-duration:5.3s;animation-delay:-4.5s"><g transform="translate(361,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:-2px;--dy:298px;animation-duration:4.2s;animation-delay:-4.9s"><g transform="translate(357,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:-24px;--dy:160px;animation-duration:4.0s;animation-delay:-1.3s"><g transform="translate(338,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:23px;--dy:161px;animation-duration:4.1s;animation-delay:-0.8s"><g transform="translate(408,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:-9px;--dy:177px;animation-duration:5.4s;animation-delay:-3.8s"><g transform="translate(426,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:32px;--dy:181px;animation-duration:5.0s;animation-delay:-2.5s"><g transform="translate(426,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:-8px;--dy:170px;animation-duration:3.7s;animation-delay:-3.5s"><g transform="translate(426,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:-22px;--dy:194px;animation-duration:4.4s;animation-delay:-0.6s"><g transform="translate(285,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:-31px;--dy:153px;animation-duration:3.8s;animation-delay:-0.6s"><g transform="translate(443,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:8px;--dy:156px;animation-duration:3.9s;animation-delay:-2.1s"><g transform="translate(373,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:32px;--dy:178px;animation-duration:4.4s;animation-delay:-0.6s"><g transform="translate(355,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:35px;--dy:173px;animation-duration:4.5s;animation-delay:-0.5s"><g transform="translate(408,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:17px;--dy:184px;animation-duration:4.5s;animation-delay:-3.8s"><g transform="translate(303,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
+<g class="p" style="--dx:-33px;--dy:193px;animation-duration:4.6s;animation-delay:-0.8s"><g transform="translate(426,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
+<g class="p" style="--dx:-9px;--dy:-120px;animation-duration:4.5s;animation-delay:-2.4s"><g transform="translate(280,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
+<g class="p" style="--dx:7px;--dy:-120px;animation-duration:4.5s;animation-delay:-3.1s"><g transform="translate(323,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
+<g class="p" style="--dx:-3px;--dy:-120px;animation-duration:4.5s;animation-delay:-0.8s"><g transform="translate(352,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
+<g class="p" style="--dx:1px;--dy:-120px;animation-duration:4.5s;animation-delay:-3.5s"><g transform="translate(396,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
+<g class="p" style="--dx:-6px;--dy:-120px;animation-duration:4.5s;animation-delay:-3.7s"><g transform="translate(429,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
+<text x="457" y="293" text-anchor="end" class="lab2">by-products leave</text>
+<path d="M259,345 L334.0,345 L334.0,445 L390.0,445 L390.0,345 L465,345 L465,482 L259,482 Z" fill="url(#si)" class="si"/>
+<text x="362" y="474" text-anchor="middle" class="silab">Si wafer</text>
+<polygon points="259.0,343.0 335.5,343.0 335.5,353.0 335.3,443.6 388.7,443.6 388.5,353.0 388.5,343.0 465.0,343.0 465.0,345.0 390.0,345.0 390.0,353.0 390.0,445.0 334.0,445.0 334.0,353.0 334.0,345.0 259.0,345.0" fill="#ffa94d" class="film" style="animation-name:s1_1"/>
+<polygon points="259.0,341.0 337.0,341.0 337.0,353.0 336.6,442.2 387.4,442.2 387.0,353.0 387.0,341.0 465.0,341.0 465.0,343.0 388.5,343.0 388.5,353.0 388.7,443.6 335.3,443.6 335.5,353.0 335.5,343.0 259.0,343.0" fill="#ee9435" class="film" style="animation-name:s1_2"/>
+<polygon points="259.0,339.0 338.5,339.0 338.5,353.0 338.0,440.9 386.0,440.9 385.5,353.0 385.5,339.0 465.0,339.0 465.0,341.0 387.0,341.0 387.0,353.0 387.4,442.2 336.6,442.2 337.0,353.0 337.0,341.0 259.0,341.0" fill="#ffa94d" class="film" style="animation-name:s1_3"/>
+<polygon points="259.0,337.0 340.0,337.0 340.0,353.0 339.3,439.5 384.7,439.5 384.0,353.0 384.0,337.0 465.0,337.0 465.0,339.0 385.5,339.0 385.5,353.0 386.0,440.9 338.0,440.9 338.5,353.0 338.5,339.0 259.0,339.0" fill="#ee9435" class="film" style="animation-name:s1_4"/>
+<polygon points="259.0,335.0 341.5,335.0 341.5,353.0 340.6,438.1 383.4,438.1 382.5,353.0 382.5,335.0 465.0,335.0 465.0,337.0 384.0,337.0 384.0,353.0 384.7,439.5 339.3,439.5 340.0,353.0 340.0,337.0 259.0,337.0" fill="#ffa94d" class="film" style="animation-name:s1_5"/>
+<polygon points="259.0,333.0 343.0,333.0 343.0,353.0 341.9,436.7 382.1,436.7 381.0,353.0 381.0,333.0 465.0,333.0 465.0,335.0 382.5,335.0 382.5,353.0 383.4,438.1 340.6,438.1 341.5,353.0 341.5,335.0 259.0,335.0" fill="#ee9435" class="film" style="animation-name:s1_6"/>
+<polygon points="259.0,331.0 344.5,331.0 344.5,353.0 343.2,435.3 380.8,435.3 379.5,353.0 379.5,331.0 465.0,331.0 465.0,333.0 381.0,333.0 381.0,353.0 382.1,436.7 341.9,436.7 343.0,353.0 343.0,333.0 259.0,333.0" fill="#ffa94d" class="film" style="animation-name:s1_7"/>
+<polygon points="259.0,329.0 346.0,329.0 346.0,353.0 344.5,433.9 379.5,433.9 378.0,353.0 378.0,329.0 465.0,329.0 465.0,331.0 379.5,331.0 379.5,353.0 380.8,435.3 343.2,435.3 344.5,353.0 344.5,331.0 259.0,331.0" fill="#ee9435" class="film" style="animation-name:s1_8"/>
+<polygon points="259.0,327.0 347.6,327.0 347.6,353.0 345.9,432.6 378.1,432.6 376.4,353.0 376.4,327.0 465.0,327.0 465.0,329.0 378.0,329.0 378.0,353.0 379.5,433.9 344.5,433.9 346.0,353.0 346.0,329.0 259.0,329.0" fill="#ffa94d" class="film" style="animation-name:s1_9"/>
+<polygon points="259.0,325.0 349.1,325.0 349.1,353.0 347.2,431.2 376.8,431.2 374.9,353.0 374.9,325.0 465.0,325.0 465.0,327.0 376.4,327.0 376.4,353.0 378.1,432.6 345.9,432.6 347.6,353.0 347.6,327.0 259.0,327.0" fill="#ee9435" class="film" style="animation-name:s1_10"/>
+<polygon points="259.0,323.0 350.6,323.0 350.6,353.0 348.5,429.8 375.5,429.8 373.4,353.0 373.4,323.0 465.0,323.0 465.0,325.0 374.9,325.0 374.9,353.0 376.8,431.2 347.2,431.2 349.1,353.0 349.1,325.0 259.0,325.0" fill="#ffa94d" class="film" style="animation-name:s1_11"/>
+<polygon points="259.0,321.0 352.1,321.0 352.1,353.0 349.8,428.4 374.2,428.4 371.9,353.0 371.9,321.0 465.0,321.0 465.0,323.0 373.4,323.0 373.4,353.0 375.5,429.8 348.5,429.8 350.6,353.0 350.6,323.0 259.0,323.0" fill="#ee9435" class="film" style="animation-name:s1_12"/>
+<text x="263" y="512" class="rd" fill="#ffa94d">bottom / top ≈ 69%</text>
+<text x="263" y="529" class="sub2">step coverage (illustrative)</text>
+<text x="263" y="551" class="ln">The most widely used method</text>
+<text x="263" y="568" class="ln">LPCVD: heat · PECVD: plasma</text>
+<text x="263" y="585" class="ln">By-products are pumped away</text>
+<rect x="487" y="44" width="222" height="544" rx="12" class="card"/>
+<text x="499" y="68" class="ttl">3  PVD (sputtering)</text>
+<text x="499" y="88" class="sub">Ar+ ions knock atoms off a target</text>
+<rect x="495" y="104" width="206" height="382" rx="6" class="ch"/>
+<rect x="495" y="104" width="206" height="150" rx="6" fill="url(#plasma)" />
+<rect x="509" y="108" width="178" height="18" rx="3" class="target"/>
+<text x="598" y="121" text-anchor="middle" class="tgt">target</text>
+<text x="598" y="148" text-anchor="middle" class="lab">Ar+ ions hit the target</text>
+<g class="p" style="--dx:0px;--dy:-100px;animation-duration:1.6s;animation-delay:-1.4s"><g transform="translate(529,235)"><circle r="4" fill="#ffe36e" /><text y="3" text-anchor="middle" class="plus">+</text></g></g>
+<g class="p" style="--dx:0px;--dy:-100px;animation-duration:1.6s;animation-delay:-1.3s"><g transform="translate(564,235)"><circle r="4" fill="#ffe36e" /><text y="3" text-anchor="middle" class="plus">+</text></g></g>
+<g class="p" style="--dx:0px;--dy:-100px;animation-duration:1.6s;animation-delay:-0.4s"><g transform="translate(600,235)"><circle r="4" fill="#ffe36e" /><text y="3" text-anchor="middle" class="plus">+</text></g></g>
+<g class="p" style="--dx:0px;--dy:-100px;animation-duration:1.6s;animation-delay:-0.6s"><g transform="translate(634,235)"><circle r="4" fill="#ffe36e" /><text y="3" text-anchor="middle" class="plus">+</text></g></g>
+<g class="p" style="--dx:0px;--dy:-100px;animation-duration:1.6s;animation-delay:-0.0s"><g transform="translate(665,235)"><circle r="4" fill="#ffe36e" /><text y="3" text-anchor="middle" class="plus">+</text></g></g>
+<g class="p" style="--dx:1px;--dy:292px;animation-duration:3.2s;animation-delay:-1.4s"><g transform="translate(592,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:3px;--dy:292px;animation-duration:2.6s;animation-delay:-0.7s"><g transform="translate(610,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:-2px;--dy:292px;animation-duration:2.8s;animation-delay:-2.9s"><g transform="translate(591,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:1px;--dy:292px;animation-duration:3.0s;animation-delay:-0.3s"><g transform="translate(598,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:2px;--dy:292px;animation-duration:3.0s;animation-delay:-1.5s"><g transform="translate(608,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:13px;--dy:185px;animation-duration:2.5s;animation-delay:-2.6s"><g transform="translate(546,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:-5px;--dy:185px;animation-duration:2.6s;animation-delay:-3.0s"><g transform="translate(674,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:-15px;--dy:185px;animation-duration:2.3s;animation-delay:-0.5s"><g transform="translate(634,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:13px;--dy:185px;animation-duration:2.3s;animation-delay:-2.6s"><g transform="translate(664,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:7px;--dy:185px;animation-duration:2.6s;animation-delay:-1.8s"><g transform="translate(676,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:-21px;--dy:185px;animation-duration:3.2s;animation-delay:-2.1s"><g transform="translate(538,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:19px;--dy:185px;animation-duration:2.6s;animation-delay:-2.8s"><g transform="translate(602,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:-13px;--dy:185px;animation-duration:2.5s;animation-delay:-0.9s"><g transform="translate(651,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<g class="p" style="--dx:4px;--dy:185px;animation-duration:2.5s;animation-delay:-1.3s"><g transform="translate(556,128)"><circle r="3.4" fill="#f0d060" /></g></g>
+<path d="M495,345 L570.0,345 L570.0,445 L626.0,445 L626.0,345 L701,345 L701,482 L495,482 Z" fill="url(#si)" class="si"/>
+<text x="598" y="474" text-anchor="middle" class="silab">Si wafer</text>
+<polygon points="495.0,343.0 571.3,343.0 570.9,353.0 570.5,444.4 625.5,444.4 625.1,353.0 624.7,343.0 701.0,343.0 701.0,345.0 626.0,345.0 626.0,353.0 626.0,445.0 570.0,445.0 570.0,353.0 570.0,345.0 495.0,345.0" fill="#f0d060" class="film" style="animation-name:s2_1"/>
+<polygon points="495.0,341.0 572.6,341.0 571.7,353.0 571.0,443.9 625.0,443.9 624.3,353.0 623.4,341.0 701.0,341.0 701.0,343.0 624.7,343.0 625.1,353.0 625.5,444.4 570.5,444.4 570.9,353.0 571.3,343.0 495.0,343.0" fill="#dcb940" class="film" style="animation-name:s2_2"/>
+<polygon points="495.0,339.0 573.9,339.0 572.6,353.0 571.5,443.3 624.5,443.3 623.4,353.0 622.1,339.0 701.0,339.0 701.0,341.0 623.4,341.0 624.3,353.0 625.0,443.9 571.0,443.9 571.7,353.0 572.6,341.0 495.0,341.0" fill="#f0d060" class="film" style="animation-name:s2_3"/>
+<polygon points="495.0,337.0 575.1,337.0 573.4,353.0 572.0,442.7 624.0,442.7 622.6,353.0 620.9,337.0 701.0,337.0 701.0,339.0 622.1,339.0 623.4,353.0 624.5,443.3 571.5,443.3 572.6,353.0 573.9,339.0 495.0,339.0" fill="#dcb940" class="film" style="animation-name:s2_4"/>
+<polygon points="495.0,335.0 576.4,335.0 574.3,353.0 572.6,442.1 623.4,442.1 621.7,353.0 619.6,335.0 701.0,335.0 701.0,337.0 620.9,337.0 622.6,353.0 624.0,442.7 572.0,442.7 573.4,353.0 575.1,337.0 495.0,337.0" fill="#f0d060" class="film" style="animation-name:s2_5"/>
+<polygon points="495.0,333.0 577.7,333.0 575.1,353.0 573.1,441.6 622.9,441.6 620.9,353.0 618.3,333.0 701.0,333.0 701.0,335.0 619.6,335.0 621.7,353.0 623.4,442.1 572.6,442.1 574.3,353.0 576.4,335.0 495.0,335.0" fill="#dcb940" class="film" style="animation-name:s2_6"/>
+<polygon points="495.0,331.0 579.0,331.0 576.0,353.0 573.6,441.0 622.4,441.0 620.0,353.0 617.0,331.0 701.0,331.0 701.0,333.0 618.3,333.0 620.9,353.0 622.9,441.6 573.1,441.6 575.1,353.0 577.7,333.0 495.0,333.0" fill="#f0d060" class="film" style="animation-name:s2_7"/>
+<polygon points="495.0,329.0 580.3,329.0 576.9,353.0 574.1,440.4 621.9,440.4 619.1,353.0 615.7,329.0 701.0,329.0 701.0,331.0 617.0,331.0 620.0,353.0 622.4,441.0 573.6,441.0 576.0,353.0 579.0,331.0 495.0,331.0" fill="#dcb940" class="film" style="animation-name:s2_8"/>
+<polygon points="495.0,327.0 581.6,327.0 577.7,353.0 574.6,439.9 621.4,439.9 618.3,353.0 614.4,327.0 701.0,327.0 701.0,329.0 615.7,329.0 619.1,353.0 621.9,440.4 574.1,440.4 576.9,353.0 580.3,329.0 495.0,329.0" fill="#f0d060" class="film" style="animation-name:s2_9"/>
+<polygon points="495.0,325.0 582.9,325.0 578.6,353.0 575.1,439.3 620.9,439.3 617.4,353.0 613.1,325.0 701.0,325.0 701.0,327.0 614.4,327.0 618.3,353.0 621.4,439.9 574.6,439.9 577.7,353.0 581.6,327.0 495.0,327.0" fill="#dcb940" class="film" style="animation-name:s2_10"/>
+<polygon points="495.0,323.0 584.1,323.0 579.4,353.0 575.6,438.7 620.4,438.7 616.6,353.0 611.9,323.0 701.0,323.0 701.0,325.0 613.1,325.0 617.4,353.0 620.9,439.3 575.1,439.3 578.6,353.0 582.9,325.0 495.0,325.0" fill="#f0d060" class="film" style="animation-name:s2_11"/>
+<polygon points="495.0,321.0 585.4,321.0 580.3,353.0 576.1,438.1 619.9,438.1 615.7,353.0 610.6,321.0 701.0,321.0 701.0,323.0 611.9,323.0 616.6,353.0 620.4,438.7 575.6,438.7 579.4,353.0 584.1,323.0 495.0,323.0" fill="#dcb940" class="film" style="animation-name:s2_12"/>
+<text x="499" y="512" class="rd" fill="#f0d060">bottom / top ≈ 29%</text>
+<text x="499" y="529" class="sub2">step coverage (illustrative)</text>
+<text x="499" y="551" class="ln">Metals, barrier and seed layers</text>
+<text x="499" y="568" class="ln">Atoms fly straight down</text>
+<text x="499" y="585" class="ln">Hard to cover deep holes</text>
+<rect x="723" y="44" width="222" height="544" rx="12" class="card"/>
+<text x="735" y="68" class="ttl">4  ALD</text>
+<text x="735" y="88" class="sub">One atomic layer per cycle</text>
+<rect x="731" y="104" width="206" height="382" rx="6" class="ch"/>
+<rect x="808" y="108" width="52" height="8" rx="2" class="metal"/>
+<g class="gas" style="animation-name:alda;opacity:1"><text x="834" y="139" text-anchor="middle" class="lab">gas A (precursor 1)</text>
+<g class="p" style="--dx:-1px;--dy:302px;animation-duration:3.1s;animation-delay:-2.1s"><g transform="translate(842,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:3px;--dy:302px;animation-duration:3.1s;animation-delay:-1.9s"><g transform="translate(832,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:-0px;--dy:302px;animation-duration:2.8s;animation-delay:-0.0s"><g transform="translate(824,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:-20px;--dy:177px;animation-duration:3.3s;animation-delay:-2.0s"><g transform="translate(878,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:1px;--dy:180px;animation-duration:3.4s;animation-delay:-0.4s"><g transform="translate(809,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:-15px;--dy:169px;animation-duration:3.4s;animation-delay:-1.8s"><g transform="translate(843,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:16px;--dy:195px;animation-duration:3.0s;animation-delay:-2.2s"><g transform="translate(843,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:1px;--dy:186px;animation-duration:3.1s;animation-delay:-1.9s"><g transform="translate(835,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:26px;--dy:186px;animation-duration:3.5s;animation-delay:-3.4s"><g transform="translate(831,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+<g class="p" style="--dx:4px;--dy:197px;animation-duration:3.4s;animation-delay:-0.5s"><g transform="translate(799,118)"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="1" fill="#8fd3ff"/></g></g>
+</g>
+<g class="gas" style="animation-name:aldb;opacity:0"><text x="834" y="139" text-anchor="middle" class="lab">gas B (precursor 2)</text>
+<g class="p" style="--dx:-3px;--dy:302px;animation-duration:2.8s;animation-delay:-0.3s"><g transform="translate(833,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:3px;--dy:302px;animation-duration:2.8s;animation-delay:-2.6s"><g transform="translate(840,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:3px;--dy:302px;animation-duration:3.6s;animation-delay:-0.8s"><g transform="translate(827,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:-6px;--dy:177px;animation-duration:3.6s;animation-delay:-3.0s"><g transform="translate(900,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:-4px;--dy:179px;animation-duration:2.9s;animation-delay:-0.7s"><g transform="translate(785,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:13px;--dy:158px;animation-duration:3.2s;animation-delay:-1.6s"><g transform="translate(808,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:-10px;--dy:183px;animation-duration:3.1s;animation-delay:-0.2s"><g transform="translate(764,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:17px;--dy:198px;animation-duration:2.7s;animation-delay:-1.0s"><g transform="translate(905,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:17px;--dy:168px;animation-duration:2.7s;animation-delay:-1.5s"><g transform="translate(767,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+<g class="p" style="--dx:19px;--dy:168px;animation-duration:2.7s;animation-delay:-3.3s"><g transform="translate(894,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
+</g>
+<g class="gas" style="animation-name:aldp;opacity:0"><text x="834" y="139" text-anchor="middle" class="lab">purge (pump out)</text></g>
+<text x="929" y="293" text-anchor="end" class="lab2" id="cyc">1 cycle = 1 atomic layer</text>
+<path d="M731,345 L806.0,345 L806.0,445 L862.0,445 L862.0,345 L937,345 L937,482 L731,482 Z" fill="url(#si)" class="si"/>
+<text x="834" y="474" text-anchor="middle" class="silab">Si wafer</text>
+<polygon points="731.0,341.0 810.0,341.0 810.0,353.0 810.0,441.0 858.0,441.0 858.0,353.0 858.0,341.0 937.0,341.0 937.0,345.0 862.0,345.0 862.0,353.0 862.0,445.0 806.0,445.0 806.0,353.0 806.0,345.0 731.0,345.0" fill="#6fe0a0" class="film" style="animation-name:s3_1"/>
+<polygon points="731.0,337.0 814.0,337.0 814.0,353.0 814.0,437.0 854.0,437.0 854.0,353.0 854.0,337.0 937.0,337.0 937.0,341.0 858.0,341.0 858.0,353.0 858.0,441.0 810.0,441.0 810.0,353.0 810.0,341.0 731.0,341.0" fill="#4fc88a" class="film" style="animation-name:s3_2"/>
+<polygon points="731.0,333.0 818.0,333.0 818.0,353.0 818.0,433.0 850.0,433.0 850.0,353.0 850.0,333.0 937.0,333.0 937.0,337.0 854.0,337.0 854.0,353.0 854.0,437.0 814.0,437.0 814.0,353.0 814.0,337.0 731.0,337.0" fill="#6fe0a0" class="film" style="animation-name:s3_3"/>
+<polygon points="731.0,329.0 822.0,329.0 822.0,353.0 822.0,429.0 846.0,429.0 846.0,353.0 846.0,329.0 937.0,329.0 937.0,333.0 850.0,333.0 850.0,353.0 850.0,433.0 818.0,433.0 818.0,353.0 818.0,333.0 731.0,333.0" fill="#4fc88a" class="film" style="animation-name:s3_4"/>
+<polygon points="731.0,325.0 826.0,325.0 826.0,353.0 826.0,425.0 842.0,425.0 842.0,353.0 842.0,325.0 937.0,325.0 937.0,329.0 846.0,329.0 846.0,353.0 846.0,429.0 822.0,429.0 822.0,353.0 822.0,329.0 731.0,329.0" fill="#6fe0a0" class="film" style="animation-name:s3_5"/>
+<polygon points="731.0,321.0 830.0,321.0 830.0,353.0 830.0,421.0 838.0,421.0 838.0,353.0 838.0,321.0 937.0,321.0 937.0,325.0 842.0,325.0 842.0,353.0 842.0,425.0 826.0,425.0 826.0,353.0 826.0,325.0 731.0,325.0" fill="#4fc88a" class="film" style="animation-name:s3_6"/>
+<text x="735" y="512" class="rd" fill="#6fe0a0">bottom / top ≈ 100%</text>
+<text x="735" y="529" class="sub2">step coverage (illustrative)</text>
+<text x="735" y="551" class="ln">Most uniform, but slowest</text>
+<text x="735" y="568" class="ln">Gas A, purge, gas B, purge</text>
+<text x="735" y="585" class="ln">Used for gate insulators</text>
+</svg>

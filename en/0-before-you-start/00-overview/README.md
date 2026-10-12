@@ -56,7 +56,9 @@ A chip usually goes from idea to product through the hands of several kinds of c
 | Packaging | The wafer is cut apart and the good chips are packaged | [Chapters 20 and 21](../../5-backend/20-packaging/README.md) |
 | Final test | The packaged chips are tested again and checked to make sure they will last for years | [Chapter 22](../../5-backend/22-final-test-and-reliability/README.md) |
 
-<!-- Figure: the life of a chip at a glance (design, mask, fab, test, packaging, shipment, in order) -->
+![Animation: eight stages of a chip's life from design to shipment, lit one after another along a conveyor line](../../../images/00-chip-life.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch00/chip-life.html) to try it yourself.*
 
 ---
 
@@ -83,7 +85,9 @@ A wafer carries many identical circuits arranged in a neat grid. Each circuit is
 
 A 300 mm wafer can produce anything from a few dozen to tens of thousands of dies, depending on the die size.
 
-<!-- Figure: wafer, die and chip (a whole wafer → one die enlarged → the packaged chip) -->
+![Animation: a wafer, one die zoomed in, the die cut out along the scribe line, and the packaged chip](../../../images/00-wafer-die-chip.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch00/wafer-die-chip.html) to try it yourself.*
 
 ---
 

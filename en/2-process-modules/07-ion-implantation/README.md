@@ -29,7 +29,9 @@ The early method was to place wafers in a hot gas containing the impurity and le
 
 Wherever photoresist covers the wafer, it stops the ions, so only the areas opened in the resist get implanted. That is why a lithography step comes before implantation.
 
-<!-- Figure: an ion implanter (ion source, mass-analyzing magnet, acceleration section, scanning, wafer) -->
+![Animation: an ion implanter from ion source and mass analyzer through acceleration and scanning to the wafer](../../../images/07-implanter.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch07/implanter.html) to try it yourself.*
 
 ---
 

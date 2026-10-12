@@ -49,7 +49,9 @@ WAT touches these test keys with probes and measures parameters such as transist
 
 After a die is tested, it is assigned to a category based on the result, called a **bin**. Arranging the bins of all the dies by position produces the wafer map described in Chapter 16.
 
-<!-- Figure: CP test setup (relative positions of the tester, probe card, prober and wafer) -->
+![Animation: a prober stepping a wafer under a probe card die by die while a wafer map fills with pass and fail results](../../../images/19-cp-test.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch19/cp-test.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Bin (分類)**

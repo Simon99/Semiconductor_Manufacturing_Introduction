@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The life of a chip at a glance</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--line:#c9d5e8;--text:#14213a;--muted:#55627a;--accent:#0a7fc2;--accent-bg:#e1f1fb;--warn:#b86e00;--good:#1f9d5b;--bad:#d9453d;--si:#9fb2cf;--die:#6f9fd6;--scene:#e9eff8;--pkg:#39414f;--pin:#e0a93a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1829;--panel:#16243d;--line:#34507a;--text:#eaf1fb;--muted:#aebbd2;--accent:#5cc8ff;--accent-bg:#1d3a5c;--warn:#ffb454;--good:#5fd38d;--bad:#ff6b6b;--si:#8fa3c0;--die:#5a7fb0;--scene:#101c30;--pkg:#2a303b;--pin:#ffd27a}}
+:root[data-theme="dark"]{--bg:#0e1829;--panel:#16243d;--line:#34507a;--text:#eaf1fb;--muted:#aebbd2;--accent:#5cc8ff;--accent-bg:#1d3a5c;--warn:#ffb454;--good:#5fd38d;--bad:#ff6b6b;--si:#8fa3c0;--die:#5a7fb0;--scene:#101c30;--pkg:#2a303b;--pin:#ffd27a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--accent)}
+h1{font-size:22px;margin:6px 0 2px}
+.sub{color:var(--muted);margin:0 0 10px;font-size:14px}
+.stages{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:10px}
+.stages button{font:inherit;font-size:13px;font-weight:600;padding:6px 4px;border:2px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;cursor:pointer;line-height:1.2}
+.stages button b{display:block;color:var(--accent);font-size:14px}
+.stages button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-bg)}
+.stages button:focus-visible,.ctl button:focus-visible,input:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px}
+.scene{background:var(--scene);border:1px solid var(--line);border-radius:10px;padding:6px}
+.scene svg{width:100%;height:auto;display:block}
+.scene text{font-family:system-ui,sans-serif;fill:var(--text)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.panel h2{margin:0 0 6px;font-size:19px}
+.row{margin:6px 0}
+.row .k{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--warn)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 6px}
+.ctl button{font:inherit;font-size:14px;padding:5px 12px;border:2px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;cursor:pointer}
+.sl{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl input{width:100%;accent-color:var(--accent)}
+.read{margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--accent-bg);font-size:14px;font-variant-numeric:tabular-nums}
+.read b{color:var(--accent)}
+.note{color:var(--muted);font-size:12.5px;margin-top:6px}
+@media (max-width:820px){.main{grid-template-columns:1fr}.stages{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div><a href="../../en/0-before-you-start/00-overview/README.md">&larr; Back to chapter</a></div>
+<h1>The life of a chip at a glance</h1>
+<p class="sub">Click a stage to see what happens, who does it, and what the wafer or chip looks like at that point.</p>
+<div class="stages" id="stages" role="group" aria-label="Stages of a chip's life"></div>
+<div class="main">
+  <div class="scene"><svg id="scene" viewBox="0 0 480 340" role="img" aria-label="What the wafer or chip looks like at the selected stage"></svg></div>
+  <div class="panel">
+    <h2 id="name"></h2>
+    <div class="row"><div class="k">What happens</div><div id="what"></div></div>
+    <div class="row"><div class="k">Who does it</div><div id="who"></div></div>
+    <div class="row"><div class="k">What it looks like</div><div id="look"></div></div>
+    <div class="ctl"><button id="play" type="button">Pause</button><button id="prev" type="button">&larr; Prev</button><button id="next" type="button">Next &rarr;</button></div>
+    <div class="sl"><label for="size">Die size</label><input id="size" type="range" min="3" max="30" step="1" value="10"><span id="sizev"></span></div>
+    <div class="sl"><label for="yld">Good dies</label><input id="yld" type="range" min="50" max="100" step="1" value="85"><span id="yldv"></span></div>
+    <div class="read" id="read"></div>
+    <div class="note">Die size and good-die share change the wafer view in stages 4 to 6. The good-die share is illustrative, not real industry data. Square dies, no edge exclusion, scribe lines ignored in the count.</div>
+  </div>
+</div>
+<p class="note">Wafer start to shipment: the front end plus the back end often takes three to four months or more, and the front end alone usually takes two to three months or longer.</p>
+</div>
+<script>
+(function(){
+var S=[
+ {n:"Design",who:"A fabless IC design company, or the design team of an integrated device manufacturer (IDM).",what:"Engineers design the circuit with software and turn it into the patterns of each layer.",look:"There is no wafer yet. The chip exists only as a layout file: blocks of circuitry drawn as patterns, one set per layer."},
+ {n:"Mask making",who:"A mask maker. Textbooks describe specialist mask shops as well as in-house mask shops at large manufacturers.",what:"The pattern of each layer is made into a mask, which lithography later uses to print that layer.",look:"A square glass plate carrying one layer's pattern. It is not the wafer; it is the stencil for a layer."},
+ {n:"Wafer start",who:"The fab (foundry or IDM). Blank wafers come from wafer suppliers.",what:"Blank wafers enter the fab and production officially begins.",look:"A smooth, blank, round slice of silicon (300 mm here) with a small notch that marks its crystal orientation."},
+ {n:"Front end",who:"The fab (foundry or IDM).",what:"Transistors and metal wiring are built on the wafer layer by layer. Most of the hundreds to 1,000+ steps repeat one loop: deposit, pattern, etch or implant, clean, measure.",look:"The wafer carries a neat grid of identical dies separated by narrow scribe lines. The surface gains one layer after another."},
+ {n:"Wafer test",who:"Typically the fab or a test provider (OSAT). Chapter 19 covers it.",what:"Every die on the wafer is checked to see whether it is good or bad.",look:"Same wafer, now with every die judged. Bad dies are marked (colors here are illustrative)."},
+ {n:"Packaging",who:"An outsourced assembly and test company (OSAT), or the IDM itself.",what:"The wafer is cut apart along the scribe lines and the good dies are packaged.",look:"Single dies sealed in a package with metal contacts, so they can be soldered onto a circuit board."},
+ {n:"Final test",who:"An OSAT, or the IDM itself.",what:"The packaged chips are tested again and checked to make sure they will last for years.",look:"The finished packaged chip, now with a pass verdict."},
+ {n:"Shipment",who:"The chip's owner (a fabless company or an IDM) sells and ships to customers.",what:"Tested chips are sent on to customers who solder them onto circuit boards.",look:"Packaged chips in trays inside a shipping box."}
+];
+var q=new URLSearchParams(location.search);
+var th=q.get("theme"); if(th==="light"||th==="dark") document.documentElement.setAttribute("data-theme",th);
+var stage=0,T=0,playing=true,still=q.get("still")==="1",lastKey="";
+if(q.get("t")!==null){T=+q.get("t")||0;}
+if(still) playing=false;
+var D=300,R=128,CXs=240,CYs=170;
+var $=function(i){return document.getElementById(i)};
+var box=$("stages");
+S.forEach(function(s,i){var b=document.createElement("button");b.type="button";b.innerHTML="<b>"+(i+1)+"</b>"+s.n;b.onclick=function(){stage=i;playing=false;render(true)};box.appendChild(b)});
+function dies(s){ // complete square dies on a D mm circle, grid corner at wafer center
+  var a=[],r2=(D/2)*(D/2),m=Math.ceil(D/2/s)+1;
+  for(var ix=-m;ix<m;ix++)for(var iy=-m;iy<m;iy++){
+    var x0=ix*s,y0=iy*s,x1=x0+s,y1=y0+s;
+    if(Math.max(x0*x0,x1*x1)+Math.max(y0*y0,y1*y1)<=r2)a.push([x0,y0,ix,iy]);
+  } return a;
+}
+function isBad(ix,iy,y){var h=(Math.imul(ix+500,73856093)^Math.imul(iy+500,19349663))>>>0;return ((h%1000)/1000)>=y;}
+function waferShape(cx,cy,r,fill){
+  return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+fill+'" stroke="var(--text)" stroke-opacity=".5" stroke-width="1.5"/><circle cx="'+cx+'" cy="'+(cy+r-4)+'" r="3.5" fill="var(--scene)"/>';
+}
+function dieSvg(cx,cy,r,s,mode,yld,tint){
+  var sc=r/(D/2),L=dies(s),g=Math.min(1.2,s*sc*.12),good="",bad="",all="",ng=0;
+  L.forEach(function(d){
+    var x=cx+d[0]*sc+g/2,y=cy+d[1]*sc+g/2,w=s*sc-g,p="M"+x.toFixed(1)+" "+y.toFixed(1)+"h"+w.toFixed(1)+"v"+w.toFixed(1)+"h-"+w.toFixed(1)+"z";
+    if(mode==="test"||mode==="pack"){ if(isBad(d[2],d[3],yld)) bad+=p; else {good+=p;ng++;} } else all+=p;
+  });
+  var o="";
+  if(mode==="test") o='<path d="'+good+'" fill="var(--good)"/><path d="'+bad+'" fill="var(--bad)"/>';
+  else if(mode==="pack") o='<path d="'+good+'" fill="var(--die)"/><path d="'+bad+'" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="2 2"/>';
+  else o='<path d="'+all+'" fill="'+tint+'"/>';
+  return {svg:o,total:L.length,good:ng};
+}
+function pkg(cx,cy,w,check){
+  var h=w/2,o='<rect x="'+(cx-h)+'" y="'+(cy-h)+'" width="'+w+'" height="'+w+'" rx="8" fill="var(--pkg)" stroke="var(--muted)" stroke-width="2"/>';
+  for(var k=0;k<7;k++){var p=-h+ (k+.5)*w/7;
+    o+='<rect x="'+(cx-h-12)+'" y="'+(cy+p-3)+'" width="12" height="6" fill="var(--pin)"/><rect x="'+(cx+h)+'" y="'+(cy+p-3)+'" width="12" height="6" fill="var(--pin)"/>'+
+       '<rect x="'+(cx+p-3)+'" y="'+(cy-h-12)+'" width="6" height="12" fill="var(--pin)"/><rect x="'+(cx+p-3)+'" y="'+(cy+h)+'" width="6" height="12" fill="var(--pin)"/>';}
+  o+='<rect x="'+(cx-w*.22)+'" y="'+(cy-w*.22)+'" width="'+(w*.44)+'" height="'+(w*.44)+'" fill="var(--die)" stroke="var(--text)" stroke-opacity=".6"/>';
+  if(check) o+='<circle cx="'+(cx+h)+'" cy="'+(cy+h)+'" r="22" fill="var(--good)" stroke="var(--scene)" stroke-width="3"/><path d="M'+(cx+h-10)+' '+(cy+h)+'l7 7l13 -15" fill="none" stroke="var(--scene)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>';
+  return o;
+}
+function txt(x,y,s,sz,anchor,fill){return '<text x="'+x+'" y="'+y+'" font-size="'+(sz||14)+'" text-anchor="'+(anchor||"middle")+'"'+(fill?' style="fill:'+fill+'"':'')+'>'+s+'</text>';}
+var info={total:0,good:0};
+function scene(){
+  var s=+$("size").value,y=+$("yld").value/100,o="",tints=["#6f9fd6","#7cc4a8","#d6a96f","#b58bd6","#d68b8b"],step=Math.floor(T/700)%5,r;
+  if(stage===0){
+    o+='<rect x="90" y="40" width="300" height="200" rx="10" fill="var(--panel)" stroke="var(--accent)" stroke-width="3"/>';
+    var bl=[[110,60,100,70],[220,60,80,40],[310,60,60,70],[220,110,80,20],[110,140,60,80],[180,140,110,80],[300,140,70,80]];
+    bl.forEach(function(b,i){o+='<rect x="'+b[0]+'" y="'+b[1]+'" width="'+b[2]+'" height="'+b[3]+'" fill="'+tints[i%5]+'" fill-opacity=".55" stroke="var(--text)" stroke-opacity=".5"/>'});
+    o+='<path d="M210 95 h10 M300 80 h10 M170 180 h10 M290 180 h10" stroke="var(--warn)" stroke-width="3"/>';
+    o+='<rect x="225" y="240" width="30" height="22" fill="var(--accent)"/><rect x="190" y="262" width="100" height="10" rx="5" fill="var(--accent)"/>';
+    o+=txt(240,300,"A layout on a screen: no wafer yet",15)+txt(240,320,"(illustrative floorplan)",12,"middle","var(--muted)");
+  } else if(stage===1){
+    o+='<rect x="130" y="25" width="220" height="220" rx="8" fill="var(--si)" fill-opacity=".45" stroke="var(--text)" stroke-width="3"/><rect x="152" y="47" width="176" height="176" fill="#0b1320"/>';
+    [[165,60,60,22],[240,60,75,22],[165,95,22,110],[200,95,100,22],[200,130,50,22],[270,130,45,22],[200,165,115,22],[200,200,60,12]].forEach(function(b){o+='<rect x="'+b[0]+'" y="'+b[1]+'" width="'+b[2]+'" height="'+b[3]+'" fill="#e8f0fb"/>'});
+    o+=txt(240,285,"A mask: one layer's pattern on a glass plate",15)+txt(240,306,"(illustrative pattern; one mask per layer)",12,"middle","var(--muted)");
+  } else if(stage===2){
+    o+=waferShape(CXs,CYs-10,R,"var(--si)")+txt(CXs,CYs-10,"blank silicon",16)+txt(CXs,CYs+12,"300 mm wafer",14)+txt(CXs,326,"Smooth, no circuits yet; the notch marks orientation",13,"middle","var(--muted)");
+  } else if(stage===3){
+    r=dieSvg(CXs,CYs-10,R,s,"grid",y,tints[step]);info=r;
+    o+='<g><clipPath id="cp"><circle cx="'+CXs+'" cy="'+(CYs-10)+'" r="'+R+'"/></clipPath></g>'+waferShape(CXs,CYs-10,R,"var(--si)")+r.svg+txt(CXs,326,"Layer "+(step+1)+" going on (loop repeats; illustrative)",13,"middle","var(--muted)");
+  } else if(stage===4){
+    r=dieSvg(CXs,CYs-10,R,s,"test",y,"");info=r;
+    o+=waferShape(CXs,CYs-10,R,"var(--si)")+r.svg+'<path d="M'+(CXs+150)+' 22 L'+(CXs+40)+' '+(CYs-40)+'" stroke="var(--warn)" stroke-width="4" stroke-linecap="round"/>'+
+      txt(CXs,326,"Green = good die, red = bad die (illustrative)",13,"middle","var(--muted)");
+  } else if(stage===5){
+    r=dieSvg(110,150,85,s,"pack",y,"");info=r;
+    o+=waferShape(110,150,85,"var(--si)")+r.svg+'<path d="M215 150 h60" stroke="var(--text)" stroke-width="3"/><path d="M275 150 l-12 -9 v18z" fill="var(--text)"/>'+
+      pkg(380,150,90,false)+txt(110,262,"Cut along scribe lines",13)+txt(110,280,"bad dies are left out",13,"middle","var(--muted)")+txt(380,262,"Good die in a package",13)+txt(380,280,"pins to solder on a board",13,"middle","var(--muted)");
+  } else if(stage===6){
+    r=dieSvg(110,150,85,s,"pack",y,"");info=r;
+    o+=pkg(240,140,120,true)+txt(240,260,"Packaged chip tested again",15)+txt(240,282,"checked to make sure it will last for years",13,"middle","var(--muted)");
+  } else {
+    r=dieSvg(110,150,85,s,"pack",y,"");info=r;
+    o+='<path d="M120 80 L240 40 L360 80 L360 230 L240 270 L120 230Z" fill="#c9985a" stroke="#f1d9b0" stroke-width="3"/><path d="M120 80 L240 120 L360 80 M240 120 V270" fill="none" stroke="#f1d9b0" stroke-width="3"/>';
+    for(var k=0;k<3;k++)o+=pkg(190+k*50,70,28,false).replace(/rx="8"/,'rx="3"');
+    o+=txt(240,300,"Chips in trays, boxed for customers",15)+txt(240,320,"(illustrative)",12,"middle","var(--muted)");
+  }
+  return o;
+}
+function stats(){
+  var s=+$("size").value,y=+$("yld").value/100,L=dies(s),n=L.length,g=0;
+  L.forEach(function(d){if(!isBad(d[2],d[3],y))g++});
+  var est=Math.PI*Math.pow(D/2,2)/(s*s)-Math.PI*D/Math.sqrt(2*s*s);
+  $("sizev").textContent=s+" x "+s+" mm";$("yldv").textContent=Math.round(y*100)+"%";
+  $("read").innerHTML="Die "+s+" x "+s+" mm = "+(s*s)+" mm<sup>2</sup> on a "+D+" mm wafer<br>Complete dies (counted): <b>"+n.toLocaleString("en-US")+"</b><br>Estimate pi(d/2)<sup>2</sup>/A &minus; pi d/&radic;(2A): "+Math.round(est).toLocaleString("en-US")+"<br>Good dies at "+Math.round(y*100)+"% (illustrative): <b>"+g.toLocaleString("en-US")+"</b> &rarr; chips to package";
+}
+function render(force){
+  var s=+$("size").value,key=stage+"|"+s+"|"+$("yld").value+"|"+(stage===3?Math.floor(T/700)%5:0);
+  var bs=box.children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",i===stage?"true":"false");
+  $("name").textContent=(stage+1)+". "+S[stage].n;$("what").textContent=S[stage].what;$("who").textContent=S[stage].who;$("look").textContent=S[stage].look;
+  $("play").textContent=playing?"Pause":"Play";
+  if(force||key!==lastKey){$("scene").innerHTML=scene();lastKey=key;stats();}
+}
+window.__setTime=function(ms){T=+ms||0;if(playing)stage=(Math.floor(Math.max(0,T)/2500)%8);render(false);};
+$("play").onclick=function(){playing=!playing;if(playing)T=stage*2500;render(true)};
+$("prev").onclick=function(){stage=(stage+7)%8;playing=false;render(true)};
+$("next").onclick=function(){stage=(stage+1)%8;playing=false;render(true)};
+$("size").oninput=$("yld").oninput=function(){render(true)};
+if(q.get("stage")!==null){stage=Math.max(0,Math.min(7,(+q.get("stage"))-1));playing=false;}
+else if(playing||q.get("t")!==null){if(playing)stage=(Math.floor(Math.max(0,T)/2500)%8);}
+var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(rm)playing=false;
+render(true);
+var last=performance.now();
+function tick(n){var dt=Math.max(0,n-last);last=Math.max(last,n);if(playing&&!still){T+=dt;stage=(Math.floor(Math.max(0,T)/2500)%8);render(false);}requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

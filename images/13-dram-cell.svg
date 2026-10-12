@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d"><title id="t">DRAM cell cross-section</title><desc id="d">Animated cross-section of a DRAM 1T1C cell: buried word line, bit line and a tall cylinder capacitor, showing write 1, leakage while holding, refresh, read and write 0.</desc><style>:root{--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}
+
+.si{fill:var(--si)}.np{fill:var(--np)}.sti{fill:var(--sti)}.ild{fill:var(--ild)}.plate{fill:var(--plate)}
+.gox{fill:var(--gox)}.gcap{fill:var(--gcap)}.goff{fill:var(--goff)}.gon{fill:var(--gon)}
+.blm{fill:var(--bl)}.plug{fill:var(--plug)}.bore{fill:var(--bore)}.chg{fill:var(--charge)}
+.electrode{fill:none;stroke:var(--electrode);stroke-width:8;stroke-linejoin:miter}
+.diel{fill:none;stroke:var(--diel);stroke-width:2;opacity:.85}
+.chan{fill:none;stroke:var(--charge);stroke-width:4;stroke-dasharray:1 7;stroke-linecap:round}
+.lbl{fill:var(--text);font:13px system-ui,Segoe UI,Arial,sans-serif}
+.lblm{fill:var(--muted);font:13px system-ui,Segoe UI,Arial,sans-serif}
+.lead{stroke:var(--muted);stroke-width:1.2;fill:none}
+.fd{fill:var(--charge);stroke:var(--bg);stroke-width:1.5}
+.ld{fill:var(--leak)}
+
+text{font-family:system-ui,Segoe UI,Arial,sans-serif}
+.pt{fill:var(--text);font:600 20px system-ui,Segoe UI,Arial,sans-serif}.ps{fill:var(--muted);font:14px system-ui,Segoe UI,Arial,sans-serif}
+.sd{fill:var(--text);font:14px system-ui,Segoe UI,Arial,sans-serif}.st{fill:var(--charge);font:700 20px system-ui,Segoe UI,Arial,sans-serif}
+.sm{fill:var(--muted);font:12px system-ui,Segoe UI,Arial,sans-serif}.sk{fill:var(--text);font:600 14px system-ui,Segoe UI,Arial,sans-serif}
+.boxr{fill:var(--box);stroke:var(--line);stroke-width:1}
+.ph0{opacity:1;animation:ph0 14.0s linear infinite;animation-delay:-1.0s;}
+.ph1{opacity:0;animation:ph1 14.0s linear infinite;animation-delay:-1.0s;}
+.ph2{opacity:0;animation:ph2 14.0s linear infinite;animation-delay:-1.0s;}
+.ph3{opacity:0;animation:ph3 14.0s linear infinite;animation-delay:-1.0s;}
+.ph4{opacity:0;animation:ph4 14.0s linear infinite;animation-delay:-1.0s;}
+.ph5{opacity:0;animation:ph5 14.0s linear infinite;animation-delay:-1.0s;}
+.ph6{opacity:0;animation:ph6 14.0s linear infinite;animation-delay:-1.0s;}
+.won{animation:won 14.0s linear infinite;animation-delay:-1.0s;}.woff{opacity:0;animation:woff 14.0s linear infinite;animation-delay:-1.0s;}
+.gate2{animation:won 14.0s linear infinite;animation-delay:-1.0s;}
+.leakg{opacity:0;animation:leakg 14.0s linear infinite;animation-delay:-1.0s;}
+@keyframes leakmove{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(0,55px);opacity:0}}
+.ld{animation:leakmove 1.5s linear infinite}
+#fillL{transform-origin:128px 222px;animation:qfill 14.0s linear infinite;animation-delay:-1.0s;}
+.mx{animation:mx 14.0s linear infinite;animation-delay:-1.0s;}.my{animation:my 14.0s linear infinite;animation-delay:-1.0s;}
+.fd0{animation:fd0 14.0s linear infinite;animation-delay:-1.0s;}
+.fd1{animation:fd1 14.0s linear infinite;animation-delay:-1.0s;}
+.fd2{animation:fd2 14.0s linear infinite;animation-delay:-1.0s;}
+.fd3{animation:fd3 14.0s linear infinite;animation-delay:-1.0s;}
+@keyframes ph0{0.000%{opacity:0}0.714%{opacity:1}7.857%{opacity:1}8.571%{opacity:0}100.000%{opacity:0}}
+@keyframes ph1{0.000%{opacity:0}8.571%{opacity:0}9.286%{opacity:1}45.714%{opacity:1}46.429%{opacity:0}100.000%{opacity:0}}
+@keyframes ph2{0.000%{opacity:0}46.429%{opacity:0}47.143%{opacity:1}56.429%{opacity:1}57.143%{opacity:0}100.000%{opacity:0}}
+@keyframes ph3{0.000%{opacity:0}57.143%{opacity:0}57.857%{opacity:1}63.571%{opacity:1}64.286%{opacity:0}100.000%{opacity:0}}
+@keyframes ph4{0.000%{opacity:0}64.286%{opacity:0}65.000%{opacity:1}81.429%{opacity:1}82.143%{opacity:0}100.000%{opacity:0}}
+@keyframes ph5{0.000%{opacity:0}82.143%{opacity:0}82.857%{opacity:1}88.571%{opacity:1}89.286%{opacity:0}100.000%{opacity:0}}
+@keyframes ph6{0.000%{opacity:0}89.286%{opacity:0}90.000%{opacity:1}99.286%{opacity:1}100.000%{opacity:0}}
+@keyframes won{0.000%{opacity:0}0.714%{opacity:1}7.857%{opacity:1}8.571%{opacity:0}46.429%{opacity:0}47.143%{opacity:1}56.429%{opacity:1}57.143%{opacity:0}64.286%{opacity:0}65.000%{opacity:1}76.429%{opacity:1}77.143%{opacity:0}82.143%{opacity:0}82.857%{opacity:1}87.857%{opacity:1}88.571%{opacity:0}100.000%{opacity:0}}
+@keyframes woff{0.000%{opacity:0}8.571%{opacity:0}9.286%{opacity:1}45.714%{opacity:1}46.429%{opacity:0}57.143%{opacity:0}57.857%{opacity:1}63.571%{opacity:1}64.286%{opacity:0}77.143%{opacity:0}77.857%{opacity:1}81.429%{opacity:1}82.143%{opacity:0}88.571%{opacity:0}89.286%{opacity:1}99.286%{opacity:1}100.000%{opacity:0}}
+@keyframes leakg{0.000%{opacity:0}10.000%{opacity:0}10.714%{opacity:1}45.714%{opacity:1}46.429%{opacity:0}100.000%{opacity:0}}
+@keyframes qfill{0.000%{transform:scaleY(0)}7.143%{transform:scaleY(1)}8.571%{transform:scaleY(1)}46.429%{transform:scaleY(0.58)}54.286%{transform:scaleY(1)}64.286%{transform:scaleY(1)}68.571%{transform:scaleY(0.8)}75.714%{transform:scaleY(1)}82.143%{transform:scaleY(1)}87.857%{transform:scaleY(0)}100.000%{transform:scaleY(0)}}
+@keyframes mx{0%{transform:translate(700px,0)}100%{transform:translate(885px,0)}}
+@keyframes my{0.000%{transform:translate(0,405.00px)}7.143%{transform:translate(0,295.00px)}8.571%{transform:translate(0,295.00px)}46.429%{transform:translate(0,341.20px)}54.286%{transform:translate(0,295.00px)}64.286%{transform:translate(0,295.00px)}68.571%{transform:translate(0,317.00px)}75.714%{transform:translate(0,295.00px)}82.143%{transform:translate(0,295.00px)}87.857%{transform:translate(0,405.00px)}100.000%{transform:translate(0,405.00px)}}
+@keyframes fd0{0.000%{transform:translate(330px,350px);opacity:0}0.000%{transform:translate(330px,350px);opacity:1}0.681%{transform:translate(330px,422px);opacity:1}1.447%{transform:translate(249px,422px);opacity:1}2.062%{transform:translate(249px,487px);opacity:1}2.517%{transform:translate(201px,487px);opacity:1}3.132%{transform:translate(201px,422px);opacity:1}3.614%{transform:translate(150px,422px);opacity:1}5.412%{transform:translate(150px,232px);opacity:1}5.714%{transform:translate(150px,200px);opacity:1}5.721%{transform:translate(150px,200px);opacity:0}46.421%{transform:translate(330px,350px);opacity:0}46.429%{transform:translate(330px,350px);opacity:1}47.110%{transform:translate(330px,422px);opacity:1}47.876%{transform:translate(249px,422px);opacity:1}48.491%{transform:translate(249px,487px);opacity:1}48.945%{transform:translate(201px,487px);opacity:1}49.560%{transform:translate(201px,422px);opacity:1}50.043%{transform:translate(150px,422px);opacity:1}51.840%{transform:translate(150px,232px);opacity:1}52.143%{transform:translate(150px,200px);opacity:1}52.150%{transform:translate(150px,200px);opacity:0}64.279%{transform:translate(150px,200px);opacity:0}64.286%{transform:translate(150px,200px);opacity:1}64.513%{transform:translate(150px,232px);opacity:1}65.861%{transform:translate(150px,422px);opacity:1}66.223%{transform:translate(201px,422px);opacity:1}66.684%{transform:translate(201px,487px);opacity:1}67.025%{transform:translate(249px,487px);opacity:1}67.486%{transform:translate(249px,422px);opacity:1}68.061%{transform:translate(330px,422px);opacity:1}68.571%{transform:translate(330px,350px);opacity:1}68.579%{transform:translate(330px,350px);opacity:0}70.707%{transform:translate(330px,350px);opacity:0}70.714%{transform:translate(330px,350px);opacity:1}71.310%{transform:translate(330px,422px);opacity:1}71.981%{transform:translate(249px,422px);opacity:1}72.519%{transform:translate(249px,487px);opacity:1}72.916%{transform:translate(201px,487px);opacity:1}73.454%{transform:translate(201px,422px);opacity:1}73.877%{transform:translate(150px,422px);opacity:1}75.449%{transform:translate(150px,232px);opacity:1}75.714%{transform:translate(150px,200px);opacity:1}75.721%{transform:translate(150px,200px);opacity:0}82.136%{transform:translate(150px,200px);opacity:0}82.143%{transform:translate(150px,200px);opacity:1}82.446%{transform:translate(150px,232px);opacity:1}84.243%{transform:translate(150px,422px);opacity:1}84.726%{transform:translate(201px,422px);opacity:1}85.341%{transform:translate(201px,487px);opacity:1}85.795%{transform:translate(249px,487px);opacity:1}86.410%{transform:translate(249px,422px);opacity:1}87.176%{transform:translate(330px,422px);opacity:1}87.857%{transform:translate(330px,350px);opacity:1}87.864%{transform:translate(330px,350px);opacity:0}100.000%{transform:translate(330px,350px);opacity:0}}
+@keyframes fd1{0.000%{transform:translate(330px,350px);opacity:0}1.421%{transform:translate(330px,350px);opacity:0}1.429%{transform:translate(330px,350px);opacity:1}2.110%{transform:translate(330px,422px);opacity:1}2.876%{transform:translate(249px,422px);opacity:1}3.491%{transform:translate(249px,487px);opacity:1}3.945%{transform:translate(201px,487px);opacity:1}4.560%{transform:translate(201px,422px);opacity:1}5.043%{transform:translate(150px,422px);opacity:1}6.840%{transform:translate(150px,232px);opacity:1}7.143%{transform:translate(150px,200px);opacity:1}7.150%{transform:translate(150px,200px);opacity:0}48.207%{transform:translate(330px,350px);opacity:0}48.214%{transform:translate(330px,350px);opacity:1}48.895%{transform:translate(330px,422px);opacity:1}49.662%{transform:translate(249px,422px);opacity:1}50.277%{transform:translate(249px,487px);opacity:1}50.731%{transform:translate(201px,487px);opacity:1}51.346%{transform:translate(201px,422px);opacity:1}51.828%{transform:translate(150px,422px);opacity:1}53.626%{transform:translate(150px,232px);opacity:1}53.929%{transform:translate(150px,200px);opacity:1}53.936%{transform:translate(150px,200px);opacity:0}65.707%{transform:translate(150px,200px);opacity:0}65.714%{transform:translate(150px,200px);opacity:1}65.941%{transform:translate(150px,232px);opacity:1}67.289%{transform:translate(150px,422px);opacity:1}67.651%{transform:translate(201px,422px);opacity:1}68.113%{transform:translate(201px,487px);opacity:1}68.453%{transform:translate(249px,487px);opacity:1}68.914%{transform:translate(249px,422px);opacity:1}69.489%{transform:translate(330px,422px);opacity:1}70.000%{transform:translate(330px,350px);opacity:1}70.007%{transform:translate(330px,350px);opacity:0}72.136%{transform:translate(330px,350px);opacity:0}72.143%{transform:translate(330px,350px);opacity:1}72.739%{transform:translate(330px,422px);opacity:1}73.409%{transform:translate(249px,422px);opacity:1}73.947%{transform:translate(249px,487px);opacity:1}74.345%{transform:translate(201px,487px);opacity:1}74.883%{transform:translate(201px,422px);opacity:1}75.305%{transform:translate(150px,422px);opacity:1}76.878%{transform:translate(150px,232px);opacity:1}77.143%{transform:translate(150px,200px);opacity:1}77.150%{transform:translate(150px,200px);opacity:0}83.921%{transform:translate(150px,200px);opacity:0}83.929%{transform:translate(150px,200px);opacity:1}84.231%{transform:translate(150px,232px);opacity:1}86.029%{transform:translate(150px,422px);opacity:1}86.511%{transform:translate(201px,422px);opacity:1}87.126%{transform:translate(201px,487px);opacity:1}87.580%{transform:translate(249px,487px);opacity:1}88.195%{transform:translate(249px,422px);opacity:1}88.962%{transform:translate(330px,422px);opacity:1}89.643%{transform:translate(330px,350px);opacity:1}89.650%{transform:translate(330px,350px);opacity:0}100.000%{transform:translate(330px,350px);opacity:0}}
+@keyframes fd2{0.000%{transform:translate(330px,350px);opacity:0}2.850%{transform:translate(330px,350px);opacity:0}2.857%{transform:translate(330px,350px);opacity:1}3.538%{transform:translate(330px,422px);opacity:1}4.305%{transform:translate(249px,422px);opacity:1}4.920%{transform:translate(249px,487px);opacity:1}5.374%{transform:translate(201px,487px);opacity:1}5.989%{transform:translate(201px,422px);opacity:1}6.471%{transform:translate(150px,422px);opacity:1}8.269%{transform:translate(150px,232px);opacity:1}8.571%{transform:translate(150px,200px);opacity:1}8.579%{transform:translate(150px,200px);opacity:0}49.993%{transform:translate(330px,350px);opacity:0}50.000%{transform:translate(330px,350px);opacity:1}50.681%{transform:translate(330px,422px);opacity:1}51.447%{transform:translate(249px,422px);opacity:1}52.062%{transform:translate(249px,487px);opacity:1}52.517%{transform:translate(201px,487px);opacity:1}53.132%{transform:translate(201px,422px);opacity:1}53.614%{transform:translate(150px,422px);opacity:1}55.412%{transform:translate(150px,232px);opacity:1}55.714%{transform:translate(150px,200px);opacity:1}55.721%{transform:translate(150px,200px);opacity:0}73.564%{transform:translate(330px,350px);opacity:0}73.571%{transform:translate(330px,350px);opacity:1}74.167%{transform:translate(330px,422px);opacity:1}74.838%{transform:translate(249px,422px);opacity:1}75.376%{transform:translate(249px,487px);opacity:1}75.773%{transform:translate(201px,487px);opacity:1}76.311%{transform:translate(201px,422px);opacity:1}76.734%{transform:translate(150px,422px);opacity:1}78.307%{transform:translate(150px,232px);opacity:1}78.571%{transform:translate(150px,200px);opacity:1}78.579%{transform:translate(150px,200px);opacity:0}85.707%{transform:translate(150px,200px);opacity:0}85.714%{transform:translate(150px,200px);opacity:1}86.017%{transform:translate(150px,232px);opacity:1}87.815%{transform:translate(150px,422px);opacity:1}88.297%{transform:translate(201px,422px);opacity:1}88.912%{transform:translate(201px,487px);opacity:1}89.366%{transform:translate(249px,487px);opacity:1}89.981%{transform:translate(249px,422px);opacity:1}90.747%{transform:translate(330px,422px);opacity:1}91.429%{transform:translate(330px,350px);opacity:1}91.436%{transform:translate(330px,350px);opacity:0}100.000%{transform:translate(330px,350px);opacity:0}}
+@keyframes fd3{0.000%{transform:translate(330px,350px);opacity:0}4.279%{transform:translate(330px,350px);opacity:0}4.286%{transform:translate(330px,350px);opacity:1}4.967%{transform:translate(330px,422px);opacity:1}5.733%{transform:translate(249px,422px);opacity:1}6.348%{transform:translate(249px,487px);opacity:1}6.802%{transform:translate(201px,487px);opacity:1}7.417%{transform:translate(201px,422px);opacity:1}7.900%{transform:translate(150px,422px);opacity:1}9.697%{transform:translate(150px,232px);opacity:1}10.000%{transform:translate(150px,200px);opacity:1}10.007%{transform:translate(150px,200px);opacity:0}51.779%{transform:translate(330px,350px);opacity:0}51.786%{transform:translate(330px,350px);opacity:1}52.467%{transform:translate(330px,422px);opacity:1}53.233%{transform:translate(249px,422px);opacity:1}53.848%{transform:translate(249px,487px);opacity:1}54.302%{transform:translate(201px,487px);opacity:1}54.917%{transform:translate(201px,422px);opacity:1}55.400%{transform:translate(150px,422px);opacity:1}57.197%{transform:translate(150px,232px);opacity:1}57.500%{transform:translate(150px,200px);opacity:1}57.507%{transform:translate(150px,200px);opacity:0}74.993%{transform:translate(330px,350px);opacity:0}75.000%{transform:translate(330px,350px);opacity:1}75.596%{transform:translate(330px,422px);opacity:1}76.267%{transform:translate(249px,422px);opacity:1}76.805%{transform:translate(249px,487px);opacity:1}77.202%{transform:translate(201px,487px);opacity:1}77.740%{transform:translate(201px,422px);opacity:1}78.162%{transform:translate(150px,422px);opacity:1}79.735%{transform:translate(150px,232px);opacity:1}80.000%{transform:translate(150px,200px);opacity:1}80.007%{transform:translate(150px,200px);opacity:0}87.493%{transform:translate(150px,200px);opacity:0}87.500%{transform:translate(150px,200px);opacity:1}87.803%{transform:translate(150px,232px);opacity:1}89.600%{transform:translate(150px,422px);opacity:1}90.083%{transform:translate(201px,422px);opacity:1}90.698%{transform:translate(201px,487px);opacity:1}91.152%{transform:translate(249px,487px);opacity:1}91.767%{transform:translate(249px,422px);opacity:1}92.533%{transform:translate(330px,422px);opacity:1}93.214%{transform:translate(330px,350px);opacity:1}93.221%{transform:translate(330px,350px);opacity:0}100.000%{transform:translate(330px,350px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style><rect width="960" height="600" fill="#0f172a"/>
+<g id="scene">
+<rect class="ild" x="60" y="230" width="540" height="180"/>
+<rect class="plate" x="70" y="40" width="520" height="190" rx="3"/>
+<rect class="plug" x="135" y="226" width="30" height="188"/>
+<rect class="plug" x="495" y="226" width="30" height="188"/>
+<rect class="plug" x="315" y="358" width="30" height="56"/>
+<rect class="blm bl" x="285" y="335" width="90" height="25" rx="3"/>
+<rect class="si" x="60" y="410" width="540" height="150"/>
+<rect class="sti" x="60" y="410" width="40" height="32"/><rect class="sti" x="560" y="410" width="40" height="32"/>
+<rect class="np" x="100" y="410" width="105" height="25"/><rect class="np" x="245" y="410" width="170" height="25"/><rect class="np" x="455" y="410" width="105" height="25"/>
+<rect class="gox" x="205" y="410" width="40" height="73"/>
+<rect class="gcap" x="213" y="410" width="24" height="30"/>
+<rect class="goff" x="213" y="440" width="24" height="36"/>
+<rect class="gox" x="415" y="410" width="40" height="73"/>
+<rect class="gcap" x="423" y="410" width="24" height="30"/>
+<rect class="goff" x="423" y="440" width="24" height="36"/>
+
+<rect class="gon gate2" x="213" y="440" width="24" height="36"/>
+
+<rect class="bore" x="128" y="48" width="44" height="174"/>
+<rect class="chg" id="fillL" x="128" y="48" width="44" height="174"/>
+<path class="diel" d="M118 48 V232 H182 V48"/>
+<path class="electrode" d="M124 48 V226 H176 V48"/>
+<rect class="bore" x="488" y="48" width="44" height="174"/>
+<path class="diel" d="M478 48 V232 H542 V48"/>
+<path class="electrode" d="M484 48 V226 H536 V48"/>
+<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">Top plate (shared by all cells)</text>
+<text class="lblm" x="330" y="168" text-anchor="middle">Real cylinders are dozens of</text>
+<text class="lblm" x="330" y="186" text-anchor="middle">times taller than wide</text>
+<text class="lblm" x="330" y="204" text-anchor="middle">(drawn shorter here)</text>
+<text class="lbl" x="178" y="289">Storage-node contact</text><path class="lead" d="M175 285 H167"/>
+<text class="lbl" x="330" y="326" text-anchor="middle">Bit line (runs into the page)</text>
+<text class="lbl" x="354" y="390">Bit-line contact</text><path class="lead" d="M351 387 H347"/>
+<text class="lbl" x="225" y="514" text-anchor="middle">Buried word line</text><path class="lead" d="M225 500 V486"/>
+<text class="lbl" x="435" y="514" text-anchor="middle">Buried word line</text><path class="lead" d="M435 500 V486"/>
+<text class="lblm" x="330" y="548" text-anchor="middle">p-type silicon</text>
+<text class="lblm" x="80" y="430" text-anchor="middle" font-size="12">STI</text>
+<text class="lblm" x="580" y="430" text-anchor="middle" font-size="12">STI</text>
+<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">Capacitor = bucket</text>
+<text class="lblm" x="510" y="30" text-anchor="middle">Neighbor cell: 0</text>
+<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">Transistor = switch</text>
+<text class="lblm" x="500" y="586" text-anchor="middle">Not to scale</text>
+<path class="chan won" d="M249 435 V487 H201 V435"/>
+<g class="leakg">
+<circle class="ld" cx="130" cy="442" r="4" style="animation-delay:-0.0s"/>
+<circle class="ld" cx="155" cy="442" r="4" style="animation-delay:-0.5s"/>
+<circle class="ld" cx="180" cy="442" r="4" style="animation-delay:-1.0s"/>
+<text class="lbl" x="64" y="476" fill="var(--leak)" style="fill:var(--leak)" font-weight="600">leakage</text>
+<path d="M118 470 H126" stroke="var(--leak)" stroke-width="1.5" fill="none"/>
+</g>
+<circle class="fd fd0" r="5" cx="0" cy="0" opacity="0"/>
+<circle class="fd fd1" r="5" cx="0" cy="0" opacity="0"/>
+<circle class="fd fd2" r="5" cx="0" cy="0" opacity="0"/>
+<circle class="fd fd3" r="5" cx="0" cy="0" opacity="0"/>
+</g>
+<text class="pt" x="655" y="38">DRAM cell (1T1C)</text><text class="ps" x="655" y="58">cross-section, simplified</text>
+<rect class="boxr" x="655" y="72" width="290" height="116" rx="8"/>
+<g class="ph0"><text class="st" x="670" y="100">WRITE 1</text><text class="sd" x="670" y="125">Word line on: the switch closes.</text><text class="sd" x="670" y="144">Bit line high fills the bucket.</text></g>
+<g class="ph1"><text class="st" x="670" y="100">HOLD, LEAKING</text><text class="sd" x="670" y="125">Word line off: the switch opens.</text><text class="sd" x="670" y="144">Charge is trapped, but leaks away.</text></g>
+<g class="ph2"><text class="st" x="670" y="100">REFRESH</text><text class="sd" x="670" y="125">Read the weakened charge,</text><text class="sd" x="670" y="144">then write a full 1 back.</text></g>
+<g class="ph3"><text class="st" x="670" y="100">HOLD</text><text class="sd" x="670" y="125">Charge is back to full.</text><text class="sd" x="670" y="144">Switch is open again.</text></g>
+<g class="ph4"><text class="st" x="670" y="100">READ</text><text class="sd" x="670" y="125">Switch closes; charge nudges the</text><text class="sd" x="670" y="144">bit line, sense amp sees a 1,</text><text class="sd" x="670" y="163">then the cell is rewritten.</text></g>
+<g class="ph5"><text class="st" x="670" y="100">WRITE 0</text><text class="sd" x="670" y="125">Bit line low drains the bucket.</text><text class="sd" x="670" y="144">The cell now stores 0.</text></g>
+<g class="ph6"><text class="st" x="670" y="100">HOLD (stored 0)</text><text class="sd" x="670" y="125">No charge = 0. Switch is open.</text></g>
+<text class="sk" x="655" y="214">Word line:</text>
+<text class="sk won" x="745" y="214" style="fill:var(--gon)">ON (switch closed)</text>
+<text class="sk woff" x="745" y="214" style="fill:var(--muted)">OFF (switch open)</text>
+<text class="sk" x="655" y="238">Bit line:</text>
+<text class="sd ph0" x="728" y="238" style="fill:var(--bl)">driven high (1)</text>
+<text class="sd ph1" x="728" y="238" style="fill:var(--bl)">idle</text>
+<text class="sd ph2" x="728" y="238" style="fill:var(--bl)">sense amp pushes it high</text>
+<text class="sd ph3" x="728" y="238" style="fill:var(--bl)">idle</text>
+<text class="sd ph4" x="728" y="238" style="fill:var(--bl)">nudged by cell, then restored</text>
+<text class="sd ph5" x="728" y="238" style="fill:var(--bl)">driven low (0)</text>
+<text class="sd ph6" x="728" y="238" style="fill:var(--bl)">idle</text>
+<text class="sk" x="655" y="272">Stored charge vs. time (illustrative)</text>
+<path d="M700 287 V405 H885" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
+<path d="M700 350.0 H885" stroke="var(--leak)" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
+<text class="sm" x="892" y="349" style="fill:var(--leak)">sense</text><text class="sm" x="892" y="364" style="fill:var(--leak)">level</text>
+<polyline points="700.0,405.0 713.2,295.0 715.9,295.0 785.9,341.2 800.4,295.0 818.9,295.0 826.9,317.0 840.1,295.0 852.0,295.0 862.5,405.0 885.0,405.0" fill="none" stroke="var(--charge)" stroke-width="2.5" stroke-linejoin="round"/>
+<g class="mx" transform="translate(713.2142857142857,0)"><g class="my" transform="translate(0,295.0)"><circle r="6" fill="var(--gon)" stroke="var(--bg)" stroke-width="2"/></g></g>
+<text class="sm" x="694" y="299" text-anchor="end">1</text><text class="sm" x="694" y="409" text-anchor="end">0</text>
+<text class="sm" x="708" y="423" text-anchor="middle">W1</text>
+<text class="sm" x="751" y="423" text-anchor="middle">leak</text>
+<text class="sm" x="796" y="423" text-anchor="middle">refresh</text>
+<text class="sm" x="835" y="423" text-anchor="middle">read</text>
+<text class="sm" x="863" y="423" text-anchor="middle">W0</text>
+<rect x="655" y="478" width="16" height="12" style="fill:var(--electrode)"/>
+<text class="sm" x="677" y="489" style="font-size:13px;fill:var(--text)">Capacitor electrode</text>
+<rect class="plate" x="655" y="502" width="16" height="12"/>
+<text class="sm" x="677" y="513" style="font-size:13px;fill:var(--text)">Top plate</text>
+<rect class="gon" x="655" y="526" width="16" height="12"/>
+<text class="sm" x="677" y="537" style="font-size:13px;fill:var(--text)">Buried word line</text>
+<rect class="blm" x="655" y="550" width="16" height="12"/>
+<text class="sm" x="677" y="561" style="font-size:13px;fill:var(--text)">Bit line</text>
+<rect x="820" y="482" width="16" height="3" style="fill:var(--diel)"/>
+<text class="sm" x="842" y="489" style="font-size:13px;fill:var(--text)">Thin dielectric</text>
+<rect class="np" x="820" y="502" width="16" height="12"/>
+<text class="sm" x="842" y="513" style="font-size:13px;fill:var(--text)">n+ source/drain</text>
+<rect class="si" x="820" y="526" width="16" height="12"/>
+<text class="sm" x="842" y="537" style="font-size:13px;fill:var(--text)">p-type silicon</text>
+<rect class="chg" x="820" y="550" width="16" height="12"/>
+<text class="sm" x="842" y="561" style="font-size:13px;fill:var(--text)">Stored charge</text>
+<text class="sm" x="655" y="590">Charge level shown simplified; values illustrative.</text></svg>

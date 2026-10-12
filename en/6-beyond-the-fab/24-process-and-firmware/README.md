@@ -40,6 +40,10 @@ As DRAM cells get denser, neighboring cells disturb each other more easily. In 2
 
 It is not only a reliability problem but also a security problem, because an attacker may use it to change data they should not be able to change. Today's DRAM and memory controllers include mechanisms that detect this pattern and refresh the neighboring rows to defend against it.
 
+![Animation: DRAM cells leaking charge, refresh, and Row Hammer flipping bits in neighboring rows](../../../images/24-dram-refresh-rowhammer.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch24/dram-refresh-rowhammer.html) to try it yourself.*
+
 ---
 
 ## ECC: errors will happen

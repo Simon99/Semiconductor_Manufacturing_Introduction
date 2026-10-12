@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" role="img" aria-labelledby="ti">
+<title id="ti">MOSFET: raising the gate voltage above the threshold forms a channel and electrons flow from source to drain</title>
+<style>
+:root{--bg:#f7f9fc;--tx:#1b2733;--tx2:#4a5b6c;--sub:#f3dccf;--np:#bcd4f2;--fox:#e3e6ec;--ox:#7fb2e5;--gate:#8e99a8;--metal:#d9a520;--chan:#2f6fe0;--el:#1646b8;--gbg:#dbe2ea;--gf:#e0892b;--boff:#d5dae1;--bon:#1f8a4c;--plus:#b3261e;--line:#556677;}
+@media (prefers-color-scheme:dark){:root{--bg:#f7f9fc;--tx:#1b2733;--tx2:#4a5b6c;--sub:#f3dccf;--np:#bcd4f2;--fox:#e3e6ec;--ox:#7fb2e5;--gate:#8e99a8;--metal:#d9a520;--chan:#2f6fe0;--el:#1646b8;--gbg:#dbe2ea;--gf:#e0892b;--boff:#d5dae1;--bon:#1f8a4c;--plus:#b3261e;--line:#556677;}}
+
+.fox{fill:var(--fox)}.sub{fill:var(--sub)}.nplus{fill:var(--np)}.oxide{fill:var(--ox)}.gate{fill:var(--gate)}.metal{fill:var(--metal)}
+.chan{fill:var(--chan)}.el{fill:var(--el)}.elm{stroke:var(--bg);stroke-width:2;fill:none}
+.wire{stroke:var(--metal);stroke-width:5}.lead{stroke:var(--line);stroke-width:1.5}
+.t{font:14px system-ui,-apple-system,"Segoe UI",sans-serif;fill:var(--tx)}.t.b{font-weight:700;font-size:15px}.t.s{fill:var(--tx2);font-size:13px}
+.t.gl{font-weight:700;font-size:16px;fill:#fff}.t.bw{font-weight:700;font-size:15px;fill:#fff}
+.plus{font:700 18px system-ui,sans-serif;fill:var(--plus)}
+.gbg{fill:var(--gbg)}.gfill{fill:var(--gf)}.vt{stroke:var(--tx);stroke-width:2;stroke-dasharray:3 3}
+.boff{fill:var(--boff)}.bon{fill:var(--bon)}
+
+#gfill{transform-box:fill-box;transform-origin:left center;animation:g 12s linear infinite -5s}
+#plus{animation:g 12s linear infinite -5s}
+#chan{animation:c 12s linear infinite -5s}
+#elgrp{animation:e 12s linear infinite -5s}
+#ston{animation:c 12s linear infinite -5s}
+#stoff{animation:o 12s linear infinite -5s}
+@keyframes g{0%,15%{transform:scaleX(0);opacity:0}35%,80%{transform:scaleX(1);opacity:1}92%,100%{transform:scaleX(0);opacity:0}}
+@keyframes c{0%,24%{opacity:0}30%,82%{opacity:1}87%,100%{opacity:0}}
+@keyframes e{0%,28%{opacity:0}33%,80%{opacity:1}85%,100%{opacity:0}}
+@keyframes o{0%,24%{opacity:1}30%,82%{opacity:0}87%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){#gfill,#plus,#chan,#elgrp,#ston,#stoff{animation:none}#stoff{opacity:0}#elgrp animateTransform{display:none}}
+
+</style>
+<rect width="960" height="520" fill="#f7f9fc"/>
+<text x="60" y="34" style="font:700 22px system-ui,sans-serif;fill:var(--tx)">How a MOSFET switch turns on</text>
+<rect id="gaugebg" class="gbg" x="60" y="68" width="300" height="14" rx="7"/>
+<rect id="gfill" class="gfill" x="60" y="68" width="300" height="14" rx="7"/>
+<line class="vt" x1="210" y1="62" x2="210" y2="88"/>
+<text class="t b" x="60" y="58">Gate voltage Vg</text>
+<text class="t s" x="210" y="106" text-anchor="middle">Vt (illustrative)</text>
+<text class="t s" x="60" y="106">0 V</text>
+<g id="stoff"><rect class="boff" x="520" y="52" width="380" height="42" rx="8"/><text class="t b" x="710" y="79" text-anchor="middle">OFF: switch open, no current</text></g>
+<g id="ston"><rect class="bon" x="520" y="52" width="380" height="42" rx="8"/><text class="t bw" x="710" y="79" text-anchor="middle">ON: switch closed, current flows</text></g>
+<rect id="fox" class="fox" x="60" y="250" width="840" height="50"/>
+<rect class="sub" x="60" y="300" width="840" height="170"/>
+<path class="nplus" d="M120 300H330V360Q330 375 315 375H135Q120 375 120 360Z"/>
+<path class="nplus" d="M630 300H840V360Q840 375 825 375H645Q630 375 630 360Z"/>
+<rect class="oxide" x="330" y="285" width="300" height="15"/>
+<rect class="gate" x="330" y="222" width="300" height="63" rx="3"/>
+<rect class="metal" x="190" y="250" width="70" height="50"/><rect class="metal" x="700" y="250" width="70" height="50"/>
+<line class="wire" x1="225" y1="250" x2="225" y2="150"/>
+<line class="wire" x1="480" y1="222" x2="480" y2="150"/>
+<line class="wire" x1="735" y1="250" x2="735" y2="150"/>
+<text class="t b" x="225" y="132" text-anchor="middle">Source (S)</text><text class="t s" x="225" y="147" text-anchor="middle" dy="-0">0 V reference</text>
+<text class="t b" x="480" y="132" text-anchor="middle">Gate (G)</text><text class="t s" x="480" y="147" text-anchor="middle">voltage Vg</text>
+<text class="t b" x="735" y="132" text-anchor="middle">Drain (D)</text><text class="t s" x="735" y="147" text-anchor="middle">positive voltage</text>
+<text class="t gl" x="480" y="258" text-anchor="middle">Gate</text>
+<g id="plus"><text class="plus" x="365" y="279" text-anchor="middle">+</text><text class="plus" x="410" y="279" text-anchor="middle">+</text><text class="plus" x="455" y="279" text-anchor="middle">+</text><text class="plus" x="500" y="279" text-anchor="middle">+</text><text class="plus" x="545" y="279" text-anchor="middle">+</text><text class="plus" x="590" y="279" text-anchor="middle">+</text></g>
+<text class="t s" x="225" y="345" text-anchor="middle">N+ source</text><text class="t s" x="735" y="345" text-anchor="middle">N+ drain</text>
+<text class="t s" x="480" y="458" text-anchor="middle" >P-type silicon (body)</text>
+<rect id="chan" class="chan" x="330" y="300" width="300" height="16"/>
+<line class="lead" x1="650" y1="232" x2="632" y2="292"/><text class="t b" x="652" y="208">Gate oxide</text><text class="t s" x="652" y="224">thin insulator</text>
+<line class="lead" x1="480" y1="395" x2="480" y2="318"/><text class="t b" x="480" y="412" text-anchor="middle">Channel</text><text class="t s" x="480" y="428" text-anchor="middle">forms under the gate</text>
+<g id="elgrp">
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="0.0s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-0.5s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-1.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-1.0s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-1.5s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-2.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-2.0s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-2.5s" repeatCount="indefinite"/></g>
+<g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-3.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-3.0s" repeatCount="indefinite"/></g>
+</g>
+
+<text class="t s" x="480" y="500" text-anchor="middle">NMOS cross-section, simplified and not to scale. Vt and voltages are illustrative.</text>
+</svg>

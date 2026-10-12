@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dual damascene, step by step</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1f2937; --mute:#566174; --line:#d5dbe4; --accent:#c2620a; --accent-bg:#fde9d2;
+  --diel:#c9d3e0; --diel2:#aebbcc; --cuL:#d9822b; --cu:#e8903a; --seed:#ffd9a8; --barrier:#34425c; --cap:#2a9d8f;
+  --pad:#6b7280; --panel:#f4f6f9; --cuink:#2b1a05;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1319; --card:#161d27; --ink:#e6ebf2; --mute:#9aa6b8; --line:#2d3848; --accent:#fbbf6a; --accent-bg:#3a2a14;
+    --diel:#3a4658; --diel2:#2b3544; --cuL:#c9762a; --cu:#e08a35; --seed:#f6c48e; --barrier:#a9bde6; --cap:#34c3b0;
+    --pad:#8b95a5; --panel:#0f151d; --cuink:#1b1204;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1319; --card:#161d27; --ink:#e6ebf2; --mute:#9aa6b8; --line:#2d3848; --accent:#fbbf6a; --accent-bg:#3a2a14;
+  --diel:#3a4658; --diel2:#2b3544; --cuL:#c9762a; --cu:#e08a35; --seed:#f6c48e; --barrier:#a9bde6; --cap:#34c3b0;
+  --pad:#8b95a5; --panel:#0f151d; --cuink:#1b1204;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 28px}
+.back{display:inline-block;color:var(--accent);font-size:14px;text-decoration:none;margin-bottom:6px}
+.back:hover{text-decoration:underline}
+h1{font-size:24px;margin:2px 0 4px}
+.sub{margin:0 0 12px;color:var(--mute);font-size:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+#sv{display:block;width:100%;height:auto;background:var(--panel);border-radius:8px}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.diel{fill:var(--diel)}.diel2{fill:var(--diel2)}.cuL{fill:var(--cuL)}.cu{fill:var(--cu)}
+.cap{fill:var(--cap)}.pad{fill:var(--pad)}.void{fill:var(--panel)}
+.seedst{stroke:var(--seed);fill:none}.barst{stroke:var(--barrier);fill:none}
+.lbl{font-size:12px;fill:var(--ink)}.lblCu{font-size:12px;fill:var(--cuink)}.padt{font-size:12px;fill:#fff;font-weight:600}
+.lead{stroke:var(--ink);stroke-width:1;fill:none}.arrow{fill:#fff}
+.steps{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:6px}
+.steps button{width:100%;text-align:left;font:inherit;font-size:14px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 10px;cursor:pointer;display:flex;gap:10px;align-items:center;min-height:38px}
+.steps button .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:12px;font-weight:700}
+.steps button[aria-current="true"]{background:var(--accent-bg);border-color:var(--accent)}
+.steps button[aria-current="true"] .n{background:var(--accent);color:var(--card)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.row button{font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;min-height:38px}
+.row button:hover{border-color:var(--accent)}
+#cap{margin:6px 0 10px;font-size:15px;min-height:4.4em}
+.ctl{display:block;margin:10px 0;font-size:14px}
+.ctl input[type=range]{width:100%}
+.ctl b{color:var(--accent)}
+.read{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:14px;margin:8px 0 0;padding-top:8px;border-top:1px solid var(--line)}
+.read dt{color:var(--mute)}.read dd{margin:0;font-weight:600}
+.bad{color:#d1365a}.good{color:#1f9d6b}
+.note{font-size:12.5px;color:var(--mute);margin:10px 0 0}
+@media (max-width:820px){.lbl,.lblCu,.padt{font-size:15px}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--mute);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="back" href="../../en/2-process-modules/10-metallization/README.md">&larr; Back to chapter</a>
+<h1>Dual damascene, step by step</h1>
+<p class="sub">Cross-section of one new metal level: the via and the wire trench are filled with copper in a single pass. Schematic, not to scale.</p>
+<div class="grid">
+  <section class="card">
+    <svg id="sv" viewBox="30 90 570 380" role="img" aria-label="Cross-section of the dual damascene flow: dielectric, etch, barrier and seed, copper plating, CMP, cap layer"></svg>
+    <div class="legend">
+      <span><i style="background:var(--diel)"></i>Dielectric (low-k)</span>
+      <span><i style="background:var(--cu)"></i>Copper</span>
+      <span><i style="background:var(--seed)"></i>Cu seed</span>
+      <span><i style="background:var(--barrier)"></i>Barrier</span>
+      <span><i style="background:var(--cap)"></i>Cap layer</span>
+    </div>
+    <label class="ctl">Timeline <input id="tl" type="range" min="0" max="14999" step="10" value="0" aria-label="Timeline"></label>
+  </section>
+  <aside class="card">
+    <ol class="steps" id="steps"></ol>
+    <div class="row">
+      <button id="prev" type="button">&larr; Prev</button>
+      <button id="play" type="button">Pause</button>
+      <button id="next" type="button">Next &rarr;</button>
+    </div>
+    <p id="cap" aria-live="polite"></p>
+    <label class="ctl">Via width: <b id="vwv"></b> <input id="vw" type="range" min="36" max="90" step="2" value="60"></label>
+    <label class="ctl"><input id="add" type="checkbox" checked> Plating additives (bottom-up fill)</label>
+    <dl class="read">
+      <dt>Via depth</dt><dd id="r-depth"></dd>
+      <dt>Aspect ratio</dt><dd id="r-ar"></dd>
+      <dt>Cu share of via width</dt><dd id="r-share"></dd>
+      <dt>Plating result</dt><dd id="r-fill"></dd>
+    </dl>
+    <p class="note">All sizes are illustrative pixels, not real dimensions. The barrier is drawn at a fixed 6 px per side, so a narrower via leaves less room for copper. Turn the additives off to see the opening close first and trap a void.</p>
+  </aside>
+</div>
+</main>
+<script>
+"use strict";
+const STAGES=["Deposit dielectric","Etch via and trench","Barrier and seed layers","Copper plating (then anneal)","Copper CMP","Cap layer"];
+const CAPS=[
+ ["CVD lays down the insulating layer","(low-k in advanced chips) over the","finished lower copper wire."],
+ ["Lithography and etching open a narrow","via down to the lower wire and a wider","trench above it for the new wire. The","cap is opened at the via bottom."],
+ ["A very thin barrier stops copper from","diffusing out; a thin copper seed layer","gives plating a place to start."],
+ ["Plating fills via and trench in one go,","growing faster at the bottom than at","the opening (bottom-up). An anneal","then stabilizes the copper."],
+ ["CMP polishes away the copper (and","barrier) outside the trenches, leaving","a flat surface and separate wires."],
+ ["A thin cap layer seals the copper","against oxidation and diffusion. The","next metal level repeats this flow."]
+];
+const SLOT=2500, CYCLE=SLOT*6, CX=300, FIELD=190, FLOOR=270, CAPY=392, CU0=400;
+function clamp(x){return x<0?0:x>1?1:x}
+// Shared drawing: returns SVG markup for stage s (0..5), params P={vw,add}, progress prog (0..1), opts {id}
+function stageSVG(s,P,prog,o){
+  const id=o.id, w=P.vw, vl=CX-w/2, vr=CX+w/2;
+  const body=(bot)=>`M30,${FIELD} L200,${FIELD} L200,${FLOOR} L${vl},${FLOOR} L${vl},${bot} L${vr},${bot} L${vr},${FLOOR} L400,${FLOOR} L400,${FIELD} L470,${FIELD} L470,${FLOOR} L560,${FLOOR} L560,${FIELD} L600,${FIELD}`;
+  let h='';
+  h+=`<rect class="diel2" x="30" y="400" width="570" height="70"/>`;
+  h+=`<rect class="cuL" x="190" y="400" width="220" height="70"/>`;
+  if(s===0){
+    h+=`<rect class="diel" x="30" y="${FIELD}" width="570" height="${CAPY-FIELD}"/>`;
+    h+=`<rect class="cap" x="30" y="${CAPY}" width="570" height="8"/>`;
+  }else{
+    h+=`<path class="diel" d="${body(CAPY)} L600,${CAPY} L30,${CAPY} Z"/>`;
+    h+=`<rect class="cap" x="30" y="${CAPY}" width="${vl-30}" height="8"/><rect class="cap" x="${vr}" y="${CAPY}" width="${600-vr}" height="8"/>`;
+  }
+  // labels
+  h+=`<text class="lbl" x="45" y="212">Upper dielectric</text>`;
+  h+=`<text class="lbl" x="45" y="452">Lower dielectric</text>`;
+  h+=`<text class="lblCu" x="200" y="440">Lower Cu wire</text>`;
+  h+=`<text class="lbl" x="45" y="386">cap / etch stop</text>`;
+  if(s>=1){
+    h+=`<text class="lbl" x="192" y="250" text-anchor="end">wire trench &#9656;</text>`;
+    h+=`<text class="lbl" x="${vl-8}" y="335" text-anchor="end">via &#9656;</text>`;
+  }
+  if(s>=2){
+    const prof=body(CU0)+` L600,100 L30,100 Z`;
+    h+=`<clipPath id="${id}o"><path d="${prof}"/></clipPath>`;
+    h+=`<clipPath id="${id}f"><rect x="0" y="${FIELD}" width="700" height="300"/></clipPath>`;
+    h+=`<clipPath id="${id}t"><rect x="0" y="0" width="700" height="${FIELD}"/></clipPath>`;
+    const bands=`<path class="seedst" d="${body(CU0)}" stroke-width="18"/><path class="barst" d="${body(CU0)}" stroke-width="12"/>`;
+    h+=`<g clip-path="url(#${id}o)">`;
+    if(s===2){
+      h+=bands;
+    }else if(s===3){
+      const sy=0.02+0.98*clamp(prog);
+      h+=`<rect class="cu grow" x="30" y="160" width="570" height="240" transform="translate(0 400) scale(1 ${sy.toFixed(4)}) translate(0 -400)"/>`;
+      h+=bands;
+      if(!P.add) h+=`<ellipse class="void" cx="${CX}" cy="340" rx="${Math.max(4,w/2-12)}" ry="46" opacity="${clamp((prog-0.6)/0.3).toFixed(3)}"/>`;
+      else h+=`<path class="arrow" d="M${CX-7},368 L${CX+7},368 L${CX},350 Z" opacity="${(1-clamp((prog-0.7)/0.3)).toFixed(3)}"/>`;
+    }else{
+      const sy=s===4?(1-0.125*clamp(prog)):0.875;
+      h+=`<rect class="cu polish" x="30" y="160" width="570" height="240" transform="translate(0 400) scale(1 ${sy.toFixed(4)}) translate(0 -400)"/>`;
+      if(!P.add) h+=`<ellipse class="void" cx="${CX}" cy="340" rx="${Math.max(4,w/2-12)}" ry="46"/>`;
+      h+=`<g clip-path="url(#${id}f)">${bands}</g>`;
+      h+=`<g clip-path="url(#${id}t)" class="fieldb" opacity="${s===4?(1-clamp(prog)).toFixed(3):0}">${bands}</g>`;
+    }
+    h+=`</g>`;
+  }
+  if(s===2){
+    h+=`<text class="lbl" x="40" y="132">Cu seed</text><path class="lead" d="M75,137 L75,182"/>`;
+    h+=`<text class="lbl" x="120" y="150">barrier (blocks Cu diffusion)</text><path class="lead" d="M140,155 L140,187"/>`;
+  }
+  if(s===3){
+    h+=`<text class="lbl" x="45" y="150">copper overburden (removed later by CMP)</text>`;
+    h+=P.add?`<text class="lbl" x="${vr+10}" y="335">&#9666; fills bottom-up</text>`
+            :`<text class="lbl" x="${vr+10}" y="335">&#9666; opening closes first: void</text>`;
+  }
+  if(s===4){
+    const dy=30*clamp(prog);
+    h+=`<g class="padg" transform="translate(0 ${dy.toFixed(2)})"><rect class="pad" x="30" y="134" width="570" height="26"/><text class="padt" x="42" y="152">polishing pad + slurry</text></g>`;
+  }
+  if(s===5){
+    h+=`<rect class="cap" x="30" y="182" width="570" height="8"/>`;
+    h+=`<text class="lbl" x="45" y="172">new cap layer &#9662;</text>`;
+  }
+  return h;
+}
+if(typeof document!=="undefined"){(function(){
+  const $=id=>document.getElementById(id);
+  const q=new URLSearchParams(location.search);
+  const th=q.get("theme"); if(th==="dark"||th==="light") document.documentElement.setAttribute("data-theme",th);
+  const P={vw:60,add:true};
+  let T=0, playing=true, tweenEnd=-1, last=null, dirty=true;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const steps=$("steps");
+  STAGES.forEach((n,i)=>{const li=document.createElement("li");const b=document.createElement("button");b.type="button";b.innerHTML=`<span class="n">${i+1}</span><span>${n}</span>`;b.onclick=()=>goStage(i);li.appendChild(b);steps.appendChild(li)});
+  function stageOf(t){return Math.floor(t/SLOT)%6}
+  function progOf(t){return clamp((t%SLOT)/2000)}
+  function goStage(i){i=(i+6)%6;playing=false;T=i*SLOT;tweenEnd=i*SLOT+2000;$("play").textContent="Play";dirty=true}
+  function render(){
+    const s=stageOf(T), p=progOf(T);
+    $("sv").innerHTML=stageSVG(s,P,p,{id:"h"});
+    [...steps.querySelectorAll("button")].forEach((b,i)=>{if(i===s)b.setAttribute("aria-current","true");else b.removeAttribute("aria-current")});
+    $("cap").textContent=CAPS[s].join(" ");
+    $("tl").value=Math.min(14999,Math.round(T));
+    const w=P.vw, depth=FLOOR<CU0?CU0-FLOOR:0;
+    $("vwv").textContent=w+" px (illustrative)";
+    $("r-depth").textContent=depth+" px";
+    $("r-ar").textContent=(depth/w).toFixed(1)+" : 1";
+    $("r-share").textContent=Math.round((w-12)/w*100)+"% (barrier takes "+Math.round(12/w*100)+"%)";
+    const f=$("r-fill");
+    if(s<3){f.textContent="Not plated yet";f.className=""}
+    else if(P.add){f.textContent="Void-free: bottom-up fill";f.className="good"}
+    else{f.textContent="Void trapped in via: resistance up, breaks sooner";f.className="bad"}
+    dirty=false;
+  }
+  function loop(now){
+    if(last===null)last=now;
+    const dt=Math.min(100,now-last);last=now;
+    if(playing){T=(T+dt)%CYCLE;dirty=true}
+    else if(tweenEnd>=0&&T<tweenEnd){T=Math.min(tweenEnd,T+dt);dirty=true}
+    if(dirty)render();
+    requestAnimationFrame(loop);
+  }
+  $("prev").onclick=()=>goStage(stageOf(T)-1);
+  $("next").onclick=()=>goStage(stageOf(T)+1);
+  $("play").onclick=()=>{playing=!playing;tweenEnd=-1;$("play").textContent=playing?"Pause":"Play";dirty=true};
+  $("vw").oninput=e=>{P.vw=+e.target.value;dirty=true};
+  $("add").onchange=e=>{P.add=e.target.checked;dirty=true};
+  $("tl").oninput=e=>{playing=false;tweenEnd=-1;T=+e.target.value;$("play").textContent="Play";dirty=true};
+  window.__setTime=function(ms){playing=false;tweenEnd=-1;T=((ms%CYCLE)+CYCLE)%CYCLE;$("play").textContent="Play";render()};
+  window.__params=P; window.__refresh=()=>{$("vw").value=P.vw;$("add").checked=P.add;render()};
+  const tq=q.get("t");
+  if(tq!==null){window.__setTime(+tq)}
+  else if(q.get("still")==="1"||reduce){window.__setTime(CYCLE-1)}
+  render();
+  if(playing)requestAnimationFrame(loop);
+  else requestAnimationFrame(loop);
+})()}
+</script>
+</body>
+</html>

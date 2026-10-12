@@ -46,7 +46,9 @@ Each lithography step uses one mask and is called a **mask layer**. The whole fl
 6. **Source and drain**: Implant a deep, heavy dose. The spacers keep this implant a small distance away from the gate. Then anneal to activate.
 7. **Silicide**: Deposit a metal and heat it so it reacts with the silicon on the source, drain and gate, forming a compound with very low resistance that makes the later connections easier.
 
-<!-- Figure: FEOL cross-sections step by step (isolation → wells → gate → spacers → source/drain → silicide) -->
+![Animation: the front-end flow building NMOS and PMOS transistors step by step, from isolation to silicide](../../../images/11-feol-flow.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch11/feol-flow.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | STI (Shallow Trench Isolation, 淺溝槽隔離)**

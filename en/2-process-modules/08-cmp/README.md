@@ -34,7 +34,9 @@ The main parts of a CMP tool:
 
 During polishing, the chemicals in the slurry first soften or react with the wafer surface, and then the abrasive particles wear away the softened material. High spots feel more pressure and are polished faster, so the surface becomes flatter and flatter.
 
-<!-- Figure: a CMP tool (rotating platen, pad, polishing head, slurry nozzle, conditioner) -->
+![Animation: a CMP tool with a spinning platen, pad, polishing head, slurry nozzle and conditioner, with the Preston relation](../../../images/08-cmp-tool.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch08/cmp-tool.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | CMP (Chemical Mechanical Planarization, 化學機械研磨)**
@@ -69,7 +71,9 @@ Pads and slurry are consumables. As a pad wears, its polishing rate slowly chang
 
 CMP does not remove the same amount everywhere. Soft materials polish faster than hard ones, and dense pattern areas polish differently from sparse ones. This leads to two classic problems:
 
-<!-- Figure: cross-sections comparing dishing and erosion -->
+![Animation: dishing in a wide copper line and erosion across a dense area as polishing time grows](../../../images/08-dishing-erosion.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch08/dishing-erosion.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Dishing and erosion (碟化與侵蝕)**

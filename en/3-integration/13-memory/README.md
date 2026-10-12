@@ -36,7 +36,9 @@ The biggest challenge in DRAM manufacturing is the capacitor. The cell area keep
 
 To save area, DRAM transistors also have their gates buried in the silicon. These are called **buried word lines**.
 
-<!-- Figure: DRAM memory cell cross-section (buried word line, bit line, tall cylindrical capacitor) -->
+![Animation: a DRAM cell as a transistor and capacitor, showing write, leak, refresh and read](../../../images/13-dram-cell.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch13/dram-cell.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | DRAM (Dynamic Random Access Memory, 動態隨機存取記憶體)**
@@ -64,7 +66,9 @@ Early NAND was planar. Once it shrank past a certain point, each cell could hold
 
 Many 3D NAND designs also place the periphery circuits **directly underneath** the memory array to save more area.
 
-<!-- Figure: 3D NAND cross-section (alternating stacked layers, vertical channel holes, staircase at the edge) -->
+![Animation: a 3D NAND cross-section with stacked layers, vertical channel holes and a staircase at the edge](../../../images/13-3d-nand.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch13/3d-nand.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | 3D NAND**

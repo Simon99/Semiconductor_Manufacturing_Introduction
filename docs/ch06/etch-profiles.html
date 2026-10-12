@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Etch profiles: isotropic vs anisotropic</title>
+<style>
+:root{--bg:#f1f3f8;--card:#fff;--ink:#1b2433;--mute:#44506a;--line:#c9ced8;--resist:#e2735a;--film:#6f9bd1;--stop:#8b909a;--red:#c0182b;--green:#2a7f62;--accent:#2457c5;--cav:#fff}
+:root[data-theme=dark]{--bg:#12151c;--card:#1b2030;--ink:#e8ecf5;--mute:#a7b2c9;--line:#38405a;--resist:#e2735a;--film:#4f79b0;--stop:#6a707c;--red:#ff6b7d;--green:#4fcf9f;--accent:#7aa2ff;--cav:#1b2030}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12151c;--card:#1b2030;--ink:#e8ecf5;--mute:#a7b2c9;--line:#38405a;--film:#4f79b0;--stop:#6a707c;--red:#ff6b7d;--green:#4fcf9f;--accent:#7aa2ff;--cav:#1b2030}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--accent)}
+h1{font-size:24px;margin:6px 0 2px}
+.sub{color:var(--mute);margin:0 0 12px}
+.grid{align-items:start;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:16px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+svg{display:block;width:100%;height:auto}
+.t{fill:var(--ink)} .m{fill:var(--mute)}
+.cav{fill:var(--cav);stroke:var(--ink);stroke-width:1.6}
+label{display:block;font-weight:600;margin:6px 0 2px}
+input[type=range]{width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
+button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+td{padding:4px 0;border-top:1px solid var(--line)} td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.story{min-height:5.6em;margin:8px 0 0}
+.note{color:var(--mute);font-size:14px;margin-top:8px}
+.tag{display:inline-block;font-weight:700;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div><a href="../../en/2-process-modules/06-etching/README.md">&larr; Back to chapter</a></div>
+<h1>Isotropic vs anisotropic etching</h1>
+<p class="sub">Drag the anisotropy slider and watch the sidewall and the undercut under the resist change.</p>
+<div class="grid">
+<div class="card">
+<svg id="sc" viewBox="0 0 640 400" role="img" aria-label="Cross-section of a film being etched under a photoresist opening">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--green)"/></marker></defs>
+<rect x="20" y="130" width="600" height="140" fill="var(--film)"/>
+<rect x="20" y="270" width="600" height="50" fill="var(--stop)"/>
+<text x="30" y="300" font-size="14" fill="#fff">layer below (etch stop)</text>
+<path id="g0" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" opacity=".8"/>
+<path id="g1" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" opacity=".8"/>
+<path id="cav" class="cav"/>
+<rect x="20" y="90" width="220" height="40" fill="var(--resist)"/>
+<rect x="400" y="90" width="220" height="40" fill="var(--resist)"/>
+<text x="30" y="116" font-size="14" font-weight="600" fill="#fff">photoresist</text>
+<g id="arr"></g>
+<g stroke="var(--mute)" stroke-width="1.5"><line x1="240" y1="82" x2="400" y2="82"/><line x1="240" y1="77" x2="240" y2="87"/><line x1="400" y1="77" x2="400" y2="87"/></g>
+<text x="320" y="72" text-anchor="middle" font-size="13" class="m">resist opening</text>
+<g id="dim" stroke="var(--red)" stroke-width="3"><line id="dl" y1="146" y2="146"/><line id="dt" y1="139" y2="153"/></g>
+<text id="dtxt" y="172" text-anchor="end" font-size="15" font-weight="700" fill="var(--red)" stroke="var(--cav)" stroke-width="4" paint-order="stroke">undercut</text>
+<text x="620" y="345" text-anchor="end" font-size="13" class="m">dashed: isotropic (0) and fully anisotropic (1) at the same etch time</text>
+<text id="sw" x="320" y="380" text-anchor="middle" font-size="16" font-weight="700" class="t"></text>
+</svg>
+</div>
+<div class="card">
+<label for="a">Anisotropy: <span id="av">1.00</span> <span class="m" style="font-weight:400">(0 = same speed in all directions, 1 = straight down only)</span></label>
+<input id="a" type="range" min="0" max="1" step="0.01" value="1">
+<label for="tt">Etch progress: <span id="tv"></span></label>
+<input id="tt" type="range" min="0" max="1.1" step="0.005" value="0">
+<div class="row"><button id="play">Pause</button><button id="reset">Restart</button></div>
+<div class="row" id="stages">
+<button data-t="0">1 Mask</button><button data-t="0.5">2 Etching</button><button data-t="1">3 Reach layer</button><button data-t="1.1">4 Over etch</button>
+</div>
+<p class="story" id="story"></p>
+<table>
+<tr><td>Vertical : sideways etch rate</td><td id="r"></td></tr>
+<tr><td>Depth (x film thickness)</td><td id="d"></td></tr>
+<tr><td>Undercut per side (x film thickness)</td><td id="u"></td></tr>
+<tr><td>Hole wider than resist opening by</td><td id="w"></td></tr>
+<tr><td>Typical of</td><td id="k"></td></tr>
+</table>
+<p class="note">Illustrative geometric model: sideways rate = (1 &minus; anisotropy) &times; vertical rate. Real profiles also depend on chemistry, ions, pressure and sidewall passivation. Dry etching is not always anisotropic: some dry etches are tuned to be isotropic on purpose.</p>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var T=140,YF=130,W=160,CX=320,N=26,TEND=1.1,LOOP=9000;
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
+var $=function(i){return document.getElementById(i)};
+var a=q.get('a')!==null?Math.min(1,Math.max(0,parseFloat(q.get('a')))):1;
+var t=0,playing=true,last=null,lastA=null;
+function cav(a,t){
+ var L=(1-a)*t*T,ry=t*T,x0=CX-W/2,x1=CX+W/2,p=[],i,g;
+ for(i=0;i<=N;i++){g=Math.PI/2*i/N;p.push([x0-L*Math.cos(g),YF+Math.min(ry*Math.sin(g),T)])}
+ for(i=N;i>=0;i--){g=Math.PI/2*i/N;p.push([x1+L*Math.cos(g),YF+Math.min(ry*Math.sin(g),T)])}
+ return 'M'+p.map(function(s){return s[0].toFixed(1)+' '+s[1].toFixed(1)}).join(' L')+'Z';
+}
+function arrows(a){
+ var s='',i,dx;
+ var iso=[-60,-30,0,30,60];
+ for(i=0;i<5;i++){dx=iso[i];s+='<line x1="'+(CX+dx*.2)+'" y1="10" x2="'+(CX+dx*1.1)+'" y2="52" stroke="var(--green)" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5" opacity="'+(1-a).toFixed(2)+'"><animate attributeName="stroke-dashoffset" values="0;-22" dur="1.1s" repeatCount="indefinite"/></line>';}
+ [-48,-16,16,48].forEach(function(d){s+='<line x1="'+(CX+d)+'" y1="10" x2="'+(CX+d)+'" y2="52" stroke="var(--green)" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5" opacity="'+a.toFixed(2)+'"><animate attributeName="stroke-dashoffset" values="0;-22" dur=".7s" repeatCount="indefinite"/></line>';});
+ s+='<text x="480" y="30" font-size="13" font-weight="600" fill="var(--green)" opacity="'+a.toFixed(2)+'">ions, straight down</text>';
+ s+='<text x="480" y="48" font-size="13" font-weight="600" fill="var(--green)" opacity="'+(1-a).toFixed(2)+'">etchant, all directions</text>';
+ return s;
+}
+function kind(a){return a<0.15?'Wet etch (chemical, isotropic)':a<0.6?'Plasma etch with a strong chemical part':a<0.9?'Plasma etch, mostly ion-driven':'Ideal ion-driven plasma etch';}
+function sidewall(a){return a<0.15?'Rounded sidewall, strong undercut':a<0.6?'Bowed sidewall, clear undercut':a<0.9?'Nearly straight, slight undercut':'Straight, vertical sidewall';}
+function stage(t){return t<0.02?0:t<0.98?1:t<1.0?2:t<1.06?2:3}
+var STORY=[
+ '1. Mask. After lithography the pattern exists only in the photoresist. Where resist covers the film, it is protected.',
+ '2. Etching. The film under the opening is removed. With low anisotropy the etch also creeps sideways under the resist; with high anisotropy it only goes down.',
+ '3. Reached the layer below. Plasma light changes here (endpoint detection). The hole depth now equals the film thickness.',
+ '4. Over etch. The etch continues a little to clear the film everywhere. Sideways etching, if any, keeps growing: the undercut gets bigger.'];
+function render(){
+ var L=(1-a)*t*T;
+ $('cav').setAttribute('d',cav(a,t));
+ $('g0').setAttribute('d',cav(0,t));$('g1').setAttribute('d',cav(1,t));
+ var x0=CX-W/2;
+ $('dl').setAttribute('x1',(x0-L).toFixed(1));$('dl').setAttribute('x2',x0);
+ $('dt').setAttribute('x1',x0);$('dt').setAttribute('x2',x0);
+ $('dtxt').setAttribute('x',x0-10);$('dim').style.display=L<2?'none':'';
+ $('dtxt').textContent=L<2?'undercut ~ 0':'undercut';
+ $('av').textContent=a.toFixed(2);
+ $('tv').textContent=(t/TEND*100).toFixed(0)+'% of the planned time ('+(t<=1?'etching':'over etch')+')';
+ $('tt').value=t;$('a').value=a;
+ $('r').textContent='1 : '+(1-a).toFixed(2);
+ $('d').textContent=Math.min(t,1).toFixed(2);
+ $('u').textContent=(L/T).toFixed(2);
+ $('w').textContent=(2*L/T).toFixed(2)+' x film thickness';
+ $('k').textContent=kind(a);
+ $('sw').textContent=sidewall(a);
+ if(lastA!==a){$('arr').innerHTML=arrows(a);lastA=a}
+ var s=stage(t);$('story').textContent=STORY[s];
+ Array.prototype.forEach.call($('stages').children,function(b,i){b.className=i===s?'on':''});
+ $('play').textContent=playing?'Pause':'Play';
+}
+function frame(ts){
+ if(playing){if(last!==null){t+= (ts-last)/LOOP*TEND; if(t>TEND+0.15)t=0; if(t>TEND&&t<TEND+0.15){/* hold */}}
+  last=ts;render_t();}
+ else last=null;
+ requestAnimationFrame(frame);
+}
+function render_t(){var tt=Math.min(t,TEND);var s=t;t=tt;render();t=s;}
+$('a').addEventListener('input',function(e){a=parseFloat(e.target.value);render()});
+$('tt').addEventListener('input',function(e){playing=false;t=parseFloat(e.target.value);render()});
+$('play').addEventListener('click',function(){playing=!playing;if(playing&&t>=TEND)t=0;render()});
+$('reset').addEventListener('click',function(){t=0;playing=true;render()});
+Array.prototype.forEach.call($('stages').children,function(b){b.addEventListener('click',function(){playing=false;t=parseFloat(b.getAttribute('data-t'));render()})});
+window.__setTime=function(ms){playing=false;t=Math.max(0,Math.min(TEND,ms/LOOP*TEND));render();};
+if(q.get('still')==='1'){playing=false;t=TEND}
+else if(q.get('t')!==null){playing=false;t=Math.max(0,Math.min(TEND,parseFloat(q.get('t'))/LOOP*TEND))}
+render();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

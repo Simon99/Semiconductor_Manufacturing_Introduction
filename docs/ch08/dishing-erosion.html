@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dishing and erosion - interactive</title>
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#26282b;--mut:#5b6068;--line:#d5d8dd;--di:#c9d3df;--cu:#d98a4a;--cu2:#9a5524;--hot:#d6322a;--acc:#1f6feb}
+:root[data-theme=dark]{--bg:#16181c;--card:#1f2227;--ink:#e8eaed;--mut:#a3a9b2;--line:#3a3f47;--di:#4a5a70;--cu:#e0985a;--cu2:#f0b27c;--hot:#ff6a5f;--acc:#6aa5ff}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--acc)}
+h1{font-size:1.4rem;margin:6px 0 2px}
+p.sub{margin:0 0 10px;color:var(--mut);font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:inherit;fill:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;align-items:center}
+.row label{font-weight:600}
+input[type=range]{flex:1 1 260px;min-width:160px;accent-color:var(--acc)}
+button{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.on{border-color:var(--acc);outline:2px solid var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-size:1.35rem}
+.stat span{color:var(--mut);font-size:.85rem}
+.note{margin-top:12px;padding:10px 12px;border-left:4px solid var(--hot);background:var(--card);border-radius:6px}
+.small{color:var(--mut);font-size:.85rem;margin-top:10px}
+</style></head><body><main>
+<a href="../../en/2-process-modules/08-cmp/README.md">&larr; Back to chapter</a>
+<h1>Dishing and erosion: drag the over-polish time</h1>
+<p class="sub">One copper wiring layer after CMP, in cross-section. All depths are illustrative, not measured data.</p>
+<div class="card"><svg id="sv" viewBox="0 0 960 360" role="img" aria-label="Cross-section of a wide copper line and a dense array of narrow copper lines after CMP">
+<path id="di" fill="var(--di)"/>
+<path id="wd" fill="var(--cu)" stroke="var(--cu2)" stroke-width="1.5"/>
+<path id="nr" fill="var(--cu)" stroke="var(--cu2)" stroke-width="1.5"/>
+<line x1="40" y1="130" x2="920" y2="130" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="7 6" opacity=".6"/>
+<rect id="mw" x="267" y="130" width="7" fill="var(--hot)"/>
+<rect id="me" x="858" y="130" width="7" fill="var(--hot)"/>
+<line id="ml" x1="770" x2="868" stroke="var(--hot)" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="270" y="42" font-size="24" font-weight="700" text-anchor="middle" style="fill:var(--hot)">DISHING</text>
+<text x="270" y="68" font-size="19" text-anchor="middle">dip inside one wide line</text>
+<text x="610" y="42" font-size="24" font-weight="700" text-anchor="middle" style="fill:var(--hot)">EROSION</text>
+<text x="610" y="68" font-size="19" text-anchor="middle">whole dense area sits lower</text>
+<line x1="270" y1="78" x2="270" y2="118" stroke="var(--mut)"/><line x1="610" y1="78" x2="610" y2="118" stroke="var(--mut)"/>
+<text x="926" y="120" font-size="17" text-anchor="end">original flat level</text>
+<text x="270" y="338" font-size="19" text-anchor="middle">Wide line</text>
+<text x="610" y="338" font-size="19" text-anchor="middle">Dense narrow lines</text>
+<text x="90" y="338" font-size="19" text-anchor="middle">Sparse area</text>
+<text x="60" y="298" font-size="17" style="fill:var(--mut)">dielectric (hard)</text>
+<rect x="430" y="283" width="16" height="16" fill="var(--cu)" stroke="var(--cu2)"/><text x="454" y="298" font-size="17">copper (soft)</text>
+</svg></div>
+<div class="row"><label for="sl">Over-polish time</label><input id="sl" type="range" min="0" max="100" value="85" aria-describedby="rd"><span id="rd" style="min-width:5ch;font-weight:700">85%</span></div>
+<div class="row"><button id="b1">1 At endpoint</button><button id="b2">2 Over-polish begins</button><button id="b3">3 Long over-polish</button><button id="pp">Pause</button></div>
+<div class="note" id="cap"></div>
+<div class="grid">
+<div class="stat"><span>Dishing depth (wide line centre)</span><b id="s1"></b></div>
+<div class="stat"><span>Erosion depth (dense area vs field)</span><b id="s2"></b></div>
+<div class="stat"><span>Wide line: thickness left at centre</span><b id="s3"></b></div>
+<div class="stat"><span>Dense line: thickness left</span><b id="s4"></b></div>
+<div class="stat"><span>Wide line: local resistance R/R0</span><b id="s5"></b></div>
+<div class="stat"><span>Dense line: resistance R/R0</span><b id="s6"></b></div>
+</div>
+<p class="small">Model (illustrative): trench depth T0 = 300 nm drawn as 110 units. Dishing = 110 nm x t, erosion = 125 nm x t, small extra dishing in narrow lines = 16 nm x t, where t is the over-polish slider. Line resistance R = &rho;L/(W&middot;T), so with width and length fixed, R/R0 = T0/T. Soft copper polishing faster than hard dielectric, and dense areas polishing differently from sparse ones, are the causes given in the chapter. Dummy fill (chapter) evens out pattern density to reduce this.</p>
+</main>
+<script>
+(function(){
+var Y0=130,YB=240,BOT=290,DM=40,EM=46,DN=6,T0=300,PX=T0/110;
+var CYC=14000,KT=[0,.1,.2,.3,.8,.9,1],PV=[.85,.85,0,0,1,1,.85];
+var q=new URLSearchParams(location.search),th=q.get('theme');
+if(th==='dark'||th==='light')document.documentElement.dataset.theme=th;
+else if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark';
+var $=function(i){return document.getElementById(i)};
+function f(v){return v.toFixed(1)}
+function geo(p){
+ var e=EM*p,d=DM*p,pts=[[40,BOT],[40,Y0],[140,Y0],[140,YB],[400,YB],[400,Y0],[430,Y0],[470,Y0+e]];
+ for(var k=0;k<7;k++){var x=490+40*k;pts.push([x,Y0+e],[x,YB],[x+20,YB],[x+20,Y0+e]);}
+ pts.push([770,Y0+e],[810,Y0],[920,Y0],[920,BOT]);
+ var di='M'+pts.map(function(a){return f(a[0])+','+f(a[1])}).join(' L')+'Z';
+ var w=[[140,YB]];for(var i=0;i<9;i++){var x2=140+260*i/8,t=(x2-270)/130;w.push([x2,Y0+d*(1-t*t)]);}w.push([400,YB]);
+ var wd='M'+w.map(function(a){return f(a[0])+','+f(a[1])}).join(' L')+'Z';
+ var yt=Y0+e+DN*p,nr='';for(var k2=0;k2<7;k2++){var x3=490+40*k2;nr+='M'+x3+','+YB+' H'+(x3+20)+' V'+f(yt)+' H'+x3+'Z ';}
+ return{di:di,wd:wd,nr:nr,e:e,d:d,yt:yt};
+}
+var CAPS=['At the endpoint the surface is flat (dashed line). Nothing is dished or eroded yet.',
+'Over-polish begins: copper is soft, so it wears away faster than the hard dielectric beside it. The wide line starts to dip and the dense area starts to sink.',
+'Long over-polish: the wide line is clearly dished, and the whole dense area sits lower than the sparse field around it. Wires are thinner, so resistance goes up.'];
+var P=0.85,playing=!q.has('still'),t0=performance.now(),base=0;
+function pAt(ms){var u=((ms%CYC)+CYC)%CYC/CYC;for(var i=1;i<KT.length;i++){if(u<=KT[i]){var a=(u-KT[i-1])/(KT[i]-KT[i-1]);return PV[i-1]+(PV[i]-PV[i-1])*a;}}return PV[PV.length-1];}
+function render(p){
+ P=p;var g=geo(p);
+ $('di').setAttribute('d',g.di);$('wd').setAttribute('d',g.wd);$('nr').setAttribute('d',g.nr);
+ $('mw').setAttribute('height',f(g.d));$('me').setAttribute('height',f(g.e));
+ $('ml').setAttribute('y1',f(Y0+g.e));$('ml').setAttribute('y2',f(Y0+g.e));
+ $('sl').value=Math.round(p*100);$('rd').textContent=Math.round(p*100)+'%';
+ var r=function(v){return Math.round(v*PX/10)*10};
+ var dn=r(g.d),en=r(g.e),wl=(110-g.d)/110,dl=(110-g.e-DN*p)/110;
+ $('s1').textContent='~'+dn+' nm';$('s2').textContent='~'+en+' nm';
+ $('s3').textContent=Math.round(wl*100)+'%';$('s4').textContent=Math.round(dl*100)+'%';
+ $('s5').textContent=(1/wl).toFixed(2)+'x';$('s6').textContent=(1/dl).toFixed(2)+'x';
+ $('cap').textContent=CAPS[p<0.05?0:(p<0.6?1:2)];
+ $('b1').className=p<0.05?'on':'';$('b2').className=(p>=0.05&&p<0.6)?'on':'';$('b3').className=p>=0.6?'on':'';
+}
+function tick(now){if(playing){render(pAt(base+now-t0));}requestAnimationFrame(tick);}
+window.__setTime=function(ms){playing=false;$('pp').textContent='Play';render(pAt(ms));};
+function setp(v){playing=false;$('pp').textContent='Play';render(v);}
+$('sl').addEventListener('input',function(){setp(this.value/100)});
+$('b1').onclick=function(){setp(0)};$('b2').onclick=function(){setp(.4)};$('b3').onclick=function(){setp(1)};
+$('pp').onclick=function(){if(playing){playing=false;this.textContent='Play';}else{playing=true;base=0;t0=performance.now();var u=P;this.textContent='Pause';}};
+if(!playing)$('pp').textContent='Play';
+render(0.85);
+if(q.has('t'))window.__setTime(parseFloat(q.get('t')));
+requestAnimationFrame(tick);
+})();
+</script></body></html>

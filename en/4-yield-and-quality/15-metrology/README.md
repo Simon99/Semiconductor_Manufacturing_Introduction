@@ -53,7 +53,9 @@ Defect inspection usually has two steps:
 
 The result is a defect map showing the position and type of every defect on the wafer.
 
-<!-- Figure: the defect inspection flow (full-wafer scan → compare neighboring dies → mark differences → electron microscope review) -->
+![Animation: scanning a wafer, comparing neighboring dies, flagging differences and reviewing them with an electron microscope](../../../images/15-defect-inspection.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch15/defect-inspection.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Defect (缺陷)**

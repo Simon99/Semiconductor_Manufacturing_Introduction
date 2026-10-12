@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DRAM Refresh and Row Hammer</title>
+<style>
+:root{--bg:#f6f8fb;--panel:#fff;--ink:#17212f;--mute:#586679;--line:#cdd6e2;--band:#e6ecf5;--track:#f1f4f9;--accent:#2563eb;--ok:#2fa36b;--warn:#d68b00;--bad:#d64545;--ham:#e07a00;--chart1:#2563eb;--chart2:#9333ea}
+:root[data-theme="dark"]{--bg:#0f1722;--panel:#162231;--ink:#e8eef7;--mute:#9fb2c8;--line:#34475f;--band:#1f2f44;--track:#0c1420;--accent:#6aa5ff;--ok:#3ec585;--warn:#f0b43c;--bad:#ff6b6b;--ham:#ffb454;--chart1:#6aa5ff;--chart2:#c58bff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1722;--panel:#162231;--ink:#e8eef7;--mute:#9fb2c8;--line:#34475f;--band:#1f2f44;--track:#0c1420;--accent:#6aa5ff;--ok:#3ec585;--warn:#f0b43c;--bad:#ff6b6b;--ham:#ffb454;--chart1:#6aa5ff;--chart2:#c58bff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--accent)}
+h1{font-size:22px;margin:6px 0 4px}
+.sub{color:var(--mute);margin:0 0 10px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.card h2{font-size:15px;margin:0 0 6px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer}
+button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ctl{margin:8px 0}
+.ctl label{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+.ctl input[type=range]{width:100%}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0}
+.read{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin:8px 0;font-size:14px}
+.read b{text-align:right;font-variant-numeric:tabular-nums}
+.stage-text{background:var(--band);border-radius:8px;padding:8px 10px;margin:8px 0;min-height:4.4em}
+.status{font-weight:700;margin:6px 0}
+.bad{color:var(--bad)}.ok{color:var(--ok)}
+.note{color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div><a href="../../en/6-beyond-the-fab/24-process-and-firmware/README.md">&larr; Back to chapter</a></div>
+<h1>Why DRAM needs refresh, and what Row Hammer does</h1>
+<p class="sub">A DRAM bit is charge in a tiny capacitor, and capacitors leak. Move the sliders and watch which cells lose their bit. All numbers are <b>illustrative</b>.</p>
+<div class="stages" id="stages"></div>
+<div class="grid">
+ <div>
+  <div class="card"><h2>DRAM array (5 of many rows; cells store a 1)</h2><svg id="arr" viewBox="0 0 640 340" role="img" aria-label="DRAM cell array with charge levels"></svg></div>
+  <div class="card" style="margin-top:12px"><h2>Charge of two victim-row cells over three refresh windows</h2><svg id="chart" viewBox="0 0 640 230" role="img" aria-label="Charge versus time"></svg></div>
+ </div>
+ <div class="card">
+  <div class="stage-text" id="stext"></div>
+  <div class="ctl"><label for="T"><span>Refresh interval (full window)</span><span id="Tv"></span></label><input id="T" type="range" min="8" max="128" step="4" value="64"></div>
+  <div class="ctl"><label for="N"><span>Hammer count (aggressor activations per window)</span><span id="Nv"></span></label><input id="N" type="range" min="0" max="200000" step="5000" value="0"></div>
+  <label class="chk"><input id="hot" type="checkbox"><span>High temperature (leakage 2x faster, illustrative)</span></label>
+  <label class="chk"><input id="def" type="checkbox"><span>Defense: refresh neighbor rows early (4x per window)</span></label>
+  <div class="status" id="status"></div>
+  <div class="read">
+   <span>Cells lost to leakage alone</span><b id="rLeak"></b>
+   <span>Extra cells flipped by hammering</span><b id="rHam"></b>
+   <span>Spacing between refresh commands</span><b id="rRefi"></b>
+   <span>Time spent refreshing (8192 cmds x 350 ns)</span><b id="rOvh"></b>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button id="pp">Pause</button><button id="rs">Restart</button></div>
+  <p class="note">Model (illustrative): cell charge decays as e<sup>-t/&tau;</sup> with &tau; between 100 and 250 ms (halved when hot); a hammered victim loses an extra 0.5 &times; (count / 150,000) &times; (time / window); a bit is lost when charge falls below 50%. Real thresholds, retention times and mitigations vary by chip and generation. Typical refresh window 64 ms (32 ms when hot) and 8192 refresh commands per window are common DDR3/DDR4 values; 350 ns per command is an example.</p>
+ </div>
+</div>
+</div>
+<script>
+(function(){
+var NTH=150000, LOOP=12000, SENSE=0.5, TREFC=350e-6; // ms per command
+var norm=[[160,220,100,190,240,170,210,150],[230,180,200,120,250,175,140,215]];
+var vic=[220,200,140,210,170,230,120,205];
+var rowsDef=[{k:'n',t:norm[0],l:'Row 0',s:''},{k:'v',t:vic,l:'Row 1',s:'victim'},{k:'a',t:null,l:'Row 2',s:'aggressor'},{k:'v',t:vic.slice().reverse(),l:'Row 3',s:'victim'},{k:'n',t:norm[1],l:'Row 4',s:''}];
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='light'||th==='dark') document.documentElement.setAttribute('data-theme',th);
+var $=function(id){return document.getElementById(id)};
+var st={T:+(q.get('T')||64),N:+(q.get('N')||0),hot:q.get('hot')==='1',def:q.get('def')==='1',t:0,paused:false,stage:0};
+if(q.get('t')!==null){st.t=+q.get('t');st.paused=true}
+if(q.get('still')==='1')st.paused=true;
+var stages=[
+ {n:'1 Leak',T:128,N:0,hot:0,def:0,x:'Each cell leaks. With a long interval (128 ms here) the leakiest cells drop below 50% before refresh arrives, so their bits are lost.'},
+ {n:'2 Refresh',T:64,N:0,hot:0,def:0,x:'Refreshing every row once per window (64 ms is a typical value) writes the charge back before it falls too low. Nothing is lost.'},
+ {n:'3 Heat',T:64,N:0,hot:1,def:0,x:'Hot cells leak faster, so a 64 ms window is no longer enough. Halve the interval (try 32 ms) and the data survives, at the cost of more refresh time.'},
+ {n:'4 Row Hammer',T:64,N:70000,hot:0,def:0,x:'Opening the aggressor row again and again disturbs the rows next to it. Victim cells lose charge faster, and the weakest ones flip even though refresh is on time.'},
+ {n:'5 Defense',T:64,N:70000,hot:0,def:1,x:'Detecting the pattern and refreshing the neighbor rows early resets the damage before it adds up. The flips disappear.'}];
+stages.forEach(function(s,i){var b=document.createElement('button');b.textContent=s.n;b.onclick=function(){setStage(i)};b.id='st'+i;$('stages').appendChild(b)});
+function setStage(i){var s=stages[i];st.stage=i;st.T=s.T;st.N=s.N;st.hot=!!s.hot;st.def=!!s.def;st.t=0;sync();render()}
+function sync(){$('T').value=st.T;$('N').value=st.N;$('hot').checked=st.hot;$('def').checked=st.def}
+$('T').oninput=function(){st.T=+this.value;st.stage=-1;render()};
+$('N').oninput=function(){st.N=+this.value;st.stage=-1;render()};
+$('hot').onchange=function(){st.hot=this.checked;st.stage=-1;render()};
+$('def').onchange=function(){st.def=this.checked;st.stage=-1;render()};
+$('pp').onclick=function(){st.paused=!st.paused;if(!st.paused)last=null;render()};
+$('rs').onclick=function(){st.t=0;render()};
+function colr(l){ if(l<SENSE)return css('--bad'); if(l>=0.75)return css('--ok'); var f=(0.75-l)/0.25; return mix(css('--ok'),css('--warn'),f)}
+var cs=null; function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function hex(c){c=c.replace('#','');if(c.length===3)c=c.replace(/./g,'$&$&');return [0,2,4].map(function(i){return parseInt(c.substr(i,2),16)})}
+function mix(a,b,f){var A=hex(a),B=hex(b);return 'rgb('+A.map(function(x,i){return Math.round(x+(B[i]-x)*f)}).join(',')+')'}
+// model
+function tauEff(tau){return st.hot?tau/2:tau}
+function period(victim,hammer){return (st.def&&victim&&hammer&&st.N>0)?st.T/4:st.T}
+function raw(tau,victim,hammer,tt){ // tt ms since last refresh of this cell
+  var l=Math.exp(-tt/tauEff(tau)); if(victim&&hammer) l-=0.5*(st.N/NTH)*(tt/st.T); return l}
+function cross(tau,victim,hammer){ // first time (ms) in the first period when charge<SENSE, or null
+  var P=period(victim,hammer); if(raw(tau,victim,hammer,P)>=SENSE)return null;
+  var lo=0,hi=P; for(var i=0;i<40;i++){var m=(lo+hi)/2; if(raw(tau,victim,hammer,m)<SENSE)hi=m;else lo=m} return hi}
+function cellState(tau,victim,hammer,ts){ // ts sim ms in loop
+  var tc=cross(tau,victim,hammer);
+  if(tc!==null&&ts>=tc)return {l:0.1,lost:true};
+  var P=period(victim,hammer); return {l:Math.max(raw(tau,victim,hammer,ts%P),0),lost:false}}
+function simTime(){return (st.t%LOOP)/LOOP*3*st.T}
+function render(){
+  var ts=simTime(), hamming=st.N>0;
+  var b=document.querySelectorAll('#stages button'); for(var i=0;i<b.length;i++)b[i].className=(i===st.stage?'on':'');
+  $('stext').textContent=st.stage>=0?stages[st.stage].x:'Custom settings. Try the stage buttons above for a guided path, or keep moving the sliders.';
+  $('Tv').textContent=st.T+' ms'; $('Nv').textContent=st.N.toLocaleString('en-US');
+  $('pp').textContent=st.paused?'Play':'Pause';
+  // array
+  var s='',lostLeak=0,lostHam=0;
+  var bandc=css('--band'),trk=css('--track'),line=css('--line'),ink=css('--ink'),mute=css('--mute'),ham=css('--ham');
+  var pulse=hamming&&((Math.floor(st.t/150)%2)===0);
+  rowsDef.forEach(function(r,i){
+    var y=18+i*62;
+    s+='<rect x="100" y="'+y+'" width="468" height="54" rx="9" fill="'+bandc+'"/>';
+    if(r.k==='a'&&hamming)s+='<rect x="96" y="'+(y-3)+'" width="476" height="60" rx="11" fill="none" stroke="'+ham+'" stroke-width="3" opacity="'+(pulse?1:0.35)+'"/>';
+    s+='<text x="8" y="'+(y+23)+'" font-size="14" font-weight="600" fill="'+ink+'">'+r.l+'</text>';
+    if(r.s)s+='<text x="8" y="'+(y+42)+'" font-size="12" fill="'+(r.k==='a'?ham:css('--bad'))+'">'+r.s+'</text>';
+    var anyRef=false;
+    for(var c=0;c<8;c++){
+      var x=110+c*57, ct=y+5, h=44, w=38, l=1, lost=false;
+      if(r.k!=='a'){
+        var v=r.k==='v', a=cellState(r.t[c],v,hamming&&v,ts); l=a.l; lost=a.lost;
+              }
+      s+='<rect x="'+x+'" y="'+ct+'" width="'+w+'" height="'+h+'" rx="5" fill="'+trk+'" stroke="'+line+'" stroke-width="1.5"/>';
+      var fh=(h-6)*l; s+='<rect x="'+(x+3)+'" y="'+(ct+3+(h-6)-fh)+'" width="'+(w-6)+'" height="'+fh+'" rx="3" fill="'+(r.k==='a'?css('--ok'):colr(l))+'"/>';
+      if(lost)s+='<text x="'+(x+w/2)+'" y="'+(ct+h/2+5)+'" font-size="14" font-weight="700" text-anchor="middle" fill="'+css('--bad')+'">X</text>';
+    }
+    s+='<text x="574" y="'+(y+22)+'" font-size="12" fill="'+mute+'">'+(r.k==='a'?(hamming?'ACT ACT ...':'idle'):(r.k==='v'&&st.def&&hamming?'early REF':'REF'))+'</text>';
+  });
+  s+='<text x="8" y="334" font-size="12" fill="'+mute+'">Sim time '+ts.toFixed(0)+' ms of '+(3*st.T)+' ms (3 windows; the loop restarts with fresh data)</text>';
+  $('arr').innerHTML=s;
+  // counts
+  rowsDef.forEach(function(r){ if(r.k==='a')return; for(var c=0;c<8;c++){
+    var v=r.k==='v', base=cross(r.t[c],false,false)!==null, wh=cross(r.t[c],v,hamming&&v)!==null;
+    if(base)lostLeak++; else if(wh)lostHam++; }});
+  $('rLeak').textContent=lostLeak+' / 32'; $('rHam').textContent=lostHam+' / 16';
+  var tre=st.T/8192; $('rRefi').textContent=(tre*1000).toFixed(2)+' µs';
+  var ovh=8192*TREFC/st.T*100; $('rOvh').textContent=ovh.toFixed(1)+' %';
+  var stt=$('status'), tot=lostLeak+lostHam;
+  if(tot===0){stt.className='status ok';stt.textContent='All data intact.'}
+  else if(lostLeak>0){stt.className='status bad';stt.textContent='Data lost: refresh is too slow for the leakiest cells'+(lostHam?' (and hammering adds more).':'.')}
+  else{stt.className='status bad';stt.textContent='Row Hammer flips '+lostHam+' bit(s) even though refresh is on time.'}
+  chart(ts);
+}
+function chart(ts){
+  var W=640,H=230,L=44,R=12,Tp=14,B=36, pw=W-L-R, ph=H-Tp-B, tot=3*st.T;
+  var X=function(t){return L+t/tot*pw}, Y=function(v){return Tp+(1-v)*ph};
+  var ink=css('--ink'),mute=css('--mute'),line=css('--line'),bad=css('--bad');
+  var s='<rect x="'+L+'" y="'+Tp+'" width="'+pw+'" height="'+ph+'" fill="'+css('--track')+'" stroke="'+line+'"/>';
+  s+='<line x1="'+L+'" x2="'+(L+pw)+'" y1="'+Y(SENSE)+'" y2="'+Y(SENSE)+'" stroke="'+bad+'" stroke-dasharray="6 4" stroke-width="1.5"/>';
+  s+='<text x="'+(L+pw-4)+'" y="'+(Y(SENSE)-5)+'" font-size="12" text-anchor="end" fill="'+bad+'">bit lost below ~50% (illustrative)</text>';
+  [['220',css('--chart1'),'strong cell (tau 220 ms)',220],['120',css('--chart2'),'weak cell (tau 120 ms)',120]].forEach(function(cfg,k){
+    var tau=cfg[3],v=true,ham=st.N>0, P=period(v,ham), tc=cross(tau,v,ham), d='';
+    for(var t=0;t<=tot+0.001;t+=tot/360){
+      if(tc!==null&&t>=tc){break}
+      var tt=t%P; var l=Math.max(raw(tau,v,ham,tt),0);
+      var prev=(t-tot/360)%P; if(t>0&&tt<prev) d+=' L'+X(t)+' '+Y(Math.max(raw(tau,v,ham,P),0));
+      d+=(d===''?'M':' L')+X(t)+' '+Y(l);
+    }
+    s+='<path d="'+d+'" fill="none" stroke="'+cfg[1]+'" stroke-width="2.2"/>';
+    if(tc!==null){s+='<circle cx="'+X(tc)+'" cy="'+Y(raw(tau,v,ham,tc))+'" r="6" fill="'+bad+'"/><text x="'+(X(tc)+9)+'" y="'+(Y(0.5)+18)+'" font-size="12" fill="'+bad+'">bit lost</text>'}
+    s+='<line x1="'+(L+8+k*250)+'" x2="'+(L+32+k*250)+'" y1="'+(H-10)+'" y2="'+(H-10)+'" stroke="'+cfg[1]+'" stroke-width="3"/><text x="'+(L+38+k*250)+'" y="'+(H-6)+'" font-size="12" fill="'+ink+'">'+cfg[2]+'</text>';
+  });
+  for(var w=1;w<3;w++)s+='<line x1="'+X(w*st.T)+'" x2="'+X(w*st.T)+'" y1="'+Tp+'" y2="'+(Tp+ph)+'" stroke="'+line+'" stroke-dasharray="2 4"/>';
+  s+='<line x1="'+X(ts)+'" x2="'+X(ts)+'" y1="'+Tp+'" y2="'+(Tp+ph)+'" stroke="'+ink+'" stroke-width="1.5"/>';
+  [0,1,2,3].forEach(function(w){s+='<text x="'+X(w*st.T)+'" y="'+(Tp+ph+15)+'" font-size="12" text-anchor="'+(w===3?'end':'middle')+'" fill="'+mute+'">'+(w*st.T)+' ms</text>'});
+  s+='<text x="12" y="'+(Tp+ph/2)+'" font-size="12" fill="'+mute+'" transform="rotate(-90 12 '+(Tp+ph/2)+')" text-anchor="middle">cell charge</text>';
+  s+='<text x="'+(L-6)+'" y="'+(Y(1)+4)+'" font-size="12" text-anchor="end" fill="'+mute+'">100%</text><text x="'+(L-6)+'" y="'+(Y(0)+4)+'" font-size="12" text-anchor="end" fill="'+mute+'">0</text>';
+  $('chart').innerHTML=s;
+}
+var last=null;
+function tick(now){ if(!st.paused){ if(last!==null)st.t+=now-last; last=now; render(); } else last=null; requestAnimationFrame(tick)}
+window.__setTime=function(ms){st.t=ms;st.paused=true;render()};
+window.__setState=function(o){for(var k in o)st[k]=o[k];st.stage=-1;sync();render()};
+sync(); if(q.get('stage')!==null){setStage(+q.get('stage'));if(q.get('t')!==null)st.t=+q.get('t')} else if(!q.get('T')&&!q.get('N')) {setStage(1);} 
+if(q.get('t')!==null)st.t=+q.get('t');
+render(); requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die size and yield</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--line:#c9d0dc;--tx:#1b2433;--mut:#4b5668;--good:#3b82c4;--bad:#e8863a;--def:#7a1020;--wf:#e4e9f1;--wfl:#6b7a90;--acc:#1f5fa8}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1623;--card:#182131;--line:#2f3d55;--tx:#e8edf5;--mut:#a9b6c9;--good:#5aa2e0;--bad:#f0954a;--def:#ff6b7f;--wf:#273449;--wfl:#8fa0b8;--acc:#7db6ee}}
+:root[data-theme=dark]{--bg:#0f1623;--card:#182131;--line:#2f3d55;--tx:#e8edf5;--mut:#a9b6c9;--good:#5aa2e0;--bad:#f0954a;--def:#ff6b7f;--wf:#273449;--wfl:#8fa0b8;--acc:#7db6ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.4}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 20px}
+a{color:var(--acc)}h1{font-size:22px;margin:6px 0 2px}p.sub{margin:0 0 10px;color:var(--mut);font-size:14px}
+.formula{background:var(--tx);color:var(--bg);border-radius:10px;padding:6px 14px;font-size:18px;text-align:center;margin-bottom:10px}
+.formula b{font-size:22px}.formula small{display:block;font-size:13px;opacity:.85;margin-top:2px}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.card h2{font-size:16px;margin:0 0 4px}
+canvas{display:block;width:min(100%,44vh);height:auto;aspect-ratio:1/1;margin:0 auto}
+.read{font-size:14px;margin-top:4px}.read b{font-size:18px}.read .m{color:var(--mut)}
+.ctl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:10px}
+label{font-size:14px;display:block}input[type=range]{width:100%}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button{font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--tx);cursor:pointer}
+button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.step{font-size:14px;color:var(--mut);flex:1 1 280px}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
+@media (max-width:760px){.panels{grid-template-columns:1fr}.ctl{grid-template-columns:1fr}canvas{width:100%}}
+</style></head><body><div class="wrap">
+<a href="../../en/4-yield-and-quality/16-yield-analysis/README.md">&larr; Back to chapter</a>
+<h1>Same defects, different die size</h1>
+<p class="sub">Both wafers have exactly the same defects. A die fails if at least one defect lands on it. Change the die sizes and the defect density.</p>
+<div class="formula">Y = e<sup>&minus;A&middot;D0</sup> <small id="fl"></small></div>
+<div class="panels">
+ <div class="card"><h2>Wafer A &mdash; die <span id="tA"></span></h2><canvas id="cA" width="560" height="560"></canvas><div class="read" id="rA"></div></div>
+ <div class="card"><h2>Wafer B &mdash; die <span id="tB"></span></h2><canvas id="cB" width="560" height="560"></canvas><div class="read" id="rB"></div></div>
+</div>
+<div class="ctl">
+ <label>Die area A, wafer A: <b id="vA"></b><input id="sA" type="range" min="20" max="900" step="5" value="840"></label>
+ <label>Die area A, wafer B: <b id="vB"></b><input id="sB" type="range" min="20" max="900" step="5" value="64"></label>
+ <label>Defect density D0: <b id="vD"></b><input id="sD" type="range" min="0.02" max="0.5" step="0.01" value="0.15"></label>
+</div>
+<div class="bar">
+ <button id="play">Pause</button>
+ <button data-s="0">1 Defects land</button><button data-s="1">2 Cut into dies</button><button data-s="2">3 Mark hit dies</button><button data-s="3">4 Count good</button>
+ <span class="step" id="step"></span>
+</div>
+<p class="note">Illustrative: 300 mm wafer, square dies, D0 in defects per cm&sup2;, no edge exclusion. Only dies fully inside the wafer are counted. The "counted" number is this one random sample; the Poisson formula is the average you would expect over many wafers, so they differ a little (more on small samples). Defects are drawn larger than real ones for visibility.</p>
+</div>
+<script>
+(function(){
+var R=150,P=new URLSearchParams(location.search);
+if(P.get('theme'))document.documentElement.setAttribute('data-theme',P.get('theme'));
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var r=rng(16),DEF=[];while(DEF.length<400){var x=(r()*2-1)*R,y=(r()*2-1)*R;if(x*x+y*y<=R*R)DEF.push([x,y]);}
+var $=function(i){return document.getElementById(i)};
+var st={A:840,B:64,D:0.15},t=0,paused=false,still=P.get('still')==='1',last=null,manual=null;
+var T=[0,2500,4500,7000],CYC=12000;
+function cv(n){var s=getComputedStyle(document.documentElement);return s.getPropertyValue(n).trim()}
+function calc(area,D){var w=Math.sqrt(area),L=[];var n=Math.ceil(R*2/w)+2;
+ // grid centered on wafer center
+ for(var i=-n;i<=n;i++)for(var j=-n;j<=n;j++){var x0=i*w-w/2,y0=j*w-w/2,x1=x0+w,y1=y0+w;
+  if(Math.max(x0*x0,x1*x1)+Math.max(y0*y0,y1*y1)<=R*R)L.push([x0,y0,w]);}
+ var nd=Math.round(D*Math.PI*Math.pow(R/10,2)),bad=[],good=0;
+ L.forEach(function(d){var h=false;for(var k=0;k<nd;k++){var p=DEF[k];if(p[0]>=d[0]&&p[0]<d[0]+d[2]&&p[1]>=d[1]&&p[1]<d[1]+d[2]){h=true;break}}
+  d[3]=h;if(!h)good++;});
+ return {L:L,N:L.length,good:good,nd:nd,Y:Math.exp(-area/100*D)};}
+function clamp(v){return Math.max(0,Math.min(1,v))}
+function draw(c,m,tt){var g=c.getContext('2d'),W=c.width,s=W/2/(R+6);g.clearRect(0,0,W,W);g.save();g.translate(W/2,W/2);
+ g.fillStyle=cv('--wf');g.strokeStyle=cv('--wfl');g.lineWidth=2;g.beginPath();g.arc(0,0,(R+4)*s,0,7);g.fill();g.stroke();
+ var ga=clamp((tt-T[1])/900),ba=clamp((tt-T[2])/1500),gap=Math.min(1.5,m.L[0][2]*s*0.08);
+ if(ga>0){g.globalAlpha=ga;m.L.forEach(function(d){var hit=d[3];var col=hit&&ba>0?cv('--bad'):cv('--good');
+  if(hit&&ba>0){g.fillStyle=cv('--good');g.globalAlpha=ga;g.fillRect(d[0]*s+gap/2,d[1]*s+gap/2,d[2]*s-gap,d[2]*s-gap);g.globalAlpha=ga*ba;}
+  else g.globalAlpha=ga;
+  g.fillStyle=col;g.fillRect(d[0]*s+gap/2,d[1]*s+gap/2,d[2]*s-gap,d[2]*s-gap);});g.globalAlpha=1;}
+ var dp=clamp(tt/T[1]*1.0),show=Math.floor(m.nd*Math.min(1,dp*1.15)),rad=Math.max(2.5,s*1.8);
+ g.strokeStyle=cv('--card');g.lineWidth=1;g.fillStyle=cv('--def');
+ for(var k=0;k<show;k++){var p=DEF[k],fall=clamp((dp*1.15*m.nd-k)/ (m.nd*0.15+1)),yy=p[1]*s-(1-fall)*30;g.globalAlpha=fall;g.beginPath();g.arc(p[0]*s,yy,rad,0,7);g.fill();g.stroke();}
+ g.restore();}
+function fmt(n){return n.toFixed(2)}
+function render(){
+ var D=st.D,a=calc(st.A,D),b=calc(st.B,D);
+ $('tA').textContent=Math.sqrt(st.A).toFixed(1)+'×'+Math.sqrt(st.A).toFixed(1)+' mm';
+ $('tB').textContent=Math.sqrt(st.B).toFixed(1)+'×'+Math.sqrt(st.B).toFixed(1)+' mm';
+ $('vA').textContent=(st.A/100).toFixed(2)+' cm²';$('vB').textContent=(st.B/100).toFixed(2)+' cm²';$('vD').textContent=D.toFixed(2)+' /cm²';
+ function rd(el,m,area){$(el).innerHTML='<b>'+m.good+' good</b> of '+m.N+' dies ('+(100*m.good/m.N).toFixed(0)+'% counted)<br><span class="m">Y = e<sup>−'+fmt(area/100)+'×'+D.toFixed(2)+'</sup> = '+(100*m.Y).toFixed(1)+'% → expected ≈ '+(m.N*m.Y).toFixed(0)+' good · '+m.nd+' defects</span>';}
+ rd('rA',a,st.A);rd('rB',b,st.B);
+ $('fl').textContent='A: A·D0 = '+fmt(st.A/100*D)+' → Y = '+(100*a.Y).toFixed(1)+'%   |   B: A·D0 = '+fmt(st.B/100*D)+' → Y = '+(100*b.Y).toFixed(1)+'%';
+ var tt=still?CYC:t%CYC;
+ draw($('cA'),a,tt);draw($('cB'),b,tt);
+ var si=tt>=T[3]?3:tt>=T[2]?2:tt>=T[1]?1:0;
+ var tx=['Defects land at random positions. The same positions are used on both wafers.','The wafer is cut into dies. A larger die means fewer dies and each one covers more area.','Any die with a defect on it is marked bad (orange). A large die is a bigger target.','Count the good dies. Larger area means a smaller e^(−A·D0) and fewer good dies.'];
+ $('step').textContent='Step '+(si+1)+': '+tx[si];
+ document.querySelectorAll('button[data-s]').forEach(function(x){x.classList.toggle('on',+x.dataset.s===si)});
+}
+window.__setTime=function(ms){t=ms;paused=true;still=false;$('play').textContent='Play';render();};
+['A','B'].forEach(function(k){$('s'+k).addEventListener('input',function(e){st[k]=+e.target.value;render();});});
+$('sD').addEventListener('input',function(e){st.D=+e.target.value;render();});
+$('play').onclick=function(){paused=!paused;still=false;$('play').textContent=paused?'Play':'Pause';};
+document.querySelectorAll('button[data-s]').forEach(function(x){x.onclick=function(){still=false;paused=true;$('play').textContent='Play';t=T[+x.dataset.s]+(+x.dataset.s===0?1800:+x.dataset.s===3?2000:1600);render();};});
+if(P.get('t')!==null){t=+P.get('t');paused=true;still=false;$('play').textContent='Play';}
+if(still){paused=true;$('play').textContent='Play';}
+function loop(ts){if(last!==null&&!paused)t+=ts-last;last=ts;if(!paused)render();requestAnimationFrame(loop);}
+render();requestAnimationFrame(loop);
+window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',render);
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){paused=true;still=true;$('play').textContent='Play';render();}
+})();
+</script></body></html>

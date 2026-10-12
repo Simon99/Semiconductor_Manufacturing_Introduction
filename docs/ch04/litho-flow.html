@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lithography flow: coat, expose, develop</title>
+<style>
+:root{--bg:#fbf9f4;--card:#ffffff;--line:#d6d0c2;--tx:#1f2933;--sub:#52606d;--acc:#e8590c;
+--wafer:#7b8794;--film:#4f86c6;--res:#f2b134;--resN:#a4571a;--expP:#fff1bf;--expPs:#c99a1e;--quartz:#bfe0f5;--chrome:#2b2f36;--uv:#6d3be8;--nozzle:#52606d;--dev:#1b9aaa;--btn:#f0ece1;--on:#1f2933;--onfg:#fff}
+:root[data-theme=dark]{--bg:#12161c;--card:#1b2129;--line:#364150;--tx:#e8ecf1;--sub:#a3afbd;--acc:#ff8a4c;
+--wafer:#6b7787;--film:#4f86c6;--res:#e9a82a;--resN:#b8651f;--expP:#5b4d1f;--expPs:#d9ad3c;--quartz:#35607f;--chrome:#0b0d10;--uv:#a78bfa;--nozzle:#9aa5b1;--dev:#35c0d0;--btn:#262e39;--on:#e8ecf1;--onfg:#12161c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161c;--card:#1b2129;--line:#364150;--tx:#e8ecf1;--sub:#a3afbd;--acc:#ff8a4c;
+--wafer:#6b7787;--film:#4f86c6;--res:#e9a82a;--resN:#b8651f;--expP:#5b4d1f;--expPs:#d9ad3c;--quartz:#35607f;--chrome:#0b0d10;--uv:#a78bfa;--nozzle:#9aa5b1;--dev:#35c0d0;--btn:#262e39;--on:#e8ecf1;--onfg:#12161c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:10px 16px 20px}
+a{color:var(--acc)}
+.back{font-size:14px;margin:0 0 6px}
+h1{font-size:22px;margin:0 0 2px}
+.lead{margin:0 0 10px;color:var(--sub);font-size:14px}
+.main{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:inherit;fill:var(--tx)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.lbl{font-size:13px;color:var(--sub);margin-right:2px}
+button{font:inherit;font-size:14px;color:var(--tx);background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button[aria-pressed=true]{background:var(--on);color:var(--onfg);border-color:var(--on)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.sl{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl output{min-width:5.5em;text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--acc)}
+h2{font-size:17px;margin:0 0 4px}
+.desc{margin:0 0 8px;font-size:15px}
+dl{margin:0;font-size:14px}
+dt{color:var(--sub);font-size:12px;margin-top:6px}
+dd{margin:0}
+.warn{color:var(--acc);font-weight:600}
+.note{font-size:12px;color:var(--sub);margin:8px 0 0}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--sub);margin-top:6px}
+.leg i{display:inline-block;width:14px;height:12px;vertical-align:-1px;margin-right:4px;border:1px solid rgba(0,0,0,.2)}
+@media (max-width:820px){.main{grid-template-columns:1fr}}
+@media (max-width:480px){h1{font-size:19px}button{padding:6px 9px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="back"><a href="../../en/2-process-modules/04-lithography/README.md">&larr; Back to chapter</a></p>
+<h1>Lithography flow: coat, expose, develop</h1>
+<p class="lead">Watch a wafer cross-section go through the three stages, then switch the resist type and see which part of the pattern stays.</p>
+<div class="main">
+ <div class="card">
+  <svg id="scene" viewBox="0 0 560 380" role="img" aria-label="Wafer cross-section at the current lithography stage"></svg>
+  <div class="leg">
+   <span><i style="background:var(--wafer)"></i>silicon wafer</span><span><i style="background:var(--film)"></i>film layer</span><span><i style="background:var(--res)"></i>photoresist</span><span><i style="background:var(--expP)"></i>exposed, soluble</span><span><i style="background:var(--resN)"></i>exposed, hardened</span><span><i style="background:var(--chrome)"></i>mask chrome</span>
+  </div>
+ </div>
+ <div>
+  <div class="card">
+   <div class="row"><span class="lbl">Stage</span>
+    <button data-stage="0">1 Coat</button><button data-stage="1">2 Expose</button><button data-stage="2">3 Develop</button>
+    <button id="play" aria-pressed="false">Pause</button></div>
+   <div class="row"><span class="lbl">Resist</span>
+    <button data-tone="pos" aria-pressed="true">Positive</button><button data-tone="neg" aria-pressed="false">Negative</button></div>
+   <div class="sl"><label for="w">Mask gap width</label><input id="w" type="range" min="40" max="300" step="10" value="160"><output id="wo"></output></div>
+   <div class="sl"><label for="dose">Exposure dose</label><input id="dose" type="range" min="40" max="160" step="5" value="100"><output id="doseo"></output></div>
+   <p class="note">Gap width and dose are illustrative units, not real process values. The printed-width model is a simple sketch: more light widens the exposed area a little.</p>
+  </div>
+  <div class="card" style="margin-top:12px" aria-live="polite">
+   <h2 id="st"></h2>
+   <p class="desc" id="sd"></p>
+   <dl>
+    <dt>Where the light hit</dt><dd id="r1"></dd>
+    <dt>After develop</dt><dd id="r2"></dd>
+    <dt>Printed width (illustrative)</dt><dd id="r3"></dd>
+   </dl>
+  </div>
+ </div>
+</div>
+<p class="note">Based on the Lithography chapter: coat, soft bake, align and expose, post-exposure bake, develop, inspect. Bakes and inspection are skipped here. The scanner projects the mask at 1/4 size; the mask is drawn 1:1 here. Next stop is etching.</p>
+</div>
+<script>
+(function(){
+var q=new URLSearchParams(location.search);
+var th=q.get('theme'); if(th==='light'||th==='dark') document.documentElement.setAttribute('data-theme',th);
+var CYC=12000, ST=4000;
+var S={tone:'pos',W:160,dose:100,t:0,paused:false,fixed:false,last:null,flow:0};
+var sc=document.getElementById('scene');
+var X0=20,X1=540,CX=280,YR=250,T=56,YF=274,YS=340;
+function ease(p){p=Math.max(0,Math.min(1,p));return 1-(1-p)*(1-p)}
+function R(x,y,w,h,c,x2){return '<rect x="'+x+'" y="'+y+'" width="'+Math.max(0,w)+'" height="'+Math.max(0,h)+'" '+(c||'')+'/>'}
+function model(){
+ var We=Math.max(10,Math.min(330,S.W+(S.dose-100)*0.5));
+ var ok=S.dose>=60;
+ return {We:We,ok:ok};
+}
+function stageInfo(){
+ var tt=((S.t%CYC)+CYC)%CYC; var s=Math.floor(tt/ST); if(s>2)s=2;
+ return {s:s,p:(tt-s*ST)/ST};
+}
+function render(){
+ var si=stageInfo(), s=si.s, p=si.p, m=model(), pos=S.tone==='pos';
+ var h='';
+ var xl=CX-m.We/2, xr=CX+m.We/2;
+ // wafer + film
+ h+=R(X0,YF,X1-X0,YS-YF,'fill="var(--wafer)"');
+ h+=R(X0,YR,X1-X0,YF-YR,'fill="var(--film)"');
+ h+='<text x="'+(X0+10)+'" y="'+(YS-14)+'" font-size="17" fill="#fff" style="fill:#fff">silicon wafer</text>';
+ h+='<text x="'+(X0+10)+'" y="'+(YF-7)+'" font-size="16" style="fill:#fff">film layer (to be patterned)</text>';
+ var Tcur=T;
+ if(s===0) Tcur=T*ease(p/0.85);
+ // resist
+ if(s<2){
+  h+=R(X0,YR-Tcur,X1-X0,Tcur,'fill="var(--res)"');
+  if(Tcur>30) h+='<text x="'+(X1-10)+'" y="'+(YR-Tcur/2+5)+'" font-size="17" text-anchor="end" style="fill:#3d2a00">photoresist</text>';
+ }
+ if(s===0){
+  var dp=Math.min(1,p/0.3);
+  h+='<path d="M'+(CX-14)+' 24 h28 v26 l-11 16 h-6 l-11 -16 z" fill="var(--nozzle)"/>';
+  h+='<text x="'+(CX+26)+'" y="40" font-size="16">dispense resist</text>';
+  if(p<0.3) h+='<circle cx="'+CX+'" cy="'+(76+dp*(YR-T-90))+'" r="6" fill="var(--resN)"/>';
+  var rot=p*360*3;
+  h+='<g transform="translate(450 100)"><g transform="rotate('+rot+')"><path d="M0 -36 a36 36 0 1 1 -25 10" fill="none" stroke="var(--nozzle)" stroke-width="4"/><path d="M-36 -22 l12 6 l-14 6 z" fill="var(--nozzle)" transform="translate(11 -6) rotate(-30)"/></g></g>';
+  h+='<text x="450" y="156" font-size="17" text-anchor="middle">wafer spins fast,</text><text x="450" y="176" font-size="17" text-anchor="middle">resist spreads evenly</text>';
+ }
+ if(s===1){
+  // mask
+  h+=R(X0,84,X1-X0,16,'fill="var(--quartz)" stroke="var(--line)"');
+  h+=R(X0,96,xl-X0,7,'fill="var(--chrome)"');
+  h+=R(xr,96,X1-xr,7,'fill="var(--chrome)"');
+  h+='<text x="'+(X1-6)+'" y="80" font-size="17" text-anchor="end">mask: clear gap in the middle</text>';
+  var dash=(-S.flow*40)%22;
+  for(var x=X0+12;x<X1;x+=24){
+   h+='<line x1="'+x+'" y1="26" x2="'+x+'" y2="68" stroke="var(--uv)" stroke-width="3" stroke-dasharray="7 6" stroke-dashoffset="'+dash+'" opacity="0.9"/>';
+  }
+  h+='<text x="'+(X0+6)+'" y="16" font-size="17" style="fill:var(--uv)">UV light</text>';
+  for(var x2=Math.ceil((xl+8-X0-12)/24)*24+X0+12;x2<xr-4;x2+=24){
+   h+='<line x1="'+x2+'" y1="106" x2="'+x2+'" y2="'+(YR-T-4)+'" stroke="var(--uv)" stroke-width="3" stroke-dasharray="7 6" stroke-dashoffset="'+dash+'"/>';
+   h+='<path d="M'+(x2-6)+' '+(YR-T-14)+' l6 10 l6 -10 z" fill="var(--uv)"/>';
+  }
+  var a=ease(p*1.4);
+  if(pos) h+=R(xl,YR-T,m.We,T,'fill="var(--expP)" stroke="var(--expPs)" stroke-dasharray="5 4" opacity="'+a+'"');
+  else h+=R(xl,YR-T,m.We,T,'fill="var(--resN)" opacity="'+a+'"');
+  if(a>0.6 && m.We>70) h+='<text x="'+CX+'" y="'+(YR-T/2+5)+'" font-size="17" text-anchor="middle" style="fill:'+(pos?'var(--tx)':'#fff')+'">'+(pos?'now soluble':'now hardened')+'</text>';
+  if(!m.ok) h+='<text x="'+CX+'" y="'+(YR-T-24)+'" font-size="16" text-anchor="middle" style="fill:var(--acc)">low dose: reaction is weak</text>';
+ }
+ if(s===2){
+  var e=ease(p/0.8);
+  var fin=m.ok?0:T*0.4;               // leftover thickness in a region that should clear / thin kept line
+  // developer drops
+  if(p<0.75){
+   for(var d=-1;d<=1;d++){var dy=((p*3+d*0.3+1)%1);h+='<circle cx="'+(CX+d*70)+'" cy="'+(70+dy*100)+'" r="5" fill="var(--dev)" opacity="'+(1-dy*0.6)+'"/>';}
+  }
+  h+='<text x="'+(X0+6)+'" y="40" font-size="17" style="fill:var(--dev)">developer</text>';
+  if(pos){
+   h+=R(X0,YR-T,xl-X0,T,'fill="var(--res)"');
+   h+=R(xr,YR-T,X1-xr,T,'fill="var(--res)"');
+   var th2=fin+(T-fin)*(1-e);
+   if(th2>0.5) h+=R(xl,YR-th2,m.We,th2,'fill="var(--expP)" stroke="var(--expPs)" stroke-dasharray="5 4"');
+  } else {
+   var keep=m.ok?T:T*0.4;
+   h+=R(xl,YR-keep,m.We,keep,'fill="var(--resN)"');
+   var th3=T*(1-e);
+   if(th3>0.5){h+=R(X0,YR-th3,xl-X0,th3,'fill="var(--res)"');h+=R(xr,YR-th3,X1-xr,th3,'fill="var(--res)"');}
+  }
+  if(e>0.95){
+   var bx1=xl,bx2=xr,yb=YR-T-22;
+   h+='<g stroke="var(--tx)" stroke-width="1.5"><line x1="'+bx1+'" y1="'+yb+'" x2="'+bx2+'" y2="'+yb+'"/><line x1="'+bx1+'" y1="'+(yb-6)+'" x2="'+bx1+'" y2="'+(yb+6)+'"/><line x1="'+bx2+'" y1="'+(yb-6)+'" x2="'+bx2+'" y2="'+(yb+6)+'"/></g>';
+   h+='<text x="'+CX+'" y="'+(yb-8)+'" font-size="17" text-anchor="middle">printed width '+Math.round(m.We)+'</text>';
+  }
+ }
+ // stage banner
+ h+='<g transform="translate(10 352)">';
+ for(var i=0;i<3;i++){
+  var on=i===s;
+  h+='<g transform="translate('+(i*112)+' 0)"><rect width="104" height="22" rx="11" fill="'+(on?'var(--acc)':'var(--line)')+'"/><text x="52" y="16" font-size="14" text-anchor="middle" style="fill:'+(on?'#fff':'var(--sub)')+'">'+['1 Coat','2 Expose','3 Develop'][i]+'</text></g>';
+ }
+ h+='</g>';
+ sc.innerHTML=h;
+ // text
+ var T1=['1 Coat','2 Expose','3 Develop'][s];
+ var D=['Photoresist is dispensed on the center of the wafer. The wafer spins at high speed and spreads it into a thin, even layer.',
+ 'Light passes through the clear gap in the mask and reaches the resist only there. Resist under the chrome stays dark. The exposed resist changes chemically.',
+ 'The developer dissolves the unwanted resist and the pattern appears. The film underneath has not been touched yet; etching comes next.'][s];
+ document.getElementById('st').textContent='Stage '+T1;
+ document.getElementById('sd').textContent=D;
+ document.getElementById('r1').textContent=pos?'Positive resist: the exposed area becomes soluble in the developer.':'Negative resist: the exposed area hardens and no longer dissolves.';
+ var res=pos?'The exposed gap is washed away. A trench opens in the resist and the film is bare there.':'Only the exposed strip stays as a resist line. Everything around it is washed away.';
+ if(!m.ok) res=pos?'Dose too low: the exposed resist is not fully soluble, so a thin layer is left in the trench.':'Dose too low: the strip hardens only weakly, so only a thin, weak line is left.';
+ document.getElementById('r2').innerHTML=(s<2?'Not developed yet. At the end: ':'')+(m.ok?res:'<span class="warn">'+res+'</span>');
+ document.getElementById('r3').textContent=Math.round(m.We)+' units (mask gap '+S.W+', dose '+S.dose+'%)';
+ document.getElementById('wo').textContent=S.W+' units';
+ document.getElementById('doseo').textContent=S.dose+'%';
+ var btns=document.querySelectorAll('[data-stage]');
+ for(var b=0;b<btns.length;b++) btns[b].setAttribute('aria-pressed',String(+btns[b].dataset.stage===s));
+ document.getElementById('play').textContent=S.paused?'Play':'Pause';
+ document.getElementById('play').setAttribute('aria-pressed',String(S.paused));
+}
+function tick(ts){
+ if(S.last==null) S.last=ts;
+ var dt=ts-S.last; S.last=ts;
+ if(!S.paused&&!S.fixed){S.t+=dt;S.flow+=dt/1000;render();}
+ requestAnimationFrame(tick);
+}
+window.__setTime=function(ms){S.t=+ms;S.fixed=true;S.paused=true;S.flow=ms/1000;render();};
+document.querySelectorAll('[data-stage]').forEach(function(b){b.addEventListener('click',function(){S.fixed=false;S.paused=true;S.t=(+b.dataset.stage)*ST+ST-1;render();});});
+document.querySelectorAll('[data-tone]').forEach(function(b){b.addEventListener('click',function(){S.tone=b.dataset.tone;document.querySelectorAll('[data-tone]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});render();});});
+document.getElementById('play').addEventListener('click',function(){S.paused=!S.paused;S.fixed=false;render();});
+document.getElementById('w').addEventListener('input',function(e){S.W=+e.target.value;render();});
+document.getElementById('dose').addEventListener('input',function(e){S.dose=+e.target.value;render();});
+if(q.get('tone')==='neg'){S.tone='neg';document.querySelector('[data-tone=neg]').click();}
+if(q.get('t')!=null) window.__setTime(+q.get('t'));
+if(q.get('still')==='1'){S.fixed=true;S.paused=true;}
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches&&q.get('t')==null){S.t=2*ST+ST-1;S.paused=true;}
+render();
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

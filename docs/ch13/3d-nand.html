@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D NAND: stacking cells upward</title>
+<style>
+:root{--bg:#f4f6fa;--fg:#1b2433;--mu:#4a5568;--card:#fff;--bd:#cbd5e1;--ox:#9fb3c8;--nit:#8b7fb0;--met:#e07a1f;--sto:#fde68a;--ch:#2f9e6b;--core:#e2e8f0;--ac:#2563eb;--sub:#94a3b8;--per:#cbd5e1;--void:#f4f6fa}
+:root[data-theme=dark]{--bg:#0f1624;--fg:#e6ebf4;--mu:#9fb0c8;--card:#17202f;--bd:#33425a;--ox:#5b7390;--nit:#6d6296;--met:#e8892f;--sto:#c9a53a;--ch:#35b27a;--core:#cbd5e1;--ac:#60a5fa;--sub:#475569;--per:#334155;--void:#0f1624}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1624;--fg:#e6ebf4;--mu:#9fb0c8;--card:#17202f;--bd:#33425a;--ox:#5b7390;--nit:#6d6296;--met:#e8892f;--sto:#c9a53a;--ch:#35b27a;--core:#cbd5e1;--ac:#60a5fa;--sub:#475569;--per:#334155;--void:#0f1624}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 24px}
+a{color:var(--ac)}
+h1{font-size:22px;margin:6px 0 2px}
+.sub{color:var(--mu);margin:0 0 10px}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+svg#scene{width:100%;height:auto;display:block}
+svg text{fill:var(--fg);font-family:inherit}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:7px;padding:5px 9px;cursor:pointer}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.cap{min-height:3.2em;margin:6px 0 0}
+label{display:block;font-weight:600;margin:8px 0 2px}
+input[type=range]{width:100%}
+.big{font-size:30px;font-weight:700;line-height:1.1}
+table{border-collapse:collapse;width:100%;margin-top:6px}
+td{padding:3px 0;border-top:1px solid var(--bd);vertical-align:top}
+td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.note{color:var(--mu);font-size:13px}
+.bar{height:14px;background:var(--bd);border-radius:7px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--met)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+</style></head><body><div class="wrap">
+<p><a href="../../en/3-integration/13-memory/README.md">&larr; Back to chapter</a></p>
+<h1>3D NAND: stop shrinking, start stacking</h1>
+<p class="sub">Cross-section, simplified. Step through the process, then change the layer count and see what happens to capacity (illustrative numbers).</p>
+<div class="grid">
+<div class="card">
+<div class="steps" id="steps"></div>
+<svg id="scene" viewBox="10 0 830 470" role="img" aria-label="3D NAND cross-section"></svg>
+<p class="cap" id="cap"></p>
+<div class="steps"><button id="play">Pause</button><button id="all">Show finished chip</button></div>
+</div>
+<div class="card">
+<label for="layers">Layers in the stack: <span id="nv">200</span></label>
+<input id="layers" type="range" min="16" max="400" step="8" value="200">
+<label>Bits stored per cell</label>
+<div class="seg" id="bits"></div>
+<p class="note">Capacity (illustrative) = layers &times; cells per layer &times; bits per cell. Assumed: 1 billion cells per layer per die.</p>
+<div class="big" id="cap_out">600 Gbit</div>
+<div class="note" id="cap_gb"></div>
+<div class="bar"><i id="capbar"></i></div>
+<table>
+<tr><td>Layers drawn</td><td id="r_drawn"></td></tr>
+<tr><td>Stack height (illustrative, 60 nm per layer pair)</td><td id="r_h"></td></tr>
+<tr><td>Channel hole depth : width (illustrative, 100 nm wide)</td><td id="r_ar"></td></tr>
+<tr><td>Hole etched in sections (illustrative, 128 layers each)</td><td id="r_deck"></td></tr>
+<tr><td>Staircase steps (one per layer)</td><td id="r_st"></td></tr>
+</table>
+<p class="note">Layer count is not the only metric: bits per cell, cell size and where the periphery sits all change real density and cost. Every number here is illustrative, not a product spec.</p>
+</div></div></div>
+<script>
+const Q=new URLSearchParams(location.search);
+const th=Q.get('theme');if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);
+const STEPS=[
+ ['1 Stack','Deposit alternating layers of oxide and nitride, hundreds of layers in total.'],
+ ['2 Channel holes','Etch through the entire stack in one go. Deep, narrow holes are often etched in several sections and joined.'],
+ ['3 Storage + channel','Deposit the storage layer and the channel material along the wall of each hole.'],
+ ['4 Staircase','Shape the edge of the stack into steps so contacts from above can land on each layer separately.'],
+ ['5 Word line replacement','Remove the nitride and replace it with metal. Each metal layer is a word line; where it meets the channel is a memory cell.']];
+let layers=200,bits=3,stage=0,frac=1,playing=true,tms=0,allMode=false;
+const stepsEl=document.getElementById('steps');
+STEPS.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>{allMode=false;playing=false;tms=i*3000+2999;upd();syncPlay()};stepsEl.appendChild(b)});
+const bitsEl=document.getElementById('bits');
+[['SLC',1],['MLC',2],['TLC',3],['QLC',4]].forEach(([n,v])=>{const b=document.createElement('button');b.textContent=n+' ('+v+')';b.dataset.v=v;b.onclick=()=>{bits=v;readout()};bitsEl.appendChild(b)});
+document.getElementById('layers').oninput=e=>{layers=+e.target.value;readout();draw()};
+document.getElementById('play').onclick=()=>{playing=!playing;syncPlay()};
+document.getElementById('all').onclick=()=>{allMode=true;playing=false;upd();syncPlay()};
+function syncPlay(){document.getElementById('play').textContent=playing?'Pause':'Play'}
+function readout(){
+ const gb=layers*1.0*bits;
+ document.getElementById('nv').textContent=layers;
+ document.getElementById('cap_out').textContent=(gb>=1000?(gb/1000).toFixed(2)+' Tbit':gb+' Gbit');
+ document.getElementById('cap_gb').textContent='= '+(gb/8).toFixed(1)+' GB per die (illustrative)';
+ document.getElementById('capbar').style.width=(gb/1600*100)+'%';
+ const dr=drawn();
+ document.getElementById('r_drawn').textContent=dr+(dr<layers?' (1 drawn = '+(layers/dr).toFixed(1)+' real)':'');
+ const h=layers*0.06;
+ document.getElementById('r_h').textContent=h.toFixed(1)+' µm';
+ document.getElementById('r_ar').textContent=Math.round(h/0.1)+' : 1';
+ document.getElementById('r_deck').textContent=Math.ceil(layers/128)+(Math.ceil(layers/128)>1?' decks':' deck');
+ document.getElementById('r_st').textContent=layers;
+ [...bitsEl.children].forEach(b=>b.classList.toggle('on',+b.dataset.v===bits));
+}
+function drawn(){return Math.min(layers,48)}
+const X0=50,XF=800,XT=520,Y0=380,H=250;
+const NS='http://www.w3.org/2000/svg';
+function ease(x){return x<0?0:x>1?1:x*x*(3-2*x)}
+function draw(){
+ const n=drawn(),P=H/n,ho=P*0.42,hm=P-ho;
+ const holes=[100,185,270,355,440].map(x=>x);const HW=28;
+ const decks=Math.ceil(layers/128);
+ let s='';
+ // periphery + substrate
+ s+=`<rect x="20" y="${Y0+4}" width="${XF-X0+60}" height="26" fill="var(--per)" stroke="var(--bd)"/><text x="30" y="${Y0+22}" font-size="13">Periphery circuits (can sit directly under the array)</text>`;
+ s+=`<rect x="20" y="${Y0+30}" width="${XF-X0+60}" height="26" fill="var(--sub)"/><text x="30" y="${Y0+48}" font-size="13" style="fill:#fff">Silicon substrate / source line</text>`;
+ const sel=(allMode||stage===4)?Math.floor((tms/700)%n):-1;
+ const fs=stage>=3?(stage===3?ease(frac):1):0;
+ const revealN=stage===0?Math.ceil(n*ease(frac)):n;
+ const repl=stage>=4?(stage===4?frac:1):0;
+ // layers
+ const ends=[];
+ for(let i=0;i<n;i++){
+  if(i>=revealN)break;
+  const top=Y0-(i+1)*P;
+  const eT=XF-(XF-XT)*i/(n-1);
+  const end=XF-(XF-eT)*fs;ends.push(end);
+  const isMetal=repl>0&&(i/n)<repl;
+  s+=`<rect x="${X0}" y="${(top+hm).toFixed(1)}" width="${end-X0}" height="${ho.toFixed(1)}" fill="var(--ox)" stroke="var(--bd)" stroke-width="0.4"/>`;
+  s+=`<rect x="${X0}" y="${top.toFixed(1)}" width="${end-X0}" height="${hm.toFixed(1)}" fill="${isMetal?'var(--met)':'var(--nit)'}" stroke="var(--bd)" stroke-width="0.4"/>`;
+  if(i===sel)s+=`<rect x="${X0}" y="${top.toFixed(1)}" width="${end-X0}" height="${hm.toFixed(1)}" fill="#fff3a0" opacity="0.85"/>`;
+ }
+ // holes
+ if(stage>=1||allMode){
+  const depth=stage===1?ease(frac):1;
+  const fill=stage===2?ease(frac):(stage>=3?1:0);
+  const hh=H*depth;
+  for(const hx of holes){
+   const x=hx-HW/2;
+   s+=`<rect x="${x}" y="${Y0-hh}" width="${HW}" height="${hh}" fill="${fill>0?'var(--sto)':'var(--void)'}" stroke="var(--bd)"/>`;
+   if(fill>0){s+=`<rect x="${hx-9}" y="${Y0-hh}" width="18" height="${hh*fill}" fill="var(--ch)" transform="translate(0,${hh*(1-fill)})"/>`;
+     s+=`<rect x="${hx-3.5}" y="${Y0-hh}" width="7" height="${hh*fill}" fill="var(--core)" transform="translate(0,${hh*(1-fill)})"/>`;}
+   if(decks>1&&depth>0.99){for(let d=1;d<decks;d++){const jy=Y0-H*d/decks;s+=`<rect x="${hx-HW/2-4}" y="${jy-2}" width="${HW+8}" height="4" fill="var(--fg)" opacity="0.7"/>`}}
+   if(stage>=4||allMode){for(let i=0;i<n;i++){const top=Y0-(i+1)*P;const on=i===sel;
+     s+=`<rect x="${x-1}" y="${(top+1).toFixed(1)}" width="${HW+2}" height="${Math.max(hm-2,0.6).toFixed(1)}" fill="none" stroke="${on?'#dc2626':'#fff7d6'}" stroke-width="${on?2.4:(n>30?0.6:1.2)}"/>`}}
+   if(stage>=3||allMode)s+=`<rect x="${hx-9}" y="${Y0-H-20}" width="18" height="20" fill="var(--sub)"/>`;
+  }
+  if(stage>=3||allMode)s+=`<rect x="${holes[0]-30}" y="${Y0-H-32}" width="${holes[4]-holes[0]+60}" height="12" fill="var(--ac)"/><text x="${(holes[0]+holes[4])/2}" y="${Y0-H-40}" text-anchor="middle" font-size="13">Bit line</text>`;
+ }
+ // contacts
+ if(stage>=3||allMode){
+  const a=stage===3?Math.max(0,(frac-0.5)*2):1;
+  ends.forEach((e,i)=>{const top=Y0-(i+1)*P;const cx=e-6;const on=i===sel;
+   s+=`<line x1="${cx.toFixed(1)}" y1="${top.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${Y0-H-62}" stroke="${on?'#facc15':'var(--mu)'}" stroke-width="${on?3.2:(n>30?1:2)}" opacity="${a}"/>`});
+  s+=`<rect x="${XT-20}" y="${Y0-H-68}" width="${XF-XT+26}" height="6" fill="var(--mu)" opacity="${a}"/>`;
+  s+=`<text x="${XT-60}" y="${Y0-H-76}" font-size="13" opacity="${a}">Staircase: a contact lands on each step</text>`;
+ }
+ s+=`<text x="${X0}" y="22" font-size="13" style="fill:var(--mu)">${layers>n?'Drawing simplified: '+n+' of '+layers+' layers shown':layers+' layers shown'}</text>`;
+ if(stage<=3&&!allMode)s+=`<text x="${XF+4}" y="${Y0-H/2}" font-size="12" style="fill:var(--nit)" text-anchor="end"></text>`;
+ // legend
+ const lg=[['var(--ox)','Oxide'],[stage>=4||allMode?'var(--met)':'var(--nit)',stage>=4||allMode?'Word line metal':'Nitride (placeholder)'],['var(--sto)','Storage layer'],['var(--ch)','Channel']];
+ lg.forEach((l,i)=>{s+=`<rect x="${20+i*170}" y="${Y0+68}" width="14" height="12" fill="${l[0]}" stroke="var(--bd)"/><text x="${40+i*170}" y="${Y0+78}" font-size="12.5">${l[1]}</text>`});
+ document.getElementById('scene').innerHTML=s;
+}
+function upd(){
+ if(allMode){stage=4;frac=1}else{const c=((tms%15000)+15000)%15000;stage=Math.floor(c/3000);frac=Math.min(1,(c-stage*3000)/2400)}
+ [...stepsEl.children].forEach((b,i)=>b.classList.toggle('on',!allMode&&i===stage));
+ document.getElementById('cap').textContent=allMode?'Finished chip: word lines (orange) cross the vertical channels; each crossing is a cell. Highlighted word line is being selected.':STEPS[stage][1];
+ draw();
+}
+window.__setTime=ms=>{allMode=false;playing=false;tms=ms;upd();syncPlay()};
+if(Q.get('still')==='1'){allMode=true;playing=false;tms=2000}
+else if(Q.get('t')!==null){playing=false;tms=+Q.get('t')}
+let last=performance.now();
+function tick(now){if(playing){tms+=now-last;upd()}else if(allMode){tms+=now-last;draw()}last=now;requestAnimationFrame(tick)}
+readout();upd();syncPlay();requestAnimationFrame(tick);
+</script></body></html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planar vs FinFET vs GAA: count the wrapped faces</title>
+<style>
+:root{--bg:#f4f6fa;--fg:#17202e;--mut:#51607a;--card:#fff;--line:#d3dae6;--acc:#1f7a3a;--btn:#e7ecf4;--btnon:#1f6feb;--btnfg:#fff;--plate:#e9eef6}
+:root[data-theme=dark]{--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:12px 16px 28px}
+a{color:var(--btnon)}h1{font-size:24px;margin:6px 0 2px}p.sub{margin:0 0 12px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+#stage{width:100%;height:auto;display:block;background:var(--plate);border-radius:8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+button{font:inherit;font-size:15px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--btn);color:var(--fg);cursor:pointer}
+button.on{background:var(--btnon);color:var(--btnfg);border-color:var(--btnon)}
+label{display:block;font-size:14px;color:var(--mut);margin-top:6px}input[type=range]{width:100%}
+.big{font-size:44px;font-weight:800;color:var(--acc);line-height:1.1}.big small{font-size:18px;font-weight:600;color:var(--mut)}
+ul.f{list-style:none;padding:0;margin:6px 0;display:flex;flex-wrap:wrap;gap:6px}
+ul.f li{padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut);font-size:14px}
+ul.f li.lit{background:var(--acc);color:#0b1a0e;border-color:var(--acc);font-weight:700}
+.txt{min-height:4.6em;margin:6px 0}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+tr.cur{background:rgba(59,130,246,.15)}.note{font-size:13px;color:var(--mut)}
+</style></head><body><div class="wrap">
+<div><a href="../../en/3-integration/12-advanced-transistors/README.md">&larr; Back to chapter</a></div>
+<h1>Count the faces the gate wraps</h1>
+<p class="sub">Rotate the transistor, then press &ldquo;Count next face&rdquo; to light up each channel face the gate touches.</p>
+<div class="grid">
+<div class="card"><svg id="stage" viewBox="0 0 640 440" role="img" aria-label="3D transistor model"></svg>
+<div class="row" id="devs"></div>
+<div class="row"><button id="bPlay">Pause spin</button><button id="bCount" class="on">Count next face</button><button id="bGate">Hide gate</button></div>
+<label>Rotate (yaw) <span id="yv"></span><input id="yaw" type="range" min="-180" max="180" value="35"></label>
+</div>
+<div class="card">
+<div class="note">Gate-wrapped faces of the channel</div>
+<div class="big"><span id="cnt">3</span> <small>of <span id="tot">3</span></small></div>
+<ul class="f" id="flist"></ul>
+<div class="txt" id="stageTxt"></div>
+<div class="row"><button id="bPrev">&larr; Previous</button><button id="bNext">Next &rarr;</button></div>
+<table><tr><th>Structure</th><th>Sides wrapped</th></tr><tbody id="tb"></tbody></table>
+<p class="note">Schematic and not to scale; dimensions are illustrative. Gate dielectric is omitted for clarity.</p>
+</div></div></div>
+<script>
+const GEO={"planar": [{"b": [1, 7, -1, 7, -1.6, -1], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, -1, 0], "kind": "ch", "wrap": ["top"], "main": ["top"]}, {"b": [5, 6, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, 0, 0.9], "kind": "gate", "wrap": [], "main": false}], "finfet": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 2.6, 3.4, 0, 3], "kind": "ch", "wrap": ["top", "ymax", "ymin"], "main": ["top", "ymax", "ymin"]}, {"b": [5, 6, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 4.2, 3, 3.6], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 2.6, 0, 3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 3.4, 4.2, 0, 3], "kind": "gate", "wrap": [], "main": false}], "gaa": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [5, 6, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.1, 1.7000000000000002], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["bot"]}, {"b": [3, 5, 1.5, 4.5, 2.2, 2.8000000000000003], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": []}, {"b": [3, 5, 1.5, 4.5, 3.3000000000000003, 3.9000000000000004], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["top", "ymax", "ymin"]}, {"b": [3, 5, 1.5, 4.5, 0.3, 1.1], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.7, 2.2], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 2.8, 3.3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 3.9, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.0, 1.5, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 4.5, 5.0, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}]};
+const DEVS=[['planar','Planar','Planar: the gate sits on top of the channel, so it controls the channel from one side only (above). When the gate is off, current can still sneak through deeper down.'],
+['finfet','FinFET','FinFET: the channel is a thin vertical fin. The gate drapes over the top and both sides: three sides of control, so much less leakage.'],
+['gaa','GAA nanosheet','GAA: the channel is a stack of thin sheets, and the gate fills in around each one: top, bottom, left and right, all four sides.']];
+const FN={top:'Top',ymax:'Front side',ymin:'Back side',bot:'Bottom'};
+const ORD=['top','ymax','ymin','bot'];
+const q=new URLSearchParams(location.search);
+if(q.get('theme'))document.documentElement.dataset.theme=q.get('theme');
+const S={dev:0,count:null,gate:true,play:true,yaw:35,t:0,off:0};
+const $=id=>document.getElementById(id), st=$('stage');
+function pal(){const d=getComputedStyle(document.documentElement).getPropertyValue('--plate').trim()==='#121c2a';
+ return {sub:d?[70,84,104]:[150,162,182],sd:d?[88,150,196]:[96,150,205],ch:[96,200,230],gate:[255,170,80],lit:'#7dff4f',litS:'#124a1a'}}
+function geomOf(){return GEO[DEVS[S.dev][0]]}
+function nwrap(){const m=geomOf().find(b=>b.kind==='ch');return m.wrap.length}
+function proj(p,yaw,th,sc,cx,cy){const c=Math.cos(yaw*Math.PI/180),s=Math.sin(yaw*Math.PI/180),ct=Math.cos(th*Math.PI/180),stt=Math.sin(th*Math.PI/180);
+ const rx=p[0]-4,ry=p[1]-3,xr=rx*c-ry*s,yr=rx*s+ry*c;return [cx+xr*sc,cy-(p[2]*ct+yr*stt)*sc,-yr*ct+p[2]*stt]}
+function shade(n,yaw){const c=Math.cos(yaw*Math.PI/180),s=Math.sin(yaw*Math.PI/180);const nx=n[0]*c-n[1]*s,ny=n[0]*s+n[1]*c;return .45+.55*Math.max(0,-.35*nx-.45*ny+.82*n[2])}
+function faces(b){const[x0,x1,y0,y1,z0,z1]=b;return {top:[[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],[0,0,1]],bot:[[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]],[0,0,-1]],
+xmin:[[[x0,y0,z0],[x0,y1,z0],[x0,y1,z1],[x0,y0,z1]],[-1,0,0]],xmax:[[[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],[1,0,0]],
+ymin:[[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],[0,-1,0]],ymax:[[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],[0,1,0]]}}
+const cl=(c,f)=>'rgb('+c.map(v=>Math.min(255,Math.round(v*f))).join(',')+')';
+function render(){
+ const P=pal(),yaw=S.yaw,sc=48,cx=320,cy=250,N=nwrap(),cnt=S.count===null?N:S.count;
+ let h='',badges='';const G=geomOf();
+ const key=b=>proj([(b.b[0]+b.b[1])/2,(b.b[2]+b.b[3])/2,(b.b[4]+b.b[5])/2],yaw,28,1,0,0)[2];
+ const ord=G.filter(b=>b.kind==='sub').concat(G.filter(b=>b.kind!=='sub').sort((a,b)=>key(a)-key(b)));
+ for(const bx of ord){
+  if(bx.kind==='gate'&&!S.gate)continue;
+  const fs=faces(bx.b),arr=Object.entries(fs).map(([n,v])=>[n,v,proj([0,1,2].map(i=>v[0].reduce((a,c)=>a+c[i],0)/4),yaw,28,1,0,0)[2]]).sort((a,b)=>a[2]-b[2]);
+  for(const [n,v] of arr){
+   const pts=v[0].map(c=>proj(c,yaw,28,sc,cx,cy)),ps=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' '),f=shade(v[1],yaw);
+   if(bx.kind==='gate')h+=`<polygon points="${ps}" fill="${cl(P.gate,f)}" fill-opacity=".34" stroke="#ffd29a" stroke-opacity=".6"/>`;
+   else h+=`<polygon points="${ps}" fill="${cl(P[bx.kind],f)}" stroke="#0d1520" stroke-opacity=".45" stroke-width=".8"/>`;
+   if(bx.kind==='ch'&&bx.wrap.includes(n)){const idx=bx.wrap.indexOf(n);
+    if(idx<cnt)h+=`<polygon points="${ps}" fill="${P.lit}" fill-opacity=".92" stroke="#eaffd8" stroke-width="1.6"/>`;
+    if(bx.main.includes(n)&&idx<cnt){const mx=pts.reduce((a,p)=>a+p[0],0)/4,my=pts.reduce((a,p)=>a+p[1],0)/4;
+     badges+=`<g><circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="11" fill="#14202e" stroke="${P.lit}" stroke-width="2"/><text x="${mx.toFixed(1)}" y="${(my+4.5).toFixed(1)}" text-anchor="middle" font-size="13" font-weight="700" fill="${P.lit}" font-family="system-ui,sans-serif">${idx+1}</text></g>`}}
+  }}
+ st.innerHTML=h+badges;
+ $('yv').textContent=Math.round(((yaw+540)%360)-180)+'°';$('yaw').value=Math.round(((yaw+540)%360)-180);
+ $('cnt').textContent=cnt;$('tot').textContent=N;
+ const m=G.find(b=>b.kind==='ch');
+ $('flist').innerHTML=ORD.filter(n=>m.wrap.includes(n)).map(n=>`<li class="${m.wrap.indexOf(n)<cnt?'lit':''}">${m.wrap.indexOf(n)+1}. ${FN[n]}</li>`).join('')+'<li>Source / drain ends: not wrapped</li>';
+ $('stageTxt').textContent=DEVS[S.dev][2]+(S.dev===2?' (Counted per sheet; every sheet is wrapped the same way.)':'')+(S.gate?'':' [Gate hidden: only the channel is shown.]');
+ $('tb').innerHTML=DEVS.map((d,i)=>`<tr class="${i===S.dev?'cur':''}"><td>${d[1]}</td><td>${['One','Three','Four'][i]}</td></tr>`).join('');
+ [...$('devs').children].forEach((b,i)=>b.classList.toggle('on',i===S.dev));
+ $('bGate').textContent=S.gate?'Hide gate':'Show gate';$('bPlay').textContent=S.play?'Pause spin':'Play spin';
+}
+function setDev(i){S.dev=((i%3)+3)%3;S.count=null;render()}
+DEVS.forEach((d,i)=>{const b=document.createElement('button');b.textContent=d[1];b.onclick=()=>setDev(i);$('devs').appendChild(b)});
+$('bCount').onclick=()=>{const N=nwrap();S.count=(S.count===null||S.count>=N)?1:S.count+1;render()};
+$('bGate').onclick=()=>{S.gate=!S.gate;render()};
+$('bPlay').onclick=()=>{S.play=!S.play;if(S.play)S.off=S.yaw-spin(S.t);render()};
+$('bPrev').onclick=()=>setDev(S.dev-1);$('bNext').onclick=()=>setDev(S.dev+1);
+$('yaw').oninput=e=>{S.play=false;S.yaw=+e.target.value;render()};
+const spin=t=>30*Math.sin(t/2600);
+window.__setTime=ms=>{S.t=ms;if(S.play)S.yaw=S.off+spin(ms);render()};
+let t0=null;function loop(ts){if(t0===null)t0=ts;if(S.play)window.__setTime(ts-t0);requestAnimationFrame(loop)}
+S.off=35;
+if(q.has('dev'))S.dev=+q.get('dev');
+if(q.has('count'))S.count=+q.get('count');
+if(q.get('gate')==='0')S.gate=false;
+const still=q.has('still')||q.has('t')||q.has('yaw')||window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(q.has('yaw'))S.yaw=+q.get('yaw');
+if(q.has('t'))window.__setTime(+q.get('t'));
+if(still)S.play=false;
+render();
+if(!still)requestAnimationFrame(loop);
+</script></body></html>

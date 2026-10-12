@@ -34,7 +34,9 @@ A die freshly cut from the wafer is tiny and fragile, and its pads are far too s
 7. **Ball mount or lead plating**: Attach solder balls to the bottom, or plate the surface of the leads.
 8. **Singulation**: Cut the packages on a strip of substrate into individual chips.
 
-<!-- Figure: cross-section of a wire-bonded package (die, metal wires, lead frame or substrate, mold compound) -->
+![Animation: wire bonding a die to a lead frame and then molding the package](../../../images/20-wire-bond.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch20/wire-bond.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Wire bonding (打線接合)**
@@ -52,7 +54,9 @@ A die freshly cut from the wafer is tiny and fragile, and its pads are far too s
 
 Compared with wire bonding, flip chip has shorter connections, can place contacts across the whole surface of the die, and has better electrical and thermal performance. That is why most processors and graphics chips use flip chip.
 
-<!-- Figure: cross-section of a flip-chip package (flipped die, bumps, underfill, substrate, solder balls) -->
+![Animation: a flip-chip package built by flipping the die, soldering bumps, adding underfill and solder balls](../../../images/20-flip-chip.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch20/flip-chip.html) to try it yourself.*
 
 > [!NOTE]
 > **📖 Term | Flip chip (覆晶)**

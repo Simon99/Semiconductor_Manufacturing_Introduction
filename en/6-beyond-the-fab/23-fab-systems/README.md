@@ -79,6 +79,10 @@ sequenceDiagram
 
 Tools come from many different vendors around the world. So that systems can talk to every tool in the same way, the industry has defined common communication standards, the most widely used being **SECS/GEM**. It is like a common language between tools and systems.
 
+![Animation: a lot arriving at a tool, interlock checks, recipe download, track-in, processing and track-out recorded in the history](../../../images/23-lot-at-tool.svg)
+
+*Animated figure. [Open the interactive version](https://simon99.github.io/Semiconductor_Manufacturing_Introduction/ch23/lot-at-tool.html) to try it yourself.*
+
 ---
 
 ## Interlocks: making mistakes impossible

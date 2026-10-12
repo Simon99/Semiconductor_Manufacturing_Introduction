@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+<title id="t">Batch wet bench versus single-wafer spin cleaning</title>
+<desc id="d">Left: a carrier of wafers dips tank to tank in shared baths, so contamination spreads to every wafer. Right: one wafer spins while fresh chemical is sprayed, so nothing is shared. Bars are illustrative.</desc>
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;fill:#e8f0fa}
+.sm{font-size:12px} .md{font-size:14px} .hd{font-size:18px;font-weight:700} .dim{fill:#a9bcd6}
+#carrier{animation:car 12s linear infinite}
+@keyframes car{
+0% {transform:translate(0px,0px)}
+3% {transform:translate(0px,90px)}
+15% {transform:translate(0px,90px)}
+18% {transform:translate(0px,0px)}
+22% {transform:translate(102px,0px)}
+25% {transform:translate(102px,90px)}
+37% {transform:translate(102px,90px)}
+40% {transform:translate(102px,0px)}
+44% {transform:translate(204px,0px)}
+47% {transform:translate(204px,90px)}
+59% {transform:translate(204px,90px)}
+62% {transform:translate(204px,0px)}
+66% {transform:translate(306px,0px)}
+69% {transform:translate(306px,90px)}
+81% {transform:translate(306px,90px)}
+84% {transform:translate(306px,0px)}
+88% {transform:translate(306px,0px)}
+100% {transform:translate(0px,0px)}
+}
+.spread{animation:spr 12s linear infinite}
+@keyframes spr{0%{opacity:0}30%{opacity:.75}88%{opacity:.75}100%{opacity:0}}
+.drift{animation:drf 2.4s ease-in-out infinite}
+@keyframes drf{0%,100%{transform:translate(0,0);opacity:.9}50%{transform:translate(var(--dx),var(--dy));opacity:.5}}
+.bub{animation:bub 2.2s ease-in infinite}
+@keyframes bub{0%{transform:translateY(0);opacity:.0}20%{opacity:.8}100%{transform:translateY(-70px);opacity:0}}
+.spin{transform-origin:715px 235px;animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.film{animation:film 12s linear infinite}
+@keyframes film{0%,24%{fill:#4aa3ff}25%,49%{fill:#7fe3ff}50%,74%{fill:#7be08a}75%,89%{fill:#7fe3ff}90%,100%{fill:#9aa6b8}}
+.rip{transform-box:fill-box;transform-origin:center;animation:rip 1.2s ease-out infinite, rcol 12s linear infinite}
+@keyframes rip{0%{transform:scale(.06);opacity:.9}100%{transform:scale(1);opacity:0}}
+@keyframes rcol{0%,24%{stroke:#4aa3ff}25%,49%{stroke:#7fe3ff}50%,74%{stroke:#7be08a}75%,89%{stroke:#7fe3ff}90%,100%{stroke:#9aa6b8}}
+.dirt{animation:dirt 12s linear infinite}
+@keyframes dirt{0%,15%{opacity:1}60%,100%{opacity:0}}
+.fling{animation:fl 12s linear infinite}
+@keyframes fl{0%,55%{opacity:1}60%,100%{opacity:0}}
+.out{animation:out 1.5s ease-out infinite;transform-box:fill-box}
+@keyframes out{0%{transform:translate(0,0);opacity:.9}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+.chip{animation:chip 12s linear infinite}
+@keyframes chip{0%,24%{opacity:1}25%,100%{opacity:.28}}
+.nxt{animation:nxt 2s ease-in-out infinite}
+@keyframes nxt{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){
+ *{animation:none!important}
+ #carrier{transform:translate(0,90px)}
+ .spread{opacity:.75} .chip{opacity:1}
+ .film{fill:#4aa3ff} .rip{opacity:.35;transform:scale(.6);stroke:#4aa3ff}
+}
+</style>
+<rect width="960" height="540" fill="#14233a"/>
+<text class="hd" x="480" y="34" text-anchor="middle">Two ways to clean a wafer</text>
+<rect x="20" y="52" width="450" height="450" rx="14" fill="#1b2f4d"/>
+<rect x="490" y="52" width="450" height="450" rx="14" fill="#1b2f4d"/>
+<text class="hd" x="36" y="82">Batch wet bench</text>
+<text class="sm dim" x="36" y="102">A whole lot dips tank to tank, like a car wash</text>
+<text class="hd" x="506" y="82">Single-wafer spin clean</text>
+<text class="sm dim" x="506" y="102">One wafer at a time: spin + spray fresh chemical</text>
+<line x1="36" y1="132" x2="454" y2="132" stroke="#6f86a8" stroke-width="3"/>
+
+<rect x="36" y="278" width="92" height="92" fill="#4aa3ff" opacity=".55"/>
+<path d="M36 250V370H128V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
+<text class="sm" x="82" y="392" text-anchor="middle">SC1</text>
+<rect x="138" y="278" width="92" height="92" fill="#7fe3ff" opacity=".55"/>
+<path d="M138 250V370H230V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
+<text class="sm" x="184" y="392" text-anchor="middle">UPW rinse</text>
+<rect x="240" y="278" width="92" height="92" fill="#7be08a" opacity=".55"/>
+<path d="M240 250V370H332V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
+<text class="sm" x="286" y="392" text-anchor="middle">SC2</text>
+<rect x="342" y="278" width="92" height="92" fill="#7fe3ff" opacity=".55"/>
+<path d="M342 250V370H434V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
+<text class="sm" x="388" y="392" text-anchor="middle">UPW rinse</text>
+<circle class="bub" cx="54" cy="350" r="4" fill="#fff" style="animation-delay:0.0s"/>
+<circle class="bub" cx="82" cy="350" r="4" fill="#fff" style="animation-delay:0.7s"/>
+<circle class="bub" cx="108" cy="350" r="4" fill="#fff" style="animation-delay:1.4s"/>
+<circle class="bub" cx="258" cy="350" r="4" fill="#fff" style="animation-delay:0.0s"/>
+<circle class="bub" cx="286" cy="350" r="4" fill="#fff" style="animation-delay:0.7s"/>
+<circle class="bub" cx="312" cy="350" r="4" fill="#fff" style="animation-delay:1.4s"/>
+<g transform="translate(82,0)"><g id="carrier">
+<line x1="0" y1="132" x2="0" y2="164" stroke="#c9d6e8" stroke-width="4"/>
+<rect x="-34" y="164" width="68" height="70" rx="6" fill="none" stroke="#c9d6e8" stroke-width="3"/>
+<rect x="-27" y="170" width="5" height="58" rx="2" fill="#dfe8f4"/>
+<rect class="spread" x="-27" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<rect x="-17" y="170" width="5" height="58" rx="2" fill="#dfe8f4"/>
+<rect class="spread" x="-17" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<rect x="-7" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<rect x="3" y="170" width="5" height="58" rx="2" fill="#dfe8f4"/>
+<rect class="spread" x="3" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<rect x="13" y="170" width="5" height="58" rx="2" fill="#dfe8f4"/>
+<rect class="spread" x="13" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<rect x="23" y="170" width="5" height="58" rx="2" fill="#dfe8f4"/>
+<rect class="spread" x="23" y="170" width="5" height="58" rx="2" fill="#ff5a5a"/>
+<circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:-24px;--dy:-8px;animation-delay:0.0s"/>
+<circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:22px;--dy:10px;animation-delay:0.4s"/>
+<circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:-18px;--dy:16px;animation-delay:0.8s"/>
+<circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:26px;--dy:-12px;animation-delay:1.2000000000000002s"/>
+<circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:0px;--dy:20px;animation-delay:1.6s"/>
+</g></g>
+<text class="sm dim" x="36" y="410">Red wafer sheds particles into the shared bath,</text>
+<text class="sm dim" x="36" y="426">so every wafer in the carrier picks them up.</text>
+<text class="sm" x="454" y="124" text-anchor="end">crane + carrier of wafers</text>
+<circle cx="715" cy="235" r="122" fill="#0f1b2d" stroke="#c9d6e8" stroke-width="5"/>
+<circle cx="715" cy="235" r="100" fill="none" stroke="#6f86a8" stroke-width="2" stroke-dasharray="4 6"/>
+<circle cx="715" cy="235" r="85" fill="#cfd9e8"/>
+<circle class="film" cx="715" cy="235" r="85" opacity=".6" fill="#4aa3ff"/>
+<g class="spin">
+<line x1="745.0" y1="235.0" x2="793.0" y2="235.0" stroke="#14233a" stroke-width="2" opacity=".5"/>
+<line x1="700.0" y1="261.0" x2="676.0" y2="302.5" stroke="#14233a" stroke-width="2" opacity=".5"/>
+<line x1="700.0" y1="209.0" x2="676.0" y2="167.5" stroke="#14233a" stroke-width="2" opacity=".5"/>
+<circle cx="795" cy="235" r="5" fill="#14233a"/>
+<g class="dirt">
+<circle cx="755" cy="205" r="4" fill="#ff5a5a"/>
+<circle cx="665" cy="255" r="4" fill="#ff5a5a"/>
+<circle cx="725" cy="290" r="4" fill="#ff5a5a"/>
+<circle cx="685" cy="180" r="4" fill="#ff5a5a"/>
+<circle cx="770" cy="260" r="4" fill="#ff5a5a"/>
+</g></g>
+<circle cx="715" cy="235" r="14" fill="#6f86a8"/>
+<circle class="rip" cx="715" cy="235" r="85" fill="none" stroke-width="3" style="animation-delay:0.0s,0s"/>
+<circle class="rip" cx="715" cy="235" r="85" fill="none" stroke-width="3" style="animation-delay:0.4s,0s"/>
+<circle class="rip" cx="715" cy="235" r="85" fill="none" stroke-width="3" style="animation-delay:0.8s,0s"/>
+<g class="fling">
+<circle class="out" cx="797.7" cy="265.1" r="3.5" fill="#ff5a5a" style="--dx:31.9px;--dy:11.6px;animation-delay:0.0s"/>
+<circle class="out" cx="715.0" cy="323.0" r="3.5" fill="#ff5a5a" style="--dx:0.0px;--dy:34.0px;animation-delay:0.2s"/>
+<circle class="out" cx="632.3" cy="265.1" r="3.5" fill="#ff5a5a" style="--dx:-31.9px;--dy:11.6px;animation-delay:0.4s"/>
+<circle class="out" cx="658.4" cy="167.6" r="3.5" fill="#ff5a5a" style="--dx:-21.9px;--dy:-26.0px;animation-delay:0.6000000000000001s"/>
+<circle class="out" cx="759.0" cy="158.8" r="3.5" fill="#ff5a5a" style="--dx:17.0px;--dy:-29.4px;animation-delay:0.8s"/>
+</g>
+<path d="M805 140 L729 219" stroke="#e8f0fa" stroke-width="9" stroke-linecap="round"/><circle cx="725" cy="215" r="7" fill="#e8f0fa"/>
+<text class="sm" x="810" y="132" >nozzle</text>
+<circle class="nxt" cx="530" cy="170" r="20" fill="#dfe8f4" style="animation-delay:0.0s"/>
+<circle class="nxt" cx="530" cy="225" r="20" fill="#dfe8f4" style="animation-delay:0.3s"/>
+<circle class="nxt" cx="530" cy="280" r="20" fill="#dfe8f4" style="animation-delay:0.6s"/>
+<text class="sm" x="530" y="322" text-anchor="middle">waiting</text><text class="sm" x="530" y="338" text-anchor="middle">wafers</text>
+<text class="sm" x="878" y="292" text-anchor="middle">particles</text><text class="sm" x="878" y="308" text-anchor="middle">flung to</text><text class="sm" x="878" y="324" text-anchor="middle">drain</text>
+<g><g class="chip" style="animation-delay:0s"><rect x="506" y="380" width="98" height="26" rx="13" fill="#4aa3ff"/><text class="sm" x="555" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">SC1</text></g></g>
+<g><g class="chip" style="animation-delay:-9s"><rect x="614" y="380" width="98" height="26" rx="13" fill="#7fe3ff"/><text class="sm" x="663" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">Rinse</text></g></g>
+<g><g class="chip" style="animation-delay:-6s"><rect x="722" y="380" width="98" height="26" rx="13" fill="#7be08a"/><text class="sm" x="771" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">SC2</text></g></g>
+<g><g class="chip" style="animation-delay:-3s"><rect x="830" y="380" width="98" height="26" rx="13" fill="#9aa6b8"/><text class="sm" x="879" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">Rinse+dry</text></g></g>
+<text class="sm dim" x="506" y="428">Fresh chemical for every wafer; nothing is shared.</text>
+<text class="sm" x="36" y="456">Throughput</text><rect x="146" y="444" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="146" y="444" width="255.0" height="14" rx="7" fill="#3ecf8e"/>
+<text class="sm" x="36" y="480">Cross-contam.</text><rect x="146" y="468" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="146" y="468" width="195.0" height="14" rx="7" fill="#ff5a5a"/>
+<text class="sm" x="506" y="456">Throughput</text><rect x="616" y="444" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="616" y="444" width="150.0" height="14" rx="7" fill="#3ecf8e"/>
+<text class="sm" x="506" y="480">Cross-contam.</text><rect x="616" y="468" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="616" y="468" width="36.0" height="14" rx="7" fill="#ff5a5a"/>
+<text class="sm dim" x="480" y="524" text-anchor="middle" style="fill:#a9bcd6">Bars are illustrative and qualitative, not measurements.</text>
+</svg>

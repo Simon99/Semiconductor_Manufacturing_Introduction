@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>微影流程：塗佈、曝光、顯影</title>
+<title>微影流程（Lithography flow）：塗佈（Coat）、曝光（Expose）、顯影（Develop）</title>
 <style>
 :root{--bg:#fbf9f4;--card:#ffffff;--line:#d6d0c2;--tx:#1f2933;--sub:#52606d;--acc:#e8590c;
 --wafer:#7b8794;--film:#4f86c6;--res:#f2b134;--resN:#a4571a;--expP:#fff1bf;--expPs:#c99a1e;--quartz:#bfe0f5;--chrome:#2b2f36;--uv:#6d3be8;--nozzle:#52606d;--dev:#1b9aaa;--btn:#f0ece1;--on:#1f2933;--onfg:#fff}
@@ -27,7 +27,8 @@ svg text{font-family:inherit;fill:var(--tx)}
 button{font:inherit;font-size:14px;color:var(--tx);background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
 button[aria-pressed=true]{background:var(--on);color:var(--onfg);border-color:var(--on)}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.sl{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl label{grid-column:1/-1}
 .sl output{min-width:5.5em;text-align:right;font-variant-numeric:tabular-nums}
 input[type=range]{width:100%;accent-color:var(--acc)}
 h2{font-size:17px;margin:0 0 4px}
@@ -46,24 +47,24 @@ dd{margin:0}
 <body>
 <div class="wrap">
 <p class="back"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/04-lithography/README.md">&larr; 回到章節</a></p>
-<h1>微影流程：塗佈、曝光、顯影</h1>
-<p class="lead">觀看晶圓剖面走過三個階段，再切換光阻類型，看看圖形的哪一部分會留下來。</p>
+<h1>微影流程（Lithography flow）：塗佈（Coat）、曝光（Expose）、顯影（Develop）</h1>
+<p class="lead">觀看晶圓（Wafer）剖面走過三個階段，再切換光阻（Photoresist）類型，看看圖形的哪一部分會留下來。</p>
 <div class="main">
  <div class="card">
-  <svg id="scene" viewBox="0 0 560 380" role="img" aria-label="目前微影階段的晶圓剖面"></svg>
+  <svg id="scene" viewBox="0 0 560 380" role="img" aria-label="目前微影（Lithography）階段的晶圓（Wafer）剖面"></svg>
   <div class="leg">
-   <span><i style="background:var(--wafer)"></i>矽晶圓</span><span><i style="background:var(--film)"></i>薄膜層</span><span><i style="background:var(--res)"></i>光阻</span><span><i style="background:var(--expP)"></i>曝光後：可溶</span><span><i style="background:var(--resN)"></i>曝光後：硬化</span><span><i style="background:var(--chrome)"></i>光罩鉻層</span>
+   <span><i style="background:var(--wafer)"></i>矽晶圓（Silicon wafer）</span><span><i style="background:var(--film)"></i>薄膜層（Film layer）</span><span><i style="background:var(--res)"></i>光阻</span><span><i style="background:var(--expP)"></i>曝光後：可溶（Soluble）</span><span><i style="background:var(--resN)"></i>曝光後：硬化（Hardened）</span><span><i style="background:var(--chrome)"></i>光罩鉻層（Mask chrome）</span>
   </div>
  </div>
  <div>
   <div class="card">
    <div class="row"><span class="lbl">階段</span>
-    <button data-stage="0">1 塗佈</button><button data-stage="1">2 曝光</button><button data-stage="2">3 顯影</button>
+    <button data-stage="0">1 塗佈（Coat）</button><button data-stage="1">2 曝光（Expose）</button><button data-stage="2">3 顯影（Develop）</button>
     <button id="play" aria-pressed="false">暫停</button></div>
-   <div class="row"><span class="lbl">光阻</span>
-    <button data-tone="pos" aria-pressed="true">正型</button><button data-tone="neg" aria-pressed="false">負型</button></div>
-   <div class="sl"><label for="w">光罩縫隙寬度</label><input id="w" type="range" min="40" max="300" step="10" value="160"><output id="wo"></output></div>
-   <div class="sl"><label for="dose">曝光劑量</label><input id="dose" type="range" min="40" max="160" step="5" value="100"><output id="doseo"></output></div>
+   <div class="row"><span class="lbl">光阻（Photoresist）</span>
+    <button data-tone="pos" aria-pressed="true">正型（Positive）</button><button data-tone="neg" aria-pressed="false">負型（Negative）</button></div>
+   <div class="sl"><label for="w">光罩縫隙寬度（Mask gap width）</label><input id="w" type="range" min="40" max="300" step="10" value="160"><output id="wo"></output></div>
+   <div class="sl"><label for="dose">曝光劑量（Exposure dose）</label><input id="dose" type="range" min="40" max="160" step="5" value="100"><output id="doseo"></output></div>
    <p class="note">縫隙寬度與劑量為示意單位，並非真實製程數值。印出線寬的模型只是簡化示意：光越多，曝光區就稍微變寬。</p>
   </div>
   <div class="card" style="margin-top:12px" aria-live="polite">
@@ -71,13 +72,13 @@ dd{margin:0}
    <p class="desc" id="sd"></p>
    <dl>
     <dt>光照到哪裡</dt><dd id="r1"></dd>
-    <dt>顯影之後</dt><dd id="r2"></dd>
-    <dt>印出線寬（示意）</dt><dd id="r3"></dd>
+    <dt>顯影（Develop）之後</dt><dd id="r2"></dd>
+    <dt>印出線寬（Printed width，示意）</dt><dd id="r3"></dd>
    </dl>
   </div>
  </div>
 </div>
-<p class="note">依據微影章節：塗佈光阻、軟烤、對準與曝光、曝後烤、顯影、檢查。此處省略烘烤與檢查。曝光機以 1/4 大小投影光罩；圖中光罩按 1:1 繪製。下一站是蝕刻。</p>
+<p class="note">依據微影（Lithography）章節：塗佈光阻、軟烤（Soft bake）、對準與曝光、曝後烤（Post-exposure bake）、顯影、檢查（Inspection）。此處省略烘烤（Bake）與檢查。曝光機（Scanner）以 1/4 大小投影光罩；圖中光罩按 1:1 繪製。下一站是蝕刻（Etching）。</p>
 </div>
 <script>
 (function(){
@@ -105,35 +106,35 @@ function render(){
  // wafer + film
  h+=R(X0,YF,X1-X0,YS-YF,'fill="var(--wafer)"');
  h+=R(X0,YR,X1-X0,YF-YR,'fill="var(--film)"');
- h+='<text x="'+(X0+10)+'" y="'+(YS-14)+'" font-size="17" fill="#fff" style="fill:#fff">矽晶圓</text>';
- h+='<text x="'+(X0+10)+'" y="'+(YF-7)+'" font-size="16" style="fill:#fff">薄膜層（待圖形化）</text>';
+ h+='<text x="'+(X0+10)+'" y="'+(YS-14)+'" font-size="17" fill="#fff" style="fill:#fff">矽晶圓（Silicon wafer）</text>';
+ h+='<text x="'+(X0+10)+'" y="'+(YF-7)+'" font-size="16" style="fill:#fff">薄膜層（Film layer）：待圖形化</text>';
  var Tcur=T;
  if(s===0) Tcur=T*ease(p/0.85);
  // resist
  if(s<2){
   h+=R(X0,YR-Tcur,X1-X0,Tcur,'fill="var(--res)"');
-  if(Tcur>30) h+='<text x="'+(X1-10)+'" y="'+(YR-Tcur/2+5)+'" font-size="17" text-anchor="end" style="fill:#3d2a00">光阻</text>';
+  if(Tcur>30) h+='<text x="'+(X1-10)+'" y="'+(YR-Tcur/2+5)+'" font-size="17" text-anchor="end" style="fill:#3d2a00">光阻（Photoresist）</text>';
  }
  if(s===0){
   var dp=Math.min(1,p/0.3);
   h+='<path d="M'+(CX-14)+' 24 h28 v26 l-11 16 h-6 l-11 -16 z" fill="var(--nozzle)"/>';
-  h+='<text x="'+(CX+26)+'" y="40" font-size="16">滴塗光阻</text>';
+  h+='<text x="'+(CX+26)+'" y="40" font-size="16">滴塗（Dispense）光阻</text>';
   if(p<0.3) h+='<circle cx="'+CX+'" cy="'+(76+dp*(YR-T-90))+'" r="6" fill="var(--resN)"/>';
   var rot=p*360*3;
-  h+='<g transform="translate(450 100)"><g transform="rotate('+rot+')"><path d="M0 -36 a36 36 0 1 1 -25 10" fill="none" stroke="var(--nozzle)" stroke-width="4"/><path d="M-36 -22 l12 6 l-14 6 z" fill="var(--nozzle)" transform="translate(11 -6) rotate(-30)"/></g></g>';
-  h+='<text x="450" y="156" font-size="17" text-anchor="middle">晶圓高速旋轉，</text><text x="450" y="176" font-size="17" text-anchor="middle">光阻均勻展開</text>';
+  h+='<g transform="translate(450 86)"><g transform="rotate('+rot+')"><path d="M0 -36 a36 36 0 1 1 -25 10" fill="none" stroke="var(--nozzle)" stroke-width="4"/><path d="M-36 -22 l12 6 l-14 6 z" fill="var(--nozzle)" transform="translate(11 -6) rotate(-30)"/></g></g>';
+  h+='<text x="450" y="142" font-size="17" text-anchor="middle">晶圓高速旋轉（Spin），</text><text x="450" y="164" font-size="17" text-anchor="middle">光阻均勻展開</text>';
  }
  if(s===1){
   // mask
   h+=R(X0,84,X1-X0,16,'fill="var(--quartz)" stroke="var(--line)"');
   h+=R(X0,96,xl-X0,7,'fill="var(--chrome)"');
   h+=R(xr,96,X1-xr,7,'fill="var(--chrome)"');
-  h+='<text x="'+(X1-6)+'" y="80" font-size="17" text-anchor="end">光罩：中間有透光縫隙</text>';
+  h+='<text x="'+(X1-6)+'" y="80" font-size="15" text-anchor="end">光罩（Mask）：中間有透光縫隙</text>';
   var dash=(-S.flow*40)%22;
   for(var x=X0+12;x<X1;x+=24){
    h+='<line x1="'+x+'" y1="26" x2="'+x+'" y2="68" stroke="var(--uv)" stroke-width="3" stroke-dasharray="7 6" stroke-dashoffset="'+dash+'" opacity="0.9"/>';
   }
-  h+='<text x="'+(X0+6)+'" y="16" font-size="17" style="fill:var(--uv)">紫外光</text>';
+  h+='<text x="'+(X0+6)+'" y="16" font-size="17" style="fill:var(--uv)">紫外光（UV light）</text>';
   for(var x2=Math.ceil((xl+8-X0-12)/24)*24+X0+12;x2<xr-4;x2+=24){
    h+='<line x1="'+x2+'" y1="106" x2="'+x2+'" y2="'+(YR-T-4)+'" stroke="var(--uv)" stroke-width="3" stroke-dasharray="7 6" stroke-dashoffset="'+dash+'"/>';
    h+='<path d="M'+(x2-6)+' '+(YR-T-14)+' l6 10 l6 -10 z" fill="var(--uv)"/>';
@@ -141,7 +142,7 @@ function render(){
   var a=ease(p*1.4);
   if(pos) h+=R(xl,YR-T,m.We,T,'fill="var(--expP)" stroke="var(--expPs)" stroke-dasharray="5 4" opacity="'+a+'"');
   else h+=R(xl,YR-T,m.We,T,'fill="var(--resN)" opacity="'+a+'"');
-  if(a>0.6 && m.We>70) h+='<text x="'+CX+'" y="'+(YR-T/2+5)+'" font-size="17" text-anchor="middle" style="fill:'+(pos?'var(--tx)':'#fff')+'">'+(pos?'變成可溶':'變成硬化')+'</text>';
+  if(a>0.6 && m.We>80) h+='<text x="'+CX+'" y="'+(YR-T/2-2)+'" font-size="16" text-anchor="middle" style="fill:'+(pos?'var(--tx)':'#fff')+'">'+(pos?'變成可溶':'變成硬化')+'<tspan x="'+CX+'" dy="18" font-size="13">'+(pos?'（Soluble）':'（Hardened）')+'</tspan></text>';
   if(!m.ok) h+='<text x="'+CX+'" y="'+(YR-T-24)+'" font-size="16" text-anchor="middle" style="fill:var(--acc)">劑量過低：反應微弱</text>';
  }
  if(s===2){
@@ -151,7 +152,7 @@ function render(){
   if(p<0.75){
    for(var d=-1;d<=1;d++){var dy=((p*3+d*0.3+1)%1);h+='<circle cx="'+(CX+d*70)+'" cy="'+(70+dy*100)+'" r="5" fill="var(--dev)" opacity="'+(1-dy*0.6)+'"/>';}
   }
-  h+='<text x="'+(X0+6)+'" y="40" font-size="17" style="fill:var(--dev)">顯影液</text>';
+  h+='<text x="'+(X0+6)+'" y="40" font-size="17" style="fill:var(--dev)">顯影液（Developer）</text>';
   if(pos){
    h+=R(X0,YR-T,xl-X0,T,'fill="var(--res)"');
    h+=R(xr,YR-T,X1-xr,T,'fill="var(--res)"');
@@ -166,27 +167,27 @@ function render(){
   if(e>0.95){
    var bx1=xl,bx2=xr,yb=YR-T-22;
    h+='<g stroke="var(--tx)" stroke-width="1.5"><line x1="'+bx1+'" y1="'+yb+'" x2="'+bx2+'" y2="'+yb+'"/><line x1="'+bx1+'" y1="'+(yb-6)+'" x2="'+bx1+'" y2="'+(yb+6)+'"/><line x1="'+bx2+'" y1="'+(yb-6)+'" x2="'+bx2+'" y2="'+(yb+6)+'"/></g>';
-   h+='<text x="'+CX+'" y="'+(yb-8)+'" font-size="17" text-anchor="middle">印出線寬 '+Math.round(m.We)+'</text>';
+   h+='<text x="'+CX+'" y="'+(yb-8)+'" font-size="17" text-anchor="middle">印出線寬（Printed width）'+Math.round(m.We)+'</text>';
   }
  }
  // stage banner
  h+='<g transform="translate(10 352)">';
  for(var i=0;i<3;i++){
   var on=i===s;
-  h+='<g transform="translate('+(i*112)+' 0)"><rect width="104" height="22" rx="11" fill="'+(on?'var(--acc)':'var(--line)')+'"/><text x="52" y="16" font-size="14" text-anchor="middle" style="fill:'+(on?'#fff':'var(--sub)')+'">'+['1 塗佈','2 曝光','3 顯影'][i]+'</text></g>';
+  h+='<g transform="translate('+(i*160)+' 0)"><rect width="150" height="22" rx="11" fill="'+(on?'var(--acc)':'var(--line)')+'"/><text x="75" y="16" font-size="13" text-anchor="middle" style="fill:'+(on?'#fff':'var(--sub)')+'">'+['1 塗佈（Coat）','2 曝光（Expose）','3 顯影（Develop）'][i]+'</text></g>';
  }
  h+='</g>';
  sc.innerHTML=h;
  // text
- var T1=['1 塗佈','2 曝光','3 顯影'][s];
+ var T1=['1 塗佈（Coat）','2 曝光（Expose）','3 顯影（Develop）'][s];
  var D=['光阻滴在晶圓中央，晶圓高速旋轉，把光阻攤成一層薄而均勻的膜。',
- '光線穿過光罩的透光縫隙，只有該處的光阻會被照到，鉻層底下的光阻不受光。被照到的光阻發生化學變化。',
- '顯影液溶掉不要的光阻，圖形就浮現出來。底下的薄膜還沒被動到，接下來才是蝕刻。'][s];
+ '光線穿過光罩（Mask）的透光縫隙，只有該處的光阻會被照到，鉻層（Chrome）底下的光阻不受光。被照到的光阻發生化學變化。',
+ '顯影液（Developer）溶掉不要的光阻，圖形就浮現出來。底下的薄膜（Thin film）還沒被動到，接下來才是蝕刻（Etching）。'][s];
  document.getElementById('st').textContent='階段 '+T1;
  document.getElementById('sd').textContent=D;
- document.getElementById('r1').textContent=pos?'正型光阻：曝光區變得可溶於顯影液。':'負型光阻：曝光區硬化，不再被溶掉。';
- var res=pos?'曝光的縫隙被洗掉，光阻上開出一條溝，該處的薄膜裸露出來。':'只有曝光的那一條留下來成為光阻線，周圍全部被洗掉。';
- if(!m.ok) res=pos?'劑量過低：曝光的光阻沒有完全變可溶，溝底會殘留一層薄膜。':'劑量過低：這一條只有微弱硬化，只留下薄而脆弱的線。';
+ document.getElementById('r1').textContent=pos?'正型光阻（Positive resist）：曝光區變得可溶（Soluble）於顯影液。':'負型光阻（Negative resist）：曝光區硬化（Hardened），不再被溶掉。';
+ var res=pos?'曝光的縫隙被洗掉，光阻上開出一條溝，該處的薄膜（Thin film）裸露出來。':'只有曝光的那一條留下來成為光阻線，周圍全部被洗掉。';
+ if(!m.ok) res=pos?'劑量過低：曝光的光阻沒有完全變可溶，溝底會殘留一層薄膜（Thin film）。':'劑量過低：這一條只有微弱硬化，只留下薄而脆弱的線。';
  document.getElementById('r2').innerHTML=(s<2?'尚未顯影。最後結果：':'')+(m.ok?res:'<span class="warn">'+res+'</span>');
  document.getElementById('r3').textContent=Math.round(m.We)+' 單位（光罩縫隙 '+S.W+'，劑量 '+S.dose+'%）';
  document.getElementById('wo').textContent=S.W+' 單位';

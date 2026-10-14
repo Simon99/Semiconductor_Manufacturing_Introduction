@@ -45,13 +45,13 @@ button:hover,button.on{border-color:var(--ac);color:var(--ac)}
 <body>
 <div class="wrap">
 <p class="back"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/1-fundamentals/02-transistor-basics/README.md">&larr; 回到章節</a></p>
-<h1>MOSFET：由閘極電壓控制的開關</h1>
+<h1>MOSFET：由閘極電壓（Gate voltage）控制的開關</h1>
 <div class="grid">
-<div class="card scene"><svg id="sc" viewBox="0 0 960 520" role="img" aria-label="MOSFET 剖面圖，標示源極、汲極、閘極、閘極氧化層與通道">
+<div class="card scene"><svg id="sc" viewBox="0 0 960 520" role="img" aria-label="MOSFET 剖面圖（Cross-section），標示源極（Source）、汲極（Drain）、閘極（Gate）、閘極氧化層（Gate oxide）與通道（Channel）">
 <rect id="gaugebg" class="gbg" x="60" y="68" width="300" height="14" rx="7"/>
 <rect id="gfill" class="gfill" x="60" y="68" width="300" height="14" rx="7"/>
 <line class="vt" x1="210" y1="62" x2="210" y2="88"/>
-<text class="t b" x="60" y="58">閘極電壓 Vg</text>
+<text class="t b" x="60" y="58">閘極電壓 Vg（Gate voltage）</text>
 <text class="t s" x="210" y="106" text-anchor="middle">Vt（示意）</text>
 <text class="t s" x="60" y="106">0 V</text>
 <g id="stoff"><rect class="boff" x="520" y="52" width="380" height="42" rx="8"/><text class="t b" x="710" y="79" text-anchor="middle">關閉：開關斷路，無電流</text></g>
@@ -66,23 +66,23 @@ button:hover,button.on{border-color:var(--ac);color:var(--ac)}
 <line class="wire" x1="225" y1="250" x2="225" y2="150"/>
 <line class="wire" x1="480" y1="222" x2="480" y2="150"/>
 <line class="wire" x1="735" y1="250" x2="735" y2="150"/>
-<text class="t b" x="225" y="132" text-anchor="middle">源極（S）</text><text class="t s" x="225" y="147" text-anchor="middle" dy="-0">0 V 參考電位</text>
-<text class="t b" x="480" y="132" text-anchor="middle">閘極（G）</text><text class="t s" x="480" y="147" text-anchor="middle">電壓 Vg</text>
-<text class="t b" x="735" y="132" text-anchor="middle">汲極（D）</text><text class="t s" x="735" y="147" text-anchor="middle">正電壓</text>
+<text class="t b" x="225" y="132" text-anchor="middle">源極（Source, S）</text><text class="t s" x="225" y="147" text-anchor="middle" dy="-0">0 V 參考電位</text>
+<text class="t b" x="480" y="132" text-anchor="middle">閘極（Gate, G）</text><text class="t s" x="480" y="147" text-anchor="middle">電壓 Vg</text>
+<text class="t b" x="735" y="132" text-anchor="middle">汲極（Drain, D）</text><text class="t s" x="735" y="147" text-anchor="middle">正電壓</text>
 <text class="t gl" x="480" y="258" text-anchor="middle">閘極</text>
 <g id="plus"><text class="plus" x="365" y="279" text-anchor="middle">+</text><text class="plus" x="410" y="279" text-anchor="middle">+</text><text class="plus" x="455" y="279" text-anchor="middle">+</text><text class="plus" x="500" y="279" text-anchor="middle">+</text><text class="plus" x="545" y="279" text-anchor="middle">+</text><text class="plus" x="590" y="279" text-anchor="middle">+</text></g>
-<text class="t s" x="225" y="345" text-anchor="middle">N+ 源極</text><text class="t s" x="735" y="345" text-anchor="middle">N+ 汲極</text>
-<text class="t s" x="480" y="458" text-anchor="middle" >P 型矽（基體）</text>
+<text class="t s" x="225" y="345" text-anchor="middle">N+ 源極（N+ source）</text><text class="t s" x="735" y="345" text-anchor="middle">N+ 汲極（N+ drain）</text>
+<text class="t s" x="480" y="458" text-anchor="middle" >P 型矽（P-type silicon, body）</text>
 <rect id="chan" class="chan" x="330" y="300" width="300" height="16"/>
-<line class="lead" x1="650" y1="232" x2="632" y2="292"/><text class="t b" x="652" y="208">閘極氧化層</text><text class="t s" x="652" y="224">極薄絕緣層</text>
-<line class="lead" x1="480" y1="395" x2="480" y2="318"/><text class="t b" x="480" y="412" text-anchor="middle">通道</text><text class="t s" x="480" y="428" text-anchor="middle">形成於閘極下方</text>
+<line class="lead" x1="650" y1="232" x2="632" y2="292"/><text class="t b" x="500" y="196">閘極氧化層（Gate oxide）</text><text class="t s" x="500" y="212">極薄絕緣層（Thin insulator）</text>
+<line class="lead" x1="480" y1="395" x2="480" y2="318"/><text class="t b" x="480" y="412" text-anchor="middle">通道（Channel）</text><text class="t s" x="480" y="428" text-anchor="middle">形成於閘極下方</text>
 <g id="elgrp">
 </g>
-<text class="t s" x="480" y="500" text-anchor="middle">NMOS 剖面圖，已簡化，未依比例。Vt 與電壓皆為示意。</text>
+<text class="t s" x="480" y="500" text-anchor="middle">NMOS 剖面圖（Cross-section），已簡化，未依比例。Vt 與電壓皆為示意。</text>
 </svg></div>
 <div class="card panel">
 <h2>試試看：調整閘極電壓</h2>
-<label for="vg">閘極電壓 Vg：<span id="vgv">0.00</span> V</label>
+<label for="vg">閘極電壓 Vg（Gate voltage）：<span id="vgv">0.00</span> V</label>
 <input id="vg" type="range" min="0" max="1.2" step="0.01" value="0">
 <div class="row">
 <button id="play" type="button">暫停</button>
@@ -95,18 +95,18 @@ button:hover,button.on{border-color:var(--ac);color:var(--ac)}
 <button data-v="0.55" type="button">3 通道形成</button>
 <button data-v="0.95" type="button">4 電流流動</button>
 </div>
-<div class="ro"><span>臨界電壓 Vt</span><b>0.50 V（示意）</b><span>狀態</span><b id="rs">關閉</b><span>通道</span><b id="rc">無</b><span>汲極電流</span><b id="ri">約為 0</b></div>
+<div class="ro"><span>臨界電壓 Vt（Threshold voltage）</span><b>0.50 V（示意）</b><span>狀態</span><b id="rs">關閉</b><span>通道（Channel）</span><b id="rc">無</b><span>汲極電流（Drain current）</span><b id="ri">約為 0</b></div>
 <div id="stage"></div>
-<svg id="plot" viewBox="0 0 300 150" role="img" aria-label="示意：汲極電流與閘極電壓的關係">
+<svg id="plot" viewBox="0 0 300 150" role="img" aria-label="示意：汲極電流（Drain current）與閘極電壓（Gate voltage）的關係">
 <line x1="36" y1="120" x2="290" y2="120" stroke="var(--line)"/><line x1="36" y1="120" x2="36" y2="10" stroke="var(--line)"/>
 <path id="curve" fill="none" stroke="var(--ac)" stroke-width="2.5"/>
 <line id="vtl" stroke="var(--tx2)" stroke-dasharray="3 3"/>
 <circle id="dot" r="6" fill="var(--gf)" stroke="var(--tx)"/>
-<text x="163" y="143" text-anchor="middle" class="t s">閘極電壓 Vg（V）</text>
-<text x="12" y="65" text-anchor="middle" class="t s" transform="rotate(-90 12 65)">汲極電流</text>
+<text x="163" y="143" text-anchor="middle" class="t s">閘極電壓 Vg（Gate voltage, V）</text>
+<text x="12" y="65" text-anchor="middle" class="t s" style="font-size:10px" transform="rotate(-90 12 65)">汲極電流（Drain current）</text>
 <text id="vtt" class="t s" text-anchor="middle">Vt</text>
 </svg>
-<p class="note">理想化的示意：低於 Vt 時無電流，超過後電流隨 Vg &minus; Vt 增加（汲極電壓很小時）。實際元件在低於 Vt 時仍會有少量漏電。</p>
+<p class="note">理想化的示意：低於 Vt 時無電流，超過後電流隨 Vg &minus; Vt 增加，汲極電壓（Drain voltage）很小時。實際元件在低於 Vt 時仍會有少量漏電（Leakage）。</p>
 </div>
 </div>
 </div>
@@ -124,10 +124,10 @@ function auto(t){var f=((t%CYC)+CYC)%CYC/CYC;
  if(f<.15)return 0;if(f<.35)return lerp(0,1,(f-.15)/.2);if(f<.8)return 1;if(f<.92)return lerp(1,0,(f-.8)/.12);return 0;}
 function ss(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
 function stageText(v){
- if(v<0.05)return '<b>1. 關閉。</b>閘極電壓為 0 V。N+ 源極與 N+ 汲極之間隔著 P 型矽，電流沒有通路，開關是斷開的。';
- if(v<VT)return '<b>2. 閘極充電。</b>正的閘極電壓把電洞推離氧化層，並開始把電子吸向氧化層。但還不夠：Vg 仍低於 Vt，所以沒有通道。';
- if(v<VT+0.15)return '<b>3. 通道形成。</b>Vg 已超過 Vt。電子聚集在閘極氧化層下方的薄薄一層，把源極和汲極接通。閘門打開了。';
- return '<b>4. 電流流動。</b>電子經由通道從源極流向汲極。Vg 越高，通道越強，電流也越大。';}
+ if(v<0.05)return '<b>1. 關閉。</b>閘極電壓（Gate voltage）為 0 V。N+ 源極（N+ source）與 N+ 汲極（N+ drain）之間隔著 P 型矽（P-type silicon），電流沒有通路，開關是斷開的。';
+ if(v<VT)return '<b>2. 閘極充電。</b>正的閘極電壓（Gate voltage）把電洞（Holes）推離氧化層（Oxide），並開始把電子（Electrons）吸向氧化層。但還不夠：Vg 仍低於 Vt，所以沒有通道（Channel）。';
+ if(v<VT+0.15)return '<b>3. 通道形成。</b>Vg 已超過 Vt。電子（Electrons）聚集在閘極氧化層（Gate oxide）下方的薄薄一層，把源極（Source）和汲極（Drain）接通。閘門打開了。';
+ return '<b>4. 電流流動。</b>電子（Electrons）經由通道（Channel）從源極（Source）流向汲極（Drain）。Vg 越高，通道越強，電流也越大。';}
 function render(){
  var v=st.manual?st.vg:auto(st.t);
  var on=v>=VT, od=Math.max(0,v-VT), I=od/0.7;

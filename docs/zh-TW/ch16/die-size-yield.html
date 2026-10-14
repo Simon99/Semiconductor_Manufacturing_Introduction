@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>晶粒大小與良率</title>
+<title>晶粒（Die）大小與良率（Yield）</title>
 <style>
 :root{--bg:#f4f6fa;--card:#fff;--line:#c9d0dc;--tx:#1b2433;--mut:#4b5668;--good:#3b82c4;--bad:#e8863a;--def:#7a1020;--wf:#e4e9f1;--wfl:#6b7a90;--acc:#1f5fa8}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1623;--card:#182131;--line:#2f3d55;--tx:#e8edf5;--mut:#a9b6c9;--good:#5aa2e0;--bad:#f0954a;--def:#ff6b7f;--wf:#273449;--wfl:#8fa0b8;--acc:#7db6ee}}
@@ -25,24 +25,24 @@ button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 @media (max-width:760px){.panels{grid-template-columns:1fr}.ctl{grid-template-columns:1fr}canvas{width:100%}}
 </style></head><body><div class="wrap">
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/16-yield-analysis/README.md">&larr; 回到章節</a>
-<h1>相同缺陷，不同晶粒大小</h1>
-<p class="sub">兩片晶圓的缺陷完全相同。只要晶粒上至少落了一個缺陷，該晶粒就失效。可以調整晶粒大小與缺陷密度。</p>
+<h1>相同缺陷（Defect），不同晶粒（Die）大小</h1>
+<p class="sub">兩片晶圓（Wafer）的缺陷完全相同。只要晶粒上至少落了一個缺陷，該晶粒就失效。可以調整晶粒大小與缺陷密度（Defect density）。</p>
 <div class="formula">Y = e<sup>&minus;A&middot;D0</sup> <small id="fl"></small></div>
 <div class="panels">
- <div class="card"><h2>晶圓 A &mdash; 晶粒 <span id="tA"></span></h2><canvas id="cA" width="560" height="560"></canvas><div class="read" id="rA"></div></div>
- <div class="card"><h2>晶圓 B &mdash; 晶粒 <span id="tB"></span></h2><canvas id="cB" width="560" height="560"></canvas><div class="read" id="rB"></div></div>
+ <div class="card"><h2>晶圓（Wafer）A &mdash; 晶粒（Die） <span id="tA"></span></h2><canvas id="cA" width="560" height="560"></canvas><div class="read" id="rA"></div></div>
+ <div class="card"><h2>晶圓（Wafer）B &mdash; 晶粒（Die） <span id="tB"></span></h2><canvas id="cB" width="560" height="560"></canvas><div class="read" id="rB"></div></div>
 </div>
 <div class="ctl">
- <label>晶圓 A 的晶粒面積 A： <b id="vA"></b><input id="sA" type="range" min="20" max="900" step="5" value="840"></label>
- <label>晶圓 B 的晶粒面積 A： <b id="vB"></b><input id="sB" type="range" min="20" max="900" step="5" value="64"></label>
- <label>缺陷密度 D0： <b id="vD"></b><input id="sD" type="range" min="0.02" max="0.5" step="0.01" value="0.15"></label>
+ <label>晶圓（Wafer）A 的晶粒面積（Die area）A： <b id="vA"></b><input id="sA" type="range" min="20" max="900" step="5" value="840"></label>
+ <label>晶圓（Wafer）B 的晶粒面積（Die area）A： <b id="vB"></b><input id="sB" type="range" min="20" max="900" step="5" value="64"></label>
+ <label>缺陷密度（Defect density）D0： <b id="vD"></b><input id="sD" type="range" min="0.02" max="0.5" step="0.01" value="0.15"></label>
 </div>
 <div class="bar">
  <button id="play">暫停</button>
- <button data-s="0">1 缺陷落下</button><button data-s="1">2 切成晶粒</button><button data-s="2">3 標記被打中的晶粒</button><button data-s="3">4 計算良好晶粒</button>
+ <button data-s="0">1 缺陷（Defect）落下</button><button data-s="1">2 切成晶粒（Die）</button><button data-s="2">3 標記被打中的晶粒（Die）</button><button data-s="3">4 計算良好晶粒（Good die）</button>
  <span class="step" id="step"></span>
 </div>
-<p class="note">示意：300 mm 晶圓、方形晶粒、D0 單位為每 cm&sup2; 的缺陷數、不留邊緣排除區。只計入完全位於晶圓內的晶粒。「實測」數字是這一次隨機取樣的結果；卜瓦松（Poisson）公式則是許多片晶圓的預期平均值，所以兩者會有些差異（樣本越少差異越大）。為了方便看清楚，缺陷畫得比實際大。</p>
+<p class="note">示意：300 mm 晶圓（Wafer）、方形晶粒（Die）、D0 單位為每 cm&sup2; 的缺陷（Defect）數、不留邊緣排除區。只計入完全位於晶圓內的晶粒。「實測」數字是這一次隨機取樣的結果；卜瓦松（Poisson）公式則是許多片晶圓的預期平均值，所以兩者會有些差異（樣本越少差異越大）。為了方便看清楚，缺陷畫得比實際大。</p>
 </div>
 <script>
 (function(){
@@ -80,13 +80,13 @@ function render(){
  $('tA').textContent=Math.sqrt(st.A).toFixed(1)+'×'+Math.sqrt(st.A).toFixed(1)+' mm';
  $('tB').textContent=Math.sqrt(st.B).toFixed(1)+'×'+Math.sqrt(st.B).toFixed(1)+' mm';
  $('vA').textContent=(st.A/100).toFixed(2)+' cm²';$('vB').textContent=(st.B/100).toFixed(2)+' cm²';$('vD').textContent=D.toFixed(2)+' /cm²';
- function rd(el,m,area){$(el).innerHTML='<b>'+m.good+' 顆良好</b>，共 '+m.N+' 顆晶粒（實測 '+(100*m.good/m.N).toFixed(0)+'%）<br><span class="m">Y = e<sup>−'+fmt(area/100)+'×'+D.toFixed(2)+'</sup> = '+(100*m.Y).toFixed(1)+'% → 預期約 '+(m.N*m.Y).toFixed(0)+' 顆良好 · '+m.nd+' 個缺陷</span>';}
+ function rd(el,m,area){$(el).innerHTML='<b>'+m.good+' 顆良好</b>，共 '+m.N+' 顆晶粒（Die）（實測 '+(100*m.good/m.N).toFixed(0)+'%）<br><span class="m">Y = e<sup>−'+fmt(area/100)+'×'+D.toFixed(2)+'</sup> = '+(100*m.Y).toFixed(1)+'% → 預期約 '+(m.N*m.Y).toFixed(0)+' 顆良好 · '+m.nd+' 個缺陷</span>';}
  rd('rA',a,st.A);rd('rB',b,st.B);
- $('fl').textContent='晶圓 A：A·D0 = '+fmt(st.A/100*D)+' → Y = '+(100*a.Y).toFixed(1)+'%   |   晶圓 B：A·D0 = '+fmt(st.B/100*D)+' → Y = '+(100*b.Y).toFixed(1)+'%';
+ $('fl').textContent='晶圓（Wafer）A：A·D0 = '+fmt(st.A/100*D)+' → Y = '+(100*a.Y).toFixed(1)+'%   |   晶圓（Wafer）B：A·D0 = '+fmt(st.B/100*D)+' → Y = '+(100*b.Y).toFixed(1)+'%';
  var tt=still?CYC:t%CYC;
  draw($('cA'),a,tt);draw($('cB'),b,tt);
  var si=tt>=T[3]?3:tt>=T[2]?2:tt>=T[1]?1:0;
- var tx=['缺陷隨機落在晶圓上，兩片晶圓使用相同的位置。','把晶圓切成晶粒。晶粒越大，顆數越少，每顆涵蓋的面積也越大。','有缺陷落在上面的晶粒會被標為不良（橘色）。大晶粒是比較大的靶子。','計算良好晶粒。面積越大，e^(−A·D0) 越小，良好晶粒越少。'];
+ var tx=['缺陷（Defect）隨機落在晶圓（Wafer）上，兩片晶圓使用相同的位置。','把晶圓切成晶粒（Die）。晶粒越大，顆數越少，每顆涵蓋的面積也越大。','有缺陷落在上面的晶粒會被標為不良晶粒（Bad die，橘色）。大晶粒是比較大的靶子。','計算良好晶粒（Good die）。面積越大，e^(−A·D0) 越小，良好晶粒越少。'];
  $('step').textContent='步驟 '+(si+1)+'：'+tx[si];
  document.querySelectorAll('button[data-s]').forEach(function(x){x.classList.toggle('on',+x.dataset.s===si)});
 }

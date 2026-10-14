@@ -1,85 +1,90 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 440" width="960" height="440" role="img" aria-labelledby="t d">
-<title id="t">晶片的一生一覽</title><desc id="d">八個站點：設計、光罩製作、投片、前段製程、晶圓測試、封裝、最終測試，到出貨。</desc>
+<title id="t">晶片（Chip）的一生一覽</title><desc id="d">八個站點：設計、光罩製作（Mask making）、投片（Wafer start）、前段製程（Front end）、晶圓測試（Wafer test）、封裝（Packaging）、最終測試（Final test），到出貨。</desc>
 <style>text{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}.g{opacity:0;animation:gl 12s infinite}@keyframes gl{0%{opacity:0}2%{opacity:1}11%{opacity:1}13.5%{opacity:0}100%{opacity:0}}.tok{animation:mv 12s linear infinite}@keyframes mv{0%{transform:translateX(0);opacity:0}1.5%{opacity:1}7.5%{transform:translateX(0px)}12.5%{transform:translateX(120px)}20.0%{transform:translateX(120px)}25.0%{transform:translateX(240px)}32.5%{transform:translateX(240px)}37.5%{transform:translateX(360px)}45.0%{transform:translateX(360px)}50.0%{transform:translateX(480px)}57.5%{transform:translateX(480px)}62.5%{transform:translateX(600px)}70.0%{transform:translateX(600px)}75.0%{transform:translateX(720px)}82.5%{transform:translateX(720px)}87.5%{transform:translateX(840px)}96%{transform:translateX(840px);opacity:1}99%{opacity:0;transform:translateX(840px)}100%{opacity:0;transform:translateX(840px)}}@media (prefers-reduced-motion:reduce){.g,.tok{animation:none}.g.first{opacity:1}.tok{opacity:0}}</style>
 <rect width="960" height="440" fill="#101c30"/>
-<text x="480" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#eaf1fb">晶片的一生：從構想到出貨</text>
-<text x="480" y="56" text-anchor="middle" font-size="13" fill="#aebbd2">一片晶圓，八個站點（圖示僅為示意，未依比例）</text>
+<text x="480" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#eaf1fb">晶片（Chip）的一生：從構想到出貨</text>
+<text x="480" y="56" text-anchor="middle" font-size="13" fill="#aebbd2">一片晶圓（Wafer），八個站點（圖示僅為示意，未依比例）</text>
 <path d="M4 96 V84 H236 V96" fill="none" stroke="#aebbd2" stroke-width="2"/><text x="120.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#aebbd2">進廠之前</text>
-<path d="M244 96 V84 H476 V96" fill="none" stroke="#ffb454" stroke-width="2"/><text x="360.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#ffb454">前段：晶圓廠</text>
-<path d="M484 96 V84 H836 V96" fill="none" stroke="#5fd38d" stroke-width="2"/><text x="660.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#5fd38d">後段：測試與封裝</text>
+<path d="M244 96 V84 H476 V96" fill="none" stroke="#ffb454" stroke-width="2"/><text x="360.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#ffb454">前段（Front end）：晶圓廠（Fab）</text>
+<path d="M484 96 V84 H836 V96" fill="none" stroke="#5fd38d" stroke-width="2"/><text x="660.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#5fd38d">後段（Back end）：測試與封裝（Packaging）</text>
 <path d="M844 96 V84 H956 V96" fill="none" stroke="#aebbd2" stroke-width="2"/><text x="900.0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#aebbd2">出貨</text>
 <rect x="4" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g first" x="4" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:0.0s"/>
 <circle cx="20" cy="126" r="11" fill="#5cc8ff"/><text x="20" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">1</text>
 <rect x="28" y="152" width="64" height="42" rx="4" fill="#0c1424" stroke="#5cc8ff" stroke-width="2"/><path d="M36 166 h14 v10 h12 v-14 h14 M36 184 h20 v-8 M68 186 h16" fill="none" stroke="#5cc8ff" stroke-width="2"/><circle cx="50" cy="166" r="2.5" fill="#ffb454"/><circle cx="84" cy="164" r="2.5" fill="#ffb454"/><rect x="56" y="194" width="8" height="8" fill="#5cc8ff"/><rect x="44" y="202" width="32" height="4" rx="2" fill="#5cc8ff"/>
-<text x="60" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">設計</text>
-<text x="60" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">Fabless／IDM</text>
-<text x="60" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">以軟體設計電路，</text>
+<text x="60" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">設計</text>
+<text x="60" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">Fabless／IDM</text>
+<text x="60" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">以軟體設計電路，</text>
 <text x="60" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">再拆成每一層</text>
-<text x="60" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">的圖形</text>
+<text x="60" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">的圖形</text>
 <rect x="124" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="124" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:1.5s"/>
 <circle cx="140" cy="126" r="11" fill="#5cc8ff"/><text x="140" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">2</text>
 <rect x="150" y="148" width="60" height="60" rx="3" fill="#22395f" stroke="#d5e0f0" stroke-width="2"/><rect x="158" y="156" width="44" height="44" fill="#0c1424"/><rect x="164" y="162" width="14" height="6" fill="#e8f0fb"/><rect x="182" y="162" width="14" height="6" fill="#e8f0fb"/><rect x="164" y="172" width="6" height="22" fill="#e8f0fb"/><rect x="174" y="172" width="22" height="6" fill="#e8f0fb"/><rect x="174" y="184" width="12" height="10" fill="#e8f0fb"/><rect x="190" y="184" width="6" height="10" fill="#e8f0fb"/>
-<text x="180" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">光罩製作</text>
-<text x="180" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">光罩廠</text>
-<text x="180" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">每一層的圖形</text>
-<text x="180" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">會被做成</text>
-<text x="180" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">一片光罩</text>
+<text x="180" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">光罩製作</text>
+<text x="180" y="255" text-anchor="middle" font-size="10" fill="#aebbd2">（Mask making）</text>
+<text x="180" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">光罩廠</text>
+<text x="180" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">每一層的圖形</text>
+<text x="180" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">會被做成一片</text>
+<text x="180" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">光罩<tspan font-size="10">（Photomask）</tspan></text>
 <rect x="244" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="244" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:3.0s"/>
 <circle cx="260" cy="126" r="11" fill="#5cc8ff"/><text x="260" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">3</text>
 <clipPath id="w300"><circle cx="300" cy="178" r="30"/></clipPath><circle cx="300" cy="178" r="30" fill="#8fa3c0" stroke="#d5e0f0" stroke-width="1.5"/><circle cx="300" cy="205" r="2.6" fill="#1a2a46"/>
-<text x="300" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">投片</text>
-<text x="300" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">代工廠或 IDM</text>
-<text x="300" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">空白晶圓進入</text>
-<text x="300" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">晶圓廠，正式</text>
-<text x="300" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">開始生產</text>
+<text x="300" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">投片</text>
+<text x="300" y="255" text-anchor="middle" font-size="10" fill="#aebbd2">（Wafer start）</text>
+<text x="300" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">代工廠<tspan font-size="10">（Foundry）</tspan><tspan x="300" dy="13">或 IDM</tspan></text>
+<text x="300" y="298" text-anchor="middle" font-size="12" fill="#c9d5e8">空白晶圓進入</text>
+<text x="300" y="313" text-anchor="middle" font-size="12" fill="#c9d5e8">晶圓廠，正式</text>
+<text x="300" y="328" text-anchor="middle" font-size="12" fill="#c9d5e8">開始生產</text>
 <rect x="364" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="364" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:4.5s"/>
 <circle cx="380" cy="126" r="11" fill="#5cc8ff"/><text x="380" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">4</text>
 <clipPath id="w420"><circle cx="420" cy="178" r="30"/></clipPath><circle cx="420" cy="178" r="30" fill="#5a7fb0" stroke="#d5e0f0" stroke-width="1.5"/><g clip-path="url(#w420)"><rect x="391" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="149" width="8" height="8" fill="#7fb2ea"/><rect x="391" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="159" width="8" height="8" fill="#7fb2ea"/><rect x="391" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="169" width="8" height="8" fill="#7fb2ea"/><rect x="391" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="179" width="8" height="8" fill="#7fb2ea"/><rect x="391" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="189" width="8" height="8" fill="#7fb2ea"/><rect x="391" y="199" width="8" height="8" fill="#7fb2ea"/><rect x="401" y="199" width="8" height="8" fill="#7fb2ea"/><rect x="411" y="199" width="8" height="8" fill="#7fb2ea"/><rect x="421" y="199" width="8" height="8" fill="#7fb2ea"/><rect x="431" y="199" width="8" height="8" fill="#7fb2ea"/><rect x="441" y="199" width="8" height="8" fill="#7fb2ea"/></g><circle cx="420" cy="205" r="2.6" fill="#1a2a46"/>
-<text x="420" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">前段製程</text>
-<text x="420" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">代工廠或 IDM</text>
-<text x="420" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">一層一層做出</text>
-<text x="420" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">電晶體與</text>
-<text x="420" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">金屬導線</text>
+<text x="420" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">前段製程</text>
+<text x="420" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">代工廠或 IDM</text>
+<text x="420" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">一層一層做出</text>
+<text x="420" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">電晶體<tspan font-size="10">（Transistor）</tspan></text>
+<text x="420" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">與金屬導線</text>
+<text x="420" y="337" text-anchor="middle" font-size="12" fill="#c9d5e8"><tspan font-size="10">（Wiring）</tspan></text>
 <rect x="484" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="484" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:6.0s"/>
 <circle cx="500" cy="126" r="11" fill="#5cc8ff"/><text x="500" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">5</text>
 <clipPath id="w540"><circle cx="540" cy="178" r="30"/></clipPath><circle cx="540" cy="178" r="30" fill="#5a7fb0" stroke="#d5e0f0" stroke-width="1.5"/><g clip-path="url(#w540)"><rect x="511" y="149" width="8" height="8" fill="#5fd38d"/><rect x="521" y="149" width="8" height="8" fill="#5fd38d"/><rect x="531" y="149" width="8" height="8" fill="#5fd38d"/><rect x="541" y="149" width="8" height="8" fill="#5fd38d"/><rect x="551" y="149" width="8" height="8" fill="#5fd38d"/><rect x="561" y="149" width="8" height="8" fill="#5fd38d"/><rect x="511" y="159" width="8" height="8" fill="#5fd38d"/><rect x="521" y="159" width="8" height="8" fill="#ff6b6b"/><rect x="531" y="159" width="8" height="8" fill="#5fd38d"/><rect x="541" y="159" width="8" height="8" fill="#5fd38d"/><rect x="551" y="159" width="8" height="8" fill="#5fd38d"/><rect x="561" y="159" width="8" height="8" fill="#5fd38d"/><rect x="511" y="169" width="8" height="8" fill="#5fd38d"/><rect x="521" y="169" width="8" height="8" fill="#ff6b6b"/><rect x="531" y="169" width="8" height="8" fill="#5fd38d"/><rect x="541" y="169" width="8" height="8" fill="#ff6b6b"/><rect x="551" y="169" width="8" height="8" fill="#5fd38d"/><rect x="561" y="169" width="8" height="8" fill="#5fd38d"/><rect x="511" y="179" width="8" height="8" fill="#5fd38d"/><rect x="521" y="179" width="8" height="8" fill="#5fd38d"/><rect x="531" y="179" width="8" height="8" fill="#5fd38d"/><rect x="541" y="179" width="8" height="8" fill="#ff6b6b"/><rect x="551" y="179" width="8" height="8" fill="#5fd38d"/><rect x="561" y="179" width="8" height="8" fill="#ff6b6b"/><rect x="511" y="189" width="8" height="8" fill="#5fd38d"/><rect x="521" y="189" width="8" height="8" fill="#5fd38d"/><rect x="531" y="189" width="8" height="8" fill="#5fd38d"/><rect x="541" y="189" width="8" height="8" fill="#5fd38d"/><rect x="551" y="189" width="8" height="8" fill="#5fd38d"/><rect x="561" y="189" width="8" height="8" fill="#ff6b6b"/><rect x="511" y="199" width="8" height="8" fill="#ff6b6b"/><rect x="521" y="199" width="8" height="8" fill="#5fd38d"/><rect x="531" y="199" width="8" height="8" fill="#5fd38d"/><rect x="541" y="199" width="8" height="8" fill="#5fd38d"/><rect x="551" y="199" width="8" height="8" fill="#5fd38d"/><rect x="561" y="199" width="8" height="8" fill="#5fd38d"/></g><circle cx="540" cy="205" r="2.6" fill="#1a2a46"/><path d="M562 126 L546 164" stroke="#ffb454" stroke-width="3" stroke-linecap="round"/><circle cx="562" cy="126" r="0" fill="none"/>
-<text x="540" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">晶圓測試</text>
-<text x="540" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">晶圓廠或 OSAT</text>
-<text x="540" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">檢查每一顆</text>
-<text x="540" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">晶粒的好壞</text>
-<text x="540" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8"> </text>
+<text x="540" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">晶圓測試</text>
+<text x="540" y="255" text-anchor="middle" font-size="10" fill="#aebbd2">（Wafer test）</text>
+<text x="540" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">晶圓廠或 OSAT</text>
+<text x="540" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">檢查每一顆</text>
+<text x="540" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">晶粒<tspan font-size="10">（Die）</tspan>的好壞</text>
 <rect x="604" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="604" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:7.5s"/>
 <circle cx="620" cy="126" r="11" fill="#5cc8ff"/><text x="620" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">6</text>
 <rect x="638" y="156" width="44" height="44" rx="4" fill="#2a303b" stroke="#aebbd2" stroke-width="1.5"/><rect x="632" y="160.5" width="6" height="3" fill="#ffd27a"/><rect x="682" y="160.5" width="6" height="3" fill="#ffd27a"/><rect x="642.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="642.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="632" y="168.5" width="6" height="3" fill="#ffd27a"/><rect x="682" y="168.5" width="6" height="3" fill="#ffd27a"/><rect x="650.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="650.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="632" y="176.5" width="6" height="3" fill="#ffd27a"/><rect x="682" y="176.5" width="6" height="3" fill="#ffd27a"/><rect x="658.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="658.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="632" y="184.5" width="6" height="3" fill="#ffd27a"/><rect x="682" y="184.5" width="6" height="3" fill="#ffd27a"/><rect x="666.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="666.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="632" y="192.5" width="6" height="3" fill="#ffd27a"/><rect x="682" y="192.5" width="6" height="3" fill="#ffd27a"/><rect x="674.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="674.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="650" y="168" width="20" height="20" fill="#5a7fb0" stroke="#d5e0f0"/>
-<text x="660" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">封裝</text>
-<text x="660" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">OSAT（或 IDM）</text>
-<text x="660" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">晶圓切開，</text>
+<text x="660" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">封裝</text>
+<text x="660" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">OSAT（或 IDM）</text>
+<text x="660" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">晶圓切開，</text>
 <text x="660" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">好的晶粒</text>
-<text x="660" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">進行封裝</text>
+<text x="660" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">進行封裝</text>
 <rect x="724" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="724" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:9.0s"/>
 <circle cx="740" cy="126" r="11" fill="#5cc8ff"/><text x="740" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">7</text>
 <rect x="758" y="156" width="44" height="44" rx="4" fill="#2a303b" stroke="#aebbd2" stroke-width="1.5"/><rect x="752" y="160.5" width="6" height="3" fill="#ffd27a"/><rect x="802" y="160.5" width="6" height="3" fill="#ffd27a"/><rect x="762.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="762.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="752" y="168.5" width="6" height="3" fill="#ffd27a"/><rect x="802" y="168.5" width="6" height="3" fill="#ffd27a"/><rect x="770.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="770.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="752" y="176.5" width="6" height="3" fill="#ffd27a"/><rect x="802" y="176.5" width="6" height="3" fill="#ffd27a"/><rect x="778.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="778.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="752" y="184.5" width="6" height="3" fill="#ffd27a"/><rect x="802" y="184.5" width="6" height="3" fill="#ffd27a"/><rect x="786.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="786.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="752" y="192.5" width="6" height="3" fill="#ffd27a"/><rect x="802" y="192.5" width="6" height="3" fill="#ffd27a"/><rect x="794.5" y="150" width="3" height="6" fill="#ffd27a"/><rect x="794.5" y="200" width="3" height="6" fill="#ffd27a"/><rect x="770" y="168" width="20" height="20" fill="#5a7fb0" stroke="#d5e0f0"/><circle cx="800" cy="198" r="11" fill="#5fd38d" stroke="#101c30" stroke-width="2"/><path d="M794 198 l4 4 l8 -9" fill="none" stroke="#101c30" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="780" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">最終測試</text>
-<text x="780" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">OSAT（或 IDM）</text>
-<text x="780" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">封裝後的晶片</text>
+<text x="780" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">最終測試</text>
+<text x="780" y="255" text-anchor="middle" font-size="10" fill="#aebbd2">（Final test）</text>
+<text x="780" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">OSAT（或 IDM）</text>
+<text x="780" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">封裝後的晶片</text>
 <text x="780" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">再測一次，</text>
-<text x="780" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">確保能用多年</text>
+<text x="780" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">確保能用多年</text>
 <rect x="844" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="844" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:10.5s"/>
 <circle cx="860" cy="126" r="11" fill="#5cc8ff"/><text x="860" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#101c30">8</text>
 <path d="M868 164 L900 150 L932 164 L932 200 L900 210 L868 200 Z" fill="#c9985a" stroke="#f1d9b0" stroke-width="2"/><path d="M868 164 L900 176 L932 164 M900 176 V210" fill="none" stroke="#f1d9b0" stroke-width="2"/><path d="M888 156 L920 170 V182 L888 168Z" fill="#f4ecd8" opacity=".85"/>
-<text x="900" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">出貨</text>
-<text x="900" y="266" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">晶片擁有者</text>
-<text x="900" y="290" text-anchor="middle" font-size="12" fill="#c9d5e8">晶片送往</text>
+<text x="900" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">出貨</text>
+<text x="900" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">晶片擁有者</text>
+<text x="900" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">晶片送往</text>
 <text x="900" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">客戶與</text>
-<text x="900" y="324" text-anchor="middle" font-size="12" fill="#c9d5e8">電路板</text>
+<text x="900" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">電路板</text>
+<text x="900" y="337" text-anchor="middle" font-size="12" fill="#c9d5e8"><tspan font-size="10">（Circuit board）</tspan></text>
 <line x1="60" y1="380" x2="900" y2="380" stroke="#36507a" stroke-width="4" stroke-dasharray="3 9" stroke-linecap="round"/>
 <line x1="60" y1="346" x2="60" y2="380" stroke="#36507a" stroke-width="2"/><circle cx="60" cy="380" r="4" fill="#5cc8ff"/>
 <line x1="180" y1="346" x2="180" y2="380" stroke="#36507a" stroke-width="2"/><circle cx="180" cy="380" r="4" fill="#5cc8ff"/>

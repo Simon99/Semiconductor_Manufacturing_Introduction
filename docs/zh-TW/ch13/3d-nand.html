@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3D NAND：把記憶單元往上堆疊</title>
+<title>3D NAND：把記憶單元（Memory cell）往上堆疊</title>
 <style>
 :root{--bg:#f4f6fa;--fg:#1b2433;--mu:#4a5568;--card:#fff;--bd:#cbd5e1;--ox:#9fb3c8;--nit:#8b7fb0;--met:#e07a1f;--sto:#fde68a;--ch:#2f9e6b;--core:#e2e8f0;--ac:#2563eb;--sub:#94a3b8;--per:#cbd5e1;--void:#f4f6fa}
 :root[data-theme=dark]{--bg:#0f1624;--fg:#e6ebf4;--mu:#9fb0c8;--card:#17202f;--bd:#33425a;--ox:#5b7390;--nit:#6d6296;--met:#e8892f;--sto:#c9a53a;--ch:#35b27a;--core:#cbd5e1;--ac:#60a5fa;--sub:#475569;--per:#334155;--void:#0f1624}
@@ -33,28 +33,28 @@ td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 </style></head><body><div class="wrap">
 <p><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/13-memory/README.md">&larr; 回到章節</a></p>
 <h1>3D NAND：不再縮小，改往上疊</h1>
-<p class="sub">剖面示意，已簡化。依序走過製程步驟，再調整層數，看容量如何變化（數字僅為示意）。</p>
+<p class="sub">剖面（Cross-section）示意，已簡化。依序走過製程（Process）步驟，再調整層數（Layer count），看容量（Capacity）如何變化（數字僅為示意）。</p>
 <div class="grid">
 <div class="card">
 <div class="steps" id="steps"></div>
-<svg id="scene" viewBox="10 0 830 470" role="img" aria-label="3D NAND 剖面圖"></svg>
+<svg id="scene" viewBox="10 0 830 470" role="img" aria-label="3D NAND 剖面圖（Cross-section）"></svg>
 <p class="cap" id="cap"></p>
-<div class="steps"><button id="play">暫停</button><button id="all">顯示完成的晶片</button></div>
+<div class="steps"><button id="play">暫停</button><button id="all">顯示完成的晶片（Chip）</button></div>
 </div>
 <div class="card">
-<label for="layers">堆疊層數：<span id="nv">200</span></label>
+<label for="layers">堆疊層數（Layers in the stack）：<span id="nv">200</span></label>
 <input id="layers" type="range" min="16" max="400" step="8" value="200">
-<label>每個單元儲存的位元數</label>
+<label>每個單元儲存的位元數（Bits stored per cell）</label>
 <div class="seg" id="bits"></div>
-<p class="note">容量（示意）＝層數 &times; 每層單元數 &times; 每單元位元數。假設：每個晶粒每層 10 億個單元。</p>
+<p class="note">容量（示意）＝層數 &times; 每層單元數 &times; 每單元位元數。假設：每個晶粒（Die）每層 10 億個單元。</p>
 <div class="big" id="cap_out">600 Gbit</div>
 <div class="note" id="cap_gb"></div>
 <div class="bar"><i id="capbar"></i></div>
 <table>
 <tr><td>圖中繪製層數</td><td id="r_drawn"></td></tr>
-<tr><td>堆疊高度（示意，每對層 60 nm）</td><td id="r_h"></td></tr>
-<tr><td>通道孔深寬比（示意，孔寬 100 nm）</td><td id="r_ar"></td></tr>
-<tr><td>分段蝕刻孔（示意，每段 128 層）</td><td id="r_deck"></td></tr>
+<tr><td>堆疊高度（Stack height）（示意，每對層 60 nm）</td><td id="r_h"></td></tr>
+<tr><td>通道孔深寬比（Aspect ratio）（示意，孔寬 100 nm）</td><td id="r_ar"></td></tr>
+<tr><td>分段蝕刻孔（Hole etched in sections）（示意，每段 128 層）</td><td id="r_deck"></td></tr>
 <tr><td>階梯階數（每層一階）</td><td id="r_st"></td></tr>
 </table>
 <p class="note">層數不是唯一指標：每單元位元數、單元大小與周邊電路的位置，都會改變實際的密度與成本。此處所有數字僅為示意，並非產品規格。</p>
@@ -63,11 +63,11 @@ td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 const Q=new URLSearchParams(location.search);
 const th=Q.get('theme');if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);
 const STEPS=[
- ['1 堆疊','交替沉積氧化層與氮化層，共數百層。'],
- ['2 通道孔','一口氣蝕刻穿過整個堆疊。又深又窄的孔常分成數段蝕刻再接起來。'],
- ['3 儲存層與通道','沿著每個孔的孔壁，依序沉積儲存層與通道材料。'],
- ['4 階梯','把堆疊的邊緣做成一階一階的形狀，讓上方的接觸窗能分別接到每一層。'],
- ['5 字元線置換','移除氮化層並換成金屬。每一層金屬就是一條字元線，與通道交會之處就是一個記憶單元。']];
+ ['1 堆疊（Stack）','交替沉積（Deposition）氧化層與氮化層，共數百層。'],
+ ['2 通道孔（Channel holes）','一口氣蝕刻（Etch）穿過整個堆疊。又深又窄的孔常分成數段蝕刻再接起來。'],
+ ['3 儲存層與通道（Storage + channel）','沿著每個孔的孔壁，依序沉積儲存層與通道材料。'],
+ ['4 階梯（Staircase）','把堆疊的邊緣做成一階一階的形狀，讓上方的接觸窗能分別接到每一層。'],
+ ['5 字元線置換（Word line replacement）','移除氮化層並換成金屬。每一層金屬就是一條字元線，與通道交會之處就是一個記憶單元。']];
 let layers=200,bits=3,stage=0,frac=1,playing=true,tms=0,allMode=false;
 const stepsEl=document.getElementById('steps');
 STEPS.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>{allMode=false;playing=false;tms=i*3000+2999;upd();syncPlay()};stepsEl.appendChild(b)});
@@ -102,8 +102,8 @@ function draw(){
  const decks=Math.ceil(layers/128);
  let s='';
  // periphery + substrate
- s+=`<rect x="20" y="${Y0+4}" width="${XF-X0+60}" height="26" fill="var(--per)" stroke="var(--bd)"/><text x="30" y="${Y0+22}" font-size="13">周邊電路（可直接位於陣列正下方）</text>`;
- s+=`<rect x="20" y="${Y0+30}" width="${XF-X0+60}" height="26" fill="var(--sub)"/><text x="30" y="${Y0+48}" font-size="13" style="fill:#fff">矽基板／源極線</text>`;
+ s+=`<rect x="20" y="${Y0+4}" width="${XF-X0+60}" height="26" fill="var(--per)" stroke="var(--bd)"/><text x="30" y="${Y0+22}" font-size="13">周邊電路（Periphery circuits），可直接位於陣列（Array）正下方</text>`;
+ s+=`<rect x="20" y="${Y0+30}" width="${XF-X0+60}" height="26" fill="var(--sub)"/><text x="30" y="${Y0+48}" font-size="13" style="fill:#fff">矽基板（Silicon substrate）／源極線（Source line）</text>`;
  const sel=(allMode||stage===4)?Math.floor((tms/700)%n):-1;
  const fs=stage>=3?(stage===3?ease(frac):1):0;
  const revealN=stage===0?Math.ceil(n*ease(frac)):n;
@@ -135,7 +135,7 @@ function draw(){
      s+=`<rect x="${x-1}" y="${(top+1).toFixed(1)}" width="${HW+2}" height="${Math.max(hm-2,0.6).toFixed(1)}" fill="none" stroke="${on?'#dc2626':'#fff7d6'}" stroke-width="${on?2.4:(n>30?0.6:1.2)}"/>`}}
    if(stage>=3||allMode)s+=`<rect x="${hx-9}" y="${Y0-H-20}" width="18" height="20" fill="var(--sub)"/>`;
   }
-  if(stage>=3||allMode)s+=`<rect x="${holes[0]-30}" y="${Y0-H-32}" width="${holes[4]-holes[0]+60}" height="12" fill="var(--ac)"/><text x="${(holes[0]+holes[4])/2}" y="${Y0-H-40}" text-anchor="middle" font-size="13">位元線</text>`;
+  if(stage>=3||allMode)s+=`<rect x="${holes[0]-30}" y="${Y0-H-32}" width="${holes[4]-holes[0]+60}" height="12" fill="var(--ac)"/><text x="${(holes[0]+holes[4])/2}" y="${Y0-H-40}" text-anchor="middle" font-size="13">位元線（Bit line）</text>`;
  }
  // contacts
  if(stage>=3||allMode){
@@ -143,13 +143,13 @@ function draw(){
   ends.forEach((e,i)=>{const top=Y0-(i+1)*P;const cx=e-6;const on=i===sel;
    s+=`<line x1="${cx.toFixed(1)}" y1="${top.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${Y0-H-62}" stroke="${on?'#facc15':'var(--mu)'}" stroke-width="${on?3.2:(n>30?1:2)}" opacity="${a}"/>`});
   s+=`<rect x="${XT-20}" y="${Y0-H-68}" width="${XF-XT+26}" height="6" fill="var(--mu)" opacity="${a}"/>`;
-  s+=`<text x="${XT-60}" y="${Y0-H-76}" font-size="13" opacity="${a}">階梯：每一階都有一個接觸窗</text>`;
+  s+=`<text x="${XT-60}" y="${Y0-H-76}" font-size="13" opacity="${a}">階梯：每一階都有一個接觸窗（Contact）</text>`;
  }
  s+=`<text x="${X0}" y="22" font-size="13" style="fill:var(--mu)">${layers>n?'簡化繪製：顯示 '+layers+' 層中的 '+n+' 層':'顯示 '+layers+' 層'}</text>`;
  if(stage<=3&&!allMode)s+=`<text x="${XF+4}" y="${Y0-H/2}" font-size="12" style="fill:var(--nit)" text-anchor="end"></text>`;
  // legend
- const lg=[['var(--ox)','氧化層'],[stage>=4||allMode?'var(--met)':'var(--nit)',stage>=4||allMode?'字元線金屬':'氮化層（暫代）'],['var(--sto)','儲存層'],['var(--ch)','通道']];
- lg.forEach((l,i)=>{s+=`<rect x="${20+i*170}" y="${Y0+68}" width="14" height="12" fill="${l[0]}" stroke="var(--bd)"/><text x="${40+i*170}" y="${Y0+78}" font-size="12.5">${l[1]}</text>`});
+ const lg=[['var(--ox)','氧化層（Oxide）'],[stage>=4||allMode?'var(--met)':'var(--nit)',stage>=4||allMode?'字元線金屬（Word line metal）':'氮化層（Nitride）（暫代）'],['var(--sto)','儲存層'],['var(--ch)','通道']];
+ lg.forEach((l,i)=>{s+=`<rect x="${[20,150,380,490][i]}" y="${Y0+68}" width="14" height="12" fill="${l[0]}" stroke="var(--bd)"/><text x="${[40,170,400,510][i]}" y="${Y0+78}" font-size="12.5">${l[1]}</text>`});
  document.getElementById('scene').innerHTML=s;
 }
 function upd(){

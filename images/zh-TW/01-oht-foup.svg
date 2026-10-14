@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">天車（OHT）把 FOUP 放到機台的 Load Port 上</title>
-<desc id="d">天車沿天花板軌道從倉儲駛向機台，用吊掛機構把 FOUP 放到 Load Port 上，再回去載下一個 FOUP。時間為示意。</desc>
+<title id="t">天車（OHT）把 FOUP 放到機台（Tool）的 Load Port 上</title>
+<desc id="d">天車沿天花板軌道從倉儲（Stocker）駛向機台（Tool），用吊掛機構（Hoist）把 FOUP 放到 Load Port 上，再回去載下一個 FOUP。時間為示意。</desc>
 <style>
 .bg{fill:#101c2e}.ceil{fill:#233248}.rail{fill:#8795ab}.rail2{fill:#b9c4d6}
 .hang{fill:#4a5a74}.body{fill:#e8a23a}.dark{fill:#1b2a40}
@@ -33,7 +33,7 @@
 </defs>
 <rect class="bg" width="960" height="540"/>
 <rect class="ceil" width="960" height="44"/>
-<text class="txt sm" x="20" y="28">晶圓廠天花板：天車軌道</text>
+<text class="txt sm" x="20" y="28">晶圓廠（Fab）天花板：天車（OHT）軌道</text>
 
 <rect class="hang" x="40" y="44" width="8" height="12"/>
 <rect class="hang" x="160" y="44" width="8" height="12"/>
@@ -52,12 +52,12 @@
 <rect class="slot" x="118" y="298" width="56" height="58" rx="4"/><rect class="foup" x="126" y="306" width="40" height="42" rx="4" opacity=".55"/>
 <rect class="slot" x="46" y="368" width="56" height="58" rx="4"/><rect class="foup" x="54" y="376" width="40" height="42" rx="4" opacity=".55"/>
 <rect class="slot" x="118" y="368" width="56" height="58" rx="4"/><rect class="foup" x="126" y="376" width="40" height="42" rx="4" opacity=".55"/>
-<text class="txt sm" x="110" y="458" text-anchor="middle" style="font-weight:700">倉儲</text>
+<text class="txt sm" x="110" y="458" text-anchor="middle" style="font-weight:700">倉儲（Stocker）</text>
 <g id="stkf"><use href="#foup" transform="translate(110,22)"/></g>
 <rect class="ledge" x="250" y="360" width="90" height="12" rx="2"/>
 <rect class="tool" x="340" y="300" width="110" height="170" rx="4"/>
 <rect class="ledge" x="340" y="304" width="6" height="56"/>
-<text class="txt sm" x="398" y="420" text-anchor="middle" style="font-weight:700">機台 A</text>
+<text class="txt sm" x="398" y="420" text-anchor="middle" style="font-weight:700">機台（Tool）A</text>
 <circle class="led" cx="430" cy="322" r="6" opacity=".25"/>
 <rect class="ledge" x="500" y="360" width="90" height="12" rx="2"/>
 <rect class="tool" x="590" y="300" width="110" height="170" rx="4"/>
@@ -79,6 +79,6 @@
 <rect class="body" x="-42" y="68" width="84" height="42" rx="7"/><rect class="dark" x="-42" y="100" width="84" height="10" rx="3"/>
 <text class="txt" x="0" y="92" text-anchor="middle" style="font-size:18px;font-weight:800;fill:#1b2a40">OHT</text></g>
 <text class="txt cap" x="30" y="505" style="font-weight:700">1　天車沿天花板軌道行駛</text><text class="txt cap" x="30" y="524" style="opacity:.8">從倉儲載運到機台</text>
-<text class="txt cap" x="335" y="505" style="font-weight:700">2　吊掛機構放下密封的 FOUP</text><text class="txt cap" x="335" y="524" style="opacity:.8">最多 25 片晶圓，約 8 公斤</text>
-<text class="txt cap" x="650" y="505" style="font-weight:700">3　Load Port 接收 FOUP</text><text class="txt cap" x="650" y="524" style="opacity:.8">機台在潔淨空間內開盒</text>
+<text class="txt cap" x="335" y="505" style="font-weight:700">2　吊掛機構（Hoist）放下密封的 FOUP</text><text class="txt cap" x="335" y="524" style="opacity:.8">最多 25 片晶圓（Wafer），約 8 公斤</text>
+<text class="txt cap" x="650" y="505" style="font-weight:700">3　Load Port 接收 FOUP</text><text class="txt cap" x="650" y="524" style="opacity:.8">機台在潔淨空間（Clean space）內開盒</text>
 </svg>

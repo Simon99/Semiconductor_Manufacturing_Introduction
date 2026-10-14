@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>FEOL 剖面逐步導覽</title>
+<title>FEOL 剖面（Cross-section）逐步導覽</title>
 <style>
 :root{--bg:#f3f5f9;--panel:#fff;--ink:#1b2330;--ink2:#4a566b;--line:#cdd5e2;--acc:#2c5db0;--accink:#fff;--warn:#b84f00;--svgbg:#f6f8fb}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--panel:#171e2e;--ink:#e8edf6;--ink2:#a6b2c7;--line:#2e3a52;--acc:#6aa0ff;--accink:#0b1220;--warn:#ffa24d;--svgbg:#121a2b}}
@@ -44,11 +44,11 @@ input[type=range]{width:100%}
 <body>
 <div class="wrap">
 <div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/11-cmos-process-flow/README.md">&larr; 回到章節</a><button id="th" type="button" aria-label="切換亮色／暗色">主題</button></div>
-<h1>FEOL 逐步成形：從裸矽到兩顆電晶體</h1>
-<p class="sub">簡化的平面 CMOS 剖面（示意圖，未依比例）。依序走過七個階段，再調整閘極長度與間隔物寬度。</p>
+<h1>FEOL 逐步成形：從裸矽（Bare silicon）到兩顆電晶體（Transistor）</h1>
+<p class="sub">簡化的平面 CMOS 剖面（Cross-section，示意圖，未依比例）。依序走過七個階段，再調整閘極長度（Gate length）與間隔物寬度（Spacer width）。</p>
 <div class="grid">
 <div>
-<div class="card"><svg id="fig" viewBox="0 140 960 310" role="img" aria-label="NMOS 與 PMOS 電晶體的 FEOL 剖面"><rect class="bg" x="0" y="140" width="960" height="310" rx="10"/>
+<div class="card"><svg id="fig" viewBox="0 140 960 310" role="img" aria-label="NMOS 與 PMOS 電晶體（Transistor）的 FEOL 剖面（Cross-section）"><rect class="bg" x="0" y="140" width="960" height="310" rx="10"/>
 <text class="tx" x="250" y="168" text-anchor="middle" font-size="16" font-weight="700">NMOS</text><text class="tx" x="690" y="168" text-anchor="middle" font-size="16" font-weight="700">PMOS</text>
 <g id="scene" transform="translate(0,-10)"></g></svg></div>
 <div class="card" id="cap" style="margin-top:10px" aria-live="polite"><h2 id="ct"></h2><p id="cd"></p></div>
@@ -57,17 +57,17 @@ input[type=range]{width:100%}
 <div class="ctl" role="group" aria-label="檢視"><button id="vb" type="button" aria-pressed="false">全部檢視</button><button id="vn" type="button" aria-pressed="false">放大 NMOS</button><button id="vp" type="button" aria-pressed="false">放大 PMOS</button></div>
 <div class="steps" id="steps"></div>
 <div class="ctl"><button id="prev" type="button">&larr; 上一步</button><button id="next" type="button">下一步 &rarr;</button><button id="play" type="button">暫停</button><button id="rst" type="button">重設</button></div>
-<label for="stg">製程步驟：<b id="stgv"></b></label><input id="stg" type="range" min="0" max="7" step="1" value="7">
-<label for="lg">閘極長度 Lg：<b id="lgv"></b></label><input id="lg" type="range" min="50" max="100" step="2" value="70">
-<label for="sp">間隔物寬度：<b id="spv"></b></label><input id="sp" type="range" min="10" max="30" step="1" value="18">
+<label for="stg">製程步驟（Process step）：<b id="stgv"></b></label><input id="stg" type="range" min="0" max="7" step="1" value="7">
+<label for="lg">閘極長度（Gate length, Lg）：<b id="lgv"></b></label><input id="lg" type="range" min="50" max="100" step="2" value="70">
+<label for="sp">間隔物寬度（Spacer width）：<b id="spv"></b></label><input id="sp" type="range" min="10" max="30" step="1" value="18">
 <div class="read">
-<div><span class="m">閘極長度（Lg）</span><b id="r1"></b></div>
-<div><span class="m">間隔物寬度（每側）</span><b id="r2"></b></div>
-<div><span class="m">源汲極間距 = Lg + 2 &times; 間隔物</span><b id="r3"></b></div>
-<div><span class="m">間隔物下的 LDD 區段</span><b id="r4"></b></div>
+<div><span class="m">閘極長度（Gate length, Lg）</span><b id="r1"></b></div>
+<div><span class="m">間隔物寬度（Spacer width，每側）</span><b id="r2"></b></div>
+<div><span class="m">源汲極間距（Source/drain gap）= Lg + 2 &times; 間隔物</span><b id="r3"></b></div>
+<div><span class="m">間隔物下的 LDD（淺摻雜）區段</span><b id="r4"></b></div>
 </div>
-<p class="note">單位為示意（繪圖單位，不是奈米）。重摻雜的源極／汲極佈植被閘極和間隔物擋住，所以落在距離閘極邊緣一個間隔物寬度之處；淺摻雜佈植（第 4 步）則恰好落在閘極邊緣。因此間隔物越寬，源極／汲極離閘極就越遠。</p>
-<p class="note">先進製程使用高介電常數絕緣層加金屬閘極（HKMG）：先用多晶矽假閘極佔住位置，撐過高溫退火，之後再換掉（第 12 章）。</p>
+<p class="note">單位為示意（繪圖單位，不是奈米）。重摻雜（Heavy doping）的源極／汲極佈植被閘極和間隔物擋住，所以落在距離閘極邊緣一個間隔物寬度之處；淺摻雜佈植（第 4 步）則恰好落在閘極邊緣。因此間隔物越寬，源極／汲極離閘極就越遠。</p>
+<p class="note">先進製程使用高介電常數（High-k）絕緣層加金屬閘極（HKMG）：先用多晶矽（Polysilicon）假閘極（Dummy gate）佔住位置，撐過高溫退火，之後再換掉（第 12 章）。</p>
 <p class="tiny">網址參數：<code>?t=ms</code>, <code>?view=b|n|p</code>, <code>?still=1</code>, <code>?theme=dark|light</code>.</p>
 </div>
 </div>
@@ -82,12 +82,12 @@ function feolScene(Lg, sp) {
   function lbl(x, y, t, a) { return '<text class="tx lb' + (y >= 315 ? ' in' : '') + '" x="' + x + '" y="' + y + '" text-anchor="' + (a || 'middle') + '">' + t + '</text>'; }
   function ld(x1, y1, x2, y2) { return '<path class="ld" d="M' + x1 + ' ' + y1 + 'L' + x2 + ' ' + y2 + '"/>'; }
   // base silicon
-  add(0, '<rect class="si" x="30" y="' + Y + '" width="900" height="150"/>' + lbl(480, 438, '矽基板（晶圓）'));
+  add(0, '<rect class="si" x="30" y="' + Y + '" width="900" height="150"/>' + lbl(250, 438, '矽基板（Silicon substrate）／晶圓（Wafer）'));
   // stage 2 wells
   add(2, '<rect class="pw" x="30" y="' + Y + '" width="450" height="100"/><rect class="nw" x="480" y="' + Y + '" width="450" height="100"/>' +
-    lbl(250, 392, 'P 井（給 NMOS）') + lbl(690, 392, 'N 井（給 PMOS）'));
+    lbl(250, 392, 'P 井（P-well）給 NMOS') + lbl(690, 392, 'N 井（N-well）給 PMOS'));
   // stage 1 STI (above wells in z)
-  add(1, sti(30, 110, 0, 1) + sti(440, 520, 1, 1) + sti(850, 930, 1, 0) + ld(480, 340, 480, 356) + lbl(480, 370, 'STI 氧化層'));
+  add(1, sti(30, 110, 0, 1) + sti(440, 520, 1, 1) + sti(850, 930, 1, 0) + ld(480, 340, 480, 356) + lbl(480, 370, 'STI 氧化層') + '<text class="tx lb in" x="480" y="383" text-anchor="middle" font-size="11">（STI oxide）</text>');
   var cx = [cxN, cxP], isN = [true, false];
   var g3 = '', g4 = '', g5 = '', g6 = '', g7 = '';
   for (var i = 0; i < 2; i++) {
@@ -103,10 +103,10 @@ function feolScene(Lg, sp) {
   // stage 4 (LDD) drawn before spacers/S-D
   add(4, g4 + lbl(cxN - Lg / 2 - sp / 2, 356, 'n&#8722; LDD（淺摻雜）') + ld(cxN - Lg / 2 - sp / 2, 342, cxN - Lg / 2 - sp / 2, 308));
   add(6, g6 + ld(370, 322, 370, 348) + lbl(370, 362, 'n+ 源極／汲極') + ld(810, 322, 810, 348) + lbl(810, 362, 'p+ 源極／汲極'));
-  add(3, g3 + '<path class="ld" d="M' + (cxN - Lg / 2) + ' 236H' + (cxN + Lg / 2) + 'M' + (cxN - Lg / 2) + ' 231V241M' + (cxN + Lg / 2) + ' 231V241"/>' + lbl(cxN, 224, '閘極長度（Lg）') +
-    lbl(cxP, 230, '閘極（多晶矽）') + ld(cxP, 300, cxP, 311) + lbl(cxP, 324, '閘極氧化層'));
-  add(5, g5 + ld(gN + sp * .6, 268, gN + sp + 22, 240) + lbl(gN + sp + 26, 244, '側壁間隔物', 'start'));
-  add(7, g7 + ld(150, 307, 150, 276) + lbl(150, 270, '金屬矽化物'));
+  add(3, g3 + '<path class="ld" d="M' + (cxN - Lg / 2) + ' 236H' + (cxN + Lg / 2) + 'M' + (cxN - Lg / 2) + ' 231V241M' + (cxN + Lg / 2) + ' 231V241"/>' + lbl(cxN, 224, '閘極長度（Gate length, Lg）') +
+    lbl(cxP, 230, '閘極：多晶矽（Polysilicon）') + ld(cxP, 300, cxP, 311) + lbl(cxP, 324, '閘極氧化層') + '<text class="tx lb in" x="' + cxP + '" y="337" text-anchor="middle" font-size="11">（Gate oxide）</text>');
+  add(5, g5 + ld(gN + sp * .6, 268, gN + sp + 22, 240) + lbl(gN + sp + 26, 244, '側壁間隔物<tspan font-size="11">（Sidewall spacer）</tspan>', 'start'));
+  add(7, g7 + ld(150, 307, 150, 276) + lbl(125, 270, '金屬矽化物（Silicide）'));
   return out;
 }
 function impArrows(k, Lg, sp) {
@@ -116,16 +116,16 @@ function impArrows(k, Lg, sp) {
   if (k == 6) regs = [[120, cxN - Lg / 2 - sp - 3], [cxN + Lg / 2 + sp + 3, 430], [530, cxP - Lg / 2 - sp - 3], [cxP + Lg / 2 + sp + 3, 840]];
   var d = '';
   regs.forEach(function (r) { for (var x = r[0] + 6; x <= r[1] - 4; x += 18) d += 'M' + x + ' 258v32m-4.5-7l4.5 8l4.5-8'; });
-  return '<path class="imp-a" d="' + d + '"/><text class="tx lb2" x="' + (k == 2 ? 130 : 118) + '" y="250">離子佈植</text>';
+  return '<path class="imp-a" d="' + d + '"/><text class="tx lb2" x="' + (k == 2 ? 130 : 118) + '" y="250">離子佈植' + (k == 2 ? '（Ion implantation）' : '') + '</text>';
 }
 var STAGES = [
-  ['1  隔離（STI）', '在每個電晶體周圍蝕刻出淺溝槽，填入氧化矽，再用 CMP 磨平。'],
-  ['2  井', '以微影加佈植分別做出 P 井（NMOS）與 N 井（PMOS），再退火。'],
-  ['3  閘極', '長出極薄的閘極絕緣層，鋪上閘極材料，再定義出圖形。閘極長度至關重要。'],
-  ['4  淺摻雜', '在閘極兩側做一次淺而輕的佈植。'],
-  ['5  側壁間隔物', '鋪上一層薄膜，再全面往下蝕刻：只在閘極兩側側壁留下一小段。'],
-  ['6  源極與汲極', '做一次深而重的佈植，間隔物讓佈植與閘極保持一小段距離，再退火活化。'],
-  ['7  金屬矽化物', '鋪上金屬並加熱，使其與源極、汲極和閘極上的矽反應，形成低電阻的化合物。']
+  ['1  隔離（Isolation, STI）', '在每個電晶體周圍蝕刻（Etch）出淺溝槽（Shallow trench），填入氧化矽（Silicon oxide），再用 CMP 磨平。'],
+  ['2  井（Well）', '以微影（Lithography）加佈植分別做出 P 井（NMOS）與 N 井（PMOS），再退火（Annealing）。'],
+  ['3  閘極（Gate）', '長出極薄的閘極絕緣層（Gate insulator），鋪上閘極材料，再定義出圖形。閘極長度至關重要。'],
+  ['4  淺摻雜（Light doping）', '在閘極兩側做一次淺而輕的佈植。'],
+  ['5  側壁間隔物（Sidewall spacer）', '鋪上一層薄膜，再全面往下蝕刻：只在閘極兩側側壁留下一小段。'],
+  ['6  源極與汲極（Source and drain）', '做一次深而重的佈植，間隔物讓佈植與閘極保持一小段距離，再退火活化。'],
+  ['7  金屬矽化物（Silicide）', '鋪上金屬並加熱，使其與源極、汲極和閘極上的矽反應，形成低電阻的化合物。']
 ];
 var SCENE_CSS = '.si{fill:#c4cad4}.pw{fill:#f0b7a3;opacity:.92}.nw{fill:#98bdea;opacity:.95}.sti{fill:#e9f6f9;stroke:#5f9aa8;stroke-width:1.2}' +
   '.gox{fill:#18b4d0}.poly{fill:#5d626d}.spc{fill:#8f6fc4;stroke:#5b3f8c;stroke-width:1}.nl{fill:#7ba4e6}.pl{fill:#f29a85}.nh{fill:#2f6fd0}.ph{fill:#e0523a}.sil{fill:#e8b923;stroke:#a9820a;stroke-width:.8}' +
@@ -153,8 +153,8 @@ function paint(){
  var im=sceneG.querySelectorAll('[data-imp]');
  for(i=0;i<im.length;i++){im[i].style.opacity=(+im[i].getAttribute('data-imp')===st.stage)?1:0;}
  var s=st.stage;
- $('ct').textContent=s?STAGES[s-1][0]:'0  裸矽晶圓';
- $('cd').textContent=s?STAGES[s-1][1]+([2,4,6].indexOf(s)>=0?'（橘色箭頭＝離子佈植）':''):'FEOL 流程的起點：一片乾淨的矽晶圓。按「下一步」開始做電晶體。';
+ $('ct').textContent=s?STAGES[s-1][0]:'0  裸矽晶圓（Bare silicon wafer）';
+ $('cd').textContent=s?STAGES[s-1][1]+([2,4,6].indexOf(s)>=0?(s===2?'（橘色箭頭＝離子佈植，Ion implantation）':'（橘色箭頭＝離子佈植）'):''):'FEOL 流程的起點：一片乾淨的矽晶圓。按「下一步」開始做電晶體。';
  $('stg').value=s;$('stgv').textContent=s+' / 7';
  var b=document.querySelectorAll('#steps button');
  for(i=0;i<b.length;i++){b[i].setAttribute('aria-pressed',(i+1)===s?'true':'false');}
@@ -166,7 +166,7 @@ function paint(){
  $('play').textContent=st.playing?'暫停':'播放';
 }
 function go(n){st.stage=Math.max(0,Math.min(7,n));paint();}
-var names=['隔離','井','閘極','淺摻雜','間隔物','源極與汲極','金屬矽化物'];
+var names=['隔離（Isolation）','井（Well）','閘極（Gate）','淺摻雜（Light doping）','間隔物（Spacer）','源極與汲極（Source and drain）','金屬矽化物（Silicide）'];
 names.forEach(function(n,i){var bt=document.createElement('button');bt.type='button';bt.textContent=(i+1)+' '+n;bt.onclick=function(){st.playing=false;go(i+1)};$('steps').appendChild(bt);});
 $('prev').onclick=function(){st.playing=false;go(st.stage-1)};
 $('next').onclick=function(){st.playing=false;go(st.stage+1)};

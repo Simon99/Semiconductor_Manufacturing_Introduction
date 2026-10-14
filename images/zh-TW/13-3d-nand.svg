@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
-<title id="t">3D NAND 剖面圖</title>
-<desc id="d">氧化層與字元線金屬層交替堆疊，垂直的通道孔內有儲存層與通道，邊緣為帶接觸窗的階梯結構，下方為周邊電路。</desc>
+<title id="t">3D NAND 剖面圖（Cross-section）</title>
+<desc id="d">氧化層（Oxide）與字元線（Word line）金屬層（Metal layer）交替堆疊，垂直的通道孔（Channel hole）內有儲存層（Storage layer）與通道（Channel），邊緣為帶接觸窗（Contact）的階梯結構（Staircase），下方為周邊電路（Periphery circuits）。</desc>
 <style>
 .tx{fill:#1b2433;font-size:14px}
 .tb{fill:#1b2433;font-size:15px;font-weight:700}
@@ -9,12 +9,12 @@
 @media (prefers-reduced-motion: reduce){.anim{display:none}}
 </style>
 <rect width="960" height="540" fill="#f4f6fa"/>
-<text class="tb" x="30" y="32" id="title">3D NAND：把記憶單元往上堆疊</text>
-<text class="ts" x="30" y="52" id="sub">剖面示意，已簡化（圖中繪製 12 層，實際晶片堆疊數百層）</text>
+<text class="tb" x="30" y="32" id="title">3D NAND：把記憶單元（Memory cell）往上堆疊</text>
+<text class="ts" x="30" y="52" id="sub">剖面（Cross-section）示意，已簡化，圖中繪製 12 層，實際晶片（Chip）堆疊數百層</text>
 <rect x="40" y="414.0" width="840" height="26" fill="#cbd5e1" stroke="#64748b"/>
-<text class="ts" x="50" y="432.0" id="l_per" fill="#1b2433" style="fill:#1b2433">周邊電路（可直接位於陣列正下方）</text>
+<text class="ts" x="50" y="432.0" id="l_per" fill="#1b2433" style="fill:#1b2433">周邊電路（Periphery circuits），可直接位於陣列（Array）正下方</text>
 <rect x="40" y="440.0" width="840" height="30" fill="#94a3b8"/>
-<text class="ts" x="50" y="460.0" id="l_sub" style="fill:#1b2433">矽基板／源極線</text>
+<text class="ts" x="50" y="460.0" id="l_sub" style="fill:#1b2433">矽基板（Silicon substrate）／源極線（Source line）</text>
 <rect x="70" y="401.2" width="780.0" height="8.8" fill="#9fb3c8" stroke="#64748b" stroke-width="0.6"/>
 <rect x="70" y="389.0" width="780.0" height="12.2" fill="#e07a1f" stroke="#8a4510" stroke-width="0.8"/>
 <rect x="70" y="380.2" width="757.3" height="8.8" fill="#9fb3c8" stroke="#64748b" stroke-width="0.6"/>
@@ -287,27 +287,31 @@
 <circle class="anim" r="3.6" fill="#1d4ed8" stroke="#fff" stroke-width="0.8"><animateMotion dur="3s" begin="-1.5s" repeatCount="indefinite" path="M375,408.0 L375,132.0"/></circle>
 <circle class="anim" r="3.6" fill="#1d4ed8" stroke="#fff" stroke-width="0.8"><animateMotion dur="3s" begin="-2.0s" repeatCount="indefinite" path="M460,408.0 L460,132.0"/></circle>
 <circle class="anim" r="3.6" fill="#1d4ed8" stroke="#fff" stroke-width="0.8"><animateMotion dur="3s" begin="-2.5s" repeatCount="indefinite" path="M545,408.0 L545,132.0"/></circle>
-<line x1="205" y1="198.0" x2="150" y2="108" stroke="#1b2433" stroke-width="1.1"/>
+<line x1="205" y1="198.0" x2="205" y2="103" stroke="#1b2433" stroke-width="1.1"/>
 <circle cx="205" cy="198.0" r="3" fill="#1b2433"/>
-<text class="tx" x="150" y="84" text-anchor="middle">通道孔</text>
-<text class="ts" x="150" y="100" text-anchor="middle">儲存層＋通道</text>
+<text class="tx" x="150" y="68" text-anchor="middle">通道孔（Channel hole）</text>
+<text class="ts" x="150" y="83" text-anchor="middle">儲存層（Storage layer）</text>
+<text class="ts" x="150" y="97" text-anchor="middle">＋通道（Channel）</text>
 <line x1="74" y1="295.0" x2="46" y2="295.0" stroke="#1b2433" stroke-width="1.1"/>
 <circle cx="74" cy="295.0" r="3" fill="#1b2433"/>
-<text class="tx" x="14" y="265.0">交替</text>
-<text class="tx" x="14" y="281.0">堆疊層</text>
+<text class="tx" x="8" y="235.0">交替</text>
+<text class="tx" x="8" y="251.0">堆疊層</text>
+<text class="ts" x="3" y="265.0" style="font-size:10px">（Alternating</text>
+<text class="ts" x="3" y="278.0" style="font-size:10px">layers）</text>
 <line x1="780" y1="303.0" x2="862" y2="296" stroke="#1b2433" stroke-width="1.1"/>
 <circle cx="780" cy="303.0" r="3" fill="#1b2433"/>
 <text class="tx" x="862" y="300" text-anchor="start">階梯</text>
-<text class="ts" x="862" y="316" text-anchor="start">每一階</text>
-<text class="ts" x="862" y="333">對應一層</text>
-<text class="tx" x="640" y="62.0">接觸窗落在每一階上</text>
+<text class="ts" x="862" y="315" text-anchor="start">（Staircase）</text>
+<text class="ts" x="862" y="331" text-anchor="start">每一階</text>
+<text class="ts" x="862" y="347">對應一層</text>
+<text class="tx" x="640" y="62.0">接觸窗（Contact）落在每一階上</text>
 <line x1="435" y1="130.0" x2="470" y2="96" stroke="#1b2433" stroke-width="1.1"/>
 <circle cx="435" cy="130.0" r="3" fill="#1b2433"/>
-<text class="tx" x="470" y="100" text-anchor="middle">位元線</text>
-<rect x="30" y="488" width="16" height="12" fill="#9fb3c8" stroke="#64748b"/><text class="ts" x="52" y="498">氧化層（絕緣體）</text>
-<rect x="160" y="488" width="16" height="12" fill="#e07a1f" stroke="#8a4510"/><text class="ts" x="182" y="498">字元線（金屬）</text>
-<rect x="320" y="488" width="16" height="12" fill="#fde68a" stroke="#92400e"/><text class="ts" x="342" y="498">儲存層</text>
-<rect x="450" y="488" width="16" height="12" fill="#2f9e6b"/><text class="ts" x="472" y="498">通道</text>
-<rect x="560" y="488" width="16" height="12" fill="none" stroke="#dc2626" stroke-width="2"/><text class="ts" x="582" y="498">記憶單元＝字元線與通道交會處</text>
-<text class="ts" x="30" y="522" id="foot">亮帶一次掃過一條字元線；藍點表示電流在通道中流動。</text>
+<text class="tx" x="470" y="100" text-anchor="middle">位元線（Bit line）</text>
+<rect x="30" y="488" width="16" height="12" fill="#9fb3c8" stroke="#64748b"/><text class="ts" x="52" y="498">氧化層（Oxide）＝絕緣體（Insulator）</text>
+<rect x="300" y="488" width="16" height="12" fill="#e07a1f" stroke="#8a4510"/><text class="ts" x="322" y="498">字元線（Word line）＝金屬（Metal）</text>
+<rect x="560" y="488" width="16" height="12" fill="#fde68a" stroke="#92400e"/><text class="ts" x="582" y="498">儲存層</text>
+<rect x="650" y="488" width="16" height="12" fill="#2f9e6b"/><text class="ts" x="672" y="498">通道</text>
+<rect x="730" y="488" width="16" height="12" fill="none" stroke="#dc2626" stroke-width="2"/><text class="ts" x="752" y="498">記憶單元＝字元線與通道交會處</text>
+<text class="ts" x="30" y="522" id="foot">亮帶一次掃過一條字元線；藍點表示電流（Current）在通道中流動。</text>
 </svg>

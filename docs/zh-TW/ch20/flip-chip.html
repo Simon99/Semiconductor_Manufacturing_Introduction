@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>覆晶封裝互動圖解</title>
+<title>覆晶封裝（Flip-chip package）互動圖解</title>
 <style>
 :root{--bg:#f6f8fb;--panel:#fff;--tx:#1d2a38;--mut:#55657a;--line:#d3dae3;--acc:#3b7dd8;--sbg:#f6f8fb;--stx:#1d2a38}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10161e;--panel:#18212c;--tx:#e6edf5;--mut:#9fb0c4;--line:#2d3a4a;--acc:#6aa5f0;--sbg:#18212c;--stx:#e6edf5}}
@@ -28,7 +28,7 @@ input[type=range]{width:100%}
 .val{float:right;font-variant-numeric:tabular-nums;color:var(--mut)}
 .read{font-size:14px;background:var(--bg);border-radius:8px;padding:8px 10px;margin-top:10px}
 .read div{display:flex;justify-content:space-between;gap:8px}
-.read b{font-variant-numeric:tabular-nums}
+.read b{font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
 .note{font-size:13px;color:var(--mut);margin:8px 0 0}
 h2{font-size:15px;margin:0 0 4px}
 #plan{display:block;width:120px;height:120px;margin:6px auto}
@@ -37,31 +37,31 @@ h2{font-size:15px;margin:0 0 4px}
 <body>
 <div class="wrap">
 <div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/20-packaging/README.md">&larr; 回到章節</a></div>
-<h1>覆晶封裝：組裝步驟逐步看</h1>
+<h1>覆晶封裝（Flip-chip package）：組裝步驟逐步看</h1>
 <p class="sub">示意剖面，未依比例。拖曳進度滑桿，或按下播放。</p>
 <div class="grid">
 <div class="card">
-<svg id="scene" viewBox="0 50 960 370" role="img" aria-label="覆晶封裝剖面"></svg>
+<svg id="scene" viewBox="0 50 960 390" role="img" aria-label="覆晶封裝（Flip-chip package）剖面"></svg>
 <div class="stage" id="stage"></div>
 </div>
 <div class="card">
 <div class="row">
 <button id="play">暫停</button>
-<button data-s="0">1 凸塊</button><button data-s="1">2 翻轉</button><button data-s="2">3 焊接</button><button data-s="3">4 底部填充</button><button data-s="4">5 錫球</button>
+<button data-s="0">1 凸塊（Bump）</button><button data-s="1">2 翻轉</button><button data-s="2">3 焊接</button><button data-s="3">4 底部填充（Underfill）</button><button data-s="4">5 錫球（Solder ball）</button>
 </div>
 <label>組裝進度 <span class="val" id="pv"></span><input id="prog" type="range" min="0" max="14000" step="10" value="0"></label>
 <h2 style="margin-top:14px">接點有什麼不同？</h2>
 <svg id="plan" viewBox="0 0 120 120" aria-label="接點陣列俯視圖"></svg>
-<label style="margin-top:0">每列凸塊數 N <span class="val" id="nv"></span><input id="n" type="range" min="4" max="12" step="1" value="8"></label>
+<label style="margin-top:0">每列凸塊（Bump）數 N <span class="val" id="nv"></span><input id="n" type="range" min="4" max="12" step="1" value="8"></label>
 <div class="read">
-<div><span>面陣列，整個晶粒面（N&times;N）</span><b id="ra"></b></div>
+<div><span>面陣列（Area array），整個晶粒面（N&times;N）</span><b id="ra"></b></div>
 <div><span>僅邊緣一圈（4N&minus;4）</span><b id="rp"></b></div>
 </div>
-<p class="note">同樣是 N&times;N 的位置網格：打線只能用邊緣的焊墊（深色點）；覆晶可以用整個晶粒面上的每個位置（所有點）。</p>
-<h2 style="margin-top:14px">為什麼要底部填充？</h2>
+<p class="note">同樣是 N&times;N 的位置網格：打線（Wire bonding）只能用邊緣的焊墊（深色點）；覆晶（Flip chip）可以用整個晶粒面上的每個位置（所有點）。</p>
+<h2 style="margin-top:14px">為什麼要底部填充（Underfill）？</h2>
 <label>溫度變化（示意） <span class="val" id="tv"></span><input id="dt" type="range" min="0" max="100" step="1" value="0"></label>
-<label style="display:flex;gap:8px;align-items:center"><input id="uf" type="checkbox" checked> 有底部填充</label>
-<div class="read"><div><span>最大凸塊剪切位移（誇大）</span><b id="rs"></b></div></div>
+<label style="display:flex;gap:8px;align-items:center"><input id="uf" type="checkbox" checked> 有底部填充（Underfill）</label>
+<div class="read"><div><span>最大凸塊（Bump）剪切（Shear）位移（誇大）</span><b id="rs"></b></div></div>
 <p class="note" id="snote"></p>
 <p class="note">凸塊不是錫球：凸塊連接晶粒與基板，錫球連接封裝與電路板。</p>
 </div>
@@ -74,11 +74,11 @@ var th=Q.get('theme');if(th==='light'||th==='dark')document.documentElement.setA
 var CYC=14000,t=0,playing=true,last=null;
 var $=function(i){return document.getElementById(i)};
 var STAGES=[
-['1 在晶粒焊墊上做出凸塊','晶粒仍然正面朝上時，先在焊墊上做出凸起的金屬凸塊。'],
+['1 在晶粒焊墊（Bond pad）上做出凸塊（Bump）','晶粒（Die）仍然正面朝上時，先在焊墊上做出凸起的金屬凸塊。'],
 ['2 晶粒翻轉成正面朝下','把晶粒翻過來，讓電路面朝向基板。'],
-['3 凸塊焊接到基板','凸塊直接焊到基板的焊墊上：連接路徑短，不用金屬線。'],
-['4 底部填充膠填滿縫隙','在晶粒與基板之間的縫隙填入稱為底部填充的樹脂，用來分散應力、保護凸塊。'],
-['5 在底面植上錫球','基板底部的錫球把封裝連接到電路板。熱量也可以從晶粒背面散出。']];
+['3 凸塊焊接到基板（Substrate）','凸塊直接焊到基板的焊墊上：連接路徑短，不用金屬線。'],
+['4 底部填充膠（Underfill）填滿縫隙','在晶粒與基板之間的縫隙填入稱為底部填充的樹脂，用來分散應力、保護凸塊。'],
+['5 在底面植上錫球（Solder ball）','基板底部的錫球把封裝連接到電路板。熱量也可以從晶粒背面散出。']];
 var B=[0,.12,.30,.46,.68,.76]; // stage starts in fraction
 function sm(a,b,x){x=(x-a)/(b-a);x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
 function lin(a,b,x){return Math.max(0,Math.min(1,(x-a)/(b-a)))}
@@ -95,10 +95,10 @@ function render(){
  var asm=drop>=1;var maxS=0,maxStress=0;
  var h='';
  // offset scene: y shift -90 relative to image (440 tall)
- h+='<rect y="50" width="960" height="370" fill="var(--sbg)"/><g>';
+ h+='<rect y="50" width="960" height="390" fill="var(--sbg)"/><g>';
  h+='<g opacity="'+heat+'">';
  [390,480,570].forEach(function(x){h+='<path d="M'+x+' 182 V148 M'+(x-8)+' 158 L'+x+' 146 L'+(x+8)+' 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'});
- h+='<text x="480" y="136" text-anchor="middle" font-size="14" fill="#d9534f">熱量從晶粒背面散出</text></g>';
+ h+='<text x="480" y="136" text-anchor="middle" font-size="14" fill="#d9534f">熱量從晶粒（Die）背面散出</text></g>';
  h+='<rect x="200" y="292" width="560" height="52" rx="3" fill="#7fb98f" stroke="#3f7a52" stroke-width="1.5"/>';
  for(i=0;i<N;i++){h+='<polyline points="'+bx[i]+',296 '+bx[i]+',310 '+gx[i]+',326 '+gx[i]+',340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>'+
   '<rect x="'+(bx[i]-br-3)+'" y="292" width="'+(2*br+6)+'" height="5" fill="#e0b440"/><rect x="'+(gx[i]-gr-2)+'" y="340" width="'+(2*gr+4)+'" height="5" fill="#e0b440"/>'}
@@ -118,13 +118,13 @@ function render(){
  h+='</g>';
  var T='fill="var(--stx)"';
  h+='<g opacity="'+lab+'" font-size="16" font-weight="600">'+
- '<text x="480" y="226" text-anchor="middle" font-size="15" fill="#fff">矽晶粒（背面朝上）</text>'+
- '<path d="M712 225 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="222" '+T+'>晶粒（已翻轉）</text><text x="752" y="241" font-size="13" font-weight="400" '+T+'>主動面朝下</text>'+
- '<path d="M676 270 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="276" '+T+'>凸塊</text><text x="752" y="295" font-size="13" font-weight="400" '+T+'>連接晶粒與基板</text>'+
- (UF?'<path d="M196 282 H240" stroke="var(--stx)" stroke-width="1.5"/><text x="190" y="287" text-anchor="end" '+T+'>底部填充</text>':'')+
- '<path d="M194 316 H212" stroke="var(--stx)" stroke-width="1.5"/><text x="188" y="316" text-anchor="end" '+T+'>基板</text><text x="188" y="334" text-anchor="end" font-size="13" font-weight="400" '+T+'>扇出到較寬的間距</text>'+
- '<text x="756" y="360" '+T+'>錫球</text><text x="756" y="379" font-size="13" font-weight="400" '+T+'>連接封裝與電路板</text>'+
- '<text x="140" y="403" text-anchor="end" '+T+'>電路板</text></g>';
+ '<text x="480" y="226" text-anchor="middle" font-size="15" fill="#fff">矽晶粒（Silicon die，背面朝上）</text>'+
+ '<path d="M712 225 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="222" '+T+'>晶粒（已翻轉）</text><text x="752" y="241" font-size="13" font-weight="400" '+T+'>主動面（Active side）朝下</text>'+
+ '<path d="M676 270 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="276" '+T+'>凸塊（Bump）</text><text x="752" y="295" font-size="13" font-weight="400" '+T+'>連接晶粒與基板</text>'+
+ (UF?'<path d="M196 282 H240" stroke="var(--stx)" stroke-width="1.5"/><text x="190" y="287" text-anchor="end" '+T+'>底部填充（Underfill）</text>':'')+
+ '<path d="M194 316 H212" stroke="var(--stx)" stroke-width="1.5"/><text x="188" y="316" text-anchor="end" '+T+'>基板（Substrate）</text><text x="188" y="334" text-anchor="end" font-size="13" font-weight="400" '+T+'>扇出（Fan-out）</text><text x="188" y="349" text-anchor="end" font-size="13" font-weight="400" '+T+'>到較寬的間距</text>'+
+ '<text x="756" y="360" '+T+'>錫球（Solder ball）</text><text x="756" y="379" font-size="13" font-weight="400" '+T+'>連接封裝與電路板</text>'+
+ '<text x="150" y="434" '+T+'>電路板（Printed circuit board）</text></g>';
  h+='</g>';
  $('scene').innerHTML=h;
  var si=0;for(i=0;i<5;i++)if(tf>=B[i]-1e-9)si=i;if(tf>=.68)si=4;else if(tf>=.46)si=3;

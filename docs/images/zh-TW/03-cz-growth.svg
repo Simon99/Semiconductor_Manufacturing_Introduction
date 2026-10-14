@@ -1,12 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">柴可拉斯基長晶法</title>
-<desc id="d">旋轉的晶種從石英坩堝內的矽熔液中被緩慢向上拉出，拉出一根圓柱狀的單晶晶棒。</desc>
+<title id="t">柴可拉斯基長晶法（Czochralski crystal growth）</title>
+<desc id="d">旋轉的晶種（Seed crystal）從石英坩堝（Quartz crucible）內的矽熔液（Molten silicon）中被緩慢向上拉出，拉出一根圓柱狀的單晶晶棒（Single-crystal ingot）。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;fill:#1d2a3a}
 .ttl{font-size:24px;font-weight:700}
 .sub{font-size:13px;fill:#4a5a70}
 .lbl{font-size:13px}
 .lblb{font-size:13px;font-weight:600}
+.en{font-size:12px;font-weight:400}
 .lead{stroke:#4a5a70;stroke-width:1.2;fill:none}
 .card{fill:#ffffff;stroke:#c3ccd8;stroke-width:1.5}
 .ct{font-size:15px;font-weight:700}
@@ -62,8 +63,8 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 
 <!-- opaque base -->
 <rect width="960" height="540" fill="#f4f6fa"/>
-<text class="ttl" x="24" y="38">柴可拉斯基（CZ）長晶法</text>
-<text class="sub" x="936" y="38" text-anchor="end">把晶種從矽熔液中向上拉出，晶體就會跟著晶種生長</text>
+<text class="ttl" x="24" y="38">柴可拉斯基（Czochralski, CZ）長晶法</text>
+<text class="sub" x="936" y="24" text-anchor="end">把晶種（Seed crystal）從矽熔液（Molten silicon）中向上拉出，</text><text class="sub" x="936" y="42" text-anchor="end">晶體就會跟著晶種生長</text>
 
 <!-- chamber -->
 <rect x="110" y="80" width="380" height="420" rx="14" fill="#e3e9f1" stroke="#55657a" stroke-width="3"/>
@@ -97,8 +98,8 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
  </g>
  <path class="dash1" d="M278 108 Q300 124 322 108" fill="none" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#ar)"/>
   <text class="lblb" x="122" y="158">晶種</text><path class="lead" d="M216 154 L290 154"/>
- <text class="lblb" x="122" y="198">頸部（細）</text><path class="lead" d="M210 194 L294 194"/>
- <text class="lblb" x="122" y="238">肩部</text><path class="lead" d="M196 234 L270 234"/>
+ <text class="lblb" x="122" y="198">頸部（細）<tspan class="en" x="122" dy="14">（Neck）</tspan></text><path class="lead" d="M210 194 L294 194"/>
+ <text class="lblb" x="122" y="238">肩部<tspan class="en" x="122" dy="14">（Shoulder）</tspan></text><path class="lead" d="M196 234 L270 234"/>
 </g></g>
 
 <!-- meniscus flare -->
@@ -106,29 +107,29 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <path d="M364 380 Q348 380 345 366 L345 380 Z" fill="#ffb347"/>
 
 <!-- pull mechanism on top -->
-<rect x="268" y="52" width="64" height="28" rx="4" fill="#55657a"/>
-<text x="300" y="71" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:600">拉桿</text>
+<rect x="240" y="52" width="120" height="28" rx="4" fill="#55657a"/>
+<text x="300" y="71" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:600">拉桿（Pull rod）</text>
 
 <!-- crucible rotation arrow -->
 <path class="dash2" d="M420 488 Q300 506 180 488" fill="none" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#ar)"/>
 <text class="lbl" x="300" y="524" text-anchor="middle">坩堝通常朝反方向旋轉</text>
 
 <!-- static labels -->
-<text class="lbl" x="122" y="98">晶種與晶棒一起旋轉</text>
+<text class="lbl" x="122" y="98"  style="font-size:11px">晶種與晶棒（Ingot）一起旋轉</text>
 <text class="lblb" x="362" y="318">晶棒本體</text>
-<text class="lbl" x="362" y="336">（單晶）</text>
-<text class="lblb" x="8" y="440" >石英</text><text class="lblb" x="8" y="456">坩堝</text><path class="lead" d="M62 446 L197 446"/>
-<text class="lblb" x="8" y="396">石墨</text><text class="lblb" x="8" y="412">加熱器</text><path class="lead" d="M66 402 L174 402"/>
+<text class="lbl" x="362" y="336">單晶<tspan class="en">（Single crystal）</tspan></text>
+<text class="lblb" x="8" y="430">石英坩堝</text><text class="lbl en" x="8" y="446">（Quartz</text><text class="lbl en" x="8" y="462">crucible）</text><path class="lead" d="M72 446 L197 446"/>
+<text class="lblb" x="8" y="366">石墨加熱器</text><text class="lbl en" x="8" y="382">（Graphite</text><text class="lbl en" x="8" y="398">heater）</text><path class="lead" d="M82 382 L174 382"/>
 <text class="lblb" x="500" y="436">矽熔液</text><path class="lead" d="M496 432 L300 432"/>
 <text class="lbl" x="500" y="452">高於 1,400 °C</text>
-<text class="lblb" x="500" y="388">固液</text><text class="lblb" x="500" y="404">界面</text><path class="lead" d="M496 384 L362 374"/>
-<text class="lbl" x="500" y="200">氬氣</text><text class="lbl" x="500" y="216">充滿腔體</text>
+<text class="lblb" x="500" y="384">固液界面</text><text class="lbl en" x="500" y="400">（Solid–liquid</text><text class="lbl en" x="500" y="416">interface）</text><path class="lead" d="M496 384 L362 374"/>
+<text class="lbl" x="500" y="200">氬氣（Argon）</text><text class="lbl" x="500" y="216">充滿腔體</text>
 
 <!-- right panel -->
 <g>
  <rect class="card" x="650" y="86" width="290" height="90" rx="10"/><circle class="num" cx="674" cy="110" r="13"/><text class="numt" x="674" y="115">1</text>
  <text class="ct" x="696" y="115">熔化</text>
- <text class="cb" x="666" y="138">多晶矽放進石英坩堝，</text><text class="cb" x="666" y="156">加熱到 1,400 °C 以上熔化。</text>
+ <text class="cb" x="666" y="138">多晶矽（Polysilicon）放進石英坩堝，</text><text class="cb" x="666" y="156">加熱到 1,400 °C 以上熔化。</text>
  <rect class="hl hl1" x="650" y="86" width="290" height="90" rx="10"/>
 
  <rect class="card" x="650" y="186" width="290" height="90" rx="10"/><circle class="num" cx="674" cy="210" r="13"/><text class="numt" x="674" y="215">2</text>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>異常處理：互動圖解</title>
+<title>異常處理（Abnormality response）：互動圖解</title>
 <style>
 :root{--bg:#f3f5f9;--card:#fff;--tx:#1d2433;--mut:#4a5671;--bd:#c4cbdb;--acc:#2b3a5c;--norm:#9dbbf0;--normS:#34548f;--amb:#ffc247;--ambS:#a86b00;--red:#c02020;--grn:#1a7a42;--row:#e9edf5;--rel:#6fd09a;--cond:#5fd0d0;--rew:#b79bf0;--scr:#f08080;--btn:#2b3a5c;--btnt:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161f;--card:#1b2130;--tx:#e8ecf5;--mut:#a3aec6;--bd:#394258;--acc:#9db4e8;--norm:#4a6fb0;--normS:#9dbbf0;--amb:#d99a1e;--ambS:#ffd27a;--red:#ff7070;--grn:#5fd08c;--row:#232b3d;--btn:#9db4e8;--btnt:#12161f}}
@@ -35,29 +35,29 @@ svg text{fill:var(--tx);font-family:inherit}
 svg .m{fill:var(--mut)}
 </style></head><body><div class="wrap">
 <p style="margin:4px 0"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/18-abnormality-handling/README.md">&larr; 回到章節</a></p>
-<h1>注入一個異常，看看哪些批次會被 Hold</h1>
-<p class="sub">選一台機台，設定問題真正開始與被發現的時間。工廠不知道真正的起點，所以會 Hold 自上一次確認正常以來的所有批次。所有批次、機台與時間皆為示意。</p>
+<h1>注入一個異常（Abnormality），看看哪些批次（Lots）會被 Hold</h1>
+<p class="sub">選一台機台（Tool），設定問題真正開始與被發現的時間。工廠不知道真正的起點，所以會 Hold 自上一次確認正常（Last known good）以來的所有批次。所有批次、機台與時間皆為示意。</p>
 <div class="grid">
 <div class="card ctl">
-<b>在哪台機台注入異常</b>
+<b>在哪台機台（Tool）注入異常（Abnormality）</b>
 <div class="tools" id="tools"></div>
 <label>問題真正開始於 <b id="vS"></b><input type="range" id="start" min="1" max="20" step="0.5" value="10"></label>
-<label>經過 <b id="vD"></b> 後被發現（或在下一次控片量測時，以先到者為準）<input type="range" id="delay" min="0.5" max="8" step="0.5" value="5"></label>
-<label>控片量測間隔：<b id="vI"></b><input type="range" id="intv" min="2" max="12" step="1" value="6"></label>
-<label><input type="checkbox" id="contain" checked> 發現時立即擋住（停機台、Hold 批次）</label>
-<label>量測後確認正常的 Hold 批次處置為
-<select id="clean"><option value="0">放行</option><option value="1">有條件放行</option></select></label>
-<label><input type="checkbox" id="rework"> 受影響的步驟可以重做（例如微影）：重工，否則報廢</label>
+<label>經過 <b id="vD"></b> 後被發現，或在下一次控片（Monitor wafer）量測時，以先到者為準<input type="range" id="delay" min="0.5" max="8" step="0.5" value="5"></label>
+<label>控片（Monitor wafer）量測間隔：<b id="vI"></b><input type="range" id="intv" min="2" max="12" step="1" value="6"></label>
+<label><input type="checkbox" id="contain" checked> 發現時立即擋住（Contain：停機台、Hold 批次）</label>
+<label>量測後確認正常的 Hold 批次處置（Disposition）為
+<select id="clean"><option value="0">放行（Release）</option><option value="1">有條件放行（Conditional release）</option></select></label>
+<label><input type="checkbox" id="rework"> 受影響的步驟可以重做，例如微影（Photolithography）：重工（Rework），否則報廢（Scrap）</label>
 <label><input type="checkbox" id="truth" checked> 顯示隱藏的真相（紅色虛線框＝真正受影響）</label>
 </div>
 <div>
 <div class="card">
 <div class="stages" id="stages"><button id="play">暫停</button></div>
-<svg id="sc" viewBox="0 0 960 490" role="img" aria-label="批次－機台時間軸，含 Hold 範圍與處置區"></svg>
+<svg id="sc" viewBox="0 0 960 490" role="img" aria-label="批次－機台（Lot-tool）時間軸，含 Hold 範圍（Scope）與處置（Disposition）區"></svg>
 <div class="stg" id="stg"></div>
 </div>
 <div class="read" id="read"></div>
-<p class="note">被 Hold ＝ 在最後一次通過的控片量測到問題被發現之間，於該機台上跑過的批次（章節說明：範圍從上一次確認正常的時間點開始算）。多 Hold ＝ 為預防而被 Hold、結果其實正常的批次。處置選項依本章的表格：放行、重工、報廢、有條件放行；影響較大或不確定的實際案例會交給物料審查會議（MRB）。</p>
+<p class="note">被 Hold ＝ 在最後一次通過的控片量測到問題被發現之間，於該機台上跑過的批次（章節說明：範圍從上一次確認正常的時間點開始算）。多 Hold ＝ 為預防而被 Hold、結果其實正常的批次。處置選項依本章的表格：放行、重工、報廢、有條件放行；影響較大或不確定的實際案例會交給物料審查會議（Material Review Board，MRB）。</p>
 </div></div></div>
 <script>
 (function(){
@@ -74,10 +74,10 @@ if(Q.get('t')!==null&&Q.get('t')!==''){S.t=+Q.get('t');S.paused=true;}
 if(Q.get('still')==='1')S.paused=true;
 var $=function(i){return document.getElementById(i)};
 $('start').value=S.start;$('delay').value=S.delay;$('intv').value=S.intv;$('contain').checked=S.contain;
-var STG=[['發現異常',0,'機台警報或失控點揭露了異常。批次持續送進來，但還沒有人知道出了問題。'],
-['擋住（OCAP + Hold）',4000,'照 OCAP 處理：停機台、Hold 可疑的批次。先擋住再修復，損失才不會繼續擴大。'],
-['找出範圍',8000,'往回找到上一次確認正常的時間點（最後一次通過的控片量測）。從那之後在這台機台上跑過的批次都可疑；其他機台上的批次則不受影響。'],
-['判定處置',11000,'依量測結果決定每個被 Hold 批次的處置：放行、有條件放行、重工或報廢。']];
+var STG=[['發現異常（Detect）',0,'機台警報（Alarm）或失控點揭露了異常。批次持續送進來，但還沒有人知道出了問題。','發現異常（Detect）'],
+['擋住（Contain，OCAP + Hold）',4000,'照 OCAP 處理：停機台、Hold 可疑的批次。先擋住再修復，損失才不會繼續擴大。','擋住（Contain）'],
+['找出範圍（Scope）',8000,'往回找到上一次確認正常（Last known good）的時間點，最後一次通過的控片（Monitor wafer）量測。從那之後在這台機台上跑過的批次都可疑；其他機台上的批次則不受影響。','找出範圍（Scope）'],
+['判定處置（Disposition）',11000,'依量測結果決定每個被 Hold 批次的處置：放行（Release）、有條件放行（Conditional release）、重工（Rework）或報廢（Scrap）。','判定處置（Disposition）']];
 function fmt(h){h=Math.max(0,h);var m=Math.round(h*60),hh=Math.floor(m/60)%24,mm=m%60;return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm}
 function model(){
  var start=S.start,iv=S.intv,nm=(Math.floor(start/iv)+1)*iv,det=Math.min(24,start+S.delay,nm);
@@ -95,7 +95,7 @@ var M=model();
 // layout
 var X0=120,PW=810,Y0=70,DY=46;function X(h){return X0+h/24*PW}function Y(i){return Y0+i*DY}
 var BX=[30,255,480,705],BY=346,BW=215,BH=130;
-var BN=[['放行','var(--rel)'],['有條件放行','var(--cond)'],['重工','var(--rew)'],['報廢','var(--scr)']];
+var BN=[['放行','var(--rel)','Release'],['有條件放行','var(--cond)','Conditional release'],['重工','var(--rew)','Rework'],['報廢','var(--scr)','Scrap']];
 var svg=$('sc');
 function el(n,a,p,tx){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(tx!=null)e.textContent=tx;(p||svg).appendChild(e);return e}
 function ease(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
@@ -105,7 +105,7 @@ function build(){
  svg.innerHTML='';
  for(var i=0;i<5;i++){
   el('rect',{x:20,y:Y(i)-20,width:920,height:40,rx:6,fill:'var(--row)',opacity:i===S.tool?1:.55,'stroke':i===S.tool?'var(--red)':'none','stroke-width':i===S.tool?2:0});
-  el('text',{x:30,y:Y(i)+5,'font-size':15,'font-weight':700},null,'機台 T'+(i+1));
+  if(i===0){el('text',{x:30,y:Y(i)+1,'font-size':15,'font-weight':700},null,'機台 T1');el('text',{x:30,y:Y(i)+15,'font-size':11,'font-weight':700},null,'（Tool）');}else el('text',{x:30,y:Y(i)+5,'font-size':15,'font-weight':700},null,'機台 T'+(i+1));
  }
  for(var h=0;h<=24;h+=4){el('line',{x1:X(h),x2:X(h),y1:Y(0)-24,y2:Y(4)+24,stroke:'var(--bd)','stroke-dasharray':'3 4'});
   el('text',{x:X(h),y:Y(4)+42,'text-anchor':'middle','font-size':12,class:'m'},null,fmt(h));}
@@ -134,7 +134,7 @@ function draw(t){
   var bx=X(M.lg),ex=X(M.end);
   el('rect',{x:bx,y:y-21,width:(ex-bx)*sc,height:42,fill:'var(--amb)',opacity:.25,rx:4},g);
   el('line',{x1:bx,x2:bx,y1:Y(0)-22,y2:Y(4)+22,stroke:'var(--grn)','stroke-width':3},g);
-  el('text',{x:bx-4,y:Y(0)-26,'text-anchor':'end','font-size':13,'font-weight':700,fill:'var(--grn)'},g,'上次確認正常 '+fmt(M.lg));
+  var lax=Math.max(bx-4,128);el('text',{x:lax,y:Y(0)-26,'text-anchor':'end','font-size':13,'font-weight':700,fill:'var(--grn)'},g,'上次確認正常 '+fmt(M.lg));el('text',{x:lax,y:Y(0)-39,'text-anchor':'end','font-size':11,'font-weight':700,fill:'var(--grn)'},g,'（Last known good）');
  }
  // true start (hidden truth)
  if(S.truth&&play>=M.start){el('line',{x1:X(M.start),x2:X(M.start),y1:y-24,y2:y+24,stroke:'var(--red)','stroke-width':2,'stroke-dasharray':'4 3'},g);
@@ -181,11 +181,12 @@ function draw(t){
   var shown=0;if(t>=11000)M.held.forEach(function(q,idx){if(q.dis===b&&ease((t-11000-idx*70)/1300)>=0.98)shown++});
   var gb=el('g',{opacity:binA},g);
   el('rect',{x:BX[b],y:BY,width:BW,height:BH,rx:8,fill:BN[b][1],'fill-opacity':.25,stroke:BN[b][1],'stroke-width':2},gb);
-  el('text',{x:BX[b]+10,y:BY+20,'font-size':14,'font-weight':700},gb,BN[b][0]);
+  el('text',{x:BX[b]+10,y:BY+19,'font-size':14,'font-weight':700},gb,BN[b][0]);
+  el('text',{x:BX[b]+10,y:BY+33,'font-size':11,'font-weight':700},gb,'（'+BN[b][2]+'）');
   el('text',{x:BX[b]+BW-10,y:BY+20,'text-anchor':'end','font-size':14},gb,t>=11000?String(shown):'');
   }
  var sub=['確認無影響','需要更多數據','重做該步驟','無法挽回'];
- for(var b2=0;b2<4;b2++)el('text',{x:BX[b2]+10,y:BY+40,'font-size':12,class:'m',opacity:binA},g,sub[b2]);
+ for(var b2=0;b2<4;b2++)el('text',{x:BX[b2]+10,y:BY+47,'font-size':11,class:'m',opacity:binA},g,sub[b2]);
  // stage text
  var s=STG[stage];
  var extra='';
@@ -196,7 +197,7 @@ function draw(t){
  var over=M.held.length-M.aff;
  var naive=Math.max(0,M.aff-1);
  $('read').innerHTML=
-  '<div><span>被 Hold 的批次數</span><strong>'+M.held.length+'</strong></div>'+
+  '<div><span>被 Hold 的批次（Lots）數</span><strong>'+M.held.length+'</strong></div>'+
   '<div><span>真正受影響（隱藏）</span><strong>'+M.aff+'</strong></div>'+
   '<div><span>多 Hold（正常，預防性）</span><strong>'+over+'</strong></div>'+
   '<div><span>Hold 時間窗</span><strong>'+(M.end-M.lg).toFixed(1)+' h</strong></div>'+
@@ -211,7 +212,7 @@ function sync(){
  build();draw(S.t);
 }
 ['start','delay','intv','contain','clean','rework','truth'].forEach(function(id){$(id).addEventListener('input',sync)});
-var st=$('stages');STG.forEach(function(s,i){var b=document.createElement('button');b.dataset.s=i;b.textContent=(i+1)+' '+s[0].split('（')[0];b.onclick=function(){S.t=s[1]+(i===0?3900:200);S.paused=true;$('play').textContent='播放';draw(S.t)};st.appendChild(b)});
+var st=$('stages');STG.forEach(function(s,i){var b=document.createElement('button');b.dataset.s=i;b.textContent=(i+1)+' '+s[3];b.onclick=function(){S.t=s[1]+(i===0?3900:200);S.paused=true;$('play').textContent='播放';draw(S.t)};st.appendChild(b)});
 $('play').onclick=function(){S.paused=!S.paused;this.textContent=S.paused?'播放':'暫停';last=null};
 if(S.paused)$('play').textContent='播放';
 var last=null;

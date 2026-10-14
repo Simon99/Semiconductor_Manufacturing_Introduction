@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>雙大馬士革，一步一步來</title>
+<title>雙大馬士革（Dual damascene），一步一步來</title>
 <style>
 :root{
   --bg:#f4f6f9; --card:#ffffff; --ink:#1f2937; --mute:#566174; --line:#d5dbe4; --accent:#c2620a; --accent-bg:#fde9d2;
@@ -55,7 +55,9 @@ svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto San
 .read dt{color:var(--mute)}.read dd{margin:0;font-weight:600}
 .bad{color:#d1365a}.good{color:#1f9d6b}
 .note{font-size:12.5px;color:var(--mute);margin:10px 0 0}
-@media (max-width:820px){.lbl,.lblCu,.padt{font-size:15px}}
+.lbl.en{font-size:11px}
+@media (max-width:820px){.lbl,.lblCu,.padt{font-size:15px}.lbl.en{font-size:13px}}
+@media (max-width:520px){.read{grid-template-columns:1fr}.read dt{margin-top:4px}}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--mute);margin-top:8px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 </style>
@@ -63,17 +65,17 @@ svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto San
 <body>
 <main class="wrap">
 <a class="back" href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/10-metallization/README.md">&larr; 回到章節</a>
-<h1>雙大馬士革，一步一步來</h1>
-<p class="sub">一層新金屬層的剖面：導通孔與導線溝槽一次填滿銅。示意圖，未依比例。</p>
+<h1>雙大馬士革（Dual damascene），一步一步來</h1>
+<p class="sub">一層新金屬層的剖面：導通孔（Via）與導線溝槽（Wire trench）一次填滿銅。示意圖，未依比例。</p>
 <div class="grid">
   <section class="card">
-    <svg id="sv" viewBox="30 90 570 380" role="img" aria-label="雙大馬士革流程剖面：絕緣層、蝕刻、阻障層與晶種層、電鍍銅、CMP、覆蓋層"></svg>
+    <svg id="sv" viewBox="30 90 570 380" role="img" aria-label="雙大馬士革（Dual damascene）流程剖面：絕緣層（Dielectric）、蝕刻（Etch）、阻障層與晶種層（Barrier and seed layers）、電鍍銅（Copper plating）、CMP、覆蓋層（Cap layer）"></svg>
     <div class="legend">
-      <span><i style="background:var(--diel)"></i>絕緣層（低介電常數）</span>
-      <span><i style="background:var(--cu)"></i>銅</span>
-      <span><i style="background:var(--seed)"></i>銅晶種層</span>
-      <span><i style="background:var(--barrier)"></i>阻障層</span>
-      <span><i style="background:var(--cap)"></i>覆蓋層</span>
+      <span><i style="background:var(--diel)"></i>低介電常數絕緣層（Low-k dielectric）</span>
+      <span><i style="background:var(--cu)"></i>銅（Copper）</span>
+      <span><i style="background:var(--seed)"></i>銅晶種層（Cu seed）</span>
+      <span><i style="background:var(--barrier)"></i>阻障層（Barrier）</span>
+      <span><i style="background:var(--cap)"></i>覆蓋層（Cap layer）</span>
     </div>
     <label class="ctl">時間軸 <input id="tl" type="range" min="0" max="14999" step="10" value="0" aria-label="時間軸"></label>
   </section>
@@ -85,28 +87,28 @@ svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto San
       <button id="next" type="button">下一步 &rarr;</button>
     </div>
     <p id="cap" aria-live="polite"></p>
-    <label class="ctl">導通孔寬度：<b id="vwv"></b> <input id="vw" type="range" min="36" max="90" step="2" value="60"></label>
-    <label class="ctl"><input id="add" type="checkbox" checked> 電鍍添加劑（由下往上填充）</label>
+    <label class="ctl">導通孔寬度（Via width）：<b id="vwv"></b> <input id="vw" type="range" min="36" max="90" step="2" value="60"></label>
+    <label class="ctl"><input id="add" type="checkbox" checked> 電鍍添加劑（Plating additives），由下往上填充（Bottom-up fill）</label>
     <dl class="read">
-      <dt>導通孔深度</dt><dd id="r-depth"></dd>
-      <dt>深寬比</dt><dd id="r-ar"></dd>
-      <dt>銅占導通孔寬度的比例</dt><dd id="r-share"></dd>
-      <dt>電鍍結果</dt><dd id="r-fill"></dd>
+      <dt>導通孔深度（Via depth）</dt><dd id="r-depth"></dd>
+      <dt>深寬比（Aspect ratio）</dt><dd id="r-ar"></dd>
+      <dt>銅占導通孔寬度的比例（Cu share of via width）</dt><dd id="r-share"></dd>
+      <dt>電鍍結果（Plating result）</dt><dd id="r-fill"></dd>
     </dl>
-    <p class="note">所有尺寸都是示意用的像素，並非真實尺寸。阻障層固定畫成每側 6 px，所以導通孔越窄，留給銅的空間越少。關掉添加劑，可以看到開口先被封住，把空洞困在裡面。</p>
+    <p class="note">所有尺寸都是示意用的像素，並非真實尺寸。阻障層固定畫成每側 6 px，所以導通孔越窄，留給銅的空間越少。關掉添加劑，可以看到開口先被封住，把空洞（Void）困在裡面。</p>
   </aside>
 </div>
 </main>
 <script>
 "use strict";
-const STAGES=["鋪絕緣層","蝕刻導通孔與溝槽","阻障層與晶種層","電鍍銅（再退火）","銅 CMP","覆蓋層"];
+const STAGES=["鋪絕緣層（Deposit dielectric）","蝕刻導通孔與溝槽（Etch via and trench）","阻障層與晶種層（Barrier and seed layers）","電鍍銅（Copper plating），再退火（Anneal）","銅 CMP","覆蓋層（Cap layer）"];
 const CAPS=[
  ["以 CVD 在已完成的下層銅導線上方，","鋪一層絕緣層（先進製程使用","低介電常數材料）。"],
- ["微影與蝕刻先向下挖出窄的導通孔，","連到下層導線；上方再挖出較寬的","溝槽，作為新導線。導通孔底部的","覆蓋層也一併打開。"],
+ ["微影（Lithography）與蝕刻先向下挖出窄的導通孔，","連到下層導線；上方再挖出較寬的","溝槽，作為新導線。導通孔底部的","覆蓋層也一併打開。"],
  ["先鋪一層極薄的阻障層，防止銅","擴散出去；再鋪一層薄薄的銅晶種層，","作為電鍍的起點。"],
  ["電鍍一次填滿導通孔與溝槽，","底部長得比開口處快（由下往上","填充）。之後退火，讓銅的結構","穩定下來。"],
  ["CMP 把溝槽以外多餘的銅（以及","阻障層）磨掉，留下平坦的表面","與彼此分開的導線。"],
- ["薄薄的覆蓋層封住銅，防止氧化","與擴散。下一層金屬會重複","這個流程。"]
+ ["薄薄的覆蓋層封住銅，防止氧化（Oxidation）","與擴散。下一層金屬會重複","這個流程。"]
 ];
 const SLOT=2500, CYCLE=SLOT*6, CX=300, FIELD=190, FLOOR=270, CAPY=392, CU0=400;
 function clamp(x){return x<0?0:x>1?1:x}
@@ -125,13 +127,13 @@ function stageSVG(s,P,prog,o){
     h+=`<rect class="cap" x="30" y="${CAPY}" width="${vl-30}" height="8"/><rect class="cap" x="${vr}" y="${CAPY}" width="${600-vr}" height="8"/>`;
   }
   // labels
-  h+=`<text class="lbl" x="45" y="212">上層絕緣層</text>`;
-  h+=`<text class="lbl" x="45" y="452">下層絕緣層</text>`;
-  h+=`<text class="lblCu" x="200" y="440">下層銅導線</text>`;
-  h+=`<text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text>`;
+  h+=`<text class="lbl" x="45" y="206">上層絕緣層</text><text class="lbl en" x="45" y="220">（Upper dielectric）</text>`;
+  h+=`<text class="lbl" x="45" y="438">下層絕緣層</text><text class="lbl en" x="45" y="452">（Lower dielectric）</text>`;
+  h+=`<text class="lblCu" x="200" y="440">下層銅導線（Lower Cu wire）</text>`;
+  h+=`<text class="lbl" x="45" y="372">覆蓋層／蝕刻停止層</text><text class="lbl en" x="45" y="386">（Cap / etch stop）</text>`;
   if(s>=1){
-    h+=`<text class="lbl" x="192" y="250" text-anchor="end">導線溝槽 &#9656;</text>`;
-    h+=`<text class="lbl" x="${vl-8}" y="335" text-anchor="end">導通孔 &#9656;</text>`;
+    h+=`<text class="lbl" x="192" y="243" text-anchor="end">導線溝槽</text><text class="lbl en" x="192" y="257" text-anchor="end">（Wire trench） &#9656;</text>`;
+    h+=`<text class="lbl" x="${vl-8}" y="335" text-anchor="end">導通孔（Via） &#9656;</text>`;
   }
   if(s>=2){
     const prof=body(CU0)+` L600,100 L30,100 Z`;
@@ -158,21 +160,21 @@ function stageSVG(s,P,prog,o){
     h+=`</g>`;
   }
   if(s===2){
-    h+=`<text class="lbl" x="40" y="132">銅晶種層</text><path class="lead" d="M75,137 L75,182"/>`;
-    h+=`<text class="lbl" x="120" y="150">阻障層（阻擋銅擴散）</text><path class="lead" d="M140,155 L140,187"/>`;
+    h+=`<text class="lbl" x="40" y="132">銅晶種層（Cu seed）</text><path class="lead" d="M75,137 L75,182"/>`;
+    h+=`<text class="lbl" x="120" y="150">阻障層（Barrier）：阻擋銅擴散（Cu diffusion）</text><path class="lead" d="M140,155 L140,187"/>`;
   }
   if(s===3){
-    h+=`<text class="lbl" x="45" y="150">多餘的銅（之後由 CMP 磨除）</text>`;
-    h+=P.add?`<text class="lbl" x="${vr+10}" y="335">&#9666; 由下往上填充</text>`
-            :`<text class="lbl" x="${vr+10}" y="335">&#9666; 開口先封住：形成空洞</text>`;
+    h+=`<text class="lbl" x="45" y="150">多餘的銅（Copper overburden，之後由 CMP 磨除）</text>`;
+    h+=P.add?`<text class="lbl" x="${vr+10}" y="335">&#9666; 由下往上填充（Bottom-up fill）</text>`
+            :`<text class="lbl" x="${vr+10}" y="335">&#9666; 開口先封住：形成空洞（Void）</text>`;
   }
   if(s===4){
     const dy=30*clamp(prog);
-    h+=`<g class="padg" transform="translate(0 ${dy.toFixed(2)})"><rect class="pad" x="30" y="134" width="570" height="26"/><text class="padt" x="42" y="152">研磨墊＋研磨液</text></g>`;
+    h+=`<g class="padg" transform="translate(0 ${dy.toFixed(2)})"><rect class="pad" x="30" y="134" width="570" height="26"/><text class="padt" x="42" y="152">研磨墊（Polishing pad）＋研磨液（Slurry）</text></g>`;
   }
   if(s===5){
     h+=`<rect class="cap" x="30" y="182" width="570" height="8"/>`;
-    h+=`<text class="lbl" x="45" y="172">新的覆蓋層 &#9662;</text>`;
+    h+=`<text class="lbl" x="45" y="172">新的覆蓋層（New cap layer） &#9662;</text>`;
   }
   return h;
 }
@@ -201,8 +203,8 @@ if(typeof document!=="undefined"){(function(){
     $("r-share").textContent=Math.round((w-12)/w*100)+"%（阻障層占 "+Math.round(12/w*100)+"%）";
     const f=$("r-fill");
     if(s<3){f.textContent="尚未電鍍";f.className=""}
-    else if(P.add){f.textContent="無空洞：由下往上填充";f.className="good"}
-    else{f.textContent="導通孔內困住空洞：電阻變高、較早失效";f.className="bad"}
+    else if(P.add){f.textContent="無空洞（Void-free）：由下往上填充";f.className="good"}
+    else{f.textContent="導通孔內困住空洞（Void）：電阻（Resistance）變高、較早失效";f.className="bad"}
     dirty=false;
   }
   function loop(now){

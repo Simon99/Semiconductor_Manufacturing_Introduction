@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>柴可拉斯基長晶法 - 互動版</title>
+<title>柴可拉斯基長晶法（Czochralski crystal growth）- 互動版</title>
 <style>
 :root{--bg:#f4f6fa;--panel:#fff;--line:#c3ccd8;--tx:#1d2a3a;--sub:#4a5a70;--acc:#2f6fb0;--hot:#e8742c;
  --chamber:#e3e9f1;--chamberline:#55657a;--si1:#7d8794;--si2:#d5dce5;--si3:#eef2f6;--quartz:#8fb8cf;--heater:#5b4a44;--mech:#55657a;--sm:#b9c2ce;--warn:#b4501a}
@@ -24,6 +24,7 @@ h1{margin:4px 0 2px;font-size:22px}
 #scene{width:100%;height:auto;display:block;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
 #scene text{font-family:inherit;fill:var(--tx);font-size:13px}
 #scene .b{font-weight:600}
+#scene .en{font-size:12px;font-weight:400}
 #scene .ld{stroke:var(--sub);stroke-width:1.2;fill:none}
 .ctl{margin:6px 0 12px}
 .ctl label{display:flex;justify-content:space-between;font-weight:600;font-size:14px}
@@ -51,11 +52,11 @@ button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 <body>
 <div class="wrap">
 <a class="back" href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/1-fundamentals/03-sand-to-wafer/README.md">&larr; 回到章節</a>
-<h1>柴可拉斯基長晶法</h1>
-<p class="lead">把多晶矽熔化，用晶種接觸熔液，再一邊旋轉、一邊非常緩慢地往上拉。在晶種下方凝固的矽，會複製晶種的晶體結構。</p>
+<h1>柴可拉斯基長晶法（Czochralski crystal growth）</h1>
+<p class="lead">把多晶矽（Polysilicon）熔化，用晶種（Seed crystal）接觸熔液，再一邊旋轉、一邊非常緩慢地往上拉。在晶種下方凝固的矽，會複製晶種的晶體結構。</p>
 <div class="grid">
 <div>
-<svg id="scene" viewBox="0 44 640 492" role="img" aria-label="柴可拉斯基拉晶爐：坩堝、矽熔液、晶種、旋轉中的晶棒">
+<svg id="scene" viewBox="0 44 640 492" role="img" aria-label="柴可拉斯基拉晶爐（Czochralski crystal puller）：坩堝（Crucible）、矽熔液（Molten silicon）、晶種（Seed crystal）、旋轉中的晶棒（Ingot）">
  <defs>
   <linearGradient id="gSi" gradientUnits="userSpaceOnUse" x1="246" y1="0" x2="354" y2="0">
    <stop offset="0" stop-color="var(--si1)"/><stop offset=".3" stop-color="var(--si2)"/><stop offset=".55" stop-color="var(--si3)"/><stop offset="1" stop-color="var(--si1)"/>
@@ -88,53 +89,53 @@ button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
   <g id="stripes" clip-path="url(#bodyclip)"></g>
   <path id="rot1" d="" fill="none" stroke="var(--acc)" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ar)"/>
   <g id="lseed"><text class="b" x="122" y="0">晶種</text><path class="ld" d="M216 0 L290 0"/></g>
-  <g id="lneck"><text class="b" x="122" y="0">頸部（細）</text><path class="ld" d="M210 0 L294 0"/></g>
-  <g id="lsh"><text class="b" x="122" y="0">肩部</text><path class="ld" d="M196 0 L270 0"/></g>
+  <g id="lneck"><text class="b" x="122" y="0">頸部（細）<tspan class="en" x="122" dy="14">（Neck）</tspan></text><path class="ld" d="M210 0 L294 0"/></g>
+  <g id="lsh"><text class="b" x="122" y="0">肩部<tspan class="en" x="122" dy="14">（Shoulder）</tspan></text><path class="ld" d="M196 0 L270 0"/></g>
  </g>
  <path id="flL" d="" fill="#ffb347"/><path id="flR" d="" fill="#ffb347"/>
 
- <rect x="268" y="52" width="64" height="28" rx="4" fill="var(--mech)"/>
- <text x="300" y="71" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:600">拉桿</text>
- <text x="122" y="96">晶種與晶棒一起旋轉</text>
+ <rect x="240" y="52" width="120" height="28" rx="4" fill="var(--mech)"/>
+ <text x="300" y="71" text-anchor="middle" style="fill:#fff;font-size:12px;font-weight:600">拉桿（Pull rod）</text>
+ <text x="122" y="96"  style="font-size:11px">晶種與晶棒（Ingot）一起旋轉</text>
 
  <path id="rot2" d="M420 488 Q300 506 180 488" fill="none" stroke="var(--acc)" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ar)"/>
  <text x="300" y="524" text-anchor="middle">坩堝通常朝反方向旋轉</text>
 
- <g id="lbody"><text class="b" id="lbT1" x="366" y="0">晶棒本體</text><text id="lbT2" x="366" y="0">（單晶）</text></g>
- <text class="b" x="8" y="440">石英</text><text class="b" x="8" y="456">坩堝</text><path class="ld" d="M62 446 L197 446"/>
- <text class="b" x="8" y="396">石墨</text><text class="b" x="8" y="412">加熱器</text><path class="ld" d="M66 402 L174 402"/>
- <text class="b" x="500" y="436">矽熔液</text><path class="ld" d="M496 432 L300 432"/><text x="500" y="452">高於 1,400 °C</text>
- <text class="b" x="500" y="388">固液</text><text class="b" x="500" y="404">界面</text><path class="ld" d="M496 384 L362 374"/>
- <text x="500" y="200">氬氣</text><text x="500" y="216">充滿腔體</text>
+ <g id="lbody"><text class="b" id="lbT1" x="366" y="0">晶棒本體</text><text id="lbT2" x="366" y="0">單晶<tspan class="en">（Single crystal）</tspan></text></g>
+ <text class="b" x="8" y="430">石英坩堝</text><text class="en" x="8" y="446">（Quartz</text><text class="en" x="8" y="462">crucible）</text><path class="ld" d="M72 446 L197 446"/>
+ <text class="b" x="8" y="366">石墨加熱器</text><text class="en" x="8" y="382">（Graphite</text><text class="en" x="8" y="398">heater）</text><path class="ld" d="M82 382 L174 382"/>
+ <text class="b" x="500" y="436">矽熔液</text><path class="ld" d="M496 432 L300 432"/><text class="en" x="500" y="452">（Molten silicon）</text><text x="500" y="470">高於 1,400 °C</text>
+ <text class="b" x="500" y="384">固液界面</text><text class="en" x="500" y="400">（Solid–liquid</text><text class="en" x="500" y="416">interface）</text><path class="ld" d="M496 384 L362 374"/>
+ <text x="500" y="200">氬氣（Argon）</text><text x="500" y="216">充滿腔體</text>
 </svg>
 <p class="note">縮時動畫：實際長一根 300 mm 晶棒需要一天或更久。畫面為示意圖，未依比例。</p>
 </div>
 
 <div>
  <div class="card">
-  <div class="ctl"><label for="v">拉速 <output id="vo">1.00 mm/min</output></label><input id="v" type="range" min="0.3" max="2" step="0.05" value="1"></div>
-  <div class="ctl"><label for="w">晶種轉速 <output id="wo">12 rpm</output></label><input id="w" type="range" min="2" max="25" step="1" value="12"></div>
+  <div class="ctl"><label for="v">拉速（Pull rate） <output id="vo">1.00 mm/min</output></label><input id="v" type="range" min="0.3" max="2" step="0.05" value="1"></div>
+  <div class="ctl"><label for="w">晶種轉速（Seed rotation） <output id="wo">12 rpm</output></label><input id="w" type="range" min="2" max="25" step="1" value="12"></div>
   <div class="sec">長晶階段</div>
   <div class="btns" id="stages">
-   <button data-s="0">1 熔化</button><button data-s="1">2 接觸</button><button data-s="2">3 頸部</button><button data-s="3">4 肩部</button><button data-s="4">5 本體</button>
+   <button data-s="0">1 熔化</button><button data-s="1">2 接觸</button><button data-s="2">3 頸部（Neck）</button><button data-s="3">4 肩部（Shoulder）</button><button data-s="4">5 本體（Body）</button>
   </div>
   <div id="stagetxt"></div>
   <div class="btns"><button id="pp">暫停</button><button id="rs">重新開始</button></div>
   <div class="sec">讀數（示意模型）</div>
   <div class="read">
-   <div><small>晶棒直徑</small><b id="rD">300 mm</b></div>
+   <div><small>晶棒直徑（Ingot diameter）</small><b id="rD">300 mm</b></div>
    <div><small>已長出本體（縮時）</small><b id="rL">0 mm</b></div>
    <div><small>拉出 2 m 所需時間</small><b id="rT">33 h</b></div>
-   <div><small>徑向均勻度</small><b id="rU">100 %</b><div class="bar"><i id="rUb"></i></div></div>
+   <div><small>徑向均勻度（Radial uniformity）</small><b id="rU">100 %</b><div class="bar"><i id="rUb"></i></div></div>
   </div>
   <div id="msg"></div>
-  <svg id="plot" viewBox="0 0 320 130" role="img" aria-label="示意圖：晶棒直徑與拉速的關係">
+  <svg id="plot" viewBox="0 0 320 130" role="img" aria-label="示意圖：晶棒直徑（Ingot diameter）與拉速（Pull rate）的關係">
    <rect x="36" y="8" width="272" height="94" fill="none" stroke="var(--line)"/>
    <line x1="36" x2="308" y1="55" y2="55" stroke="var(--line)" stroke-dasharray="4 4"/>
    <path id="curve" d="" fill="none" stroke="var(--acc)" stroke-width="2"/>
    <circle id="dot" r="5" fill="var(--hot)" cx="0" cy="0"/>
    <text x="30" y="14" text-anchor="end">360</text><text x="30" y="58" text-anchor="end">300</text><text x="30" y="106" text-anchor="end">200</text>
-   <text x="36" y="118">0.3</text><text x="308" y="118" text-anchor="end">2.0 mm/min</text><text x="172" y="127" text-anchor="middle">拉速 &rarr; 直徑（mm）</text>
+   <text x="36" y="118">0.3</text><text x="308" y="118" text-anchor="end">2.0 mm/min</text><text x="172" y="127" text-anchor="middle">拉速（Pull rate）&rarr; 直徑（mm）</text>
   </svg>
   <p class="note">示意關係，並非真實爐台數據：加熱功率固定時，直徑 &asymp; 300 &times; (1 &minus; 0.30 &times; (拉速 &minus; 1)) mm，並限制在 200&ndash;360 mm。徑向均勻度 &asymp; 100 &times; exp(&minus;((rpm &minus; 12) / 9)&sup2;) %。真實的長晶爐會自動調整加熱功率與拉速，以維持目標直徑。</p>
  </div>

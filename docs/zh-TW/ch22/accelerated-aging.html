@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>加速老化：阿瑞尼斯模型互動圖</title>
+<title>加速老化（Accelerated aging）：阿瑞尼斯模型（Arrhenius model）互動圖</title>
 <style>
 :root{
   --bg:#f6f7fb;--card:#ffffff;--ink:#0f172a;--dim:#475569;--line:#cbd5e1;--accent:#b45309;--accent2:#0369a1;
@@ -34,7 +34,7 @@ button.on{background:var(--accent2);color:#fff;border-color:var(--accent2)}
 :root[data-theme="dark"] button.on{color:#0b1220}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.on{color:#0b1220}}
 .stage{margin-top:10px;padding:8px 10px;border-left:4px solid var(--accent);background:var(--chip);border-radius:6px;font-size:15px;min-height:3.4em}
-.row{display:grid;grid-template-columns:150px 1fr 90px;gap:8px;align-items:center;margin:6px 0;font-size:15px}
+.row{display:grid;grid-template-columns:180px 1fr 90px;gap:8px;align-items:center;margin:6px 0;font-size:15px}
 .row label{color:var(--dim)}
 .row output{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
 input[type=range]{width:100%;accent-color:var(--accent2)}
@@ -57,18 +57,18 @@ pre{background:var(--code);border-radius:8px;padding:8px 10px;margin:8px 0 0;fon
 <div class="wrap">
 <div class="back"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/22-final-test-and-reliability/README.md">&larr; 回到章節</a></div>
 <h1>為什麼 1000 小時的測試可以代表好幾年</h1>
-<p class="sub">高溫會加速老化。拖動滑桿，看導線更快損壞。（主角是電遷移；TDDB、HCI 與 BTI 列在下方。）</p>
+<p class="sub">高溫會加速老化。拖動滑桿，看導線更快損壞。主角是電遷移（Electromigration），TDDB、HCI 與 BTI 列在下方。</p>
 
 <div class="grid">
  <div class="card">
-  <h2>單一導線中的電遷移</h2>
-  <svg id="scene" class="scene" viewBox="30 80 620 290" role="img" aria-label="電遷移動畫：電子推動金屬原子，直到形成空洞、導線斷裂"></svg>
+  <h2>單一導線中的電遷移（Electromigration）</h2>
+  <svg id="scene" class="scene" viewBox="30 80 620 290" role="img" aria-label="電遷移（Electromigration）動畫：電子（Electrons）推動金屬原子（Metal atoms），直到形成空洞（Void）、導線斷裂"></svg>
   <div class="bar">
    <button id="play" aria-pressed="false">暫停</button>
-   <button class="st" data-p="0.10">1 電子風</button>
-   <button class="st" data-p="0.36">2 原子漂移</button>
-   <button class="st" data-p="0.60">3 空洞擴大</button>
-   <button class="st" data-p="0.80">4 導線開路</button>
+   <button class="st" data-p="0.10">1 電子風（Electron wind）</button>
+   <button class="st" data-p="0.36">2 原子漂移（Atoms drift）</button>
+   <button class="st" data-p="0.60">3 空洞（Void）擴大</button>
+   <button class="st" data-p="0.80">4 導線開路（Open circuit）</button>
   </div>
   <div class="stage" id="stage"></div>
   <p class="note" id="speedNote"></p>
@@ -76,35 +76,35 @@ pre{background:var(--code);border-radius:8px;padding:8px 10px;margin:8px 0 0;fon
 
  <div>
   <div class="card">
-   <h2>阿瑞尼斯加速因子 <span class="ill">Ea 示意</span></h2>
-   <div class="row"><label for="ea">活化能 Ea</label><input id="ea" type="range" min="0.3" max="1.2" step="0.05" value="0.7"><output id="eaO"></output></div>
-   <div class="row"><label for="tu">使用溫度</label><input id="tu" type="range" min="20" max="100" step="1" value="55"><output id="tuO"></output></div>
-   <div class="row"><label for="ts">應力溫度</label><input id="ts" type="range" min="60" max="200" step="1" value="125"><output id="tsO"></output></div>
+   <h2>阿瑞尼斯加速因子（Arrhenius acceleration factor） <span class="ill">Ea 示意</span></h2>
+   <div class="row"><label for="ea">活化能（Activation energy）Ea</label><input id="ea" type="range" min="0.3" max="1.2" step="0.05" value="0.7"><output id="eaO"></output></div>
+   <div class="row"><label for="tu">使用溫度（Use temperature）</label><input id="tu" type="range" min="20" max="100" step="1" value="55"><output id="tuO"></output></div>
+   <div class="row"><label for="ts">應力溫度（Stress temperature）</label><input id="ts" type="range" min="60" max="200" step="1" value="125"><output id="tsO"></output></div>
    <div class="warn" id="warn"></div>
    <div class="big">
-    <div><b id="afBig">-</b><span>加速因子 AF</span></div>
+    <div><b id="afBig">-</b><span>加速因子（Acceleration factor）AF</span></div>
     <div><b id="yrBig">-</b><span>1000 小時 HTOL 等於幾年使用</span></div>
     <div><b id="spBig">-</b><span>動畫速度</span></div>
    </div>
    <pre id="calc"></pre>
-   <p class="note">AF = exp[(Ea/k)(1/T<sub>use</sub> &minus; 1/T<sub>stress</sub>)], 溫度以克耳文（K）計，k = 8.617&times;10<sup>&minus;5</sup> eV/K。Ea 取決於失效機制與材料，0.7 eV 只是暫代值。此模型只考慮溫度；電壓與濕度各有自己的項。</p>
+   <p class="note">AF = exp[(Ea/k)(1/T<sub>use</sub> &minus; 1/T<sub>stress</sub>)], 溫度以克耳文（K）計，k = 8.617&times;10<sup>&minus;5</sup> eV/K。Ea 取決於失效機制（Failure mechanism）與材料，0.7 eV 只是暫代值。此模型只考慮溫度；電壓與濕度各有自己的項。</p>
   </div>
   <div class="card" style="margin-top:14px">
    <h2>FIT 與 MTTF <span class="ill">數值示意</span></h2>
-   <div class="row"><label for="fit">失效率（FIT）</label><input id="fit" type="range" min="1" max="1000" step="1" value="100"><output id="fitO"></output></div>
-   <div class="row"><label for="nd">HTOL 元件數 N</label><input id="nd" type="range" min="50" max="1000" step="1" value="231"><output id="ndO"></output></div>
-   <div class="row"><label for="cl">信賴水準</label><input id="cl" type="range" min="50" max="95" step="5" value="60"><output id="clO"></output></div>
+   <div class="row"><label for="fit">失效率（Failure rate, FIT）</label><input id="fit" type="range" min="1" max="1000" step="1" value="100"><output id="fitO"></output></div>
+   <div class="row"><label for="nd">HTOL 元件數（Devices）N</label><input id="nd" type="range" min="50" max="1000" step="1" value="231"><output id="ndO"></output></div>
+   <div class="row"><label for="cl">信賴水準（Confidence level）</label><input id="cl" type="range" min="50" max="95" step="5" value="60"><output id="clO"></output></div>
    <pre id="fitCalc"></pre>
-   <p class="note">1 FIT = 每 10<sup>9</sup> 個元件小時發生 1 次失效。MTTF = 10<sup>9</sup>/FIT 小時，僅在失效率固定時成立（浴缸曲線平坦的中段）。失效率固定時，到達 MTTF 時約有 63% 的元件已經失效，所以 MTTF 不是保證壽命。</p>
+   <p class="note">1 FIT = 每 10<sup>9</sup> 個元件小時發生 1 次失效。MTTF = 10<sup>9</sup>/FIT 小時，僅在失效率固定時成立，也就是浴缸曲線（Bathtub curve）平坦的中段。失效率固定時，到達 MTTF 時約有 63% 的元件已經失效，所以 MTTF 不是保證壽命。</p>
   </div>
  </div>
 </div>
 
 <div class="mech">
- <div><b>EM（電遷移）</b>電流長期推動金屬原子，形成空洞而使導線斷開。</div>
- <div><b>TDDB（介電層崩潰）</b>絕緣層長期承受電場，最後被擊穿。</div>
- <div><b>HCI（熱載子效應）</b>高能量電子進入閘極絕緣層，電晶體特性慢慢改變。</div>
- <div><b>BTI（偏壓溫度不穩定）</b>高溫加上電壓，使臨界電壓 Vt 漂移。</div>
+ <div><b>電遷移（Electromigration, EM）</b>電流長期推動金屬原子，形成空洞而使導線斷開。</div>
+ <div><b>時間相依介電層崩潰（Time-dependent dielectric breakdown, TDDB）</b>絕緣層（Insulating layer）長期承受電場，最後被擊穿。</div>
+ <div><b>熱載子效應（Hot-carrier injection, HCI）</b>高能量電子進入閘極絕緣層，電晶體（Transistor）特性慢慢改變。</div>
+ <div><b>偏壓溫度不穩定（Bias temperature instability, BTI）</b>高溫加上電壓，使臨界電壓（Threshold voltage, Vt）漂移。</div>
 </div>
 </div>
 
@@ -136,11 +136,11 @@ s+='<g id="elw"><g clip-path="url(#wc)"><g id="el">';
 s+='</g></g>';
 for(i=0;i<10;i+=2){s+='<path d="M'+(sx(i)-8)+' '+(Y-30)+' l14 0 m-5 -4 l5 4 l-5 4" stroke="var(--elec)" stroke-width="2" fill="none" opacity=".8"/>';}
 s+='</g>';
-s+='<g id="lbls" opacity="0"><text x="256" y="200" font-size="16" fill="var(--red)" text-anchor="middle" font-weight="700">空洞</text><text x="482" y="150" font-size="16" fill="var(--atomstroke)" font-weight="700" text-anchor="end">小丘</text></g>';
-s+='<text id="open" x="256" y="352" font-size="17" fill="var(--red)" text-anchor="middle" font-weight="700" opacity="0">開路（斷線）</text>';
+s+='<g id="lbls" opacity="0"><text x="256" y="200" font-size="16" fill="var(--red)" text-anchor="middle" font-weight="700">空洞（Void）</text><text x="482" y="150" font-size="16" fill="var(--atomstroke)" font-weight="700" text-anchor="end">小丘（Hillock）</text></g>';
+s+='<text id="open" x="380" y="352" font-size="17" fill="var(--red)" text-anchor="middle" font-weight="700" opacity="0">開路、斷線（Open circuit）</text>';
 s+='</g>';
-s+='<text x="62" y="347" font-size="15" fill="var(--elec)">電子流入 →</text><text x="620" y="347" font-size="15" fill="var(--elec)" text-anchor="end">→ 電子流出</text>';
-s+='<text x="50" y="108" font-size="15" fill="var(--dim)">金屬原子（導線中的一排）</text>';
+s+='<text x="62" y="347" font-size="15" fill="var(--elec)">電子（Electrons）流入 →</text><text x="620" y="347" font-size="15" fill="var(--elec)" text-anchor="end">→ 電子流出</text>';
+s+='<text x="50" y="108" font-size="15" fill="var(--dim)">金屬原子（Metal atoms），導線中的一排</text>';
 var sc=document.getElementById('scene'); sc.innerHTML=s;
 var $=function(id){return document.getElementById(id)};
 var A=[];for(i=0;i<10;i++)A.push($('a'+i));
@@ -179,10 +179,10 @@ function render(p){
   if(si!==curStage){curStage=si;$('stage').textContent=STAGES[si];}
   P=p;
 }
-var STAGES=["1  電流通過。電子流推動金屬原子（稱為「電子風」）。",
+var STAGES=["1  電流通過。電子流推動金屬原子，這稱為「電子風」（Electron wind）。",
 "2  原子沿電子流動的方向漂移。上游開始形成空洞，下游堆積成小丘。",
 "3  空洞持續擴大，直到橫跨整條導線的寬度。",
-"4  導線斷開：電流中斷，晶片失效（開路）。"];
+"4  導線斷開：電流中斷，晶片（Chip）失效（開路）。"];
 var curStage=-1,P=0;
 
 // ---------- model

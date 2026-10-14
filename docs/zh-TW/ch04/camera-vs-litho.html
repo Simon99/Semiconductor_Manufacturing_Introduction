@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>攝影與微影的對照</title>
+<title>攝影（Photography）與微影（Lithography）的對照</title>
 <style>
 :root{--pbg:#eef1f7;--pfg:#1b2233;--pmut:#55607a;--card:#ffffff;--bd:#c9d0df;--acc:#6a3fd6;
 --bg:#f6f7fb;--fg:#1b2233;--mut:#55607a;--line:#8a93a8;--warm:#e8a600;--quartz:#cfe6f5;--chrome:#2b3345;--film:#e9c27a;--paper:#ffffff;--dark:#3a3f4d;--latent:#c9c4b8;--resist:#e4813f;--layer:#6fa8dc;--si:#8e97a8}
@@ -39,26 +39,26 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 <body>
 <header>
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/04-lithography/README.md">&larr; 回到章節</a>
-<h1>攝影與微影的對照</h1>
-<p>燈泡、底片、鏡頭、相紙——微影就是在奈米尺度上做同一件事。選一種光源，看波長如何決定能印出的最細線寬。</p>
+<h1>攝影（Photography）與微影（Lithography）的對照</h1>
+<p>燈泡、底片（Film negative）、鏡頭（Lens）、相紙（Photo paper）——微影就是在奈米（Nanometer）尺度上做同一件事。選一種光源（Light source），看波長（Wavelength）如何決定能印出的最細線寬（Finest line）。</p>
 </header>
 <main>
-<div id="stage"><svg id="sc" viewBox="0 0 960 540" role="img" aria-label="攝影與微影對照：光源、底片或光罩、鏡頭、相紙或光阻"><style id="scss"></style><rect class="bg" width="960" height="540"/><g id="scb"></g></svg></div>
+<div id="stage"><svg id="sc" viewBox="0 0 960 540" role="img" aria-label="攝影與微影對照：光源（Light source）、底片（Film negative）或光罩（Mask）、鏡頭（Lens）、相紙（Photo paper）或光阻（Photoresist）"><style id="scss"></style><rect class="bg" width="960" height="540"/><g id="scb"></g></svg></div>
 <aside>
-<h2>光源（微影）</h2>
+<h2>光源（Light source）：微影</h2>
 <div class="row" id="srcs"></div>
-<h2>數值孔徑（NA）</h2>
-<input id="na" type="range" min="0.33" max="1.35" step="0.01" value="0.93" aria-label="數值孔徑">
+<h2>數值孔徑（Numerical aperture, NA）</h2>
+<input id="na" type="range" min="0.33" max="1.35" step="0.01" value="0.93" aria-label="數值孔徑（Numerical aperture）">
 <div class="note" id="nn"></div>
 <h2>讀數</h2>
 <div class="ro">
-<span>波長 &lambda;</span><b id="rl"></b>
+<span>波長（Wavelength）&lambda;</span><b id="rl"></b>
 <span>NA</span><b id="rn"></b>
 <span>k<sub>1</sub>（示意）</span><b>0.40</b>
-<span>最細線寬 &asymp; k<sub>1</sub>&lambda;/NA</span><b class="big" id="rr"></b>
-<span>光罩上的對應尺寸（4&times;）</span><b id="rm"></b>
+<span>最細線寬（Finest line）&asymp; k<sub>1</sub>&lambda;/NA</span><b class="big" id="rr"></b>
+<span>光罩（Mask）上的對應尺寸（4&times;）</span><b id="rm"></b>
 </div>
-<div class="note">此為瑞利型估算，k<sub>1</sub> 為示意值，實際機台會有差異。畫面中的線條未依比例。</div>
+<div class="note">此為瑞利（Rayleigh）型估算，k<sub>1</sub> 為示意值，實際機台會有差異。畫面中的線條未依比例。</div>
 <h2>時間</h2>
 <div class="row" id="steps"></div>
 <div class="row" style="margin-top:6px"><button id="pp" aria-pressed="false">暫停</button></div>
@@ -131,9 +131,9 @@ function buildScene(p) {
   }
 
   // ---- title / headers
-  b += `<text class="t th" x="480" y="28" text-anchor="middle">攝影與微影：原理相同，精度達奈米等級</text>`;
+  b += `<text class="t th" x="480" y="28" text-anchor="middle">攝影（Photography）與微影（Lithography）：原理相同，精度達奈米（Nanometer）等級</text>`;
   b += `<text class="t tc" x="240" y="60" text-anchor="middle">攝影（暗房沖印）</text>`;
-  b += `<text class="t tc" x="720" y="60" text-anchor="middle">微影（曝光機）</text>`;
+  b += `<text class="t tc" x="720" y="60" text-anchor="middle">微影（曝光機，Scanner）</text>`;
   b += `<line class="dv" x1="480" y1="72" x2="480" y2="448"/>`;
 
   function lamp(cx, kind) {
@@ -191,10 +191,10 @@ function buildScene(p) {
   b += `<rect class="outl" x="${cx1 - 72}" y="380" width="144" height="16"/>`;
   b += `<text class="t tm" x="${cx1}" y="420" text-anchor="middle">側視圖，未依比例</text>`;
   // captions col1
-  b += cap(232, 100, ['光源', '燈泡，白光']);
-  b += cap(232, 176, ['底片', '承載畫面']);
-  b += cap(232, 258, ['鏡頭', '對焦並放大']);
-  b += cap(232, 372, ['相紙', '照到光的地方會變化；', '顯影液讓畫面', '浮現出來']);
+  b += cap(232, 100, ['光源（Light source）', '燈泡，白光']);
+  b += cap(232, 176, ['底片（Film negative）', '承載畫面']);
+  b += cap(232, 258, ['鏡頭（Lens）', '對焦並放大']);
+  b += cap(232, 372, ['相紙（Photo paper）', '照到光的地方會變化；', '顯影液（Developer）讓畫面', '浮現出來']);
 
   // ---- col2 objects
   b += lamp(cx2, 'u');
@@ -219,13 +219,13 @@ function buildScene(p) {
   b += `<text class="t tm" x="${cx2}" y="448" text-anchor="middle">晶圓剖面，未依比例</text>`;
   // captions col2
   b += cap(732, 100, p.srcLines);
-  b += cap(732, 176, ['光罩（Reticle）', '石英板，帶有電路圖形']);
-  b += cap(732, 246, mirror ? ['反射鏡（無透鏡）', '圖像縮小成 1/4 大小', '光路位於真空中'] : ['鏡頭', '圖像縮小成 1/4 大小', '（EUV：反射鏡，真空中）']);
-  b += cap(732, 372, ['晶圓上的光阻', '受光的光阻會變化；', '顯影液溶掉一部分，', '留下圖形']);
+  b += cap(732, 176, ['光罩（Mask, reticle）', '石英板（Quartz plate），', '帶有電路圖形']);
+  b += cap(732, 246, mirror ? ['反射鏡（Mirror），無透鏡', '圖像縮小成 1/4 大小', '光路位於真空（Vacuum）中'] : ['鏡頭', '圖像縮小成 1/4 大小', '（EUV：反射鏡（Mirror），', '真空（Vacuum）中）']);
+  b += cap(732, 372, ['晶圓（Wafer）上的光阻', '（Photoresist）', '受光的光阻會變化；', '顯影液溶掉一部分，', '留下圖形']);
 
   // ---- phase labels
   const L = (cls, x, s) => `<text class="t ph ${cls}" x="${x}" y="470" text-anchor="middle">${s}</text>`;
-  b += L('lb1', 240, '1 準備：全新相紙') + L('lb2', 240, '2 曝光：打光') + L('lb3', 240, '3 顯影：畫面浮現');
+  b += L('lb1', 240, '1 準備：全新相紙') + L('lb2', 240, '2 曝光（Exposure）：打光') + L('lb3', 240, '3 顯影（Development）：畫面浮現');
   b += L('lb1', 720, '1 準備：晶圓已塗光阻') + L('lb2', 720, '2 曝光：光穿過光罩') + L('lb3', 720, '3 顯影：圖形浮現');
 
   // ---- footer
@@ -238,7 +238,7 @@ function buildScene(p) {
 (function(){
 var Q=new URLSearchParams(location.search);
 var th=Q.get('theme'); if(th==='light'||th==='dark') document.documentElement.setAttribute('data-theme',th);
-var SRC=[{l:436,m:0.93,n:'436 nm',c:'#5b6cff',d:'#8e9bff',s:['汞燈：436 nm']},{l:365,m:0.93,n:'365 nm',c:'#7b4dff',d:'#a98aff',s:['汞燈：365 nm']},
+var SRC=[{l:436,m:0.93,n:'436 nm',c:'#5b6cff',d:'#8e9bff',s:['汞燈（Mercury lamp）：436 nm']},{l:365,m:0.93,n:'365 nm',c:'#7b4dff',d:'#a98aff',s:['汞燈（Mercury lamp）：365 nm']},
 {l:248,m:0.93,n:'248 nm',c:'#9a3df0',d:'#c08bff',s:['KrF 雷射（DUV）','248 nm']},{l:193,m:1.35,n:'193 nm',c:'#b52fd6',d:'#d27bff',s:['ArF 雷射（DUV）','193 nm']},
 {l:13.5,m:0.55,n:'EUV 13.5 nm',c:'#e0309a',d:'#ff7cc4',s:['EUV 光','13.5 nm']}];
 var cur=3, T=0, playing=!(Q.get('still')==='1'), last=0;
@@ -248,7 +248,7 @@ function fmt(x){return x>=100?Math.round(x):x>=10?x.toFixed(0):x.toFixed(1)}
 function rebuild(){
   var s=SRC[cur], nae=document.getElementById('na');
   nae.max=s.m; if(+nae.value>s.m) nae.value=s.m; if(s.l<20&&+nae.value<0.33) nae.value=0.33;
-  document.getElementById('nn').textContent=s.l<20?'EUV 曝光機的 NA 約為 0.33 至 0.55；使用反射鏡，沒有透鏡。':s.m>1?'NA 大於 1 需要在鏡頭與晶圓之間加水（浸潤式微影）。':'在空氣中 NA 不會超過 1；水浸潤（193 nm）則可以更高。';
+  document.getElementById('nn').textContent=s.l<20?'EUV 曝光機（Scanner）的 NA 約為 0.33 至 0.55；使用反射鏡（Mirror），沒有透鏡。':s.m>1?'NA 大於 1 需要在鏡頭與晶圓（Wafer）之間加水，也就是浸潤式微影（Immersion lithography）。':'在空氣中 NA 不會超過 1；水浸潤（193 nm）則可以更高。';
   var na=parseFloat(nae.value), k1=0.4;
   var R=k1*s.l/na;
   var w=Math.max(2,Math.min(11,2+2.2*Math.log2(R/16)));
@@ -271,7 +271,7 @@ window.__setTime=function(ms){playing=false;sync();setTime(ms);};
 var srcs=document.getElementById('srcs');
 SRC.forEach(function(s,i){var b=document.createElement('button');b.textContent=s.n;b.setAttribute('aria-pressed',i===cur);b.onclick=function(){cur=i;[].forEach.call(srcs.children,function(c,j){c.setAttribute('aria-pressed',j===i)});rebuild();};srcs.appendChild(b);});
 var steps=document.getElementById('steps');
-[['1 準備',1100],['2 曝光',4000],['3 顯影',10800]].forEach(function(p){var b=document.createElement('button');b.textContent=p[0];b.onclick=function(){playing=false;sync();setTime(p[1]);};steps.appendChild(b);});
+[['1 準備',1100],['2 曝光（Exposure）',4000],['3 顯影（Development）',10800]].forEach(function(p){var b=document.createElement('button');b.textContent=p[0];b.onclick=function(){playing=false;sync();setTime(p[1]);};steps.appendChild(b);});
 function sync(){var b=document.getElementById('pp');b.textContent=playing?'暫停':'播放';b.setAttribute('aria-pressed',!playing);}
 document.getElementById('pp').onclick=function(){playing=!playing;sync();};
 document.getElementById('na').oninput=rebuild;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>管制圖：平移平均值，看哪條規則觸發</title>
+<title>管制圖（Control chart）：平移平均值（Mean），看哪條規則觸發</title>
 <style>
 :root{--bg:#f4f6fa;--fg:#17212f;--mut:#51607a;--card:#fff;--bd:#cfd7e4;--pn:#0f1b2d;--acc:#0b6bcb}
 :root[data-theme=dark]{--bg:#0b121d;--fg:#e4ecf7;--mut:#9fb3cc;--card:#14202f;--bd:#2b4160;--pn:#0f1b2d;--acc:#7dd3fc}
@@ -20,7 +20,7 @@ h1{font-size:20px;margin:6px 0 2px}
 svg{display:block;width:100%;height:auto}
 svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px}
-.card h2{font-size:14px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+.card h2{font-size:14px;margin:0 0 6px;letter-spacing:.04em;color:var(--mut)}
 .stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:6px 10px;cursor:pointer;min-height:36px}
 button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
@@ -42,11 +42,11 @@ input[type=range]{width:100%}
 <body>
 <div class="wrap">
 <div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/4-yield-and-quality/17-process-control/README.md">&larr; 回到章節</a><span class="note" style="margin:0">所有數據皆為示意</span></div>
-<h1>管制圖：平移平均值，看哪條規則觸發</h1>
-<p class="sub">每個點代表一批（lot）的量測值，依時間順序排列。界限是依製程平常的表現計算出來的；前 20 批是正常的基準線。</p>
+<h1>管制圖（Control chart）：平移平均值（Mean），看哪條規則觸發</h1>
+<p class="sub">每個點代表一批（Lot）的量測值，依時間順序排列。界限是依製程平常的表現計算出來的；前 20 批是正常的基準線（Baseline）。</p>
 <div class="grid">
 <div>
-<div class="panel"><svg id="chart" viewBox="0 0 960 460" role="img" aria-label="互動式管制圖"></svg></div>
+<div class="panel"><svg id="chart" viewBox="0 0 960 460" role="img" aria-label="互動式管制圖（Control chart）"></svg></div>
 <div class="card" style="margin-top:10px">
 <h2 id="stageName">步驟 1</h2>
 <div class="stages" id="stages"></div>
@@ -61,14 +61,14 @@ input[type=range]{width:100%}
 <label for="spike">第 15 批的單批突波： <span class="val" id="spikeV"></span></label>
 <input id="spike" type="range" min="0" max="5" step="0.1" value="0">
 <div style="display:flex;gap:6px;margin-top:10px"><button id="play" aria-pressed="true">暫停</button><button id="reset">重設</button></div>
-<div class="note">單位為 σ，即製程正常的變異幅度。規格界限設在 ±4.5σ 僅為示意。</div>
+<div class="note">單位為 σ，即製程正常的變異幅度。規格界限（Specification limits）設在 ±4.5σ 僅為示意。</div>
 </div>
 <div class="card" style="margin-top:10px">
 <h2>檢查的規則</h2>
-<div class="rule" id="r1"><i></i><div><b>1. 有一點超出管制界限</b><span id="r1t"></span></div></div>
+<div class="rule" id="r1"><i></i><div><b>1. 有一點超出管制界限（Control limit）</b><span id="r1t"></span></div></div>
 <div class="rule" id="r2"><i></i><div><b>2. 連續 9 點落在中心線同一側</b><span id="r2t"></span></div></div>
 <div class="rule" id="r3"><i></i><div><b>3. 連續 6 點上升或下降</b><span id="r3t"></span></div></div>
-<div class="rule" id="r4"><i></i><div><b>超出規格（OOS）</b><span id="r4t"></span></div></div>
+<div class="rule" id="r4"><i></i><div><b>超出規格（Out of spec, OOS）</b><span id="r4t"></span></div></div>
 <div class="note">規則門檻（±3σ、9 點、6 點）是教科書常見的慣例（Western Electric／Nelson 規則）；各晶圓廠會自行訂定。</div>
 </div>
 </div>
@@ -84,14 +84,14 @@ var still=q.get('still')==='1';
 var $=function(i){return document.getElementById(i)};
 var svg=$('chart'),NS='http://www.w3.org/2000/svg';
 var W=960,H=484,X0=40,X1=790,Y0=16,Y1=428,R=5.5,FS=13,SM=12,narrow=false;
-function layout(){narrow=svg.parentNode.clientWidth<620;if(narrow){W=520;H=500;X0=14;X1=440;FS=15;SM=14;Y1=444}else{W=960;H=484;X0=40;X1=790;FS=13;SM=12;Y1=428}svg.setAttribute('viewBox','0 0 '+W+' '+H)}
+function layout(){narrow=svg.parentNode.clientWidth<620;if(narrow){W=520;H=500;X0=14;X1=400;FS=15;SM=14;Y1=444}else{W=960;H=484;X0=40;X1=790;FS=13;SM=12;Y1=428}svg.setAttribute('viewBox','0 0 '+W+' '+H)}
 function Y(v){return Y0+(R-v)/(2*R)*(Y1-Y0)}
 function Xp(i){return X0+14+i*(X1-X0-28)/(N-1)}
 var stages=[
- {n:'1. 中心線與管制界限',shift:0,spike:0,spec:false,t:'中心線是製程的平均值。管制界限位於兩側 3σ 處：穩定的製程幾乎總是落在兩條界限之間。這裡沒有任何問題，點只是在隨機起伏。'},
- {n:'2. 規格界限',shift:0,spike:0,spec:true,t:'規格界限來自產品，而不是來自製程，而且範圍較寬。管制界限就像車道線，規格界限則是路的邊緣。'},
- {n:'3. 一點超出管制界限',shift:0,spike:3.2,spec:true,t:'第 15 批跳過了 UCL：它是 OOC（失控），但仍在規格界限內，所以產品沒問題。規則 1 觸發：要趁下一批變成 OOS 之前，立刻檢查機台。'},
- {n:'4. 同側連續多點',shift:1.6,spike:0,spec:true,t:'從第 21 批起平均值向上偏移。沒有任何單點離開管制界限，但連續 9 點都在中心線上方，靠巧合發生的機率極低。規則 2 觸發。可以拖動偏移滑桿，找出剛好能觸發它的最小偏移量。'}
+ {n:'1. 中心線與管制界限（Control limits）',shift:0,spike:0,spec:false,t:'中心線是製程的平均值。管制界限位於兩側 3σ 處：穩定的製程幾乎總是落在兩條界限之間。這裡沒有任何問題，點只是在隨機起伏。'},
+ {n:'2. 規格界限（Specification limits）',shift:0,spike:0,spec:true,t:'規格界限來自產品，而不是來自製程，而且範圍較寬。管制界限就像車道線，規格界限則是路的邊緣。'},
+ {n:'3. 一點超出管制界限',shift:0,spike:3.2,spec:true,t:'第 15 批跳過了 UCL：它是失控（Out of control, OOC），但仍在規格界限內，所以產品沒問題。規則 1 觸發：要趁下一批變成 OOS 之前，立刻檢查機台。'},
+ {n:'4. 同側連續多點（Run）',shift:1.6,spike:0,spec:true,t:'從第 21 批起平均值向上偏移。沒有任何單點離開管制界限，但連續 9 點都在中心線上方，靠巧合發生的機率極低。規則 2 觸發。可以拖動偏移滑桿，找出剛好能觸發它的最小偏移量。'}
 ];
 var stage=0,specOn=false,t=0,playing=!still&&!matchMedia('(prefers-reduced-motion: reduce)').matches,last=null;
 function data(){var s=+$('shift').value,sp=+$('spike').value,a=[];
@@ -126,7 +126,7 @@ function render(){
  function L(v,c,d,w,lab,sub){var o={x1:X0,x2:X1,y1:Y(v),y2:Y(v),stroke:c,'stroke-width':w};if(d)o['stroke-dasharray']=d;el('line',o,svg);
   txt(svg,X1+8,Y(v)+4,lab,c,'start',700);if(sub&&!narrow)txt(svg,X1+8,Y(v)+19,sub,'#9fb3cc','start',400,SM)}
  if(specOn){L(SPEC,'#f87171',null,2.5,'USL','規格');L(-SPEC,'#f87171',null,2.5,'LSL','規格')}
- L(UCL,'#fbbf24','8 5',2,'UCL','+3σ');L(0,'#7dd3fc',null,2,'中心線','平均值');L(-UCL,'#fbbf24','8 5',2,'LCL','−3σ');
+ L(UCL,'#fbbf24','8 5',2,'UCL','+3σ');L(0,'#7dd3fc',null,2,narrow?'中心線':'中心線（Center line）','平均值');if(narrow)txt(svg,X1+8,Y(0)+20,'（Center line）','#7dd3fc','start',400,12);L(-UCL,'#fbbf24','8 5',2,'LCL','−3σ');
  // clamp for drawing
  function cy(v){return Math.max(Y0+6,Math.min(Y1-6,Y(v)))}
  var pts=[];for(var i=0;i<total;i++)pts.push(Xp(i).toFixed(1)+','+cy(a[i]).toFixed(1));
@@ -147,9 +147,9 @@ function render(){
  if(total<N)el('line',{x1:Xp(total),x2:Xp(total),y1:Y0,y2:Y1,stroke:'#7dd3fc','stroke-width':1.5,opacity:.6},svg);
  // legend
  var ly=H-8,lx=narrow?14:44,gp=narrow?0:0;
- el('circle',{cx:lx+5,cy:ly-4,r:5,fill:'#ff5d5d'},svg);txt(svg,lx+16,ly,narrow?'超出界限':'超出管制界限','#9fb3cc','start',400,SM);
+ el('circle',{cx:lx+5,cy:ly-4,r:5,fill:'#ff5d5d'},svg);txt(svg,lx+16,ly,narrow?'超出界限':'超出管制界限（Control limit）','#9fb3cc','start',400,SM);
  var l2=narrow?150:230;el('path',{d:'M'+(lx+l2)+' '+(ly-11)+' l7 7 l-7 7 l-7 -7z',fill:'#a78bfa'},svg);txt(svg,lx+l2+12,ly,'連續 9 點','#9fb3cc','start',400,SM);
- var l3=narrow?240:330;el('rect',{x:lx+l3,y:ly-9,width:10,height:10,fill:'#34d399'},svg);txt(svg,lx+l3+16,ly,'連續 6 點趨勢','#9fb3cc','start',400,SM);
+ var l3=narrow?240:330;el('rect',{x:lx+l3,y:ly-9,width:10,height:10,fill:'#34d399'},svg);txt(svg,lx+l3+16,ly,'連續 6 點趨勢（Trend）','#9fb3cc','start',400,SM);
  // texts
  var full=(total===N);
  function set(id,on,msg,idle){$(id).className='rule'+(on&&full?' on':'');$(id+'t').textContent=on&&full?msg:idle}

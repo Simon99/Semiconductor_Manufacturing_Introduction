@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">批次式濕式清洗槽與單片式旋轉清洗對照</title>
-<desc id="d">左側：一批晶圓的載具逐槽浸入共用藥槽，污染會擴散到每一片晶圓。右側：單片晶圓一邊旋轉、一邊噴灑新鮮化學品，彼此不共用任何東西。長條為示意。</desc>
+<title id="t">批次式濕式清洗槽（Batch wet bench）與單片式旋轉清洗（Single-wafer spin clean）對照</title>
+<desc id="d">左側：一批晶圓（Wafer）的載具（Wafer carrier）逐槽浸入共用藥槽（Shared bath），污染（Contamination）會擴散到每一片晶圓。右側：單片晶圓一邊旋轉、一邊噴灑新鮮化學品（Chemical），彼此不共用任何東西。長條為示意。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif;fill:#e8f0fa}
 .sm{font-size:12px} .md{font-size:14px} .hd{font-size:18px;font-weight:700} .dim{fill:#a9bcd6}
@@ -56,13 +56,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 }
 </style>
 <rect width="960" height="540" fill="#14233a"/>
-<text class="hd" x="480" y="34" text-anchor="middle">兩種清洗晶圓的方式</text>
+<text class="hd" x="480" y="34" text-anchor="middle">兩種清洗晶圓（Wafer）的方式</text>
 <rect x="20" y="52" width="450" height="450" rx="14" fill="#1b2f4d"/>
 <rect x="490" y="52" width="450" height="450" rx="14" fill="#1b2f4d"/>
-<text class="hd" x="36" y="82">批次式濕式清洗槽</text>
+<text class="hd" x="36" y="82">批次式濕式清洗槽（Batch wet bench）</text>
 <text class="sm dim" x="36" y="102">整批晶圓逐槽浸入，像洗車流水線</text>
-<text class="hd" x="506" y="82">單片式旋轉清洗</text>
-<text class="sm dim" x="506" y="102">一次一片：旋轉並噴灑新鮮化學品</text>
+<text class="hd" x="506" y="82">單片式旋轉清洗（Single-wafer spin clean）</text>
+<text class="sm dim" x="506" y="102">一次一片：旋轉並噴灑新鮮化學品（Chemical）</text>
 <line x1="36" y1="132" x2="454" y2="132" stroke="#6f86a8" stroke-width="3"/>
 
 <rect x="36" y="278" width="92" height="92" fill="#4aa3ff" opacity=".55"/>
@@ -70,7 +70,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sm" x="82" y="392" text-anchor="middle">SC1</text>
 <rect x="138" y="278" width="92" height="92" fill="#7fe3ff" opacity=".55"/>
 <path d="M138 250V370H230V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
-<text class="sm" x="184" y="392" text-anchor="middle">超純水沖洗</text>
+<text class="sm" x="184" y="392" text-anchor="middle" style="font-size:10px">超純水（UPW）沖洗</text>
 <rect x="240" y="278" width="92" height="92" fill="#7be08a" opacity=".55"/>
 <path d="M240 250V370H332V250" fill="none" stroke="#c9d6e8" stroke-width="4" stroke-linejoin="round"/>
 <text class="sm" x="286" y="392" text-anchor="middle">SC2</text>
@@ -103,9 +103,9 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:26px;--dy:-12px;animation-delay:1.2000000000000002s"/>
 <circle class="drift" cx="-5" cy="200" r="3" fill="#ff5a5a" style="--dx:0px;--dy:20px;animation-delay:1.6s"/>
 </g></g>
-<text class="sm dim" x="36" y="410">紅色晶圓把微粒釋放到共用藥槽中，</text>
+<text class="sm dim" x="36" y="410">紅色晶圓把微粒（Particle）釋放到共用藥槽（Shared bath）中，</text>
 <text class="sm dim" x="36" y="426">載具內每一片晶圓都會沾染到。</text>
-<text class="sm" x="454" y="124" text-anchor="end">吊臂與晶圓載具</text>
+<text class="sm" x="454" y="124" text-anchor="end">吊臂（Crane）與晶圓載具（Wafer carrier）</text>
 <circle cx="715" cy="235" r="122" fill="#0f1b2d" stroke="#c9d6e8" stroke-width="5"/>
 <circle cx="715" cy="235" r="100" fill="none" stroke="#6f86a8" stroke-width="2" stroke-dasharray="4 6"/>
 <circle cx="715" cy="235" r="85" fill="#cfd9e8"/>
@@ -134,20 +134,20 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle class="out" cx="759.0" cy="158.8" r="3.5" fill="#ff5a5a" style="--dx:17.0px;--dy:-29.4px;animation-delay:0.8s"/>
 </g>
 <path d="M805 140 L729 219" stroke="#e8f0fa" stroke-width="9" stroke-linecap="round"/><circle cx="725" cy="215" r="7" fill="#e8f0fa"/>
-<text class="sm" x="810" y="132" >噴嘴</text>
+<text class="sm" x="810" y="132" >噴嘴（Nozzle）</text>
 <circle class="nxt" cx="530" cy="170" r="20" fill="#dfe8f4" style="animation-delay:0.0s"/>
 <circle class="nxt" cx="530" cy="225" r="20" fill="#dfe8f4" style="animation-delay:0.3s"/>
 <circle class="nxt" cx="530" cy="280" r="20" fill="#dfe8f4" style="animation-delay:0.6s"/>
 <text class="sm" x="530" y="322" text-anchor="middle">待洗</text><text class="sm" x="530" y="338" text-anchor="middle">晶圓</text>
-<text class="sm" x="878" y="292" text-anchor="middle">微粒被</text><text class="sm" x="878" y="308" text-anchor="middle">甩向</text><text class="sm" x="878" y="324" text-anchor="middle">排水口</text>
+<text class="sm" x="878" y="292" text-anchor="middle">微粒被</text><text class="sm" x="878" y="308" text-anchor="middle">甩向</text><text class="sm" x="878" y="324" text-anchor="middle">排水口</text><text class="sm" x="878" y="340" text-anchor="middle">（Drain）</text>
 <g><g class="chip" style="animation-delay:0s"><rect x="506" y="380" width="98" height="26" rx="13" fill="#4aa3ff"/><text class="sm" x="555" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">SC1</text></g></g>
-<g><g class="chip" style="animation-delay:-9s"><rect x="614" y="380" width="98" height="26" rx="13" fill="#7fe3ff"/><text class="sm" x="663" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">沖洗</text></g></g>
+<g><g class="chip" style="animation-delay:-9s"><rect x="614" y="380" width="98" height="26" rx="13" fill="#7fe3ff"/><text class="sm" x="663" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">沖洗（Rinse）</text></g></g>
 <g><g class="chip" style="animation-delay:-6s"><rect x="722" y="380" width="98" height="26" rx="13" fill="#7be08a"/><text class="sm" x="771" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">SC2</text></g></g>
-<g><g class="chip" style="animation-delay:-3s"><rect x="830" y="380" width="98" height="26" rx="13" fill="#9aa6b8"/><text class="sm" x="879" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700">沖洗＋乾燥</text></g></g>
+<g><g class="chip" style="animation-delay:-3s"><rect x="830" y="380" width="98" height="26" rx="13" fill="#9aa6b8"/><text class="sm" x="879" y="397" text-anchor="middle" style="fill:#0b1626;font-weight:700;font-size:10px">沖洗＋乾燥（Dry）</text></g></g>
 <text class="sm dim" x="506" y="428">每片晶圓都用新鮮化學品，彼此不共用。</text>
-<text class="sm" x="36" y="456">產能</text><rect x="146" y="444" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="146" y="444" width="255.0" height="14" rx="7" fill="#3ecf8e"/>
-<text class="sm" x="36" y="480">交叉污染</text><rect x="146" y="468" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="146" y="468" width="195.0" height="14" rx="7" fill="#ff5a5a"/>
-<text class="sm" x="506" y="456">產能</text><rect x="616" y="444" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="616" y="444" width="150.0" height="14" rx="7" fill="#3ecf8e"/>
-<text class="sm" x="506" y="480">交叉污染</text><rect x="616" y="468" width="300" height="14" rx="7" fill="#0f1b2d"/><rect x="616" y="468" width="36.0" height="14" rx="7" fill="#ff5a5a"/>
+<text class="sm" x="36" y="456">產能（Throughput）</text><rect x="160" y="444" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="160" y="444" width="243.1" height="14" rx="7" fill="#3ecf8e"/>
+<text class="sm" x="36" y="473" style="font-size:10px">交叉污染</text><text class="sm" x="36" y="485" style="font-size:10px">（Cross-contamination）</text><rect x="160" y="468" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="160" y="468" width="185.9" height="14" rx="7" fill="#ff5a5a"/>
+<text class="sm" x="506" y="456">產能</text><rect x="630" y="444" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="444" width="143.0" height="14" rx="7" fill="#3ecf8e"/>
+<text class="sm" x="506" y="480">交叉污染</text><rect x="630" y="468" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="468" width="34.3" height="14" rx="7" fill="#ff5a5a"/>
 <text class="sm dim" x="480" y="524" text-anchor="middle" style="fill:#a9bcd6">長條為示意的定性比較，並非實際量測值。</text>
 </svg>

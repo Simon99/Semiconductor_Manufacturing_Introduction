@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">管制圖：一個失控點與一段偏移的連續點</title>
-<desc id="d">依時間順序畫出的量測值，搭配中心線、管制界限與較寬的規格界限。有一點超出管制上限；之後連續九點都位於中心線上方。</desc>
+<title id="t">管制圖（Control chart）：一個失控點與一段偏移的連續點</title>
+<desc id="d">依時間順序畫出的量測值，搭配中心線（Center line）、管制界限（Control limits）與較寬的規格界限（Specification limits）。有一點超出管制上限（UCL）；之後連續九點都位於中心線上方。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",sans-serif}
 .lbl{font-size:13px;fill:#dbe7f5}.sm{font-size:12px;fill:#9fb3cc}.h{font-size:20px;font-weight:700;fill:#f1f6fc}
@@ -21,8 +21,8 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle cx="938" cy="22" r="6" fill="#2b4160"/><path d="M934 22 H942" stroke="#0f1b2d" stroke-width="2"/>
 <circle cx="22" cy="518" r="6" fill="#2b4160"/><path d="M18 518 H26" stroke="#0f1b2d" stroke-width="2"/>
 <circle cx="938" cy="518" r="6" fill="#2b4160"/><path d="M934 518 H942" stroke="#0f1b2d" stroke-width="2"/>
-<text class="h" x="40" y="46">管制圖：每批一個量測值，依時間順序排列</text>
-<text class="sm" x="40" y="68">示意數據。縱軸單位為 σ（正常製程的標準差）。</text>
+<text class="h" x="40" y="46">管制圖（Control chart）：每批（Lot）一個量測值，依時間順序排列</text>
+<text class="sm" x="40" y="68">示意數據。縱軸單位為 σ，即正常製程的標準差（Standard deviation）。</text>
 <rect x="70" y="84" width="720" height="32.72727272727272" fill="#f87171" opacity=".14"/>
 <rect x="70" y="411.27272727272725" width="720" height="32.72727272727275" fill="#f87171" opacity=".14"/>
 <rect x="70" y="116.72727272727272" width="720" height="49.09090909090909" fill="#fbbf24" opacity=".08"/>
@@ -41,13 +41,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <rect x="70" y="84" width="720" height="360" fill="none" stroke="#3a5478"/>
 <line x1="70" x2="790" y1="116.72727272727272" y2="116.72727272727272" stroke="#f87171" stroke-width="2.5"/>
 <text class="lbl" x="800" y="117.72727272727272" fill="#f87171" style="fill:#f87171;font-weight:700">USL</text>
-<text class="sm" x="800" y="132.72727272727272">規格界限（產品）</text>
+<text class="sm" x="800" y="132.72727272727272">規格界限（產品）</text><text class="sm" x="800" y="146.72727272727272">（Specification limit）</text>
 <line x1="70" x2="790" y1="165.8181818181818" y2="165.8181818181818" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
 <text class="lbl" x="800" y="166.8181818181818" fill="#fbbf24" style="fill:#fbbf24;font-weight:700">UCL</text>
-<text class="sm" x="800" y="181.8181818181818">平均值 + 3σ</text>
+<text class="sm" x="800" y="181.8181818181818">平均值（Mean）+ 3σ</text>
 <line x1="70" x2="790" y1="264.0" y2="264.0" stroke="#7dd3fc" stroke-width="2"/>
-<text class="lbl" x="800" y="265.0" fill="#7dd3fc" style="fill:#7dd3fc;font-weight:700">中心線</text>
-<text class="sm" x="800" y="280.0">製程平均值</text>
+<text class="lbl" x="800" y="265.0" fill="#7dd3fc" style="fill:#7dd3fc;font-weight:700">中心線（Center line）</text>
+<text class="sm" x="800" y="280.0">製程平均值</text><text class="sm" x="800" y="294.0">（Process mean）</text>
 <line x1="70" x2="790" y1="362.1818181818182" y2="362.1818181818182" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
 <text class="lbl" x="800" y="363.1818181818182" fill="#fbbf24" style="fill:#fbbf24;font-weight:700">LCL</text>
 <text class="sm" x="800" y="378.1818181818182">平均值 − 3σ</text>
@@ -92,10 +92,10 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="lbl" x="672.8" y="299.4" text-anchor="middle" style="fill:#c9bcff;font-weight:700">② 連續 9 點位於中心線上方</text>
 <text class="sm" x="672.8" y="315.4" text-anchor="middle">平均值已偏移，但每一點都仍在界限內</text></g>
 <text class="sm" x="70" y="464">較早</text><text class="sm" x="790" y="464" text-anchor="end">較晚（時間順序）</text>
-<circle cx="46" cy="492" r="5" fill="#e2e8f0"/><text class="sm" x="58" y="496">正常點</text>
+<g transform="translate(0,-6)"><circle cx="46" cy="492" r="5" fill="#e2e8f0"/><text class="sm" x="58" y="496">正常點</text>
 <circle cx="168" cy="492" r="6" fill="#ff5d5d"/><text class="sm" x="180" y="496">失控（OOC）</text>
-<path d="M322 485 l7 7 l-7 7 l-7 -7z" fill="#a78bfa"/><text class="sm" x="336" y="496">偏移連續點</text>
-<line x1="480" x2="506" y1="492" y2="492" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/><text class="sm" x="512" y="496">管制界限（來自製程）</text>
+<path d="M322 485 l7 7 l-7 7 l-7 -7z" fill="#a78bfa"/><text class="sm" x="336" y="496">偏移連續點（Run）</text>
+<line x1="480" x2="506" y1="492" y2="492" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/><text class="sm" x="512" y="496">管制界限（來自製程）</text><text class="sm" x="512" y="510">（Control limit）</text>
 <line x1="716" x2="742" y1="492" y2="492" stroke="#f87171" stroke-width="2.5"/><text class="sm" x="748" y="496">規格界限（來自產品）</text>
-<text class="sm" x="40" y="522">管制界限位於規格界限之內，因此能提早示警。圖中的規則（單點超出 ±3σ；同側連續 9 點）為常見慣例。</text>
+</g><text class="sm" x="40" y="522">管制界限位於規格界限之內，因此能提早示警。圖中的規則（單點超出 ±3σ；同側連續 9 點）為常見慣例。</text>
 </svg>

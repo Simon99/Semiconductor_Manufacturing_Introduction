@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="ti"><title id="ti">離子佈植機：離子源、質量分析磁鐵、加速、掃描、晶圓</title>
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="ti"><title id="ti">離子佈植機（Ion implanter）：離子源（Ion source）、質量分析磁鐵（Mass analyzer magnet）、加速（Acceleration）、掃描（Scanning）、晶圓（Wafer）</title>
 <style>svg{--bg:#f6f7f9;--ink:#1d2433;--mute:#566074;--panel:#dfe5ef;--metal:#8b98b3;--si:#cdd2de;--acc:#e8590c;--rej:#7d8598;--blue:#2f6fdb;--resist:#c9a227}
 .t{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;fill:var(--ink)}
 .b{font-weight:700}.m{fill:var(--mute)}
@@ -39,33 +39,33 @@
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <rect width="960" height="600" fill="var(--bg)"/>
-<text class="t b" x="40" y="34" font-size="22">離子佈植機如何運作</text>
+<text class="t b" x="40" y="34" font-size="22">離子佈植機<tspan font-size="15" font-weight="400">（Ion implanter）</tspan>如何運作</text>
 <g transform="translate(0 22)"><g id="g1"><rect class="box" x="40" y="215" width="110" height="80" rx="10"/>
 <circle id="plasma" class="plasma" cx="95" cy="255" r="22"/>
 <path d="M95 215V190" stroke="var(--metal)" stroke-width="6" fill="none"/>
-<text class="t m lbl" x="95" y="180" text-anchor="middle" font-size="14">摻雜氣體</text>
+<text class="t m lbl" x="95" y="180" text-anchor="middle" font-size="14"><tspan x="95" dy="-16">摻雜氣體</tspan><tspan x="95" dy="16">（Dopant gas）</tspan></text>
 <circle class="badge" cx="95" cy="322" r="14"/><text class="bt" x="95" y="328" text-anchor="middle" font-size="16">1</text>
-<text class="t b lbl" x="95" y="358" text-anchor="middle" font-size="17">離子源</text>
-<text class="t m lbl" x="95" y="377" text-anchor="middle" font-size="14">氣體變成離子</text></g><g id="g2"><rect class="box" x="228" y="150" width="124" height="134" rx="14"/><g transform="translate(255 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(255 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g>
+<text class="t b lbl" x="95" y="358" text-anchor="middle" font-size="17">離子源<tspan font-size="12" font-weight="400">（Ion source）</tspan></text>
+<text class="t m lbl" x="95" y="377" text-anchor="middle" font-size="14">氣體變成離子（ions）</text></g><g id="g2"><rect class="box" x="228" y="150" width="124" height="134" rx="14"/><g transform="translate(255 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(255 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g>
 <text class="t m lbl" x="334" y="206" font-size="16" font-style="italic">B</text>
 <rect class="plate" x="358" y="105" width="10" height="55"/><rect class="plate" x="358" y="190" width="10" height="100"/>
 <path class="rej" id="r1" d="M235 255C290 255 310 135 357 135"/><path class="rej" id="r2" d="M235 255C300 255 330 252 357 246"/>
 <path d="M349 128l8 8M357 128l-8 8M349 240l8 8M357 240l-8 8" stroke="var(--rej)" stroke-width="2.5"/>
 <text class="t m lbl" x="376" y="262" font-size="13">其他質量的離子</text><text class="t m lbl" x="376" y="278" font-size="13">撞上極板被擋下</text>
 <circle class="badge" cx="290" cy="322" r="14"/><text class="bt" x="290" y="328" text-anchor="middle" font-size="16">2</text>
-<text class="t b lbl" x="290" y="358" text-anchor="middle" font-size="17">質量分析器</text>
+<text class="t b lbl" x="290" y="358" text-anchor="middle" font-size="17">質量分析器<tspan font-size="12" font-weight="400">（Mass analyzer）</tspan></text>
 <text class="t m lbl" x="290" y="377" text-anchor="middle" font-size="14">磁鐵篩選質量</text></g><g id="g3"><rect class="box" x="395" y="142" width="135" height="66" rx="6"/><rect class="ring" x="408" y="130" width="8" height="90" rx="2"/><rect class="ring" x="428" y="130" width="8" height="90" rx="2"/><rect class="ring" x="448" y="130" width="8" height="90" rx="2"/><rect class="ring" x="468" y="130" width="8" height="90" rx="2"/><rect class="ring" x="488" y="130" width="8" height="90" rx="2"/><rect class="ring" x="508" y="130" width="8" height="90" rx="2"/>
 <text class="t m lbl" x="462" y="120" text-anchor="middle" font-size="14">高電壓</text>
 <circle class="badge" cx="462" cy="322" r="14"/><text class="bt" x="462" y="328" text-anchor="middle" font-size="16">3</text>
-<text class="t b lbl" x="462" y="358" text-anchor="middle" font-size="17">加速</text>
+<text class="t b lbl" x="462" y="358" text-anchor="middle" font-size="17">加速<tspan font-size="12" font-weight="400">（Acceleration）</tspan></text>
 <text class="t m lbl" x="462" y="377" text-anchor="middle" font-size="14">電場增加能量</text></g><g id="g4"><polygon class="fanbg" points="640,175 774,69 774,281"/>
 <rect id="pt" class="plate" x="575" y="138" width="50" height="9" rx="2"/><rect id="pb" class="plate" x="575" y="203" width="50" height="9" rx="2"/>
 <circle class="badge" cx="610" cy="322" r="14"/><text class="bt" x="610" y="328" text-anchor="middle" font-size="16">4</text>
-<text class="t b lbl" x="610" y="358" text-anchor="middle" font-size="17">掃描</text>
-<text class="t m lbl" x="610" y="377" text-anchor="middle" font-size="14">來回掃過晶圓</text></g><g id="g5"><rect class="si" x="790" y="55" width="32" height="240" rx="3"/>
+<text class="t b lbl" x="610" y="358" text-anchor="middle" font-size="17">掃描<tspan font-size="12" font-weight="400">（Scanning）</tspan></text>
+<text class="t m lbl" x="610" y="377" text-anchor="middle" font-size="14">來回掃過晶圓（Wafer）</text></g><g id="g5"><rect class="si" x="790" y="55" width="32" height="240" rx="3"/>
 <rect class="res" x="774" y="55" width="16" height="60"/><rect class="res" x="774" y="200" width="16" height="28"/><rect class="res" x="774" y="262" width="16" height="33"/>
 <g id="wd"><circle class="dop" cx="797" cy="122" r="3"/><circle class="dop" cx="806" cy="122" r="3"/><circle class="dop" cx="797" cy="131" r="3"/><circle class="dop" cx="806" cy="131" r="3"/><circle class="dop" cx="797" cy="140" r="3"/><circle class="dop" cx="806" cy="140" r="3"/><circle class="dop" cx="797" cy="149" r="3"/><circle class="dop" cx="806" cy="149" r="3"/><circle class="dop" cx="797" cy="158" r="3"/><circle class="dop" cx="806" cy="158" r="3"/><circle class="dop" cx="797" cy="167" r="3"/><circle class="dop" cx="806" cy="167" r="3"/><circle class="dop" cx="797" cy="176" r="3"/><circle class="dop" cx="806" cy="176" r="3"/><circle class="dop" cx="797" cy="185" r="3"/><circle class="dop" cx="806" cy="185" r="3"/><circle class="dop" cx="797" cy="194" r="3"/><circle class="dop" cx="806" cy="194" r="3"/><circle class="dop" cx="797" cy="236" r="3"/><circle class="dop" cx="806" cy="236" r="3"/><circle class="dop" cx="797" cy="244" r="3"/><circle class="dop" cx="806" cy="244" r="3"/><circle class="dop" cx="797" cy="252" r="3"/><circle class="dop" cx="806" cy="252" r="3"/><circle class="dop" cx="797" cy="259" r="3"/><circle class="dop" cx="806" cy="259" r="3"/></g>
-<text class="t m lbl" x="768" y="46" text-anchor="middle" font-size="14">光阻</text>
+<text class="t m lbl" x="768" y="46" text-anchor="middle" font-size="14">光阻（Photoresist）</text>
 <circle class="badge" cx="806" cy="322" r="14"/><text class="bt" x="806" y="328" text-anchor="middle" font-size="16">5</text>
 <text class="t b lbl" x="806" y="358" text-anchor="middle" font-size="17">晶圓</text>
 <text class="t m lbl" x="806" y="377" text-anchor="middle" font-size="14">光阻擋住離子</text></g><path class="glow" d="M150 255H235C290 255 290 175 358 175H640"/>
@@ -80,10 +80,10 @@
 <ellipse class="band" cx="265" cy="505" rx="80" ry="8" fill="var(--acc)" opacity=".75"/>
 <circle class="dop fall" cx="215" cy="462" r="3.5"/><circle class="dop fall" cx="265" cy="450" r="3.5" style="animation-delay:-.4s"/><circle class="dop fall" cx="315" cy="456" r="3.5" style="animation-delay:-.8s"/>
 <text class="t m" x="380" y="486" font-size="14">低能量：淺</text><text class="t m" x="380" y="534" font-size="14">高能量：深</text>
-<text class="t b" x="610" y="486" font-size="16">加速能量</text>
+<text class="t b" x="610" y="486" font-size="16">加速能量（Accelerating energy）</text>
 <line x1="560" y1="515" x2="900" y2="515" stroke="var(--metal)" stroke-width="6" stroke-linecap="round"/>
 <circle class="knob" cx="730" cy="515" r="11" fill="var(--acc)"/>
 <text class="t m" x="560" y="548" font-size="14">低</text><text class="t m" x="900" y="548" text-anchor="end" font-size="14">高</text>
-<text class="t b" x="560" y="578" font-size="15">劑量決定原子數量，能量決定深度。</text>
+<text class="t b" x="560" y="578" font-size="15">劑量（Dose）決定原子數量，能量決定深度。</text>
 </g>
 </svg>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>平面、FinFET 與 GAA：數數閘極包住幾個面</title>
+<title>平面（Planar）、FinFET 與 GAA：數數閘極（Gate）包住幾個面</title>
 <style>
 :root{--bg:#f4f6fa;--fg:#17202e;--mut:#51607a;--card:#fff;--line:#d3dae6;--acc:#1f7a3a;--btn:#e7ecf4;--btnon:#1f6feb;--btnfg:#fff;--plate:#e9eef6}
 :root[data-theme=dark]{--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}
@@ -24,12 +24,12 @@ ul.f li.lit{background:var(--acc);color:#0b1a0e;border-color:var(--acc);font-wei
 tr.cur{background:rgba(59,130,246,.15)}.note{font-size:13px;color:var(--mut)}
 </style></head><body><div class="wrap">
 <div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/12-advanced-transistors/README.md">&larr; 回到章節</a></div>
-<h1>數數閘極包住幾個面</h1>
-<p class="sub">旋轉電晶體，再按「數下一個面」，依序點亮閘極接觸的每個通道面。</p>
+<h1>數數閘極（Gate）包住幾個面</h1>
+<p class="sub">旋轉電晶體（Transistor），再按「數下一個面」，依序點亮閘極接觸的每個通道（Channel）面。</p>
 <div class="grid">
-<div class="card"><svg id="stage" viewBox="0 0 640 440" role="img" aria-label="電晶體立體模型"></svg>
+<div class="card"><svg id="stage" viewBox="0 0 640 440" role="img" aria-label="電晶體（Transistor）立體模型"></svg>
 <div class="row" id="devs"></div>
-<div class="row"><button id="bPlay">暫停旋轉</button><button id="bCount" class="on">數下一個面</button><button id="bGate">隱藏閘極</button></div>
+<div class="row"><button id="bPlay">暫停旋轉</button><button id="bCount" class="on">數下一個面</button><button id="bGate">隱藏閘極（Gate）</button></div>
 <label>旋轉（偏航角）<span id="yv"></span><input id="yaw" type="range" min="-180" max="180" value="35"></label>
 </div>
 <div class="card">
@@ -39,13 +39,13 @@ tr.cur{background:rgba(59,130,246,.15)}.note{font-size:13px;color:var(--mut)}
 <div class="txt" id="stageTxt"></div>
 <div class="row"><button id="bPrev">&larr; 上一個</button><button id="bNext">下一個 &rarr;</button></div>
 <table><tr><th>結構</th><th>包覆面數</th></tr><tbody id="tb"></tbody></table>
-<p class="note">示意圖，未依比例；尺寸僅為示意。為求清楚，省略了閘極絕緣層。</p>
+<p class="note">示意圖，未依比例；尺寸僅為示意。為求清楚，省略了閘極絕緣層（Gate dielectric）。</p>
 </div></div></div>
 <script>
 const GEO={"planar": [{"b": [1, 7, -1, 7, -1.6, -1], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, -1, 0], "kind": "ch", "wrap": ["top"], "main": ["top"]}, {"b": [5, 6, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, 0, 0.9], "kind": "gate", "wrap": [], "main": false}], "finfet": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 2.6, 3.4, 0, 3], "kind": "ch", "wrap": ["top", "ymax", "ymin"], "main": ["top", "ymax", "ymin"]}, {"b": [5, 6, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 4.2, 3, 3.6], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 2.6, 0, 3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 3.4, 4.2, 0, 3], "kind": "gate", "wrap": [], "main": false}], "gaa": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [5, 6, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.1, 1.7000000000000002], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["bot"]}, {"b": [3, 5, 1.5, 4.5, 2.2, 2.8000000000000003], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": []}, {"b": [3, 5, 1.5, 4.5, 3.3000000000000003, 3.9000000000000004], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["top", "ymax", "ymin"]}, {"b": [3, 5, 1.5, 4.5, 0.3, 1.1], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.7, 2.2], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 2.8, 3.3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 3.9, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.0, 1.5, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 4.5, 5.0, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}]};
-const DEVS=[['planar','平面電晶體','平面電晶體：閘極坐落在通道上方，只能從一面（上方）控制通道。閘極關閉時，電流仍可能從較深處偷偷溜過去。'],
-['finfet','FinFET','FinFET：通道是一片垂直豎立的薄鰭，閘極覆蓋在頂面與兩側面，共三面控制，因此漏電大幅減少。'],
-['gaa','GAA 奈米片','GAA：通道是數片堆疊的薄片，閘極填入並包住每一片的頂面、底面、左面與右面，共四面。']];
+const DEVS=[['planar','平面電晶體（Planar）','平面電晶體：閘極坐落在通道上方，只能從一面（上方）控制通道。閘極關閉時，電流仍可能從較深處偷偷溜過去。'],
+['finfet','FinFET','FinFET：通道是一片垂直豎立的薄鰭（Fin），閘極覆蓋在頂面與兩側面，共三面控制，因此漏電（Leakage）大幅減少。'],
+['gaa','GAA 奈米片（Nanosheet）','GAA：通道是數片堆疊的薄片，閘極填入並包住每一片的頂面、底面、左面與右面，共四面。']];
 const FN={top:'頂面',ymax:'前側面',ymin:'後側面',bot:'底面'};
 const ORD=['top','ymax','ymin','bot'];
 const q=new URLSearchParams(location.search);
@@ -84,11 +84,11 @@ function render(){
  $('yv').textContent=Math.round(((yaw+540)%360)-180)+'°';$('yaw').value=Math.round(((yaw+540)%360)-180);
  $('cnt').textContent=cnt;$('tot').textContent=N;
  const m=G.find(b=>b.kind==='ch');
- $('flist').innerHTML=ORD.filter(n=>m.wrap.includes(n)).map(n=>`<li class="${m.wrap.indexOf(n)<cnt?'lit':''}">${m.wrap.indexOf(n)+1}. ${FN[n]}</li>`).join('')+'<li>源極／汲極端：未被包覆</li>';
+ $('flist').innerHTML=ORD.filter(n=>m.wrap.includes(n)).map(n=>`<li class="${m.wrap.indexOf(n)<cnt?'lit':''}">${m.wrap.indexOf(n)+1}. ${FN[n]}</li>`).join('')+'<li>源極／汲極（Source / drain）端：未被包覆</li>';
  $('stageTxt').textContent=DEVS[S.dev][2]+(S.dev===2?'（以單片計算，每一片的包覆方式相同。）':'')+(S.gate?'':'［已隱藏閘極，只顯示通道。］');
- $('tb').innerHTML=DEVS.map((d,i)=>`<tr class="${i===S.dev?'cur':''}"><td>${d[1]}</td><td>${['一面','三面','四面'][i]}</td></tr>`).join('');
+ $('tb').innerHTML=DEVS.map((d,i)=>`<tr class="${i===S.dev?'cur':''}"><td>${d[1].replace(/（.*?）/,'')}</td><td>${['一面','三面','四面'][i]}</td></tr>`).join('');
  [...$('devs').children].forEach((b,i)=>b.classList.toggle('on',i===S.dev));
- $('bGate').textContent=S.gate?'隱藏閘極':'顯示閘極';$('bPlay').textContent=S.play?'暫停旋轉':'播放旋轉';
+ $('bGate').textContent=S.gate?'隱藏閘極（Gate）':'顯示閘極（Gate）';$('bPlay').textContent=S.play?'暫停旋轉':'播放旋轉';
 }
 function setDev(i){S.dev=((i%3)+3)%3;S.count=null;render()}
 DEVS.forEach((d,i)=>{const b=document.createElement('button');b.textContent=d[1];b.onclick=()=>setDev(i);$('devs').appendChild(b)});

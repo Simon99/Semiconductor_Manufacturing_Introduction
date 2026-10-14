@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" role="img" aria-labelledby="t d">
-<title id="t">覆晶封裝剖面：組裝順序</title>
-<desc id="d">帶有凸塊的晶粒翻轉成正面朝下，放到基板上，縫隙填入底部填充膠，最後在底面植上錫球。</desc>
+<title id="t">覆晶封裝（Flip-chip package）剖面：組裝順序</title>
+<desc id="d">帶有凸塊（Bump）的晶粒（Die）翻轉成正面朝下，放到基板（Substrate）上，縫隙填入底部填充膠（Underfill），最後在底面植上錫球（Solder ball）。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1d2a38}
 .ti{font-size:24px;font-weight:700}.sub{font-size:14px;fill:#55657a}
@@ -34,7 +34,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 @media (prefers-reduced-motion:reduce){.scene,.die,.uf,.bl,.lab,.ht,.pg,.c1,.c2,.c3,.c4,.c5{animation:none!important}}
 </style>
 <rect width="960" height="540" fill="#f6f8fb"/>
-<text class="ti" x="40" y="38">覆晶封裝剖面</text>
+<text class="ti" x="40" y="38">覆晶封裝（Flip-chip package）剖面</text>
 <text class="sub" x="40" y="60">示意，未依比例</text>
 <g class="scene">
 
@@ -42,7 +42,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <path d="M390 182 V148 M382 158 L390 146 L398 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M480 182 V148 M472 158 L480 146 L488 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M570 182 V148 M562 158 L570 146 L578 158" stroke="#d9534f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text class="ls" x="480" y="136" text-anchor="middle" style="fill:#b23b37">熱量從晶粒背面散出</text></g>
+<text class="ls" x="480" y="136" text-anchor="middle" style="fill:#b23b37">熱量從晶粒（Die）背面散出</text></g>
 <g id="substrate"><rect x="200" y="292" width="560" height="52" rx="3" fill="#7fb98f" stroke="#3f7a52" stroke-width="1.5"/>
 <polyline points="298.0,296 298.0,310 235.0,326 235.0,340" fill="none" stroke="#c99a2e" stroke-width="2.5" stroke-linejoin="round"/>
 <rect x="282.0" y="292" width="32" height="5" fill="#e0b440"/><rect x="215.0" y="340" width="40" height="5" fill="#e0b440"/>
@@ -84,15 +84,15 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <rect x="705.0" y="380" width="40" height="4" fill="#e0b440"/><circle cx="725.0" cy="362" r="18" fill="#d5dae0" stroke="#59636e" stroke-width="1.5"/><ellipse cx="719.0" cy="355" rx="5" ry="3.5" fill="#fff" opacity=".7"/>
 </g>
 <g class="lab">
-<text x="480" y="226" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:600">矽晶粒（背面朝上）</text>
-<path class="ld" d="M712 225 H744"/><text class="lb" x="752" y="222">晶粒（已翻轉）</text><text class="ls" x="752" y="241">主動面朝下</text>
-<path class="ld" d="M676 270 H758"/><text class="lb" x="766" y="276">凸塊</text><text class="ls" x="766" y="295" >連接晶粒與基板</text>
-<path class="ld" d="M196 282 H240"/><text class="lb" x="190" y="287" text-anchor="end">底部填充</text>
-<path class="ld" d="M194 316 H212"/><text class="lb" x="188" y="316" text-anchor="end">基板</text><text class="ls" x="188" y="334" text-anchor="end">扇出到較寬的間距</text>
-<path class="ld" d="M744 362 H748"/><text class="lb" x="756" y="360">錫球</text><text class="ls" x="756" y="379">連接封裝與電路板</text>
-<text class="lb" x="140" y="403" text-anchor="end">電路板</text>
+<text x="480" y="226" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:600">矽晶粒（Silicon die，背面朝上）</text>
+<path class="ld" d="M712 225 H744"/><text class="lb" x="752" y="222">晶粒（已翻轉）</text><text class="ls" x="752" y="241">主動面（Active side）朝下</text>
+<path class="ld" d="M676 270 H758"/><text class="lb" x="766" y="276">凸塊（Bump）</text><text class="ls" x="766" y="295" >連接晶粒與基板</text>
+<path class="ld" d="M196 282 H240"/><text class="lb" x="190" y="287" text-anchor="end">底部填充（Underfill）</text>
+<path class="ld" d="M194 316 H212"/><text class="lb" x="188" y="316" text-anchor="end">基板（Substrate）</text><text class="ls" x="188" y="334" text-anchor="end">扇出（Fan-out）</text><text class="ls" x="188" y="349" text-anchor="end">到較寬的間距</text>
+<path class="ld" d="M744 362 H748"/><text class="lb" x="756" y="360">錫球（Solder ball）</text><text class="ls" x="756" y="379">連接封裝與電路板</text>
+<text class="lb" x="150" y="434">電路板（Printed circuit board）</text>
 </g>
-<text class="cap c1" x="480" y="478">1  在晶粒焊墊上做出凸塊（正面朝上）</text>
+<text class="cap c1" x="480" y="478">1  在晶粒焊墊（Bond pad）上做出凸塊（正面朝上）</text>
 <text class="cap c2" x="480" y="478">2  晶粒翻轉成正面朝下</text>
 <text class="cap c3" x="480" y="478">3  凸塊焊接到基板焊墊</text>
 <text class="cap c4" x="480" y="478">4  底部填充膠流入縫隙並固化，分散應力</text>

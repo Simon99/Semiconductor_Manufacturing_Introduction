@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>浴缸曲線與預燒</title>
+<title>浴缸曲線（Bathtub curve）與預燒（Burn-in）</title>
 <style>
 :root{--bg:#f8fafc;--panel:#fff;--ink:#0f172a;--sub:#475569;--line:#cbd5e1;--red:#dc2626;--grn:#16a34a;--org:#ea580c;--teal:#0d9488;--grey:#64748b;--chip:#334155;--oven:#9a3412;--accent:#2563eb;}
 :root[data-theme="dark"]{--bg:#0b1220;--panel:#131c2e;--ink:#e5eaf3;--sub:#9fb0c8;--line:#2b3a55;--red:#f87171;--grn:#4ade80;--org:#fb923c;--teal:#2dd4bf;--grey:#94a3b8;--chip:#475569;--oven:#c2410c;--accent:#60a5fa;}
@@ -40,15 +40,15 @@ code{font-size:12px}
 </head>
 <body>
 <div class="wrap">
-<div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/22-final-test-and-reliability/README.md">&larr; 回到章節</a><h1>浴缸曲線與預燒</h1></div>
-<p class="lede">晶片生命週期中的失效率，以及工廠預燒能篩除與無法篩除的部分。所有模型數值皆為<b>示意</b>。</p>
+<div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/22-final-test-and-reliability/README.md">&larr; 回到章節</a><h1>浴缸曲線（Bathtub curve）與預燒（Burn-in）</h1></div>
+<p class="lede">晶片（Chip）生命週期中的失效率（Failure rate），以及工廠預燒能篩除與無法篩除的部分。所有模型數值皆為<b>示意</b>。</p>
 <div class="grid">
  <div>
-  <div class="card" style="overflow-x:auto"><svg id="plot" style="min-width:600px" viewBox="0 0 760 362" width="100%" role="img" aria-label="失效率對使用時間（雙對數座標），比較有無預燒"></svg></div>
+  <div class="card" style="overflow-x:auto"><svg id="plot" style="min-width:600px" viewBox="0 0 760 362" width="100%" role="img" aria-label="失效率（Failure rate）對使用時間（雙對數座標），比較有無預燒（Burn-in）"></svg></div>
   <div class="ctl">
-   <label for="bi">預燒時間：<span id="biv">48</span> 小時</label>
-   <input id="bi" type="range" min="0" max="168" step="1" value="48" aria-label="預燒時間（小時）">
-   <label><input id="nw" type="checkbox"> 顯示：預燒無法改變老化期</label>
+   <label for="bi">預燒時間（Burn-in time）：<span id="biv">48</span> 小時</label>
+   <input id="bi" type="range" min="0" max="168" step="1" value="48" aria-label="預燒時間（Burn-in time），單位小時">
+   <label><input id="nw" type="checkbox"> 顯示：預燒無法改變老化期（Wear-out）</label>
    <button id="pp" aria-pressed="false">暫停</button><span class="note" id="clock"></span>
   </div>
   <div class="read" aria-live="polite">
@@ -59,7 +59,7 @@ code{font-size:12px}
   <div class="callout" id="callout"></div>
  </div>
  <div>
-  <div class="card"><svg id="mach" viewBox="0 0 420 232" width="100%" role="img" aria-label="晶片經輸送帶通過預燒爐；體質弱的晶片失效後被剔除"></svg></div>
+  <div class="card"><svg id="mach" viewBox="0 0 420 232" width="100%" role="img" aria-label="晶片（Chip）經輸送帶通過預燒爐（Burn-in oven）；體質弱的晶片失效後被剔除"></svg></div>
   <div class="card" style="margin-top:8px"><svg id="dots" viewBox="0 0 420 134" width="100%" role="img" aria-label="1000 顆晶片，失效者以紅色標示"></svg></div>
   <div class="stages" id="stages"></div>
   <div class="card" id="stageTxt"></div>
@@ -84,10 +84,10 @@ const css=v=>'var(--'+v+')';
 // ---------- state ----------
 const CYC=14000;let t=0,paused=false,last=null,b=48;
 const STG=[
- ['1. 早期失效','帶有潛在缺陷的弱晶片在開始使用後不久就會失效。失效率一開始很高，隨著這些晶片陸續淘汰而下降（韋伯分布形狀參數 β<1）。',2500],
- ['2. 穩定期','隨機失效，失效率低且大致固定（β=1）。這段是晶片的有效使用壽命。',5000],
- ['3. 老化期','老化機制逐漸累積，失效率攀升（β>1）。何時開始，取決於設計與製程。',7500],
- ['4. 預燒','讓晶片在高溫和略高電壓下運作，使體質弱的晶片在工廠就失效，再經測試後剔除。客戶拿到的是已度過早期失效區的晶片。預燒無法延長壽命，也無法修復老化。',12000]];
+ ['1. 早期失效（Early failures）','帶有潛在缺陷的弱晶片在開始使用後不久就會失效。失效率一開始很高，隨著這些晶片陸續淘汰而下降，韋伯（Weibull）分布形狀參數 β<1。',2500],
+ ['2. 穩定期（Stable period）','隨機失效，失效率低且大致固定（β=1）。這段是晶片的有效使用壽命。',5000],
+ ['3. 老化期（Wear-out）','老化機制逐漸累積，失效率攀升（β>1）。何時開始，取決於設計與製程。',7500],
+ ['4. 預燒（Burn-in）','讓晶片在高溫和略高電壓下運作，使體質弱的晶片在工廠就失效，再經測試後剔除。客戶拿到的是已度過早期失效區的晶片。預燒無法延長壽命，也無法修復老化。',12000]];
 function stageOf(tt){return tt<3500?0:tt<6000?1:tt<8500?2:3}
 // ---------- plot ----------
 const PL=56,PR=744,PT=14,PB=318,XMIN=1,XMAX=1e5,YMIN=100,YMAX=1e6;
@@ -124,7 +124,7 @@ function buildPlot(){
  [['grey','全部晶片，未預燒','7 5',3],['teal','預燒後出貨','',4.5]].forEach((r,i)=>{el(lg,'line',{x1:0,x2:26,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':r[3],'stroke-dasharray':r[2]});el(lg,'text',{x:32,y:i*18+4,'font-size':12.5},r[1])});
  [['red','早期部分（β<1）'],['grn','隨機部分（β=1）'],['org','老化部分（β>1）']].forEach((r,i)=>{el(lg,'line',{x1:230,x2:254,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':2,'stroke-dasharray':'2 3'});el(lg,'text',{x:260,y:i*18+4,'font-size':12,class:'s'},r[1])});
  // phase labels
- [['早期失效',2.5,'red'],['穩定期',160,'grn'],['老化期',2e4,'org']].forEach(r=>{g['l'+r[0]]=el(plot,'text',{x:X(r[1]),y:PB-8-0,'font-size':13,'font-weight':700,fill:css(r[2]),style:'fill:'+css(r[2])},r[0])});
+ [['早期失效',2.5,'red','早期失效（Early failures）'],['穩定期',160,'grn','穩定期（Stable period）'],['老化期',2e4,'org','老化期（Wear-out）']].forEach(r=>{g['l'+r[0]]=el(plot,'text',{x:r[0]==='老化期'?PR-4:X(r[1]),'text-anchor':r[0]==='老化期'?'end':'start',y:PB-8-0,'font-size':13,'font-weight':700,fill:css(r[2]),style:'fill:'+css(r[2])},r[3])});
 }
 function wearStart(){let lo=1,hi=1e5;for(let i=0;i<60;i++){const m=Math.sqrt(lo*hi);(hW(m)>hE(m)+P.hc)?hi=m:lo=m}return hi}
 function draw(){
@@ -173,7 +173,7 @@ const mach=document.getElementById('mach');
 const CH=[['w',.79],['a',.04],['b',.29],['c',.54]];let chipEl={},wx,wb,puff=[],hat;
 (function(){
  el(mach,'defs',{}).innerHTML='<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset="1" stop-color="#f97316"/></linearGradient>';
- el(mach,'text',{x:8,y:20,'font-size':14,'font-weight':700},'預燒爐（高溫 + 略高電壓）');
+ el(mach,'text',{x:8,y:20,'font-size':14,'font-weight':700},'預燒爐（Burn-in oven），高溫 + 略高電壓');
  el(mach,'text',{x:8,y:37,'font-size':12,class:'s'},'失效比例為示意放大');
  el(mach,'rect',{x:6,y:140,width:190,height:9,rx:4.5,fill:css('grey')});el(mach,'rect',{x:262,y:140,width:152,height:9,rx:4.5,fill:css('grey')});
  el(mach,'rect',{x:196,y:139,width:66,height:4,fill:css('grey'),'fill-opacity':.6});
@@ -188,7 +188,7 @@ const CH=[['w',.79],['a',.04],['b',.29],['c',.54]];let chipEl={},wx,wb,puff=[],h
  el(mach,'text',{x:154,y:82,'text-anchor':'middle','font-size':12.5,'font-weight':700,style:'fill:#fff'},'預燒爐');
  el(mach,'text',{x:8,y:166,'font-size':12,class:'s'},'晶片進入');el(mach,'text',{x:414,y:166,'text-anchor':'end','font-size':12,'font-weight':700,style:'fill:'+css('grn')},'通過：出貨');
  el(mach,'text',{x:257,y:154,'text-anchor':'middle','font-size':12,class:'s',dy:'0'},'');
- el(mach,'text',{x:257,y:226,'text-anchor':'middle','font-size':12,'font-weight':700,style:'fill:'+css('red')},'剔除（測試與分級）');
+ el(mach,'text',{x:257,y:226,'text-anchor':'middle','font-size':12,'font-weight':700,style:'fill:'+css('red')},'剔除，測試與分級（Test & sort）');
  for(let i=0;i<3;i++)puff.push(el(mach,'circle',{cx:150+i*8,cy:88,r:6+i,fill:'#64748b',opacity:0}));
 })();
 const mx=ph=>8+ph*404;

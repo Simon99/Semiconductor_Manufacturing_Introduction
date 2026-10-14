@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d"><title id="t">DRAM 記憶單元剖面</title><desc id="d">DRAM 1T1C 記憶單元的動態剖面：埋入式字元線、位元線與高聳的圓柱電容，依序展示寫入 1、保持期間的漏電、刷新、讀取與寫入 0。</desc><style>:root{--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d"><title id="t">DRAM 記憶單元剖面（Cell cross-section）</title><desc id="d">DRAM 1T1C 記憶單元（Cell）的動態剖面（Cross-section）：埋入式字元線（Buried word line）、位元線（Bit line）與高聳的圓柱電容（Cylinder capacitor），依序展示寫入（Write）1、保持（Hold）期間的漏電（Leakage）、刷新（Refresh）、讀取（Read）與寫入 0。</desc><style>:root{--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}
 
 .si{fill:var(--si)}.np{fill:var(--np)}.sti{fill:var(--sti)}.ild{fill:var(--ild)}.plate{fill:var(--plate)}
 .gox{fill:var(--gox)}.gcap{fill:var(--gcap)}.goff{fill:var(--goff)}.gon{fill:var(--gon)}
@@ -79,28 +79,28 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <rect class="bore" x="488" y="48" width="44" height="174"/>
 <path class="diel" d="M478 48 V232 H542 V48"/>
 <path class="electrode" d="M484 48 V226 H536 V48"/>
-<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">頂板（所有單元共用）</text>
+<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">頂板（Top plate）</text><text class="lblm" x="330" y="114" text-anchor="middle">（所有單元共用）</text>
 <text class="lblm" x="330" y="168" text-anchor="middle">實際圓柱的高度是寬度的</text>
 <text class="lblm" x="330" y="186" text-anchor="middle">數十倍</text>
 <text class="lblm" x="330" y="204" text-anchor="middle">（此處畫得較矮）</text>
-<text class="lbl" x="178" y="289">儲存節點接點</text><path class="lead" d="M175 285 H167"/>
-<text class="lbl" x="330" y="326" text-anchor="middle">位元線（延伸進紙面）</text>
-<text class="lbl" x="354" y="390">位元線接點</text><path class="lead" d="M351 387 H347"/>
-<text class="lbl" x="225" y="514" text-anchor="middle">埋入式字元線</text><path class="lead" d="M225 500 V486"/>
+<text class="lbl" x="178" y="289">儲存節點接點（Storage-node contact）</text><path class="lead" d="M175 285 H167"/>
+<text class="lbl" x="330" y="326" text-anchor="middle">位元線（Bit line，延伸進紙面）</text>
+<text class="lbl" x="354" y="384">位元線接點</text><text class="lbl" x="354" y="400">（Bit-line contact）</text><path class="lead" d="M351 381 H347"/>
+<text class="lbl" x="225" y="514" text-anchor="middle">埋入式字元線（Buried word line）</text><path class="lead" d="M225 500 V486"/>
 <text class="lbl" x="435" y="514" text-anchor="middle">埋入式字元線</text><path class="lead" d="M435 500 V486"/>
-<text class="lblm" x="330" y="548" text-anchor="middle">p 型矽</text>
+<text class="lblm" x="330" y="548" text-anchor="middle">p 型矽（p-type silicon）</text>
 <text class="lblm" x="80" y="430" text-anchor="middle" font-size="12">STI</text>
 <text class="lblm" x="580" y="430" text-anchor="middle" font-size="12">STI</text>
-<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">電容＝水桶</text>
-<text class="lblm" x="510" y="30" text-anchor="middle">相鄰單元：0</text>
-<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">電晶體＝開關</text>
+<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">電容（Capacitor）＝水桶</text>
+<text class="lblm" x="510" y="30" text-anchor="middle">相鄰單元（Neighbor cell）：0</text>
+<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">電晶體（Transistor）＝開關</text>
 <text class="lblm" x="500" y="586" text-anchor="middle">未依比例</text>
 <path class="chan won" d="M249 435 V487 H201 V435"/>
 <g class="leakg">
 <circle class="ld" cx="130" cy="442" r="4" style="animation-delay:-0.0s"/>
 <circle class="ld" cx="155" cy="442" r="4" style="animation-delay:-0.5s"/>
 <circle class="ld" cx="180" cy="442" r="4" style="animation-delay:-1.0s"/>
-<text class="lbl" x="64" y="476" fill="var(--leak)" style="fill:var(--leak)" font-weight="600">漏電</text>
+<text class="lbl" x="22" y="476" fill="var(--leak)" style="fill:var(--leak)" font-weight="600">漏電（Leakage）</text>
 <path d="M118 470 H126" stroke="var(--leak)" stroke-width="1.5" fill="none"/>
 </g>
 <circle class="fd fd0" r="5" cx="0" cy="0" opacity="0"/>
@@ -108,13 +108,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle class="fd fd2" r="5" cx="0" cy="0" opacity="0"/>
 <circle class="fd fd3" r="5" cx="0" cy="0" opacity="0"/>
 </g>
-<text class="pt" x="655" y="38">DRAM 記憶單元（1T1C）</text><text class="ps" x="655" y="58">剖面示意（簡化）</text>
+<text class="pt" x="655" y="38">DRAM 記憶單元（1T1C）</text><text class="ps" x="655" y="58">剖面（Cross-section）示意（簡化）</text>
 <rect class="boxr" x="655" y="72" width="290" height="116" rx="8"/>
-<g class="ph0"><text class="st" x="670" y="100">寫入 1</text><text class="sd" x="670" y="125">字元線導通，開關閉合。</text><text class="sd" x="670" y="144">位元線為高電位，注滿水桶。</text></g>
-<g class="ph1"><text class="st" x="670" y="100">保持（漏電中）</text><text class="sd" x="670" y="125">字元線關閉，開關斷開。</text><text class="sd" x="670" y="144">電荷被困住，但會漏失。</text></g>
-<g class="ph2"><text class="st" x="670" y="100">刷新</text><text class="sd" x="670" y="125">讀出已衰減的電荷，</text><text class="sd" x="670" y="144">再把完整的 1 寫回去。</text></g>
+<g class="ph0"><text class="st" x="670" y="100">寫入（Write）1</text><text class="sd" x="670" y="125">字元線（Word line）導通，開關閉合。</text><text class="sd" x="670" y="144">位元線為高電位，注滿水桶。</text></g>
+<g class="ph1"><text class="st" x="670" y="100">保持（Hold）：漏電中</text><text class="sd" x="670" y="125">字元線關閉，開關斷開。</text><text class="sd" x="670" y="144">電荷（Charge）被困住，但會漏失。</text></g>
+<g class="ph2"><text class="st" x="670" y="100">刷新（Refresh）</text><text class="sd" x="670" y="125">讀出已衰減的電荷，</text><text class="sd" x="670" y="144">再把完整的 1 寫回去。</text></g>
 <g class="ph3"><text class="st" x="670" y="100">保持</text><text class="sd" x="670" y="125">電荷已恢復飽滿。</text><text class="sd" x="670" y="144">開關再次斷開。</text></g>
-<g class="ph4"><text class="st" x="670" y="100">讀取</text><text class="sd" x="670" y="125">開關閉合，電荷輕推位元線，</text><text class="sd" x="670" y="144">感測放大器判讀為 1，</text><text class="sd" x="670" y="163">然後重新寫回該單元。</text></g>
+<g class="ph4"><text class="st" x="670" y="100">讀取（Read）</text><text class="sd" x="670" y="125">開關閉合，電荷輕推位元線，</text><text class="sd" x="670" y="144">感測放大器（Sense amp）判讀為 1，</text><text class="sd" x="670" y="163">然後重新寫回該單元。</text></g>
 <g class="ph5"><text class="st" x="670" y="100">寫入 0</text><text class="sd" x="670" y="125">位元線為低電位，把水桶放空。</text><text class="sd" x="670" y="144">此單元現在儲存 0。</text></g>
 <g class="ph6"><text class="st" x="670" y="100">保持（儲存 0）</text><text class="sd" x="670" y="125">沒有電荷＝0，開關斷開。</text></g>
 <text class="sk" x="655" y="214">字元線：</text>
@@ -128,10 +128,10 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sd ph4" x="722" y="238" style="fill:var(--bl)">受單元輕推後復原</text>
 <text class="sd ph5" x="722" y="238" style="fill:var(--bl)">驅動為低電位（0）</text>
 <text class="sd ph6" x="722" y="238" style="fill:var(--bl)">閒置</text>
-<text class="sk" x="655" y="272">儲存電荷與時間（示意）</text>
+<text class="sk" x="655" y="272">儲存電荷（Stored charge）與時間（示意）</text>
 <path d="M700 287 V405 H885" stroke="var(--muted)" stroke-width="1.5" fill="none"/>
 <path d="M700 350.0 H885" stroke="var(--leak)" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
-<text class="sm" x="892" y="349" style="fill:var(--leak)">感測</text><text class="sm" x="892" y="364" style="fill:var(--leak)">準位</text>
+<text class="sm" x="722" y="366" style="fill:var(--leak)">感測準位（Sense level）</text>
 <polyline points="700.0,405.0 713.2,295.0 715.9,295.0 785.9,341.2 800.4,295.0 818.9,295.0 826.9,317.0 840.1,295.0 852.0,295.0 862.5,405.0 885.0,405.0" fill="none" stroke="var(--charge)" stroke-width="2.5" stroke-linejoin="round"/>
 <g class="mx" transform="translate(713.2142857142857,0)"><g class="my" transform="translate(0,295.0)"><circle r="6" fill="var(--gon)" stroke="var(--bg)" stroke-width="2"/></g></g>
 <text class="sm" x="694" y="299" text-anchor="end">1</text><text class="sm" x="694" y="409" text-anchor="end">0</text>
@@ -140,20 +140,12 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sm" x="796" y="423" text-anchor="middle">刷新</text>
 <text class="sm" x="831" y="423" text-anchor="middle">讀取</text>
 <text class="sm" x="868" y="423" text-anchor="middle">寫 0</text>
-<rect x="655" y="478" width="16" height="12" style="fill:var(--electrode)"/>
-<text class="sm" x="677" y="489" style="font-size:13px;fill:var(--text)">電容電極</text>
-<rect class="plate" x="655" y="502" width="16" height="12"/>
-<text class="sm" x="677" y="513" style="font-size:13px;fill:var(--text)">頂板</text>
-<rect class="gon" x="655" y="526" width="16" height="12"/>
-<text class="sm" x="677" y="537" style="font-size:13px;fill:var(--text)">埋入式字元線</text>
-<rect class="blm" x="655" y="550" width="16" height="12"/>
-<text class="sm" x="677" y="561" style="font-size:13px;fill:var(--text)">位元線</text>
-<rect x="820" y="482" width="16" height="3" style="fill:var(--diel)"/>
-<text class="sm" x="842" y="489" style="font-size:13px;fill:var(--text)">薄介電層</text>
-<rect class="np" x="820" y="502" width="16" height="12"/>
-<text class="sm" x="842" y="513" style="font-size:13px;fill:var(--text)">n+ 源極／汲極</text>
-<rect class="si" x="820" y="526" width="16" height="12"/>
-<text class="sm" x="842" y="537" style="font-size:13px;fill:var(--text)">p 型矽</text>
-<rect class="chg" x="820" y="550" width="16" height="12"/>
-<text class="sm" x="842" y="561" style="font-size:13px;fill:var(--text)">儲存電荷</text>
+<rect x="655" y="471" width="16" height="12" style="fill:var(--electrode)"/><text class="sm" x="677" y="481" style="font-size:13px;fill:var(--text)">電容電極</text><text class="sm" x="677" y="494" style="font-size:11px;fill:var(--text)">（Capacitor electrode）</text>
+<rect class="plate" x="655" y="501" width="16" height="12"/><text class="sm" x="677" y="512" style="font-size:13px;fill:var(--text)">頂板</text>
+<rect class="gon" x="655" y="529" width="16" height="12"/><text class="sm" x="677" y="540" style="font-size:13px;fill:var(--text)">埋入式字元線</text>
+<rect class="blm" x="655" y="557" width="16" height="12"/><text class="sm" x="677" y="568" style="font-size:13px;fill:var(--text)">位元線</text>
+<rect x="820" y="475" width="16" height="3" style="fill:var(--diel)"/><text class="sm" x="842" y="481" style="font-size:13px;fill:var(--text)">薄介電層</text><text class="sm" x="842" y="494" style="font-size:11px;fill:var(--text)">（Thin dielectric）</text>
+<rect class="np" x="820" y="499" width="16" height="12"/><text class="sm" x="842" y="509" style="font-size:13px;fill:var(--text)">n+ 源極／汲極</text><text class="sm" x="842" y="522" style="font-size:11px;fill:var(--text)">（n+ source/drain）</text>
+<rect class="si" x="820" y="529" width="16" height="12"/><text class="sm" x="842" y="540" style="font-size:13px;fill:var(--text)">p 型矽</text>
+<rect class="chg" x="820" y="557" width="16" height="12"/><text class="sm" x="842" y="568" style="font-size:13px;fill:var(--text)">儲存電荷</text>
 <text class="sm" x="655" y="590">電荷量為簡化表示，數值僅供示意。</text></svg>

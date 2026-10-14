@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>溝槽上的四種沉積方法</title>
+<title>溝槽（Trench）上的四種沉積（Deposition）方法</title>
 <style>
 :root{
   --bg:#f3f6fb; --panel:#ffffff; --line:#cfd9e6; --text:#13233a; --muted:#5a6d86;
@@ -44,11 +44,12 @@ h1{font-size:22px;margin:0 0 2px}
 svg#scene{display:block;width:100%;height:auto;max-height:calc(100vh - 110px);margin:0 auto}
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .seg button{font:inherit;font-size:14px;font-weight:600;padding:8px 6px;border-radius:8px;border:2px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer;display:flex;align-items:center;gap:6px;justify-content:center}
+.seg button .bt{min-width:0;text-align:center;line-height:1.25}
 .seg button .dot{width:12px;height:12px;border-radius:50%;flex:none}
 .seg button[aria-pressed="true"]{border-color:var(--accent);background:var(--accentbg)}
 .ctl{margin-top:10px}
-.ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:2px}
-.ctl label b{color:var(--text)}
+.ctl label{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);margin-bottom:2px}
+.ctl label b{color:var(--text);flex:none}
 input[type=range]{width:100%;accent-color:var(--accent);margin:2px 0}
 .row{display:flex;gap:8px;margin-top:8px}
 .row button{font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer}
@@ -84,11 +85,11 @@ ol.steps li.on .n{background:var(--accent);color:var(--bg)}
 <body>
 <div class="wrap">
   <a class="back" href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/05-thin-films/README.md">&larr; 回到章節</a>
-  <h1>沉積薄膜的四種方法</h1>
-  <p class="lead">選一種方法，看薄膜如何在溝槽上長出來。拖曳時間滑桿、改變溝槽的深度，看看各種方法對底部的覆蓋好不好。</p>
+  <h1>沉積（Deposition）薄膜（Thin film）的四種方法</h1>
+  <p class="lead">選一種方法，看薄膜如何在溝槽上長出來。拖曳時間滑桿、改變溝槽（Trench）的深度，看看各種方法對底部的覆蓋好不好。</p>
   <div class="grid">
     <div class="card" id="scenebox">
-      <svg id="scene" viewBox="0 0 640 570" role="img" aria-label="晶圓上溝槽的剖面圖，有粒子飛入並長出薄膜">
+      <svg id="scene" viewBox="0 0 640 570" role="img" aria-label="晶圓（Wafer）上溝槽（Trench）的剖面圖，有粒子飛入並長出薄膜（Thin film）">
         <rect id="chamber" x="20" y="14" width="600" height="540" rx="10" fill="var(--chamber)" stroke="var(--chamberline)" stroke-width="2"/>
         <defs>
           <linearGradient id="plasmaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--plasma)" stop-opacity=".30"/><stop offset="1" stop-color="var(--plasma)" stop-opacity="0"/></linearGradient>
@@ -97,7 +98,7 @@ ol.steps li.on .n{background:var(--accent);color:var(--bg)}
         <g id="decor"></g>
         <g id="parts"></g>
         <path id="si" fill="url(#siP)" stroke="var(--sistroke)" stroke-width="1.2"/>
-        <text x="320" y="540" text-anchor="middle" font-size="16" font-weight="600" fill="var(--text)" id="silabel">矽晶圓</text>
+        <text x="320" y="540" text-anchor="middle" font-size="16" font-weight="600" fill="var(--text)" id="silabel">矽晶圓（Si wafer）</text>
         <polygon id="film" stroke="none"/>
         <g id="rings" fill="none" stroke="var(--panel)" stroke-opacity=".55" stroke-width="1"></g>
         <polygon id="film2" fill="none" stroke="var(--text)" stroke-opacity=".6" stroke-width="1"/>
@@ -110,18 +111,18 @@ ol.steps li.on .n{background:var(--accent);color:var(--bg)}
     </div>
     <div>
       <div class="card">
-        <div class="seg" id="seg" role="group" aria-label="沉積方法">
-          <button data-m="thermal"><span class="dot" style="background:var(--thermal)"></span>熱氧化</button>
-          <button data-m="cvd"><span class="dot" style="background:var(--cvd)"></span>CVD</button>
-          <button data-m="pvd"><span class="dot" style="background:var(--pvd)"></span>PVD（濺鍍）</button>
-          <button data-m="ald"><span class="dot" style="background:var(--ald)"></span>ALD</button>
+        <div class="seg" id="seg" role="group" aria-label="沉積方法（Deposition method）">
+          <button data-m="thermal"><span class="dot" style="background:var(--thermal)"></span><span class="bt">熱氧化（Thermal oxidation）</span></button>
+          <button data-m="cvd"><span class="dot" style="background:var(--cvd)"></span><span class="bt">CVD</span></button>
+          <button data-m="pvd"><span class="dot" style="background:var(--pvd)"></span><span class="bt">PVD（濺鍍，Sputtering）</span></button>
+          <button data-m="ald"><span class="dot" style="background:var(--ald)"></span><span class="bt">ALD</span></button>
         </div>
-        <div class="ctl"><label><span>沉積時間</span><b id="vt">0%</b></label>
-          <input id="rt" type="range" min="0" max="100" value="0" aria-label="沉積時間"></div>
-        <div class="ctl"><label><span>溝槽深度 &divide; 寬度（深寬比）</span><b id="var">1.8</b></label>
-          <input id="rar" type="range" min="0.5" max="3" step="0.1" value="1.8" aria-label="溝槽深寬比"></div>
-        <div class="ctl"><label><span>目標膜厚（佔溝槽寬度的 %）</span><b id="vth">43%</b></label>
-          <input id="rth" type="range" min="20" max="80" step="1" value="43" aria-label="目標膜厚"></div>
+        <div class="ctl"><label><span>沉積時間（Deposition time）</span><b id="vt">0%</b></label>
+          <input id="rt" type="range" min="0" max="100" value="0" aria-label="沉積時間（Deposition time）"></div>
+        <div class="ctl"><label><span>溝槽深度 &divide; 寬度（深寬比，Aspect ratio）</span><b id="var">1.8</b></label>
+          <input id="rar" type="range" min="0.5" max="3" step="0.1" value="1.8" aria-label="溝槽深寬比（Trench aspect ratio）"></div>
+        <div class="ctl"><label><span>目標膜厚（Film thickness，佔溝槽寬度的 %）</span><b id="vth">43%</b></label>
+          <input id="rth" type="range" min="20" max="80" step="1" value="43" aria-label="目標膜厚（Target film thickness）"></div>
         <div class="row"><button id="play">暫停</button><button id="replay">重新開始</button></div>
         <div class="stats">
           <div class="stat"><div class="k">頂部</div><div class="v" id="sTop">0<small>%</small></div></div>
@@ -135,7 +136,7 @@ ol.steps li.on .n{background:var(--accent);color:var(--bg)}
       <div class="card" style="margin-top:12px">
         <div class="sec">發生了什麼事（點選步驟）</div>
         <ol class="steps" id="steps"></ol>
-        <div class="cmp"><h3>此深寬比下的階梯覆蓋</h3><div id="bars"></div></div>
+        <div class="cmp"><h3>此深寬比下的階梯覆蓋（Step coverage）</h3><div id="bars"></div></div>
         <div class="note">示意模型：底部／頂部 = 1 / (1 + s &times; AR)，其中 s = 0（ALD）、0.1（熱氧化）、0.25（CVD）、1.4（PVD）。實際數值取決於 Recipe；重點是教科書上的順序：在深孔中 ALD &gt; CVD &gt; PVD。階梯覆蓋指的是底部與側壁的膜厚和頂部膜厚相比的比例。</div>
       </div>
     </div>
@@ -150,12 +151,12 @@ function $(id){return document.getElementById(id)}
 function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 var W=96, CX=320, YS=215, YBOT=546, X0=40, X1=600, LOOP=12000, NC=13;
 var S={thermal:0.1,cvd:0.25,pvd:1.4,ald:0}, OF={thermal:0,cvd:0.35,pvd:0.9,ald:0};
-var NAMES={thermal:'熱氧化',cvd:'CVD',pvd:'PVD（濺鍍）',ald:'ALD'};
+var NAMES={thermal:'熱氧化',cvd:'CVD',pvd:'PVD',ald:'ALD'};
 var STEPS={
- thermal:['O2（乾式）或水蒸氣（濕式）流過爐管中的高溫晶圓。','氧氣到達矽表面並發生反應：Si + O2 → SiO2。','氧化層是「吃掉」矽長出來的（約 44% 的厚度來自晶圓，為教科書數值），所以氧化層與矽之間的介面品質極佳。','爐管是批次式機台：一次可處理上百片晶圓。'],
- cvd:['數種氣體經由噴灑頭流入腔體。','氣體在晶圓表面發生反應，留下固態薄膜。','氣態的副產物被抽走。','LPCVD 用加熱；PECVD 用電漿，所以可在較低溫度下進行。覆蓋還不錯，但頂部比底部厚（示意）。'],
- pvd:['在真空腔體中，帶電的氬離子被加速撞向靶材。','被撞出靶材的原子飛向晶圓。','它們大多從正上方抵達：頂部厚，底部薄。','薄膜會在開口處堆積（懸突），可能在底部還沒蓋好之前就把開口封住。'],
- ald:['氣體 A 在表面鋪滿一層後就自動停止。','抽氣清洗：把腔體抽乾淨。','氣體 B 流入，與那一層反應。','再次抽氣清洗。每一輪約長出一層原子厚的薄膜。重複進行：頂部、側壁和底部厚度相同，但很慢。']
+ thermal:['O2（乾式）或水蒸氣（濕式）流過爐管中的高溫晶圓。','氧氣（Oxygen）到達矽表面並發生反應：Si + O2 → SiO2。','氧化層（Oxide）是「吃掉」矽長出來的（約 44% 的厚度來自晶圓，為教科書數值），所以氧化層與矽之間的介面（Interface）品質極佳。','爐管是批次式機台（Batch tool）：一次可處理上百片晶圓。'],
+ cvd:['數種氣體（Gas）經由噴灑頭流入腔體（Chamber）。','氣體在晶圓表面發生反應，留下固態薄膜。','氣態的副產物（By-product）被抽走。','LPCVD 用加熱；PECVD 用電漿（Plasma），所以可在較低溫度下進行。覆蓋還不錯，但頂部比底部厚（示意）。'],
+ pvd:['在真空腔體中，帶電的氬離子（Argon ion）被加速撞向靶材。','被撞出靶材的原子（Atom）飛向晶圓。','它們大多從正上方抵達：頂部厚，底部薄。','薄膜會在開口處堆積（懸突，Overhang），可能在底部還沒蓋好之前就把開口封住。'],
+ ald:['氣體 A 在表面鋪滿一層後就自動停止。','抽氣清洗（Purge）：把腔體（Chamber）抽乾淨。','氣體 B 流入，與那一層反應。','再次抽氣清洗。每一輪約長出一層原子厚的薄膜。重複進行：頂部、側壁和底部厚度相同，但很慢。']
 };
 var COLV={thermal:'var(--thermal)',cvd:'var(--cvd)',pvd:'var(--pvd)',ald:'var(--ald)'};
 var st={m:'thermal',ar:1.8,th:43,t:1700,playing:true,manual:false};
@@ -196,21 +197,22 @@ function buildDecor(){
   if(m==='thermal'){
     [30,610].forEach(function(x){var s='';for(var k=0;k<22;k++){s+=(x+(k%2?5:-5))+','+(24+k*24)+' '}
       el('polyline',{points:s,fill:'none',stroke:'var(--furnaceline)','stroke-width':2.2,'stroke-linejoin':'round',opacity:.85},d)});
-    el('text',{x:320,y:40,'text-anchor':'middle','font-size':17,fill:'var(--text)'},d).textContent='爐管：通入 O2（乾式）或水蒸氣（濕式）';
+    el('text',{x:320,y:36,'text-anchor':'middle','font-size':16,fill:'var(--text)'},d).textContent='爐管（Furnace tube）：通入 O2（乾式）';
+    el('text',{x:320,y:57,'text-anchor':'middle','font-size':16,fill:'var(--text)'},d).textContent='或水蒸氣（Steam，濕式）';
   }
   if(m==='cvd'){
     el('rect',{x:60,y:22,width:520,height:14,rx:3,fill:'var(--metal)'},d);
     for(var k=0;k<12;k++) el('circle',{cx:75+k*45.5,cy:29,r:2.6,fill:'var(--chamber)'},d);
-    el('text',{x:320,y:62,'text-anchor':'middle','font-size':17,fill:'var(--text)'},d).textContent='噴灑頭：前驅物流入';
+    el('text',{x:320,y:62,'text-anchor':'middle','font-size':17,fill:'var(--text)'},d).textContent='噴灑頭（Showerhead）：前驅物（Precursor）流入';
   }
   if(m==='pvd'){
     el('rect',{x:20,y:14,width:600,height:230,rx:10,fill:'url(#plasmaG)'},d);
     el('rect',{x:60,y:20,width:520,height:30,rx:5,fill:'var(--metal)',stroke:'var(--text)','stroke-opacity':.5},d);
-    el('text',{x:320,y:41,'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#10203a'},d).textContent='靶材（金屬）－真空腔體';
+    el('text',{x:320,y:41,'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#10203a'},d).textContent='靶材（Target，金屬）－真空腔體（Vacuum chamber）';
   }
   if(m==='ald'){
     el('rect',{x:280,y:22,width:80,height:12,rx:3,fill:'var(--metal)'},d);
-    el('text',{x:320,y:52,'text-anchor':'middle','font-size':15,fill:'var(--muted)'},d).textContent='進氣口';
+    el('text',{x:320,y:52,'text-anchor':'middle','font-size':15,fill:'var(--muted)'},d).textContent='進氣口（Gas inlet）';
   }
 }
 
@@ -297,7 +299,7 @@ function buildBars(){
   ['ald','cvd','thermal','pvd'].forEach(function(m){
     var c=Math.round(cov(m,st.ar)*100);
     var r=document.createElement('div');r.className='bar';
-    r.innerHTML='<span>'+NAMES[m].replace('（濺鍍）','')+'</span><span class="tr"><span class="fl" style="display:block;width:'+c+'%;background:'+COLV[m]+'"></span></span><span class="pc">'+c+'%</span>';
+    r.innerHTML='<span>'+NAMES[m]+'</span><span class="tr"><span class="fl" style="display:block;width:'+c+'%;background:'+COLV[m]+'"></span></span><span class="pc">'+c+'%</span>';
     if(m===st.m) r.style.fontWeight=700;
     b.appendChild(r);
   });
@@ -315,12 +317,12 @@ function render(){
     var c=p*NC, k=Math.floor(c+1e-9), f=c-k; if(p>=1){k=NC;f=0}
     layers=k+(f>=0.8?1:0); tt=tmax*layers/NC;
     var done=(p>=1&&!st.manual)||p>=1;
-    if(f<0.3){aldPh.a=1;phaseName='氣體 A：鋪滿一層後自動停止';}
-    else if(f<0.5){phaseName='抽氣清洗';}
-    else if(f<0.8){aldPh.b=1;phaseName='氣體 B：與該層反應';}
-    else {phaseName='抽氣清洗';}
-    if(st.playing===false && st.manual===false && p>=1){aldPh.a=1;aldPh.b=0;phaseName='氣體 A：鋪滿一層後自動停止'}
-    var u=(st.t%LOOP)/LOOP; if(!st.manual&&(u<0.10||u>0.9)){aldPh.a=u<0.10?1:0;aldPh.b=0;phaseName=u<0.10?'氣體 A：鋪滿一層後自動停止':'循環完成'}
+    if(f<0.3){aldPh.a=1;phaseName='氣體（Gas）A：鋪滿一層後自動停止';}
+    else if(f<0.5){phaseName='抽氣清洗（Purge）';}
+    else if(f<0.8){aldPh.b=1;phaseName='氣體（Gas）B：與該層反應';}
+    else {phaseName='抽氣清洗（Purge）';}
+    if(st.playing===false && st.manual===false && p>=1){aldPh.a=1;aldPh.b=0;phaseName='氣體（Gas）A：鋪滿一層後自動停止'}
+    var u=(st.t%LOOP)/LOOP; if(!st.manual&&(u<0.10||u>0.9)){aldPh.a=u<0.10?1:0;aldPh.b=0;phaseName=u<0.10?'氣體（Gas）A：鋪滿一層後自動停止':'循環完成'}
     // short fades near boundaries
   }
   var G=geom(m,tt,st.ar);
@@ -341,7 +343,7 @@ function render(){
   var gh=$('ghost');
   if(m==='thermal'){
     gh.setAttribute('points',[[X0,YS],[xl,YS],[xl,YB],[xr,YB],[xr,YS],[X1,YS]].map(function(a){return a.join(',')}).join(' '));
-    $('ghostlab').textContent='虛線：原本的矽表面';
+    $('ghostlab').textContent='虛線：原本的矽（Silicon）表面';
   } else {gh.setAttribute('points','');$('ghostlab').textContent='';}
   $('phase').textContent = m==='ald'?(phaseName+(layers!==null?'   ·   第 '+Math.min(NC,layers+(aldPh.a||aldPh.b?1:0))+' / '+NC+' 輪':'')):'';
   $('phase').setAttribute('y', m==='ald'?76:76);
@@ -354,14 +356,14 @@ function render(){
   $('sTop').innerHTML=pc(top)+'<small>%</small>'; $('sSide').innerHTML=pc(side)+'<small>%</small>'; $('sBot').innerHTML=pc(bot)+'<small>%</small>';
   $('sCov').innerHTML=(top>0.5?Math.round(bot/top*100):Math.round(G.c*100))+'<small>%</small>';
   var s=$('status'), msg='開口仍然敞開', warn=false;
-  if(G.topPinch && G.botFree){msg='開口被封死：內部困住空洞（不利於填溝）';warn=true}
-  else if(G.topPinch){msg='溝槽已填滿：側壁處處相接，只留下一道接縫';}
-  else if(m==='pvd'&&G.o>12){msg='懸突正在縮小開口';}
-  else if(top<0.5){msg='裸晶圓：尚未沉積任何東西';}
+  if(G.topPinch && G.botFree){msg='開口被封死：內部困住空洞（Void，不利於填溝）';warn=true}
+  else if(G.topPinch){msg='溝槽已填滿：側壁處處相接，只留下一道接縫（Seam）';}
+  else if(m==='pvd'&&G.o>12){msg='懸突（Overhang）正在縮小開口';}
+  else if(top<0.5){msg='裸晶圓（Bare wafer）：尚未沉積任何東西';}
   s.textContent=msg; s.className='status'+(warn?' warn':'');
   // step highlight
   var si;
-  if(m==='ald'){ si= aldPh.a?0:(aldPh.b?2:(/抽氣清洗/.test(phaseName)?(phaseName&&1):3)); if(phaseName==='抽氣清洗'){var cc=p*NC;var ff=cc-Math.floor(cc);si=ff<0.5?1:3}}
+  if(m==='ald'){ si= aldPh.a?0:(aldPh.b?2:(/抽氣清洗/.test(phaseName)?(phaseName&&1):3)); if(phaseName==='抽氣清洗（Purge）'){var cc=p*NC;var ff=cc-Math.floor(cc);si=ff<0.5?1:3}}
   else si= p<0.05?0:(p<0.4?1:(p<0.8?2:3));
   var lis=$('steps').children; for(var i3=0;i3<lis.length;i3++) lis[i3].className=i3===si?'on':'';
 }

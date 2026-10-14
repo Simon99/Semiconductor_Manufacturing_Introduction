@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 520" width="960" height="520" role="img" aria-labelledby="ti">
-<title id="ti">MOSFET：閘極電壓升到臨界電壓以上就會形成通道，電子由源極流向汲極</title>
+<title id="ti">MOSFET：閘極電壓（Gate voltage）升到臨界電壓（Threshold voltage）以上就會形成通道（Channel），電子（Electrons）由源極（Source）流向汲極（Drain）</title>
 <style>
 :root{--bg:#f7f9fc;--tx:#1b2733;--tx2:#4a5b6c;--sub:#f3dccf;--np:#bcd4f2;--fox:#e3e6ec;--ox:#7fb2e5;--gate:#8e99a8;--metal:#d9a520;--chan:#2f6fe0;--el:#1646b8;--gbg:#dbe2ea;--gf:#e0892b;--boff:#d5dae1;--bon:#1f8a4c;--plus:#b3261e;--line:#556677;}
 @media (prefers-color-scheme:dark){:root{--bg:#f7f9fc;--tx:#1b2733;--tx2:#4a5b6c;--sub:#f3dccf;--np:#bcd4f2;--fox:#e3e6ec;--ox:#7fb2e5;--gate:#8e99a8;--metal:#d9a520;--chan:#2f6fe0;--el:#1646b8;--gbg:#dbe2ea;--gf:#e0892b;--boff:#d5dae1;--bon:#1f8a4c;--plus:#b3261e;--line:#556677;}}
@@ -31,7 +31,7 @@
 <rect id="gaugebg" class="gbg" x="60" y="68" width="300" height="14" rx="7"/>
 <rect id="gfill" class="gfill" x="60" y="68" width="300" height="14" rx="7"/>
 <line class="vt" x1="210" y1="62" x2="210" y2="88"/>
-<text class="t b" x="60" y="58">閘極電壓 Vg</text>
+<text class="t b" x="60" y="58">閘極電壓 Vg（Gate voltage）</text>
 <text class="t s" x="210" y="106" text-anchor="middle">Vt（示意）</text>
 <text class="t s" x="60" y="106">0 V</text>
 <g id="stoff"><rect class="boff" x="520" y="52" width="380" height="42" rx="8"/><text class="t b" x="710" y="79" text-anchor="middle">關閉：開關斷路，無電流</text></g>
@@ -46,16 +46,16 @@
 <line class="wire" x1="225" y1="250" x2="225" y2="150"/>
 <line class="wire" x1="480" y1="222" x2="480" y2="150"/>
 <line class="wire" x1="735" y1="250" x2="735" y2="150"/>
-<text class="t b" x="225" y="132" text-anchor="middle">源極（S）</text><text class="t s" x="225" y="147" text-anchor="middle" dy="-0">0 V 參考電位</text>
-<text class="t b" x="480" y="132" text-anchor="middle">閘極（G）</text><text class="t s" x="480" y="147" text-anchor="middle">電壓 Vg</text>
-<text class="t b" x="735" y="132" text-anchor="middle">汲極（D）</text><text class="t s" x="735" y="147" text-anchor="middle">正電壓</text>
+<text class="t b" x="225" y="132" text-anchor="middle">源極（Source, S）</text><text class="t s" x="225" y="147" text-anchor="middle" dy="-0">0 V 參考電位</text>
+<text class="t b" x="480" y="132" text-anchor="middle">閘極（Gate, G）</text><text class="t s" x="480" y="147" text-anchor="middle">電壓 Vg</text>
+<text class="t b" x="735" y="132" text-anchor="middle">汲極（Drain, D）</text><text class="t s" x="735" y="147" text-anchor="middle">正電壓</text>
 <text class="t gl" x="480" y="258" text-anchor="middle">閘極</text>
 <g id="plus"><text class="plus" x="365" y="279" text-anchor="middle">+</text><text class="plus" x="410" y="279" text-anchor="middle">+</text><text class="plus" x="455" y="279" text-anchor="middle">+</text><text class="plus" x="500" y="279" text-anchor="middle">+</text><text class="plus" x="545" y="279" text-anchor="middle">+</text><text class="plus" x="590" y="279" text-anchor="middle">+</text></g>
-<text class="t s" x="225" y="345" text-anchor="middle">N+ 源極</text><text class="t s" x="735" y="345" text-anchor="middle">N+ 汲極</text>
-<text class="t s" x="480" y="458" text-anchor="middle" >P 型矽（基體）</text>
+<text class="t s" x="225" y="345" text-anchor="middle">N+ 源極（N+ source）</text><text class="t s" x="735" y="345" text-anchor="middle">N+ 汲極（N+ drain）</text>
+<text class="t s" x="480" y="458" text-anchor="middle" >P 型矽（P-type silicon, body）</text>
 <rect id="chan" class="chan" x="330" y="300" width="300" height="16"/>
-<line class="lead" x1="650" y1="232" x2="632" y2="292"/><text class="t b" x="652" y="208">閘極氧化層</text><text class="t s" x="652" y="224">極薄絕緣層</text>
-<line class="lead" x1="480" y1="395" x2="480" y2="318"/><text class="t b" x="480" y="412" text-anchor="middle">通道</text><text class="t s" x="480" y="428" text-anchor="middle">形成於閘極下方</text>
+<line class="lead" x1="650" y1="232" x2="632" y2="292"/><text class="t b" x="500" y="196">閘極氧化層（Gate oxide）</text><text class="t s" x="500" y="212">極薄絕緣層（Thin insulator）</text>
+<line class="lead" x1="480" y1="395" x2="480" y2="318"/><text class="t b" x="480" y="412" text-anchor="middle">通道（Channel）</text><text class="t s" x="480" y="428" text-anchor="middle">形成於閘極下方</text>
 <g id="elgrp">
 <g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="0.0s" repeatCount="indefinite"/></g>
 <g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-0.5s" repeatCount="indefinite"/></g>
@@ -66,5 +66,5 @@
 <g><circle class="el" cx="150" cy="308" r="7"/><path class="elm" d="M146 308H154"/><animateTransform attributeName="transform" type="translate" from="0 0" to="660 0" dur="3.5s" begin="-3.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="3.5s" begin="-3.0s" repeatCount="indefinite"/></g>
 </g>
 
-<text class="t s" x="480" y="500" text-anchor="middle">NMOS 剖面圖，已簡化，未依比例。Vt 與電壓皆為示意。</text>
+<text class="t s" x="480" y="500" text-anchor="middle">NMOS 剖面圖（Cross-section），已簡化，未依比例。Vt 與電壓皆為示意。</text>
 </svg>

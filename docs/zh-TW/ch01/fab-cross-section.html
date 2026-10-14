@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>晶圓廠剖面圖</title>
+<title>晶圓廠（Fab）剖面圖</title>
 <style>
 :root{--bg:#eef2f7;--card:#fff;--ink:#1f2d3d;--mute:#51627a;--line:#c5d0de;--accent:#2a6db0;--accent-ink:#fff;--warn:#d9480f;--ok:#1f8f5f}
 :root[data-theme="dark"]{--bg:#0f1621;--card:#18222f;--ink:#e6edf5;--mute:#9db0c6;--line:#2c3b4e;--accent:#5aa7e8;--accent-ink:#0b1420;--warn:#ff7a3d;--ok:#4cc38a}
@@ -23,7 +23,7 @@ button{font:inherit;color:var(--ink);background:var(--card);border:1px solid var
 button:hover{border-color:var(--accent)}
 button[aria-pressed="true"],button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-#stext{margin:0 0 6px;min-height:6.6em;font-size:13.5px;line-height:1.4}
+#stext{margin:0 0 6px;min-height:7.2em;font-size:13.5px;line-height:1.4}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0 0}
 .row label{font-size:14px}
 .row output{font-variant-numeric:tabular-nums;min-width:4.5em;text-align:right;font-weight:600}
@@ -40,6 +40,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .k{font-size:12px;color:var(--mute)}
 .v{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
 #spark{width:100%;height:56px;display:block;margin-top:4px}
+.en{display:block;font-size:10px;line-height:1.2}
 .note{font-size:12px;color:var(--mute);margin:6px 0 0;line-height:1.35}
 @media (max-width:900px){main{grid-template-columns:1fr}}
 @media (max-width:480px){.big{font-size:34px}header{padding-top:8px}}
@@ -48,35 +49,35 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <body>
 <header>
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/01-how-a-fab-works/README.md">&larr; 回到章節</a>
-<h1>晶圓廠剖面圖：為什麼空氣只往一個方向流</h1>
+<h1>晶圓廠（Fab）剖面圖：為什麼空氣只往一個方向流</h1>
 </header>
 <main>
-<section class="card" id="stage" aria-label="晶圓廠剖面模擬">
-<canvas id="cv" width="960" height="600" role="img" aria-label="晶圓廠剖面動畫：上層是空調與濾網，中層是無塵室，下層是管線與附屬設備。橘色圓點是往下移動的微粒。"></canvas>
+<section class="card" id="stage" aria-label="晶圓廠（Fab）剖面模擬">
+<canvas id="cv" width="960" height="600" role="img" aria-label="晶圓廠（Fab）剖面動畫：上層是空調與濾網（Filter），中層是無塵室（Cleanroom），下層是管線與附屬設備。橘色圓點是往下移動的微粒（Particle）。"></canvas>
 </section>
 <aside class="card panel">
 <h2>逐步導覽</h2>
 <div class="steps" role="group" aria-label="階段">
 <button data-s="1" aria-pressed="false">1 進氣</button>
 <button data-s="2" aria-pressed="false">2 過濾</button>
-<button data-s="3" aria-pressed="false">3 無塵室</button>
+<button data-s="3" aria-pressed="false">3 無塵室<span class="en">（Cleanroom）</span></button>
 <button data-s="4" aria-pressed="false">4 地板</button>
 </div>
 <p id="stext"></p>
 <h2 style="margin-top:6px">動手試試</h2>
-<button id="sw" role="switch" aria-checked="true"><span>天花板濾網：<span id="swv">開</span></span><span class="knob"></span></button>
-<div class="row"><label for="eff">濾網效率</label><output id="effo"></output></div>
+<button id="sw" role="switch" aria-checked="true"><span>天花板濾網（Ceiling filters）：<span id="swv">開</span></span><span class="knob"></span></button>
+<div class="row"><label for="eff">濾網效率（Filter efficiency）</label><output id="effo"></output></div>
 <input id="eff" type="range" min="0" max="99.99" step="0.01" value="99.97">
 <div class="row"><label for="ppl">室內人數</label><output id="pplo"></output></div>
 <input id="ppl" type="range" min="0" max="5" step="1" value="2">
 <div class="btns" style="margin-top:8px"><button id="pause">暫停</button><button id="reset">重置</button></div>
 <div class="read" aria-live="off">
-<div style="grid-column:1/3"><div class="k">無塵室內目前的微粒數</div><div class="big" id="now">0</div></div>
+<div style="grid-column:1/3"><div class="k">無塵室（Cleanroom）內目前的微粒（Particle）數</div><div class="big" id="now">0</div></div>
 <div><div class="k">最近 10 秒平均</div><div class="v" id="avg">0</div></div>
 <div><div class="k">最近 10 秒最高</div><div class="v" id="peak">0</div></div>
 </div>
-<canvas id="spark" width="320" height="56" aria-label="最近 40 秒的微粒數量"></canvas>
-<p class="note">示意：圓點代表微粒；數量並非實測的潔淨度等級。</p>
+<canvas id="spark" width="320" height="56" aria-label="最近 40 秒的微粒（Particle）數量"></canvas>
+<p class="note">示意：圓點代表微粒；數量並非實測的潔淨度等級（Cleanliness class）。</p>
 </aside>
 </main>
 <script>
@@ -131,6 +132,12 @@ function fit(){var dpr=Math.min(window.devicePixelRatio||1,3);var w=cv.clientWid
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 function txt(c,s,x,y,o){o=o||{};c.font=(o.b?"700 ":"")+(o.sz||13)+"px 'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";c.textAlign=o.a||"left";c.fillStyle=o.c||P.ink;
  if(o.halo){c.lineWidth=4;c.strokeStyle=o.halo;c.lineJoin="round";c.strokeText(s,x,y);}c.fillText(s,x,y);}
+var FAM="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";
+function tg(c,zh,en,x,y,o){o=o||{};var sz=o.sz||13,es=o.es||10,b=o.b?"700 ":"",e="（"+en+"）",po=o.post||"";
+ c.font=b+sz+"px "+FAM;var w1=c.measureText(zh).width,w3=po?c.measureText(po).width:0;c.font=b+es+"px "+FAM;var w2=c.measureText(e).width;
+ var a=o.a||"left",tw=w1+w2+w3,x0=a==="center"?x-tw/2:a==="right"?x-tw:x;
+ var o1={b:o.b,sz:sz,c:o.c,halo:o.halo,a:"left"},o2={b:o.b,sz:es,c:o.c,halo:o.halo,a:"left"};
+ txt(c,zh,x0,y,o1);txt(c,e,x0+w1,y,o2);if(po)txt(c,po,x0+w1+w2,y,o1);}
 function smooth(u){u=Math.max(0,Math.min(1,u));return u*u*(3-2*u);}
 function fan(c,cx,cy,r,ang){c.save();c.translate(cx,cy);c.fillStyle=P.filt;c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,r,0,7);c.fill();c.stroke();
  c.rotate(ang);c.fillStyle=P.air;for(var k=0;k<4;k++){c.save();c.rotate(k*Math.PI/2);c.beginPath();c.ellipse(0,-r*.5,r*.22,r*.45,0,0,7);c.fill();c.restore();}
@@ -145,12 +152,12 @@ function draw(){
  c.strokeStyle=P.wall;c.lineWidth=2;rr(c,30,46,900,552,8);c.stroke();c.lineWidth=1;c.beginPath();c.moveTo(31,178);c.lineTo(929,178);c.moveTo(31,408);c.lineTo(929,408);c.stroke();
  // plenum + units
  c.fillStyle=P.plen;c.fillRect(66,82,828,70);c.strokeStyle=P.wall;c.lineWidth=1.5;c.strokeRect(66,82,828,70);
- txt(c,"靜壓室：等待過濾的髒空氣",448,132,{a:"center",sz:12,c:P.mute});
- [90,772].forEach(function(x){c.fillStyle=P.unit;rr(c,x,86,104,62,4);c.fill();c.stroke();fan(c,x+30,117,20,t*2*Math.PI/1.6);txt(c,"空調",x+56,112,{sz:12});txt(c,"機組",x+56,127,{sz:12});});
+ tg(c,"靜壓室","Plenum",448,132,{a:"center",sz:12,c:P.mute,post:"：等待過濾的髒空氣"});
+ [90,772].forEach(function(x){c.fillStyle=P.unit;rr(c,x,86,x===90?150:104,62,4);c.fill();c.stroke();fan(c,x+30,117,20,t*2*Math.PI/1.6);if(x===90){txt(c,"空調機組",x+56,111,{sz:12});txt(c,"（Air handler）",x+56,126,{sz:10});}else{txt(c,"空調",x+56,112,{sz:12});txt(c,"機組",x+56,127,{sz:12});}});
  // filters
  var n=12,w=828/n;for(var i=0;i<n;i++){var x=66+i*w;c.fillStyle=S.filters?P.filt:P.filtOff;c.fillRect(x+1.5,152,w-3,24);c.strokeStyle=P.wall;c.lineWidth=1.5;c.strokeRect(x+1.5,152,w-3,24);
   c.strokeStyle=S.filters?"#8aa0ba":"rgba(120,120,120,.35)";for(var k=1;k<6;k++){c.beginPath();c.moveTo(x+1.5+k*(w-3)/6,154);c.lineTo(x+1.5+k*(w-3)/6,174);c.stroke();}}
- txt(c,S.filters?"天花板濾網":"天花板濾網：關閉（已旁通）",448,170,{a:"center",b:1,halo:S.filters?P.filt:P.filtOff,c:P.ink});
+ tg(c,"天花板濾網","Ceiling filters",448,170,{a:"center",b:1,halo:S.filters?P.filt:P.filtOff,c:P.ink,post:S.filters?"":"：關閉（已旁通）"});
  // flash on filter
  sim.flash.forEach(function(f){c.fillStyle="rgba(255,200,80,"+(1-f.age/.35)*.9+")";c.beginPath();c.arc(f.x,160,6*(1+f.age*4),0,7);c.fill();});
  // airflow dashes
@@ -168,16 +175,16 @@ function draw(){
  c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.moveTo(0,232);c.lineTo(0,232+26+low);c.stroke();
  c.fillStyle=P.filt;c.strokeStyle=P.pill;c.lineWidth=1.8;rr(c,-11,232+low,22,26,3);c.fill();c.stroke();c.fillStyle="#8fb6dc";c.fillRect(-7,238+low,14,5);c.restore();
  // callout
- c.fillStyle=P.filt;c.strokeStyle=P.wall;c.lineWidth=1.2;rr(c,76,262,336,42,6);c.fill();c.stroke();
- txt(c,"辦公室空氣：每立方英尺有數十萬到上百萬顆",86,279,{sz:12});txt(c,"0.5 µm 以上的微粒；關鍵區域：個位數以下。",86,296,{sz:12});
+ c.fillStyle=P.filt;c.strokeStyle=P.wall;c.lineWidth=1.2;rr(c,76,248,336,56,6);c.fill();c.stroke();
+ txt(c,"辦公室空氣：每立方英尺有數十萬到上百萬顆",86,265,{sz:12});tg(c,"0.5 µm 以上的微粒","Particle",86,280,{sz:12,post:"；"});tg(c,"關鍵區域","Critical area",86,295,{sz:12,post:"：個位數以下。"});
  // tools
  [[80,150],[250,150],[580,120]].forEach(function(a){var x=a[0],w=a[1];c.fillStyle=P.tool;c.strokeStyle=P.pill===P.pill?P.wall:P.wall;c.lineWidth=2;rr(c,x,312,w,88,4);c.fill();c.stroke();
   c.fillStyle=P.toolWin;rr(c,x+12,322,w-24,30,3);c.fill();c.stroke();c.fillStyle=P.ink;c.fillRect(x+12,362,26,18);
-  c.fillStyle="#4cc38a";c.beginPath();c.arc(x+54,371,4,0,7);c.fill();c.fillStyle="#e0a82e";c.beginPath();c.arc(x+68,371,4,0,7);c.fill();txt(c,"製程機台",x+w/2,342,{a:"center",c:P.ink});});
+  c.fillStyle="#4cc38a";c.beginPath();c.arc(x+54,371,4,0,7);c.fill();c.fillStyle="#e0a82e";c.beginPath();c.arc(x+68,371,4,0,7);c.fill();if(x===80){txt(c,"製程機台",x+w/2,336,{a:"center",c:P.ink});txt(c,"（Process tool）",x+w/2,348,{a:"center",sz:10,c:P.ink});}else txt(c,"製程機台",x+w/2,342,{a:"center",c:P.ink});});
  c.fillStyle=P.wall;c.fillRect(400,346,32,6);c.fillRect(400,352,6,24);txt(c,"Load Port",428,392,{a:"center",sz:12,c:P.mute});
  c.fillStyle=P.stock;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,760,284,120,116,4);c.fill();c.stroke();
  for(var r=0;r<4;r++){var yy=288+r*27;c.beginPath();c.moveTo(764,yy+25);c.lineTo(876,yy+25);c.stroke();for(var q=0;q<3;q++)if((r+q)%3!=2){c.fillStyle=P.filt;rr(c,772+q*36,yy+3,20,20,2);c.fill();c.lineWidth=1.3;c.stroke();c.lineWidth=2;}}
- txt(c,"倉儲（等待中的 FOUP）",820,276,{a:"center",b:1});
+ tg(c,"倉儲","Stocker",812,276,{a:"center",b:1,sz:12,post:"：等待中的 FOUP"});
  // people
  var xs=PEOPLE_X.slice(0,S.people);xs.forEach(function(x){person(c,x);});
  txt(c,"人員是最大的",520,284,{a:"center",b:1});txt(c,"污染來源",520,300,{a:"center",b:1});
@@ -186,24 +193,24 @@ function draw(){
  // return air
  c.strokeStyle=P.airline;c.lineWidth=3;c.setLineDash([8,12]);c.lineDashOffset=t*30;
  c.beginPath();c.moveTo(448,448);c.lineTo(48,448);c.lineTo(48,120);c.lineTo(66,120);c.moveTo(448,448);c.lineTo(912,448);c.lineTo(912,120);c.lineTo(894,120);c.stroke();c.setLineDash([]);
- c.save();c.fillStyle=P.air;c.font="700 12px 'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,sans-serif";c.textAlign="center";c.fillText("回",40,324);c.fillText("風",40,340);c.restore();
+ c.save();c.translate(44,332);c.rotate(-Math.PI/2);tg(c,"回風","Return air",0,0,{a:"center",sz:12,b:1,c:P.air});c.restore();
  c.save();c.fillStyle=P.air;c.font="700 12px 'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,sans-serif";c.textAlign="center";c.fillText("回",922,324);c.fillText("風",922,340);c.restore();
  // pipes
  var pipes=[[464,"#e0a82e"],[482,"#4cc38a"],[500,"#4d9be0"],[518,"#a3a7ae"]];
  [[120,0],[135,1],[300,2],[315,0],[610,1],[625,3],[790,0],[805,2]].forEach(function(a){c.strokeStyle=pipes[a[1]][1];c.lineWidth=5;c.beginPath();c.moveTo(a[0],408);c.lineTo(a[0],pipes[a[1]][0]);c.stroke();});
  pipes.forEach(function(p){c.strokeStyle=p[1];c.lineWidth=14;c.beginPath();c.moveTo(66,p[0]);c.lineTo(894,p[0]);c.stroke();
   c.strokeStyle="rgba(255,255,255,.7)";c.lineWidth=2.5;c.setLineDash([6,34]);c.lineDashOffset=-t*30;c.beginPath();c.moveTo(66,p[0]);c.lineTo(894,p[0]);c.stroke();c.setLineDash([]);});
- [[250,464,"化學品"],[360,482,"特殊氣體"],[470,500,"超純水"],[580,518,"排氣"],[780,464,"化學品"],[780,500,"超純水"]].forEach(function(a){txt(c,a[2],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});});
- function tank(x,y,w,h,col,lab){c.fillStyle=col;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,x,y,w,h,10);c.fill();c.stroke();c.fillStyle="rgba(255,255,255,.35)";rr(c,x+6,y+h*.4,w-12,h*.6-6,6);c.fill();txt(c,lab,x+w/2,y+h+16,{a:"center",sz:12,c:P.ink});}
- tank(95,534,60,40,"#e8c35a","化學品供應");tank(220,534,60,40,"#8fc7a0","特殊氣體");tank(345,534,60,40,"#7ab6ea","超純水");
- [490,550].forEach(function(x){c.save();c.translate(x,553);c.fillStyle="#c8ced6";c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,19,0,7);c.fill();c.stroke();c.rotate(t*2*Math.PI/1.6);c.fillStyle="#51627a";c.fillRect(-3,-14,6,28);c.fillRect(-14,-3,28,6);c.restore();});
- txt(c,"真空幫浦",520,590,{a:"center",sz:12});
- tank(640,534,92,40,"#b9bcc2","排氣處理");tank(790,534,92,40,"#a7b8a0","廢水處理");
+ [[250,464,"化學品","Chemicals"],[400,482,"特殊氣體","Specialty gases"],[470,500,"超純水","Ultrapure water"],[560,518,"排氣","Exhaust"],[780,464,"化學品"],[780,500,"超純水"]].forEach(function(a){if(a[3])tg(c,a[2],a[3],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});else txt(c,a[2],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});});
+ function tank(x,y,w,h,col,lab,en){c.fillStyle=col;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,x,y,w,h,10);c.fill();c.stroke();c.fillStyle="rgba(255,255,255,.35)";rr(c,x+6,y+h*.4,w-12,h*.6-6,6);c.fill();txt(c,lab,x+w/2,y+h+14,{a:"center",sz:12,c:P.ink});if(en)txt(c,"（"+en+"）",x+w/2,y+h+26,{a:"center",sz:10,c:P.ink});}
+ tank(95,528,60,40,"#e8c35a","化學品供應","Chemical supply");tank(220,528,60,40,"#8fc7a0","特殊氣體");tank(345,528,60,40,"#7ab6ea","超純水");
+ [490,550].forEach(function(x){c.save();c.translate(x,547);c.fillStyle="#c8ced6";c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,19,0,7);c.fill();c.stroke();c.rotate(t*2*Math.PI/1.6);c.fillStyle="#51627a";c.fillRect(-3,-14,6,28);c.fillRect(-14,-3,28,6);c.restore();});
+ txt(c,"真空幫浦",520,582,{a:"center",sz:12});txt(c,"（Vacuum pumps）",520,594,{a:"center",sz:10});
+ tank(640,528,92,40,"#b9bcc2","排氣處理","Exhaust treatment");tank(790,528,92,40,"#a7b8a0","廢水處理","Wastewater treatment");
  // particles
  c.fillStyle=P.part;sim.parts.forEach(function(p){var a=p.y>Y.floor?1-(p.y-Y.floor)/36:1;c.globalAlpha=Math.max(0,a);c.beginPath();c.arc(p.x,p.y,2.8,0,7);c.fill();});c.globalAlpha=1;
  // pills
- [[52,"1　上層：空調與過濾",208],[184,"2　中層：無塵室",164],[414,"3　下層：管線與附屬設備",240]].forEach(function(a){c.fillStyle=P.pill;rr(c,72,a[0],a[2],22,11);c.fill();txt(c,a[1],84,a[0]+16,{b:1,sz:14,c:P.pillInk});});
- txt(c,"有孔地板：空氣與微粒被抽走",650,432,{a:"center",sz:12,b:1,c:P.air,halo:P.zBot});
+ [[52,"1　上層：空調與過濾",335,"Air handling and filtration"],[184,"2　中層：無塵室",219,"Cleanroom"],[414,"3　下層：管線與附屬設備",391,"Piping and support equipment"]].forEach(function(a){c.fillStyle=P.pill;rr(c,72,a[0],a[2],22,11);c.fill();tg(c,a[1],a[3],84,a[0]+16,{b:1,sz:14,es:12,c:P.pillInk});});
+ tg(c,"有孔地板","Perforated floor",650,432,{a:"center",sz:12,b:1,c:P.air,halo:P.zBot,post:"：空氣與微粒被抽走"});
  txt(c,"示意，未依比例",930,30,{a:"right",sz:12,c:P.mute});
  // stage highlight
  if(S.stage){var reg={1:[47,152],2:[150,178],3:[178,408],4:[408,597]}[S.stage];
@@ -223,10 +230,10 @@ function drawSpark(){
 // ---------- UI ----------
 var $=function(i){return document.getElementById(i);};
 var STEXT={0:"選一個階段，跟著空氣從屋頂一路走到地下室，或直接玩玩下方的開關。",
-1:"1 進氣。空調機組與風扇把空氣吸進來，送進無塵室上方的靜壓室。這時的空氣還是髒的：橘色圓點就是微粒。",
-2:"2 過濾。天花板濾網會攔下往下流動的空氣中的微粒。把濾網關掉，髒空氣就會直接穿過去。",
-3:"3 無塵室。潔淨空氣往下流過各台機台。人還是會掉皮屑和頭髮，但向下的氣流會持續把這些微粒帶離晶圓。",
-4:"4 地板與下層。空氣經由有孔地板被抽走，回到上方。下層的管線與設備負責供應超純水、氣體與化學品，抽真空，並處理廢氣與廢水。"};
+1:"1 進氣。空調機組（Air handler）與風扇把空氣吸進來，送進無塵室（Cleanroom）上方的靜壓室（Plenum）。這時的空氣還是髒的：橘色圓點就是微粒（Particle）。",
+2:"2 過濾。天花板濾網（Ceiling filters）會攔下往下流動的空氣中的微粒（Particle）。把濾網關掉，髒空氣就會直接穿過去。",
+3:"3 無塵室（Cleanroom）。潔淨空氣往下流過各台機台（Tools）。人還是會掉皮屑和頭髮，但向下的氣流會持續把這些微粒（Particle）帶離晶圓（Wafer）。",
+4:"4 地板與下層。空氣經由有孔地板（Perforated floor）被抽走，回到上方。下層的管線（Piping）與設備負責供應超純水（Ultrapure water）、氣體（Gases）與化學品（Chemicals），抽真空，並處理廢氣（Exhaust）與廢水（Wastewater）。"};
 function sync(){
  $("sw").setAttribute("aria-checked",S.filters);$("swv").textContent=S.filters?"開":"關";
  $("eff").value=S.eff;$("effo").textContent=S.eff.toFixed(2)+"%";$("eff").disabled=!S.filters;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>蝕刻輪廓：等向與非等向</title>
+<title>蝕刻輪廓（Etch profiles）：等向與非等向（Isotropic vs. anisotropic）</title>
 <style>
 :root{--bg:#f1f3f8;--card:#fff;--ink:#1b2433;--mute:#44506a;--line:#c9ced8;--resist:#e2735a;--film:#6f9bd1;--stop:#8b909a;--red:#c0182b;--green:#2a7f62;--accent:#2457c5;--cav:#fff}
 :root[data-theme=dark]{--bg:#12151c;--card:#1b2030;--ink:#e8ecf5;--mute:#a7b2c9;--line:#38405a;--resist:#e2735a;--film:#4f79b0;--stop:#6a707c;--red:#ff6b7d;--green:#4fcf9f;--accent:#7aa2ff;--cav:#1b2030}
@@ -27,7 +27,7 @@ button{background:var(--card);color:var(--ink);border:1px solid var(--line);bord
 button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 table{width:100%;border-collapse:collapse;margin-top:8px}
 td{padding:4px 0;border-top:1px solid var(--line)} td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
-.story{min-height:5.6em;margin:8px 0 0}
+.story{min-height:7.4em;margin:8px 0 0}
 .note{color:var(--mute);font-size:14px;margin-top:8px}
 .tag{display:inline-block;font-weight:700;color:var(--green)}
 </style>
@@ -35,15 +35,15 @@ td{padding:4px 0;border-top:1px solid var(--line)} td:last-child{text-align:righ
 <body>
 <div class="wrap">
 <div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/06-etching/README.md">&larr; 回到章節</a></div>
-<h1>等向與非等向蝕刻</h1>
-<p class="sub">拖曳非等向性滑桿，觀察側壁與光阻下方的側蝕如何變化。</p>
+<h1>等向與非等向蝕刻（Isotropic vs. anisotropic etching）</h1>
+<p class="sub">拖曳非等向性（Anisotropy）滑桿，觀察側壁（Sidewall）與光阻（Photoresist）下方的側蝕（Undercut）如何變化。</p>
 <div class="grid">
 <div class="card">
-<svg id="sc" viewBox="0 0 640 400" role="img" aria-label="光阻開口下薄膜被蝕刻的剖面圖">
+<svg id="sc" viewBox="0 0 640 400" role="img" aria-label="光阻（Photoresist）開口下薄膜（Film）被蝕刻的剖面圖">
 <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--green)"/></marker></defs>
 <rect x="20" y="130" width="600" height="140" fill="var(--film)"/>
 <rect x="20" y="270" width="600" height="50" fill="var(--stop)"/>
-<text x="30" y="300" font-size="14" fill="#fff">下層（蝕刻停止層）</text>
+<text x="30" y="300" font-size="14" fill="#fff">下層：蝕刻停止層（Etch stop layer）</text>
 <path id="g0" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" opacity=".8"/>
 <path id="g1" fill="none" stroke="var(--mute)" stroke-width="1.5" stroke-dasharray="5 4" opacity=".8"/>
 <path id="cav" class="cav"/>
@@ -52,31 +52,31 @@ td{padding:4px 0;border-top:1px solid var(--line)} td:last-child{text-align:righ
 <text x="30" y="116" font-size="14" font-weight="600" fill="#fff">光阻</text>
 <g id="arr"></g>
 <g stroke="var(--mute)" stroke-width="1.5"><line x1="240" y1="82" x2="400" y2="82"/><line x1="240" y1="77" x2="240" y2="87"/><line x1="400" y1="77" x2="400" y2="87"/></g>
-<text x="320" y="72" text-anchor="middle" font-size="13" class="m">光阻開口</text>
+<text x="320" y="72" text-anchor="middle" font-size="13" class="m">光阻開口（Resist opening）</text>
 <g id="dim" stroke="var(--red)" stroke-width="3"><line id="dl" y1="146" y2="146"/><line id="dt" y1="139" y2="153"/></g>
-<text id="dtxt" y="172" text-anchor="end" font-size="15" font-weight="700" fill="var(--red)" stroke="var(--cav)" stroke-width="4" paint-order="stroke">側蝕</text>
-<text x="620" y="345" text-anchor="end" font-size="13" class="m">虛線：相同蝕刻時間下的等向（0）與完全非等向（1）</text>
+<text id="dtxt" y="172" text-anchor="end" font-size="15" font-weight="700" fill="var(--red)" stroke="var(--cav)" stroke-width="4" paint-order="stroke">側蝕（Undercut）</text>
+<text x="620" y="345" text-anchor="end" font-size="13" class="m">虛線：相同蝕刻時間下的等向（Isotropic，0）與完全非等向（Anisotropic，1）</text>
 <text id="sw" x="320" y="380" text-anchor="middle" font-size="16" font-weight="700" class="t"></text>
 </svg>
 </div>
 <div class="card">
-<label for="a">非等向性：<span id="av">1.00</span> <span class="m" style="font-weight:400">（0＝各方向速度相同，1＝只往正下方）</span></label>
+<label for="a">非等向性（Anisotropy）：<span id="av">1.00</span> <span class="m" style="font-weight:400">（0＝各方向速度相同，1＝只往正下方）</span></label>
 <input id="a" type="range" min="0" max="1" step="0.01" value="1">
-<label for="tt">蝕刻進度：<span id="tv"></span></label>
+<label for="tt">蝕刻進度（Etch progress）：<span id="tv"></span></label>
 <input id="tt" type="range" min="0" max="1.1" step="0.005" value="0">
 <div class="row"><button id="play">暫停</button><button id="reset">重新開始</button></div>
 <div class="row" id="stages">
-<button data-t="0">1 光罩圖形</button><button data-t="0.5">2 蝕刻中</button><button data-t="1">3 到達下層</button><button data-t="1.1">4 過度蝕刻</button>
+<button data-t="0">1 光罩圖形（Mask）</button><button data-t="0.5">2 蝕刻中（Etching）</button><button data-t="1">3 到達下層</button><button data-t="1.1">4 過度蝕刻（Over etch）</button>
 </div>
 <p class="story" id="story"></p>
 <table>
-<tr><td>縱向：橫向蝕刻速率</td><td id="r"></td></tr>
-<tr><td>深度（×薄膜厚度）</td><td id="d"></td></tr>
-<tr><td>單側側蝕（×薄膜厚度）</td><td id="u"></td></tr>
+<tr><td>縱向：橫向蝕刻速率（Etch rate）</td><td id="r"></td></tr>
+<tr><td>深度，×薄膜（Film）厚度</td><td id="d"></td></tr>
+<tr><td>單側側蝕（Undercut per side）（×薄膜厚度）</td><td id="u"></td></tr>
 <tr><td>孔洞比光阻開口寬出</td><td id="w"></td></tr>
 <tr><td>典型對應</td><td id="k"></td></tr>
 </table>
-<p class="note">示意用的幾何模型：橫向速率＝（1 &minus; 非等向性）&times; 縱向速率。實際輪廓還取決於化學成分、離子、壓力與側壁鈍化。乾蝕刻不一定都是非等向，有些乾蝕刻會刻意調成等向。</p>
+<p class="note">示意用的幾何模型：橫向速率＝（1 &minus; 非等向性）&times; 縱向速率。實際輪廓（Profile）還取決於化學成分、離子（Ion）、壓力與側壁鈍化（Sidewall passivation）。乾蝕刻（Dry etching）不一定都是非等向，有些乾蝕刻會刻意調成等向。</p>
 </div>
 </div>
 </div>
@@ -99,18 +99,18 @@ function arrows(a){
  var iso=[-60,-30,0,30,60];
  for(i=0;i<5;i++){dx=iso[i];s+='<line x1="'+(CX+dx*.2)+'" y1="10" x2="'+(CX+dx*1.1)+'" y2="52" stroke="var(--green)" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5" opacity="'+(1-a).toFixed(2)+'"><animate attributeName="stroke-dashoffset" values="0;-22" dur="1.1s" repeatCount="indefinite"/></line>';}
  [-48,-16,16,48].forEach(function(d){s+='<line x1="'+(CX+d)+'" y1="10" x2="'+(CX+d)+'" y2="52" stroke="var(--green)" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5" opacity="'+a.toFixed(2)+'"><animate attributeName="stroke-dashoffset" values="0;-22" dur=".7s" repeatCount="indefinite"/></line>';});
- s+='<text x="480" y="30" font-size="13" font-weight="600" fill="var(--green)" opacity="'+a.toFixed(2)+'">離子，筆直向下</text>';
- s+='<text x="480" y="48" font-size="13" font-weight="600" fill="var(--green)" opacity="'+(1-a).toFixed(2)+'">蝕刻劑，往各方向</text>';
+ s+='<text x="630" y="30" text-anchor="end" font-size="13" font-weight="600" fill="var(--green)" opacity="'+a.toFixed(2)+'">離子（Ion），筆直向下</text>';
+ s+='<text x="630" y="48" text-anchor="end" font-size="13" font-weight="600" fill="var(--green)" opacity="'+(1-a).toFixed(2)+'">蝕刻劑（Etchant），往各方向</text>';
  return s;
 }
-function kind(a){return a<0.15?'濕蝕刻（化學性、等向）':a<0.6?'化學成分偏重的電漿蝕刻':a<0.9?'以離子為主的電漿蝕刻':'理想的離子驅動電漿蝕刻';}
-function sidewall(a){return a<0.15?'側壁圓弧，側蝕嚴重':a<0.6?'側壁外凸，明顯側蝕':a<0.9?'幾乎筆直，輕微側蝕':'側壁筆直、垂直';}
+function kind(a){return a<0.15?'濕蝕刻（Wet etch）：化學性、等向':a<0.6?'化學成分偏重的電漿蝕刻（Plasma etch）':a<0.9?'以離子為主的電漿蝕刻（Plasma etch）':'理想的離子驅動電漿蝕刻（Plasma etch）';}
+function sidewall(a){return a<0.15?'側壁（Sidewall）圓弧，側蝕（Undercut）嚴重':a<0.6?'側壁（Sidewall）外凸，明顯側蝕（Undercut）':a<0.9?'側壁（Sidewall）幾乎筆直，輕微側蝕（Undercut）':'側壁（Sidewall）筆直、垂直';}
 function stage(t){return t<0.02?0:t<0.98?1:t<1.0?2:t<1.06?2:3}
 var STORY=[
- '1. 光罩圖形。微影完成後，圖形只存在於光阻上。光阻蓋住的薄膜受到保護。',
- '2. 蝕刻中。開口下方的薄膜被去除。非等向性低時，蝕刻也會往光阻下方橫向蔓延；非等向性高時則只往下。',
- '3. 到達下層。此時電漿發光會改變（終點偵測）。孔洞深度已等於薄膜厚度。',
- '4. 過度蝕刻。再多蝕刻一點，確保薄膜處處清乾淨。若有橫向蝕刻，會持續擴大，側蝕也就越來越大。'];
+ '1. 光罩圖形（Mask）。微影（Lithography）完成後，圖形只存在於光阻（Photoresist）上。光阻蓋住的薄膜（Film）受到保護。',
+ '2. 蝕刻中（Etching）。開口下方的薄膜（Film）被去除。非等向性（Anisotropy）低時，蝕刻也會往光阻（Photoresist）下方橫向蔓延；非等向性高時則只往下。',
+ '3. 到達下層。此時電漿（Plasma）發光會改變，這就是終點偵測（Endpoint detection）。孔洞深度已等於薄膜厚度。',
+ '4. 過度蝕刻（Over etch）。再多蝕刻一點，確保薄膜處處清乾淨。若有橫向蝕刻，會持續擴大，側蝕（Undercut）也就越來越大。'];
 function render(){
  var L=(1-a)*t*T;
  $('cav').setAttribute('d',cav(a,t));
@@ -119,9 +119,9 @@ function render(){
  $('dl').setAttribute('x1',(x0-L).toFixed(1));$('dl').setAttribute('x2',x0);
  $('dt').setAttribute('x1',x0);$('dt').setAttribute('x2',x0);
  $('dtxt').setAttribute('x',x0-10);$('dim').style.display=L<2?'none':'';
- $('dtxt').textContent=L<2?'側蝕 ≈ 0':'側蝕';
+ $('dtxt').textContent=L<2?'側蝕（Undercut）≈ 0':'側蝕（Undercut）';
  $('av').textContent=a.toFixed(2);
- $('tv').textContent=(t/TEND*100).toFixed(0)+'% 預定時間（'+(t<=1?'蝕刻中':'過度蝕刻')+'）';
+ $('tv').textContent=(t/TEND*100).toFixed(0)+'% 預定時間（'+(t<=1?'蝕刻中（Etching）':'過度蝕刻（Over etch）')+'）';
  $('tt').value=t;$('a').value=a;
  $('r').textContent='1 : '+(1-a).toFixed(2);
  $('d').textContent=Math.min(t,1).toFixed(2);

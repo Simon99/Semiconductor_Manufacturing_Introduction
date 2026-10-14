@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>批次式清洗槽與單片式清洗對照</title>
+<title>批次式清洗槽（Batch wet bench）與單片式清洗（Single-wafer spin clean）對照</title>
 <style>
 :root{--bg:#f4f7fb;--panel:#fff;--ink:#14233a;--dim:#4f6482;--line:#c9d6e8;--accent:#1d6fd6;--scene:#1b2f4d;--scene-ink:#e8f0fa;--good:#1f9d6b;--bad:#e04848;--track:#dfe7f2}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1626;--panel:#14233a;--ink:#e8f0fa;--dim:#a9bcd6;--line:#2c4468;--accent:#5aa8ff;--scene:#1b2f4d;--track:#0f1b2d;--good:#3ecf8e;--bad:#ff6a6a}}
@@ -20,44 +20,44 @@ p.lead{margin:0 0 12px;color:var(--dim)}
 button{font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
 button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
 button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.sl{display:grid;grid-template-columns:minmax(150px,230px) 1fr 70px;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.sl{display:grid;grid-template-columns:minmax(150px,340px) 1fr 70px;gap:8px;align-items:center;margin:6px 0;font-size:14px}
 .sl input{width:100%}
 .sl output{font-variant-numeric:tabular-nums;text-align:right}
 @media(max-width:560px){.sl{grid-template-columns:1fr 60px}.sl label{grid-column:1/3}}
-#stagetxt{min-height:3.2em;font-size:15px}
-.bars{display:grid;grid-template-columns:130px 1fr 80px;gap:6px 8px;align-items:center;font-size:14px}
+#stagetxt{min-height:4.8em;font-size:15px}
+.bars{display:grid;grid-template-columns:270px 1fr 80px;gap:6px 8px;align-items:center;font-size:14px}
 .bars .t{height:14px;border-radius:7px;background:var(--track);overflow:hidden}
 .bars .t i{display:block;height:100%;border-radius:7px}
 .bars .on{font-weight:700}
 .note{color:var(--dim);font-size:13px}
-@media(max-width:560px){.bars{grid-template-columns:100px 1fr 64px}}
+@media(max-width:560px){.bars{grid-template-columns:150px 1fr 64px}}
 </style>
 </head>
 <body>
 <main>
 <p><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/2-process-modules/09-cleaning/README.md">&larr; 回到章節</a></p>
-<h1>批次式濕式清洗槽與單片式旋轉清洗</h1>
-<p class="lead">切換模式後再調整滑桿，你會在產能與交叉污染之間取捨。所有數字皆為示意。</p>
+<h1>批次式濕式清洗槽（Batch wet bench）與單片式旋轉清洗（Single-wafer spin clean）</h1>
+<p class="lead">切換模式後再調整滑桿，你會在產能（Throughput）與交叉污染（Cross-contamination）之間取捨。所有數字皆為示意。</p>
 <div class="card">
-<svg id="scene" viewBox="0 0 960 400" role="img" aria-label="清洗機台動畫：批次式濕式清洗槽或單片式旋轉清洗機"></svg>
+<svg id="scene" viewBox="0 0 960 400" role="img" aria-label="清洗機台動畫：批次式濕式清洗槽（Batch wet bench）或單片式旋轉清洗（Single-wafer spin clean）機台"></svg>
 <div class="row" role="group" aria-label="模式">
-<button id="mBatch" aria-pressed="true">批次式濕式清洗槽</button>
-<button id="mSingle" aria-pressed="false">單片式旋轉清洗</button>
+<button id="mBatch" aria-pressed="true">批次式濕式清洗槽（Batch wet bench）</button>
+<button id="mSingle" aria-pressed="false">單片式旋轉清洗（Single-wafer spin clean）</button>
 <span style="flex:1"></span>
 <button id="bPause" aria-pressed="false">暫停</button>
-<button id="bDirty" aria-pressed="false">加入一片髒晶圓</button>
+<button id="bDirty" aria-pressed="false">加入一片髒晶圓（Dirty wafer）</button>
 </div>
 <div class="row" role="group" aria-label="階段"><span class="note">階段：</span>
-<button data-s="0">1 SC1</button><button data-s="1">2 沖洗</button><button data-s="2">3 SC2</button><button data-s="3">4 沖洗／乾燥</button></div>
+<button data-s="0">1 SC1</button><button data-s="1">2 沖洗（Rinse）</button><button data-s="2">3 SC2</button><button data-s="3">4 沖洗（Rinse）／乾燥（Dry）</button></div>
 <div id="stagetxt" aria-live="polite"></div>
 </div>
 <div class="card">
-<div class="sl"><label for="sB">每批晶圓數（批次式清洗槽）</label><input id="sB" type="range" min="1" max="50" value="25"><output id="oB"></output></div>
-<div class="sl"><label for="sC">腔室數（單片式機台）</label><input id="sC" type="range" min="1" max="8" value="4"><output id="oC"></output></div>
-<div class="sl"><label for="sN">換藥液後已處理的晶圓數（批次式藥槽）</label><input id="sN" type="range" min="0" max="200" value="60"><output id="oN"></output></div>
+<div class="sl"><label for="sB">每批晶圓（Wafer）數：批次式清洗槽（Batch wet bench）</label><input id="sB" type="range" min="1" max="50" value="25"><output id="oB"></output></div>
+<div class="sl"><label for="sC">腔室（Chamber）數：單片式機台（Single-wafer tool）</label><input id="sC" type="range" min="1" max="8" value="4"><output id="oC"></output></div>
+<div class="sl"><label for="sN">換藥液後已處理的晶圓數：批次式藥槽（Batch bath）</label><input id="sN" type="range" min="0" max="200" value="60"><output id="oN"></output></div>
 <div class="bars" id="bars"></div>
 <p id="verdict" style="margin:10px 0 4px"></p>
-<p class="note">示意模型，並非實測數據：批次式每批循環 15 分鐘（產能 = 每批片數 x 4 片／小時）；單片式每腔室每片 4 分鐘（每腔室 15 片／小時）。批次式的污染指數會隨共用藥槽老化而上升：8 + 87 x (1 - e^(-N/80))；單片式因為每片晶圓都用新鮮化學品，維持在低檔（5）。批次中的一片髒晶圓會與整批晶圓共用同一個藥槽；在單片式腔室中，它的微粒會被甩向排水口。</p>
+<p class="note">示意模型，並非實測數據：批次式每批循環 15 分鐘（產能 = 每批片數 x 4 片／小時）；單片式每腔室每片 4 分鐘（每腔室 15 片／小時）。批次式的污染指數（Contamination index）會隨共用藥槽老化而上升：8 + 87 x (1 - e^(-N/80))；單片式因為每片晶圓都用新鮮化學品，維持在低檔（5）。批次中的一片髒晶圓會與整批晶圓共用同一個藥槽；在單片式腔室中，它的微粒會被甩向排水口。</p>
 </div>
 </main>
 <script>
@@ -72,12 +72,12 @@ if(q.get('still')==='1')st.paused=true;
 function el(p,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 function txt(p,x,y,s,a){a=a||{};a.x=x;a.y=y;a['font-size']=a['font-size']||17;a.fill='#e8f0fa';a['font-family']='Noto Sans TC,PingFang TC,Microsoft JhengHei,Noto Sans CJK TC,system-ui,sans-serif';var e=el(p,'text',a);e.textContent=s;return e}
 var COL=['#4aa3ff','#7fe3ff','#7be08a','#9aa6b8'];
-var NAMES=['SC1','超純水沖洗','SC2','超純水沖洗'];
+var NAMES=['SC1','超純水（UPW）沖洗','SC2','超純水沖洗'];
 var STXT=[
-'<b>1. SC1</b>：氨水＋雙氧水＋水，去除微粒和有機物。',
-'<b>2. 沖洗</b>：超純水（幾乎不含離子、微粒和細菌）把 SC1 的化學品沖掉。',
-'<b>3. SC2</b>：鹽酸＋雙氧水＋水，去除金屬污染。',
-'<b>4. 沖洗並乾燥</b>：最後用超純水沖洗一次，再乾燥。乾燥不完全會留下水痕。'];
+'<b>1. SC1</b>：氨水（Ammonium hydroxide）＋雙氧水（Hydrogen peroxide）＋水，去除微粒（Particle）和有機物（Organics）。',
+'<b>2. 沖洗（Rinse）</b>：超純水（Ultrapure water）——幾乎不含離子（Ion）、微粒（Particle）和細菌（Bacteria）——把 SC1 的化學品（Chemical）沖掉。',
+'<b>3. SC2</b>：鹽酸（Hydrochloric acid）＋雙氧水（Hydrogen peroxide）＋水，去除金屬污染（Metal contamination）。',
+'<b>4. 沖洗（Rinse）並乾燥（Dry）</b>：最後用超純水（Ultrapure water）沖洗一次，再乾燥。乾燥不完全會留下水痕（Watermark）。'];
 var gB=el(svg,'g',{}),gS=el(svg,'g',{});
 // ---- batch scene
 var TX=[135,365,595,825],TW=190,TY=215,TH=150;
@@ -110,7 +110,7 @@ function buildCarrier(){
  carLbl.setAttribute('transform','translate(0,0)');
  // label sits above frame; hide behind rail? keep
 }
-txt(gB,40,40,'共用藥槽：同一批晶圓、同一種化學品',{'font-size':17});
+txt(gB,40,40,'共用藥槽（Shared bath）：同一批晶圓（Wafer）、同一種化學品（Chemical）',{'font-size':17});
 // ---- single scene
 var CX=480,CY=210;
 el(gS,'circle',{cx:CX,cy:CY,r:148,fill:'#0f1b2d',stroke:'#c9d6e8','stroke-width':6});
@@ -126,19 +126,20 @@ var rips=[0,1,2].map(function(){return el(gS,'circle',{cx:CX,cy:CY,r:10,fill:'no
 var flings=[20,90,160,230,300].map(function(a){return {a:a*Math.PI/180,c:el(gS,'circle',{r:4,fill:'#ff5a5a',opacity:0})}});
 el(gS,'path',{d:'M640 100 L'+(CX+18)+' '+(CY-20),stroke:'#e8f0fa','stroke-width':11,'stroke-linecap':'round'});
 el(gS,'circle',{cx:CX+12,cy:CY-26,r:9,fill:'#e8f0fa'});
-txt(gS,650,96,'噴嘴');
+txt(gS,650,96,'噴嘴（Nozzle）');
 [0,1,2].forEach(function(i){el(gS,'circle',{cx:150,cy:140+i*62,r:24,fill:'#dfe8f4'})});
-txt(gS,150,338,'待洗晶圓',{'text-anchor':'middle','font-size':16});
-txt(gS,150,104,'每片晶圓都用新鮮化學品',{'text-anchor':'middle','font-size':15});
-txt(gS,830,330,'微粒被甩向排水口，',{'text-anchor':'middle','font-size':16});
+txt(gS,150,338,'待洗晶圓（Wafer）',{'text-anchor':'middle','font-size':16});
+txt(gS,150,84,'每片晶圓（Wafer）都用',{'text-anchor':'middle','font-size':15});txt(gS,150,102,'新鮮化學品（Chemical）',{'text-anchor':'middle','font-size':15});
+txt(gS,830,310,'微粒（Particle）被甩向',{'text-anchor':'middle','font-size':16});
+txt(gS,830,330,'排水口（Drain），',{'text-anchor':'middle','font-size':16});
 txt(gS,830,350,'不會傳給下一片晶圓',{'text-anchor':'middle','font-size':16});
-txt(gS,700,36,'並行運作的腔室',{'font-size':15});
+txt(gS,700,36,'並行運作的腔室（Chamber）',{'font-size':15});
 var minis=[];
 for(var i=0;i<8;i++){var g=el(gS,'g',{});el(g,'circle',{cx:714+i*30,cy:66,r:12,fill:'#cfd9e8'});var m=el(g,'line',{x1:714+i*30,y1:66,x2:714+i*30+10,y2:66,stroke:'#14233a','stroke-width':2.5});minis.push({g:g,m:m,cx:714+i*30})}
 // ---- readouts
 var barsEl=document.getElementById('bars');
 function mkBar(label,col){var a=document.createElement('div');a.textContent=label;var t=document.createElement('div');t.className='t';var i=document.createElement('i');i.style.background=col;t.appendChild(i);var v=document.createElement('div');v.style.textAlign='right';barsEl.appendChild(a);barsEl.appendChild(t);barsEl.appendChild(v);return {a:a,i:i,v:v}}
-var bars={tb:mkBar('批次：片／小時','var(--good)'),ts:mkBar('單片：片／小時','var(--good)'),cb:mkBar('批次：污染','var(--bad)'),cs:mkBar('單片：污染','var(--bad)'),eb:mkBar('批次：受波及','var(--bad)'),es:mkBar('單片：受波及','var(--bad)')};
+var bars={tb:mkBar('批次（Batch）：片／小時','var(--good)'),ts:mkBar('單片（Single-wafer）：片／小時','var(--good)'),cb:mkBar('批次：污染（Contamination）','var(--bad)'),cs:mkBar('單片：污染','var(--bad)'),eb:mkBar('批次：受波及（Exposed）','var(--bad)'),es:mkBar('單片：受波及','var(--bad)')};
 function model(){
  var wb=4*st.B,ws=15*st.C,cb=8+87*(1-Math.exp(-st.N/80)),cs=5;
  return {wb:wb,ws:ws,cb:cb,cs:cs};
@@ -166,7 +167,7 @@ var lastStage=-1;
 function render(){
  var tt=((st.t%CYC)+CYC)%CYC,u=tt/CYC*100,s=stageOf(u),m=model(),bm=st.mode==='batch';
  gB.style.display=bm?'':'none';gS.style.display=bm?'none':'';
- if(s!==lastStage||true){document.getElementById('stagetxt').innerHTML=STXT[s]+(bm?'':(s===3?'（最後旋乾）':''));lastStage=s}
+ if(s!==lastStage||true){document.getElementById('stagetxt').innerHTML=STXT[s]+(bm?'':(s===3?'（最後旋乾，Spin dry）':''));lastStage=s}
  document.querySelectorAll('[data-s]').forEach(function(b){b.setAttribute('aria-pressed',(+b.dataset.s===s)?'true':'false')});
  if(bm){
   var p=carPos(u);carrier.setAttribute('transform','translate('+(TX[0]+p[0])+','+p[1]+')');
@@ -193,7 +194,7 @@ function tick(ts){if(last!==null&&!st.paused){st.t+=ts-last}last=ts;render();req
 window.__setTime=function(ms){st.t=+ms;st.paused=true;sync();render()};
 function sync(){document.getElementById('bPause').setAttribute('aria-pressed',st.paused?'true':'false');document.getElementById('bPause').textContent=st.paused?'播放':'暫停';
  document.getElementById('mBatch').setAttribute('aria-pressed',st.mode==='batch');document.getElementById('mSingle').setAttribute('aria-pressed',st.mode==='single');
- document.getElementById('bDirty').setAttribute('aria-pressed',st.dirty);document.getElementById('bDirty').textContent=st.dirty?'移除髒晶圓':'加入一片髒晶圓';readout()}
+ document.getElementById('bDirty').setAttribute('aria-pressed',st.dirty);document.getElementById('bDirty').textContent=st.dirty?'移除髒晶圓（Dirty wafer）':'加入一片髒晶圓（Dirty wafer）';readout()}
 document.getElementById('mBatch').onclick=function(){st.mode='batch';sync();render()};
 document.getElementById('mSingle').onclick=function(){st.mode='single';sync();render()};
 document.getElementById('bPause').onclick=function(){st.paused=!st.paused;sync()};

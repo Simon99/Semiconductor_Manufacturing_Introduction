@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d">
-<title id="t">四種沉積薄膜的方法</title>
-<desc id="d">並排的溝槽剖面圖：熱氧化讓氧化層從矽本身長出來，CVD 用反應氣體堆出相當均勻的薄膜，PVD 濺鍍的原子大多直直往下，所以溝槽底部較薄，ALD 每個循環長一層原子層，覆蓋最均勻。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 640" width="960" height="640" role="img" aria-labelledby="t d">
+<title id="t">四種沉積（Deposition）薄膜（Thin film）的方法</title>
+<desc id="d">並排的溝槽（Trench）剖面圖：熱氧化（Thermal oxidation）讓氧化層（Oxide）從矽（Silicon）本身長出來，CVD 用反應氣體（Gas）堆出相當均勻的薄膜（Thin film），PVD 濺鍍（Sputtering）的原子（Atom）大多直直往下，所以溝槽底部較薄，ALD 每個循環（Cycle）長一層原子層（Atomic layer），覆蓋最均勻。</desc>
 <defs>
 <pattern id="si" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#56647a"/><circle cx="3" cy="3" r="1.3" fill="#7c8ba3"/><circle cx="9" cy="9" r="1.3" fill="#7c8ba3"/></pattern>
 <linearGradient id="plasma" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b07cff" stop-opacity=".30"/><stop offset="1" stop-color="#b07cff" stop-opacity="0"/></linearGradient>
@@ -78,12 +78,12 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 @keyframes s3_5{0%,10%{opacity:1}11%{opacity:0}73.60%{opacity:0}74.80%{opacity:1}100%{opacity:1}}
 @keyframes s3_6{0%,10%{opacity:1}11%{opacity:0}86.27%{opacity:0}87.47%{opacity:1}100%{opacity:1}}
 </style>
-<rect class="bg" width="960" height="600"/>
-<text x="15" y="28" class="hdr">在晶圓上鋪上薄膜的四種方法</text>
-<text x="945" y="28" text-anchor="end" class="hdr2">溝槽剖面・薄膜逐漸長厚，之後循環重新開始</text>
-<rect x="15" y="44" width="222" height="544" rx="12" class="card"/>
-<text x="27" y="68" class="ttl">1  熱氧化</text>
-<text x="27" y="88" class="sub">O2 或水蒸氣 + Si → SiO2</text>
+<rect class="bg" width="960" height="640"/>
+<text x="15" y="28" class="hdr">在晶圓（Wafer）上鋪上薄膜（Thin film）的四種方法</text>
+<text x="945" y="28" text-anchor="end" class="hdr2">溝槽（Trench）剖面・薄膜逐漸長厚，之後循環重新開始</text>
+<rect x="15" y="44" width="222" height="584" rx="12" class="card"/>
+<text x="27" y="62" class="ttl" style="font-size:13px">1  熱氧化（Thermal oxidation）</text>
+<text x="27" y="84" class="sub">O2 或水蒸氣（Steam） + Si → SiO2</text>
 <rect x="23" y="104" width="206" height="382" rx="6" class="furn"/>
 <polyline points="24,112 32,124 24,136 32,148 24,160 32,172 24,184 32,196 24,208 32,220 24,232 32,244 24,256 32,268 24,280 32,292 24,304 32,316 24,328 32,340" class="coil"/>
 <polyline points="220,112 228,124 220,136 228,148 220,160 228,172 220,184 228,196 220,208 228,220 220,232 228,244 220,256 228,268 220,280 228,292 220,304 228,316 220,328 228,340" class="coil"/>
@@ -102,9 +102,10 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <g class="p" style="--dx:5px;--dy:224px;animation-duration:3.7s;animation-delay:-3.8s"><g transform="translate(145,166)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
 <g class="p" style="--dx:-5px;--dy:200px;animation-duration:3.5s;animation-delay:-2.6s"><g transform="translate(106,190)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
 <g class="p" style="--dx:0px;--dy:223px;animation-duration:3.5s;animation-delay:-4.2s"><g transform="translate(132,194)"><circle cx="-3" r="3.6" fill="#ff7a6b"/><circle cx="3" r="3.6" fill="#ff7a6b"/></g></g>
-<text x="221" y="295" text-anchor="end" class="lab2">氧化層也會長進矽裡</text>
+<text x="221" y="279" text-anchor="end" class="lab2">氧化層（Oxide）也會</text>
+<text x="221" y="295" text-anchor="end" class="lab2">長進矽（Silicon）裡</text>
 <path d="M23,345 L98.0,345 L98.0,445 L154.0,445 L154.0,345 L229,345 L229,482 L23,482 Z" fill="url(#si)" class="si"/>
-<text x="126" y="474" text-anchor="middle" class="silab">矽晶圓</text>
+<text x="126" y="474" text-anchor="middle" class="silab">矽晶圓（Si wafer）</text>
 <polygon points="23.0,343.9 99.0,343.9 99.0,353.9 98.9,444.0 153.1,444.0 153.0,353.9 153.0,343.9 229.0,343.9 229.0,345.9 154.8,345.9 154.8,353.9 154.7,445.7 97.3,445.7 97.2,353.9 97.2,345.9 23.0,345.9" fill="#5ec8ff" class="film" style="animation-name:s0_1"/>
 <polygon points="23.0,342.8 100.0,342.8 100.0,354.8 99.9,443.1 152.1,443.1 152.0,354.8 152.0,342.8 229.0,342.8 229.0,346.8 155.5,346.8 155.5,354.8 155.5,446.5 96.5,446.5 96.5,354.8 96.5,346.8 23.0,346.8" fill="#46b5ec" class="film" style="animation-name:s0_2"/>
 <polygon points="23.0,341.6 101.0,341.6 101.0,355.6 100.8,442.1 151.2,442.1 151.0,355.6 151.0,341.6 229.0,341.6 229.0,347.6 156.3,347.6 156.3,355.6 156.2,447.2 95.8,447.2 95.7,355.6 95.7,347.6 23.0,347.6" fill="#5ec8ff" class="film" style="animation-name:s0_3"/>
@@ -120,13 +121,14 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <polyline points="23,345 98.0,345 98.0,445 154.0,445 154.0,345 229,345" class="ghost"/>
 <text x="221" y="311" text-anchor="end" class="lab2">虛線：原本的矽表面</text>
 <text x="27" y="512" class="rd" fill="#5ec8ff">底部／頂部 ≈ 85%</text>
-<text x="27" y="529" class="sub2">階梯覆蓋（示意）</text>
+<text x="27" y="529" class="sub2">階梯覆蓋（Step coverage，示意）</text>
 <text x="27" y="551" class="ln">從矽本身長出來</text>
-<text x="27" y="568" class="ln">介面最好，批次式爐管</text>
-<text x="27" y="585" class="ln">需要高溫</text>
-<rect x="251" y="44" width="222" height="544" rx="12" class="card"/>
-<text x="263" y="68" class="ttl">2  CVD</text>
-<text x="263" y="88" class="sub">氣體在表面反應</text>
+<text x="27" y="567" class="ln">介面（Interface）最好，</text>
+<text x="27" y="583" class="ln">批次式爐管（Batch furnace）</text>
+<text x="27" y="599" class="ln">需要高溫</text>
+<rect x="251" y="44" width="222" height="584" rx="12" class="card"/>
+<text x="263" y="62" class="ttl">2  CVD</text>
+<text x="263" y="84" class="sub">氣體（Gas）在表面反應</text>
 <rect x="259" y="104" width="206" height="382" rx="6" class="ch"/>
 <rect x="273" y="108" width="178" height="9" rx="2" class="metal"/>
 <circle cx="285" cy="112.5" r="1.8" class="hole"/>
@@ -139,7 +141,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle cx="408" cy="112.5" r="1.8" class="hole"/>
 <circle cx="426" cy="112.5" r="1.8" class="hole"/>
 <circle cx="443" cy="112.5" r="1.8" class="hole"/>
-<text x="362" y="136" text-anchor="middle" class="lab">前驅物</text>
+<text x="362" y="136" text-anchor="middle" class="lab">前驅物（Precursor）</text>
 <g class="p" style="--dx:-11px;--dy:298px;animation-duration:3.6s;animation-delay:-4.2s"><g transform="translate(354,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
 <g class="p" style="--dx:-3px;--dy:298px;animation-duration:5.3s;animation-delay:-2.7s"><g transform="translate(368,122)"><circle r="3.8" fill="#ffa94d" /></g></g>
 <g class="p" style="--dx:1px;--dy:298px;animation-duration:5.3s;animation-delay:-4.5s"><g transform="translate(361,122)"><circle r="3.8" fill="#8fd3ff" /></g></g>
@@ -161,7 +163,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <g class="p" style="--dx:-3px;--dy:-120px;animation-duration:4.5s;animation-delay:-0.8s"><g transform="translate(352,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
 <g class="p" style="--dx:1px;--dy:-120px;animation-duration:4.5s;animation-delay:-3.5s"><g transform="translate(396,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
 <g class="p" style="--dx:-6px;--dy:-120px;animation-duration:4.5s;animation-delay:-3.7s"><g transform="translate(429,300)"><rect x="-2.8" y="-2.8" width="5.6" height="5.6" rx="1" fill="#9aa8bb"/></g></g>
-<text x="457" y="293" text-anchor="end" class="lab2">副產物排出</text>
+<text x="457" y="293" text-anchor="end" class="lab2">副產物（By-product）排出</text>
 <path d="M259,345 L334.0,345 L334.0,445 L390.0,445 L390.0,345 L465,345 L465,482 L259,482 Z" fill="url(#si)" class="si"/>
 <text x="362" y="474" text-anchor="middle" class="silab">矽晶圓</text>
 <polygon points="259.0,343.0 335.5,343.0 335.5,353.0 335.3,443.6 388.7,443.6 388.5,353.0 388.5,343.0 465.0,343.0 465.0,345.0 390.0,345.0 390.0,353.0 390.0,445.0 334.0,445.0 334.0,353.0 334.0,345.0 259.0,345.0" fill="#ffa94d" class="film" style="animation-name:s1_1"/>
@@ -179,11 +181,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text x="263" y="512" class="rd" fill="#ffa94d">底部／頂部 ≈ 69%</text>
 <text x="263" y="529" class="sub2">階梯覆蓋（示意）</text>
 <text x="263" y="551" class="ln">用途最廣的方法</text>
-<text x="263" y="568" class="ln">LPCVD 用加熱；PECVD 用電漿</text>
-<text x="263" y="585" class="ln">副產物被抽走</text>
-<rect x="487" y="44" width="222" height="544" rx="12" class="card"/>
-<text x="499" y="68" class="ttl">3  PVD（濺鍍）</text>
-<text x="499" y="88" class="sub">Ar+ 離子把靶材的原子撞出來</text>
+<text x="263" y="567" class="ln">LPCVD 用加熱；</text>
+<text x="263" y="583" class="ln">PECVD 用電漿（Plasma）</text>
+<text x="263" y="599" class="ln">副產物被抽走</text>
+<rect x="487" y="44" width="222" height="584" rx="12" class="card"/>
+<text x="499" y="62" class="ttl">3  PVD（濺鍍，Sputtering）</text>
+<text x="499" y="78" class="sub">Ar+ 離子（Ion）把靶材（Target）</text>
+<text x="499" y="93" class="sub">的原子（Atom）撞出來</text>
 <rect x="495" y="104" width="206" height="382" rx="6" class="ch"/>
 <rect x="495" y="104" width="206" height="150" rx="6" fill="url(#plasma)" />
 <rect x="509" y="108" width="178" height="18" rx="3" class="target"/>
@@ -224,12 +228,15 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <polygon points="495.0,321.0 585.4,321.0 580.3,353.0 576.1,438.1 619.9,438.1 615.7,353.0 610.6,321.0 701.0,321.0 701.0,323.0 611.9,323.0 616.6,353.0 620.4,438.7 575.6,438.7 579.4,353.0 584.1,323.0 495.0,323.0" fill="#dcb940" class="film" style="animation-name:s2_12"/>
 <text x="499" y="512" class="rd" fill="#f0d060">底部／頂部 ≈ 29%</text>
 <text x="499" y="529" class="sub2">階梯覆蓋（示意）</text>
-<text x="499" y="551" class="ln">金屬、阻障層與晶種層</text>
-<text x="499" y="568" class="ln">原子直直往下飛</text>
-<text x="499" y="585" class="ln">深孔很難覆蓋</text>
-<rect x="723" y="44" width="222" height="544" rx="12" class="card"/>
-<text x="735" y="68" class="ttl">4  ALD</text>
-<text x="735" y="88" class="sub">每個循環長一層原子</text>
+<text x="499" y="551" class="ln">金屬（Metal）、</text>
+<text x="499" y="567" class="ln">阻障層（Barrier layer）與</text>
+<text x="499" y="583" class="ln">晶種層（Seed layer）</text>
+<text x="499" y="599" class="ln">原子直直往下飛</text>
+<text x="499" y="615" class="ln">深孔很難覆蓋</text>
+<rect x="723" y="44" width="222" height="584" rx="12" class="card"/>
+<text x="735" y="62" class="ttl">4  ALD</text>
+<text x="735" y="78" class="sub">每個循環（Cycle）長一層</text>
+<text x="735" y="93" class="sub">原子層（Atomic layer）</text>
 <rect x="731" y="104" width="206" height="382" rx="6" class="ch"/>
 <rect x="808" y="108" width="52" height="8" rx="2" class="metal"/>
 <g class="gas" style="animation-name:alda;opacity:1"><text x="834" y="139" text-anchor="middle" class="lab">氣體 A（前驅物 1）</text>
@@ -256,7 +263,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <g class="p" style="--dx:17px;--dy:168px;animation-duration:2.7s;animation-delay:-1.5s"><g transform="translate(767,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
 <g class="p" style="--dx:19px;--dy:168px;animation-duration:2.7s;animation-delay:-3.3s"><g transform="translate(894,118)"><circle r="3.8" fill="#ff9bd0" /></g></g>
 </g>
-<g class="gas" style="animation-name:aldp;opacity:0"><text x="834" y="139" text-anchor="middle" class="lab">抽氣清洗</text></g>
+<g class="gas" style="animation-name:aldp;opacity:0"><text x="834" y="139" text-anchor="middle" class="lab">抽氣清洗（Purge）</text></g>
 <text x="929" y="293" text-anchor="end" class="lab2" id="cyc">1 個循環 = 1 層原子層</text>
 <path d="M731,345 L806.0,345 L806.0,445 L862.0,445 L862.0,345 L937,345 L937,482 L731,482 Z" fill="url(#si)" class="si"/>
 <text x="834" y="474" text-anchor="middle" class="silab">矽晶圓</text>
@@ -269,6 +276,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text x="735" y="512" class="rd" fill="#6fe0a0">底部／頂部 ≈ 100%</text>
 <text x="735" y="529" class="sub2">階梯覆蓋（示意）</text>
 <text x="735" y="551" class="ln">最均勻，但最慢</text>
-<text x="735" y="568" class="ln">氣體 A、清洗、氣體 B、清洗</text>
-<text x="735" y="585" class="ln">用於閘極絕緣層</text>
+<text x="735" y="567" class="ln">氣體 A、清洗、氣體 B、清洗</text>
+<text x="735" y="583" class="ln">用於閘極絕緣層</text>
+<text x="735" y="599" class="ln">（Gate insulator）</text>
 </svg>

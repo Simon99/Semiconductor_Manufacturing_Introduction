@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d">
-<title id="t">微影流程：塗佈、曝光、顯影</title>
-<desc id="d">正型與負型光阻在微影三個階段的晶圓剖面示意。</desc>
+<title id="t">微影流程（Lithography flow）：塗佈（Coat）、曝光（Expose）、顯影（Develop）</title>
+<desc id="d">正型與負型光阻（Positive and negative photoresist）在微影（Lithography）三個階段的晶圓（Wafer）剖面示意。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1f2933}
 .bg{fill:#fbf9f4}
@@ -42,26 +42,26 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <marker id="ahv" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="#6d3be8"/></marker>
 </defs>
 <rect class="bg" width="960" height="600"/>
-<text class="t1" x="25" y="34">微影流程：塗佈、曝光、顯影</text>
-<text class="t2" x="25" y="56">各階段的晶圓剖面。光阻的類型決定圖形的哪一部分會留下來。</text>
+<text class="t1" x="25" y="34">微影流程（Lithography flow）：塗佈（Coat）、曝光（Expose）、顯影（Develop）</text>
+<text class="t2" x="25" y="56">各階段的晶圓（Wafer）剖面。光阻（Photoresist）的類型決定圖形的哪一部分會留下來。</text>
 <text class="h" x="25" y="88">1  塗佈</text><text class="hs" x="25" y="108">旋轉塗上一層薄而均勻的光阻</text>
-<text class="h" x="335" y="88">2  曝光</text><text class="hs" x="335" y="108">光線穿過光罩的透光縫隙</text>
-<text class="h" x="645" y="88">3  顯影</text><text class="hs" x="645" y="108">顯影液洗掉部分光阻</text>
-<text class="ban" x="25" y="128">正型光阻：曝光區變成可溶，所以被洗掉</text>
+<text class="h" x="335" y="88">2  曝光</text><text class="hs" x="335" y="108">光線穿過光罩（Mask）的透光縫隙</text>
+<text class="h" x="645" y="88">3  顯影</text><text class="hs" x="645" y="108">顯影液（Developer）洗掉部分光阻</text>
+<text class="ban" x="25" y="128">正型光阻（Positive resist）：曝光區變成可溶（Soluble），所以被洗掉</text>
 <g transform="translate(25,136)">
 <rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
 <rect class="glow g-coat" x="0" y="0" width="290" height="170" rx="8"/>
 <rect class="sub" x="15" y="140" width="260" height="26"/>
 <rect class="film" x="15" y="124" width="260" height="16"/>
-<text class="lab w" x="145" y="158" text-anchor="middle">矽晶圓</text>
-<text class="lab w" x="145" y="136" text-anchor="middle">待圖形化的薄膜</text>
+<text class="lab w" x="145" y="158" text-anchor="middle">矽晶圓（Silicon wafer）</text>
+<text class="lab w" x="145" y="136" text-anchor="middle">待圖形化的薄膜（Thin film）</text>
 <rect class="res" x="15" y="94" width="260" height="30"/>
 <text class="lab d" x="145" y="114" text-anchor="middle">光阻</text>
 <path class="nozzle" d="M133 26 h24 v22 l-9 12 l-3 0 l-9 -12 z"/>
-<text class="lab" x="20" y="38">滴塗</text>
+<text class="lab" x="20" y="38">滴塗（Dispense）</text>
 <circle class="drop" cx="145" cy="68" r="5"/>
 <path class="spin" d="M232 40 a20 20 0 1 1 -2 -18" marker-end="url(#ah)"/>
-<text class="lab" x="252" y="62" text-anchor="middle">旋轉</text>
+<text class="lab" x="252" y="62" text-anchor="middle">旋轉<tspan x="252" dy="13">（Spin）</tspan></text>
 </g>
 <g transform="translate(335,136)">
 <rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
@@ -83,7 +83,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <rect class="quartz" x="15" y="42" width="260" height="10"/>
 <rect class="chrome" x="15" y="50" width="90" height="5"/>
 <rect class="chrome" x="185" y="50" width="90" height="5"/>
-<text class="lab" x="20" y="22">紫外光</text>
+<text class="lab" x="20" y="19">紫外光<tspan x="20" dy="12" font-size="10">（UV light）</tspan></text>
 <text class="lab" x="270" y="36" text-anchor="end">光罩</text>
 <rect class="res" x="15" y="94" width="260" height="30"/>
 <rect class="expP ex" x="105" y="94" width="80" height="30"/>
@@ -100,11 +100,11 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle class="ddrop" cx="175" cy="56" r="4"/>
 <rect class="res" x="15" y="94" width="90" height="30"/><rect class="res" x="185" y="94" width="90" height="30"/>
 <rect class="ovl" x="105" y="94" width="80" height="30"/>
-<text class="lab" x="145" y="86" text-anchor="middle">裸露薄膜</text>
+<text class="lab" x="145" y="86" text-anchor="middle">裸露薄膜（Bare film）</text>
 </g>
 <path class="arr" d="M317 211 l16 10 l-16 10 z"/>
 <path class="arr" d="M627 211 l16 10 l-16 10 z"/>
-<text class="ban" x="25" y="330">負型光阻：曝光區硬化，所以留下來（同一片光罩，結果相反）</text>
+<text class="ban" x="25" y="330">負型光阻（Negative resist）：曝光區硬化（Hardened），所以留下來（同一片光罩，結果相反）</text>
 <g transform="translate(25,338)">
 <rect class="pbg" x="0" y="0" width="290" height="170" rx="8"/>
 <rect class="glow g-coat" x="0" y="0" width="290" height="170" rx="8"/>
@@ -161,12 +161,12 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <path class="arr" d="M627 413 l16 10 l-16 10 z"/>
 <g>
 <rect class="sub" x="25" y="528" width="16" height="14"/><text class="leg" x="47" y="540">矽晶圓</text>
-<rect class="film" x="147" y="528" width="16" height="14"/><text class="leg" x="169" y="540">薄膜層</text>
-<rect class="res" x="253" y="528" width="16" height="14"/><text class="leg" x="275" y="540">光阻</text>
-<rect class="expP" x="369" y="528" width="16" height="14"/><text class="leg" x="391" y="540">曝光後：可溶</text>
-<rect class="expN" x="581" y="528" width="16" height="14"/><text class="leg" x="603" y="540">曝光後：硬化</text>
-<rect class="chrome" x="801" y="528" width="16" height="14"/><text class="leg" x="823" y="540">光罩鉻層</text>
+<rect class="film" x="125" y="528" width="16" height="14"/><text class="leg" x="147" y="540">薄膜層（Film layer）</text>
+<rect class="res" x="303" y="528" width="16" height="14"/><text class="leg" x="325" y="540">光阻</text>
+<rect class="expP" x="379" y="528" width="16" height="14"/><text class="leg" x="401" y="540">曝光後：可溶</text>
+<rect class="expN" x="503" y="528" width="16" height="14"/><text class="leg" x="525" y="540">曝光後：硬化</text>
+<rect class="chrome" x="627" y="528" width="16" height="14"/><text class="leg" x="649" y="540">光罩鉻層（Mask chrome）</text>
 </g>
-<text class="note" x="25" y="568">下一站是蝕刻：只有光阻已被洗掉之處，底下的薄膜才會被蝕刻。圖中光罩按 1:1 繪製；曝光機實際以 1/4 大小投影。</text>
-<text class="note" x="25" y="588">此示意圖省略烘烤（軟烤、曝後烤）與檢查步驟。</text>
+<text class="note" x="25" y="568">下一站是蝕刻（Etching）：只有光阻已被洗掉之處，底下的薄膜才會被蝕刻。圖中光罩按 1:1 繪製；曝光機（Scanner）實際以 1/4 大小投影。</text>
+<text class="note" x="25" y="588">此示意圖省略烘烤（Bake）與檢查（Inspection）步驟，包括軟烤（Soft bake）、曝後烤（Post-exposure bake）。</text>
 </svg>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DRAM 記憶單元探索器</title>
+<title>DRAM 記憶單元（Cell）探索器</title>
 <style>
 :root{--bg:#f8fafc;--text:#0f172a;--muted:#475569;--si:#cbd5e1;--np:#60a5fa;--sti:#94a3b8;--ild:#e2e8f0;--plate:#ddd6fe;--electrode:#7c3aed;--diel:#0f172a;--gox:#475569;--gcap:#94a3b8;--goff:#94a3b8;--gon:#ea580c;--bl:#059669;--plug:#64748b;--charge:#0891b2;--leak:#dc2626;--bore:#f5f3ff;--box:#e2e8f0;--line:#94a3b8;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}}
@@ -63,11 +63,11 @@ input[type=range]{width:100%}
 <body>
 <div class="wrap">
 <p class="back"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/3-integration/13-memory/README.md">&larr; 回到章節</a></p>
-<h1>DRAM 記憶單元探索器：寫入、漏電、刷新</h1>
-<p class="sub">一個電晶體（開關）加一個高聳的圓柱電容（水桶）。有電荷＝1，沒有電荷＝0。</p>
+<h1>DRAM 記憶單元（Cell）探索器：寫入（Write）、漏電（Leakage）、刷新（Refresh）</h1>
+<p class="sub">一個電晶體（Transistor，開關）加一個高聳的圓柱電容（Cylinder capacitor，水桶）。有電荷（Charge）＝1，沒有電荷＝0。</p>
 <div class="grid">
  <div class="card">
-  <svg id="stage" viewBox="0 0 640 600" role="img" aria-label="DRAM 記憶單元剖面，含埋入式字元線、位元線與高聳的圓柱電容">
+  <svg id="stage" viewBox="0 0 640 600" role="img" aria-label="DRAM 記憶單元剖面（Cell cross-section），含埋入式字元線（Buried word line）、位元線（Bit line）與高聳的圓柱電容（Cylinder capacitor）">
    <rect width="640" height="600" fill="var(--bg)"/>
    <g id="sc"><rect class="ild" x="60" y="230" width="540" height="180"/>
 <rect class="plate" x="70" y="40" width="520" height="190" rx="3"/>
@@ -94,21 +94,21 @@ input[type=range]{width:100%}
 <rect class="bore" x="488" y="48" width="44" height="174"/>
 <path class="diel" d="M478 48 V232 H542 V48"/>
 <path class="electrode" d="M484 48 V226 H536 V48"/>
-<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">頂板（所有單元共用）</text>
+<text class="lbl" x="330" y="96" text-anchor="middle" font-weight="600">頂板（Top plate）</text><text class="lblm" x="330" y="114" text-anchor="middle">（所有單元共用）</text>
 <text class="lblm" x="330" y="168" text-anchor="middle">實際圓柱的高度是寬度的</text>
 <text class="lblm" x="330" y="186" text-anchor="middle">數十倍</text>
 <text class="lblm" x="330" y="204" text-anchor="middle">（此處畫得較矮）</text>
-<text class="lbl" x="178" y="289">儲存節點接點</text><path class="lead" d="M175 285 H167"/>
-<text class="lbl" x="330" y="326" text-anchor="middle">位元線（延伸進紙面）</text>
-<text class="lbl" x="354" y="390">位元線接點</text><path class="lead" d="M351 387 H347"/>
-<text class="lbl" x="225" y="514" text-anchor="middle">埋入式字元線</text><path class="lead" d="M225 500 V486"/>
+<text class="lbl" x="178" y="289">儲存節點接點（Storage-node contact）</text><path class="lead" d="M175 285 H167"/>
+<text class="lbl" x="330" y="326" text-anchor="middle">位元線（Bit line，延伸進紙面）</text>
+<text class="lbl" x="354" y="384">位元線接點</text><text class="lbl" x="354" y="400">（Bit-line contact）</text><path class="lead" d="M351 381 H347"/>
+<text class="lbl" x="225" y="514" text-anchor="middle">埋入式字元線（Buried word line）</text><path class="lead" d="M225 500 V486"/>
 <text class="lbl" x="435" y="514" text-anchor="middle">埋入式字元線</text><path class="lead" d="M435 500 V486"/>
-<text class="lblm" x="330" y="548" text-anchor="middle">p 型矽</text>
+<text class="lblm" x="330" y="548" text-anchor="middle">p 型矽（p-type silicon）</text>
 <text class="lblm" x="80" y="430" text-anchor="middle" font-size="12">STI</text>
 <text class="lblm" x="580" y="430" text-anchor="middle" font-size="12">STI</text>
-<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">電容＝水桶</text>
-<text class="lblm" x="510" y="30" text-anchor="middle">相鄰單元：0</text>
-<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">電晶體＝開關</text>
+<text class="lbl" x="150" y="30" text-anchor="middle" font-weight="600">電容（Capacitor）＝水桶</text>
+<text class="lblm" x="510" y="30" text-anchor="middle">相鄰單元（Neighbor cell）：0</text>
+<text class="lbl" x="225" y="586" text-anchor="middle" font-weight="600">電晶體（Transistor）＝開關</text>
 <text class="lblm" x="500" y="586" text-anchor="middle">未依比例</text></g>
    <g id="dots"></g>
    <g id="leakg" opacity="0"></g>
@@ -121,40 +121,40 @@ input[type=range]{width:100%}
  </div>
  <div>
   <div class="card">
-   <div class="stage-title" id="sTitle">寫入 1</div>
+   <div class="stage-title" id="sTitle">寫入（Write）1</div>
    <div class="stage-desc" id="sDesc"></div>
    <div class="kv">
-    <b>字元線</b><span id="kWL">關閉</span>
-    <b>位元線</b><span id="kBL">閒置</span>
-    <b>電荷</b><span id="kQ">0 %</span>
-    <b>感測值</b><span id="kS">0</span>
+    <b>字元線（Word line）</b><span id="kWL">關閉</span>
+    <b>位元線（Bit line）</b><span id="kBL">閒置</span>
+    <b>電荷（Charge）</b><span id="kQ">0 %</span>
+    <b>感測值（Sensed value）</b><span id="kS">0</span>
     <b>狀態</b><span id="kStat"><span class="badge ok">正常</span></span>
     <b>模擬時鐘</b><span id="kT">0 ms</span>
-    <b>已完成刷新次數</b><span id="kR">0</span>
+    <b>已完成刷新（Refresh）次數</b><span id="kR">0</span>
    </div>
-   <svg id="gauge" viewBox="0 0 440 150" role="img" aria-label="儲存電荷與時間的關係">
+   <svg id="gauge" viewBox="0 0 480 150" role="img" aria-label="儲存電荷（Stored charge）與時間的關係">
     <rect x="0" y="0" width="400" height="150" fill="none"/>
     <path d="M40 24 V120 H370" stroke="var(--muted)" fill="none" stroke-width="1.2"/>
     <line id="gThr" x1="40" x2="370" y1="72" y2="72" stroke="var(--leak)" stroke-dasharray="5 4" stroke-width="1.2"/>
-    <text x="376" y="68" style="fill:var(--leak)">感測</text><text x="376" y="82" style="fill:var(--leak)">準位</text>
+    <text x="376" y="68" style="fill:var(--leak)">感測準位</text><text x="376" y="82" style="fill:var(--leak)">（Sense level）</text>
     <text x="34" y="28" text-anchor="end">1</text><text x="34" y="124" text-anchor="end">0</text>
     <polyline id="gLine" points="" fill="none" stroke="var(--charge)" stroke-width="2.4" stroke-linejoin="round"/>
     <circle id="gDot" r="5.5" cx="40" cy="120" fill="var(--gon)" stroke="var(--bg)" stroke-width="2"/>
     <text id="gL" x="40" y="138">時間</text><text id="gR" x="370" y="138" text-anchor="end"></text>
-    <text x="205" y="11" text-anchor="middle" style="fill:var(--text)">儲存電荷與時間（示意）</text>
+    <text x="205" y="11" text-anchor="middle" style="fill:var(--text)">儲存電荷（Stored charge）與時間（示意）</text>
    </svg>
   </div>
   <div class="card" style="margin-top:12px">
    <b>自己試試看</b> <span class="note">（按任一按鈕即由你接手，結束示範）</span>
    <div class="row">
-    <button id="bW1" class="primary">寫入 1</button>
-    <button id="bW0">寫入 0</button>
-    <button id="bRd">讀取</button>
-    <button id="bRf">立即刷新</button>
+    <button id="bW1" class="primary">寫入（Write）1</button>
+    <button id="bW0">寫入（Write）0</button>
+    <button id="bRd">讀取（Read）</button>
+    <button id="bRf">立即刷新（Refresh）</button>
    </div>
-   <label for="sTau">漏電速度：電荷時間常數 <b id="vTau">100 ms</b>（示意）</label>
+   <label for="sTau">漏電（Leakage）速度：電荷（Charge）時間常數（Time constant） <b id="vTau">100 ms</b>（示意）</label>
    <input id="sTau" type="range" min="30" max="300" step="5" value="100">
-   <label><input id="cAuto" type="checkbox"> 自動刷新，間隔 <b id="vInt">64 ms</b></label>
+   <label><input id="cAuto" type="checkbox"> 自動刷新（Auto-refresh），間隔 <b id="vInt">64 ms</b></label>
    <input id="sInt" type="range" min="8" max="200" step="2" value="64">
    <div class="note">試試看：寫入 1，關閉自動刷新並等待，觀察電荷掉到感測準位以下（這個 1 就遺失了）。接著開啟自動刷新，並把間隔設得比漏電時間短。</div>
   </div>
@@ -165,7 +165,7 @@ input[type=range]{width:100%}
   </div>
  </div>
 </div>
-<p class="note">示意圖，未依比例；電荷量簡化畫成水桶。漏電以簡單的指數衰減建模，且操作速度已放慢以便觀看，因此所有數字皆為示意。供參考：DDR3/DDR4 DRAM 在一般溫度下，必須在約 64 ms 內刷新每一列。</p>
+<p class="note">示意圖，未依比例；電荷量簡化畫成水桶。漏電以簡單的指數衰減（Exponential decay）建模，且操作速度已放慢以便觀看，因此所有數字皆為示意。供參考：DDR3/DDR4 DRAM 在一般溫度下，必須在約 64 ms 內刷新每一列。</p>
 </div>
 <script>
 (function(){
@@ -183,18 +183,18 @@ function pointAt(s){const d=Math.max(0,Math.min(1,s))*LEN;let i=1;while(i<cum.le
 const NS='http://www.w3.org/2000/svg';
 const dots=[];for(let k=0;k<5;k++){const c=document.createElementNS(NS,'circle');c.setAttribute('r','5');c.setAttribute('class','fd');c.setAttribute('opacity','0');$('dots').appendChild(c);dots.push(c);}
 const ldots=[];{const g=$('leakg');for(let k=0;k<3;k++){const c=document.createElementNS(NS,'circle');c.setAttribute('r','4');c.setAttribute('class','ld');g.appendChild(c);ldots.push(c);}
- const t=document.createElementNS(NS,'text');t.setAttribute('x','64');t.setAttribute('y','476');t.setAttribute('class','lbl');t.setAttribute('style','fill:var(--leak)');t.setAttribute('font-weight','600');t.textContent='漏電';g.appendChild(t);}
+ const t=document.createElementNS(NS,'text');t.setAttribute('x','22');t.setAttribute('y','476');t.setAttribute('class','lbl');t.setAttribute('style','fill:var(--leak)');t.setAttribute('font-weight','600');t.textContent='漏電（Leakage）';g.appendChild(t);}
 const chan=document.querySelector('#sc .chan');
 const fill=$('fillL'), gate=$('gate1');
 // ---- demo script (same timeline as the animated SVG)
 const PH=[
- ["寫入 1",0,1.2,1,"驅動為高電位（1）",["字元線導通，開關閉合。","位元線為高電位，注滿水桶。"]],
- ["保持（漏電中）",1.2,6.5,0,"閒置",["字元線關閉，開關斷開。","電荷被困住，但會漏失。"]],
- ["刷新",6.5,8.0,1,"感測放大器將其推高",["讀出已衰減的電荷，","再把完整的 1 寫回去。"]],
- ["保持",8.0,9.0,0,"閒置",["電荷已恢復飽滿。","開關再次斷開。"]],
- ["讀取",9.0,11.5,1,"受單元輕推後復原",["開關閉合，電荷輕推位元線，","感測放大器判讀為 1，","然後重新寫回該單元。"]],
- ["寫入 0",11.5,12.5,1,"驅動為低電位（0）",["位元線為低電位，把水桶放空。","此單元現在儲存 0。"]],
- ["保持（儲存 0）",12.5,14,0,"閒置",["沒有電荷＝0，開關斷開。"]]];
+ ["寫入（Write）1",0,1.2,1,"驅動為高電位（1）",["字元線導通，開關閉合。","位元線為高電位，注滿水桶。"]],
+ ["保持（Hold）：漏電中",1.2,6.5,0,"閒置",["字元線關閉，開關斷開。","電荷被困住，但會漏失。"]],
+ ["刷新（Refresh）",6.5,8.0,1,"感測放大器（Sense amplifier）將其推高",["讀出已衰減的電荷，","再把完整的 1 寫回去。"]],
+ ["保持（Hold）",8.0,9.0,0,"閒置",["電荷已恢復飽滿。","開關再次斷開。"]],
+ ["讀取（Read）",9.0,11.5,1,"受單元輕推後復原",["開關閉合，電荷輕推位元線，","感測放大器判讀為 1，","然後重新寫回該單元。"]],
+ ["寫入（Write）0",11.5,12.5,1,"驅動為低電位（0）",["位元線為低電位，把水桶放空。","此單元現在儲存 0。"]],
+ ["保持（Hold）：儲存 0",12.5,14,0,"閒置",["沒有電荷＝0，開關斷開。"]]];
 const WLON=[[0,1.2],[6.5,8.0],[9.0,10.8],[11.5,12.4]];
 const QP=[[0,0],[1.0,1],[1.2,1],[6.5,.58],[7.6,1],[9.0,1],[9.6,.8],[10.6,1],[11.5,1],[12.3,0],[14,0]];
 const FWD=[[0,1.4],[6.5,8.1],[9.9,10.7]], REV=[[9.0,9.8],[11.5,12.3]];
@@ -204,14 +204,14 @@ function demoState(ms){const t=((ms/1000)%T+T)%T;const ph=PH.find(p=>t>=p[1]&&t<
  return{Q:interp(QP,t),wl:inW(WLON,t),title:ph[0],bl:ph[4],desc:ph[5],flow:inW(FWD,t)?1:inW(REV,t)?-1:0,leak:t>=1.4&&t<6.5,t:t};}
 // ---- live model
 const S={mode:'demo',running:true,demoMs:1000,Q:0,wbit:null,clock:0,op:null,lastRef:0,refs:0,ff:false,tau:100,auto:false,interval:64,trace:[],hl:false,flowPh:0,
-  title:'保持（儲存 0）',desc:['沒有電荷＝0，開關斷開。'],bl:'閒置',read:null};
+  title:'保持（Hold）：儲存 0',desc:['沒有電荷＝0，開關斷開。'],bl:'閒置',read:null};
 const RATE=20; // sim ms per real second
 const ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
-function startWrite(b){S.op={type:'write',t:0,dur:1.0,Q0:S.Q,tgt:b};S.wbit=b;S.title=b?'寫入 1':'寫入 0';S.bl=b?'驅動為高電位（1）':'驅動為低電位（0）';
+function startWrite(b){S.op={type:'write',t:0,dur:1.0,Q0:S.Q,tgt:b};S.wbit=b;S.title=b?'寫入（Write）1':'寫入（Write）0';S.bl=b?'驅動為高電位（1）':'驅動為低電位（0）';
  S.desc=b?['字元線導通，開關閉合。','位元線為高電位，注滿水桶。']:['字元線導通，開關閉合。','位元線為低電位，把水桶放空。'];}
-function startRW(kind){if(S.op)return;S.op={type:kind,t:0,dur:2.0,Q0:S.Q,sensed:S.Q>=THR?1:0};S.title=kind==='read'?'讀取':'刷新';S.bl='預充電，再由單元輕推';
- S.desc=kind==='read'?['開關閉合，電荷輕推位元線，','感測放大器判斷是 1 或 0，','然後重新寫回該單元。']:['讀出已衰減的電荷，','再以完整強度寫回去。'];}
-function take(){if(S.mode==='demo'){S.mode='live';S.Q=0;S.wbit=null;S.op=null;S.clock=0;S.lastRef=0;S.refs=0;S.trace=[];S.read=null;S.title='保持（儲存 0）';S.desc=['沒有電荷＝0，開關斷開。'];S.bl='閒置';$('demo').textContent='';}}
+function startRW(kind){if(S.op)return;S.op={type:kind,t:0,dur:2.0,Q0:S.Q,sensed:S.Q>=THR?1:0};S.title=kind==='read'?'讀取（Read）':'刷新（Refresh）';S.bl='預充電（Precharge），再由單元輕推';
+ S.desc=kind==='read'?['開關閉合，電荷輕推位元線，','感測放大器（Sense amplifier）判斷是 1 或 0，','然後重新寫回該單元。']:['讀出已衰減的電荷，','再以完整強度寫回去。'];}
+function take(){if(S.mode==='demo'){S.mode='live';S.Q=0;S.wbit=null;S.op=null;S.clock=0;S.lastRef=0;S.refs=0;S.trace=[];S.read=null;S.title='保持（Hold）：儲存 0';S.desc=['沒有電荷＝0，開關斷開。'];S.bl='閒置';$('demo').textContent='';}}
 function wl(){return S.mode==='demo'?demoState(S.demoMs).wl:!!S.op;}
 function flowOf(){
  if(S.mode==='demo')return demoState(S.demoMs).flow;
@@ -231,7 +231,7 @@ function step(dt){
   S.clock+=dc*0.5; // time passes, but no leak modeled during the slowed-down operation
   if(o.t>=o.dur){
    if(o.type!=='write'){S.Q=o.sensed?1:0;if(o.type==='read'){S.read=o.sensed;}else{S.refs++;S.lastRef=S.clock;} if(S.wbit===null)S.wbit=o.sensed; }
-   S.op=null;S.title=S.Q>.95?'保持':S.Q<.05?'保持（儲存 0）':'保持（漏電中）';S.bl='閒置';
+   S.op=null;S.title=S.Q>.95?'保持（Hold）':S.Q<.05?'保持（Hold）：儲存 0':'保持（Hold）：漏電中';S.bl='閒置';
    if(o.type==='write'&&o.tgt===1)S.lastRef=S.clock;
    idleText();
   }
@@ -246,9 +246,9 @@ function step(dt){
  S.trace.push([S.clock,S.Q]);const W=240;while(S.trace.length>2&&S.trace[0][0]<S.clock-W)S.trace.shift();
 }
 function idleText(){if(S.op)return;S.bl='閒置';
- if(S.Q>.97){S.title='保持';S.desc=['字元線關閉，開關斷開。','水桶裝滿＝1，但會漏電。'];}
- else if(S.Q<.03){S.title='保持（儲存 0）';S.desc=['沒有電荷＝0，開關斷開。'];}
- else{S.title='保持（漏電中）';S.desc=['字元線關閉，開關斷開。','電荷正慢慢漏失。'];}}
+ if(S.Q>.97){S.title='保持（Hold）';S.desc=['字元線關閉，開關斷開。','水桶裝滿＝1，但會漏電。'];}
+ else if(S.Q<.03){S.title='保持（Hold）：儲存 0';S.desc=['沒有電荷＝0，開關斷開。'];}
+ else{S.title='保持（Hold）：漏電中';S.desc=['字元線關閉，開關斷開。','電荷正慢慢漏失。'];}}
 // ---- render
 function badge(c,t){return '<span class="badge '+c+'">'+t+'</span>';}
 function render(){
@@ -301,11 +301,11 @@ $('sInt').oninput=e=>{S.interval=+e.target.value;$('vInt').textContent=S.interva
 $('cAuto').onchange=e=>{take();S.auto=e.target.checked;S.lastRef=S.clock;};
 // ---- steps
 const STEPS=[
- ["1. 認識記憶單元","一個開關加一個水桶。字元線埋在矽裡面，負責開關這個開關；位元線則負責把資料送進、送出。",()=>{take();S.op=null;S.Q=0;S.wbit=null;S.ff=false;S.trace=[];idleText();const s=$('stage');s.classList.remove('hl');void s.getBoundingClientRect();s.classList.add('hl');}],
- ["2. 寫入 1","字元線拉高，開關閉合，位元線把電荷注入水桶。有電荷代表 1。",()=>{take();S.op=null;startWrite(1);}],
- ["3. 保持：水桶會漏電","字元線拉低，開關斷開。電荷會慢慢漏進矽裡。這裡的時間被加速了。如果電荷掉到感測準位以下，這個 1 就遺失了。",()=>{take();S.op=null;S.ff=true;}],
- ["4. 刷新","讀出已衰減的電荷，判斷它仍是 1，再以完整強度寫回去。DRAM 對每一列都會一再重複這個動作。",()=>{take();S.ff=false;S.op=null;startRW('refresh');}],
- ["5. 讀取","讀取時水桶與位元線相連，感測放大器偵測到微小的變化。讀取會擾動電荷，所以要把數值寫回去。",()=>{take();S.ff=false;S.op=null;startRW('read');}]];
+ ["1. 認識記憶單元（Cell）","一個開關加一個水桶。字元線埋在矽裡面，負責開關這個開關；位元線則負責把資料送進、送出。",()=>{take();S.op=null;S.Q=0;S.wbit=null;S.ff=false;S.trace=[];idleText();const s=$('stage');s.classList.remove('hl');void s.getBoundingClientRect();s.classList.add('hl');}],
+ ["2. 寫入（Write）1","字元線拉高，開關閉合，位元線把電荷注入水桶。有電荷代表 1。",()=>{take();S.op=null;startWrite(1);}],
+ ["3. 保持（Hold）：水桶會漏電","字元線拉低，開關斷開。電荷會慢慢漏進矽裡。這裡的時間被加速了。如果電荷掉到感測準位以下，這個 1 就遺失了。",()=>{take();S.op=null;S.ff=true;}],
+ ["4. 刷新（Refresh）","讀出已衰減的電荷，判斷它仍是 1，再以完整強度寫回去。DRAM 對每一列都會一再重複這個動作。",()=>{take();S.ff=false;S.op=null;startRW('refresh');}],
+ ["5. 讀取（Read）","讀取時水桶與位元線相連，感測放大器（Sense amplifier）偵測到微小的變化。讀取會擾動電荷，所以要把數值寫回去。",()=>{take();S.ff=false;S.op=null;startRW('read');}]];
 let cur=-1;const ol=$('steps');
 STEPS.forEach((s,i)=>{const li=document.createElement('li');li.innerHTML='<b>'+s[0]+'</b><small>'+s[1]+'</small>';li.tabIndex=0;li.onclick=()=>go(i);li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(i);}};ol.appendChild(li);});
 function stepSel(i){cur=i;[...ol.children].forEach((li,j)=>li.classList.toggle('on',j===i));}

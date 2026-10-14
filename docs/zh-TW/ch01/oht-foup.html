@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>用天車派送 FOUP</title>
+<title>用天車（OHT）派送 FOUP</title>
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--ink:#14213a;--mute:#53627c;--line:#cdd7e6;--accent:#1b6fd1;--btn:#e7eef9;
 --scene:#101c2e;--ceil:#233248;--rail:#8795ab;--tool:#35506e;--toolln:#6f8fb3;--ledge:#8fa6c2;--stk:#2d4663;--slot:#223a55;--floor:#2b3d57;--stxt:#e6eefb;--hl:#ffd27a}
@@ -52,12 +52,12 @@ input[type=range]{flex:1;min-width:90px}
 <body>
 <main>
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/01-how-a-fab-works/README.md">&larr; 回到章節</a>
-<h1>用天車派送 FOUP</h1>
-<p class="sub">選一台機台，從倉儲送出一個 FOUP。天車沿天花板軌道載運，再把它放到機台的 Load Port 上。</p>
-<div class="scene"><svg id="sv" viewBox="0 0 1100 540" role="img" aria-label="天花板軌道上的天車，往來於倉儲與四台機台之間"></svg></div>
+<h1>用天車（OHT）派送 FOUP</h1>
+<p class="sub">選一台機台（Tool），從倉儲（Stocker）送出一個 FOUP。天車沿天花板軌道載運，再把它放到機台的 Load Port 上。</p>
+<div class="scene"><svg id="sv" viewBox="0 0 1100 540" role="img" aria-label="天花板軌道上的天車（OHT），往來於倉儲（Stocker）與四台機台（Tool）之間"></svg></div>
 <div class="row">
  <div class="card">
-  <h2>機台（點選卡片上的按鈕）</h2>
+  <h2>機台（Tool）：點選卡片上的按鈕</h2>
   <div class="tools" id="tools"></div>
   <div class="ctl">
    <label>天車速度 <input id="spd" type="range" min="1" max="5" step="0.5" value="3"> <output id="spdo">3.0 m/s</output></label>
@@ -68,7 +68,7 @@ input[type=range]{flex:1;min-width:90px}
  <div class="card">
   <h2>運送階段</h2>
   <ol class="steps" id="steps">
-   <li>1. 吊掛機構在倉儲抓取 FOUP</li>
+   <li>1. 吊掛機構（Hoist）在倉儲抓取 FOUP</li>
    <li>2. 天車沿軌道駛向機台</li>
    <li>3. 吊掛機構把 FOUP 放到 Load Port</li>
    <li>4. FOUP 已就位：由機台接手</li>
@@ -78,7 +78,7 @@ input[type=range]{flex:1;min-width:90px}
    <dt>行駛時間</dt><dd id="r2">-</dd>
    <dt>整趟時間</dt><dd id="r3">-</dd>
   </dl>
-  <p class="note">示意數字：場景 1 單位 = 0.1 m，抓取與放下分別耗時 6 秒與 8 秒，動畫約為實際速度的 6 倍。機台停機或 Load Port 已被占用時會拒收 FOUP（簡化規則）。依本章說明，一個 FOUP 最多裝 25 片晶圓，重約 8 公斤。</p>
+  <p class="note">示意數字：場景 1 單位 = 0.1 m，抓取與放下分別耗時 6 秒與 8 秒，動畫約為實際速度的 6 倍。機台停機或 Load Port 已被占用時會拒收 FOUP（簡化規則）。依本章說明，一個 FOUP 最多裝 25 片晶圓（Wafer），重約 8 公斤。</p>
  </div>
 </div>
 </main>
@@ -91,7 +91,7 @@ var q=new URLSearchParams(location.search);
 if(q.get('theme')==='dark'||q.get('theme')==='light')document.documentElement.setAttribute('data-theme',q.get('theme'));
 var sv=document.getElementById('sv');
 var h='<defs><g id="foup"><rect x="-12" y="121" width="24" height="7" rx="2" fill="#d8f1ff"/><rect x="-26" y="127" width="52" height="61" rx="5" fill="#58b8f0" stroke="#d8f1ff" stroke-width="2"/><path d="M-18 168H18M-18 175H18M-18 182H18" stroke="#1e5f8a" stroke-width="2" fill="none"/><rect x="19" y="132" width="5" height="30" rx="2" fill="#d8f1ff"/><text class="stxt" x="-3" y="152" text-anchor="middle" font-size="13" font-weight="700" style="fill:#08263d">FOUP</text></g><clipPath id="below"><rect x="-50" y="110" width="100" height="700"/></clipPath></defs>';
-h+='<rect width="1100" height="540" fill="var(--scene)"/><rect width="1100" height="44" fill="var(--ceil)"/><text class="stxt" x="20" y="28" font-size="14">晶圓廠天花板：天車軌道</text>';
+h+='<rect width="1100" height="540" fill="var(--scene)"/><rect width="1100" height="44" fill="var(--ceil)"/><text class="stxt" x="20" y="28" font-size="14">晶圓廠（Fab）天花板：天車軌道</text>';
 for(var x=40;x<1100;x+=120)h+='<rect x="'+x+'" y="44" width="8" height="12" fill="#4a5a74"/>';
 h+='<rect y="56" width="1100" height="12" fill="var(--rail)"/><rect y="56" width="1100" height="3" fill="#b9c4d6"/><rect y="470" width="1100" height="10" fill="var(--floor)"/>';
 h+='<rect x="30" y="210" width="150" height="260" rx="4" fill="var(--stk)" stroke="var(--toolln)" stroke-width="2"/>';

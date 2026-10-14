@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2.5D 封裝：互動圖解</title>
+<title>2.5D 封裝（2.5D packaging）：互動圖解</title>
 <style>
 :root{--bg:#f5f7fa;--panel:#fff;--tx:#1f2a37;--mu:#566275;--bd:#c9d0db;--ac:#2b5fd9;--si:#b8c4d6;--sib:#6b7a90;--cpu:#4f74c9;--cpub:#2b4a94;--mem:#e8b04a;--memb:#8a6414;--sub:#3f8f62;--subb:#25623f;--bump:#d9a441;--wire:#5a687d;--ball:#d5d8de;--dot:#ff7a00;--tsv:#c9783a;--trace:#f1f4f8}
 :root[data-theme=dark]{--bg:#12161d;--panel:#1b212b;--tx:#e6ebf2;--mu:#9aa6b8;--bd:#33405a;--ac:#7ea2ff;--si:#56647c;--sib:#8a99b3;--cpu:#4a6fc4;--cpub:#8eaaf0;--mem:#c8922f;--memb:#f0cf8a;--sub:#2f7a52;--subb:#6fc79a;--bump:#d9a441;--wire:#a9b5c8;--ball:#8b93a1;--dot:#ffa040;--tsv:#e08b4c;--trace:#b9c2d0}
@@ -36,28 +36,28 @@ input[type=range]{width:100%;accent-color:var(--ac)}
 <body>
 <div class="wrap">
 <div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/21-advanced-packaging/README.md">&larr; 回到章節</a></div>
-<h1>2.5D 封裝：為什麼要把晶片放在中介層上？</h1>
-<p class="sub">處理器與 HBM 記憶體堆疊並排放置。切換它們的連接方式，並拖曳調整距離。</p>
+<h1>2.5D 封裝（2.5D packaging）：為什麼要把晶片（Chip）放在中介層（Interposer）上？</h1>
+<p class="sub">處理器（Processor）與 HBM 記憶體堆疊（High Bandwidth Memory stack）並排放置。切換它們的連接方式，並拖曳調整距離。</p>
 <div class="card">
-<svg id="scene" viewBox="0 120 960 315" role="img" aria-label="兩顆晶片的剖面圖：透過矽中介層相連，或經由電路板相連；橘色圓點代表資料。"></svg>
-<div class="leg"><span>橘色圓點 = 資料位元，兩種模式下移動速度相同</span><span>圖中畫出的導線只是示意取樣，實際數量見讀數</span></div>
+<svg id="scene" viewBox="0 120 960 315" role="img" aria-label="兩顆晶片（Chips）的剖面圖：透過矽中介層（Silicon interposer）相連，或經由電路板（Printed circuit board）相連；橘色圓點代表資料。"></svg>
+<div class="leg"><span>橘色圓點 = 資料位元（Bit），兩種模式下移動速度相同</span><span>圖中畫出的導線（Wires）只是示意取樣，實際數量見讀數</span></div>
 </div>
 <div class="grid">
 <div class="card">
 <div class="row" role="group" aria-label="連接方式">
-<button id="mI" aria-pressed="true">2.5D：矽中介層</button>
-<button id="mB" aria-pressed="false">電路板長走線</button>
+<button id="mI" aria-pressed="true">2.5D：矽中介層（Silicon interposer）</button>
+<button id="mB" aria-pressed="false">電路板長走線（Board-level trace）</button>
 </div>
-<label for="gap" style="font-size:14px">兩顆晶片之間的距離：<b id="gv">3 mm</b></label>
+<label for="gap" style="font-size:14px">兩顆晶片（Chips）之間的距離：<b id="gv">3 mm</b></label>
 <input id="gap" type="range" min="1" max="60" step="1" value="3">
 <div class="row"><button id="pp">暫停</button></div>
 <div class="stats">
-<div class="stat"><span>連線的導線數（示意）</span><b id="sW"></b></div>
-<div class="stat"><span>頻寬（示意，每條導線速度相同）</span><b id="sB"></b></div>
-<div class="stat"><span>導線長度</span><b id="sL"></b></div>
-<div class="stat"><span>每位元能耗（相對 1 mm 連線）</span><b id="sE"></b></div>
+<div class="stat"><span>連線的導線數（Wire count，示意）</span><b id="sW"></b></div>
+<div class="stat"><span>頻寬（Bandwidth，示意，每條導線速度相同）</span><b id="sB"></b></div>
+<div class="stat"><span>導線長度（Wire length）</span><b id="sL"></b></div>
+<div class="stat"><span>每位元能耗（Energy per bit，相對 1 mm 連線）</span><b id="sE"></b></div>
 </div>
-<p class="note">示意模型：2.5D 連線 = 1024 條導線（一組 HBM 介面的寬度）；電路板連線 = 64 條導線（典型的記憶體通道）；兩者皆假設每條導線 4 Gb/s。每位元能耗視為與導線長度成正比，因為導線越長，要充電的電容越大。</p>
+<p class="note">示意模型：2.5D 連線 = 1024 條導線，即一組 HBM 介面（Interface）的寬度；電路板連線 = 64 條導線，即典型的記憶體通道（Memory channel）；兩者皆假設每條導線 4 Gb/s。每位元能耗視為與導線長度成正比，因為導線越長，要充電的電容（Capacitance）越大。</p>
 </div>
 <div class="card">
 <div class="row"><b>逐步導覽</b>
@@ -74,12 +74,13 @@ var q=new URLSearchParams(location.search);
 var th=q.get('theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);
 var mode='I',gap=3,step=0,paused=false,T=0,last=null,SPEED=160;
 var STEPS=[
-{t:'步驟 1：兩顆晶片，同一件工作。處理器（藍色）與 HBM 記憶體堆疊（金色）必須交換大量資料，所以兩者並排放置。',h:'chips',l:'處理器晶粒 | HBM 堆疊：DRAM 晶粒疊在基底晶粒上'},
-{t:'步驟 2：矽中介層在兩顆晶片之間提供非常細密的導線。大量短導線並行，就代表高頻寬。',h:'wires',l:'中介層 = 位於晶片與封裝之間的矽質配線層'},
-{t:'步驟 3：TSV 向下貫穿中介層，連到封裝基板上的凸塊，再由錫球把封裝接到電路板。',h:'tsv',l:'TSV = 矽穿孔 | 覆晶凸塊 | 基板'},
-{t:'步驟 4：對照電路板上一般的獨立封裝。走線更長也更寬，所以能容納的數量更少。切換連接方式並拖曳距離，就能看出差異。',h:'board',l:'電路板走線：長達數公分，導線很少'}];
+{t:'步驟 1：兩顆晶片（Chips），同一件工作。處理器（Processor，藍色）與 HBM 記憶體堆疊（HBM stack，金色）必須交換大量資料，所以兩者並排放置。',h:'chips',l:'處理器晶粒（Processor die）| HBM 堆疊：DRAM 晶粒（DRAM die）疊在基底晶粒（Base die）上'},
+{t:'步驟 2：矽中介層（Silicon interposer）在兩顆晶片之間提供非常細密的導線（Wires）。大量短導線並行，就代表高頻寬（High bandwidth）。',h:'wires',l:'中介層（Interposer）= 位於晶片與封裝（Package）之間的矽質配線層（Wiring layer）'},
+{t:'步驟 3：TSV 向下貫穿中介層，連到封裝基板（Package substrate）上的凸塊（Bumps），再由錫球（Solder balls）把封裝接到電路板（Printed circuit board）。',h:'tsv',l:'TSV = 矽穿孔（Through-silicon via）| 覆晶凸塊（Flip-chip bumps）| 基板（Substrate）'},
+{t:'步驟 4：對照電路板（Printed circuit board）上一般的獨立封裝（Package）。走線（Traces）更長也更寬，所以能容納的數量更少。切換連接方式並拖曳距離，就能看出差異。',h:'board',l:'電路板走線（Board-level traces）：長達數公分，導線（Wires）很少'}];
 function el(n,a,p,tx){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(tx!==undefined)e.textContent=tx;(p||sc).appendChild(e);return e}
 var dots=[];
+function el2(a,p,l1,l2,fs){var t=el('text',a,p),i,L=[l1,l2];for(i=0;i<2;i++){var s=document.createElementNS(NS,'tspan');s.setAttribute('x',a.x);if(i){s.setAttribute('dy',fs+1);s.setAttribute('style','font-size:'+fs+'px')}s.textContent=L[i];t.appendChild(s)}return t}
 function build(){
  sc.innerHTML='';dots=[];
  var gpx=30+(gap-1)*4.2, x0=70, cw=230, mw=210, xc1=x0+cw, xm0=xc1+gpx, xm1=xm0+mw;
@@ -89,20 +90,20 @@ function build(){
   var ix0=x0-40, ix1=xm1+40, top=290;
   el('rect',{x:ix0-20,y:350,width:ix1-ix0+40,height:30,rx:3,fill:'var(--sub)',stroke:'var(--subb)'},gS);
   for(var x=ix0+10;x<ix1;x+=44){el('circle',{cx:x,cy:394,r:8,fill:'var(--ball)',stroke:'var(--sib)'},gS)}
-  el('text',{x:ix0-14,y:416},gS,'');gS.lastChild.textContent='封裝基板 + 錫球';
+  el('text',{x:ix0-14,y:416},gS,'');gS.lastChild.textContent='封裝基板（Package substrate）+ 錫球（Solder balls）';
   gS.lastChild.setAttribute('x',ix0-14);gS.lastChild.setAttribute('y',420);
   el('rect',{x:ix0,y:top,width:ix1-ix0,height:48,rx:2,fill:'var(--si)',stroke:'var(--sib)'},gT);
   for(var x=ix0+14;x<ix1;x+=30){el('rect',{x:x-2,y:top+18,width:4,height:30,fill:'var(--tsv)'},gT);el('circle',{cx:x,cy:top+54,r:5,fill:'var(--bump)',stroke:'var(--memb)'},gT)}
   el('text',{x:ix1+8,y:top+22,'text-anchor':'start'},gT,'');gT.lastChild.textContent='';
   // chips
   el('rect',{x:x0,y:top-80,width:cw,height:80,rx:3,fill:'var(--cpu)',stroke:'var(--cpub)'},gC);
-  el('text',{x:x0+cw/2,y:top-34,'text-anchor':'middle',class:'w',style:'font-weight:700;font-size:17px'},gC,'處理器');
+  el('text',{x:x0+cw/2,y:top-34,'text-anchor':'middle',class:'w',style:'font-weight:700;font-size:17px'},gC,'處理器（Processor）');
   var hy=[top-140,top-120,top-100,top-80];
   for(var i=0;i<4;i++){el('rect',{x:xm0,y:top-36-i*20,width:mw,height:17,rx:2,fill:'var(--mem)',stroke:'var(--memb)'},gC)}
   el('rect',{x:xm0,y:top-16,width:mw,height:16,rx:2,fill:'var(--mem)',stroke:'var(--memb)',opacity:.75},gC);
   gC.lastChild.previousSibling;
-  el('text',{x:xm0+mw/2,y:top-108,'text-anchor':'middle',style:'font-weight:700;font-size:17px'},gC,'HBM 堆疊');
-  el('text',{x:xm0+mw/2,y:top-4,'text-anchor':'middle',style:'font-size:13px;fill:var(--tx)'},gC,'基底晶粒');
+  el('text',{x:xm0+mw/2,y:top-102,'text-anchor':'middle',style:'font-weight:700;font-size:17px'},gC,'HBM 堆疊（High Bandwidth Memory stack）');
+  el('text',{x:xm0+mw/2,y:top-4,'text-anchor':'middle',style:'font-size:13px;fill:var(--tx)'},gC,'基底晶粒（Base die）');
   // micro bumps
   for(var x=x0+10;x<xc1;x+=14)el('circle',{cx:x,cy:top-3,r:2.6,fill:'var(--bump)'},gW);
   for(var x=xm0+8;x<xm1;x+=14)el('circle',{cx:x,cy:top-3,r:2.6,fill:'var(--bump)'},gW);
@@ -111,22 +112,22 @@ function build(){
   for(var i=0;i<n;i++){var y=top+6+i*3;lanes.push(y);el('line',{x1:xc1-30,y1:y,x2:xm0+30,y2:y,stroke:'var(--wire)','stroke-width':1.4},gW)}
   laneX0=xc1-30;laneX1=xm0+30;
   el('text',{x:(laneX0+laneX1)/2,y:top+70,'text-anchor':'middle',style:'font-size:14px'},gW,'');gW.lastChild.textContent='';
-  el('text',{x:ix1+10,y:top+30,style:'font-size:14px'},gT,'中介層');
-  el('text',{x:ix1+10,y:top+52,style:'font-size:14px'},gT,'TSV + 凸塊');
-  el('text',{x:ix1+10,y:top+8,style:'font-size:14px'},gW,'配線層');
+  el2({x:ix1+10,y:top+14,style:'font-size:14px'},gT,'中介層','（Interposer）',11);
+  el2({x:ix1+10,y:top+42,style:'font-size:14px'},gT,'TSV + 凸塊','（Bump）',11);
+  el2({x:ix1+10,y:top-14,style:'font-size:14px'},gW,'配線層','（Wiring layer）',11);
  }else{
   var by=360;
   el('rect',{x:30,y:by,width:900,height:60,rx:3,fill:'var(--sub)',stroke:'var(--subb)'},gB);
   var cy=by-70;
-  function pkg(x,w,col,bc,lab){el('rect',{x:x,y:cy,width:w,height:62,rx:3,fill:col,stroke:bc},gC);el('text',{x:x+w/2,y:cy+36,'text-anchor':'middle',class:lab==='處理器'?'w':'',style:'font-weight:700;font-size:17px'+(lab==='處理器'?'':';fill:#1f2a37')},gC,lab);
+  function pkg(x,w,col,bc,lab){el('rect',{x:x,y:cy,width:w,height:62,rx:3,fill:col,stroke:bc},gC);el('text',{x:x+w/2,y:cy+36,'text-anchor':'middle',class:lab.indexOf('處理器')===0?'w':'',style:'font-weight:700;font-size:17px'+(lab.indexOf('處理器')===0?'':';fill:#1f2a37')},gC,lab);
    for(var xx=x+14;xx<x+w;xx+=26)el('circle',{cx:xx,cy:cy+70,r:6,fill:'var(--ball)',stroke:'var(--sib)'},gS)}
-  pkg(x0,cw,'var(--cpu)','var(--cpub)','處理器');pkg(xm0,mw,'var(--mem)','var(--memb)','記憶體');
+  pkg(x0,cw,'var(--cpu)','var(--cpub)','處理器（Processor）');pkg(xm0,mw,'var(--mem)','var(--memb)','記憶體（Memory）');
   lanes=[by+14,by+30,by+46];laneX0=x0+cw/2;laneX1=xm0+mw/2;
   lanes.forEach(function(y,i){el('line',{x1:laneX0+i*8,y1:cy+70,x2:laneX0+i*8,y2:y,stroke:'var(--trace)','stroke-width':3.5},gW);
    el('line',{x1:laneX1-i*8,y1:cy+70,x2:laneX1-i*8,y2:y,stroke:'var(--trace)','stroke-width':3.5},gW);
    el('line',{x1:laneX0+i*8,y1:y,x2:laneX1-i*8,y2:y,stroke:'var(--trace)','stroke-width':3.5},gW)});
-  el('text',{x:36,y:by+54,style:'font-size:14px;fill:#fff'},gB,'電路板');
-  el('text',{x:(laneX0+laneX1)/2,y:by-80,'text-anchor':'middle',style:'font-size:14px'},gW,'長走線，導線很少');
+  el2({x:36,y:by+40,style:'font-size:14px;fill:#fff'},gB,'電路板','（Printed circuit board）',11);
+  el('text',{x:(laneX0+laneX1)/2,y:by-80,'text-anchor':'middle',style:'font-size:14px'},gW,'長走線（Long trace），導線很少');
  }
  sc.insertBefore(gB,sc.firstChild);
  // brace for the distance

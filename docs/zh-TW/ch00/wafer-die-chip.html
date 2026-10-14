@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>晶圓、晶粒與晶片</title>
+<title>晶圓（Wafer）、晶粒（Die）與晶片（Chip）</title>
 <style>
 :root{--bg:#eef2f7;--card:#fff;--ink:#1d2733;--sub:#44546a;--line:#c9d3e0;--wafer:#c9d3e0;--wst:#6b7c93;--die:#8fa6c4;--dst:#4d6585;--hl:#f08a24;--hlst:#b85d00;--blk:#5d7fa8;--pad:#e6b422;--body:#2b2f36;--acc:#0b63c5;--bad:#c0392b}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10161e;--card:#18212c;--ink:#e6edf5;--sub:#9fb0c5;--line:#32445a;--wafer:#3a4b60;--wst:#7e93ad;--die:#5f7fa8;--dst:#9bb6d8;--hl:#ffa040;--hlst:#ffc080;--blk:#4a6c98;--acc:#6db0ff}}
@@ -25,7 +25,7 @@ button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 @media(max-width:760px){.row{grid-template-columns:1fr}}
 input[type=range]{width:100%}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0}
-.kv b{font-variant-numeric:tabular-nums}
+.kv b{font-variant-numeric:tabular-nums;white-space:nowrap}
 .formula{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font-family:ui-monospace,Menlo,Consolas,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",monospace;font-size:14px;overflow-wrap:anywhere}
 .note{color:var(--sub);font-size:13px}
 .t{fill:var(--ink);font-size:13px}.tb{font-size:17px;font-weight:700;fill:var(--ink)}.ts{font-size:13px;fill:var(--sub)}
@@ -34,14 +34,14 @@ input[type=range]{width:100%}
 <body>
 <div class="wrap">
 <p><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/00-overview/README.md">&larr; 回到章節</a></p>
-<h1>晶圓、晶粒與晶片</h1>
-<p class="lead">一片晶圓上有許多相同的電路，每一個叫做一顆晶粒。沿著切割道把晶圓切開，再把每顆晶粒封裝起來，就成了你手上拿得到的晶片。</p>
+<h1>晶圓（Wafer）、晶粒（Die）與晶片（Chip）</h1>
+<p class="lead">一片晶圓上有許多相同的電路，每一個叫做一顆晶粒。沿著切割道（Scribe line）把晶圓切開，再把每顆晶粒封裝（Packaging）起來，就成了你手上拿得到的晶片。</p>
 
 <div class="card">
 <h2>跟著一顆晶粒走一趟</h2>
-<svg id="scene" viewBox="0 80 960 320" role="img" aria-label="晶圓放大到其中一顆晶粒，再切割並封裝成晶片"></svg>
+<svg id="scene" viewBox="0 80 960 320" role="img" aria-label="晶圓（Wafer）放大到其中一顆晶粒（Die），再切割並封裝（Packaging）成晶片（Chip）"></svg>
 <div class="ctl">
-<button data-s="0">1 晶圓</button><button data-s="1">2 晶粒</button><button data-s="2">3 切割</button><button data-s="3">4 封裝</button>
+<button data-s="0">1 晶圓（Wafer）</button><button data-s="1">2 晶粒（Die）</button><button data-s="2">3 切割</button><button data-s="3">4 封裝（Packaging）</button>
 <button id="pp">暫停</button>
 </div>
 <p class="say" id="say"></p>
@@ -50,18 +50,18 @@ input[type=range]{width:100%}
 <div class="card">
 <h2>一片晶圓放得下幾顆晶粒？</h2>
 <div class="row">
-<svg id="map" viewBox="0 0 320 320" role="img" aria-label="排滿晶粒的晶圓圖"></svg>
+<svg id="map" viewBox="0 0 320 320" role="img" aria-label="排滿晶粒的晶圓圖（Wafer map）"></svg>
 <div>
-<label for="sz"><b>晶粒邊長</b>（方形晶粒）：<b id="szv"></b></label>
+<label for="sz"><b>晶粒邊長（Die side）</b>（方形晶粒）：<b id="szv"></b></label>
 <input id="sz" type="range" min="2" max="40" step="0.5" value="10">
 <div class="kv">
-<span>晶粒面積 S</span><b id="area"></b>
+<span>晶粒面積（Die area）S</span><b id="area"></b>
 <span>公式估算值</span><b id="est"></b>
 <span>圖中顆數（僅計完整晶粒）</span><b id="cnt"></b>
-<span>完整晶粒佔晶圓面積</span><b id="use"></b>
+<span>完整晶粒佔晶圓面積（Wafer area used by full dies）</span><b id="use"></b>
 </div>
-<div class="formula">DPW &asymp; &pi;(d/2)&sup2; / S &minus; &pi;d / &radic;(2S)<br>d = 300 mm（晶圓直徑），S = 晶粒面積（單位 mm&sup2;）</div>
-<p class="note">第一項：晶圓面積除以晶粒面積。第二項：圓形邊緣損失的晶粒。公式未考慮切割道與邊緣排除區；圖中顆數取 4 種網格對位中最多的一種。所有數字皆為示意的幾何計算，並非實際產品的資料。</p>
+<div class="formula">DPW &asymp; &pi;(d/2)&sup2; / S &minus; &pi;d / &radic;(2S)<br>d = 300 mm（晶圓直徑，Wafer diameter），S = 晶粒面積（單位 mm&sup2;）</div>
+<p class="note">第一項：晶圓面積除以晶粒面積。第二項：圓形邊緣損失的晶粒。公式未考慮切割道與邊緣排除區（Edge exclusion）；圖中顆數取 4 種網格對位中最多的一種。所有數字皆為示意的幾何計算，並非實際產品的資料。</p>
 </div>
 </div>
 </div>
@@ -74,7 +74,7 @@ var NS='http://www.w3.org/2000/svg',D=300;
 var LOOP=16000,STG=4000;
 var scene=document.getElementById('scene'),say=document.getElementById('say');
 var texts=[
-"1. 晶圓是一片薄薄的圓形矽片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒。",
+"1. 晶圓是一片薄薄的圓形矽（Silicon）片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒。",
 "2. 放大其中一顆晶粒，電路就在裡面。窄窄的切割道（虛線）把它和鄰近的晶粒隔開，焊墊則負責和外界連接。",
 "3. 鋸片沿著切割道切下去，讓每顆晶粒脫離晶圓。",
 "4. 晶粒被固定在外殼裡，從焊墊拉線接到接腳，再封起來。封裝好的晶粒就是晶片。"];
@@ -99,7 +99,7 @@ el('rect',{x:dx,y:dy,width:ds,height:ds,fill:'var(--die)',stroke:'var(--dst)','s
 for(var k=0;k<7;k++){var p=12+k*19;[[p,3,9,7],[p,ds-10,9,7],[3,p,7,9],[ds-10,p,7,9]].forEach(function(r){el('rect',{x:dx+r[0],y:dy+r[1],width:r[2],height:r[3],fill:'var(--pad)'},g2)})}
 el('rect',{x:dx-12,y:dy-12,width:ds+24,height:ds+24,fill:'none',stroke:'var(--hlst)','stroke-width':2,'stroke-dasharray':'7 5'},g2);
 var t2=el('text',{x:dx+ds/2,y:dy+ds+54,'text-anchor':'middle',class:'tb'},g2);t2.textContent='晶粒';
-var t2b=el('text',{x:dx+ds/2,y:dy+ds+74,'text-anchor':'middle',class:'ts'},g2);t2b.textContent='虛線＝切割道，黃色＝焊墊';
+var t2b=el('text',{x:dx+ds/2,y:dy+ds+74,'text-anchor':'middle',class:'ts'},g2);t2b.textContent='虛線＝切割道，黃色＝焊墊（Bond pad）';
 var zl1=el('line',{x1:hl[0]+pitch-2,y1:hl[1],x2:dx-24,y2:dy-24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
 var zl2=el('line',{x1:hl[0]+pitch-2,y1:hl[1]+pitch-2,x2:dx-24,y2:dy+ds+24,stroke:'var(--hlst)','stroke-dasharray':'4 4'},g2);
 // saw
@@ -119,7 +119,7 @@ var cover=el('g',{},g3);el('rect',{x:px,y:py,width:ps,height:ps,rx:8,fill:'var(-
 el('circle',{cx:px+15,cy:py+15,r:5,fill:'#8b95a3'},cover);
 var ct=el('text',{x:px+ps/2,y:py+ps/2+5,'text-anchor':'middle',style:'fill:#c4ccd6;font-size:15px;font-weight:700'},cover);ct.textContent='晶片';
 var t3=el('text',{x:px+ps/2,y:py+ps+54,'text-anchor':'middle',class:'tb'},g3);t3.textContent='封裝後的晶片';
-var t3b=el('text',{x:px+ps/2,y:py+ps+74,'text-anchor':'middle',class:'ts'},g3);t3b.textContent='晶粒＋金線＋外殼＋接腳';
+var t3b=el('text',{x:px+ps/2,y:py+ps+74,'text-anchor':'middle',class:'ts'},g3);t3b.textContent='晶粒＋金線（Bond wire）＋外殼';var t3c=el('text',{x:px+ps/2,y:py+ps+92,'text-anchor':'middle',class:'ts'},g3);t3c.textContent='＋接腳（Pin）';
 // arrows
 var ar1=el('path',{d:'M270 195H340',stroke:'var(--sub)','stroke-width':3,fill:'none'},scene);
 var ar1t=el('text',{x:300,y:180,'text-anchor':'middle',class:'t'},scene);ar1t.textContent='放大';

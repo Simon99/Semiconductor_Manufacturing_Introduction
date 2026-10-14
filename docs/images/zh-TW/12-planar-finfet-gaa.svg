@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">平面、FinFET 與 GAA：閘極包覆通道的面數</title>
-<desc id="d">立體對照。平面電晶體的閘極接觸通道 1 面，FinFET 為 3 面，GAA 奈米片為 4 面。</desc>
+<title id="t">平面（Planar）、FinFET 與 GAA：閘極（Gate）包覆通道（Channel）的面數</title>
+<desc id="d">立體對照。平面電晶體（Planar transistor）的閘極（Gate）接觸通道（Channel）1 面，FinFET 為 3 面，GAA（Gate-all-around）奈米片（Nanosheet）為 4 面。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .ti{font-size:24px;font-weight:700;fill:#f1f5fb}.su{font-size:14px;fill:#a9b8cc}
@@ -38,8 +38,8 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 @media (prefers-reduced-motion:reduce){.a{animation:none!important;opacity:1!important}}
 </style>
 <rect width="960" height="540" fill="#121c2a"/>
-<text x="480" y="40" class="ti" text-anchor="middle">閘極包住通道的幾個面？</text>
-<text x="480" y="62" class="su" text-anchor="middle">包覆面數越多，閘極對通道的控制越強，漏電越少</text>
+<text x="480" y="40" class="ti" text-anchor="middle">閘極（Gate）包住通道（Channel）的幾個面？</text>
+<text x="480" y="62" class="su" text-anchor="middle">包覆面數越多，閘極對通道的控制越強，漏電（Leakage）越少</text>
 <line x1="320" y1="90" x2="320" y2="480" stroke="#2a3a50"/><line x1="640" y1="90" x2="640" y2="480" stroke="#2a3a50"/>
 <g>
 <polygon points="12.8,278.8 146.6,222.2 146.6,206.3 12.8,262.9" fill="#1f252e" stroke="#0d1520" stroke-opacity=".5" stroke-width=".8"/>
@@ -75,7 +75,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <polygon points="175.6,326.7 197.9,317.3 197.9,290.8 175.6,300.2" fill="#2c4b63" stroke="#0d1520" stroke-opacity=".5" stroke-width=".8"/>
 </g>
 <g class="a" style="animation-name:k0"><circle cx="160.0" cy="250.0" r="9" fill="#14202e" stroke="#8dff5a" stroke-width="2"/><text x="160.0" y="254.5" class="bd">1</text></g>
-<text x="160" y="378" class="nm" text-anchor="middle">平面電晶體</text>
+<text x="160" y="378" class="nm" text-anchor="middle">平面電晶體（Planar）</text>
 <text x="160" y="418" class="ct a" text-anchor="middle" style="animation-name:k1">0 面</text>
 <text x="160" y="418" class="ct a" text-anchor="middle" style="animation-name:k2">1 面</text>
 <text x="160" y="444" class="cp" text-anchor="middle">閘極只在上方</text>
@@ -135,7 +135,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text x="480" y="418" class="ct a" text-anchor="middle" style="animation-name:k7">1 面</text>
 <text x="480" y="418" class="ct a" text-anchor="middle" style="animation-name:k8">2 面</text>
 <text x="480" y="418" class="ct a" text-anchor="middle" style="animation-name:k9">3 面</text>
-<text x="480" y="444" class="cp" text-anchor="middle">閘極包住垂直的鰭</text>
+<text x="480" y="444" class="cp" text-anchor="middle">閘極包住垂直的鰭（Fin）</text>
 <text x="480" y="466" class="cp2" text-anchor="middle">鰭的頂面＋左面＋右面</text>
 <g>
 <polygon points="652.8,262.9 786.6,206.3 786.6,179.9 652.8,236.4" fill="#1f252e" stroke="#0d1520" stroke-opacity=".5" stroke-width=".8"/>
@@ -227,16 +227,16 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <g class="a" style="animation-name:k18"><circle cx="769.9" cy="138.9" r="9" fill="#14202e" stroke="#8dff5a" stroke-width="2"/><text x="769.9" y="143.4" class="bd">2</text></g>
 <g class="a" style="animation-name:k20"><circle cx="800.0" cy="146.7" r="9" fill="#14202e" stroke="#8dff5a" stroke-width="2"/><text x="800.0" y="151.2" class="bd">1</text></g>
 <g class="a" style="animation-name:k21"><circle cx="830.1" cy="170.3" r="9" fill="#14202e" stroke="#8dff5a" stroke-width="2"/><text x="830.1" y="174.8" class="bd">3</text></g>
-<text x="800" y="378" class="nm" text-anchor="middle">GAA 奈米片</text>
+<text x="800" y="378" class="nm" text-anchor="middle">GAA 奈米片（Nanosheet）</text>
 <text x="800" y="418" class="ct a" text-anchor="middle" style="animation-name:k22">0 面</text>
 <text x="800" y="418" class="ct a" text-anchor="middle" style="animation-name:k23">1 面</text>
 <text x="800" y="418" class="ct a" text-anchor="middle" style="animation-name:k24">2 面</text>
 <text x="800" y="418" class="ct a" text-anchor="middle" style="animation-name:k25">3 面</text>
 <text x="800" y="418" class="ct a" text-anchor="middle" style="animation-name:k26">4 面</text>
 <text x="800" y="444" class="cp" text-anchor="middle">閘極包住每一片奈米片</text>
-<text x="800" y="466" class="cp2" text-anchor="middle">頂面＋底面＋左面＋右面</text><g transform="translate(150,508)"><rect width="14" height="14" y="-12" fill="#60c8e6"/><text x="22" y="0" class="lg">通道（矽）</text>
+<text x="800" y="466" class="cp2" text-anchor="middle">頂面＋底面＋左面＋右面</text><g transform="translate(150,508)"><rect width="14" height="14" y="-12" fill="#60c8e6"/><text x="22" y="0" class="lg">通道（矽，Silicon）</text>
 <rect x="170" width="14" height="14" y="-12" fill="#f0963c" fill-opacity=".5" stroke="#ffd29a"/><text x="192" y="0" class="lg">閘極（透明）</text>
 <rect x="350" width="14" height="14" y="-12" fill="#8dff5a"/><text x="372" y="0" class="lg">閘極接觸的面</text>
-<rect x="560" width="14" height="14" y="-12" fill="#5896c4"/><text x="582" y="0" class="lg">源極／汲極</text></g>
+<rect x="560" width="14" height="14" y="-12" fill="#5896c4"/><text x="582" y="0" class="lg">源極／汲極（Source / drain）</text></g>
 <text x="940" y="530" class="cp2" text-anchor="end" style="font-size:12px">示意圖，未依比例</text>
 </svg>

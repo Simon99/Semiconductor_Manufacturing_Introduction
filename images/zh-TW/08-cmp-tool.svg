@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-<title id="t">CMP 機台：平台、研磨墊、研磨頭、研磨液噴嘴、修整器</title>
-<desc id="d">化學機械研磨（CMP）機台的側視圖。研磨頭把晶圓正面朝下壓在旋轉的研磨墊上，研磨液持續滴落，修整器刮磨研磨墊。研磨速率遵循 Preston 關係式 RR = Kp × P × V。</desc>
+<title id="t">CMP 機台（CMP tool）：平台（Platen）、研磨墊（Polishing pad）、研磨頭（Polishing head）、研磨液噴嘴（Slurry nozzle）、修整器（Conditioner）</title>
+<desc id="d">化學機械研磨（Chemical mechanical planarization, CMP）機台（Tool）的側視圖。研磨頭（Polishing head）把晶圓（Wafer）正面朝下壓在旋轉的研磨墊（Polishing pad）上，研磨液（Slurry）持續滴落，修整器（Conditioner）刮磨研磨墊。研磨速率（Removal rate）遵循 Preston 關係式（Preston relation）RR = Kp × P × V。</desc>
 <style>
 .padscroll{animation:ps 1.2s linear infinite}
 .platscroll{animation:ps40 1.6s linear infinite}
@@ -26,13 +26,13 @@
 @media (prefers-reduced-motion:reduce){*{animation:none!important}.c0{opacity:1}.drop{opacity:1}}
 </style>
 <rect width="960" height="540" fill="#f5f7fb"/>
-<text x="30" y="38" font-size="22" font-weight="700" fill="#1c2433">CMP 機台：把晶圓磨平</text>
+<text x="30" y="38" font-size="22" font-weight="700" fill="#1c2433">CMP 機台：把晶圓（Wafer）磨平</text>
 <text x="30" y="60" font-size="13" fill="#4a5568">側視圖（動畫，未依比例）</text>
 <g transform="translate(10,70)"><defs><clipPath id="padclip"><rect x="20" y="280" width="580" height="18"/></clipPath><clipPath id="platclip"><rect x="20" y="298" width="580" height="47"/></clipPath><clipPath id="spclip"><rect x="295" y="130" width="30" height="85"/></clipPath><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#d64545"/></marker><marker id="ahk" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2d3748"/></marker></defs>
 <g data-part="3"><rect x="60" y="345" width="500" height="45" rx="4" fill="#2d3748"/><rect x="290" y="345" width="40" height="45" fill="#1a202c"/>
 <rect x="20" y="298" width="580" height="47" rx="3" fill="#4a5568"/>
 <g clip-path="url(#platclip)"><g id="platscroll" class="platscroll"><rect x="-20" y="298" width="14" height="47" fill="#5f6b80"/><rect x="20" y="298" width="14" height="47" fill="#5f6b80"/><rect x="60" y="298" width="14" height="47" fill="#5f6b80"/><rect x="100" y="298" width="14" height="47" fill="#5f6b80"/><rect x="140" y="298" width="14" height="47" fill="#5f6b80"/><rect x="180" y="298" width="14" height="47" fill="#5f6b80"/><rect x="220" y="298" width="14" height="47" fill="#5f6b80"/><rect x="260" y="298" width="14" height="47" fill="#5f6b80"/><rect x="300" y="298" width="14" height="47" fill="#5f6b80"/><rect x="340" y="298" width="14" height="47" fill="#5f6b80"/><rect x="380" y="298" width="14" height="47" fill="#5f6b80"/><rect x="420" y="298" width="14" height="47" fill="#5f6b80"/><rect x="460" y="298" width="14" height="47" fill="#5f6b80"/><rect x="500" y="298" width="14" height="47" fill="#5f6b80"/><rect x="540" y="298" width="14" height="47" fill="#5f6b80"/><rect x="580" y="298" width="14" height="47" fill="#5f6b80"/><rect x="620" y="298" width="14" height="47" fill="#5f6b80"/></g></g>
-<text x="310" y="327" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">平台（旋轉中）</text>
+<text x="310" y="327" text-anchor="middle" font-size="13" fill="#e2e8f0" font-weight="600">平台（Platen）旋轉中</text>
 <rect x="20" y="280" width="580" height="18" fill="#cfd5e0" stroke="#9aa3b5"/>
 <g clip-path="url(#padclip)"><g id="padscroll" class="padscroll"><circle cx="0" cy="286" r="2" fill="#8993a8"/><circle cx="30" cy="292" r="2" fill="#8993a8"/><circle cx="60" cy="286" r="2" fill="#8993a8"/><circle cx="90" cy="292" r="2" fill="#8993a8"/><circle cx="120" cy="286" r="2" fill="#8993a8"/><circle cx="150" cy="292" r="2" fill="#8993a8"/><circle cx="180" cy="286" r="2" fill="#8993a8"/><circle cx="210" cy="292" r="2" fill="#8993a8"/><circle cx="240" cy="286" r="2" fill="#8993a8"/><circle cx="270" cy="292" r="2" fill="#8993a8"/><circle cx="300" cy="286" r="2" fill="#8993a8"/><circle cx="330" cy="292" r="2" fill="#8993a8"/><circle cx="360" cy="286" r="2" fill="#8993a8"/><circle cx="390" cy="292" r="2" fill="#8993a8"/><circle cx="420" cy="286" r="2" fill="#8993a8"/><circle cx="450" cy="292" r="2" fill="#8993a8"/><circle cx="480" cy="286" r="2" fill="#8993a8"/><circle cx="510" cy="292" r="2" fill="#8993a8"/><circle cx="540" cy="286" r="2" fill="#8993a8"/><circle cx="570" cy="292" r="2" fill="#8993a8"/><circle cx="600" cy="286" r="2" fill="#8993a8"/><circle cx="630" cy="292" r="2" fill="#8993a8"/></g></g></g>
 <g data-part="1"><rect x="20" y="276" width="580" height="4" fill="#3b9be8" opacity="0.55"/></g>
@@ -44,7 +44,7 @@
 <rect x="295" y="120" width="30" height="97" fill="#a0aec0" stroke="#2d3748" stroke-width="2"/>
 <g clip-path="url(#spclip)"><g id="headscroll" class="headscroll"><rect x="281" y="120" width="7" height="97" fill="#718096"/><rect x="295" y="120" width="7" height="97" fill="#718096"/><rect x="309" y="120" width="7" height="97" fill="#718096"/><rect x="323" y="120" width="7" height="97" fill="#718096"/><rect x="337" y="120" width="7" height="97" fill="#718096"/></g></g>
 <g id="pa" class="pa"><rect id="pshaft" x="306" y="40" width="8" height="55" fill="#d64545"/><path id="phead" d="M296 95 L330 95 L313 118 Z" fill="#d64545"/></g>
-<text x="344" y="62" font-size="14" font-weight="700" fill="#b83232">下壓力（壓力 P）</text>
+<text x="344" y="62" font-size="14" font-weight="700" fill="#b83232">下壓力（Down force）</text><text x="344" y="78" font-size="12" font-weight="700" fill="#b83232">壓力 P（Pressure）</text>
 </g>
 <g data-part="3"><rect x="195" y="273" width="230" height="8" fill="#8aa0bd" stroke="#2d3748"/>
 <g id="bumps" class="bumps"><rect x="215" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="265" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="310" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="345" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/><rect x="390" y="281" width="16" height="7" fill="#8aa0bd" stroke="#2d3748" stroke-width="1"/></g></g>
@@ -63,15 +63,15 @@
 <path d="M536 278 l4 5 l4 -5 z" fill="#1a202c"/>
 <path d="M546 278 l4 5 l4 -5 z" fill="#1a202c"/>
 </g></g>
-<text x="76" y="150" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨液噴嘴</text><text x="76" y="166" font-size="12" fill="#4a5568" text-anchor="start">研磨顆粒＋化學品</text>
+<text x="76" y="150" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨液噴嘴（Slurry nozzle）</text><text x="76" y="166" font-size="12" fill="#4a5568" text-anchor="start">研磨顆粒（Abrasive）＋化學品</text>
 <line x1="74" y1="147" x2="62" y2="125" stroke="#2d3748" stroke-width="1.2"/>
-<text x="345" y="165" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨頭</text><text x="345" y="181" font-size="12" fill="#4a5568" text-anchor="start">將晶圓正面朝下壓住</text>
+<text x="345" y="165" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨頭</text><text x="345" y="181" font-size="12" font-weight="700" fill="#1c2433" text-anchor="start">（Polishing head）</text><text x="345" y="197" font-size="12" fill="#4a5568" text-anchor="start">將晶圓正面朝下壓住</text>
 <line x1="340" y1="171" x2="340" y2="215" stroke="#2d3748" stroke-width="1.2"/>
 <text x="76" y="252" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">晶圓</text><text x="76" y="268" font-size="12" fill="#4a5568" text-anchor="start">（正面朝下）</text>
 <line x1="156" y1="264" x2="222" y2="277" stroke="#2d3748" stroke-width="1.2"/><circle cx="222" cy="277" r="2.5" fill="#2d3748"/>
-<text x="545" y="200" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">修整器</text><text x="545" y="216" font-size="12" fill="#4a5568" text-anchor="start">鑽石顆粒圓盤</text>
+<text x="545" y="200" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">修整器（Conditioner）</text><text x="545" y="216" font-size="12" fill="#4a5568" text-anchor="start">鑽石顆粒圓盤</text><text x="545" y="230" font-size="12" fill="#4a5568" text-anchor="start">（Diamond-grit disk）</text>
 <line x1="543" y1="197" x2="528" y2="197" stroke="#2d3748" stroke-width="1.2"/>
-<text x="610" y="293" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨墊</text>
+<text x="610" y="289" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">研磨墊</text><text x="610" y="303" font-size="12" font-weight="700" fill="#1c2433" text-anchor="start">（Polishing pad）</text>
 <text x="610" y="328" font-size="14" font-weight="700" fill="#1c2433" text-anchor="start">平台</text>
 <line x1="608" y1="289" x2="598" y2="289" stroke="#2d3748"/><line x1="608" y1="324" x2="598" y2="324" stroke="#2d3748"/>
 <text x="310" y="372" font-size="12" fill="#e2e8f0" text-anchor="middle">平台旋轉，研磨頭旋轉</text></g>
@@ -86,17 +86,17 @@
 <rect x="855" y="184" width="52" height="10" rx="3" fill="#718096" transform="rotate(35 855 189)"/>
 <circle cx="897" cy="200" r="13" fill="#d69e2e" stroke="#744210" stroke-width="1.5"/>
 <circle cx="855" cy="95" r="5" fill="#3b9be8"/>
-<text x="863" y="99" font-size="12" fill="#1c2433">研磨液</text>
+<text x="863" y="99" font-size="12" fill="#1c2433">研磨液（Slurry）</text>
 <text x="800" y="252" font-size="12" fill="#1c2433">研磨頭</text>
 <text x="850" y="252" font-size="12" fill="#1c2433">修整器</text>
 <text x="745" y="252" font-size="12" fill="#4a5568">平台</text>
 </g>
 <g>
 <rect x="738" y="268" width="212" height="160" rx="10" fill="#fff" stroke="#2b6cb0" stroke-width="2"/>
-<text x="844" y="292" text-anchor="middle" font-size="13" font-weight="700" fill="#2b6cb0">Preston 關係式</text>
+<text x="844" y="292" text-anchor="middle" font-size="13" font-weight="700" fill="#2b6cb0">Preston 關係式</text><text x="844" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#2b6cb0">（Preston relation）</text>
 <text x="844" y="326" text-anchor="middle" font-size="22" font-weight="700" fill="#1c2433">RR = K<tspan font-size="14" dy="4">p</tspan><tspan dy="-4"> · P · V</tspan></text>
-<text x="844" y="352" text-anchor="middle" font-size="12" fill="#1c2433">RR 研磨速率</text>
-<text x="844" y="369" text-anchor="middle" font-size="12" fill="#1c2433">P 壓力　V 相對速度</text>
+<text x="844" y="352" text-anchor="middle" font-size="12" fill="#1c2433">RR 研磨速率（Removal rate）</text>
+<text x="844" y="369" text-anchor="middle" font-size="12" fill="#1c2433">P 壓力　V 相對速度（Relative speed）</text>
 <text x="844" y="386" text-anchor="middle" font-size="12" fill="#1c2433">Kp 研磨墊／研磨液常數</text>
 <text x="844" y="410" text-anchor="middle" font-size="12" fill="#4a5568" font-style="italic">P 或 V 越大，研磨越快</text>
 <text x="844" y="424" text-anchor="middle" font-size="11" fill="#4a5568" font-style="italic" style="display:none"></text>

@@ -167,6 +167,6 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <rect class="expN" x="503" y="528" width="16" height="14"/><text class="leg" x="525" y="540">曝光後：硬化</text>
 <rect class="chrome" x="627" y="528" width="16" height="14"/><text class="leg" x="649" y="540">光罩鉻層（Mask chrome）</text>
 </g>
-<text class="note" x="25" y="568">下一站是蝕刻（Etching）：只有光阻已被洗掉之處，底下的薄膜才會被蝕刻。圖中光罩按 1:1 繪製；曝光機（Scanner）實際以 1/4 大小投影。</text>
+<text class="note" x="25" y="568">下一站是蝕刻（Etching）：只有光阻已被洗掉之處，底下的薄膜才會被蝕刻。圖中光罩（Mask）按 1:1 繪製；曝光機（Scanner）實際以 1/4 大小投影。</text>
 <text class="note" x="25" y="588">此示意圖省略烘烤（Bake）與檢查（Inspection）步驟，包括軟烤（Soft bake）、曝後烤（Post-exposure bake）。</text>
 </svg>

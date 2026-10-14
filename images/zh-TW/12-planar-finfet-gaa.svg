@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
-<title id="t">平面（Planar）、FinFET 與 GAA：閘極（Gate）包覆通道（Channel）的面數</title>
+<title id="t">平面（Planar）、FinFET 與 GAA（gate-all-around）：閘極（Gate）包覆通道（Channel）的面數</title>
 <desc id="d">立體對照。平面電晶體（Planar transistor）的閘極（Gate）接觸通道（Channel）1 面，FinFET 為 3 面，GAA（Gate-all-around）奈米片（Nanosheet）為 4 面。</desc>
 <style>
 text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}

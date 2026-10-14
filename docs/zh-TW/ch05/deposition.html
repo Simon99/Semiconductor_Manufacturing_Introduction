@@ -151,11 +151,11 @@ function $(id){return document.getElementById(id)}
 function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 var W=96, CX=320, YS=215, YBOT=546, X0=40, X1=600, LOOP=12000, NC=13;
 var S={thermal:0.1,cvd:0.25,pvd:1.4,ald:0}, OF={thermal:0,cvd:0.35,pvd:0.9,ald:0};
-var NAMES={thermal:'熱氧化',cvd:'CVD',pvd:'PVD',ald:'ALD'};
+var NAMES={thermal:'熱氧化（Thermal oxidation）',cvd:'CVD',pvd:'PVD',ald:'ALD'};
 var STEPS={
  thermal:['O2（乾式）或水蒸氣（濕式）流過爐管中的高溫晶圓。','氧氣（Oxygen）到達矽表面並發生反應：Si + O2 → SiO2。','氧化層（Oxide）是「吃掉」矽長出來的（約 44% 的厚度來自晶圓，為教科書數值），所以氧化層與矽之間的介面（Interface）品質極佳。','爐管是批次式機台（Batch tool）：一次可處理上百片晶圓。'],
  cvd:['數種氣體（Gas）經由噴灑頭流入腔體（Chamber）。','氣體在晶圓表面發生反應，留下固態薄膜。','氣態的副產物（By-product）被抽走。','LPCVD 用加熱；PECVD 用電漿（Plasma），所以可在較低溫度下進行。覆蓋還不錯，但頂部比底部厚（示意）。'],
- pvd:['在真空腔體中，帶電的氬離子（Argon ion）被加速撞向靶材。','被撞出靶材的原子（Atom）飛向晶圓。','它們大多從正上方抵達：頂部厚，底部薄。','薄膜會在開口處堆積（懸突，Overhang），可能在底部還沒蓋好之前就把開口封住。'],
+ pvd:['在真空腔體中，帶電的氬離子（Argon ion）被加速撞向靶材（Sputtering target）。','被撞出靶材的原子（Atom）飛向晶圓。','它們大多從正上方抵達：頂部厚，底部薄。','薄膜會在開口處堆積（懸突，Overhang），可能在底部還沒蓋好之前就把開口封住。'],
  ald:['氣體 A 在表面鋪滿一層後就自動停止。','抽氣清洗（Purge）：把腔體（Chamber）抽乾淨。','氣體 B 流入，與那一層反應。','再次抽氣清洗。每一輪約長出一層原子厚的薄膜。重複進行：頂部、側壁和底部厚度相同，但很慢。']
 };
 var COLV={thermal:'var(--thermal)',cvd:'var(--cvd)',pvd:'var(--pvd)',ald:'var(--ald)'};

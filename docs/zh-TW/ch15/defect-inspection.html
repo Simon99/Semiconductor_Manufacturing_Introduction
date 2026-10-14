@@ -59,7 +59,7 @@ for(var j=0;j<150;j++){var p=pos();noise.push({x:p[0],y:p[1],s:0.9+(-Math.log(1-
 var all=real.map(function(d,i){return{x:d.x,y:d.y,s:d.s,t:d.t,real:1}}).concat(noise.map(function(d){return{x:d.x,y:d.y,s:d.s,t:'nuisance',real:0}}));
 var T=2.8,flag=[],stage=0,t=0,playing=true,STG=4000;
 var names=['1 掃描','2 比對（Die-to-die comparison）','3 標記','4 複檢（SEM）'];
-var descs=['機台以光或電子束掃過整片晶圓（Wafer），為每顆晶粒取像。','將每顆晶粒與相鄰晶粒比對。每顆晶粒應該長得一樣，所以有差異的地方就可能是缺陷。','強度超過門檻的差異會被標在缺陷分佈圖（Defect map）上。門檻值就是靈敏度設定。','被標記的位置會用電子顯微鏡拍攝近照並分類為微粒（Particle）、刮傷（Scratch）或橋接（Bridging）。誤報也會被複檢。'];
+var descs=['機台以光或電子束掃過整片晶圓（Wafer），為每顆晶粒（Die）取像。','將每顆晶粒（Die）與相鄰晶粒比對。每顆晶粒應該長得一樣，所以有差異的地方就可能是缺陷（Defect）。','強度超過門檻的差異會被標在缺陷分佈圖（Defect map）上。門檻值就是靈敏度（Sensitivity）設定。','被標記的位置會用電子顯微鏡拍攝近照並分類為微粒（Particle）、刮傷（Scratch）或橋接（Bridging）。誤報也會被複檢。'];
 var stEl=document.getElementById('st');names.forEach(function(n,i){var b=document.createElement('button');b.textContent=n;b.onclick=function(){t=i*STG+300;playing=false;sync();draw()};stEl.appendChild(b)});
 var ppb=document.getElementById('pp');ppb.onclick=function(){playing=!playing;sync()};
 function sync(){ppb.textContent=playing?'暫停':'播放';[].forEach.call(stEl.children,function(b,i){b.className=i===stage?'on':''});document.getElementById('desc').textContent=descs[stage];document.getElementById('ph').textContent='階段 '+(stage+1)+'／4'}

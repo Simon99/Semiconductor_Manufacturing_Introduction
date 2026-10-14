@@ -49,7 +49,7 @@ button.on{border-color:var(--acc);outline:2px solid var(--acc)}
 <rect x="430" y="283" width="16" height="16" fill="var(--cu)" stroke="var(--cu2)"/><text x="454" y="298" font-size="17">銅（軟）</text>
 </svg></div>
 <div class="row"><label for="sl">過度研磨時間（Over-polish time）</label><input id="sl" type="range" min="0" max="100" value="85" aria-describedby="rd"><span id="rd" style="min-width:5ch;font-weight:700">85%</span></div>
-<div class="row"><button id="b1">1 到達終點（Endpoint）</button><button id="b2">2 開始過度研磨（Over-polish）</button><button id="b3">3 長時間過度研磨</button><button id="pp">暫停</button></div>
+<div class="row"><button id="b1">1 到達終點（Endpoint）</button><button id="b2">2 開始過度研磨（Over-polish）</button><button id="b3">3 長時間過度研磨（Over-polish）</button><button id="pp">暫停</button></div>
 <div class="note" id="cap"></div>
 <div class="grid">
 <div class="stat"><span>碟陷深度（Dishing depth，寬導線中央）</span><b id="s1"></b></div>
@@ -80,9 +80,9 @@ function geo(p){
  var yt=Y0+e+DN*p,nr='';for(var k2=0;k2<7;k2++){var x3=490+40*k2;nr+='M'+x3+','+YB+' H'+(x3+20)+' V'+f(yt)+' H'+x3+'Z ';}
  return{di:di,wd:wd,nr:nr,e:e,d:d,yt:yt};
 }
-var CAPS=['到達終點時表面是平的（虛線），還沒有碟陷或侵蝕。',
-'開始過度研磨：銅比較軟，比旁邊硬的介電層磨得更快。寬導線開始凹陷，密集區域開始變低。',
-'長時間過度研磨：寬導線明顯碟陷，整片密集區域比周圍的稀疏區域低。導線變薄，所以電阻變高。'];
+var CAPS=['到達終點（Endpoint）時表面是平的（虛線），還沒有碟陷（Dishing）或侵蝕（Erosion）。',
+'開始過度研磨（Over-polish）：銅（Copper）比較軟，比旁邊硬的介電層（Dielectric layer）磨得更快。寬導線開始凹陷，密集區域開始變低。',
+'長時間過度研磨（Over-polish）：寬導線明顯碟陷（Dishing），整片密集區域比周圍的稀疏區域低。導線變薄，所以電阻變高。'];
 var P=0.85,playing=!q.has('still'),t0=performance.now(),base=0;
 function pAt(ms){var u=((ms%CYC)+CYC)%CYC/CYC;for(var i=1;i<KT.length;i++){if(u<=KT[i]){var a=(u-KT[i-1])/(KT[i]-KT[i-1]);return PV[i-1]+(PV[i]-PV[i-1])*a;}}return PV[PV.length-1];}
 function render(p){

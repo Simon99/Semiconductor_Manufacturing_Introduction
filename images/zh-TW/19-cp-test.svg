@@ -308,9 +308,9 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="ink" x="52" y="198" font-size="13" font-weight="700">探針卡</text>
 <text class="ink2" x="52" y="211" font-size="11">（Probe card）</text>
 <text class="ink2" x="52" y="227" font-size="12">極細探針（Needle）對應</text>
-<text class="ink2" x="52" y="242" font-size="12">晶粒的焊墊（Pad）位置</text>
+<text class="ink2" x="52" y="242" font-size="12">晶粒（Die）的焊墊（Pad）位置</text>
 <path class="leader" d="M150 196 L218 172"/>
-<text class="ink" x="430" y="222" font-size="13" font-weight="700">晶圓</text>
+<text class="ink" x="430" y="222" font-size="13" font-weight="700">晶圓（Wafer）</text>
 <text class="ink2" x="430" y="237" font-size="12">一排晶粒的</text>
 <text class="ink2" x="430" y="251" font-size="12">剖面圖</text>
 <path class="leader" d="M428 240 L340 266"/>

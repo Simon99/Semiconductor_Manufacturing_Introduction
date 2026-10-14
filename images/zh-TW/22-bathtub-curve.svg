@@ -22,7 +22,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <path d="M50,100 V380 H500" fill="none" stroke="#475569" stroke-width="2"/>
 <path d="M500,380 l-9,-5 v10 z" fill="#475569"/><path d="M50,100 l-5,9 h10 z" fill="#475569"/>
 <text x="500" y="372" text-anchor="end" font-size="13" class="sub" id="txtTime">使用時間</text>
-<text transform="translate(26,240) rotate(-90)" text-anchor="middle" font-size="13" class="sub" id="txtRate">失效率</text>
+<text transform="translate(26,240) rotate(-90)" text-anchor="middle" font-size="13" class="sub" id="txtRate">失效率（Failure rate）</text>
 <!-- shaved region -->
 <g class="hatch"><path d="M50,330 V120 C75,290 110,326 170,330 Z" fill="url(#hp)"/></g>
 <!-- ship marker -->
@@ -44,9 +44,9 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text x="405" y="417" text-anchor="middle" font-size="11" class="sub" id="txtWearE">（Wear-out）</text>
 <text x="405" y="433" text-anchor="middle" font-size="12" class="sub" id="txtWear2">老化</text></g>
 <!-- burn-in annotations -->
-<g class="lShip"><text x="62" y="305" font-size="13" class="b" style="fill:#0d9488" id="txtFlat">預燒後趨平</text></g>
+<g class="lShip"><text x="62" y="305" font-size="13" class="b" style="fill:#0d9488" id="txtFlat">預燒（Burn-in）後趨平</text></g>
 <g class="lBurn"><text x="176" y="140" font-size="12" class="sub" id="txtCut1">於工廠篩除弱晶片</text><text x="176" y="156" font-size="12" class="sub" id="txtCut2">（出廠前）</text></g>
-<g class="lNo"><text x="322" y="150" font-size="13" class="b" style="fill:#ea580c" id="txtNo1">預燒無法</text><text x="322" y="167" font-size="13" class="b" style="fill:#ea580c" id="txtNo2">修復老化</text></g>
+<g class="lNo"><text x="322" y="150" font-size="13" class="b" style="fill:#ea580c" id="txtNo1">預燒（Burn-in）無法</text><text x="322" y="167" font-size="13" class="b" style="fill:#ea580c" id="txtNo2">修復老化（Wear-out）</text></g>
 </g>
 
 <!-- ===== RIGHT: MACHINE ===== -->
@@ -82,6 +82,6 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 
 <!-- ===== CAPTION ===== -->
 <rect x="30" y="452" width="900" height="64" rx="10" fill="#e2e8f0"/>
-<text x="480" y="480" text-anchor="middle" font-size="17" class="b" id="txtCap1">預燒在工廠篩出早期失效，而不是等到客戶手上才發現。</text>
-<text x="480" y="503" text-anchor="middle" font-size="15" class="sub" id="txtCap2">它無法延長壽命，也無法修復設計或製程造成的老化。</text>
+<text x="480" y="480" text-anchor="middle" font-size="17" class="b" id="txtCap1">預燒（Burn-in）在工廠篩出早期失效，而不是等到客戶手上才發現。</text>
+<text x="480" y="503" text-anchor="middle" font-size="15" class="sub" id="txtCap2">它無法延長壽命，也無法修復設計或製程造成的老化（Wear-out）。</text>
 </svg>

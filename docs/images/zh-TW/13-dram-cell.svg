@@ -87,7 +87,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="lbl" x="330" y="326" text-anchor="middle">位元線（Bit line，延伸進紙面）</text>
 <text class="lbl" x="354" y="384">位元線接點</text><text class="lbl" x="354" y="400">（Bit-line contact）</text><path class="lead" d="M351 381 H347"/>
 <text class="lbl" x="225" y="514" text-anchor="middle">埋入式字元線（Buried word line）</text><path class="lead" d="M225 500 V486"/>
-<text class="lbl" x="435" y="514" text-anchor="middle">埋入式字元線</text><path class="lead" d="M435 500 V486"/>
+<text class="lbl" x="435" y="514" text-anchor="middle">埋入式字元線（Buried word line）</text><path class="lead" d="M435 500 V486"/>
 <text class="lblm" x="330" y="548" text-anchor="middle">p 型矽（p-type silicon）</text>
 <text class="lblm" x="80" y="430" text-anchor="middle" font-size="12">STI</text>
 <text class="lblm" x="580" y="430" text-anchor="middle" font-size="12">STI</text>
@@ -141,9 +141,9 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sm" x="831" y="423" text-anchor="middle">讀取</text>
 <text class="sm" x="868" y="423" text-anchor="middle">寫 0</text>
 <rect x="655" y="471" width="16" height="12" style="fill:var(--electrode)"/><text class="sm" x="677" y="481" style="font-size:13px;fill:var(--text)">電容電極</text><text class="sm" x="677" y="494" style="font-size:11px;fill:var(--text)">（Capacitor electrode）</text>
-<rect class="plate" x="655" y="501" width="16" height="12"/><text class="sm" x="677" y="512" style="font-size:13px;fill:var(--text)">頂板</text>
+<rect class="plate" x="655" y="501" width="16" height="12"/><text class="sm" x="677" y="512" style="font-size:13px;fill:var(--text)">頂板（Top plate）</text>
 <rect class="gon" x="655" y="529" width="16" height="12"/><text class="sm" x="677" y="540" style="font-size:13px;fill:var(--text)">埋入式字元線</text>
-<rect class="blm" x="655" y="557" width="16" height="12"/><text class="sm" x="677" y="568" style="font-size:13px;fill:var(--text)">位元線</text>
+<rect class="blm" x="655" y="557" width="16" height="12"/><text class="sm" x="677" y="568" style="font-size:13px;fill:var(--text)">位元線（Bit line）</text>
 <rect x="820" y="475" width="16" height="3" style="fill:var(--diel)"/><text class="sm" x="842" y="481" style="font-size:13px;fill:var(--text)">薄介電層</text><text class="sm" x="842" y="494" style="font-size:11px;fill:var(--text)">（Thin dielectric）</text>
 <rect class="np" x="820" y="499" width="16" height="12"/><text class="sm" x="842" y="509" style="font-size:13px;fill:var(--text)">n+ 源極／汲極</text><text class="sm" x="842" y="522" style="font-size:11px;fill:var(--text)">（n+ source/drain）</text>
 <rect class="si" x="820" y="529" width="16" height="12"/><text class="sm" x="842" y="540" style="font-size:13px;fill:var(--text)">p 型矽</text>

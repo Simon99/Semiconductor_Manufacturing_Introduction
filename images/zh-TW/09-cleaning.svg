@@ -147,7 +147,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sm dim" x="506" y="428">每片晶圓都用新鮮化學品，彼此不共用。</text>
 <text class="sm" x="36" y="456">產能（Throughput）</text><rect x="160" y="444" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="160" y="444" width="243.1" height="14" rx="7" fill="#3ecf8e"/>
 <text class="sm" x="36" y="473" style="font-size:10px">交叉污染</text><text class="sm" x="36" y="485" style="font-size:10px">（Cross-contamination）</text><rect x="160" y="468" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="160" y="468" width="185.9" height="14" rx="7" fill="#ff5a5a"/>
-<text class="sm" x="506" y="456">產能</text><rect x="630" y="444" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="444" width="143.0" height="14" rx="7" fill="#3ecf8e"/>
-<text class="sm" x="506" y="480">交叉污染</text><rect x="630" y="468" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="468" width="34.3" height="14" rx="7" fill="#ff5a5a"/>
+<text class="sm" x="506" y="456">產能（Throughput）</text><rect x="630" y="444" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="444" width="143.0" height="14" rx="7" fill="#3ecf8e"/>
+<text class="sm" x="506" y="480">交叉污染（Cross-contamination）</text><rect x="630" y="468" width="286" height="14" rx="7" fill="#0f1b2d"/><rect x="630" y="468" width="34.3" height="14" rx="7" fill="#ff5a5a"/>
 <text class="sm dim" x="480" y="524" text-anchor="middle" style="fill:#a9bcd6">長條為示意的定性比較，並非實際量測值。</text>
 </svg>

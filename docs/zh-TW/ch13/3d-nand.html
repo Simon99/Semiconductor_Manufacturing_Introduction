@@ -63,11 +63,11 @@ td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 const Q=new URLSearchParams(location.search);
 const th=Q.get('theme');if(th==='dark'||th==='light')document.documentElement.setAttribute('data-theme',th);
 const STEPS=[
- ['1 堆疊（Stack）','交替沉積（Deposition）氧化層與氮化層，共數百層。'],
+ ['1 堆疊（Stack）','交替沉積（Deposition）氧化層（Oxide）與氮化層，共數百層。'],
  ['2 通道孔（Channel holes）','一口氣蝕刻（Etch）穿過整個堆疊。又深又窄的孔常分成數段蝕刻再接起來。'],
- ['3 儲存層與通道（Storage + channel）','沿著每個孔的孔壁，依序沉積儲存層與通道材料。'],
- ['4 階梯（Staircase）','把堆疊的邊緣做成一階一階的形狀，讓上方的接觸窗能分別接到每一層。'],
- ['5 字元線置換（Word line replacement）','移除氮化層並換成金屬。每一層金屬就是一條字元線，與通道交會之處就是一個記憶單元。']];
+ ['3 儲存層與通道（Storage + channel）','沿著每個孔的孔壁，依序沉積儲存層（Storage layer）與通道（Channel）材料。'],
+ ['4 階梯（Staircase）','把堆疊的邊緣做成一階一階的形狀，讓上方的接觸窗（Contact）能分別接到每一層。'],
+ ['5 字元線置換（Word line replacement）','移除氮化層並換成金屬（Metal）。每一層金屬就是一條字元線（Word line），與通道（Channel）交會之處就是一個記憶單元。']];
 let layers=200,bits=3,stage=0,frac=1,playing=true,tms=0,allMode=false;
 const stepsEl=document.getElementById('steps');
 STEPS.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>{allMode=false;playing=false;tms=i*3000+2999;upd();syncPlay()};stepsEl.appendChild(b)});
@@ -148,7 +148,7 @@ function draw(){
  s+=`<text x="${X0}" y="22" font-size="13" style="fill:var(--mu)">${layers>n?'簡化繪製：顯示 '+layers+' 層中的 '+n+' 層':'顯示 '+layers+' 層'}</text>`;
  if(stage<=3&&!allMode)s+=`<text x="${XF+4}" y="${Y0-H/2}" font-size="12" style="fill:var(--nit)" text-anchor="end"></text>`;
  // legend
- const lg=[['var(--ox)','氧化層（Oxide）'],[stage>=4||allMode?'var(--met)':'var(--nit)',stage>=4||allMode?'字元線金屬（Word line metal）':'氮化層（Nitride）（暫代）'],['var(--sto)','儲存層'],['var(--ch)','通道']];
+ const lg=[['var(--ox)','氧化層（Oxide）'],[stage>=4||allMode?'var(--met)':'var(--nit)',stage>=4||allMode?'字元線金屬（Word line metal）':'氮化層（Nitride）（暫代）'],['var(--sto)','儲存層（Storage layer）'],['var(--ch)','通道（Channel）']];
  lg.forEach((l,i)=>{s+=`<rect x="${[20,150,380,490][i]}" y="${Y0+68}" width="14" height="12" fill="${l[0]}" stroke="var(--bd)"/><text x="${[40,170,400,510][i]}" y="${Y0+78}" font-size="12.5">${l[1]}</text>`});
  document.getElementById('scene').innerHTML=s;
 }

@@ -54,7 +54,7 @@ h2{font-size:15px;margin:0 0 4px}
 <svg id="plan" viewBox="0 0 120 120" aria-label="接點陣列俯視圖"></svg>
 <label style="margin-top:0">每列凸塊（Bump）數 N <span class="val" id="nv"></span><input id="n" type="range" min="4" max="12" step="1" value="8"></label>
 <div class="read">
-<div><span>面陣列（Area array），整個晶粒面（N&times;N）</span><b id="ra"></b></div>
+<div><span>面陣列（Area array），整個晶粒（Die）面（N&times;N）</span><b id="ra"></b></div>
 <div><span>僅邊緣一圈（4N&minus;4）</span><b id="rp"></b></div>
 </div>
 <p class="note">同樣是 N&times;N 的位置網格：打線（Wire bonding）只能用邊緣的焊墊（深色點）；覆晶（Flip chip）可以用整個晶粒面上的每個位置（所有點）。</p>
@@ -63,7 +63,7 @@ h2{font-size:15px;margin:0 0 4px}
 <label style="display:flex;gap:8px;align-items:center"><input id="uf" type="checkbox" checked> 有底部填充（Underfill）</label>
 <div class="read"><div><span>最大凸塊（Bump）剪切（Shear）位移（誇大）</span><b id="rs"></b></div></div>
 <p class="note" id="snote"></p>
-<p class="note">凸塊不是錫球：凸塊連接晶粒與基板，錫球連接封裝與電路板。</p>
+<p class="note">凸塊（Bump）不是錫球（Solder ball）：凸塊（Bump）連接晶粒（Die）與基板（Substrate），錫球（Solder ball）連接封裝與電路板（Printed circuit board）。</p>
 </div>
 </div>
 </div>
@@ -74,11 +74,11 @@ var th=Q.get('theme');if(th==='light'||th==='dark')document.documentElement.setA
 var CYC=14000,t=0,playing=true,last=null;
 var $=function(i){return document.getElementById(i)};
 var STAGES=[
-['1 在晶粒焊墊（Bond pad）上做出凸塊（Bump）','晶粒（Die）仍然正面朝上時，先在焊墊上做出凸起的金屬凸塊。'],
-['2 晶粒翻轉成正面朝下','把晶粒翻過來，讓電路面朝向基板。'],
-['3 凸塊焊接到基板（Substrate）','凸塊直接焊到基板的焊墊上：連接路徑短，不用金屬線。'],
-['4 底部填充膠（Underfill）填滿縫隙','在晶粒與基板之間的縫隙填入稱為底部填充的樹脂，用來分散應力、保護凸塊。'],
-['5 在底面植上錫球（Solder ball）','基板底部的錫球把封裝連接到電路板。熱量也可以從晶粒背面散出。']];
+['1 在晶粒焊墊（Bond pad）上做出凸塊（Bump）','晶粒（Die）仍然正面朝上時，先在焊墊（Bond pad）上做出凸起的金屬凸塊（Bump）。'],
+['2 晶粒翻轉成正面朝下','把晶粒（Die）翻過來，讓電路面朝向基板（Substrate）。'],
+['3 凸塊焊接到基板（Substrate）','凸塊（Bump）直接焊到基板（Substrate）的焊墊（Bond pad）上：連接路徑短，不用金屬線。'],
+['4 底部填充膠（Underfill）填滿縫隙','在晶粒（Die）與基板（Substrate）之間的縫隙填入稱為底部填充（Underfill）的樹脂，用來分散應力、保護凸塊（Bump）。'],
+['5 在底面植上錫球（Solder ball）','基板底部的錫球（Solder ball）把封裝連接到電路板（Printed circuit board）。熱量也可以從晶粒（Die）背面散出。']];
 var B=[0,.12,.30,.46,.68,.76]; // stage starts in fraction
 function sm(a,b,x){x=(x-a)/(b-a);x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
 function lin(a,b,x){return Math.max(0,Math.min(1,(x-a)/(b-a)))}
@@ -120,10 +120,10 @@ function render(){
  h+='<g opacity="'+lab+'" font-size="16" font-weight="600">'+
  '<text x="480" y="226" text-anchor="middle" font-size="15" fill="#fff">矽晶粒（Silicon die，背面朝上）</text>'+
  '<path d="M712 225 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="222" '+T+'>晶粒（已翻轉）</text><text x="752" y="241" font-size="13" font-weight="400" '+T+'>主動面（Active side）朝下</text>'+
- '<path d="M676 270 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="276" '+T+'>凸塊（Bump）</text><text x="752" y="295" font-size="13" font-weight="400" '+T+'>連接晶粒與基板</text>'+
+ '<path d="M676 270 H744" stroke="var(--stx)" stroke-width="1.5"/><text x="752" y="276" '+T+'>凸塊（Bump）</text><text x="752" y="295" font-size="13" font-weight="400" '+T+'>連接晶粒（Die）與基板（Substrate）</text>'+
  (UF?'<path d="M196 282 H240" stroke="var(--stx)" stroke-width="1.5"/><text x="190" y="287" text-anchor="end" '+T+'>底部填充（Underfill）</text>':'')+
  '<path d="M194 316 H212" stroke="var(--stx)" stroke-width="1.5"/><text x="188" y="316" text-anchor="end" '+T+'>基板（Substrate）</text><text x="188" y="334" text-anchor="end" font-size="13" font-weight="400" '+T+'>扇出（Fan-out）</text><text x="188" y="349" text-anchor="end" font-size="13" font-weight="400" '+T+'>到較寬的間距</text>'+
- '<text x="756" y="360" '+T+'>錫球（Solder ball）</text><text x="756" y="379" font-size="13" font-weight="400" '+T+'>連接封裝與電路板</text>'+
+ '<text x="756" y="360" '+T+'>錫球（Solder ball）</text><text x="756" y="379" font-size="13" font-weight="400" '+T+'>連接封裝與電路板（Printed circuit board）</text>'+
  '<text x="150" y="434" '+T+'>電路板（Printed circuit board）</text></g>';
  h+='</g>';
  $('scene').innerHTML=h;
@@ -136,7 +136,7 @@ function render(){
  $('nv').textContent=N;$('ra').textContent=N*N+' 個接點';$('rp').textContent=(4*N-4)+' 個接點';
  $('tv').textContent=Math.round(dT*100);
  $('rs').textContent=(asm?(maxS).toFixed(1):'0.0')+' px'+(UF?'（有底部填充）':'（無底部填充）');
- $('snote').textContent=asm?(dT===0?'提高溫度變化：矽與基板的膨脹量不同，會對最外側的凸塊造成最大的剪切。':(UF?'底部填充把晶粒與基板綁在一起，剪切由大家分攤，每個凸塊的彎曲小得多（係數為示意）。':'沒有底部填充時，外側凸塊要承受全部的膨脹差異而變紅：這正是底部填充所分散的應力。')):'完成組裝（第 3 步之後）才看得到效果。';
+ $('snote').textContent=asm?(dT===0?'提高溫度變化：矽與基板（Substrate）的膨脹量不同，會對最外側的凸塊（Bump）造成最大的剪切。':(UF?'底部填充（Underfill）把晶粒（Die）與基板（Substrate）綁在一起，剪切由大家分攤，每個凸塊（Bump）的彎曲小得多（係數為示意）。':'沒有底部填充（Underfill）時，外側凸塊（Bump）要承受全部的膨脹差異而變紅：這正是底部填充（Underfill）所分散的應力。')):'完成組裝（第 3 步之後）才看得到效果。';
  // plan view
  var p='<rect x="2" y="2" width="116" height="116" rx="4" fill="#8ea6bf" stroke="#4b6580"/>',g=100/(N-1);
  for(var r2=0;r2<N;r2++)for(var c=0;c<N;c++){var e=r2===0||c===0||r2===N-1||c===N-1;

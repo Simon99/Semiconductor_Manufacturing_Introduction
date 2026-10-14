@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>平面（Planar）、FinFET 與 GAA：數數閘極（Gate）包住幾個面</title>
+<title>平面（Planar）、FinFET 與 GAA（gate-all-around）：數數閘極（Gate）包住幾個面</title>
 <style>
 :root{--bg:#f4f6fa;--fg:#17202e;--mut:#51607a;--card:#fff;--line:#d3dae6;--acc:#1f7a3a;--btn:#e7ecf4;--btnon:#1f6feb;--btnfg:#fff;--plate:#e9eef6}
 :root[data-theme=dark]{--bg:#0f1621;--fg:#e8eef7;--mut:#9fb0c6;--card:#162131;--line:#2a3a50;--acc:#8dff5a;--btn:#22324a;--btnon:#3b82f6;--btnfg:#fff;--plate:#121c2a}
@@ -43,9 +43,9 @@ tr.cur{background:rgba(59,130,246,.15)}.note{font-size:13px;color:var(--mut)}
 </div></div></div>
 <script>
 const GEO={"planar": [{"b": [1, 7, -1, 7, -1.6, -1], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, -1, 0], "kind": "ch", "wrap": ["top"], "main": ["top"]}, {"b": [5, 6, 0, 6, -1, 0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 0, 6, 0, 0.9], "kind": "gate", "wrap": [], "main": false}], "finfet": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 2.6, 3.4, 0, 3], "kind": "ch", "wrap": ["top", "ymax", "ymin"], "main": ["top", "ymax", "ymin"]}, {"b": [5, 6, 2.6, 3.4, 0, 3], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 4.2, 3, 3.6], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.8, 2.6, 0, 3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 3.4, 4.2, 0, 3], "kind": "gate", "wrap": [], "main": false}], "gaa": [{"b": [1, 7, -1, 7, -1, 0], "kind": "sub", "wrap": [], "main": false}, {"b": [2, 3, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [5, 6, 1.5, 4.5, 0, 4.0], "kind": "sd", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.1, 1.7000000000000002], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["bot"]}, {"b": [3, 5, 1.5, 4.5, 2.2, 2.8000000000000003], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": []}, {"b": [3, 5, 1.5, 4.5, 3.3000000000000003, 3.9000000000000004], "kind": "ch", "wrap": ["top", "ymax", "ymin", "bot"], "main": ["top", "ymax", "ymin"]}, {"b": [3, 5, 1.5, 4.5, 0.3, 1.1], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 1.7, 2.2], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 2.8, 3.3], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.5, 4.5, 3.9, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 1.0, 1.5, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}, {"b": [3, 5, 4.5, 5.0, 0.3, 4.5], "kind": "gate", "wrap": [], "main": false}]};
-const DEVS=[['planar','平面電晶體（Planar）','平面電晶體：閘極坐落在通道上方，只能從一面（上方）控制通道。閘極關閉時，電流仍可能從較深處偷偷溜過去。'],
-['finfet','FinFET','FinFET：通道是一片垂直豎立的薄鰭（Fin），閘極覆蓋在頂面與兩側面，共三面控制，因此漏電（Leakage）大幅減少。'],
-['gaa','GAA 奈米片（Nanosheet）','GAA：通道是數片堆疊的薄片，閘極填入並包住每一片的頂面、底面、左面與右面，共四面。']];
+const DEVS=[['planar','平面電晶體（Planar）','平面電晶體：閘極（gate）坐落在通道（channel）上方，只能從一面（上方）控制通道。閘極關閉時，電流仍可能從較深處偷偷溜過去。'],
+['finfet','FinFET','FinFET：通道（channel）是一片垂直豎立的薄鰭（Fin），閘極（gate）覆蓋在頂面與兩側面，共三面控制，因此漏電（Leakage）大幅減少。'],
+['gaa','GAA（gate-all-around） 奈米片（Nanosheet）','GAA（gate-all-around）：通道（channel）是數片堆疊的薄片，閘極（gate）填入並包住每一片的頂面、底面、左面與右面，共四面。']];
 const FN={top:'頂面',ymax:'前側面',ymin:'後側面',bot:'底面'};
 const ORD=['top','ymax','ymin','bot'];
 const q=new URLSearchParams(location.search);

@@ -53,32 +53,32 @@ input[type=range]{flex:1;min-width:90px}
 <main>
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/01-how-a-fab-works/README.md">&larr; 回到章節</a>
 <h1>用天車（OHT）派送 FOUP</h1>
-<p class="sub">選一台機台（Tool），從倉儲（Stocker）送出一個 FOUP。天車沿天花板軌道載運，再把它放到機台的 Load Port 上。</p>
+<p class="sub">選一台機台（Tool），從倉儲（Stocker）送出一個 FOUP。天車（OHT）沿天花板軌道載運，再把它放到機台（Tool）的 Load Port 上。</p>
 <div class="scene"><svg id="sv" viewBox="0 0 1100 540" role="img" aria-label="天花板軌道上的天車（OHT），往來於倉儲（Stocker）與四台機台（Tool）之間"></svg></div>
 <div class="row">
  <div class="card">
   <h2>機台（Tool）：點選卡片上的按鈕</h2>
   <div class="tools" id="tools"></div>
   <div class="ctl">
-   <label>天車速度 <input id="spd" type="range" min="1" max="5" step="0.5" value="3"> <output id="spdo">3.0 m/s</output></label>
+   <label>天車（OHT）速度 <input id="spd" type="range" min="1" max="5" step="0.5" value="3"> <output id="spdo">3.0 m/s</output></label>
    <button id="pause">暫停</button>
   </div>
-  <p class="msg" id="msg" aria-live="polite">請先選一台機台，再按「派送 FOUP」。</p>
+  <p class="msg" id="msg" aria-live="polite">請先選一台機台（Tool），再按「派送 FOUP」。</p>
  </div>
  <div class="card">
   <h2>運送階段</h2>
   <ol class="steps" id="steps">
-   <li>1. 吊掛機構（Hoist）在倉儲抓取 FOUP</li>
-   <li>2. 天車沿軌道駛向機台</li>
+   <li>1. 吊掛機構（Hoist）在倉儲（Stocker）抓取 FOUP</li>
+   <li>2. 天車（OHT）沿軌道駛向機台（Tool）</li>
    <li>3. 吊掛機構把 FOUP 放到 Load Port</li>
-   <li>4. FOUP 已就位：由機台接手</li>
+   <li>4. FOUP 已就位：由機台（Tool）接手</li>
   </ol>
   <dl class="read">
    <dt>軌道距離</dt><dd id="r1">-</dd>
    <dt>行駛時間</dt><dd id="r2">-</dd>
    <dt>整趟時間</dt><dd id="r3">-</dd>
   </dl>
-  <p class="note">示意數字：場景 1 單位 = 0.1 m，抓取與放下分別耗時 6 秒與 8 秒，動畫約為實際速度的 6 倍。機台停機或 Load Port 已被占用時會拒收 FOUP（簡化規則）。依本章說明，一個 FOUP 最多裝 25 片晶圓（Wafer），重約 8 公斤。</p>
+  <p class="note">示意數字：場景 1 單位 = 0.1 m，抓取與放下分別耗時 6 秒與 8 秒，動畫約為實際速度的 6 倍。機台（Tool）停機或 Load Port 已被占用時會拒收 FOUP（簡化規則）。依本章說明，一個 FOUP 最多裝 25 片晶圓（Wafer），重約 8 公斤。</p>
  </div>
 </div>
 </main>
@@ -91,12 +91,12 @@ var q=new URLSearchParams(location.search);
 if(q.get('theme')==='dark'||q.get('theme')==='light')document.documentElement.setAttribute('data-theme',q.get('theme'));
 var sv=document.getElementById('sv');
 var h='<defs><g id="foup"><rect x="-12" y="121" width="24" height="7" rx="2" fill="#d8f1ff"/><rect x="-26" y="127" width="52" height="61" rx="5" fill="#58b8f0" stroke="#d8f1ff" stroke-width="2"/><path d="M-18 168H18M-18 175H18M-18 182H18" stroke="#1e5f8a" stroke-width="2" fill="none"/><rect x="19" y="132" width="5" height="30" rx="2" fill="#d8f1ff"/><text class="stxt" x="-3" y="152" text-anchor="middle" font-size="13" font-weight="700" style="fill:#08263d">FOUP</text></g><clipPath id="below"><rect x="-50" y="110" width="100" height="700"/></clipPath></defs>';
-h+='<rect width="1100" height="540" fill="var(--scene)"/><rect width="1100" height="44" fill="var(--ceil)"/><text class="stxt" x="20" y="28" font-size="14">晶圓廠（Fab）天花板：天車軌道</text>';
+h+='<rect width="1100" height="540" fill="var(--scene)"/><rect width="1100" height="44" fill="var(--ceil)"/><text class="stxt" x="20" y="28" font-size="14">晶圓廠（Fab）天花板：天車（OHT）軌道</text>';
 for(var x=40;x<1100;x+=120)h+='<rect x="'+x+'" y="44" width="8" height="12" fill="#4a5a74"/>';
 h+='<rect y="56" width="1100" height="12" fill="var(--rail)"/><rect y="56" width="1100" height="3" fill="#b9c4d6"/><rect y="470" width="1100" height="10" fill="var(--floor)"/>';
 h+='<rect x="30" y="210" width="150" height="260" rx="4" fill="var(--stk)" stroke="var(--toolln)" stroke-width="2"/>';
 [228,298,368].forEach(function(y){[44,108].forEach(function(x){h+='<rect x="'+x+'" y="'+y+'" width="56" height="58" rx="4" fill="var(--slot)"/><rect x="'+(x+8)+'" y="'+(y+8)+'" width="40" height="42" rx="4" fill="#58b8f0" opacity=".55"/>';});});
-h+='<text class="stxt" x="105" y="458" text-anchor="middle" font-size="14" font-weight="700">倉儲</text><g id="stkf"><use href="#foup" transform="translate('+STK+',22)"/></g>';
+h+='<text class="stxt" x="105" y="458" text-anchor="middle" font-size="14" font-weight="700">倉儲（Stocker）</text><g id="stkf"><use href="#foup" transform="translate('+STK+',22)"/></g>';
 TOOLS.forEach(function(t,i){
  h+='<rect x="'+(t.x0-90)+'" y="360" width="90" height="12" rx="2" fill="var(--ledge)"/><rect x="'+t.x0+'" y="300" width="100" height="170" rx="4" fill="var(--tool)" stroke="var(--toolln)" stroke-width="2"/><rect x="'+t.x0+'" y="304" width="6" height="56" fill="var(--ledge)"/>';
  h+='<text class="stxt" x="'+(t.x0+53)+'" y="420" text-anchor="middle" font-size="14" font-weight="700">'+t.n+'</text><text class="stxt" x="'+t.cx+'" y="392" text-anchor="middle" font-size="12" style="fill:var(--hl)">Load Port</text>';
@@ -109,7 +109,7 @@ var $=function(i){return document.getElementById(i)};
 var veh=$('veh'),hoist=$('hoist'),carry=$('carry'),stkf=$('stkf');
 // ---- model ----
 var S, events=[], clock=0, paused=false, speed=3;
-function reset(){S={x:TOOLS[1].cx,d:150,carry:false,stk:false,tools:TOOLS.map(function(){return{st:'idle',pf:false}}),job:null,sel:1,msg:'請先選一台機台，再按「派送 FOUP」。',stage:-1,info:null};
+function reset(){S={x:TOOLS[1].cx,d:150,carry:false,stk:false,tools:TOOLS.map(function(){return{st:'idle',pf:false}}),job:null,sel:1,msg:'請先選一台機台（Tool），再按「派送 FOUP」。',stage:-1,info:null};
  /* start pose: mid-delivery to Tool B so a still is informative */ }
 function dist(a,b){return Math.abs(a-b)}
 function makeJob(target){
@@ -140,17 +140,17 @@ function stepJob(dt){
   }
   if(j.e>=s.dur){j.i++;j.e=0}
  }
- if(j.i>=j.steps.length){S.tools[j.target].st='running';S.stk=true;S.stage=3;S.msg=TOOLS[j.target].n+'的 Load Port 已收到 FOUP，正在加工這批晶圓。';S.job=null}
+ if(j.i>=j.steps.length){S.tools[j.target].st='running';S.stk=true;S.stage=3;S.msg=TOOLS[j.target].n+'的 Load Port 已收到 FOUP，正在加工這批晶圓（Wafer）。';S.job=null}
 }
 function apply(ev){
  if(ev.t==='dispatch'){
   var T=S.tools[ev.i];
-  if(S.job){S.msg='天車正忙著運送另一個 FOUP。';return}
-  if(T.st==='down'){S.msg=TOOLS[ev.i].n+'停機中（維修或故障），派送被拒絕，請改選其他機台。';return}
-  if(T.st==='running'){S.msg=TOOLS[ev.i].n+'的 Load Port 被加工中的批次占用，請等它完成，或改選其他機台。';return}
+  if(S.job){S.msg='天車（OHT）正忙著運送另一個 FOUP。';return}
+  if(T.st==='down'){S.msg=TOOLS[ev.i].n+'停機中（維修或故障），派送被拒絕，請改選其他機台（Tool）。';return}
+  if(T.st==='running'){S.msg=TOOLS[ev.i].n+'的 Load Port 被加工中的批次占用，請等它完成，或改選其他機台（Tool）。';return}
   S.job=makeJob(ev.i);S.stage=0;S.msg='正在派送 FOUP 到'+TOOLS[ev.i].n+'。';
  }else if(ev.t==='down'){var T2=S.tools[ev.i];if(T2.st!=='running'&&!(S.job&&S.job.target===ev.i)){T2.st=T2.st==='down'?'idle':'down';S.msg=TOOLS[ev.i].n+(T2.st==='down'?'已設為停機。':'已恢復運作，目前閒置。')}}
- else if(ev.t==='finish'){var T3=S.tools[ev.i];if(T3.st==='running'){T3.st='idle';T3.pf=false;S.msg=TOOLS[ev.i].n+'已完成這批晶圓，FOUP 已被取走。'}}
+ else if(ev.t==='finish'){var T3=S.tools[ev.i];if(T3.st==='running'){T3.st='idle';T3.pf=false;S.msg=TOOLS[ev.i].n+'已完成這批晶圓（Wafer），FOUP 已被取走。'}}
  else if(ev.t==='speed'){S.speed=ev.v}
  else if(ev.t==='sel'){S.sel=ev.i}
 }
@@ -182,7 +182,7 @@ function render(){
  var lis=$('steps').children;for(var k=0;k<lis.length;k++)lis[k].className=(S.stage===k?'on':(S.stage>k?'done':''));
  $('msg').textContent=S.msg;
  if(S.info){$('r1').textContent=S.info.dist.toFixed(1)+' m';$('r2').textContent=S.info.travel.toFixed(1)+' 秒（速度 '+S.speed.toFixed(1)+' m/s）';$('r3').textContent='約 '+Math.round(S.info.total)+' 秒（示意）'}
- $('cap1').textContent=S.stage<0?'階段：天車返回倉儲':S.stage===3?'階段：已就位，FOUP 在 Load Port':'階段：'+['在倉儲抓取','沿軌道行駛','放到 Load Port'][S.stage];
+ $('cap1').textContent=S.stage<0?'階段：天車（OHT）返回倉儲（Stocker）':S.stage===3?'階段：已就位，FOUP 在 Load Port':'階段：'+['在倉儲（Stocker）抓取','沿軌道行駛','放到 Load Port'][S.stage];
 }
 // ---- UI ----
 var tc='';TOOLS.forEach(function(t,i){tc+='<div class="tc" id="tc'+i+'"><b>'+t.n+' <span class="chip idle" id="ch'+i+'">閒置</span></b><div class="btns"><button class="pri" id="dp'+i+'">派送 FOUP</button><button id="dn'+i+'">設為停機</button><button id="fn'+i+'" style="display:none">完成批次</button></div></div>'});

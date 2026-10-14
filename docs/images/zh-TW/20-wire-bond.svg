@@ -75,13 +75,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <line x1="380" y1="404" x2="430" y2="285" class="ld"/><circle cx="430" cy="285" r="2.5" fill="#55606e"/><text x="250" y="420" text-anchor="start" class="lab" >黏晶膠（Die attach adhesive）</text>
 <line x1="600" y1="404" x2="605" y2="298" class="ld"/><circle cx="605" cy="298" r="2.5" fill="#55606e"/><text x="560" y="420" text-anchor="start" class="lab" >晶粒承載座（Die paddle），導線架</text>
 <line x1="70" y1="404" x2="72" y2="368" class="ld"/><circle cx="72" cy="368" r="2.5" fill="#55606e"/><text x="30" y="420" text-anchor="start" class="lab" >接腳（Lead）</text>
-<g class="cap0"><text x="480" y="466" text-anchor="middle" class="cap" >完成的封裝（Package）：封膠材料保護晶粒與金屬線，接腳則把晶片（Chip）接到電路板（Printed circuit board）。</text><text x="480" y="488" text-anchor="middle" class="cap" >打線（Wire bonding）是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。</text></g>
-<g class="cap1"><text x="480" y="466" text-anchor="middle" class="cap" >第 1 條線：劈刀（Capillary）把線端的金屬球壓在晶粒焊墊上，再拉出弧形線圈（Loop）拉向接腳。</text><text x="480" y="488" text-anchor="middle" class="cap" >在接腳上壓出扁平的針腳接點（Stitch bond），這條線就完成了。這條線比頭髮還細。</text></g>
-<g class="cap2"><text x="480" y="466" text-anchor="middle" class="cap" >第 2 條線：在下一個焊墊重複同樣的動作。每個焊墊各有一條線，依序完成。</text><text x="480" y="488" text-anchor="middle" class="cap" >若焊墊受到污染，線就黏不上，造成斷路（Open circuit）。</text></g>
-<g class="cap3"><text x="480" y="466" text-anchor="middle" class="cap" >封膠（Molding）：環氧樹脂流過晶粒與金屬線四周，硬化成保護外殼。</text><text x="480" y="488" text-anchor="middle" class="cap" >流速過快會把細線推向一側，即沖線（Wire sweep），造成相鄰導線短路（Short circuit）。</text></g>
+<g class="cap0"><text x="480" y="466" text-anchor="middle" class="cap" >完成的封裝（Package）：封膠材料保護晶粒（Die）與金屬線，接腳（Lead）則把晶片（Chip）接到電路板（Printed circuit board）。</text><text x="480" y="488" text-anchor="middle" class="cap" >打線（Wire bonding）是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。</text></g>
+<g class="cap1"><text x="480" y="466" text-anchor="middle" class="cap" >第 1 條線：劈刀（Capillary）把線端的金屬球壓在晶粒（Die）焊墊（Bond pad）上，再拉出弧形線圈（Loop）拉向接腳（Lead）。</text><text x="480" y="488" text-anchor="middle" class="cap" >在接腳上壓出扁平的針腳接點（Stitch bond），這條線就完成了。這條線比頭髮還細。</text></g>
+<g class="cap2"><text x="480" y="466" text-anchor="middle" class="cap" >第 2 條線：在下一個焊墊（Bond pad）重複同樣的動作。每個焊墊各有一條線，依序完成。</text><text x="480" y="488" text-anchor="middle" class="cap" >若焊墊受到污染，線就黏不上，造成斷路（Open circuit）。</text></g>
+<g class="cap3"><text x="480" y="466" text-anchor="middle" class="cap" >封膠（Molding）：環氧樹脂流過晶粒（Die）與金屬線四周，硬化成保護外殼。</text><text x="480" y="488" text-anchor="middle" class="cap" >流速過快會把細線推向一側，即沖線（Wire sweep），造成相鄰導線短路（Short circuit）。</text></g>
 <g transform="translate(230,508)">
 <rect x="0" y="0" width="170" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><text x="85" y="20" text-anchor="middle" class="chip" >1 黏晶（Die attach）</text>
-<rect x="190" y="0" width="160" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip2" x="190" y="0" width="160" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="270" y="20" text-anchor="middle" class="chip" >2 打線</text>
-<rect x="370" y="0" width="130" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip3" x="370" y="0" width="130" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="435" y="20" text-anchor="middle" class="chip" >3 封膠</text>
+<rect x="190" y="0" width="160" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip2" x="190" y="0" width="160" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="270" y="20" text-anchor="middle" class="chip" >2 打線（Wire bonding）</text>
+<rect x="370" y="0" width="130" height="30" rx="15" fill="#eef0f3" stroke="#aab2bd"/><rect class="chip3" x="370" y="0" width="130" height="30" rx="15" fill="#f6c95a" stroke="#8a6a10"/><text x="435" y="20" text-anchor="middle" class="chip" >3 封膠（Molding）</text>
 </g>
 </svg>

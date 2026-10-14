@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 552" width="960" height="552" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC',system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
 <title>閘極間距與金屬間距（Gate pitch and metal pitch）</title>
-<desc>從上方看的閘極（Gate）與金屬導線（Metal wire），標示 CPP 與 MMP；間距（Pitch）縮小到 0.7 倍後，同樣面積內可容納更多線條，相對密度（Relative density）提高到約 2 倍。</desc>
+<desc>從上方看的閘極（Gate）與金屬導線（Metal wire），標示 CPP 與 MMP（Minimum Metal Pitch）；間距（Pitch）縮小到 0.7 倍後，同樣面積內可容納更多線條，相對密度（Relative density）提高到約 2 倍。</desc>
 <style>
 .sc{transform-origin:0 0;animation:shrink 12s linear infinite}
 .lx{animation:lx 12s linear infinite}

@@ -41,14 +41,14 @@ code{font-size:12px}
 <body>
 <div class="wrap">
 <div class="top"><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/22-final-test-and-reliability/README.md">&larr; 回到章節</a><h1>浴缸曲線（Bathtub curve）與預燒（Burn-in）</h1></div>
-<p class="lede">晶片（Chip）生命週期中的失效率（Failure rate），以及工廠預燒能篩除與無法篩除的部分。所有模型數值皆為<b>示意</b>。</p>
+<p class="lede">晶片（Chip）生命週期中的失效率（Failure rate），以及工廠預燒（Burn-in）能篩除與無法篩除的部分。所有模型數值皆為<b>示意</b>。</p>
 <div class="grid">
  <div>
   <div class="card" style="overflow-x:auto"><svg id="plot" style="min-width:600px" viewBox="0 0 760 362" width="100%" role="img" aria-label="失效率（Failure rate）對使用時間（雙對數座標），比較有無預燒（Burn-in）"></svg></div>
   <div class="ctl">
    <label for="bi">預燒時間（Burn-in time）：<span id="biv">48</span> 小時</label>
    <input id="bi" type="range" min="0" max="168" step="1" value="48" aria-label="預燒時間（Burn-in time），單位小時">
-   <label><input id="nw" type="checkbox"> 顯示：預燒無法改變老化期（Wear-out）</label>
+   <label><input id="nw" type="checkbox"> 顯示：預燒（Burn-in）無法改變老化期（Wear-out）</label>
    <button id="pp" aria-pressed="false">暫停</button><span class="note" id="clock"></span>
   </div>
   <div class="read" aria-live="polite">
@@ -84,10 +84,10 @@ const css=v=>'var(--'+v+')';
 // ---------- state ----------
 const CYC=14000;let t=0,paused=false,last=null,b=48;
 const STG=[
- ['1. 早期失效（Early failures）','帶有潛在缺陷的弱晶片在開始使用後不久就會失效。失效率一開始很高，隨著這些晶片陸續淘汰而下降，韋伯（Weibull）分布形狀參數 β<1。',2500],
- ['2. 穩定期（Stable period）','隨機失效，失效率低且大致固定（β=1）。這段是晶片的有效使用壽命。',5000],
- ['3. 老化期（Wear-out）','老化機制逐漸累積，失效率攀升（β>1）。何時開始，取決於設計與製程。',7500],
- ['4. 預燒（Burn-in）','讓晶片在高溫和略高電壓下運作，使體質弱的晶片在工廠就失效，再經測試後剔除。客戶拿到的是已度過早期失效區的晶片。預燒無法延長壽命，也無法修復老化。',12000]];
+ ['1. 早期失效（Early failures）','帶有潛在缺陷的弱晶片在開始使用後不久就會失效。失效率（Failure rate）一開始很高，隨著這些晶片陸續淘汰而下降，韋伯（Weibull）分布形狀參數 β<1。',2500],
+ ['2. 穩定期（Stable period）','隨機失效，失效率（Failure rate）低且大致固定（β=1）。這段是晶片的有效使用壽命。',5000],
+ ['3. 老化期（Wear-out）','老化機制逐漸累積，失效率（Failure rate）攀升（β>1）。何時開始，取決於設計與製程。',7500],
+ ['4. 預燒（Burn-in）','讓晶片在高溫和略高電壓下運作，使體質弱的晶片在工廠就失效，再經測試後剔除。客戶拿到的是已度過早期失效區的晶片。預燒（Burn-in）無法延長壽命，也無法修復老化（Wear-out）。',12000]];
 function stageOf(tt){return tt<3500?0:tt<6000?1:tt<8500?2:3}
 // ---------- plot ----------
 const PL=56,PR=744,PT=14,PB=318,XMIN=1,XMAX=1e5,YMIN=100,YMAX=1e6;
@@ -109,7 +109,7 @@ function buildPlot(){
  for(let e=2;e<=6;e++){const y=Y(Math.pow(10,e));el(plot,'line',{x1:PL,x2:PR,y1:y,y2:y,stroke:css('line'),'stroke-width':1});
   el(plot,'text',{x:PL-6,y:y+4,'text-anchor':'end','font-size':12,class:'s'},e===2?'100':e===3?'1k':e===4?'10k':e===5?'100k':'1M')}
  el(plot,'text',{x:(PL+PR)/2,y:PB+36,'text-anchor':'middle','font-size':13,class:'s'},'出貨後使用時數（對數刻度）');
- el(plot,'text',{transform:'translate(13,'+((PT+PB)/2)+') rotate(-90)','text-anchor':'middle','font-size':13,class:'s'},'失效率，FIT（對數刻度）');
+ el(plot,'text',{transform:'translate(13,'+((PT+PB)/2)+') rotate(-90)','text-anchor':'middle','font-size':13,class:'s'},'失效率（Failure rate），FIT（對數刻度）');
  g.wearBand=el(plot,'g',{});
  g.hatch=el(plot,'path',{fill:'url(#hp)',stroke:'none'});
  const clip=el(plot,'g',{'clip-path':'url(#rev)'});g.clip=clip;
@@ -121,7 +121,7 @@ function buildPlot(){
  g.wm=el(plot,'g',{});
  // legend
  const lg=el(plot,'g',{transform:'translate(300,18)'});
- [['grey','全部晶片，未預燒','7 5',3],['teal','預燒後出貨','',4.5]].forEach((r,i)=>{el(lg,'line',{x1:0,x2:26,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':r[3],'stroke-dasharray':r[2]});el(lg,'text',{x:32,y:i*18+4,'font-size':12.5},r[1])});
+ [['grey','全部晶片，未預燒（Burn-in）','7 5',3],['teal','預燒（Burn-in）後出貨','',4.5]].forEach((r,i)=>{el(lg,'line',{x1:0,x2:26,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':r[3],'stroke-dasharray':r[2]});el(lg,'text',{x:32,y:i*18+4,'font-size':12.5},r[1])});
  [['red','早期部分（β<1）'],['grn','隨機部分（β=1）'],['org','老化部分（β>1）']].forEach((r,i)=>{el(lg,'line',{x1:230,x2:254,y1:i*18,y2:i*18,stroke:css(r[0]),'stroke-width':2,'stroke-dasharray':'2 3'});el(lg,'text',{x:260,y:i*18+4,'font-size':12,class:'s'},r[1])});
  // phase labels
  [['早期失效',2.5,'red','早期失效（Early failures）'],['穩定期',160,'grn','穩定期（Stable period）'],['老化期',2e4,'org','老化期（Wear-out）']].forEach(r=>{g['l'+r[0]]=el(plot,'text',{x:r[0]==='老化期'?PR-4:X(r[1]),'text-anchor':r[0]==='老化期'?'end':'start',y:PB-8-0,'font-size':13,'font-weight':700,fill:css(r[2]),style:'fill:'+css(r[2])},r[3])});
@@ -149,7 +149,7 @@ function draw(){
   el(g.wm,'circle',{cx:X(xm),cy:Y(o),r:6,fill:css('grey')});el(g.wm,'circle',{cx:X(xm),cy:Y(s),r:3.5,fill:css('teal')});
   co.style.display='block';
   const dl=(s/o-1)*100;
-  co.innerHTML='使用 50,000 小時時：未預燒為 <b>'+fmt(o)+' FIT</b>，預燒後為 <b>'+fmt(s)+' FIT</b>（'+(dl>=0?'+':'')+dl.toFixed(1)+'%）。老化期的曲線仍是同一條曲線。預燒只是把時鐘往前撥了 '+fmt(teq)+' 等效小時（已消耗的壽命），因此出貨的晶片只是在曲線上稍微往後，絕不會更低。';
+  co.innerHTML='使用 50,000 小時時：未預燒（Burn-in）為 <b>'+fmt(o)+' FIT</b>，預燒（Burn-in）後為 <b>'+fmt(s)+' FIT</b>（'+(dl>=0?'+':'')+dl.toFixed(1)+'%）。老化期（Wear-out）的曲線仍是同一條曲線。預燒（Burn-in）只是把時鐘往前撥了 '+fmt(teq)+' 等效小時（已消耗的壽命），因此出貨的晶片只是在曲線上稍微往後，絕不會更低。';
  }else co.style.display='none';
  // readouts
  const scr=1-Math.exp(-H(teq));

@@ -93,10 +93,10 @@
 <g class="lot l1"><rect x="-20" y="-12" width="40" height="24" rx="5" fill="#9dbbf0" stroke="#34548f" stroke-width="1.5"/><rect x="-20" y="-12" width="40" height="6" rx="3" fill="#000" opacity=".16"/><text x="0" y="6" text-anchor="middle" font-size="13" font-weight="700" fill="#10151f">L1</text></g>
 <g class="lot l2"><rect x="-20" y="-12" width="40" height="24" rx="5" fill="#9dbbf0" stroke="#34548f" stroke-width="1.5"/><rect x="-20" y="-12" width="40" height="6" rx="3" fill="#000" opacity=".16"/><text x="0" y="6" text-anchor="middle" font-size="13" font-weight="700" fill="#10151f">L2</text></g>
 <line x1="30" y1="432" x2="930" y2="432" stroke="#c4cbdb"/>
-<rect x="40" y="440" width="14" height="14" rx="3" fill="#6fd09a" stroke="#2b3550"/><text x="62" y="452" font-size="12">放行：確認無影響，繼續生產</text>
-<rect x="40" y="462" width="14" height="14" rx="3" fill="#5fd0d0" stroke="#2b3550"/><text x="62" y="474" font-size="12">有條件放行：繼續生產，但加強檢查或特別標記</text>
-<rect x="490" y="440" width="14" height="14" rx="3" fill="#b79bf0" stroke="#2b3550"/><text x="512" y="452" font-size="12">重工：去除部分結果重做，主要是微影（Photolithography）</text>
-<rect x="490" y="462" width="14" height="14" rx="3" fill="#f08080" stroke="#2b3550"/><text x="512" y="474" font-size="12">報廢：損壞無法挽回，或繼續做風險太高</text>
+<rect x="40" y="440" width="14" height="14" rx="3" fill="#6fd09a" stroke="#2b3550"/><text x="62" y="452" font-size="12">放行（Release）：確認無影響，繼續生產</text>
+<rect x="40" y="462" width="14" height="14" rx="3" fill="#5fd0d0" stroke="#2b3550"/><text x="62" y="474" font-size="12">有條件放行（Conditional release）：繼續生產，但加強檢查或特別標記</text>
+<rect x="490" y="440" width="14" height="14" rx="3" fill="#b79bf0" stroke="#2b3550"/><text x="512" y="452" font-size="12">重工（Rework）：去除部分結果重做，主要是微影（Photolithography）</text>
+<rect x="490" y="462" width="14" height="14" rx="3" fill="#f08080" stroke="#2b3550"/><text x="512" y="474" font-size="12">報廢（Scrap）：損壞無法挽回，或繼續做風險太高</text>
 <rect x="40" y="488" width="14" height="14" rx="3" fill="#9dbbf0" stroke="#34548f"/><text x="62" y="500" font-size="12">正常批次</text>
 <rect x="160" y="488" width="14" height="14" rx="3" fill="#ffc247" stroke="#a86b00"/><text x="182" y="500" font-size="12">被 Hold 的批次（可疑）</text>
 <text x="480" y="526" text-anchor="middle" font-size="13" class="b">發現異常、擋住影響、找出範圍、判定處置，再找出根本原因（Root cause）、防止再發</text>

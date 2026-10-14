@@ -152,11 +152,11 @@ var NS='http://www.w3.org/2000/svg';
 var CX=300, YI=376, CYCLE=18000;
 var PH=[0,2000,3500,5500,7000]; // stage start times (ms)
 var TXT=[
- '熔化：石英坩堝裡的多晶矽被加熱到 1,400 °C 以上，直到熔化。',
- '接觸：晶種是一小塊單晶矽，將它降下，直到剛好接觸熔液。',
+ '熔化：石英坩堝裡的多晶矽（Polysilicon）被加熱到 1,400 °C 以上，直到熔化。',
+ '接觸：晶種（Seed crystal）是一小塊單晶矽，將它降下，直到剛好接觸熔液（Molten silicon）。',
  '頸部：開始上拉，先拉出一段細頸（標準做法，用來濾掉晶體缺陷）。',
- '肩部：放慢拉速並調整熔液溫度，讓晶體逐漸變粗，達到目標直徑。',
- '本體：晶種與晶棒一邊旋轉、一邊被往上拉，圓柱狀的單晶晶棒逐漸長成。'];
+ '肩部：放慢拉速並調整熔液（Molten silicon）溫度，讓晶體逐漸變粗，達到目標直徑。',
+ '本體：晶種（Seed crystal）與晶棒（Ingot）一邊旋轉、一邊被往上拉，圓柱狀的單晶（Single crystal）晶棒（Ingot）逐漸長成。'];
 var vEl=$('v'), wEl=$('w');
 var t=(Q.get('t')!==null)?+Q.get('t'):10000, playing=!(Q.get('still')==='1'||Q.get('t')!==null);
 if(Q.get('v'))vEl.value=Q.get('v'); if(Q.get('w'))wEl.value=Q.get('w');

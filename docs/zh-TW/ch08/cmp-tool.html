@@ -113,16 +113,16 @@ svg.chart{width:100%;height:auto;display:block}
 </div>
 </div>
 </div>
-<p class="note">V 是距離平台中心 0.15 m 處晶圓與研磨墊之間的相對速度（Relative speed），且研磨頭與平台轉速相同。K<sub>p</sub> 取決於研磨墊、研磨液與薄膜。簡化模型：Preston 關係式指出研磨速率與壓力、相對速度成正比；它沒有納入研磨液化學、研磨墊磨耗（Pad wear）與圖形密度（Pattern density），而這些在實務上同樣重要。本頁所有數值皆為示意。</p>
+<p class="note">V 是距離平台（Platen）中心 0.15 m 處晶圓與研磨墊（Polishing pad）之間的相對速度（Relative speed），且研磨頭（Polishing head）與平台轉速相同。K<sub>p</sub> 取決於研磨墊、研磨液（Slurry）與薄膜。簡化模型：Preston 關係式指出研磨速率與壓力、相對速度成正比；它沒有納入研磨液化學、研磨墊磨耗（Pad wear）與圖形密度（Pattern density），而這些在實務上同樣重要。本頁所有數值皆為示意。</p>
 </div>
 <script>
 (function(){
 var Kp=1.0e-13, R=0.15, FILM=500; // Pa^-1, m, nm
-var stagesTxt=[["全部","在研磨液的作用下，把晶圓壓在旋轉的研磨墊上，表面就被磨平。請拖曳滑桿。"],
-["1 研磨液（Slurry）","研磨液（研磨顆粒＋化學品）滴在旋轉的研磨墊上。"],
-["2 下壓","研磨頭把晶圓正面朝下壓在研磨墊上。壓力 P 越大，研磨越快。"],
-["3 研磨（Polish）","化學作用讓表面變軟，研磨顆粒將它磨掉。凸起處受到的壓力較大，最先被磨除。"],
-["4 修整（Conditioning）","鑽石顆粒修整器持續刮磨研磨墊，讓它保持粗糙。"]];
+var stagesTxt=[["全部","在研磨液（Slurry）的作用下，把晶圓壓在旋轉的研磨墊（Polishing pad）上，表面就被磨平。請拖曳滑桿。"],
+["1 研磨液（Slurry）","研磨液（研磨顆粒＋化學品）滴在旋轉的研磨墊（Polishing pad）上。"],
+["2 下壓","研磨頭（Polishing head）把晶圓正面朝下壓在研磨墊（Polishing pad）上。壓力 P 越大，研磨越快。"],
+["3 研磨（Polish）","化學作用讓表面變軟，研磨顆粒（Particle）將它磨掉。凸起處受到的壓力較大，最先被磨除。"],
+["4 修整（Conditioning）","鑽石顆粒修整器持續刮磨研磨墊（Polishing pad），讓它保持粗糙。"]];
 var q=new URLSearchParams(location.search);
 var th=q.get('theme'); if(th==='dark'||th==='light') document.documentElement.setAttribute('data-theme',th);
 var $=function(i){return document.getElementById(i)};

@@ -66,7 +66,7 @@ input[type=range]{width:100%}
 <div class="card" style="margin-top:10px">
 <h2>檢查的規則</h2>
 <div class="rule" id="r1"><i></i><div><b>1. 有一點超出管制界限（Control limit）</b><span id="r1t"></span></div></div>
-<div class="rule" id="r2"><i></i><div><b>2. 連續 9 點落在中心線同一側</b><span id="r2t"></span></div></div>
+<div class="rule" id="r2"><i></i><div><b>2. 連續 9 點落在中心線（Center line）同一側</b><span id="r2t"></span></div></div>
 <div class="rule" id="r3"><i></i><div><b>3. 連續 6 點上升或下降</b><span id="r3t"></span></div></div>
 <div class="rule" id="r4"><i></i><div><b>超出規格（Out of spec, OOS）</b><span id="r4t"></span></div></div>
 <div class="note">規則門檻（±3σ、9 點、6 點）是教科書常見的慣例（Western Electric／Nelson 規則）；各晶圓廠會自行訂定。</div>
@@ -88,10 +88,10 @@ function layout(){narrow=svg.parentNode.clientWidth<620;if(narrow){W=520;H=500;X
 function Y(v){return Y0+(R-v)/(2*R)*(Y1-Y0)}
 function Xp(i){return X0+14+i*(X1-X0-28)/(N-1)}
 var stages=[
- {n:'1. 中心線與管制界限（Control limits）',shift:0,spike:0,spec:false,t:'中心線是製程的平均值。管制界限位於兩側 3σ 處：穩定的製程幾乎總是落在兩條界限之間。這裡沒有任何問題，點只是在隨機起伏。'},
- {n:'2. 規格界限（Specification limits）',shift:0,spike:0,spec:true,t:'規格界限來自產品，而不是來自製程，而且範圍較寬。管制界限就像車道線，規格界限則是路的邊緣。'},
+ {n:'1. 中心線與管制界限（Control limits）',shift:0,spike:0,spec:false,t:'中心線（Center line）是製程的平均值。管制界限（Control limit）位於兩側 3σ 處：穩定的製程幾乎總是落在兩條界限之間。這裡沒有任何問題，點只是在隨機起伏。'},
+ {n:'2. 規格界限（Specification limits）',shift:0,spike:0,spec:true,t:'規格界限（Specification limit）來自產品，而不是來自製程，而且範圍較寬。管制界限（Control limit）就像車道線，規格界限則是路的邊緣。'},
  {n:'3. 一點超出管制界限',shift:0,spike:3.2,spec:true,t:'第 15 批跳過了 UCL：它是失控（Out of control, OOC），但仍在規格界限內，所以產品沒問題。規則 1 觸發：要趁下一批變成 OOS 之前，立刻檢查機台。'},
- {n:'4. 同側連續多點（Run）',shift:1.6,spike:0,spec:true,t:'從第 21 批起平均值向上偏移。沒有任何單點離開管制界限，但連續 9 點都在中心線上方，靠巧合發生的機率極低。規則 2 觸發。可以拖動偏移滑桿，找出剛好能觸發它的最小偏移量。'}
+ {n:'4. 同側連續多點（Run）',shift:1.6,spike:0,spec:true,t:'從第 21 批起平均值向上偏移。沒有任何單點離開管制界限，但連續 9 點都在中心線（Center line）上方，靠巧合發生的機率極低。規則 2 觸發。可以拖動偏移滑桿，找出剛好能觸發它的最小偏移量。'}
 ];
 var stage=0,specOn=false,t=0,playing=!still&&!matchMedia('(prefers-reduced-motion: reduce)').matches,last=null;
 function data(){var s=+$('shift').value,sp=+$('spike').value,a=[];

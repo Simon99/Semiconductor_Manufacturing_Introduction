@@ -42,7 +42,7 @@ h1{font-size:22px;margin:6px 0 2px}
 <div class="wrap">
 <div><a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/0-before-you-start/00-overview/README.md">&larr; 回到章節</a></div>
 <h1>晶片（Chip）的一生一覽</h1>
-<p class="sub">點選一個階段，看看這時發生什麼事、由誰負責，以及晶圓（Wafer）或晶片長什麼樣子。</p>
+<p class="sub">點選一個階段，看看這時發生什麼事、由誰負責，以及晶圓（Wafer）或晶片（Chip）長什麼樣子。</p>
 <div class="stages" id="stages" role="group" aria-label="晶片（Chip）一生的各個階段"></div>
 <div class="main">
   <div class="scene"><svg id="scene" viewBox="0 0 480 340" role="img" aria-label="所選階段的晶圓（Wafer）或晶片（Chip）外觀"></svg></div>
@@ -55,7 +55,7 @@ h1{font-size:22px;margin:6px 0 2px}
     <div class="sl"><label for="size">晶粒（Die）大小</label><input id="size" type="range" min="3" max="30" step="1" value="10"><span id="sizev"></span></div>
     <div class="sl"><label for="yld">良品晶粒（Good dies）</label><input id="yld" type="range" min="50" max="100" step="1" value="85"><span id="yldv"></span></div>
     <div class="read" id="read"></div>
-    <div class="note">晶粒大小與良品比例會改變第 4 到 6 階段的晶圓畫面。良品比例即良率（Yield），僅為示意，並非真實產業數據。計算時假設晶粒為正方形、不排除晶圓邊緣、忽略切割道（Scribe lines）。</div>
+    <div class="note">晶粒（Die）大小與良品比例會改變第 4 到 6 階段的晶圓（Wafer）畫面。良品比例即良率（Yield），僅為示意，並非真實產業數據。計算時假設晶粒（Die）為正方形、不排除晶圓（Wafer）邊緣、忽略切割道（Scribe lines）。</div>
   </div>
 </div>
 <p class="note">從投片到出貨，前段（Front end）加上後段（Back end）往往要三到四個月以上，光是前段通常就要兩到三個月甚至更久。</p>
@@ -63,14 +63,14 @@ h1{font-size:22px;margin:6px 0 2px}
 <script>
 (function(){
 var S=[
- {n:"設計",who:"無晶圓廠（Fabless）的 IC 設計公司，或整合元件製造廠（IDM）的設計團隊。",what:"工程師用軟體設計電路，並轉成每一層的圖形。",look:"此時還沒有晶圓。晶片只是一份佈局（Layout）檔案：電路區塊被畫成圖形，每一層各有一組。"},
- {n:"光罩製作（Mask making）",who:"光罩廠。教科書提到有專業的光罩廠，也有大型製造商自設的光罩廠。",what:"把每一層的圖形做成一片光罩（Photomask），之後微影（Lithography）會用它把該層圖形印到晶圓上。",look:"一片方形玻璃板，上面載有某一層的圖形。它不是晶圓，而是某一層的模板。"},
+ {n:"設計",who:"無晶圓廠（Fabless）的 IC 設計公司，或整合元件製造廠（IDM）的設計團隊。",what:"工程師用軟體設計電路，並轉成每一層的圖形。",look:"此時還沒有晶圓（Wafer）。晶片（Chip）只是一份佈局（Layout）檔案：電路區塊被畫成圖形，每一層各有一組。"},
+ {n:"光罩製作（Mask making）",who:"光罩廠。教科書提到有專業的光罩廠，也有大型製造商自設的光罩廠。",what:"把每一層的圖形做成一片光罩（Photomask），之後微影（Lithography）會用它把該層圖形印到晶圓（Wafer）上。",look:"一片方形玻璃板，上面載有某一層的圖形。它不是晶圓（Wafer），而是某一層的模板。"},
  {n:"投片（Wafer start）",who:"晶圓廠（Fab；代工廠〔Foundry〕或 IDM）。空白晶圓由晶圓供應商提供。",what:"空白晶圓進入晶圓廠，正式開始生產。",look:"一片平滑、空白的圓形矽片（這裡是 300 mm），邊緣有一個小缺口，用來標示晶體方向。"},
- {n:"前段製程（Front end）",who:"晶圓廠（代工廠或 IDM）。",what:"在晶圓上一層一層做出電晶體（Transistor）和金屬導線（Metal wiring）。數百到 1,000 多個步驟，大多是在重複同一個循環：沉積（Deposit）、定義圖形（Pattern）、蝕刻（Etch）或佈植（Implant）、清洗、量測。",look:"晶圓上有整齊排列的相同晶粒，晶粒之間隔著窄窄的切割道（Scribe line）。表面一層一層往上加。"},
- {n:"晶圓測試（Wafer test）",who:"通常由晶圓廠或封測廠（OSAT）負責。第 19 章會詳細介紹。",what:"檢查晶圓上每一顆晶粒的好壞。",look:"還是同一片晶圓，但每顆晶粒都已判定完畢，壞的會被標記出來（這裡的顏色僅為示意）。"},
- {n:"封裝（Packaging）",who:"委外的封裝測試廠（OSAT），或 IDM 自己來。",what:"沿著切割道把晶圓切開，再把好的晶粒封裝起來。",look:"單顆晶粒被密封在封裝體裡，並有金屬接點，方便焊到電路板上。"},
- {n:"最終測試（Final test）",who:"OSAT，或 IDM 自己來。",what:"封裝後的晶片再測一次，並確保它們能用很多年。",look:"封裝完成的晶片，並打上通過的記號。"},
- {n:"出貨",who:"晶片的擁有者（無晶圓廠公司或 IDM）負責銷售並出貨給客戶。",what:"測試完成的晶片送到客戶手上，由客戶焊到電路板上。",look:"封裝好的晶片裝在托盤裡，放進出貨箱。"}
+ {n:"前段製程（Front end）",who:"晶圓廠（代工廠或 IDM）。",what:"在晶圓（Wafer）上一層一層做出電晶體（Transistor）和金屬導線（Metal wiring）。數百到 1,000 多個步驟，大多是在重複同一個循環：沉積（Deposit）、定義圖形（Pattern）、蝕刻（Etch）或佈植（Implant）、清洗、量測。",look:"晶圓（Wafer）上有整齊排列的相同晶粒（Die），晶粒之間隔著窄窄的切割道（Scribe line）。表面一層一層往上加。"},
+ {n:"晶圓測試（Wafer test）",who:"通常由晶圓廠或封測廠（OSAT）負責。第 19 章會詳細介紹。",what:"檢查晶圓（Wafer）上每一顆晶粒（Die）的好壞。",look:"還是同一片晶圓（Wafer），但每顆晶粒（Die）都已判定完畢，壞的會被標記出來（這裡的顏色僅為示意）。"},
+ {n:"封裝（Packaging）",who:"委外的封裝測試廠（OSAT），或 IDM 自己來。",what:"沿著切割道（Scribe line）把晶圓（Wafer）切開，再把好的晶粒（Die）封裝（Packaging）起來。",look:"單顆晶粒（Die）被密封在封裝體裡，並有金屬接點，方便焊到電路板上。"},
+ {n:"最終測試（Final test）",who:"OSAT，或 IDM 自己來。",what:"封裝（Packaging）後的晶片（Chip）再測一次，並確保它們能用很多年。",look:"封裝完成的晶片（Chip），並打上通過的記號。"},
+ {n:"出貨",who:"晶片（Chip）的擁有者（無晶圓廠公司或 IDM）負責銷售並出貨給客戶。",what:"測試完成的晶片（Chip）送到客戶手上，由客戶焊到電路板上。",look:"封裝好的晶片（Chip）裝在托盤裡，放進出貨箱。"}
 ];
 var q=new URLSearchParams(location.search);
 var th=q.get("theme"); if(th==="light"||th==="dark") document.documentElement.setAttribute("data-theme",th);

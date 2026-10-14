@@ -81,7 +81,7 @@ label{display:block;font-weight:600}input[type=range]{width:100%;accent-color:va
 <div><label for="D">劑量（Dose）：<span id="Dv"></span> 個原子/cm&sup2;</label><input id="D" type="range" min="12" max="16" step="0.1" value="15"></div></div>
 <div class="ro" style="margin-top:10px"><div><b id="rp"></b><span>投影射程（Projected range）Rp（示意）</span></div><div><b id="dr"></b><span>射程離散（Straggle）&Delta;Rp（示意）</span></div><div><b id="np"></b><span>峰值濃度（Peak concentration）（cm&minus;&sup3;）</span></div></div></div>
 <div class="card two"><div><svg id="xs" viewBox="0 0 360 352" role="img" aria-label="佈植後矽（Silicon）的剖面圖"></svg></div><div><svg id="ch" viewBox="0 0 520 352" role="img" aria-label="摻雜濃度（Doping concentration）隨深度分布圖"></svg></div></div>
-<p class="note">示意模型，並非製程模擬器（process simulator）：Rp &asymp; 3 &middot; E<sup>0.95</sup> nm（E 單位為 keV），&Delta;Rp = 0.35 &middot; Rp，高斯分布（Gaussian profile）N(x) = Q / (&radic;(2&pi;) &Delta;Rp) &middot; exp(&minus;(x&minus;Rp)&sup2; / 2&Delta;Rp&sup2;)，Q 為劑量。實際深度取決於離子種類、基板（substrate）與傾角，通道效應（Channeling effect）。本圖未模擬退火（Annealing）。劑量決定原子數量，能量決定深度。</p>
+<p class="note">示意模型，並非製程模擬器（process simulator）：Rp &asymp; 3 &middot; E<sup>0.95</sup> nm（E 單位為 keV），&Delta;Rp = 0.35 &middot; Rp，高斯分布（Gaussian profile）N(x) = Q / (&radic;(2&pi;) &Delta;Rp) &middot; exp(&minus;(x&minus;Rp)&sup2; / 2&Delta;Rp&sup2;)，Q 為劑量。實際深度取決於離子種類、基板（substrate）與傾角，通道效應（Channeling effect）。本圖未模擬退火（Annealing）。劑量（Dose）決定原子數量，能量決定深度。</p>
 </main>
 <script>
 (function(){
@@ -93,7 +93,7 @@ var steps=[['全部','按下任一步驟即可強調顯示，或觀看整條離�
 ['2 質量分析（Mass analysis）','質量分析：離子通過磁場，不同質量的離子轉彎程度不同，所以只有需要的那一種能通過狹縫（slit）。'],
 ['3 加速（Acceleration）','加速：電場把離子加速到所需的能量，能量決定離子打進多深。'],
 ['4 掃描（Scanning）','掃描：離子束均勻地掃過整片晶圓。'],
-['5 晶圓（Wafer）','晶圓：光阻會擋住離子，所以只有光阻開口的區域會被佈植。']];
+['5 晶圓（Wafer）','晶圓：光阻（Photoresist）會擋住離子，所以只有光阻開口的區域會被佈植。']];
 var sel=0,sc=$('scene');
 steps.forEach(function(s,i){var b=document.createElement('button');b.textContent=s[0];b.onclick=function(){sel=i;ui()};b.id='s'+i;$('steps').appendChild(b)});
 function ui(){steps.forEach(function(s,i){$('s'+i).className=i===sel?'on':''});$('cap').textContent=steps[sel][1];

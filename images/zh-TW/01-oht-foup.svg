@@ -78,7 +78,7 @@
 <circle cx="-26" cy="62" r="6" fill="#d9e2f0"/><circle cx="26" cy="62" r="6" fill="#d9e2f0"/>
 <rect class="body" x="-42" y="68" width="84" height="42" rx="7"/><rect class="dark" x="-42" y="100" width="84" height="10" rx="3"/>
 <text class="txt" x="0" y="92" text-anchor="middle" style="font-size:18px;font-weight:800;fill:#1b2a40">OHT</text></g>
-<text class="txt cap" x="30" y="505" style="font-weight:700">1　天車沿天花板軌道行駛</text><text class="txt cap" x="30" y="524" style="opacity:.8">從倉儲載運到機台</text>
+<text class="txt cap" x="30" y="505" style="font-weight:700">1　天車（OHT）沿天花板軌道行駛</text><text class="txt cap" x="30" y="524" style="opacity:.8">從倉儲載運到機台</text>
 <text class="txt cap" x="335" y="505" style="font-weight:700">2　吊掛機構（Hoist）放下密封的 FOUP</text><text class="txt cap" x="335" y="524" style="opacity:.8">最多 25 片晶圓（Wafer），約 8 公斤</text>
-<text class="txt cap" x="650" y="505" style="font-weight:700">3　Load Port 接收 FOUP</text><text class="txt cap" x="650" y="524" style="opacity:.8">機台在潔淨空間（Clean space）內開盒</text>
+<text class="txt cap" x="650" y="505" style="font-weight:700">3　Load Port 接收 FOUP</text><text class="txt cap" x="650" y="524" style="opacity:.8">機台（Tool）在潔淨空間（Clean space）內開盒</text>
 </svg>

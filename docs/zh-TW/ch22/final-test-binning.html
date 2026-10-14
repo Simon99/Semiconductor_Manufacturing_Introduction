@@ -230,10 +230,10 @@ function play(){pinned=0;anims().forEach(function(a){a.play()});playing=true;$('
 function pause(){anims().forEach(function(a){a.pause()});playing=false;$('play').textContent='播放';$('play').setAttribute('aria-pressed','false')}
 $('play').addEventListener('click',function(){playing?pause():play()});
 var TXT={
- 1:'<b>1 取放（Load）。</b>分類機，也就是機械臂（Robot arm），用真空吸嘴（Suction nozzle）從托盤取起一顆封裝好的晶片，壓入測試座。測試座位在可加熱或冷卻的腔室（Chamber）內。',
- 2:'<b>2 測試（Test）。</b>測試機透過測試座對晶片做功能與電性測試，通常會在低溫與高溫下各測一次。封裝可能傷到晶片，例如打線不良（Poor wire bond）、應力（Stress），有些特性也要封裝後才看得出來。',
- 3:'<b>3 分級（Bin）。</b>分類機依結果把晶片放進對應的收納槽（Bin）：不合格，或依實際達到的速度或功耗（Power）通過並歸入較慢或較快的等級。同一個設計因此可以用不同規格（Spec）販售。',
- 4:'<b>4 SLT（選用）。</b>部分產品的合格晶片還要做系統級測試：在接近最終產品的環境中執行真實軟體。勾選 SLT 核取方塊可看到額外的淘汰數。'
+ 1:'<b>1 取放（Load）。</b>分類機（handler），也就是機械臂（Robot arm），用真空吸嘴（Suction nozzle）從托盤（tray）取起一顆封裝好的晶片，壓入測試座（test socket）。測試座（test socket）位在可加熱或冷卻的腔室（Chamber）內。',
+ 2:'<b>2 測試（Test）。</b>測試機（tester）透過測試座（test socket）對晶片做功能與電性測試，通常會在低溫與高溫下各測一次。封裝可能傷到晶片，例如打線不良（Poor wire bond）、應力（Stress），有些特性也要封裝後才看得出來。',
+ 3:'<b>3 分級（Bin）。</b>分類機（handler）依結果把晶片放進對應的收納槽（Bin）：不合格，或依實際達到的速度或功耗（Power）通過並歸入較慢或較快的等級。同一個設計因此可以用不同規格（Spec）販售。',
+ 4:'<b>4 SLT（選用）。</b>部分產品的合格晶片還要做系統級測試（SLT）：在接近最終產品的環境中執行真實軟體。勾選 SLT 核取方塊可看到額外的淘汰數。'
 };
 var stageSeek={1:2.15,2:2.9,3:4.5,4:4.9};
 function stageAt(ms){var t=(ms%LOOP)%5000/1000;return t<2.3?1:t<3.2?2:3}

@@ -180,14 +180,14 @@ function render(){
  sc.innerHTML=h;
  // text
  var T1=['1 塗佈（Coat）','2 曝光（Expose）','3 顯影（Develop）'][s];
- var D=['光阻滴在晶圓中央，晶圓高速旋轉，把光阻攤成一層薄而均勻的膜。',
- '光線穿過光罩（Mask）的透光縫隙，只有該處的光阻會被照到，鉻層（Chrome）底下的光阻不受光。被照到的光阻發生化學變化。',
- '顯影液（Developer）溶掉不要的光阻，圖形就浮現出來。底下的薄膜（Thin film）還沒被動到，接下來才是蝕刻（Etching）。'][s];
+ var D=['光阻（Photoresist）滴在晶圓（Wafer）中央，晶圓高速旋轉，把光阻攤成一層薄而均勻的膜。',
+ '光線穿過光罩（Mask）的透光縫隙，只有該處的光阻（Photoresist）會被照到，鉻層（Chrome）底下的光阻不受光。被照到的光阻發生化學變化。',
+ '顯影液（Developer）溶掉不要的光阻（Photoresist），圖形就浮現出來。底下的薄膜（Thin film）還沒被動到，接下來才是蝕刻（Etching）。'][s];
  document.getElementById('st').textContent='階段 '+T1;
  document.getElementById('sd').textContent=D;
- document.getElementById('r1').textContent=pos?'正型光阻（Positive resist）：曝光區變得可溶（Soluble）於顯影液。':'負型光阻（Negative resist）：曝光區硬化（Hardened），不再被溶掉。';
- var res=pos?'曝光的縫隙被洗掉，光阻上開出一條溝，該處的薄膜（Thin film）裸露出來。':'只有曝光的那一條留下來成為光阻線，周圍全部被洗掉。';
- if(!m.ok) res=pos?'劑量過低：曝光的光阻沒有完全變可溶，溝底會殘留一層薄膜（Thin film）。':'劑量過低：這一條只有微弱硬化，只留下薄而脆弱的線。';
+ document.getElementById('r1').textContent=pos?'正型光阻（Positive resist）：曝光區變得可溶（Soluble）於顯影液（Developer）。':'負型光阻（Negative resist）：曝光區硬化（Hardened），不再被溶掉。';
+ var res=pos?'曝光的縫隙被洗掉，光阻（Photoresist）上開出一條溝，該處的薄膜（Thin film）裸露出來。':'只有曝光的那一條留下來成為光阻（Photoresist）線，周圍全部被洗掉。';
+ if(!m.ok) res=pos?'劑量過低：曝光的光阻（Photoresist）沒有完全變可溶，溝底會殘留一層薄膜（Thin film）。':'劑量過低：這一條只有微弱硬化，只留下薄而脆弱的線。';
  document.getElementById('r2').innerHTML=(s<2?'尚未顯影。最後結果：':'')+(m.ok?res:'<span class="warn">'+res+'</span>');
  document.getElementById('r3').textContent=Math.round(m.We)+' 單位（光罩縫隙 '+S.W+'，劑量 '+S.dose+'%）';
  document.getElementById('wo').textContent=S.W+' 單位';

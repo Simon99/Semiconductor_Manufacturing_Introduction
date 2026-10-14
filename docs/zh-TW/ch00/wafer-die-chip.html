@@ -74,10 +74,10 @@ var NS='http://www.w3.org/2000/svg',D=300;
 var LOOP=16000,STG=4000;
 var scene=document.getElementById('scene'),say=document.getElementById('say');
 var texts=[
-"1. 晶圓是一片薄薄的圓形矽（Silicon）片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒。",
-"2. 放大其中一顆晶粒，電路就在裡面。窄窄的切割道（虛線）把它和鄰近的晶粒隔開，焊墊則負責和外界連接。",
-"3. 鋸片沿著切割道切下去，讓每顆晶粒脫離晶圓。",
-"4. 晶粒被固定在外殼裡，從焊墊拉線接到接腳，再封起來。封裝好的晶粒就是晶片。"];
+"1. 晶圓（Wafer）是一片薄薄的圓形矽（Silicon）片。同一個電路整齊地重複排成網格，每一個方格就是一顆晶粒（Die）。",
+"2. 放大其中一顆晶粒（Die），電路就在裡面。窄窄的切割道（Scribe line）（虛線）把它和鄰近的晶粒隔開，焊墊（Bond pad）則負責和外界連接。",
+"3. 鋸片沿著切割道（Scribe line）切下去，讓每顆晶粒（Die）脫離晶圓（Wafer）。",
+"4. 晶粒（Die）被固定在外殼裡，從焊墊（Bond pad）拉線接到接腳（Pin），再封起來。封裝好的晶粒就是晶片（Chip）。"];
 function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 // scene build
 var cx=150,cy=215,R=118,pitch=19,gW=[],hl=null;

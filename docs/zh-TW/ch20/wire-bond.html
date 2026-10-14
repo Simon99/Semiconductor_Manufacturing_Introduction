@@ -87,9 +87,9 @@ ${ld(600,404,605,298)}${tx(560,420,'晶粒承載座（Die paddle），導線架�
 ${ld(70,404,72,368)}${tx(30,420,'接腳（Lead）')}`;
 const CAP=[
  [0,1.4,'完成的封裝（Package）：封膠材料（Mold compound）保護晶粒（Die）與金屬線（Bond wire），接腳（Lead）則把晶片（Chip）接到電路板（Printed circuit board）。打線（Wire bonding）是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。'],
- [1.4,5.1,'第 1 條線：劈刀（Capillary）把線端的金屬球壓在晶粒焊墊上，再拉出弧形線圈（Loop）拉向接腳。在接腳上壓出扁平的針腳接點（Stitch bond），這條線就完成了。這條線比頭髮還細。'],
- [5.1,8.5,'第 2 條線：在下一個焊墊重複同樣的動作。每個焊墊各有一條線，依序完成。若焊墊受到污染，線就黏不上，造成斷路（Open circuit）。'],
- [8.5,10.5,'封膠（Molding）：環氧樹脂（Epoxy resin）流過晶粒與金屬線四周，硬化成保護外殼。流速過快會把細線推向一側，即沖線（Wire sweep），造成相鄰導線短路（Short circuit）。'],
+ [1.4,5.1,'第 1 條線：劈刀（Capillary）把線端的金屬球壓在晶粒（Die）焊墊（Bond pad）上，再拉出弧形線圈（Loop）拉向接腳（Lead）。在接腳上壓出扁平的針腳接點（Stitch bond），這條線就完成了。這條線比頭髮還細。'],
+ [5.1,8.5,'第 2 條線：在下一個焊墊（Bond pad）重複同樣的動作。每個焊墊各有一條線，依序完成。若焊墊受到污染，線就黏不上，造成斷路（Open circuit）。'],
+ [8.5,10.5,'封膠（Molding）：環氧樹脂（Epoxy resin）流過晶粒（Die）與金屬線四周，硬化成保護外殼。流速過快會把細線推向一側，即沖線（Wire sweep），造成相鄰導線短路（Short circuit）。'],
  [10.5,14.1,'完成的封裝（Package）：封膠材料（Mold compound）保護晶粒（Die）與金屬線（Bond wire），接腳（Lead）則把晶片（Chip）接到電路板（Printed circuit board）。打線（Wire bonding）是最常見的晶粒對封裝連接方式，因為成本低、技術成熟。']];
 const STEPS=[['起點',1.5],['球形接合（Ball bond）',2.5],['拉線弧（Loop）',3.4],['針腳接合（Stitch bond）',4.35],['第 2 條線',6.7],['封膠（Molding）',9.6],['完成',12]];
 $('chips').innerHTML=STEPS.map((s,i)=>`<button class="chip" data-i="${i}">${s[0]}</button>`).join('');

@@ -63,7 +63,7 @@
 <text x="660" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#eaf1fb">封裝</text>
 <text x="660" y="271" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb454">OSAT（或 IDM）</text>
 <text x="660" y="292" text-anchor="middle" font-size="12" fill="#c9d5e8">晶圓切開，</text>
-<text x="660" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">好的晶粒</text>
+<text x="660" y="307" text-anchor="middle" font-size="12" fill="#c9d5e8">好的晶粒<tspan font-size="10">（Die）</tspan></text>
 <text x="660" y="322" text-anchor="middle" font-size="12" fill="#c9d5e8">進行封裝</text>
 <rect x="724" y="106" width="112" height="240" rx="10" fill="#1a2a46" stroke="#36507a" stroke-width="1.5"/>
 <rect class="g" x="724" y="106" width="112" height="240" rx="10" fill="#5cc8ff" fill-opacity=".14" stroke="#5cc8ff" stroke-width="3" style="animation-delay:9.0s"/>

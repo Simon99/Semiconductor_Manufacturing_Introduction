@@ -155,7 +155,7 @@ function draw(){
 function upd(){
  if(allMode){stage=4;frac=1}else{const c=((tms%15000)+15000)%15000;stage=Math.floor(c/3000);frac=Math.min(1,(c-stage*3000)/2400)}
  [...stepsEl.children].forEach((b,i)=>b.classList.toggle('on',!allMode&&i===stage));
- document.getElementById('cap').textContent=allMode?'完成的晶片：字元線（橘色）橫跨垂直通道，每個交會處就是一個單元。亮起的是目前被選取的字元線。':STEPS[stage][1];
+ document.getElementById('cap').textContent=allMode?'完成的晶片：字元線（Word Lines）（橘色）橫跨垂直通道，每個交會處就是一個單元。亮起的是目前被選取的字元線。':STEPS[stage][1];
  draw();
 }
 window.__setTime=ms=>{allMode=false;playing=false;tms=ms;upd();syncPlay()};

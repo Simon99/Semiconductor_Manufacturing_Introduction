@@ -180,7 +180,7 @@ function draw(){
  // tools
  [[80,150],[250,150],[580,120]].forEach(function(a){var x=a[0],w=a[1];c.fillStyle=P.tool;c.strokeStyle=P.pill===P.pill?P.wall:P.wall;c.lineWidth=2;rr(c,x,312,w,88,4);c.fill();c.stroke();
   c.fillStyle=P.toolWin;rr(c,x+12,322,w-24,30,3);c.fill();c.stroke();c.fillStyle=P.ink;c.fillRect(x+12,362,26,18);
-  c.fillStyle="#4cc38a";c.beginPath();c.arc(x+54,371,4,0,7);c.fill();c.fillStyle="#e0a82e";c.beginPath();c.arc(x+68,371,4,0,7);c.fill();if(x===80){txt(c,"製程機台",x+w/2,336,{a:"center",c:P.ink});txt(c,"（Process tool）",x+w/2,348,{a:"center",sz:10,c:P.ink});}else txt(c,"製程機台",x+w/2,342,{a:"center",c:P.ink});});
+  c.fillStyle="#4cc38a";c.beginPath();c.arc(x+54,371,4,0,7);c.fill();c.fillStyle="#e0a82e";c.beginPath();c.arc(x+68,371,4,0,7);c.fill();if(x===80){txt(c,"製程機台",x+w/2,336,{a:"center",c:P.ink});txt(c,"（Process tool）",x+w/2,348,{a:"center",sz:10,c:P.ink});}else{txt(c,"製程機台",x+w/2,336,{a:"center",c:P.ink});txt(c,"（Process tool）",x+w/2,348,{a:"center",sz:10,c:P.ink});}});
  c.fillStyle=P.wall;c.fillRect(400,346,32,6);c.fillRect(400,352,6,24);txt(c,"Load Port",428,392,{a:"center",sz:12,c:P.mute});
  c.fillStyle=P.stock;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,760,284,120,116,4);c.fill();c.stroke();
  for(var r=0;r<4;r++){var yy=288+r*27;c.beginPath();c.moveTo(764,yy+25);c.lineTo(876,yy+25);c.stroke();for(var q=0;q<3;q++)if((r+q)%3!=2){c.fillStyle=P.filt;rr(c,772+q*36,yy+3,20,20,2);c.fill();c.lineWidth=1.3;c.stroke();c.lineWidth=2;}}
@@ -202,7 +202,7 @@ function draw(){
   c.strokeStyle="rgba(255,255,255,.7)";c.lineWidth=2.5;c.setLineDash([6,34]);c.lineDashOffset=-t*30;c.beginPath();c.moveTo(66,p[0]);c.lineTo(894,p[0]);c.stroke();c.setLineDash([]);});
  [[250,464,"化學品","Chemicals"],[400,482,"特殊氣體","Specialty gases"],[470,500,"超純水","Ultrapure water"],[560,518,"排氣","Exhaust"],[780,464,"化學品"],[780,500,"超純水"]].forEach(function(a){if(a[3])tg(c,a[2],a[3],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});else txt(c,a[2],a[0],a[1]+4,{a:"center",sz:12,c:"#1f2d3d"});});
  function tank(x,y,w,h,col,lab,en){c.fillStyle=col;c.strokeStyle=P.wall;c.lineWidth=2;rr(c,x,y,w,h,10);c.fill();c.stroke();c.fillStyle="rgba(255,255,255,.35)";rr(c,x+6,y+h*.4,w-12,h*.6-6,6);c.fill();txt(c,lab,x+w/2,y+h+14,{a:"center",sz:12,c:P.ink});if(en)txt(c,"（"+en+"）",x+w/2,y+h+26,{a:"center",sz:10,c:P.ink});}
- tank(95,528,60,40,"#e8c35a","化學品供應","Chemical supply");tank(220,528,60,40,"#8fc7a0","特殊氣體");tank(345,528,60,40,"#7ab6ea","超純水");
+ tank(95,528,60,40,"#e8c35a","化學品供應","Chemical supply");tank(220,528,60,40,"#8fc7a0","特殊氣體","Specialty gases");tank(345,528,60,40,"#7ab6ea","超純水");
  [490,550].forEach(function(x){c.save();c.translate(x,547);c.fillStyle="#c8ced6";c.strokeStyle=P.wall;c.lineWidth=2;c.beginPath();c.arc(0,0,19,0,7);c.fill();c.stroke();c.rotate(t*2*Math.PI/1.6);c.fillStyle="#51627a";c.fillRect(-3,-14,6,28);c.fillRect(-14,-3,28,6);c.restore();});
  txt(c,"真空幫浦",520,582,{a:"center",sz:12});txt(c,"（Vacuum pumps）",520,594,{a:"center",sz:10});
  tank(640,528,92,40,"#b9bcc2","排氣處理","Exhaust treatment");tank(790,528,92,40,"#a7b8a0","廢水處理","Wastewater treatment");

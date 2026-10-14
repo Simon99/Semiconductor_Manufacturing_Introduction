@@ -96,7 +96,7 @@ flowchart LR
 | [第 5 章　薄膜](2-process-modules/05-thin-films/README.md) | 熱氧化、CVD、PVD、ALD 與磊晶 |
 | [第 6 章　蝕刻](2-process-modules/06-etching/README.md) | 乾蝕刻與濕蝕刻、電漿、選擇比與終點偵測 |
 | [第 7 章　離子佈植與熱處理](2-process-modules/07-ion-implantation/README.md) | 劑量、能量、退火與熱預算 |
-| [第 8 章　CMP](2-process-modules/08-cmp/README.md) | 把晶圓磨平：研磨液、碟化、侵蝕與假圖形 |
+| [第 8 章　CMP](2-process-modules/08-cmp/README.md) | 把晶圓磨平：研磨液、碟陷、侵蝕與虛擬填充 |
 | [第 9 章　清洗與污染控制](2-process-modules/09-cleaning/README.md) | RCA 清洗、Q-Time 與交叉污染 |
 | [第 10 章　金屬化](2-process-modules/10-metallization/README.md) | 接觸窗、銅的大馬士革製程與低介電常數材料 |
 

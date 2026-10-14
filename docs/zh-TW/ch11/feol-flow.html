@@ -116,7 +116,7 @@ function impArrows(k, Lg, sp) {
   if (k == 6) regs = [[120, cxN - Lg / 2 - sp - 3], [cxN + Lg / 2 + sp + 3, 430], [530, cxP - Lg / 2 - sp - 3], [cxP + Lg / 2 + sp + 3, 840]];
   var d = '';
   regs.forEach(function (r) { for (var x = r[0] + 6; x <= r[1] - 4; x += 18) d += 'M' + x + ' 258v32m-4.5-7l4.5 8l4.5-8'; });
-  return '<path class="imp-a" d="' + d + '"/><text class="tx lb2" x="' + (k == 2 ? 130 : 118) + '" y="250">離子佈植' + (k == 2 ? '（Ion implantation）' : '') + '</text>';
+  return '<path class="imp-a" d="' + d + '"/><text class="tx lb2" x="' + (k == 2 ? 130 : 118) + '" y="250">離子佈植（Ion implantation）</text>';
 }
 var STAGES = [
   ['1  隔離（Isolation, STI）', '在每個電晶體周圍蝕刻（Etch）出淺溝槽（Shallow trench），填入氧化矽（Silicon oxide），再用 CMP 磨平。'],

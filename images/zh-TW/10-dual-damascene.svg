@@ -62,7 +62,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="cap0" x="630" y="352">步驟 1：鋪絕緣層</text>
 <text class="capt" x="630" y="378">以 CVD 在已完成的下層銅導線</text>
 <text class="capt" x="630" y="398">上方鋪一層絕緣層（先進製程</text>
-<text class="capt" x="630" y="418">使用低介電常數材料）。</text>
+<text class="capt" x="630" y="418">使用低介電常數（low-k dielectric）</text><text class="capt" x="630" y="432">材料）。</text>
 </g>
 <g class="g g1">
 <g clip-path="url(#pc)"><rect class="diel2" x="30" y="400" width="570" height="70"/><rect class="cuL" x="190" y="400" width="220" height="70"/><path class="diel" d="M30,190 L200,190 L200,270 L270,270 L270,392 L330,392 L330,270 L400,270 L400,190 L470,190 L470,270 L560,270 L560,190 L600,190 L600,392 L30,392 Z"/><rect class="cap" x="30" y="392" width="240" height="8"/><rect class="cap" x="330" y="392" width="270" height="8"/><text class="lbl" x="45" y="212">上層絕緣層</text><text class="lbl" x="45" y="452">下層絕緣層</text><text class="lblCu" x="200" y="440">下層銅導線</text><text class="lbl" x="45" y="386">覆蓋層／蝕刻停止層</text><text class="lbl" x="192" y="243" text-anchor="end">導線溝槽</text><text class="lbl en" x="192" y="257" text-anchor="end">（Wire trench） &#9656;</text><text class="lbl" x="262" y="335" text-anchor="end">導通孔 &#9656;</text></g>

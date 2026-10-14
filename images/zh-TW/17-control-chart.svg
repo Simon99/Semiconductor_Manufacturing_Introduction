@@ -47,7 +47,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="sm" x="800" y="181.8181818181818">平均值（Mean）+ 3σ</text>
 <line x1="70" x2="790" y1="264.0" y2="264.0" stroke="#7dd3fc" stroke-width="2"/>
 <text class="lbl" x="800" y="265.0" fill="#7dd3fc" style="fill:#7dd3fc;font-weight:700">中心線（Center line）</text>
-<text class="sm" x="800" y="280.0">製程平均值</text><text class="sm" x="800" y="294.0">（Process mean）</text>
+<text class="sm" x="800" y="280.0">製程平均值<tspan x="800" dy="14">（process mean）</tspan></text>
 <line x1="70" x2="790" y1="362.1818181818182" y2="362.1818181818182" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 5"/>
 <text class="lbl" x="800" y="363.1818181818182" fill="#fbbf24" style="fill:#fbbf24;font-weight:700">LCL</text>
 <text class="sm" x="800" y="378.1818181818182">平均值 − 3σ</text>

@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="t d"><title id="t">DRAM 記憶單元剖面（Cell cross-section）</title><desc id="d">DRAM 1T1C 記憶單元（Cell）的動態剖面（Cross-section）：埋入式字元線（Buried word line）、位元線（Bit line）與高聳的圓柱電容（Cylinder capacitor），依序展示寫入（Write）1、保持（Hold）期間的漏電（Leakage）、刷新（Refresh）、讀取（Read）與寫入 0。</desc><style>:root{--bg:#0f172a;--text:#e2e8f0;--muted:#94a3b8;--si:#334155;--np:#2f6fb5;--sti:#64748b;--ild:#1b2a44;--plate:#4a3d78;--electrode:#c084fc;--diel:#f1f5f9;--gox:#cbd5e1;--gcap:#94a3b8;--goff:#64748b;--gon:#fb923c;--bl:#34d399;--plug:#94a3b8;--charge:#22d3ee;--leak:#f87171;--bore:#241a40;--box:#1e293b;--line:#475569;}
 
 .si{fill:var(--si)}.np{fill:var(--np)}.sti{fill:var(--sti)}.ild{fill:var(--ild)}.plate{fill:var(--plate)}

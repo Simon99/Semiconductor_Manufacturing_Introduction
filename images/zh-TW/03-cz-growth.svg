@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
 <title id="t">柴可拉斯基長晶法（Czochralski crystal growth）</title>
 <desc id="d">旋轉的晶種（Seed crystal）從石英坩堝（Quartz crucible）內的矽熔液（Molten silicon）中被緩慢向上拉出，拉出一根圓柱狀的單晶晶棒（Single-crystal ingot）。</desc>
@@ -98,7 +99,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
  </g>
  <path class="dash1" d="M278 108 Q300 124 322 108" fill="none" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#ar)"/>
   <text class="lblb" x="122" y="158">晶種</text><path class="lead" d="M216 154 L290 154"/>
- <text class="lblb" x="122" y="198">頸部（細）<tspan class="en" x="122" dy="14">（Neck）</tspan></text><path class="lead" d="M210 194 L294 194"/>
+ <text class="lblb" x="122" y="198">頸部（Neck / shoulder）（細）<tspan class="en" x="122" dy="14">（Neck）</tspan></text><path class="lead" d="M210 194 L294 194"/>
  <text class="lblb" x="122" y="238">肩部<tspan class="en" x="122" dy="14">（Shoulder）</tspan></text><path class="lead" d="M196 234 L270 234"/>
 </g></g>
 
@@ -115,7 +116,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <text class="lbl" x="300" y="524" text-anchor="middle">坩堝通常朝反方向旋轉</text>
 
 <!-- static labels -->
-<text class="lbl" x="122" y="98"  style="font-size:11px">晶種與晶棒（Ingot）一起旋轉</text>
+<text class="lbl" x="122" y="98" style="font-size:11px">晶種與晶棒（Ingot）一起旋轉</text>
 <text class="lblb" x="362" y="318">晶棒本體</text>
 <text class="lbl" x="362" y="336">單晶<tspan class="en">（Single crystal）</tspan></text>
 <text class="lblb" x="8" y="430">石英坩堝</text><text class="lbl en" x="8" y="446">（Quartz</text><text class="lbl en" x="8" y="462">crucible）</text><path class="lead" d="M72 446 L197 446"/>

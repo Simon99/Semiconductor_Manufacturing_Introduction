@@ -408,7 +408,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td{padding:3px 0;border
 <div class="card"><h2>這條路徑的代價（示意模型）</h2>
 <table>
 <tr><td>訊號目前位於</td><td id="r-now">-</td></tr>
-<tr><td>路徑上的導通孔數</td><td id="r-via">-</td></tr>
+<tr><td>路徑上的導通孔（Via）數</td><td id="r-via">-</td></tr>
 <tr><td>導線電阻（Wire resistance）R &prop; &Sigma; L / (W&middot;T)</td><td id="r-R">-</td></tr>
 <tr><td>相較於全程走在 M2</td><td id="r-rel">-</td></tr>
 </table>
@@ -451,9 +451,9 @@ function steps(){
   const S=[
    ['1. 接觸窗',0.0,'訊號從電晶體 A 出發，經過鎢接觸窗：在絕緣層（Insulator）上挖出小孔並填入金屬，一路通到第一層金屬（M1）。'],
    ['2. 下層',(e[2]+ (T>2?20:0))/v.L,'M1–M2 又窄又密，像巷弄。細導線的截面積小，所以只用在鄰近電晶體之間的短距離連接。'],
-   ['3. 中層',T>=3?(e[3]+10)/v.L:null,'M3–M4 比較寬，像市區道路，連接不同的電路區塊。導通孔（層與層之間填滿金屬的孔）把訊號從一層送到下一層。'],
+   ['3. 中層',T>=3?(e[3]+10)/v.L:null,'M3–M4 比較寬，像市區道路，連接不同的電路區塊。導通孔（Via）（層與層之間填滿金屬的孔）把訊號從一層送到下一層。'],
    ['4. 最長的一段',v.top/v.L,'長距離的一段走在 M'+T+'（'+tier(T)+'）。'+(T>=5?'粗而寬的導線截面積大，單位長度的電阻很低，所以長距離訊號和電源都走最上面幾層。':'試著把最高金屬層往上調：更寬、更厚的導線能降低長距離走線的電阻。')],
-   ['5. 向下走回來',1.0,'訊號沿著導通孔一路往下，再經過另一個接觸窗，進入電晶體 B 的閘極。']
+   ['5. 向下走回來',1.0,'訊號沿著導通孔（Via）一路往下，再經過另一個接觸窗，進入電晶體 B 的閘極。']
   ];
   const box=$('steps');box.innerHTML='';
   S.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.textContent=s[0];b.disabled=s[1]===null;

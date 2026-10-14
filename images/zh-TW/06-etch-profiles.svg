@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 530" width="960" height="530" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Noto Sans CJK TC', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
 <title id="t">等向與非等向蝕刻（Isotropic vs. anisotropic etching）的輪廓（Profile）對照</title>
 <desc id="d">同一個光阻（Photoresist）開口下的兩種剖面。等向蝕刻（Isotropic etching）會往側面吃，在光阻下方造成側蝕（Undercut）；非等向蝕刻（Anisotropic etching）則筆直往下，側壁（Sidewall）垂直。</desc>
@@ -7,7 +8,7 @@
 <text x="480" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#1b2433">同樣的光阻（Photoresist）圖形，兩種蝕刻（Etching）方式</text>
 <text x="480" y="64" text-anchor="middle" font-size="15" fill="#44506a">側蝕（Undercut）＝光阻邊緣下方的橫向蝕刻（剖面圖，示意）</text>
 <rect x="30" y="84" width="440" height="396" rx="14" fill="#ffffff" stroke="#c9ced8"/>
-<text x="250.0" y="106" text-anchor="middle" font-size="19" font-weight="700" fill="#1b2433">等向蝕刻（Isotropic etching）<tspan x="250.0" dy="18" font-size="14">非等向性（Anisotropy）0</tspan></text>
+<text x="250.0" y="106" text-anchor="middle" font-size="19" font-weight="700" fill="#1b2433">等向蝕刻（Isotropic etching）<tspan x="250.0" dy="18" font-size="14">非等向（Isotropic / anisotropic etching）性（Anisotropy）0</tspan></text>
 <text x="250.0" y="142" text-anchor="middle" font-size="14" fill="#44506a">濕蝕刻（Wet etch）：各方向速度相同</text>
 <rect x="50" y="250" width="400" height="100" fill="#6f9bd1"/>
 <rect x="50" y="350" width="400" height="40" fill="#8b909a"/>
@@ -19,7 +20,7 @@
 <g stroke="#c0182b" stroke-width="2.5" fill="none"><line x1="85.0" y1="263" x2="195.0" y2="263"><animate attributeName="x1" dur="12s" repeatCount="indefinite" calcMode="linear" keyTimes="0.0000;0.0800;0.0801;0.1218;0.1634;0.2051;0.2467;0.2884;0.3301;0.3717;0.4134;0.4551;0.4967;0.5384;0.5800;0.6217;0.6634;0.7050;0.7467;0.7883;0.8300;1.0000" values="85.0;85.0;195.0;188.9;182.8;176.7;170.6;164.4;158.3;152.2;146.1;140.0;133.9;127.8;121.7;115.6;109.4;103.3;97.2;91.1;85.0;85.0"/></line><line x1="195.0" y1="257" x2="195.0" y2="269"/></g>
 <text x="185.0" y="288" text-anchor="end" font-size="14" fill="#c0182b" font-weight="700" stroke="#fff" stroke-width="4" paint-order="stroke">側蝕</text>
 <text x="250.0" y="229" text-anchor="middle" font-size="12" fill="#44506a">光阻開口</text><text x="250.0" y="243" text-anchor="middle" font-size="10" fill="#44506a">（Resist opening）</text>
-<g stroke="#44506a" stroke-width="1.5"><line x1="195.0" y1="210" x2="305.0" y2="210"/><line x1="195.0" y1="205" x2="195.0" y2="215" /><line x1="305.0" y1="205" x2="305.0" y2="215"/></g>
+<g stroke="#44506a" stroke-width="1.5"><line x1="195.0" y1="210" x2="305.0" y2="210"/><line x1="195.0" y1="205" x2="195.0" y2="215"/><line x1="305.0" y1="205" x2="305.0" y2="215"/></g>
 <line x1="241.2" y1="150" x2="206.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="1.1s" repeatCount="indefinite"/></line>
 <line x1="245.6" y1="150" x2="228.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="1.1s" repeatCount="indefinite"/></line>
 <line x1="250.0" y1="150" x2="250.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="1.1s" repeatCount="indefinite"/></line>
@@ -42,7 +43,7 @@
 <g stroke="#c0182b" stroke-width="2.5" fill="none"><line x1="655.0" y1="263" x2="655.0" y2="263"><animate attributeName="x1" dur="12s" repeatCount="indefinite" calcMode="linear" keyTimes="0.0000;0.0800;0.0801;0.1218;0.1634;0.2051;0.2467;0.2884;0.3301;0.3717;0.4134;0.4551;0.4967;0.5384;0.5800;0.6217;0.6634;0.7050;0.7467;0.7883;0.8300;1.0000" values="655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0;655.0"/></line><line x1="655.0" y1="257" x2="655.0" y2="269"/></g>
 <text x="645.0" y="288" text-anchor="end" font-size="14" fill="#c0182b" font-weight="700" stroke="#fff" stroke-width="4" paint-order="stroke">側蝕</text>
 <text x="710.0" y="206" text-anchor="middle" font-size="12" fill="#44506a">光阻開口</text>
-<g stroke="#44506a" stroke-width="1.5"><line x1="655.0" y1="210" x2="765.0" y2="210"/><line x1="655.0" y1="205" x2="655.0" y2="215" /><line x1="765.0" y1="205" x2="765.0" y2="215"/></g>
+<g stroke="#44506a" stroke-width="1.5"><line x1="655.0" y1="210" x2="765.0" y2="210"/><line x1="655.0" y1="205" x2="655.0" y2="215"/><line x1="765.0" y1="205" x2="765.0" y2="215"/></g>
 <line x1="674.0" y1="150" x2="674.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="0.7s" repeatCount="indefinite"/></line>
 <line x1="698.0" y1="150" x2="698.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="0.7s" repeatCount="indefinite"/></line>
 <line x1="722.0" y1="150" x2="722.0" y2="195" stroke="#2a7f62" stroke-width="3" marker-end="url(#ah)" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" values="0;-22" dur="0.7s" repeatCount="indefinite"/></line>

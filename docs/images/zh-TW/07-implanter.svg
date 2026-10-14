@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 600" width="960" height="600" role="img" aria-labelledby="ti"><title id="ti">離子佈植機（Ion implanter）：離子源（Ion source）、質量分析磁鐵（Mass analyzer magnet）、加速（Acceleration）、掃描（Scanning）、晶圓（Wafer）</title>
 <style>svg{--bg:#f6f7f9;--ink:#1d2433;--mute:#566074;--panel:#dfe5ef;--metal:#8b98b3;--si:#cdd2de;--acc:#e8590c;--rej:#7d8598;--blue:#2f6fdb;--resist:#c9a227}
 .t{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;fill:var(--ink)}
@@ -39,11 +40,11 @@
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <rect width="960" height="600" fill="var(--bg)"/>
-<text class="t b" x="40" y="34" font-size="22">離子佈植機<tspan font-size="15" font-weight="400">（Ion implanter）</tspan>如何運作</text>
+<text class="t b" x="40" y="34" font-size="22">離子佈植（Ion implantation）機<tspan font-size="15" font-weight="400">（Ion implanter）</tspan>如何運作</text>
 <g transform="translate(0 22)"><g id="g1"><rect class="box" x="40" y="215" width="110" height="80" rx="10"/>
 <circle id="plasma" class="plasma" cx="95" cy="255" r="22"/>
 <path d="M95 215V190" stroke="var(--metal)" stroke-width="6" fill="none"/>
-<text class="t m lbl" x="95" y="180" text-anchor="middle" font-size="14"><tspan x="95" dy="-16">摻雜氣體</tspan><tspan x="95" dy="16">（Dopant gas）</tspan></text>
+<text class="t m lbl" x="95" y="180" text-anchor="middle" font-size="14"><tspan x="95" dy="-16">摻雜（Dopant / doping）氣體</tspan><tspan x="95" dy="16">（Dopant gas）</tspan></text>
 <circle class="badge" cx="95" cy="322" r="14"/><text class="bt" x="95" y="328" text-anchor="middle" font-size="16">1</text>
 <text class="t b lbl" x="95" y="358" text-anchor="middle" font-size="17">離子源<tspan font-size="12" font-weight="400">（Ion source）</tspan></text>
 <text class="t m lbl" x="95" y="377" text-anchor="middle" font-size="14">氣體變成離子（ions）</text></g><g id="g2"><rect class="box" x="228" y="150" width="124" height="134" rx="14"/><g transform="translate(255 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(255 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(290 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 178)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g><g transform="translate(325 255)"><circle class="bfield" r="7"/><path class="bfield" d="M-4 -4L4 4M4 -4L-4 4"/></g>

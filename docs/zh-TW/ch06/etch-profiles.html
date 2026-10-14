@@ -103,7 +103,7 @@ function arrows(a){
  s+='<text x="630" y="48" text-anchor="end" font-size="13" font-weight="600" fill="var(--green)" opacity="'+(1-a).toFixed(2)+'">蝕刻劑（Etchant），往各方向</text>';
  return s;
 }
-function kind(a){return a<0.15?'濕蝕刻（Wet etch）：化學性、等向':a<0.6?'化學成分偏重的電漿蝕刻（Plasma etch）':a<0.9?'以離子為主的電漿蝕刻（Plasma etch）':'理想的離子驅動電漿蝕刻（Plasma etch）';}
+function kind(a){return a<0.15?'濕蝕刻（Wet etch）：化學性、等向':a<0.6?'化學成分偏重的電漿蝕刻（Plasma etch）':a<0.9?'以離子為主的電漿蝕刻（Plasma etch）':'理想的離子驅動電漿（Plasma）蝕刻（Plasma etch）';}
 function sidewall(a){return a<0.15?'側壁（Sidewall）圓弧，側蝕（Undercut）嚴重':a<0.6?'側壁（Sidewall）外凸，明顯側蝕（Undercut）':a<0.9?'側壁（Sidewall）幾乎筆直，輕微側蝕（Undercut）':'側壁（Sidewall）筆直、垂直';}
 function stage(t){return t<0.02?0:t<0.98?1:t<1.0?2:t<1.06?2:3}
 var STORY=[

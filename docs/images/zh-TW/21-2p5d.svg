@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 525" width="960" height="525" role="img" aria-labelledby="t d">
 <title id="t">2.5D 封裝（2.5D packaging）剖面圖</title>
 <desc id="d">處理器（Processor）與 HBM 堆疊（HBM stack）並排放在矽中介層（Silicon interposer）上，中介層再置於封裝基板（Package substrate）上。資料點沿著中介層上大量的短導線（Wires）流動；下方則是同樣兩顆晶片（Chips）放在電路板（Printed circuit board）上，僅以少數幾條長走線（Traces）相連。</desc>

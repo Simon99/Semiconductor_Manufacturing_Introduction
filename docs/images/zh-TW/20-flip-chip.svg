@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 540" role="img" aria-labelledby="t d">
 <title id="t">覆晶封裝（Flip-chip package）剖面：組裝順序</title>
 <desc id="d">帶有凸塊（Bump）的晶粒（Die）翻轉成正面朝下，放到基板（Substrate）上，縫隙填入底部填充膠（Underfill），最後在底面植上錫球（Solder ball）。</desc>
@@ -34,7 +35,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 @media (prefers-reduced-motion:reduce){.scene,.die,.uf,.bl,.lab,.ht,.pg,.c1,.c2,.c3,.c4,.c5{animation:none!important}}
 </style>
 <rect width="960" height="540" fill="#f6f8fb"/>
-<text class="ti" x="40" y="38">覆晶封裝（Flip-chip package）剖面</text>
+<text class="ti" x="40" y="38">覆晶（Flip chip）封裝（Flip-chip package）剖面</text>
 <text class="sub" x="40" y="60">示意，未依比例</text>
 <g class="scene">
 
@@ -86,13 +87,13 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <g class="lab">
 <text x="480" y="226" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:600">矽晶粒（Silicon die，背面朝上）</text>
 <path class="ld" d="M712 225 H744"/><text class="lb" x="752" y="222">晶粒（已翻轉）</text><text class="ls" x="752" y="241">主動面（Active side）朝下</text>
-<path class="ld" d="M676 270 H758"/><text class="lb" x="766" y="276">凸塊（Bump）</text><text class="ls" x="766" y="295" >連接晶粒（Die）與基板（Substrate）</text>
+<path class="ld" d="M676 270 H758"/><text class="lb" x="766" y="276">凸塊（Bump）</text><text class="ls" x="766" y="295">連接晶粒（Die）與基板（Substrate）</text>
 <path class="ld" d="M196 282 H240"/><text class="lb" x="190" y="287" text-anchor="end">底部填充（Underfill）</text>
 <path class="ld" d="M194 316 H212"/><text class="lb" x="188" y="316" text-anchor="end">基板（Substrate）</text><text class="ls" x="188" y="334" text-anchor="end">扇出（Fan-out）</text><text class="ls" x="188" y="349" text-anchor="end">到較寬的間距</text>
 <path class="ld" d="M744 362 H748"/><text class="lb" x="756" y="360">錫球（Solder ball）</text><text class="ls" x="756" y="379">連接封裝與電路板（Printed circuit board）</text>
 <text class="lb" x="150" y="434">電路板（Printed circuit board）</text>
 </g>
-<text class="cap c1" x="480" y="478">1  在晶粒焊墊（Bond pad）上做出凸塊（正面朝上）</text>
+<text class="cap c1" x="480" y="478">1  在晶粒焊墊（Bond pad）上做出凸塊（Bump）（正面朝上）</text>
 <text class="cap c2" x="480" y="478">2  晶粒翻轉成正面朝下</text>
 <text class="cap c3" x="480" y="478">3  凸塊焊接到基板焊墊（Bond pad）</text>
 <text class="cap c4" x="480" y="478">4  底部填充膠流入縫隙並固化，分散應力</text>

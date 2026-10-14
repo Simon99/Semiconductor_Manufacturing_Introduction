@@ -35,10 +35,10 @@ button.pp{border:1px solid var(--acc);background:var(--accbg);color:#111;border-
 <a href="https://github.com/Simon99/Semiconductor_Manufacturing_Introduction/blob/anim/ch22-pilot/zh-TW/5-backend/20-packaging/README.md">&larr; 回到章節</a>
 <h1>打線接合（Wire bonding）：把晶粒（Die）連接到封裝（Package）</h1>
 <p class="sub">示意圖，未依比例。可按播放、跳到各步驟，或調整下方的線弧高度（Loop height）與封膠流速（Mold flow speed）。</p>
-<div class="card"><svg id="scene" viewBox="0 90 960 350" role="img" aria-label="打線封裝（Wire-bond package）剖面動畫"></svg></div>
+<div class="card"><svg id="scene" viewBox="0 90 960 350" role="img" aria-label="打線（Wire bonding）封裝（Wire-bond package）剖面動畫"></svg></div>
 <div class="chips" id="chips"></div>
 <div class="panel" id="panel" aria-live="polite"></div>
-<ul class="legend"><li>金屬線（Bond wire）：金（Gold）或銅（Copper），比頭髮還細</li><li>焊墊（Bond pad）：晶粒（Die）上的小金屬方塊</li><li>封膠材料（Mold compound）：環氧樹脂（Epoxy resin）外殼</li><li>黏晶膠（Die attach adhesive）：把晶粒黏在承載座上</li><li>晶粒承載座（Die paddle）與接腳（Lead）：合稱導線架（Lead frame）</li></ul>
+<ul class="legend"><li>金屬線（Bond wire）：金（Gold）或銅（Copper），比頭髮還細</li><li>焊墊（Bond pad）：晶粒（Die）上的小金屬方塊</li><li>封膠材料（Mold compound）：環氧樹脂（Epoxy resin）外殼</li><li>黏晶（Die attach / die bonding）膠（Die attach adhesive）：把晶粒黏在承載座上</li><li>晶粒承載座（Die paddle）與接腳（Lead）：合稱導線架（Lead frame）</li></ul>
 <div class="row card">
  <div><button class="pp" id="pp">暫停</button> <span class="ro" id="tro"></span>
   <input type="range" id="scrub" min="0" max="14000" step="10" value="0" aria-label="時間軸"></div>
@@ -49,7 +49,7 @@ button.pp{border:1px solid var(--acc);background:var(--accbg);color:#111;border-
   <input type="range" id="flow" min="0" max="100" value="40">
   <div class="ro">沖線量（Wire sweep）：<b id="sw"></b>（占與相鄰導線間距的比例）<span id="verdict" style="white-space:nowrap"></span></div></div>
 </div>
-<div class="card" style="margin-top:10px"><div class="ro" style="margin-bottom:4px">三條相鄰金屬線的俯視圖（Top view），示意。封膠流動會把中間那條線推向一側；線弧越高，線越長，沖線越大。</div>
+<div class="card" style="margin-top:10px"><div class="ro" style="margin-bottom:4px">三條相鄰金屬線的俯視圖（Top view），示意。封膠流動會把中間那條線推向一側；線弧越高，線越長，沖線（Wire sweep）越大。</div>
 <svg id="top" viewBox="0 0 960 150" role="img" aria-label="沖線（Wire sweep）俯視圖"></svg></div>
 <p class="sub" style="margin-top:12px">沖線模型（Sweep model），示意，非實測：沖線% = 流速 &times; (金屬線長度 / 預設長度)&sup2; &times; 0.6。達 100% 時，金屬線碰到相鄰導線，造成短路（Short circuit）。</p>
 </main>

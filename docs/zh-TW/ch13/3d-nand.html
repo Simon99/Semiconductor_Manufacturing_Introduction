@@ -67,7 +67,7 @@ const STEPS=[
  ['2 通道孔（Channel holes）','一口氣蝕刻（Etch）穿過整個堆疊。又深又窄的孔常分成數段蝕刻再接起來。'],
  ['3 儲存層與通道（Storage + channel）','沿著每個孔的孔壁，依序沉積儲存層（Storage layer）與通道（Channel）材料。'],
  ['4 階梯（Staircase）','把堆疊的邊緣做成一階一階的形狀，讓上方的接觸窗（Contact）能分別接到每一層。'],
- ['5 字元線置換（Word line replacement）','移除氮化層並換成金屬（Metal）。每一層金屬就是一條字元線（Word line），與通道（Channel）交會之處就是一個記憶單元。']];
+ ['5 字元線（Word line）置換（Word line replacement）','移除氮化層並換成金屬（Metal）。每一層金屬就是一條字元線（Word line），與通道（Channel）交會之處就是一個記憶單元。']];
 let layers=200,bits=3,stage=0,frac=1,playing=true,tms=0,allMode=false;
 const stepsEl=document.getElementById('steps');
 STEPS.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>{allMode=false;playing=false;tms=i*3000+2999;upd();syncPlay()};stepsEl.appendChild(b)});

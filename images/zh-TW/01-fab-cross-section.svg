@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:lang="zh-Hant-TW" viewBox="0 0 960 620" width="960" height="620" role="img" aria-labelledby="t d">
 <title id="t">晶圓廠（Fab）剖面圖</title>
 <desc id="d">分成三層：上層是空調與過濾（Air handling and filtration），中層是無塵室（Cleanroom），下層是管線與附屬設備（Piping and support equipment）。空氣從天花板濾網（Ceiling filters）往下流過無塵室，再穿過有孔地板（Perforated floor）被抽走，把微粒（Particle）一併帶走。</desc>
@@ -22,7 +23,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 @media (prefers-reduced-motion:reduce){.spin,.fall,.flow,.flowb,.oht,.lower,.cable{animation:none!important}}
 </style>
 <rect width="960" height="620" fill="#eef2f7"/>
-<g id="title"><text x="30" y="30" class="ti">晶圓廠（Fab）剖面圖</text>
+<g id="title"><text x="30" y="30" class="ti">晶圓（Wafer）廠（Fab）剖面圖</text>
 <text x="930" y="30" class="sm" text-anchor="end">示意，未依比例</text></g>
 <rect x="30" y="46" width="900" height="552" rx="8" fill="#fff" stroke="#51627a" stroke-width="2"/>
 <!-- zones -->
@@ -222,7 +223,7 @@ text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Noto Sans CJ
 <circle class="fall" cx="710" cy="338" r="2.6" fill="#d9480f" style="--d:62px;--t:5s;--dl:-3.1s"/>
 <circle class="fall" cx="708" cy="341" r="2.6" fill="#d9480f" style="--d:62px;--t:5s;--dl:-0.7s"/>
 <circle class="fall" cx="714" cy="346" r="2.6" fill="#d9480f" style="--d:62px;--t:5s;--dl:-2.4s"/>
-<text x="720" y="312" class="sm" text-anchor="middle" style="fill:#3c5169;display:none"></text>
+<text x="720" y="312" class="sm" text-anchor="middle" style="fill:#3c5169;display:none"/>
 <g id="counts"><rect x="450" y="206" width="288" height="0" fill="none"/>
 <rect x="76" y="248" width="336" height="56" rx="6" fill="#fff" stroke="#51627a" stroke-width="1.2"/>
 <text x="86" y="265" class="sm">辦公室空氣：每立方英尺有數十萬到上百萬顆</text>
